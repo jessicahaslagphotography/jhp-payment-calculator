@@ -139,14 +139,14 @@
   .mk-h{font-family:var(--serif); font-weight:500; font-size:30px; line-height:1.16; margin:0 0 14px; letter-spacing:.02em}
   .mk-p{font-family:var(--sans); font-weight:300; font-size:14.5px; line-height:1.78; color:var(--muted); margin:0 0 18px}
   .mk-rule{height:1px; background:var(--line); border:none; margin:0}
-  .mk-tiles{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; max-width:940px; margin:0 auto}
-  @media (max-width:760px){ .mk-tiles{grid-template-columns:1fr} }
-  .mk-tile{background:var(--surface); border:1px solid var(--line-soft); border-radius:3px; padding:26px 22px; display:flex; flex-direction:column}
-  .mk-tile .tn{font-family:var(--serif); font-weight:500; font-size:22px; line-height:1.2; margin:0 0 10px}
-  .mk-tile .td{font-family:var(--sans); font-weight:300; font-size:13px; line-height:1.7; color:var(--muted); margin:0 0 18px; flex:1}
-  .mk-tile .tp{font-family:var(--sans); font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--dim); margin:0 0 4px}
-  .mk-tile .tv{font-family:var(--serif); font-size:27px; color:var(--gold-bright); margin:0; line-height:1}
   .mk-center{text-align:center; max-width:640px; margin:0 auto}
+  .mk-incl{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 34px;
+    max-width:660px; margin:26px auto 0; list-style:none; padding:0}
+  @media (max-width:620px){ .mk-incl{grid-template-columns:1fr; gap:0} }
+  .mk-incl span{font-family:var(--sans); font-weight:300; font-size:13.5px; color:var(--muted);
+    padding:11px 0 11px 20px; border-bottom:1px solid var(--line-soft); position:relative}
+  .mk-incl span::before{content:""; position:absolute; left:0; top:19px;
+    width:7px; height:1px; background:var(--gold)}
   .mk-band{background:var(--surface); padding:52px 30px; text-align:center; border-bottom:1px solid var(--line-soft)}
   .mk-band .mk-h{margin-bottom:8px}
   .mk-ba{display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:620px; margin:22px auto 0}
@@ -362,27 +362,23 @@
         </div>
 
         <div class="mk-sec">
-          <div class="mk-center" style="margin-bottom:30px">
-            <p class="mk-kicker">The collections</p>
-            <h3 class="mk-h" style="color:var(--ink)">Every session includes hair, makeup and a same-day reveal</h3>
-            <p class="mk-p">A $697 session fee reserves your date. Products are chosen at your reveal, on interest-free plans, with no credit check.</p>
+          <div class="mk-center">
+            <p class="mk-kicker">Your session</p>
+            <h3 class="mk-h" style="color:var(--ink)">The session fee is $697</h3>
+            <p class="mk-p">It reserves your date on the calendar and covers everything it takes to get you in front of the camera.</p>
           </div>
-          <div class="mk-tiles">
-            <div class="mk-tile">
-              <p class="tn">The Petite Collections</p>
-              <p class="td">Fully digital, no sales tax, and the fastest way into the experience.</p>
-              <p class="tp">Begins at</p><p class="tv">$1,500</p>
-            </div>
-            <div class="mk-tile">
-              <p class="tn">The Signature Collections</p>
-              <p class="td">Albums, wall art and digitals together. Where most clients land.</p>
-              <p class="tp">Begins at</p><p class="tv">$2,900</p>
-            </div>
-            <div class="mk-tile">
-              <p class="tn">The Artist Collection</p>
-              <p class="td">Every image, every product, nothing held back for later.</p>
-              <p class="tp">Complete at</p><p class="tv">$9,400</p>
-            </div>
+          <div class="mk-incl">
+            <span>Pre-session prep guides</span>
+            <span>Access to our client wardrobe</span>
+            <span>Wardrobe and styling guidance</span>
+            <span>Complimentary hair and makeup</span>
+            <span>Your boudoir photography session</span>
+            <span>Professional guidance and posing throughout</span>
+            <span>Same-day image reveal and ordering appointment</span>
+          </div>
+          <div class="mk-center" style="margin-top:26px">
+            <p class="mk-p" style="font-size:13px; margin-bottom:18px">Prints, albums and digitals are chosen separately at your reveal, once you&rsquo;ve seen your images.</p>
+            <button class="b-secondary" type="button">See what&rsquo;s included</button>
           </div>
         </div>
 
