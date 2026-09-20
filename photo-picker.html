@@ -93,6 +93,11 @@
   <div class="slots" id="slots"></div>
 
   <div class="grid" id="grid">
+      <button class="tile" type="button" data-img="6Y2A9498"><img src="assets/pick/6Y2A9498.jpg" alt="6Y2A9498" loading="lazy"><span class="fn">6Y2A9498</span></button>
+      <button class="tile" type="button" data-img="6Y2A9504"><img src="assets/pick/6Y2A9504.jpg" alt="6Y2A9504" loading="lazy"><span class="fn">6Y2A9504</span></button>
+      <button class="tile" type="button" data-img="6Y2A9510"><img src="assets/pick/6Y2A9510.jpg" alt="6Y2A9510" loading="lazy"><span class="fn">6Y2A9510</span></button>
+      <button class="tile" type="button" data-img="6Y2A9514"><img src="assets/pick/6Y2A9514.jpg" alt="6Y2A9514" loading="lazy"><span class="fn">6Y2A9514</span></button>
+      <button class="tile" type="button" data-img="6Y2A9515"><img src="assets/pick/6Y2A9515.jpg" alt="6Y2A9515" loading="lazy"><span class="fn">6Y2A9515</span></button>
       <button class="tile" type="button" data-img="DSC_0148-BW"><img src="assets/pick/DSC_0148-BW.jpg" alt="DSC_0148-BW" loading="lazy"><span class="fn">DSC_0148-BW</span></button>
       <button class="tile" type="button" data-img="DSC_0273-BW"><img src="assets/pick/DSC_0273-BW.jpg" alt="DSC_0273-BW" loading="lazy"><span class="fn">DSC_0273-BW</span></button>
       <button class="tile" type="button" data-img="DSC_0475-BW"><img src="assets/pick/DSC_0475-BW.jpg" alt="DSC_0475-BW" loading="lazy"><span class="fn">DSC_0475-BW</span></button>
@@ -129,7 +134,8 @@
   </div>
 
   <div class="note">
-    <p><b>Three slots aren&rsquo;t here</b>, because nothing in these 33 can fill them: the portrait of you on the manifesto block, and the before/after pair. Send those separately and I&rsquo;ll drop them in.</p>
+    <p><b>Your five headshots are first in the grid.</b> The portrait slot is pre-set to <code>6Y2A9514</code> &mdash; the one with direct eye contact, which is what the manifesto block needs. Change it if you disagree.</p>
+    <p><b>One pair still isn&rsquo;t here:</b> the before/after images. Nothing in this folder can fill those. Send them and I&rsquo;ll drop them in.</p>
     <p><b>Aspect ratios are how the slot crops</b>, not how the photo is shaped. A tall frame in the 16:7 hero loses its top and bottom, so pick something that survives a wide crop &mdash; or pick it anyway and tell me where to bias the crop.</p>
   </div>
 </div>
@@ -138,6 +144,7 @@
 (function(){
   var SLOTS = [
     {key:"hero",    name:"Hero",          ar:"16:7", hint:"full bleed, headline sits bottom-left"},
+    {key:"jess",    name:"Portrait of Jess", ar:"4:5", hint:"manifesto block"},
     {key:"mission", name:"Mission band",  ar:"3:2",  hint:"under 'what this is actually for'"},
     {key:"band",    name:"Session band",  ar:"3:2",  hint:"under the $697 inclusions"},
     {key:"strip1",  name:"Strip 1",       ar:"3:4",  hint:""},
@@ -145,7 +152,7 @@
     {key:"strip3",  name:"Strip 3",       ar:"3:4",  hint:""},
     {key:"strip4",  name:"Strip 4",       ar:"3:4",  hint:""}
   ];
-  var CURRENT = {hero:"DSC_1279-BW", mission:"DSC_0273-BW", band:"DSC_8438-BW",
+  var CURRENT = {hero:"DSC_1279-BW", jess:"6Y2A9514", mission:"DSC_0273-BW", band:"DSC_8438-BW",
                  strip1:"DSC_0798-BW", strip2:"DSC_8449-BW", strip3:"DSC_0475-BW", strip4:"DSC_2060"};
 
   var picks = Object.assign({}, CURRENT);
