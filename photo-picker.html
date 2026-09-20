@@ -1,0 +1,270 @@
+<title>Photo Picker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#13100E; --surface:#1C1714; --raised:#241D18;
+    --ink:#F2ECE2; --muted:#A99A86; --dim:#7D7161;
+    --gold:#C9A24B; --gold-bright:#E6C576;
+    --line:rgba(201,162,75,.22); --line-soft:rgba(242,236,226,.09);
+    --ok:#9DB77F;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Jost',-apple-system,'Segoe UI',system-ui,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  body{background:var(--ground); color:var(--ink); font-family:var(--sans);
+    font-size:15px; line-height:1.55; margin:0; -webkit-font-smoothing:antialiased}
+  .shell{max-width:1180px; margin:0 auto; padding:0 16px; padding-block:clamp(26px,5vw,48px) 90px}
+  .eyebrow{font-size:10.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin:0 0 10px}
+  h1{font-family:var(--serif); font-weight:500; font-size:clamp(32px,6vw,50px); line-height:1.05; margin:0 0 12px}
+  .lede{color:var(--muted); font-size:15px; max-width:62ch; margin:0 0 6px}
+  .lede b{color:var(--ink); font-weight:500}
+  .mast{border-bottom:1px solid var(--line); padding-bottom:24px; margin-bottom:26px}
+
+  .bar{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--ground);
+    border-bottom:1px solid var(--line-soft); padding:12px 0 14px; margin-bottom:22px}
+  .barrow{display:flex; align-items:center; gap:12px; flex-wrap:wrap}
+  .status{font-size:12.5px; color:var(--dim); font-family:var(--mono)}
+  .status.ok{color:var(--ok)}
+  .prompt{font-family:var(--serif); font-size:19px; color:var(--ink)}
+  .prompt b{color:var(--gold-bright); font-weight:500}
+
+  .slots{display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin:0 0 8px}
+  .slot{background:var(--surface); border:1px solid var(--line-soft); border-radius:6px;
+    padding:0; overflow:hidden; text-align:left; cursor:pointer; font-family:var(--sans);
+    color:var(--ink); transition:border-color .15s; display:flex; flex-direction:column}
+  .slot:hover{border-color:var(--line)}
+  .slot.active{border-color:var(--gold); box-shadow:0 0 0 1px var(--gold)}
+  .slot .thumb{aspect-ratio:3/2; background:var(--raised); display:flex; align-items:center;
+    justify-content:center; overflow:hidden; position:relative}
+  .slot .thumb img{width:100%; height:100%; object-fit:cover; display:block}
+  .slot .thumb .none{font-family:var(--mono); font-size:9.5px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--dim)}
+  .slot .meta{padding:8px 10px 9px}
+  .slot .nm{font-size:12.5px; font-weight:500; margin:0 0 2px}
+  .slot .ar{font-family:var(--mono); font-size:10px; color:var(--dim); margin:0}
+  .slot .cur{font-family:var(--mono); font-size:10px; color:var(--gold); margin:3px 0 0; word-break:break-all}
+  .slot .clear{position:absolute; top:5px; right:5px; background:rgba(19,16,14,.82); color:var(--muted);
+    border:1px solid var(--line-soft); border-radius:3px; font-size:10px; padding:2px 6px;
+    cursor:pointer; font-family:var(--sans); letter-spacing:.06em}
+  .slot .clear:hover{color:var(--gold); border-color:var(--gold)}
+
+  .grid{columns:4 200px; column-gap:12px; margin-top:22px}
+  .tile{display:block; width:100%; margin:0 0 12px; break-inside:avoid; padding:0;
+    background:var(--surface); border:1px solid var(--line-soft); border-radius:5px;
+    overflow:hidden; cursor:pointer; position:relative; font-family:var(--sans)}
+  .tile:hover{border-color:var(--gold)}
+  .tile img{display:block; width:100%; height:auto}
+  .tile .fn{display:block; font-family:var(--mono); font-size:9.5px; color:var(--dim);
+    padding:5px 7px; letter-spacing:.04em; text-align:left}
+  .tile.used{outline:1px solid var(--gold); outline-offset:-1px}
+  .tile.used .fn{color:var(--gold)}
+  .tile .badge{position:absolute; top:6px; left:6px; background:var(--gold); color:var(--ground);
+    font-size:9px; letter-spacing:.12em; text-transform:uppercase; font-weight:500;
+    padding:3px 7px; border-radius:2px}
+  button:focus-visible{outline:2px solid var(--gold-bright); outline-offset:2px}
+
+  .note{border-left:2px solid var(--gold); background:var(--surface); padding:13px 16px;
+    border-radius:0 6px 6px 0; margin:22px 0 0}
+  .note p{margin:0; font-size:13.5px; color:var(--muted)}
+  .note p+p{margin-top:8px}
+  .note b{color:var(--ink); font-weight:500}
+  .note code{font-family:var(--mono); font-size:12px; color:var(--gold)}
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+
+<div class="shell">
+  <div class="mast">
+    <p class="eyebrow">JHP Boudoir &middot; homepage</p>
+    <h1>Photo Picker</h1>
+    <p class="lede">Click a slot, then click the photograph you want in it. <b>Your picks save as you go</b> &mdash; tell me when you&rsquo;re done and I&rsquo;ll read them straight out and rebuild the mock.</p>
+  </div>
+
+  <div class="bar">
+    <div class="barrow">
+      <span class="prompt" id="prompt">Pick a slot to start</span>
+      <span style="flex:1"></span>
+      <span class="status" id="status">connecting&hellip;</span>
+    </div>
+  </div>
+
+  <div class="slots" id="slots"></div>
+
+  <div class="grid" id="grid">
+      <button class="tile" type="button" data-img="DSC_0148-BW"><img src="assets/pick/DSC_0148-BW.jpg" alt="DSC_0148-BW" loading="lazy"><span class="fn">DSC_0148-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_0273-BW"><img src="assets/pick/DSC_0273-BW.jpg" alt="DSC_0273-BW" loading="lazy"><span class="fn">DSC_0273-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_0475-BW"><img src="assets/pick/DSC_0475-BW.jpg" alt="DSC_0475-BW" loading="lazy"><span class="fn">DSC_0475-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_0484-BW"><img src="assets/pick/DSC_0484-BW.jpg" alt="DSC_0484-BW" loading="lazy"><span class="fn">DSC_0484-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_0511-BW"><img src="assets/pick/DSC_0511-BW.jpg" alt="DSC_0511-BW" loading="lazy"><span class="fn">DSC_0511-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_0609-BW"><img src="assets/pick/DSC_0609-BW.jpg" alt="DSC_0609-BW" loading="lazy"><span class="fn">DSC_0609-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_0630-BW"><img src="assets/pick/DSC_0630-BW.jpg" alt="DSC_0630-BW" loading="lazy"><span class="fn">DSC_0630-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_0776-BW"><img src="assets/pick/DSC_0776-BW.jpg" alt="DSC_0776-BW" loading="lazy"><span class="fn">DSC_0776-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_0798-BW"><img src="assets/pick/DSC_0798-BW.jpg" alt="DSC_0798-BW" loading="lazy"><span class="fn">DSC_0798-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_0927-BW"><img src="assets/pick/DSC_0927-BW.jpg" alt="DSC_0927-BW" loading="lazy"><span class="fn">DSC_0927-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_1205-BW"><img src="assets/pick/DSC_1205-BW.jpg" alt="DSC_1205-BW" loading="lazy"><span class="fn">DSC_1205-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_1279-BW"><img src="assets/pick/DSC_1279-BW.jpg" alt="DSC_1279-BW" loading="lazy"><span class="fn">DSC_1279-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_1312-BW"><img src="assets/pick/DSC_1312-BW.jpg" alt="DSC_1312-BW" loading="lazy"><span class="fn">DSC_1312-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_1324-BW"><img src="assets/pick/DSC_1324-BW.jpg" alt="DSC_1324-BW" loading="lazy"><span class="fn">DSC_1324-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_1803"><img src="assets/pick/DSC_1803.jpg" alt="DSC_1803" loading="lazy"><span class="fn">DSC_1803</span></button>
+      <button class="tile" type="button" data-img="DSC_1936-BW"><img src="assets/pick/DSC_1936-BW.jpg" alt="DSC_1936-BW" loading="lazy"><span class="fn">DSC_1936-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_2030-BW"><img src="assets/pick/DSC_2030-BW.jpg" alt="DSC_2030-BW" loading="lazy"><span class="fn">DSC_2030-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_2043"><img src="assets/pick/DSC_2043.jpg" alt="DSC_2043" loading="lazy"><span class="fn">DSC_2043</span></button>
+      <button class="tile" type="button" data-img="DSC_2060"><img src="assets/pick/DSC_2060.jpg" alt="DSC_2060" loading="lazy"><span class="fn">DSC_2060</span></button>
+      <button class="tile" type="button" data-img="DSC_2071"><img src="assets/pick/DSC_2071.jpg" alt="DSC_2071" loading="lazy"><span class="fn">DSC_2071</span></button>
+      <button class="tile" type="button" data-img="DSC_2174-BW"><img src="assets/pick/DSC_2174-BW.jpg" alt="DSC_2174-BW" loading="lazy"><span class="fn">DSC_2174-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_2236-BW"><img src="assets/pick/DSC_2236-BW.jpg" alt="DSC_2236-BW" loading="lazy"><span class="fn">DSC_2236-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_2702-BW"><img src="assets/pick/DSC_2702-BW.jpg" alt="DSC_2702-BW" loading="lazy"><span class="fn">DSC_2702-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_4505-BW"><img src="assets/pick/DSC_4505-BW.jpg" alt="DSC_4505-BW" loading="lazy"><span class="fn">DSC_4505-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_4553-BW"><img src="assets/pick/DSC_4553-BW.jpg" alt="DSC_4553-BW" loading="lazy"><span class="fn">DSC_4553-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_4568-BW"><img src="assets/pick/DSC_4568-BW.jpg" alt="DSC_4568-BW" loading="lazy"><span class="fn">DSC_4568-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_6722-BW"><img src="assets/pick/DSC_6722-BW.jpg" alt="DSC_6722-BW" loading="lazy"><span class="fn">DSC_6722-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_8438-BW"><img src="assets/pick/DSC_8438-BW.jpg" alt="DSC_8438-BW" loading="lazy"><span class="fn">DSC_8438-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_8449-BW"><img src="assets/pick/DSC_8449-BW.jpg" alt="DSC_8449-BW" loading="lazy"><span class="fn">DSC_8449-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_8604-BW"><img src="assets/pick/DSC_8604-BW.jpg" alt="DSC_8604-BW" loading="lazy"><span class="fn">DSC_8604-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_9236-BW"><img src="assets/pick/DSC_9236-BW.jpg" alt="DSC_9236-BW" loading="lazy"><span class="fn">DSC_9236-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_9309-BW"><img src="assets/pick/DSC_9309-BW.jpg" alt="DSC_9309-BW" loading="lazy"><span class="fn">DSC_9309-BW</span></button>
+      <button class="tile" type="button" data-img="DSC_9341-BW"><img src="assets/pick/DSC_9341-BW.jpg" alt="DSC_9341-BW" loading="lazy"><span class="fn">DSC_9341-BW</span></button>
+  </div>
+
+  <div class="note">
+    <p><b>Three slots aren&rsquo;t here</b>, because nothing in these 33 can fill them: the portrait of you on the manifesto block, and the before/after pair. Send those separately and I&rsquo;ll drop them in.</p>
+    <p><b>Aspect ratios are how the slot crops</b>, not how the photo is shaped. A tall frame in the 16:7 hero loses its top and bottom, so pick something that survives a wide crop &mdash; or pick it anyway and tell me where to bias the crop.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var SLOTS = [
+    {key:"hero",    name:"Hero",          ar:"16:7", hint:"full bleed, headline sits bottom-left"},
+    {key:"mission", name:"Mission band",  ar:"3:2",  hint:"under 'what this is actually for'"},
+    {key:"band",    name:"Session band",  ar:"3:2",  hint:"under the $697 inclusions"},
+    {key:"strip1",  name:"Strip 1",       ar:"3:4",  hint:""},
+    {key:"strip2",  name:"Strip 2",       ar:"3:4",  hint:""},
+    {key:"strip3",  name:"Strip 3",       ar:"3:4",  hint:""},
+    {key:"strip4",  name:"Strip 4",       ar:"3:4",  hint:""}
+  ];
+  var CURRENT = {hero:"DSC_1279-BW", mission:"DSC_0273-BW", band:"DSC_8438-BW",
+                 strip1:"DSC_0798-BW", strip2:"DSC_8449-BW", strip3:"DSC_0475-BW", strip4:"DSC_2060"};
+
+  var picks = Object.assign({}, CURRENT);
+  var active = null, ref = null, writable = true, saving = false, pending = false;
+  var slotsEl = document.getElementById("slots");
+  var gridEl  = document.getElementById("grid");
+  var statusEl= document.getElementById("status");
+  var promptEl= document.getElementById("prompt");
+
+  function setStatus(t, ok){ statusEl.textContent = t; statusEl.className = "status" + (ok ? " ok" : ""); }
+
+  function renderSlots(){
+    slotsEl.textContent = "";
+    SLOTS.forEach(function(s){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "slot" + (active === s.key ? " active" : "");
+      b.setAttribute("data-slot", s.key);
+      var th = document.createElement("div");
+      th.className = "thumb";
+      th.style.aspectRatio = s.ar.replace(":", "/");
+      var v = picks[s.key];
+      if(v){
+        var im = document.createElement("img");
+        im.src = "assets/pick/" + v + ".jpg"; im.alt = v; im.loading = "lazy";
+        th.appendChild(im);
+        var x = document.createElement("span");
+        x.className = "clear"; x.textContent = "clear";
+        x.setAttribute("data-clear", s.key);
+        th.appendChild(x);
+      } else {
+        var n = document.createElement("span");
+        n.className = "none"; n.textContent = "empty";
+        th.appendChild(n);
+      }
+      var m = document.createElement("div");
+      m.className = "meta";
+      var nm = document.createElement("p"); nm.className = "nm"; nm.textContent = s.name;
+      var ar = document.createElement("p"); ar.className = "ar"; ar.textContent = s.ar + (s.hint ? " \u00b7 " + s.hint : "");
+      m.appendChild(nm); m.appendChild(ar);
+      if(v){ var c = document.createElement("p"); c.className = "cur"; c.textContent = v; m.appendChild(c); }
+      b.appendChild(th); b.appendChild(m);
+      slotsEl.appendChild(b);
+    });
+    var used = {};
+    SLOTS.forEach(function(s){ if(picks[s.key]) used[picks[s.key]] = s.name; });
+    Array.prototype.forEach.call(gridEl.querySelectorAll(".tile"), function(t){
+      var n = t.getAttribute("data-img");
+      var old = t.querySelector(".badge");
+      if(old) old.remove();
+      if(used[n]){
+        t.classList.add("used");
+        var bd = document.createElement("span");
+        bd.className = "badge"; bd.textContent = used[n];
+        t.appendChild(bd);
+      } else t.classList.remove("used");
+    });
+    var s2 = SLOTS.filter(function(s){ return s.key === active; })[0];
+    promptEl.innerHTML = active
+      ? "Now click a photo for <b>" + s2.name + "</b>"
+      : "Pick a slot to start";
+  }
+
+  function save(){
+    if(!ref || !writable) return;
+    if(saving){ pending = true; return; }
+    saving = true;
+    setStatus("saving\u2026");
+    ref.set(Object.assign({}, picks, {updatedAt: new Date().toISOString()})).then(function(){
+      saving = false; setStatus("saved", true);
+      if(pending){ pending = false; save(); }
+    }, function(e){
+      saving = false; pending = false;
+      if(e && e.code === "invalid_argument"){ writable = false; setStatus("read-only \u2014 ask Jess to share edit access"); }
+      else setStatus("not saved (" + ((e && e.code) || "error") + ")");
+    });
+  }
+
+  slotsEl.addEventListener("click", function(ev){
+    var c = ev.target.closest("[data-clear]");
+    if(c){ ev.stopPropagation(); picks[c.getAttribute("data-clear")] = ""; renderSlots(); save(); return; }
+    var b = ev.target.closest("[data-slot]");
+    if(!b) return;
+    active = b.getAttribute("data-slot");
+    renderSlots();
+  });
+
+  gridEl.addEventListener("click", function(ev){
+    var t = ev.target.closest("[data-img]");
+    if(!t) return;
+    if(!active){ promptEl.innerHTML = "Pick a <b>slot</b> first, then a photo"; return; }
+    picks[active] = t.getAttribute("data-img");
+    var i = SLOTS.map(function(s){ return s.key; }).indexOf(active);
+    var next = SLOTS.slice(i+1).filter(function(s){ return !picks[s.key]; })[0];
+    active = next ? next.key : null;
+    renderSlots();
+    save();
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+
+  renderSlots();
+
+  claude.use("db").then(function(db){
+    if(!db){ setStatus("offline \u2014 picks won't save"); return; }
+    ref = db.doc("picks/homepage");
+    ref.onSnapshot(function(snap){
+      if(snap.exists){
+        var d = snap.data();
+        SLOTS.forEach(function(s){
+          if(typeof d[s.key] === "string") picks[s.key] = d[s.key];
+        });
+        renderSlots();
+        if(!saving) setStatus("saved", true);
+      } else {
+        setStatus("ready", true);
+      }
+    }, function(e){
+      setStatus("sync stopped (" + (e.code || "error") + ")");
+    });
+  }, function(){ setStatus("offline \u2014 picks won't save"); });
+})();
+</script>
