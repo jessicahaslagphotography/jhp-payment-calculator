@@ -149,10 +149,11 @@
   .mk-hero .shotbox{height:340px}
   @media (max-width:620px){ .mk-hero .shotbox{height:270px} }
   .mk-hero .over{position:absolute; inset:0; display:flex; flex-direction:column;
-    align-items:flex-start; justify-content:center; gap:12px; text-align:left; padding:0 clamp(20px,6vw,64px);
-    background:linear-gradient(100deg, rgba(19,16,14,.86) 0%, rgba(19,16,14,.62) 38%,
-      rgba(19,16,14,.18) 62%, rgba(19,16,14,.55) 100%)}
-  .mk-hero .over > *{max-width:19ch}
+    align-items:flex-start; justify-content:flex-end; gap:12px; text-align:left;
+    padding:0 clamp(20px,5vw,52px) clamp(24px,4vw,40px);
+    background:linear-gradient(0deg, rgba(19,16,14,.92) 0%, rgba(19,16,14,.72) 26%,
+      rgba(19,16,14,.28) 52%, rgba(19,16,14,.10) 100%)}
+  .mk-hero .over > *{max-width:22ch}
   .mk-hero .eb{font-family:var(--sans); font-size:9.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--gold)}
   .mk-hero .ttl{font-family:var(--serif); font-weight:500; font-size:clamp(28px,5.4vw,50px); line-height:1.04; margin:0; letter-spacing:.01em}
   .mk-sec{padding:48px 30px; border-bottom:1px solid var(--line-soft)}
@@ -366,10 +367,10 @@
         </div>
 
         <div class="mk-hero">
-          <div class="shotbox"><img class="shot" src="assets/hero.jpg" alt="A smiling woman in red, reflected in a gilt mirror, photographed by JHP Boudoir"></div>
+          <div class="shotbox"><img class="shot" src="assets/hero.jpg" alt="A woman photographed from behind on an emerald velvet sofa, by JHP Boudoir"></div>
           <div class="over">
             <p class="eb">Jefferson City, Missouri</p>
-            <h2 class="ttl">Central Missouri&rsquo;s<br>boudoir studio</h2>
+            <h2 class="ttl">Central Missouri&rsquo;s<br>Premier Boudoir Studio</h2>
             <button class="b-primary" type="button" style="margin-top:6px">Book your session</button>
           </div>
         </div>
@@ -402,6 +403,9 @@
             <h3 class="mk-h" style="color:var(--ink)">What this is actually for</h3>
             <p class="mk-p">To hand you a set of photographs that stop you mid-scroll two years from now and make you think, oh &mdash; that&rsquo;s me. Not a version of you that had to lose weight first. You, on an ordinary Tuesday, photographed properly for probably the first time in your adult life.</p>
             <button class="b-secondary" type="button" style="margin-top:6px">Book a call with Jess</button>
+          </div>
+          <div class="mk-band-img">
+            <div class="shotbox"><img class="shot" src="assets/mission.jpg" alt="A smiling woman in red, reflected in a gilt mirror, photographed by JHP Boudoir"></div>
           </div>
         </div>
 
