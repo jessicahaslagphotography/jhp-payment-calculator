@@ -129,6 +129,20 @@
   .mk-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-width:1000px; margin:0 auto}
   @media (max-width:620px){ .mk-strip{grid-template-columns:repeat(2,1fr)} }
   .mk-strip .shotbox{aspect-ratio:3/4}
+  .mk-ticker{border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft);
+    padding:13px 0; overflow:hidden; white-space:nowrap; background:var(--surface)}
+  .mk-ticker span{font-family:var(--sans); font-size:10.5px; letter-spacing:.26em; text-transform:uppercase;
+    color:var(--gold); display:inline-block; padding-right:26px}
+  .mk-affirm p{font-family:var(--serif); font-weight:400; font-size:clamp(22px,3.6vw,30px);
+    line-height:1.9; margin:0; color:var(--ink); text-align:center}
+  .mk-affirm p .last{color:var(--gold-bright)}
+  .mk-quotes{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:960px; margin:26px auto 0}
+  @media (max-width:760px){ .mk-quotes{grid-template-columns:1fr} }
+  .mk-q{background:var(--surface); border:1px solid var(--line-soft); padding:22px 20px; border-radius:3px}
+  .mk-q .qt{font-family:var(--serif); font-style:italic; font-size:16px; line-height:1.6; color:var(--muted); margin:0 0 14px}
+  .mk-q .qa{font-family:var(--sans); font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin:0}
+  .mk-q.slot .qt{color:var(--dim); font-style:normal; font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; line-height:1.7}
+  .mk-two-cta{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px}
   .mk-band-img{margin:24px auto 0; max-width:760px}
   .mk-band-img .shotbox{aspect-ratio:3/2}
   .mk-hero{position:relative}
@@ -336,7 +350,7 @@
 
   <section>
     <h2>Your homepage in it</h2>
-    <p class="sechint">Real blocks from your Showit site, real copy, real prices — and six photographs from the 33 you sent through. The palette was drawn from your checkout pages before I saw these — the match to your studio’s emerald velvet and gilt frames is your set, not my grading. Two frames stay empty on purpose: there is no portrait of you in that set, and labelling a finished boudoir image as a &ldquo;before&rdquo; would be a lie.</p>
+    <p class="sechint">Nine blocks in Kelli Marie&rsquo;s order — hero, ticker, manifesto, affirmation, mission, session fee, before &amp; after, testimonials, capture — rendered in the palette above, with six of your own photographs. Three frames stay empty on purpose: there is no portrait of you in the set, no before/after pair, and I am not writing your testimonials.</p>
 
     <div class="frame">
       <div class="frame-bar">
@@ -355,10 +369,12 @@
           <div class="shotbox"><img class="shot" src="assets/hero.jpg" alt="A smiling woman in red, reflected in a gilt mirror, photographed by JHP Boudoir"></div>
           <div class="over">
             <p class="eb">Jefferson City, Missouri</p>
-            <h2 class="ttl">Luxury boudoir,<br>for women who've never done this</h2>
+            <h2 class="ttl">Central Missouri&rsquo;s<br>boudoir studio</h2>
             <button class="b-primary" type="button" style="margin-top:6px">Book your session</button>
           </div>
         </div>
+
+        <div class="mk-ticker"><span>boudoir is the only thing we photograph &bull; every age, every size, every body &bull; Jefferson City, Missouri &bull;</span><span>boudoir is the only thing we photograph &bull; every age, every size, every body &bull; Jefferson City, Missouri &bull;</span></div>
 
         <div class="mk-sec">
           <div class="mk-two">
@@ -367,10 +383,25 @@
             </div>
             <div>
               <p class="mk-kicker">Meet your photographer</p>
-              <h3 class="mk-h" style="color:var(--ink); margin-top:0">Hi, I'm Jess</h3>
-              <p class="mk-p">I was a social worker before I was a boudoir photographer, which tells you most of what you need to know about how I run a session. I spent years learning how to make a person feel safe in a room. I just do it with a camera now.</p>
-              <button class="b-secondary" type="button">More about me</button>
+              <h3 class="mk-h" style="color:var(--ink); margin-top:0">You do not have to be ready</h3>
+              <p class="mk-p">I was a social worker before I was a boudoir photographer. Years of sitting with people on the hardest day of their life taught me the thing that turned out to matter more than any camera setting: how to make a person feel safe in a room.</p>
+              <p class="mk-p">Nearly every woman who walks in here tells me a version of the same sentence. I don&rsquo;t know how to pose. I should lose fifteen pounds first. I&rsquo;m not really the kind of woman who does this.</p>
+              <p class="mk-p" style="margin-bottom:0">You do not have to fix anything first. That is the entire point.</p>
             </div>
+          </div>
+        </div>
+
+        <div class="mk-band mk-affirm">
+          <p>You are not too old.<br>You are not too much.<br>You are not too late.<br><span class="last">You are exactly who I photograph.</span></p>
+          <div style="margin-top:26px"><button class="b-secondary" type="button">Meet Jess</button></div>
+        </div>
+
+        <div class="mk-sec">
+          <div class="mk-center">
+            <p class="mk-kicker">Our mission</p>
+            <h3 class="mk-h" style="color:var(--ink)">What this is actually for</h3>
+            <p class="mk-p">To hand you a set of photographs that stop you mid-scroll two years from now and make you think, oh &mdash; that&rsquo;s me. Not a version of you that had to lose weight first. You, on an ordinary Tuesday, photographed properly for probably the first time in your adult life.</p>
+            <button class="b-secondary" type="button" style="margin-top:6px">Book a call with Jess</button>
           </div>
         </div>
 
@@ -398,13 +429,27 @@
           </div>
         </div>
 
-        <div class="mk-sec">
-          <div class="mk-center" style="margin-bottom:26px">
-            <p class="mk-kicker">The work</p>
-            <h3 class="mk-h" style="color:var(--ink)">Every woman here was nervous</h3>
-            <p class="mk-p">Every single one. Not models — women from Jefferson City and Columbia and every small town in between, who decided to go first.</p>
+        <div class="mk-band">
+          <p class="mk-kicker">Before &amp; after</p>
+          <h3 class="mk-h" style="color:var(--ink)">A transformation worth investing in</h3>
+          <p class="mk-p" style="max-width:40ch; margin:0 auto">Same woman, same morning, about four hours apart.</p>
+          <div class="mk-ba">
+            <div class="shotbox"><span class="ph-note">Briana<br>before</span></div>
+            <div class="shotbox"><span class="ph-note">Briana<br>after</span></div>
           </div>
-          <div class="mk-strip">
+        </div>
+
+        <div class="mk-sec">
+          <div class="mk-center" style="margin-bottom:6px">
+            <p class="mk-kicker">What they said afterwards</p>
+            <h3 class="mk-h" style="color:var(--ink)">Every woman here was nervous</h3>
+          </div>
+          <div class="mk-quotes">
+            <div class="mk-q slot"><p class="qt">Your Google review &mdash; one</p><p class="qa">Miss B.</p></div>
+            <div class="mk-q slot"><p class="qt">Your Google review &mdash; two</p><p class="qa">Miss K.</p></div>
+            <div class="mk-q slot"><p class="qt">Your Google review &mdash; three</p><p class="qa">Miss T.</p></div>
+          </div>
+          <div class="mk-strip" style="margin-top:22px">
             <div class="shotbox"><img class="shot" src="assets/strip-1.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
             <div class="shotbox"><img class="shot" src="assets/strip-2.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
             <div class="shotbox"><img class="shot" src="assets/strip-3.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
@@ -412,20 +457,16 @@
           </div>
         </div>
 
-        <div class="mk-band">
-          <p class="mk-kicker">Before &amp; after</p>
-          <h3 class="mk-h" style="color:var(--ink)">A transformation worth investing in</h3>
-          <div class="mk-ba">
-            <div class="shotbox"><span class="ph-note">Briana<br>before</span></div>
-            <div class="shotbox"><span class="ph-note">Briana<br>after</span></div>
+        <div class="mk-sec" style="border-bottom:none">
+          <div class="mk-center">
+            <p class="mk-kicker">Before everyone else</p>
+            <h3 class="mk-h" style="color:var(--ink)">Know first</h3>
+            <p class="mk-p">Specialty sessions, the treehouse, model calls and the occasional last-minute opening go out to the VIP group and the email list first, and they go fast. We won&rsquo;t sell your information and we won&rsquo;t email you much.</p>
+            <div class="mk-two-cta">
+              <button class="b-primary" type="button">Join the VIP group</button>
+              <button class="b-secondary" type="button">Keep me posted</button>
+            </div>
           </div>
-          <p class="mk-p" style="font-size:12px; margin:16px auto 0; max-width:46ch; color:var(--dim)">Placeholders — your real Briana and Taylor pairs drop straight in.</p>
-        </div>
-
-        <div class="mk-sec" style="text-align:center; border-bottom:none">
-          <h3 class="mk-h" style="color:var(--ink)">Still deciding?</h3>
-          <p class="mk-p" style="max-width:44ch; margin:0 auto 20px">Grab a fifteen-minute call. No pitch — just your questions, answered by the person who'll be photographing you.</p>
-          <button class="b-primary" type="button">Book a call with Jess</button>
         </div>
 
         <hr class="mk-rule">
