@@ -1,0 +1,628 @@
+<title>JHP Boudoir Build Kit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Light theme — warm parchment counterpart to Jessica's dark studio palette */
+    --bg:#F4EFE6; --surface:#FBF8F2; --raised:#F0E9DC;
+    --ink:#241D18; --muted:#6B5D4C; --dim:#8D7E69;
+    --gold:#8A6520; --gold-bright:#6F5017;
+    --line:rgba(138,101,32,.26); --line-soft:rgba(36,29,24,.12);
+    --crit:#9C3B2B; --crit-bg:rgba(156,59,43,.10);
+    --warn:#8A6520; --warn-bg:rgba(138,101,32,.10);
+    --ok:#4A6B33;  --ok-bg:rgba(74,107,51,.10);
+    --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+    --sans:'Jost',-apple-system,'Segoe UI',system-ui,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#13100E; --surface:#1C1714; --raised:#241D18;
+      --ink:#F2ECE2; --muted:#A99A86; --dim:#7D7161;
+      --gold:#C9A24B; --gold-bright:#E6C576;
+      --line:rgba(201,162,75,.24); --line-soft:rgba(242,236,226,.10);
+      --crit:#CD6C5B; --crit-bg:rgba(205,108,91,.12);
+      --warn:#D9A441; --warn-bg:rgba(217,164,65,.12);
+      --ok:#9DB77F;   --ok-bg:rgba(157,183,127,.12);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#13100E; --surface:#1C1714; --raised:#241D18;
+    --ink:#F2ECE2; --muted:#A99A86; --dim:#7D7161;
+    --gold:#C9A24B; --gold-bright:#E6C576;
+    --line:rgba(201,162,75,.24); --line-soft:rgba(242,236,226,.10);
+    --crit:#CD6C5B; --crit-bg:rgba(205,108,91,.12);
+    --warn:#D9A441; --warn-bg:rgba(217,164,65,.12);
+    --ok:#9DB77F;   --ok-bg:rgba(157,183,127,.12);
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--bg); color:var(--ink); font-family:var(--sans);
+    line-height:1.55; margin:0; font-size:15px; -webkit-font-smoothing:antialiased;
+  }
+  .shell{max-width:1180px; margin:0 auto; padding:0 16px; padding-block:clamp(28px,5vw,56px) 80px;}
+
+  /* ---------- masthead ---------- */
+  .mast{border-bottom:1px solid var(--line); padding-bottom:26px; margin-bottom:30px}
+  .eyebrow{font-size:10.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin:0 0 10px}
+  h1{font-family:var(--serif); font-weight:500; font-size:clamp(34px,6.5vw,54px); line-height:1.04; margin:0 0 12px; text-wrap:balance}
+  .standfirst{font-family:var(--serif); font-size:clamp(17px,2.4vw,21px); color:var(--muted); max-width:62ch; margin:0 0 20px; font-style:italic}
+  .facts{display:flex; flex-wrap:wrap; gap:8px}
+  .fact{font-size:11.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--muted);
+    border:1px solid var(--line-soft); border-radius:999px; padding:5px 12px; background:var(--surface)}
+  .fact b{color:var(--ink); font-weight:500}
+
+  /* ---------- layout ---------- */
+  .cols{display:grid; grid-template-columns:186px 1fr; gap:38px; align-items:start}
+  @media (max-width:860px){ .cols{grid-template-columns:1fr; gap:22px} }
+
+  nav.rail{position:sticky; top:env(safe-area-inset-top,0px); padding-top:6px}
+  @media (max-width:860px){
+    nav.rail{position:static; display:flex; gap:7px; overflow-x:auto; padding-bottom:10px;
+      border-bottom:1px solid var(--line-soft); -webkit-overflow-scrolling:touch}
+  }
+  nav.rail a{
+    display:block; text-decoration:none; color:var(--muted); font-size:13px; padding:7px 0;
+    border-left:2px solid transparent; padding-left:12px; white-space:nowrap; transition:.15s
+  }
+  nav.rail a:hover{color:var(--ink); border-left-color:var(--gold)}
+  @media (max-width:860px){
+    nav.rail a{border-left:none; border-bottom:2px solid transparent; padding:6px 2px; flex:none}
+    nav.rail a:hover{border-left-color:transparent; border-bottom-color:var(--gold)}
+  }
+  nav .railhead{font-size:10px; letter-spacing:.22em; text-transform:uppercase; color:var(--dim); margin:0 0 8px; padding-left:12px}
+  @media (max-width:860px){ nav .railhead{display:none} }
+
+  main{min-width:0}
+  section{margin:0 0 54px; scroll-margin-top:20px}
+  h2{font-family:var(--serif); font-weight:500; font-size:clamp(25px,4vw,33px); margin:0 0 6px; line-height:1.15; text-wrap:balance}
+  .sechint{color:var(--muted); font-size:14px; margin:0 0 22px; max-width:64ch}
+  h3{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin:30px 0 12px; font-weight:500}
+
+  /* ---------- findings ---------- */
+  .finding{display:grid; grid-template-columns:auto 1fr; gap:14px; padding:16px 0; border-bottom:1px solid var(--line-soft); align-items:start}
+  .finding:last-child{border-bottom:none}
+  .sev{font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; font-weight:600; padding:4px 8px;
+    border-radius:4px; white-space:nowrap; margin-top:2px}
+  .sev.c{color:var(--crit); background:var(--crit-bg)}
+  .sev.w{color:var(--warn); background:var(--warn-bg)}
+  .sev.n{color:var(--ok);   background:var(--ok-bg)}
+  .finding .ft{font-weight:500; margin:0 0 4px; font-size:15px}
+  .finding .fb{color:var(--muted); font-size:13.5px; margin:0}
+  .finding .fb code{font-family:var(--mono); font-size:12px; color:var(--ink);
+    background:var(--raised); padding:1px 5px; border-radius:3px; word-break:break-word}
+
+  /* ---------- paste blocks ---------- */
+  .paste{background:var(--surface); border:1px solid var(--line-soft); border-radius:10px; margin:0 0 16px; overflow:hidden}
+  .ph{display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap;
+    padding:9px 14px; background:var(--raised); border-bottom:1px solid var(--line-soft)}
+  .loc{font-family:var(--mono); font-size:11px; color:var(--gold); letter-spacing:.02em; word-break:break-all}
+  .loc .arrow{color:var(--dim); padding:0 3px}
+  .btn{font-family:var(--sans); font-size:11px; letter-spacing:.08em; text-transform:uppercase; font-weight:500;
+    color:var(--ink); background:transparent; border:1px solid var(--line); border-radius:5px;
+    padding:5px 11px; cursor:pointer; transition:.15s; flex:none}
+  .btn:hover{border-color:var(--gold); color:var(--gold)}
+  .btn.done{color:var(--ok); border-color:var(--ok)}
+  .btn:focus-visible{outline:2px solid var(--gold); outline-offset:2px}
+  .pb{padding:14px; font-size:14.5px; white-space:pre-wrap; word-wrap:break-word}
+  .pb.code{font-family:var(--mono); font-size:12.5px; line-height:1.6; color:var(--muted); overflow-x:auto; white-space:pre}
+  .pb .hd{font-family:var(--serif); font-size:21px; line-height:1.2; display:block; margin-bottom:8px}
+  .note{font-size:12.5px; color:var(--dim); padding:0 14px 12px; margin:0}
+  .note b{color:var(--warn); font-weight:500}
+
+  /* ---------- tables ---------- */
+  .tw{overflow-x:auto; border:1px solid var(--line-soft); border-radius:10px; background:var(--surface)}
+  table{width:100%; border-collapse:collapse; font-size:13.5px; min-width:520px}
+  th{text-align:left; font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--dim);
+    font-weight:500; padding:11px 13px; border-bottom:1px solid var(--line); white-space:nowrap}
+  td{padding:11px 13px; border-bottom:1px solid var(--line-soft); vertical-align:top}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+  .was{color:var(--dim); text-decoration:line-through; font-size:12px}
+  td code{font-family:var(--mono); font-size:11.5px; color:var(--gold); word-break:break-all}
+  .old{color:var(--dim)}
+  .new{color:var(--ink); font-weight:500}
+
+  ul.tight{margin:0 0 16px; padding-left:19px; color:var(--muted); font-size:14px}
+  ul.tight li{margin-bottom:6px}
+  ul.tight b{color:var(--ink); font-weight:500}
+
+  .callout{border-left:2px solid var(--gold); background:var(--surface); padding:14px 16px; border-radius:0 8px 8px 0; margin:0 0 20px}
+  .callout p{margin:0; font-size:14px; color:var(--muted)}
+  .callout p+p{margin-top:9px}
+  .callout b{color:var(--ink); font-weight:500}
+
+  .toast{position:fixed; left:50%; bottom:24px; transform:translateX(-50%) translateY(18px);
+    background:var(--gold); color:var(--bg); font-weight:500; font-size:13.5px;
+    padding:10px 20px; border-radius:999px; opacity:0; transition:.22s; pointer-events:none; z-index:9}
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+  @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+  footer{border-top:1px solid var(--line-soft); margin-top:40px; padding-top:20px; color:var(--dim); font-size:12.5px}
+</style>
+
+<div class="shell">
+
+  <div class="mast">
+    <p class="eyebrow">Showit build kit &middot; jhpboudoir.com</p>
+    <h1>The JHP Boudoir Revamp</h1>
+    <p class="standfirst">Every word, every fix, every meta tag — written to be pasted straight into the Showit editor, block by block, in the order they appear on the page.</p>
+    <div class="facts">
+      <span class="fact">Platform <b>Showit + WP Engine</b></span>
+      <span class="fact">Pages audited <b>6</b></span>
+      <span class="fact">Critical fixes <b>4</b></span>
+      <span class="fact">Prices verified <b>against PSPP checkout</b></span>
+    </div>
+  </div>
+
+  <div class="cols">
+    <nav class="rail">
+      <p class="railhead">Sections</p>
+      <a href="#fix">1 &middot; Fix first</a>
+      <a href="#nav">2 &middot; Navigation</a>
+      <a href="#home">3 &middot; Home</a>
+      <a href="#invest">4 &middot; Investment</a>
+      <a href="#about">5 &middot; About</a>
+      <a href="#other">6 &middot; Portfolio</a>
+      <a href="#contact">7 &middot; Contact + GHL</a>
+      <a href="#seo">8 &middot; SEO tags</a>
+      <a href="#brand">9 &middot; Brand note</a>
+    </nav>
+
+    <main>
+
+      <!-- ============ 1 ============ -->
+      <section id="fix">
+        <h2>Fix first</h2>
+        <p class="sechint">Ranked by what it costs you. The top two are actively losing money right now — everything else in this kit can wait behind them.</p>
+
+        <div class="finding">
+          <span class="sev c">Critical</span>
+          <div>
+            <p class="ft">Template lorem ipsum is live on your homepage</p>
+            <p class="fb">The <code>welcome</code> block has three states — <code>main</code>, <code>about</code>, <code>investment</code>. Main is clean. The other two are one click away and still read <em>“hi, I'm erin”</em>, <em>“Lorem ipsum dolor amet gluten-free kinfolk lo-fi beard fanny pack banjo…”</em>, <em>“package one / two / three”</em> and <strong>“investment begins at $xxx”</strong> three times over. It's also in the HTML Google indexes. Section 3 replaces all of it.</p>
+          </div>
+        </div>
+
+        <div class="finding">
+          <span class="sev c">Critical</span>
+          <div>
+            <p class="ft">Your contact form goes to Dubsado, not GHL</p>
+            <p class="fb">The contact page embeds <code>hello.dubsado.com/public/form/view/6376fedace74022c58931131</code> in an iframe, and the thank-you state links to <code>app.iris-works.com/customer/leads/new?ref=15295</code> — two systems you've since migrated off. Your 2,510-contact <code>contact_intelligence</code> table exists precisely because you moved to GHL. Every inquiry from the website is landing outside the pipeline. Section 7.</p>
+          </div>
+        </div>
+
+        <div class="finding">
+          <span class="sev c">Critical</span>
+          <div>
+            <p class="ft">No inquiry form exists in GHL yet</p>
+            <p class="fb">Your location has exactly two forms — <code>CCS GIVEAWAY FORM</code> and <code>A2P Form</code>. Neither is a website inquiry. You'll need to build one, or route contact to your <code>Info</code> calendar instead. Both routes are written out in Section 7 with your real IDs.</p>
+          </div>
+        </div>
+
+        <div class="finding">
+          <span class="sev c">Critical</span>
+          <div>
+            <p class="ft">Your stated “Collections begin at $3,400” is last year's price</p>
+            <p class="fb">$3,400 is the <em>retail strike-through</em> on the Silver Collection. Silver actually sells at <strong>$2,900</strong>. Your Investment page is quoting a number $500 above your real entry point — which reads as more expensive to every visitor comparing you against another studio.</p>
+          </div>
+        </div>
+
+        <div class="finding">
+          <span class="sev w">High</span>
+          <div>
+            <p class="ft">Three pages share one title tag</p>
+            <p class="fb">Home, Portfolio and Contact all carry <code>JHP Boudoir - Jefferson City, MO. Boudoir Photographer</code>. Information is titled just <code>Information</code>. No page has a meta description. Google is writing your search snippets for you. Section 8.</p>
+          </div>
+        </div>
+
+        <div class="finding">
+          <span class="sev w">High</span>
+          <div>
+            <p class="ft">Your own funnel pages aren't linked from anywhere</p>
+            <p class="fb">You run 52 Scalogy pages — the model call, the giveaway, the treehouse sessions, reserve-and-checkout flows. Not one is reachable from the site's navigation. A visitor who lands on the homepage cannot find any of them.</p>
+          </div>
+        </div>
+
+        <div class="finding">
+          <span class="sev n">Housekeeping</span>
+          <div>
+            <p class="ft">Empty <code>lang</code> attribute sitewide</p>
+            <p class="fb">Every Showit page renders <code>&lt;html class="d" lang=""&gt;</code>. Screen readers can't pick a pronunciation and search engines can't confirm the language. Set it in Showit under <em>Site Settings → Advanced</em>.</p>
+          </div>
+        </div>
+
+        <div class="finding">
+          <span class="sev n">Housekeeping</span>
+          <div>
+            <p class="ft">The repo file isn't your calculator</p>
+            <p class="fb"><code>Boudoir Payment Calculator.html</code> in this repository is a saved ChatGPT browser page, not the tool. Your real calculator is the Scalogy page <code>payment-calculator</code>. Say the word and I'll clear it out.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 2 ============ -->
+      <section id="nav">
+        <h2>Navigation</h2>
+        <p class="sechint">Your current menu buries the two things that convert — price and proof — behind a word nobody searches for. “Information” tells a visitor nothing.</p>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Now</th><th>Change to</th><th>Why</th></tr></thead>
+            <tbody>
+              <tr><td class="old">Home</td><td class="new">Home</td><td>Keep.</td></tr>
+              <tr><td class="old">About</td><td class="new">About</td><td>Keep. The page is genuinely good.</td></tr>
+              <tr><td class="old">Portfolio</td><td class="new">Portfolio</td><td>Keep.</td></tr>
+              <tr><td class="old">Investment <code>/information</code></td><td class="new">Investment <code>/information</code></td><td>Label is already right — the page title tag isn't. Section 8.</td></tr>
+              <tr><td class="old">Specialty Sessions</td><td class="new">Specialty Sessions</td><td>Keep.</td></tr>
+              <tr><td class="old">Blog</td><td class="new">Blog</td><td>Keep.</td></tr>
+              <tr><td class="old">Contact</td><td class="new">Book a Call</td><td>“Contact” asks for effort with no promise. “Book a Call” names the next step and matches your <code>Info</code> calendar.</td></tr>
+              <tr><td class="old">—</td><td class="new">The Sale / current offer</td><td>Surface whichever Scalogy funnel is live. Right now nothing on the site points to any of them.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout" style="margin-top:20px">
+          <p><b>One more thing to check in the editor.</b> On the contact page, the <code>Contact</code> menu item and the <code>Book Your Session Now</code> button both point at <code>#/</code> — a link that goes nowhere. If that's Showit's current-page behaviour, fine. If it's on other pages too, it's a dead CTA in your most valuable spot.</p>
+        </div>
+      </section>
+
+      <!-- ============ 3 ============ -->
+      <section id="home">
+        <h2>Home</h2>
+        <p class="sechint">Block names below match what's in your Showit editor. The two states carrying lorem are <code>welcome_about</code> and <code>welcome_investment</code> — they're the whole job on this page.</p>
+
+        <h3>welcome → about state</h3>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">welcome_about<span class="arrow">→</span>heading</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb"><span class="hd">Hi, I'm Jess</span></div>
+          <p class="note">Replaces <b>“hi, I'm erin”</b> — the template designer's name, still live on your site.</p>
+        </div>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">welcome_about<span class="arrow">→</span>paragraph 1</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">I was a social worker before I was a boudoir photographer, which tells you most of what you need to know about how I run a session. I spent years learning how to make a person feel safe in a room. I just do it with a camera now.</div>
+        </div>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">welcome_about<span class="arrow">→</span>paragraph 2</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">Born and raised on a beef and poultry farm in central Missouri, and still here. Boudoir is the only thing we photograph — no weddings, no seniors, no families on a lawn. Just this. So by the time you walk into the studio, my team has done this more times than we can count, and you only have to do one thing: show up.</div>
+        </div>
+
+        <h3>welcome → investment state</h3>
+        <div class="callout">
+          <p><b>Read this before you paste.</b> The prices below are pulled from your live PSPP checkout, so they're right. The feature bullets are structural — payment terms, tax treatment, digital vs. physical — because I don't have your product sheets. Anything marked <b>[VERIFY]</b> is my best guess at contents; swap in the real album, wall art and digital counts before publishing.</p>
+        </div>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">welcome_investment<span class="arrow">→</span>tile 1 &middot; was “package one”</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb"><span class="hd">The Petite Collections</span>For the woman who wants the images and nothing to dust. Fully digital, no sales tax, and the fastest way into the experience.
+
++ Every image fully retouched and yours to keep
++ Digital delivery — no sales tax added
++ Interest-free pre-session payment plan
++ Complimentary hair and makeup on session day
++ [VERIFY] number of images included
+
+investment begins at $1,500</div>
+        </div>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">welcome_investment<span class="arrow">→</span>tile 2 &middot; was “package two”</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb"><span class="hd">The Signature Collections</span>Where most of my clients land. Albums, wall art and digitals together — the version of this you actually hang on a wall.
+
++ A printed album you'll still be opening in twenty years
++ Wall art, sized and framed with you at your reveal
++ Matching digitals for every printed image
++ Interest-free pre-session payment plan
++ [VERIFY] Silver through Gold tiers listed side by side
+
+investment begins at $2,900</div>
+        </div>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">welcome_investment<span class="arrow">→</span>tile 3 &middot; was “package three”</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb"><span class="hd">The Artist Collection</span>Everything. Every image from your session, every product I offer, nothing held back for a second purchase.
+
++ Your complete gallery, fully retouched
++ The full album and wall art collection
++ Every digital file, print-released
++ Interest-free pre-session payment plan
++ [VERIFY] any Artist-only inclusions
+
+investment begins at $9,400</div>
+        </div>
+
+        <h3>book-now block</h3>
+        <div class="paste">
+          <div class="ph"><span class="loc">book-now<span class="arrow">→</span>book-now_1</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">Book Your
+Session Now</div>
+          <p class="note">Copy is fine. <b>The link isn't</b> — it currently points at <code>#/</code>. Repoint it at your GHL <code>Info</code> calendar (Section 7).</p>
+        </div>
+      </section>
+
+      <!-- ============ 4 ============ -->
+      <section id="invest">
+        <h2>Investment</h2>
+        <p class="sechint">This is your best page. It's honest, specific, and it answers the real objections. Two corrections and one addition.</p>
+
+        <h3>Correction · the entry price</h3>
+        <div class="paste">
+          <div class="ph"><span class="loc">/information<span class="arrow">→</span>Prints &amp; Products</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">- All prints and products are sold separately and are not included in the Session Fee. This allows you to customize your purchase and invest in only the products you love most.
+- A product purchase is required.
+- Minimum Product Investment Begins at $1,500
+- Collections begin at $2,900</div>
+          <p class="note">One character changed: <b>$3,400 → $2,900</b>. $3,400 is Silver's strike-through retail, not what you charge.</p>
+        </div>
+
+        <h3>Addition · the full collection table</h3>
+        <p class="sechint" style="margin-bottom:14px">Right now a visitor sees “begins at” and has to inquire to learn anything more. Published tiers pre-qualify people before they ever reach your calendar.</p>
+
+        <div class="tw">
+          <table>
+            <thead><tr><th>Collection</th><th class="num">Retail</th><th class="num">Your price</th><th>Tax</th></tr></thead>
+            <tbody>
+              <tr><td>Artist</td><td class="num was">$9,900</td><td class="num">$9,400</td><td>+7.85%</td></tr>
+              <tr><td>Platinum</td><td class="num was">$8,900</td><td class="num">$8,400</td><td>+7.85%</td></tr>
+              <tr><td>Diamond</td><td class="num was">$7,400</td><td class="num">$6,900</td><td>+7.85%</td></tr>
+              <tr><td>Gold</td><td class="num was">$5,600</td><td class="num">$5,100</td><td>+7.85%</td></tr>
+              <tr><td>Rose</td><td class="num was">$4,400</td><td class="num">$3,900</td><td>+7.85%</td></tr>
+              <tr><td>Silver</td><td class="num was">$3,400</td><td class="num">$2,900</td><td>+7.85%</td></tr>
+              <tr><td>Petite — One</td><td class="num was">$2,700</td><td class="num">$2,200</td><td>None · digital</td></tr>
+              <tr><td>Petite — Two</td><td class="num was">$2,000</td><td class="num">$1,500</td><td>None · digital</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note" style="padding-left:0; padding-top:10px">Source: your live <code>payment-calculator</code> page — the same numbers the PSPP checkout charges against.</p>
+
+        <h3>Addition · one more FAQ</h3>
+        <div class="paste">
+          <div class="ph"><span class="loc">/information<span class="arrow">→</span>FAQ &middot; new entry</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb"><span class="hd">What does the payment plan actually look like?</span>Interest-free, no credit check, and split however the calendar allows. Pick your collection, pick a cadence — weekly, bi-weekly or monthly — and your payments run until 30 days before your session date. A $2,900 Silver Collection booked six months out is roughly $520 a month. Nothing is owed after your session.</div>
+          <p class="note">The $520 figure is Silver + 7.85% tax across 6 monthly payments, straight out of your calculator. Recheck it if you change the cadence rules.</p>
+        </div>
+      </section>
+
+      <!-- ============ 5 ============ -->
+      <section id="about">
+        <h2>About</h2>
+        <p class="sechint">Leave this page alone. It's the only page on the site already written in your voice — the farm, the social work degree, the weenie dog, Taco Bell. One addition only.</p>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">/about<span class="arrow">→</span>after “How it started”</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb"><span class="hd">Who I photograph</span>Women who have never done anything like this. That's nearly all of them. Mothers six weeks postpartum and mothers thirty years past it. Women turning forty and women who just left something that wasn't working. Nobody walks in here as a professional model, and I have never once needed them to be.</div>
+          <p class="note">Gives the page the thing it's missing — the reader can't currently find herself in it.</p>
+        </div>
+
+        <div class="callout">
+          <p><b>One factual check.</b> The page says <em>“In my 31st year around the sun”</em> and <em>“5 years ago, I dusted off the camera”</em>. Both go stale on their own. Swap them for a birth-year-free phrasing or a fixed date so you're not editing this every January.</p>
+        </div>
+      </section>
+
+      <!-- ============ 6 ============ -->
+      <section id="other">
+        <h2>Portfolio &amp; Specialty</h2>
+        <p class="sechint">Portfolio is images with no words around them. A page of photographs with no copy ranks for nothing and answers nothing.</p>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">/portfolio<span class="arrow">→</span>intro, above the gallery</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb"><span class="hd">Every woman here was nervous</span>Every single one. They sat in the chair while my team did their hair, said some version of “I don't know how to pose,” and then we started, and twenty minutes later they forgot to be nervous. What you're looking at is not a room full of models. It's a room full of women from Jefferson City and Columbia and every small town in between who decided to go first.</div>
+        </div>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">/specialty-sessions<span class="arrow">→</span>intro</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb"><span class="hd">Specialty Sessions</span>A few times a year I open something outside the standard studio session — the treehouse, the model call, a seasonal set I've been building in my head since winter. They're limited, they book fast, and they go out to the VIP group and the email list before they ever reach this page.</div>
+          <p class="note">Then link the live Scalogy landing page underneath — <b>treehouse-landing</b>, <b>everybody-model-call</b> or <b>boudoir-giveaway</b>, whichever is running.</p>
+        </div>
+      </section>
+
+      <!-- ============ 7 ============ -->
+      <section id="contact">
+        <h2>Contact &amp; GHL routing</h2>
+        <p class="sechint">Pull the Dubsado iframe out of the <code>contact-form</code> block and replace it with one of these. Both use IDs read live from your GHL location.</p>
+
+        <h3>Route A · Book a call — works today</h3>
+        <p class="sechint" style="margin-bottom:14px">Your <b>Info</b> calendar is active and round-robin. Nothing to build; paste and publish. Showit takes this under <em>Embed Code</em> on the element.</p>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">contact-form<span class="arrow">→</span>replace the Dubsado iframe</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb code">&lt;iframe
+  src="https://api.leadconnectorhq.com/widget/booking/mi2EqYRq4gGEbBJHe82b"
+  style="width:100%;border:none;overflow:hidden;"
+  scrolling="no"
+  id="mi2EqYRq4gGEbBJHe82b_jhp"&gt;
+&lt;/iframe&gt;
+&lt;script src="https://link.msgsndr.com/js/form_embed.js"&gt;&lt;/script&gt;</div>
+          <p class="note">Calendar <b>Info</b> · <code>mi2EqYRq4gGEbBJHe82b</code> · round robin · active.</p>
+        </div>
+
+        <h3>Route B · A real inquiry form — needs building first</h3>
+        <p class="sechint" style="margin-bottom:14px">Better long-term: a form captures people who aren't ready to commit to a call, and it tags them into your automations. Build it in GHL under <em>Sites → Forms</em>, then the embed is the same shape:</p>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">contact-form<span class="arrow">→</span>once the form exists</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb code">&lt;iframe
+  src="https://api.leadconnectorhq.com/widget/form/YOUR_FORM_ID"
+  style="width:100%;height:100%;border:none;border-radius:4px"
+  id="inline-YOUR_FORM_ID"
+  data-layout='{"id":"INLINE"}'
+  data-form-name="Website Inquiry"
+  data-height="600"&gt;
+&lt;/iframe&gt;
+&lt;script src="https://link.msgsndr.com/js/form_embed.js"&gt;&lt;/script&gt;</div>
+          <p class="note">Swap <b>YOUR_FORM_ID</b> for the new form's ID. Your existing two — <code>LEzvKkzkU67YKCjQlw1K</code> (CCS Giveaway) and <code>4hQ2mA7QJDB5DhgjXVUY</code> (A2P) — are not this; don't reuse either.</p>
+        </div>
+
+        <h3>Fields worth collecting</h3>
+        <ul class="tight">
+          <li><b>Name, email, phone</b> — phone matters, you run SMS.</li>
+          <li><b>Month you'd like to be photographed</b> — the same question your model call page asks, so the data lines up.</li>
+          <li><b>What's bringing you in right now</b> — open text. This is the line you'll actually read before the call.</li>
+          <li><b>Acknowledgement of the $697 session fee and $1,500 minimum product investment</b> — your EMC page already does exactly this, and it's why that funnel doesn't waste your time.</li>
+        </ul>
+
+        <div class="callout">
+          <p><b>Don't forget the second link.</b> The thank-you state of the contact block still points at Iris Works: <code>app.iris-works.com/customer/leads/new?ref=15295</code>. Remove it or repoint it, or people who submit successfully get handed to a dead system.</p>
+        </div>
+
+        <h3>Your other live calendars, for reference</h3>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Calendar</th><th>ID</th><th>Use</th></tr></thead>
+            <tbody>
+              <tr><td>Info</td><td><code>mi2EqYRq4gGEbBJHe82b</code></td><td class="new">Website contact — Route A</td></tr>
+              <tr><td>Boudoir Sessions</td><td><code>XneF2fYSuYQduDRbb86d</code></td><td>Session dates. Not public-facing.</td></tr>
+              <tr><td>Image Reveal &amp; Ordering</td><td><code>8mXIXpIwowHFECJYmiAS</code></td><td>Post-session. Already handled by <code>book-reveal</code>.</td></tr>
+              <tr><td>Giveaway Call</td><td><code>txj4kA6D4wbOhcCrk8oQ</code></td><td>Giveaway funnel only.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ 8 ============ -->
+      <section id="seo">
+        <h2>SEO tags</h2>
+        <p class="sechint">Showit sets these per page under <em>Page Settings → SEO</em>. Titles are under 60 characters and descriptions under 158, so Google won't truncate them.</p>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">/ <span class="arrow">→</span> title</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">Boudoir Photographer in Jefferson City, MO | JHP Boudoir</div>
+        </div>
+        <div class="paste">
+          <div class="ph"><span class="loc">/ <span class="arrow">→</span> description</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">Luxury boudoir photography in Jefferson City, Missouri. Complimentary hair and makeup, a professionally guided session, and same-day image reveal. Sessions from $697.</div>
+        </div>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">/about <span class="arrow">→</span> title</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">Meet Jess | Central Missouri Boudoir Photographer</div>
+        </div>
+        <div class="paste">
+          <div class="ph"><span class="loc">/about <span class="arrow">→</span> description</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">A social worker turned boudoir photographer, born and raised in central Missouri. Boudoir is all I shoot, and I'll walk you through every minute of it.</div>
+        </div>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">/portfolio <span class="arrow">→</span> title</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">Boudoir Portfolio | Real Women, Jefferson City MO</div>
+        </div>
+        <div class="paste">
+          <div class="ph"><span class="loc">/portfolio <span class="arrow">→</span> description</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">Real boudoir sessions photographed in our Jefferson City studio. Not models — women from mid-Missouri who decided to go first.</div>
+        </div>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">/information <span class="arrow">→</span> title</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">Boudoir Pricing &amp; Payment Plans | JHP Boudoir</div>
+        </div>
+        <div class="paste">
+          <div class="ph"><span class="loc">/information <span class="arrow">→</span> description</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">A $697 session fee covers hair, makeup and your session. Collections begin at $2,900, with interest-free pre-session payment plans and no credit check.</div>
+        </div>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">/contact <span class="arrow">→</span> title</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">Book a Boudoir Session | Jefferson City, Missouri</div>
+        </div>
+        <div class="paste">
+          <div class="ph"><span class="loc">/contact <span class="arrow">→</span> description</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">Ready to book, or just have questions? Grab a call with Jess and we'll talk through dates, collections and what your session day actually looks like.</div>
+        </div>
+
+        <div class="paste">
+          <div class="ph"><span class="loc">/specialty-sessions <span class="arrow">→</span> title</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">Specialty Boudoir Sessions | Limited Dates</div>
+        </div>
+        <div class="paste">
+          <div class="ph"><span class="loc">/specialty-sessions <span class="arrow">→</span> description</span><button class="btn" type="button">Copy</button></div>
+          <div class="pb">Treehouse sessions, model calls and seasonal sets — opened a few times a year, limited to a handful of dates, and gone fast.</div>
+        </div>
+      </section>
+
+      <!-- ============ 9 ============ -->
+      <section id="brand">
+        <h2>Brand note</h2>
+        <p class="sechint">Worth saying out loud, because it will shape whatever you do next.</p>
+
+        <div class="callout">
+          <p><b>You are running two visual identities.</b> The Showit site is white, black and blush <code>#ffe4dc</code>, set in Nanum Myeongjo, Rufina and Montserrat — the template's palette, not a chosen one. Your Scalogy pages are a dark studio palette: near-black <code>#13100E</code>, warm ink <code>#F2ECE2</code>, antique gold <code>#C9A24B</code>, set in Cormorant Garamond and Jost.</p>
+          <p>The second one is <b>considerably better</b>, and it's the one a client sees at checkout, at her reveal booking, and on her payment plan. It reads like a $9,400 collection. The blush template reads like a starter site.</p>
+          <p>This kit is deliberately scoped to copy and plumbing — a visual overhaul is a separate, bigger job. But when you're ready, the direction already exists. You built it. <b>The page you're reading is set in it.</b></p>
+        </div>
+
+        <h3>The tokens, if you want to carry them across</h3>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Role</th><th>Hex</th><th>Where it's already used</th></tr></thead>
+            <tbody>
+              <tr><td>Ground</td><td><code>#13100E</code></td><td>Page background</td></tr>
+              <tr><td>Surface</td><td><code>#1C1714</code></td><td>Panels, cards</td></tr>
+              <tr><td>Raised</td><td><code>#241D18</code></td><td>Inputs, table fills</td></tr>
+              <tr><td>Ink</td><td><code>#F2ECE2</code></td><td>Body text</td></tr>
+              <tr><td>Muted</td><td><code>#A99A86</code></td><td>Secondary text</td></tr>
+              <tr><td>Gold</td><td><code>#C9A24B</code></td><td>Accent, rules, primary buttons</td></tr>
+              <tr><td>Gold bright</td><td><code>#E6C576</code></td><td>Emphasis figures</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note" style="padding-left:0; padding-top:10px">Type: <b>Cormorant Garamond</b> 400–600 for display, <b>Jost</b> 300–600 for everything else. Both are on Google Fonts, so Showit can load them.</p>
+      </section>
+
+      <footer>
+        Built from a live crawl of jhpboudoir.com on 20 September 2026, your Scalogy tenant, and a read-only query against your GHL location. Prices verified against the PSPP checkout. Anything marked [VERIFY] is mine to guess and yours to confirm.
+      </footer>
+
+    </main>
+  </div>
+</div>
+
+<div class="toast" id="toast">Copied</div>
+
+<script>
+(function(){
+  var toast = document.getElementById('toast'), timer = null;
+  function flash(){
+    toast.classList.add('show');
+    clearTimeout(timer);
+    timer = setTimeout(function(){ toast.classList.remove('show'); }, 1400);
+  }
+  function textFor(block){
+    var body = block.querySelector('.pb');
+    if(!body) return '';
+    // <span class="hd"> is a heading pasted into its own Showit field — keep it on its own line
+    var clone = body.cloneNode(true);
+    var hd = clone.querySelector('.hd');
+    if(hd) hd.insertAdjacentText('afterend', '\n');
+    return (clone.textContent || '').replace(/ /g,' ').replace(/[ \t]+$/gm,'').trim();
+  }
+  document.querySelectorAll('.paste .btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var text = textFor(btn.closest('.paste'));
+      function ok(){
+        btn.textContent = 'Copied';
+        btn.classList.add('done');
+        flash();
+        setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1600);
+      }
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(text).then(ok, function(){ fallback(text); ok(); });
+      } else { fallback(text); ok(); }
+    });
+  });
+  function fallback(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly','');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(ta);
+  }
+})();
+</script>
