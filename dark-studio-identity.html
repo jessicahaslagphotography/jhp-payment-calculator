@@ -117,14 +117,23 @@
   .mk-nav span{font-family:var(--sans); font-weight:400; font-size:9.5px; letter-spacing:.24em;
     text-transform:uppercase; color:var(--muted)}
   .mk-logo{font-family:var(--serif); font-size:17px; letter-spacing:.14em; color:var(--gold); text-transform:uppercase}
-  .imgph{background:
+  .shot{display:block; width:100%; height:100%; object-fit:cover; max-width:100%;
+    filter:saturate(.96) contrast(1.02)}
+  .shotbox{overflow:hidden; position:relative;
+    background:
       repeating-linear-gradient(135deg, rgba(201,162,75,.05) 0 2px, transparent 2px 9px),
-      linear-gradient(160deg, #2A221B 0%, #1A1512 60%, #221A14 100%);
-    border:1px solid var(--line-soft); display:flex; align-items:center; justify-content:center;
-    color:var(--dim); font-family:var(--mono); font-size:10px; letter-spacing:.14em;
-    text-transform:uppercase; text-align:center; padding:8px}
+      linear-gradient(160deg, #2A221B 0%, #1A1512 60%, #221A14 100%)}
+  .ph-note{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--dim); text-align:center; width:90%; line-height:1.5}
+  .mk-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-width:1000px; margin:0 auto}
+  @media (max-width:620px){ .mk-strip{grid-template-columns:repeat(2,1fr)} }
+  .mk-strip .shotbox{aspect-ratio:3/4}
+  .mk-band-img{margin:24px auto 0; max-width:760px}
+  .mk-band-img .shotbox{aspect-ratio:3/2}
   .mk-hero{position:relative}
-  .mk-hero .imgph{height:290px; border-left:none; border-right:none}
+  .mk-hero .shotbox{height:340px}
+  @media (max-width:620px){ .mk-hero .shotbox{height:270px} }
   .mk-hero .over{position:absolute; inset:0; display:flex; flex-direction:column;
     align-items:center; justify-content:center; gap:11px; text-align:center; padding:20px;
     background:linear-gradient(180deg, rgba(19,16,14,.55), rgba(19,16,14,.32) 45%, rgba(19,16,14,.78))}
@@ -134,7 +143,7 @@
   @media (max-width:620px){ .mk-sec{padding:34px 18px} }
   .mk-two{display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:center; max-width:880px; margin:0 auto}
   @media (max-width:620px){ .mk-two{grid-template-columns:1fr; gap:20px} }
-  .mk-two .imgph{aspect-ratio:4/5; max-width:100%}
+  .mk-two .shotbox{aspect-ratio:4/5; border:1px solid var(--line-soft)}
   .mk-kicker{font-family:var(--sans); font-size:9.5px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); margin:0 0 10px}
   .mk-h{font-family:var(--serif); font-weight:500; font-size:30px; line-height:1.16; margin:0 0 14px; letter-spacing:.02em}
   .mk-p{font-family:var(--sans); font-weight:300; font-size:14.5px; line-height:1.78; color:var(--muted); margin:0 0 18px}
@@ -150,7 +159,7 @@
   .mk-band{background:var(--surface); padding:52px 30px; text-align:center; border-bottom:1px solid var(--line-soft)}
   .mk-band .mk-h{margin-bottom:8px}
   .mk-ba{display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:620px; margin:22px auto 0}
-  .mk-ba .imgph{aspect-ratio:1; max-width:100%}
+  .mk-ba .shotbox{aspect-ratio:1; border:1px solid var(--line-soft)}
   .mk-foot{padding:30px; text-align:center}
   .mk-foot .fl{display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:14px}
   .mk-foot .fl span{font-family:var(--sans); font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted)}
@@ -325,7 +334,7 @@
 
   <section>
     <h2>Your homepage in it</h2>
-    <p class="sechint">The real blocks from your Showit site, real copy from the build kit, real prices. Photographs are marked as placements — I can't hotlink your Showit CDN images into this page, and the images are where the warmth comes from, so read the empty frames generously.</p>
+    <p class="sechint">Real blocks from your Showit site, real copy, real prices — and your own photographs, taken from the eight in <code>psq_photos</code> that already run on your pre-session questionnaire. Two frames stay empty on purpose: there is no portrait of you in that set, and labelling a finished boudoir image as a &ldquo;before&rdquo; would be a lie.</p>
 
     <div class="frame">
       <div class="frame-bar">
@@ -341,7 +350,7 @@
         </div>
 
         <div class="mk-hero">
-          <div class="imgph">Hero image · full bleed</div>
+          <div class="shotbox"><img class="shot" src="assets/psq-5.jpg" alt="A smiling woman wrapped in green satin, photographed by JHP Boudoir"></div>
           <div class="over">
             <p class="eb">Jefferson City, Missouri</p>
             <h2 class="ttl">Luxury boudoir,<br>for women who've never done this</h2>
@@ -351,7 +360,9 @@
 
         <div class="mk-sec">
           <div class="mk-two">
-            <div class="imgph">Portrait of Jess</div>
+            <div class="shotbox" style="aspect-ratio:4/5">
+              <span class="ph-note">Portrait of Jess<br>your photo goes here</span>
+            </div>
             <div>
               <p class="mk-kicker">Meet your photographer</p>
               <h3 class="mk-h" style="color:var(--ink); margin-top:0">Hi, I'm Jess</h3>
@@ -376,9 +387,26 @@
             <span>Professional guidance and posing throughout</span>
             <span>Same-day image reveal and ordering appointment</span>
           </div>
+          <div class="mk-band-img">
+            <div class="shotbox"><img class="shot" src="assets/psq-8.jpg" alt="A woman in red lingerie kneeling before a gilt mirror, photographed by JHP Boudoir"></div>
+          </div>
           <div class="mk-center" style="margin-top:26px">
             <p class="mk-p" style="font-size:13px; margin-bottom:18px">Prints, albums and digitals are chosen separately at your reveal, once you&rsquo;ve seen your images.</p>
             <button class="b-secondary" type="button">See what&rsquo;s included</button>
+          </div>
+        </div>
+
+        <div class="mk-sec">
+          <div class="mk-center" style="margin-bottom:26px">
+            <p class="mk-kicker">The work</p>
+            <h3 class="mk-h" style="color:var(--ink)">Every woman here was nervous</h3>
+            <p class="mk-p">Every single one. Not models — women from Jefferson City and Columbia and every small town in between, who decided to go first.</p>
+          </div>
+          <div class="mk-strip">
+            <div class="shotbox"><img class="shot" src="assets/psq-1.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
+            <div class="shotbox"><img class="shot" src="assets/psq-3.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
+            <div class="shotbox"><img class="shot" src="assets/psq-4.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
+            <div class="shotbox"><img class="shot" src="assets/psq-2.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
           </div>
         </div>
 
@@ -386,9 +414,10 @@
           <p class="mk-kicker">Before &amp; after</p>
           <h3 class="mk-h" style="color:var(--ink)">A transformation worth investing in</h3>
           <div class="mk-ba">
-            <div class="imgph">Briana · before</div>
-            <div class="imgph">Briana · after</div>
+            <div class="shotbox"><span class="ph-note">Briana<br>before</span></div>
+            <div class="shotbox"><span class="ph-note">Briana<br>after</span></div>
           </div>
+          <p class="mk-p" style="font-size:12px; margin:16px auto 0; max-width:46ch; color:var(--dim)">Placeholders — your real Briana and Taylor pairs drop straight in.</p>
         </div>
 
         <div class="mk-sec" style="text-align:center; border-bottom:none">
@@ -448,7 +477,7 @@
   </section>
 
   <footer>
-    Palette and type pair taken from your existing Scalogy page templates. Contrast ratios computed to WCAG 2.1 against all three ground values. Current Showit values read from the live site's rendered CSS on 20 September 2026. Mock uses real copy and real prices; photographs are placements.
+    Palette and type pair taken from your existing Scalogy page templates. Contrast ratios computed to WCAG 2.1 against all three ground values. Current Showit values read from the live site's rendered CSS on 20 September 2026. Mock uses real copy, real prices, and six of your own photographs from psq_photos (900px, already published on your pre-session questionnaire). The portrait of Jess and the before/after pair remain placeholders.
   </footer>
 
 </div>
