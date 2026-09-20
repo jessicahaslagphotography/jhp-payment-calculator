@@ -135,8 +135,10 @@
   .mk-hero .shotbox{height:340px}
   @media (max-width:620px){ .mk-hero .shotbox{height:270px} }
   .mk-hero .over{position:absolute; inset:0; display:flex; flex-direction:column;
-    align-items:center; justify-content:center; gap:11px; text-align:center; padding:20px;
-    background:linear-gradient(180deg, rgba(19,16,14,.55), rgba(19,16,14,.32) 45%, rgba(19,16,14,.78))}
+    align-items:flex-start; justify-content:center; gap:12px; text-align:left; padding:0 clamp(20px,6vw,64px);
+    background:linear-gradient(100deg, rgba(19,16,14,.86) 0%, rgba(19,16,14,.62) 38%,
+      rgba(19,16,14,.18) 62%, rgba(19,16,14,.55) 100%)}
+  .mk-hero .over > *{max-width:19ch}
   .mk-hero .eb{font-family:var(--sans); font-size:9.5px; letter-spacing:.3em; text-transform:uppercase; color:var(--gold)}
   .mk-hero .ttl{font-family:var(--serif); font-weight:500; font-size:clamp(28px,5.4vw,50px); line-height:1.04; margin:0; letter-spacing:.01em}
   .mk-sec{padding:48px 30px; border-bottom:1px solid var(--line-soft)}
@@ -334,7 +336,7 @@
 
   <section>
     <h2>Your homepage in it</h2>
-    <p class="sechint">Real blocks from your Showit site, real copy, real prices — and your own photographs, taken from the eight in <code>psq_photos</code> that already run on your pre-session questionnaire. Two frames stay empty on purpose: there is no portrait of you in that set, and labelling a finished boudoir image as a &ldquo;before&rdquo; would be a lie.</p>
+    <p class="sechint">Real blocks from your Showit site, real copy, real prices — and six photographs from the 33 you sent through. The palette was drawn from your checkout pages before I saw these — the match to your studio’s emerald velvet and gilt frames is your set, not my grading. Two frames stay empty on purpose: there is no portrait of you in that set, and labelling a finished boudoir image as a &ldquo;before&rdquo; would be a lie.</p>
 
     <div class="frame">
       <div class="frame-bar">
@@ -350,7 +352,7 @@
         </div>
 
         <div class="mk-hero">
-          <div class="shotbox"><img class="shot" src="assets/psq-5.jpg" alt="A smiling woman wrapped in green satin, photographed by JHP Boudoir"></div>
+          <div class="shotbox"><img class="shot" src="assets/hero.jpg" alt="A smiling woman in red, reflected in a gilt mirror, photographed by JHP Boudoir"></div>
           <div class="over">
             <p class="eb">Jefferson City, Missouri</p>
             <h2 class="ttl">Luxury boudoir,<br>for women who've never done this</h2>
@@ -388,7 +390,7 @@
             <span>Same-day image reveal and ordering appointment</span>
           </div>
           <div class="mk-band-img">
-            <div class="shotbox"><img class="shot" src="assets/psq-8.jpg" alt="A woman in red lingerie kneeling before a gilt mirror, photographed by JHP Boudoir"></div>
+            <div class="shotbox"><img class="shot" src="assets/band.jpg" alt="A woman on a leather chesterfield in the studio library, photographed by JHP Boudoir"></div>
           </div>
           <div class="mk-center" style="margin-top:26px">
             <p class="mk-p" style="font-size:13px; margin-bottom:18px">Prints, albums and digitals are chosen separately at your reveal, once you&rsquo;ve seen your images.</p>
@@ -403,10 +405,10 @@
             <p class="mk-p">Every single one. Not models — women from Jefferson City and Columbia and every small town in between, who decided to go first.</p>
           </div>
           <div class="mk-strip">
-            <div class="shotbox"><img class="shot" src="assets/psq-1.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
-            <div class="shotbox"><img class="shot" src="assets/psq-3.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
-            <div class="shotbox"><img class="shot" src="assets/psq-4.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
-            <div class="shotbox"><img class="shot" src="assets/psq-2.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
+            <div class="shotbox"><img class="shot" src="assets/strip-1.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
+            <div class="shotbox"><img class="shot" src="assets/strip-2.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
+            <div class="shotbox"><img class="shot" src="assets/strip-3.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
+            <div class="shotbox"><img class="shot" src="assets/strip-4.jpg" alt="Boudoir portrait by JHP Boudoir"></div>
           </div>
         </div>
 
@@ -477,7 +479,7 @@
   </section>
 
   <footer>
-    Palette and type pair taken from your existing Scalogy page templates. Contrast ratios computed to WCAG 2.1 against all three ground values. Current Showit values read from the live site's rendered CSS on 20 September 2026. Mock uses real copy, real prices, and six of your own photographs from psq_photos (900px, already published on your pre-session questionnaire). The portrait of Jess and the before/after pair remain placeholders.
+    Palette and type pair taken from your existing Scalogy page templates. Contrast ratios computed to WCAG 2.1 against all three ground values. Current Showit values read from the live site's rendered CSS on 20 September 2026. Mock uses real copy, real prices, and six photographs from the 33-image Drive folder, resized to web dimensions. The portrait of Jess and the before/after pair remain placeholders.
   </footer>
 
 </div>
