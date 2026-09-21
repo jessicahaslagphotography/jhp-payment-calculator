@@ -79,7 +79,7 @@
   <div class="mast">
     <p class="eyebrow">JHP Boudoir &middot; homepage</p>
     <h1>Photo Picker</h1>
-    <p class="lede">Click a slot, then click the photograph you want in it. <b>Your picks save as you go</b> &mdash; tell me when you&rsquo;re done and I&rsquo;ll read them straight out and rebuild the mock.</p>
+    <p class="lede">Eight slots, matching your eight-block layout. Click a slot, then click the photograph you want in it. <b>Your picks save as you go</b> &mdash; tell me when you&rsquo;re done and I&rsquo;ll read them straight out and rebuild the mock.</p>
   </div>
 
   <div class="bar">
@@ -134,8 +134,8 @@
   </div>
 
   <div class="note">
-    <p><b>Your five headshots are first in the grid.</b> The portrait slot is pre-set to <code>6Y2A9514</code> &mdash; the one with direct eye contact, which is what the manifesto block needs. Change it if you disagree.</p>
-    <p><b>One pair still isn&rsquo;t here:</b> the before/after images. Nothing in this folder can fill those. Send them and I&rsquo;ll drop them in.</p>
+    <p><b>Your five headshots are first in the grid.</b> The portrait slot is pre-set to <code>6Y2A9514</code> &mdash; the one with direct eye contact, which is what block 4 needs. Change it if you disagree.</p>
+    <p><b>The before/after pair isn&rsquo;t here.</b> Nothing in this folder can fill it. Send your Briana and Taylor pairs and I&rsquo;ll drop them into block 5.</p>
     <p><b>Aspect ratios are how the slot crops</b>, not how the photo is shaped. A tall frame in the 16:7 hero loses its top and bottom, so pick something that survives a wide crop &mdash; or pick it anyway and tell me where to bias the crop.</p>
   </div>
 </div>
@@ -143,17 +143,18 @@
 <script>
 (function(){
   var SLOTS = [
-    {key:"hero",    name:"Hero",          ar:"16:7", hint:"full bleed, headline sits bottom-left"},
-    {key:"jess",    name:"Portrait of Jess", ar:"4:5", hint:"manifesto block"},
-    {key:"mission", name:"Mission band",  ar:"3:2",  hint:"under 'what this is actually for'"},
-    {key:"band",    name:"Session band",  ar:"3:2",  hint:"under the $697 inclusions"},
-    {key:"strip1",  name:"Strip 1",       ar:"3:4",  hint:""},
-    {key:"strip2",  name:"Strip 2",       ar:"3:4",  hint:""},
-    {key:"strip3",  name:"Strip 3",       ar:"3:4",  hint:""},
-    {key:"strip4",  name:"Strip 4",       ar:"3:4",  hint:""}
+    {key:"hero",     name:"Hero",             ar:"16:7", hint:"block 2 \u00b7 headline sits bottom-left"},
+    {key:"empower1", name:"Imagery 1",        ar:"3:4",  hint:"block 3"},
+    {key:"empower2", name:"Imagery 2",        ar:"3:4",  hint:"block 3"},
+    {key:"empower3", name:"Imagery 3",        ar:"3:4",  hint:"block 3"},
+    {key:"jess",     name:"Portrait of Jess", ar:"4:5",  hint:"block 4"},
+    {key:"review1",  name:"Review 1",         ar:"3:4",  hint:"block 6"},
+    {key:"review2",  name:"Review 2",         ar:"3:4",  hint:"block 6"},
+    {key:"review3",  name:"Review 3",         ar:"3:4",  hint:"block 6"}
   ];
-  var CURRENT = {hero:"DSC_1279-BW", jess:"6Y2A9514", mission:"DSC_0273-BW", band:"DSC_8438-BW",
-                 strip1:"DSC_0798-BW", strip2:"DSC_8449-BW", strip3:"DSC_0475-BW", strip4:"DSC_2060"};
+  var CURRENT = {hero:"DSC_1279-BW", empower1:"DSC_0798-BW", empower2:"DSC_8449-BW",
+                 empower3:"DSC_2060", jess:"6Y2A9514", review1:"DSC_0475-BW",
+                 review2:"DSC_0927-BW", review3:"DSC_1803"};
 
   var picks = Object.assign({}, CURRENT);
   var active = null, ref = null, writable = true, saving = false, pending = false;
