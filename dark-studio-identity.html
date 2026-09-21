@@ -156,18 +156,22 @@
   .mk-rev .qt.slot{font-family:var(--mono); font-style:normal; font-size:10.5px; letter-spacing:.12em;
     text-transform:uppercase; color:var(--dim); line-height:1.8}
   .mk-rev .qa{font-family:var(--sans); font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin:0}
-  .mk-optin{max-width:460px; margin:20px auto 0}
+  .mk-optin{margin:18px 0 0}
   .mk-optin-band{position:relative; border-top:1px solid var(--line-soft)}
   .mk-optin-band .over{position:absolute; inset:0; display:flex; flex-direction:column;
-    align-items:center; justify-content:center; text-align:center; padding:24px clamp(18px,5vw,48px);
-    background:linear-gradient(90deg, rgba(19,16,14,.88) 0%, rgba(19,16,14,.72) 45%,
-      rgba(19,16,14,.72) 55%, rgba(19,16,14,.88) 100%)}
-  .mk-optin-band .over > *{max-width:46ch}
+    align-items:flex-end; justify-content:center; text-align:left;
+    padding:24px clamp(18px,4vw,46px);
+    background:linear-gradient(90deg, rgba(19,16,14,0) 0%, rgba(19,16,14,.10) 32%,
+      rgba(19,16,14,.62) 52%, rgba(19,16,14,.90) 74%, rgba(19,16,14,.94) 100%)}
+  .mk-optin-band .over > *{width:min(42%,420px); margin-left:0; margin-right:0}
+  @media (max-width:860px){
+    .mk-optin-band .over > *{width:min(56%,380px)}
+  }
   @media (max-width:620px){
     .mk-optin-band .over{position:static; background:var(--surface)}
   }
   .mk-field{display:flex; gap:10px; flex-wrap:wrap}
-  .mk-field input{flex:1; min-width:180px; font-family:var(--sans); font-size:14px; color:var(--ink);
+  .mk-field input{flex:1; min-width:120px; font-family:var(--sans); font-size:14px; color:var(--ink);
     background:var(--raised); border:1px solid var(--line); border-radius:2px; padding:12px 13px}
   .mk-field input::placeholder{color:var(--dim)}
   .mk-ghl{font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
@@ -464,14 +468,17 @@
         </div>
 
         <div class="mk-optin-band">
-          <div class="shotbox"><img class="shot" src="assets/optin.jpg" alt="A boudoir photograph by JHP Boudoir"></div>
+          <div class="shotbox"><img class="shot" src="assets/optin.jpg" alt="A woman in red lingerie on a leopard rug beside a gilt mirror, by JHP Boudoir"></div>
           <div class="over">
-            <p class="mk-kicker" style="margin-bottom:8px">The list</p>
-            <h3 class="mk-h" style="color:var(--ink); margin-bottom:10px">Stay in the know for all things JHP Boudoir</h3>
-            <p class="mk-p" style="margin-bottom:0">Exclusives, specialty sessions and last-minute openings, before they go public.</p>
+            <p class="mk-kicker" style="margin-bottom:8px; text-align:left">The list</p>
+            <h3 class="mk-h" style="color:var(--ink); margin-bottom:10px; text-align:left">Stay in the know for all things JHP Boudoir</h3>
+            <p class="mk-p" style="margin-bottom:0; text-align:left">Exclusives, specialty sessions and last-minute openings, before they go public.</p>
             <div class="mk-optin">
               <div class="mk-field">
-                <input id="mk-name" type="text" placeholder="First name" aria-label="First name">
+                <input id="mk-first" type="text" placeholder="First name" aria-label="First name">
+                <input id="mk-last" type="text" placeholder="Last name" aria-label="Last name">
+              </div>
+              <div class="mk-field" style="margin-top:10px">
                 <input id="mk-email" type="email" placeholder="Email address" aria-label="Email address">
               </div>
               <div style="margin-top:12px"><button class="b-primary" type="button">Sign me up</button></div>
