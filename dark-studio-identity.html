@@ -163,6 +163,9 @@
   .mk-ig img{display:block; width:100%; aspect-ratio:1; object-fit:cover}
   .mk-ig-head{text-align:center; padding:0 18px 22px}
   .mk-ig-foot{text-align:center; padding:22px 18px 0}
+  .mk-vip{background:var(--surface); border-top:1px solid var(--line); padding:52px 30px; text-align:center}
+  @media (max-width:620px){ .mk-vip{padding:38px 18px} }
+  .mk-vip .inner{max-width:52ch; margin:0 auto}
   .mk-handle{font-family:var(--sans); font-size:10px; letter-spacing:.26em; text-transform:uppercase;
     color:var(--gold); margin:0 0 8px}
   .mk-optin{margin:18px 0 0}
@@ -393,7 +396,7 @@
 
   <section>
     <h2>Your homepage in it</h2>
-    <p class="sechint">Your nine blocks — header, hero, imagery, Jess, transformation and mission, three Google reviews, email opt-in, Instagram, footer — in the palette above, with eight of your own photographs. Only the before/after pair stays empty: nothing in the folder can fill it, and I am not writing your reviews.</p>
+    <p class="sechint">Your ten blocks — header, hero, imagery, Jess, transformation and mission, three Google reviews, email opt-in, VIP group, Instagram, footer — in the palette above, with eight of your own photographs. Only the before/after pair stays empty: nothing in the folder can fill it, and I am not writing your reviews.</p>
 
     <div class="frame">
       <div class="frame-bar">
@@ -492,6 +495,15 @@
               </div>
               <div style="margin-top:12px"><button class="b-primary" type="button">Sign me up</button></div>
             </div>
+          </div>
+        </div>
+
+        <div class="mk-vip">
+          <div class="inner">
+            <p class="mk-kicker">The VIP group</p>
+            <h3 class="mk-h" style="color:var(--ink)">Where it starts for most women</h3>
+            <p class="mk-p">A private group of women who have already been photographed here, and women still deciding. Behind the scenes, first looks, and the occasional opening that never makes it to the website.</p>
+            <button class="b-primary" type="button" style="margin-top:4px">Join the VIP group</button>
           </div>
         </div>
 
