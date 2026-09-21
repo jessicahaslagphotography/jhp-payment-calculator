@@ -129,6 +129,19 @@
   ul.tight li{margin-bottom:6px}
   ul.tight b{color:var(--ink); font-weight:500}
 
+  .spec{width:100%; border-collapse:collapse; margin:18px 0 4px; font-size:14px}
+  .spec th{text-align:left; font-family:var(--sans); font-size:11px; letter-spacing:.09em; text-transform:uppercase; color:var(--dim); font-weight:600; padding:0 10px 8px 0; border-bottom:1px solid var(--line)}
+  .spec td{padding:10px 10px 10px 0; border-bottom:1px solid var(--line-soft); vertical-align:top; line-height:1.45; color:var(--muted)}
+  .spec td:first-child{color:var(--gold); font-variant-numeric:tabular-nums; white-space:nowrap}
+  .spec td b{color:var(--ink); font-weight:500}
+  .spec .num{font-variant-numeric:tabular-nums; white-space:nowrap}
+  @media(max-width:700px){
+    .spec,.spec tbody,.spec tr,.spec td{display:block; width:auto}
+    .spec thead{display:none}
+    .spec tr{padding:12px 0; border-bottom:1px solid var(--line-soft)}
+    .spec td{border:0; padding:2px 0}
+    .spec td:first-child{font-size:15px; margin-bottom:4px}
+  }
   .callout{border-left:2px solid var(--gold); background:var(--surface); padding:14px 16px; border-radius:0 8px 8px 0; margin:0 0 20px}
   .callout p{margin:0; font-size:14px; color:var(--muted)}
   .callout p+p{margin-top:9px}
@@ -159,6 +172,7 @@
   <div class="cols">
     <nav class="rail">
       <p class="railhead">Sections</p>
+      <a href="#build">0 &middot; Start here</a>
       <a href="#fix">1 &middot; Fix first</a>
       <a href="#nav">2 &middot; Navigation</a>
       <a href="#home">3 &middot; Home</a>
@@ -171,6 +185,47 @@
     </nav>
 
     <main>
+
+      <!-- ============ 0 ============ -->
+      <section id="build">
+        <h2>Start here</h2>
+        <p class="sechint">The order to build it in, and the canvas heights to build it at. Do the three prep steps first &mdash; each one saves you re-touching ten canvases later.</p>
+
+        <div class="callout">
+          <p><b>1 &middot; Duplicate the live Home page before you change anything.</b> Pages panel, right-click <code>Home</code>, Duplicate, rename the copy <code>Home OLD &mdash; backup</code>. You are rebuilding the page that brings in your inquiries today. A duplicate costs nothing and means a bad evening is one click from undone.</p>
+          <p><b>2 &middot; Upload the photo set in one go.</b> Images panel, Upload, all fifteen files from the zip. Every filename is the slot it belongs in, so nothing lands in the wrong hole. The four <code>ig-*.jpg</code> are square stand-ins &mdash; swap in your four latest posts before you publish.</p>
+          <p><b>3 &middot; Set the palette and the four text themes before you build a single canvas.</b> Design Settings, Palette: <code>colors-0</code> = <code>#13100E</code>, <code>colors-6</code> = <code>#C9A24B</code>, <code>colors-7</code> = <code>#F2ECE2</code>. Then the text themes from Section 9. Set them now and all ten canvases inherit them. Set them last and you are editing type on ten canvases by hand.</p>
+        </div>
+
+        <h3>Canvas heights</h3>
+        <p class="sechint">Showit&rsquo;s desktop canvas is 1200px wide and mobile is 320px. Every number below is your own photo&rsquo;s real proportions at those two widths, so nothing has to be cropped to fit. Treat them as starting heights &mdash; nudge them once the type is in.</p>
+
+        <table class="spec">
+          <thead><tr><th>Canvas</th><th>Desktop</th><th>Mobile</th><th>The one thing to get right</th></tr></thead>
+          <tbody>
+            <tr><td>1 &middot; Header</td><td class="num">90</td><td class="num">70</td><td>Logo centred, nav split either side.</td></tr>
+            <tr><td>2 &middot; Hero</td><td class="num">800</td><td class="num">400</td><td>The photo is 1.503:1, so at 1200 wide it stands <b>799 tall</b> &mdash; that is the 800. At 320 wide the same photo is only <b>213 tall</b>, too short to hold a headline, so on mobile the type moves <b>below</b> the photo instead of over it.</td></tr>
+            <tr><td>3 &middot; Imagery</td><td class="num">800</td><td class="num">1590</td><td>Three portraits at <b>344 &times; 517</b> across the desktop. Stacked at <b>280 &times; 420</b> on mobile, which is why mobile runs so much taller.</td></tr>
+            <tr><td>4 &middot; Jess</td><td class="num">860</td><td class="num">940</td><td>Your headshot at <b>480 &times; 720</b>, copy beside it.</td></tr>
+            <tr><td>5 &middot; Transformation</td><td class="num">1010</td><td class="num">1130</td><td>Before and after at <b>528 &times; 704</b> each. Both boxes identical, because both photos are already identical at 900 &times; 1200. This is the block you asked to match &mdash; if the two boxes differ by even a few pixels the eye catches it straight away.</td></tr>
+            <tr><td>6 &middot; Reviews</td><td class="num">800</td><td class="num">1550</td><td>Card photo <b>344 &times; 229</b>, three cards the same height. Set the three text boxes to match each other rather than their content, or the boxes end up different lengths again.</td></tr>
+            <tr><td>7 &middot; Email opt-in</td><td class="num">800</td><td class="num">540</td><td>Photo full width at <b>1200 &times; 799</b>, text overlaid on the right. On mobile the overlay does not work at 213 tall, so the photo sits on top and the form goes underneath.</td></tr>
+            <tr><td>8 &middot; VIP Facebook group</td><td class="num">420</td><td class="num">480</td><td>Type only, centred. No photo.</td></tr>
+            <tr><td>9 &middot; Instagram</td><td class="num">460</td><td class="num">480</td><td>Four across at <b>258 &times; 258</b> on desktop, a 2 &times; 2 grid at <b>144 &times; 144</b> on mobile. Squares are the one place cropping is right &mdash; Instagram already cropped them.</td></tr>
+            <tr><td>10 &middot; Footer</td><td class="num">320</td><td class="num">420</td><td>Specialty Sessions and Blog live here, not in the top nav.</td></tr>
+          </tbody>
+        </table>
+        <p class="note">That comes to roughly <b>6,360px</b> of desktop page. Long, but every screen of it is doing a job.</p>
+
+        <h3>How to place a photo without cropping it</h3>
+        <p class="note">You asked for nothing cropped or resized to fit a box, and the numbers above are what makes that possible: <b>size the box to the photo, never the photo to the box.</b> Draw each image element at the width and height in the table, and because those dimensions already match the photo&rsquo;s own proportions, Showit&rsquo;s Fill and Fit settings give you the same result and neither one cuts anything off. If you change a box to a size not in that table, work the height out from the width first &mdash; the portraits are 0.666:1, the transformation pair 0.75:1, the landscapes 1.503:1.</p>
+
+        <h3>Test the hero on a real phone before you build canvas 3</h3>
+        <p class="note">The hero is the one block that can go wrong in a way the desktop editor will not show you. That photo has a bright window at the right and a busy base, so the scrim under the headline has to be denser than usual, and how it reads on a phone in daylight is not something the preview tells you honestly. Build canvases 1 and 2, publish to a hidden page, and look at it on your own phone. Five minutes there beats finding out after nine more canvases are sitting on the same assumption.</p>
+
+        <h3>The last three passes, once all ten canvases exist</h3>
+        <p class="note"><b>Links.</b> Every button and nav item, desktop <em>and</em> mobile &mdash; Showit keeps the two separate, and a mobile button with no link is the most common way a rebuild like this quietly loses inquiries. <b>SEO.</b> Section 8 has the title, description and social image for every page. <b>Publish.</b> Then open the live URL on your phone, not the editor preview, and walk the whole page once from the top.</p>
+      </section>
 
       <!-- ============ 1 ============ -->
       <section id="fix">
