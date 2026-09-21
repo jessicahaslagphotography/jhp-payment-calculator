@@ -156,7 +156,16 @@
   .mk-rev .qt.slot{font-family:var(--mono); font-style:normal; font-size:10.5px; letter-spacing:.12em;
     text-transform:uppercase; color:var(--dim); line-height:1.8}
   .mk-rev .qa{font-family:var(--sans); font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin:0}
-  .mk-optin{max-width:520px; margin:22px auto 0}
+  .mk-optin{max-width:460px; margin:20px auto 0}
+  .mk-optin-band{position:relative; border-top:1px solid var(--line-soft)}
+  .mk-optin-band .over{position:absolute; inset:0; display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; padding:24px clamp(18px,5vw,48px);
+    background:linear-gradient(90deg, rgba(19,16,14,.88) 0%, rgba(19,16,14,.72) 45%,
+      rgba(19,16,14,.72) 55%, rgba(19,16,14,.88) 100%)}
+  .mk-optin-band .over > *{max-width:46ch}
+  @media (max-width:620px){
+    .mk-optin-band .over{position:static; background:var(--surface)}
+  }
   .mk-field{display:flex; gap:10px; flex-wrap:wrap}
   .mk-field input{flex:1; min-width:180px; font-family:var(--sans); font-size:14px; color:var(--ink);
     background:var(--raised); border:1px solid var(--line); border-radius:2px; padding:12px 13px}
@@ -454,18 +463,18 @@
           </div>
         </div>
 
-        <div class="mk-sec" style="border-bottom:none">
-          <div class="mk-center">
-            <p class="mk-kicker">Before everyone else</p>
-            <h3 class="mk-h" style="color:var(--ink)">Know first</h3>
-            <p class="mk-p">Specialty sessions, the treehouse, model calls and the occasional last-minute opening go out to the list first, and they go fast. We won&rsquo;t sell your information and we won&rsquo;t email you much.</p>
+        <div class="mk-optin-band">
+          <div class="shotbox"><img class="shot" src="assets/optin.jpg" alt="A boudoir photograph by JHP Boudoir"></div>
+          <div class="over">
+            <p class="mk-kicker" style="margin-bottom:8px">The list</p>
+            <h3 class="mk-h" style="color:var(--ink); margin-bottom:10px">Stay in the know for all things JHP Boudoir</h3>
+            <p class="mk-p" style="margin-bottom:0">Exclusives, specialty sessions and last-minute openings, before they go public.</p>
             <div class="mk-optin">
               <div class="mk-field">
                 <input id="mk-name" type="text" placeholder="First name" aria-label="First name">
                 <input id="mk-email" type="email" placeholder="Email address" aria-label="Email address">
               </div>
-              <div style="margin-top:12px"><button class="b-primary" type="button">Keep me posted</button></div>
-              <p class="mk-ghl">Posts to GoHighLevel</p>
+              <div style="margin-top:12px"><button class="b-primary" type="button">Sign me up</button></div>
             </div>
           </div>
         </div>

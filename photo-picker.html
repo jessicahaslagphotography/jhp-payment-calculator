@@ -136,6 +136,7 @@
   <div class="note">
     <p><b>Your five headshots are first in the grid.</b> The portrait slot is pre-set to <code>6Y2A9514</code> &mdash; the one with direct eye contact, which is what block 4 needs. Change it if you disagree.</p>
     <p><b>The before/after pair isn&rsquo;t here.</b> Nothing in this folder can fill it. Send your Briana and Taylor pairs and I&rsquo;ll drop them into block 5.</p>
+    <p><b>The opt-in slot carries type over it</b>, so a wide frame without a face competing for attention tends to work best there. A tall one makes that band very deep.</p>
     <p><b>Nothing is cropped any more.</b> Every slot shows the whole frame at its own proportions, so you can pick any photograph for any slot without losing its top or bottom. Rows of different-shaped photos will not line up along the bottom, which is the honest trade.</p>
   </div>
 </div>
@@ -150,11 +151,12 @@
     {key:"jess",     name:"Portrait of Jess", ar:"full frame", hint:"block 4"},
     {key:"review1",  name:"Review 1",         ar:"full frame", hint:"block 6"},
     {key:"review2",  name:"Review 2",         ar:"full frame", hint:"block 6"},
-    {key:"review3",  name:"Review 3",         ar:"full frame", hint:"block 6"}
+    {key:"review3",  name:"Review 3",         ar:"full frame", hint:"block 6"},
+    {key:"optin",    name:"Email opt-in",     ar:"full frame", hint:"block 7 \u00b7 text sits over it"}
   ];
   var CURRENT = {hero:"DSC_1279-BW", empower1:"DSC_0798-BW", empower2:"DSC_8449-BW",
                  empower3:"DSC_2060", jess:"6Y2A9514", review1:"DSC_0475-BW",
-                 review2:"DSC_0927-BW", review3:"DSC_1803"};
+                 review2:"DSC_0927-BW", review3:"DSC_1803", optin:"DSC_0511-BW"};
 
   var picks = Object.assign({}, CURRENT);
   var active = null, ref = null, writable = true, saving = false, pending = false;
