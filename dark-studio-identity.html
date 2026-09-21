@@ -117,18 +117,17 @@
   .mk-nav span{font-family:var(--sans); font-weight:400; font-size:9.5px; letter-spacing:.24em;
     text-transform:uppercase; color:var(--muted)}
   .mk-logo{font-family:var(--serif); font-size:17px; letter-spacing:.14em; color:var(--gold); text-transform:uppercase}
-  .shot{display:block; width:100%; height:100%; object-fit:cover; max-width:100%;
+  .shot{display:block; width:100%; height:auto; max-width:100%;
     filter:saturate(.96) contrast(1.02)}
   .shotbox{overflow:hidden; position:relative;
     background:
       repeating-linear-gradient(135deg, rgba(201,162,75,.05) 0 2px, transparent 2px 9px),
       linear-gradient(160deg, #2A221B 0%, #1A1512 60%, #221A14 100%)}
-  .ph-note{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+  .ph-note{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); pointer-events:none;
     font-family:var(--mono); font-size:9.5px; letter-spacing:.14em; text-transform:uppercase;
     color:var(--dim); text-align:center; width:90%; line-height:1.5}
   .mk-strip{display:grid; grid-template-columns:repeat(4,1fr); gap:10px; max-width:1000px; margin:0 auto}
   @media (max-width:620px){ .mk-strip{grid-template-columns:repeat(2,1fr)} }
-  .mk-strip .shotbox{aspect-ratio:3/4}
   .mk-ticker{border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft);
     padding:13px 0; overflow:hidden; white-space:nowrap; background:var(--surface)}
   .mk-ticker span{font-family:var(--sans); font-size:10.5px; letter-spacing:.26em; text-transform:uppercase;
@@ -143,16 +142,14 @@
   .mk-q .qa{font-family:var(--sans); font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin:0}
   .mk-q.slot .qt{color:var(--dim); font-style:normal; font-family:var(--mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; line-height:1.7}
   .mk-two-cta{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:20px}
-  .mk-trio{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:940px; margin:0 auto}
+  .mk-trio{display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:940px; margin:0 auto; align-items:start}
   @media (max-width:700px){ .mk-trio{grid-template-columns:1fr} }
-  .mk-trio .shotbox{aspect-ratio:3/4}
   .mk-empower{font-family:var(--serif); font-weight:400; font-size:clamp(21px,3.2vw,29px);
     line-height:1.5; color:var(--ink); max-width:26ch; margin:0 auto; text-align:center}
   .mk-empower .hi{color:var(--gold-bright)}
-  .mk-rev{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; max-width:980px; margin:26px auto 0}
+  .mk-rev{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; max-width:980px; margin:26px auto 0; align-items:start}
   @media (max-width:760px){ .mk-rev{grid-template-columns:1fr} }
   .mk-rev article{background:var(--surface); border:1px solid var(--line-soft); border-radius:3px; overflow:hidden}
-  .mk-rev .shotbox{aspect-ratio:3/4}
   .mk-rev .rv{padding:18px 18px 20px}
   .mk-rev .stars{color:var(--gold); font-size:12px; letter-spacing:.24em; margin:0 0 10px}
   .mk-rev .qt{font-family:var(--serif); font-style:italic; font-size:15.5px; line-height:1.6; color:var(--muted); margin:0 0 12px}
@@ -167,11 +164,8 @@
   .mk-ghl{font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase;
     color:var(--dim); margin:12px 0 0; text-align:center}
   .mk-band-img{margin:24px auto 0; max-width:760px}
-  .mk-band-img .shotbox{aspect-ratio:3/2}
   .mk-hero{position:relative}
-  .mk-hero .shotbox{height:560px}
-  @media (max-width:860px){ .mk-hero .shotbox{height:440px} }
-  @media (max-width:620px){ .mk-hero .shotbox{height:400px} }
+
   .mk-hero .over{position:absolute; inset:0; display:flex; flex-direction:column;
     align-items:flex-start; justify-content:flex-end; gap:12px; text-align:left;
     padding:0 clamp(20px,5vw,56px) clamp(30px,4.5vw,48px);
@@ -182,9 +176,9 @@
   .mk-hero .ttl{font-family:var(--serif); font-weight:500; font-size:clamp(32px,6.4vw,62px); line-height:1.03; margin:0; letter-spacing:.01em}
   .mk-sec{padding:48px 30px; border-bottom:1px solid var(--line-soft)}
   @media (max-width:620px){ .mk-sec{padding:34px 18px} }
-  .mk-two{display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:center; max-width:880px; margin:0 auto}
+  .mk-two{display:grid; grid-template-columns:1fr 1fr; gap:30px; align-items:start; max-width:880px; margin:0 auto}
   @media (max-width:620px){ .mk-two{grid-template-columns:1fr; gap:20px} }
-  .mk-two .shotbox{aspect-ratio:4/5; border:1px solid var(--line-soft)}
+  .mk-two .shotbox{border:1px solid var(--line-soft)}
   .mk-kicker{font-family:var(--sans); font-size:9.5px; letter-spacing:.28em; text-transform:uppercase; color:var(--gold); margin:0 0 10px}
   .mk-h{font-family:var(--serif); font-weight:500; font-size:30px; line-height:1.16; margin:0 0 14px; letter-spacing:.02em}
   .mk-p{font-family:var(--sans); font-weight:300; font-size:14.5px; line-height:1.78; color:var(--muted); margin:0 0 18px}
@@ -199,8 +193,8 @@
     width:7px; height:1px; background:var(--gold)}
   .mk-band{background:var(--surface); padding:52px 30px; text-align:center; border-bottom:1px solid var(--line-soft)}
   .mk-band .mk-h{margin-bottom:8px}
-  .mk-ba{display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:620px; margin:22px auto 0}
-  .mk-ba .shotbox{aspect-ratio:3/4; border:1px solid var(--line-soft)}
+  .mk-ba{display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:680px; margin:22px auto 0; align-items:start}
+  .mk-ba .shotbox{border:1px solid var(--line-soft)}
   .mk-foot{padding:30px; text-align:center}
   .mk-foot .fl{display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:14px}
   .mk-foot .fl span{font-family:var(--sans); font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--muted)}
@@ -410,7 +404,7 @@
 
         <div class="mk-sec">
           <div class="mk-two">
-            <div class="shotbox" style="aspect-ratio:4/5"><img class="shot" src="assets/jess.jpg" alt="Jessica Haslag, boudoir photographer, holding her camera"></div>
+            <div class="shotbox"><img class="shot" src="assets/jess.jpg" alt="Jessica Haslag, boudoir photographer, holding her camera"></div>
             <div>
               <p class="mk-kicker">Meet your photographer</p>
               <h3 class="mk-h" style="color:var(--ink); margin-top:0">Howdy, I&rsquo;m Jess</h3>
