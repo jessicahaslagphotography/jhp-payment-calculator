@@ -156,6 +156,13 @@
   .mk-rev .qt.slot{font-family:var(--mono); font-style:normal; font-size:10.5px; letter-spacing:.12em;
     text-transform:uppercase; color:var(--dim); line-height:1.8}
   .mk-rev .qa{font-family:var(--sans); font-size:9.5px; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); margin:0}
+  .mk-ig{display:grid; grid-template-columns:repeat(4,1fr); gap:4px}
+  @media (max-width:620px){ .mk-ig{grid-template-columns:repeat(2,1fr)} }
+  .mk-ig img{display:block; width:100%; aspect-ratio:1; object-fit:cover}
+  .mk-ig-head{text-align:center; padding:0 18px 22px}
+  .mk-ig-foot{text-align:center; padding:22px 18px 0}
+  .mk-handle{font-family:var(--sans); font-size:10px; letter-spacing:.26em; text-transform:uppercase;
+    color:var(--gold); margin:0 0 8px}
   .mk-optin{margin:18px 0 0}
   .mk-optin-band{position:relative; border-top:1px solid var(--line-soft)}
   .mk-optin-band .over{position:absolute; inset:0; display:flex; flex-direction:column;
@@ -384,7 +391,7 @@
 
   <section>
     <h2>Your homepage in it</h2>
-    <p class="sechint">Your eight blocks — header, hero, imagery, Jess, transformation and mission, three Google reviews, email opt-in, footer — in the palette above, with eight of your own photographs. Only the before/after pair stays empty: nothing in the folder can fill it, and I am not writing your reviews.</p>
+    <p class="sechint">Your nine blocks — header, hero, imagery, Jess, transformation and mission, three Google reviews, email opt-in, Instagram, footer — in the palette above, with eight of your own photographs. Only the before/after pair stays empty: nothing in the folder can fill it, and I am not writing your reviews.</p>
 
     <div class="frame">
       <div class="frame-bar">
@@ -483,6 +490,22 @@
               </div>
               <div style="margin-top:12px"><button class="b-primary" type="button">Sign me up</button></div>
             </div>
+          </div>
+        </div>
+
+        <div class="mk-sec" style="border-bottom:none; padding-bottom:34px">
+          <div class="mk-ig-head">
+            <p class="mk-handle">@jhpboudoir_</p>
+            <h3 class="mk-h" style="color:var(--ink); margin:0">Follow along</h3>
+          </div>
+          <div class="mk-ig">
+            <img src="assets/ig-1.jpg" alt="Instagram post by JHP Boudoir">
+            <img src="assets/ig-2.jpg" alt="Instagram post by JHP Boudoir">
+            <img src="assets/ig-3.jpg" alt="Instagram post by JHP Boudoir">
+            <img src="assets/ig-4.jpg" alt="Instagram post by JHP Boudoir">
+          </div>
+          <div class="mk-ig-foot">
+            <button class="b-secondary" type="button">Follow on Instagram</button>
           </div>
         </div>
 
