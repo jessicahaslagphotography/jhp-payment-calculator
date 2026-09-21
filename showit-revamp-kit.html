@@ -837,18 +837,20 @@ Privacy Policy</div>
         <p class="note">Your current fonts &mdash; Nanum Myeongjo, Rufina, Montserrat &mdash; came with the template. Once every canvas is rebuilt you can remove them, but leave them in place until then so the old page keeps rendering while you work.</p>
 
         <h3>Step 2 &middot; The palette</h3>
-        <p class="note">Showit shows the palette as a row of swatches. Fill the first seven with these, in this order &mdash; the order matters, because your published HTML already refers to slots by position (<code>colors-0</code> is the ground, <code>colors-6</code> the gold, <code>colors-7</code> the ink), and keeping the order means nothing you have already built shifts colour underneath you.</p>
+        <p class="note">Showit shows the palette as a row of swatches and numbers them <b>from zero</b>, which is why your published CSS reads <code>colors-0</code> through <code>colors-7</code> &mdash; eight slots, not seven. Set each swatch to the hex on its row. The <b>Slot</b> column below is the position in that row, counting from the left starting at zero.</p>
+        <p class="note">Three of the eight are <b>already spoken for</b> by pages you have published: <code>colors-0</code>, <code>colors-6</code> and <code>colors-7</code> appear in your live HTML. Those three have to keep the values below or things you have already built change colour underneath you. The other five are free &mdash; the assignments below are mine, chosen so related colours sit next to each other.</p>
         <div class="tw">
           <table>
-            <thead><tr><th>Slot</th><th>Role</th><th>Hex</th><th>What it is for</th></tr></thead>
+            <thead><tr><th>Slot</th><th>Role</th><th>Hex</th><th>Locked?</th><th>What it is for</th></tr></thead>
             <tbody>
-              <tr><td>1</td><td>Ground</td><td><code>#13100E</code></td><td>Every canvas background</td></tr>
-              <tr><td>2</td><td>Surface</td><td><code>#1C1714</code></td><td>Review cards, the VIP band</td></tr>
-              <tr><td>3</td><td>Raised</td><td><code>#241D18</code></td><td>Form fields on the opt-in</td></tr>
-              <tr><td>4</td><td>Ink</td><td><code>#F2ECE2</code></td><td>Headlines and anything that must be read first</td></tr>
-              <tr><td>5</td><td>Muted</td><td><code>#A99A86</code></td><td>Body copy and review quotes</td></tr>
-              <tr><td>6</td><td>Dim</td><td><code>#7D7161</code></td><td><b>Footer credit lines only.</b> See the warning below</td></tr>
-              <tr><td>7</td><td>Gold</td><td><code>#C9A24B</code></td><td>Eyebrows, hairlines, primary buttons</td></tr>
+              <tr><td><code>colors-0</code></td><td>Ground</td><td><code>#13100E</code></td><td><b>Locked</b></td><td>Every canvas background</td></tr>
+              <tr><td><code>colors-1</code></td><td>Surface</td><td><code>#1C1714</code></td><td>free</td><td>Review cards, the VIP band</td></tr>
+              <tr><td><code>colors-2</code></td><td>Raised</td><td><code>#241D18</code></td><td>free</td><td>Form fields on the opt-in</td></tr>
+              <tr><td><code>colors-3</code></td><td>Muted</td><td><code>#A99A86</code></td><td>free</td><td>Body copy and review quotes</td></tr>
+              <tr><td><code>colors-4</code></td><td>Dim</td><td><code>#7D7161</code></td><td>free</td><td><b>Footer credit lines only.</b> See the warning below</td></tr>
+              <tr><td><code>colors-5</code></td><td>Gold bright</td><td><code>#E6C576</code></td><td>free</td><td>Emphasis figures, hover states</td></tr>
+              <tr><td><code>colors-6</code></td><td>Gold</td><td><code>#C9A24B</code></td><td><b>Locked</b></td><td>Eyebrows, hairlines, primary buttons</td></tr>
+              <tr><td><code>colors-7</code></td><td>Ink</td><td><code>#F2ECE2</code></td><td><b>Locked</b></td><td>Headlines and anything that must be read first</td></tr>
             </tbody>
           </table>
         </div>
