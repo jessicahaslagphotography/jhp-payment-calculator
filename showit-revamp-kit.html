@@ -181,7 +181,7 @@
       <a href="#other">6 &middot; Portfolio</a>
       <a href="#contact">7 &middot; Contact + GHL</a>
       <a href="#seo">8 &middot; SEO tags</a>
-      <a href="#brand">9 &middot; Brand note</a>
+      <a href="#brand">9 &middot; Palette &amp; type</a>
     </nav>
 
     <main>
@@ -194,7 +194,7 @@
         <div class="callout">
           <p><b>1 &middot; Duplicate the live Home page before you change anything.</b> Pages panel, right-click <code>Home</code>, Duplicate, rename the copy <code>Home OLD &mdash; backup</code>. You are rebuilding the page that brings in your inquiries today. A duplicate costs nothing and means a bad evening is one click from undone.</p>
           <p><b>2 &middot; Upload the photo set in one go.</b> Images panel, Upload, all fifteen files from the zip. Every filename is the slot it belongs in, so nothing lands in the wrong hole. The four <code>ig-*.jpg</code> are square stand-ins &mdash; swap in your four latest posts before you publish.</p>
-          <p><b>3 &middot; Set the palette and the four text themes before you build a single canvas.</b> Design Settings, Palette: <code>colors-0</code> = <code>#13100E</code>, <code>colors-6</code> = <code>#C9A24B</code>, <code>colors-7</code> = <code>#F2ECE2</code>. Then the text themes from Section 9. Set them now and all ten canvases inherit them. Set them last and you are editing type on ten canvases by hand.</p>
+          <p><b>3 &middot; Set the palette and the four text themes before you build a single canvas.</b> Design Settings, Palette: <code>colors-0</code> = <code>#13100E</code>, <code>colors-6</code> = <code>#C9A24B</code>, <code>colors-7</code> = <code>#F2ECE2</code>. Then the fonts, palette, text themes and button styles in Section 9, which now has every value written out. Set them now and all ten canvases inherit them. Set them last and you are editing type on ten canvases by hand.</p>
         </div>
 
         <h3>Canvas heights</h3>
@@ -824,31 +824,80 @@ Privacy Policy</div>
 
       <!-- ============ 9 ============ -->
       <section id="brand">
-        <h2>Brand note</h2>
-        <p class="sechint">Worth saying out loud, because it will shape whatever you do next.</p>
+        <h2>Palette &amp; type</h2>
+        <p class="sechint">Set all of this <b>before</b> you build a canvas. In Showit it lives in one place, and every text element you draw afterwards inherits from it.</p>
 
         <div class="callout">
-          <p><b>You are running two visual identities.</b> The Showit site is white, black and blush <code>#ffe4dc</code>, set in Nanum Myeongjo, Rufina and Montserrat — the template's palette, not a chosen one. Your Scalogy pages are a dark studio palette: near-black <code>#13100E</code>, warm ink <code>#F2ECE2</code>, antique gold <code>#C9A24B</code>, set in Cormorant Garamond and Jost.</p>
-          <p>The second one is <b>considerably better</b>, and it's the one a client sees at checkout, at her reveal booking, and on her payment plan. It reads like a $9,400 collection. The blush template reads like a starter site.</p>
-          <p>This kit is deliberately scoped to copy and plumbing — a visual overhaul is a separate, bigger job. But when you're ready, the direction already exists. You built it. <b>The page you're reading is set in it.</b></p>
+          <p><b>Where it is.</b> Open the site in the Showit editor and go to the design settings panel &mdash; the one holding <b>Color Palette</b>, <b>Text Themes</b> and <b>Fonts</b>, reached from the menu at the top left. Fonts first, then palette, then themes, in that order: a theme cannot point at a font the site has not loaded.</p>
+          <p><b>The desktop/mobile catch.</b> Showit stores a separate definition of every text theme for each view. Your live site already shows this &mdash; it carries <code>st-d-title</code> and <code>st-m-title</code>, desktop and mobile. So each theme below has two rows, and you set it once in desktop view and again with the mobile toggle on. Skipping the mobile column is how type ends up correct on your laptop and wrong on every phone.</p>
         </div>
 
-        <h3>The tokens, if you want to carry them across</h3>
+        <h3>Step 1 &middot; Load the two fonts</h3>
+        <p class="note">Add <b>Cormorant Garamond</b> and <b>Jost</b>. Both are Google Fonts, so Showit lists them &mdash; no upload needed. Cormorant Garamond carries the weights 400 through 600 and an italic; Jost 300 through 600. Load those weights, not just the default, or the themes below fall back to the nearest one and the page loses its contrast between display and body type.</p>
+        <p class="note">Your current fonts &mdash; Nanum Myeongjo, Rufina, Montserrat &mdash; came with the template. Once every canvas is rebuilt you can remove them, but leave them in place until then so the old page keeps rendering while you work.</p>
+
+        <h3>Step 2 &middot; The palette</h3>
+        <p class="note">Showit shows the palette as a row of swatches. Fill the first seven with these, in this order &mdash; the order matters, because your published HTML already refers to slots by position (<code>colors-0</code> is the ground, <code>colors-6</code> the gold, <code>colors-7</code> the ink), and keeping the order means nothing you have already built shifts colour underneath you.</p>
         <div class="tw">
           <table>
-            <thead><tr><th>Role</th><th>Hex</th><th>Where it's already used</th></tr></thead>
+            <thead><tr><th>Slot</th><th>Role</th><th>Hex</th><th>What it is for</th></tr></thead>
             <tbody>
-              <tr><td>Ground</td><td><code>#13100E</code></td><td>Page background</td></tr>
-              <tr><td>Surface</td><td><code>#1C1714</code></td><td>Panels, cards</td></tr>
-              <tr><td>Raised</td><td><code>#241D18</code></td><td>Inputs, table fills</td></tr>
-              <tr><td>Ink</td><td><code>#F2ECE2</code></td><td>Body text</td></tr>
-              <tr><td>Muted</td><td><code>#A99A86</code></td><td>Secondary text</td></tr>
-              <tr><td>Gold</td><td><code>#C9A24B</code></td><td>Accent, rules, primary buttons</td></tr>
-              <tr><td>Gold bright</td><td><code>#E6C576</code></td><td>Emphasis figures</td></tr>
+              <tr><td>1</td><td>Ground</td><td><code>#13100E</code></td><td>Every canvas background</td></tr>
+              <tr><td>2</td><td>Surface</td><td><code>#1C1714</code></td><td>Review cards, the VIP band</td></tr>
+              <tr><td>3</td><td>Raised</td><td><code>#241D18</code></td><td>Form fields on the opt-in</td></tr>
+              <tr><td>4</td><td>Ink</td><td><code>#F2ECE2</code></td><td>Headlines and anything that must be read first</td></tr>
+              <tr><td>5</td><td>Muted</td><td><code>#A99A86</code></td><td>Body copy and review quotes</td></tr>
+              <tr><td>6</td><td>Dim</td><td><code>#7D7161</code></td><td><b>Footer credit lines only.</b> See the warning below</td></tr>
+              <tr><td>7</td><td>Gold</td><td><code>#C9A24B</code></td><td>Eyebrows, hairlines, primary buttons</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="note" style="padding-left:0; padding-top:10px">Type: <b>Cormorant Garamond</b> 400–600 for display, <b>Jost</b> 300–600 for everything else. Both are on Google Fonts, so Showit can load them.</p>
+
+        <div class="finding">
+          <span class="sev c">Critical</span>
+          <div>
+            <p class="ft">Two colour pairs will fail accessibility if you guess at them</p>
+            <p class="fb"><b>Never put cream on a gold button.</b> <code>#F2ECE2</code> on <code>#C9A24B</code> measures <b>2.04:1</b> &mdash; far under the 4.5:1 minimum, and genuinely hard to read in sunlight. Gold buttons take <b>ground</b> <code>#13100E</code> as their label colour, which measures 8.2:1. <br><b>And never set body copy in dim.</b> <code>#7D7161</code> on the ground measures <b>3.98:1</b>, just under the line. It is fine for a footer credit at small size and wrong for a paragraph anyone has to read. Body copy is muted <code>#A99A86</code>, which passes at 6.1:1.</p>
+          </div>
+        </div>
+
+        <h3>Step 3 &middot; The text themes</h3>
+        <p class="note">Four themes carry the whole homepage, plus a fifth for the review quotes. Showit lets you add themes beyond the four it ships with &mdash; add the quote one rather than hand-styling three text boxes and hoping they match.</p>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Theme</th><th>View</th><th>Font &amp; weight</th><th>Size</th><th>Line height</th><th>Letter spacing</th><th>Colour</th></tr></thead>
+            <tbody>
+              <tr><td rowspan="2"><b>Title</b><br>hero headline</td><td>Desktop</td><td>Cormorant Garamond 500</td><td>56px</td><td>1.06</td><td>0.01em</td><td>Ink</td></tr>
+              <tr><td>Mobile</td><td>Cormorant Garamond 500</td><td>34px</td><td>1.10</td><td>0.01em</td><td>Ink</td></tr>
+              <tr><td rowspan="2"><b>Heading</b><br>every section heading</td><td>Desktop</td><td>Cormorant Garamond 500</td><td>34px</td><td>1.15</td><td>0.01em</td><td>Ink</td></tr>
+              <tr><td>Mobile</td><td>Cormorant Garamond 500</td><td>26px</td><td>1.18</td><td>0.01em</td><td>Ink</td></tr>
+              <tr><td rowspan="2"><b>Subheading</b><br>the gold eyebrows</td><td>Desktop</td><td>Jost 400, uppercase</td><td>11px</td><td>1.4</td><td>0.30em</td><td>Gold</td></tr>
+              <tr><td>Mobile</td><td>Jost 400, uppercase</td><td>10px</td><td>1.4</td><td>0.24em</td><td>Gold</td></tr>
+              <tr><td rowspan="2"><b>Paragraph</b><br>all body copy</td><td>Desktop</td><td>Jost 300</td><td>17px</td><td>1.75</td><td>0</td><td>Muted</td></tr>
+              <tr><td>Mobile</td><td>Jost 300</td><td>16px</td><td>1.70</td><td>0</td><td>Muted</td></tr>
+              <tr><td rowspan="2"><b>Quote</b><br>the three reviews</td><td>Desktop</td><td>Cormorant Garamond 400 <em>italic</em></td><td>20px</td><td>1.60</td><td>0</td><td>Muted</td></tr>
+              <tr><td>Mobile</td><td>Cormorant Garamond 400 <em>italic</em></td><td>18px</td><td>1.60</td><td>0</td><td>Muted</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">Letter spacing is the detail that makes the gold eyebrows read as deliberate rather than as small text. <b>0.30em is wide</b> &mdash; it will look wrong while you are typing it and right once the canvas is built. The mobile value is tighter only because 320px does not have the room.</p>
+
+        <h3>Step 4 &middot; Buttons</h3>
+        <div class="tw">
+          <table>
+            <thead><tr><th>Style</th><th>Fill</th><th>Label</th><th>Border</th><th>Type</th></tr></thead>
+            <tbody>
+              <tr><td>Primary<br><code>st-primary</code></td><td>Gold <code>#C9A24B</code></td><td>Ground <code>#13100E</code></td><td>none</td><td>Jost 500, 12px, 0.16em, uppercase</td></tr>
+              <tr><td>Secondary<br><code>st-secondary</code></td><td>transparent</td><td>Ink <code>#F2ECE2</code></td><td>1px Ink at 40%</td><td>Jost 500, 12px, 0.16em, uppercase</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="note">One primary button per canvas at most. The moment a screen has two gold buttons neither one is the next step.</p>
+
+        <h3>Why this is worth doing first</h3>
+        <div class="callout">
+          <p>Your Showit site is currently white, black and blush <code>#ffe4dc</code> in Nanum Myeongjo, Rufina and Montserrat &mdash; the template&rsquo;s palette, never a chosen one. The palette above is the one a client already meets at checkout, at her reveal booking and on her payment plan, because you built it for those pages. <b>This step is what makes the website match the business.</b></p>
+        </div>
       </section>
 
       <footer>
