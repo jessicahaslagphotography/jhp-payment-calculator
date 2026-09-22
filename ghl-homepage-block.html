@@ -152,9 +152,10 @@
 .jhp-home .jhp-vip .inner{max-width:54ch;margin:0 auto}
 
 /* ---------- 9 · instagram ---------- */
-.jhp-home .jhp-ig{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}
-@media (max-width:620px){.jhp-home .jhp-ig{grid-template-columns:repeat(2,1fr)}}
-.jhp-home .jhp-ig img{aspect-ratio:1;object-fit:cover}
+/* Behold pulls the live @jhpboudoir_ feed. Columns and gap are set in the
+   Behold dashboard; this only bounds the width so it lines up with the page. */
+.jhp-home .jhp-ig-wrap{max-width:1040px;margin:0 auto}
+.jhp-home .jhp-ig-wrap behold-widget{display:block;width:100%}
 .jhp-home .jhp-handle{font-family:var(--sans);font-size:11px;letter-spacing:.26em;
   text-transform:uppercase;color:var(--gold);margin:0 0 8px}
 
@@ -290,12 +291,19 @@
     <p class="jhp-handle">@jhpboudoir_</p>
     <h2 class="jhp-h" style="margin-bottom:0">Follow Along</h2>
   </div>
-  <div class="jhp-ig">
-    <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f2966c1acf6d4ad508.jpg" alt="Recent JHP Boudoir work">
-    <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f230b0f957cccd65d3.jpg" alt="Recent JHP Boudoir work">
-    <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f2804f2db9b749cc02.jpg" alt="Recent JHP Boudoir work">
-    <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f2966c1acf6d4ad513.jpg" alt="Recent JHP Boudoir work">
+  <div class="jhp-ig-wrap">
+    <behold-widget feed-id="jnoM4Us1mPFmRBXBMriG"></behold-widget>
   </div>
+  <script>
+    (() => {
+      if (window.__bhldScript) return;
+      window.__bhldScript = true;
+      const d = document, s = d.createElement("script");
+      s.type = "module";
+      s.src = "https://w.behold.so/widget.js";
+      setTimeout(() => { d.head.append(s); }, 0);
+    })();
+  </script>
   <div class="jhp-center" style="margin-top:26px">
     <a class="jhp-btn2" href="https://www.instagram.com/jhpboudoir_" target="_blank" rel="noopener">Follow on Instagram</a>
   </div>
