@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homepage Photo Swapper</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ground:#13100E; --surface:#1C1714; --raised:#241D18;
+    --ink:#F2ECE2; --muted:#A99A86; --dim:#7D7161;
+    --gold:#C9A24B; --gold-bright:#E6C576;
+    --line:rgba(201,162,75,.22); --line-soft:rgba(242,236,226,.09);
+    --ok:#9DB77F; --warn:#D9A441;
+    --serif:'Cormorant Garamond',Georgia,serif;
+    --sans:'Jost',-apple-system,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+    font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .shell{max-width:1060px;margin:0 auto;padding:clamp(22px,4vw,40px) 16px 120px}
+  h1{font-family:var(--serif);font-weight:500;font-size:clamp(27px,5vw,40px);line-height:1.08;margin:0 0 10px}
+  .lede{color:var(--muted);font-weight:300;max-width:60ch;margin:0 0 4px}
+  .lede b{color:var(--ink);font-weight:500}
+  .status{font-size:12.5px;color:var(--dim);margin:14px 0 0;min-height:18px}
+  .status.warn{color:var(--warn)}
+  hr.rule{height:1px;background:var(--line);border:0;margin:22px 0 26px}
+
+  .slot{all:unset;cursor:pointer;display:block;width:100%;border:1px solid var(--line-soft);
+    border-radius:4px;overflow:hidden;background:var(--surface);transition:border-color .2s;position:relative}
+  .slot:hover{border-color:var(--gold)}
+  .slot:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+  .slot.changed{border-color:var(--gold)}
+  .slot .img{display:block;width:100%;overflow:hidden;background:var(--raised)}
+  .slot .img img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 42%;
+    filter:saturate(.96) contrast(1.02)}
+  .slot .cap{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:9px 11px}
+  .slot .lb{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+  .slot .fn{font-size:11.5px;color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .slot .swap{position:absolute;top:9px;right:9px;font-size:9.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--ground);background:var(--gold);padding:4px 9px;
+    border-radius:2px;opacity:0;transition:opacity .2s}
+  .slot:hover .swap,.slot:focus-visible .swap{opacity:1}
+  .slot .dot{position:absolute;top:9px;left:9px;width:7px;height:7px;border-radius:50%;
+    background:var(--gold);display:none}
+  .slot.changed .dot{display:block}
+
+  .sect{margin:0 0 26px}
+  .sect .hd{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim);margin:0 0 10px}
+  .row3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+  @media(max-width:700px){.row3{grid-template-columns:1fr 1fr}.row2{grid-template-columns:1fr}}
+
+  /* chooser */
+  .veil{position:fixed;inset:0;background:rgba(10,8,7,.88);display:none;z-index:40;
+    overflow-y:auto;padding:0 0 40px}
+  .veil.on{display:block}
+  .chooser{max-width:1060px;margin:0 auto;padding:18px 16px}
+  .chd{position:sticky;top:0;background:var(--ground);border-bottom:1px solid var(--line);
+    padding:14px 0 12px;margin-bottom:16px;display:flex;align-items:center;
+    justify-content:space-between;gap:12px;flex-wrap:wrap;z-index:2}
+  .chd .t{font-family:var(--serif);font-size:22px}
+  .chd .t span{color:var(--gold)}
+  .chd .n{font-size:12.5px;color:var(--muted)}
+  .x{all:unset;cursor:pointer;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold);border:1px solid var(--gold);padding:9px 18px;border-radius:2px}
+  .x:hover{color:var(--gold-bright);border-color:var(--gold-bright)}
+  .x:focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px}
+  .cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+  .opt{all:unset;cursor:pointer;display:block;border:1px solid var(--line-soft);border-radius:4px;
+    overflow:hidden;background:var(--surface)}
+  .opt:hover{border-color:var(--gold)}
+  .opt:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+  .opt.is{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+  .opt .ip{display:block;overflow:hidden;background:var(--raised)}
+  .opt .ip img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 42%;
+    filter:saturate(.96) contrast(1.02)}
+  .opt .cp{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:8px 10px}
+  .opt .nm{font-size:11px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .opt .or{font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:2px 5px;border-radius:2px}
+  .or.ok{color:var(--ok);background:rgba(157,183,127,.12)}
+  .or.wn{color:var(--warn);background:rgba(217,164,65,.12)}
+
+  .bar{position:fixed;left:0;right:0;bottom:0;background:var(--raised);border-top:1px solid var(--line);
+    padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:center;
+    flex-wrap:wrap;z-index:30}
+  .bar .cnt{font-size:13px;color:var(--muted)}
+  .bar .cnt b{color:var(--gold-bright);font-weight:500}
+  .btn{all:unset;cursor:pointer;font-size:12px;font-weight:500;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--ground);background:var(--gold);padding:11px 22px;border-radius:2px}
+  .btn:hover{background:var(--gold-bright)}
+  .btn:focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px}
+  .btn.ghost{color:var(--gold);background:transparent;border:1px solid var(--gold);padding:10px 21px}
+</style>
+</head>
+<body>
+<div class="shell">
+  <h1>Swap a homepage photo</h1>
+  <p class="lede">Click any photo below to change it. Every option you are shown is
+    <b>cropped to that slot&rsquo;s real shape</b>, so the crop you see is the crop that ships.</p>
+  <p class="status" id="status">Connecting&hellip;</p>
+  <hr class="rule">
+  <div id="page"></div>
+</div>
+
+<div class="veil" id="veil">
+  <div class="chooser">
+    <div class="chd">
+      <div>
+        <div class="t">Choose for <span id="chslot"></span></div>
+        <div class="n" id="chnote"></div>
+      </div>
+      <button class="x" id="chclose" type="button">Close</button>
+    </div>
+    <div class="cgrid" id="cgrid"></div>
+  </div>
+</div>
+
+<div class="bar">
+  <span class="cnt" id="cnt">No changes yet</span>
+  <button class="btn ghost" id="reset" type="button">Reset all</button>
+  <button class="btn" id="copy" type="button">Copy picks</button>
+</div>
+
+<script>
+var PHOTOS = [{"f": "6Y2A9498.jpg", "land": false}, {"f": "6Y2A9504.jpg", "land": false}, {"f": "6Y2A9510.jpg", "land": false}, {"f": "6Y2A9514.jpg", "land": false}, {"f": "6Y2A9515.jpg", "land": false}, {"f": "DSC_0148-BW.jpg", "land": false}, {"f": "DSC_0273-BW.jpg", "land": true}, {"f": "DSC_0475-BW.jpg", "land": false}, {"f": "DSC_0484-BW.jpg", "land": false}, {"f": "DSC_0511-BW.jpg", "land": true}, {"f": "DSC_0609-BW.jpg", "land": false}, {"f": "DSC_0630-BW.jpg", "land": true}, {"f": "DSC_0776-BW.jpg", "land": true}, {"f": "DSC_0798-BW.jpg", "land": false}, {"f": "DSC_0927-BW.jpg", "land": true}, {"f": "DSC_1205-BW.jpg", "land": true}, {"f": "DSC_1279-BW.jpg", "land": true}, {"f": "DSC_1312-BW.jpg", "land": true}, {"f": "DSC_1324-BW.jpg", "land": true}, {"f": "DSC_1803.jpg", "land": true}, {"f": "DSC_1936-BW.jpg", "land": true}, {"f": "DSC_2030-BW.jpg", "land": true}, {"f": "DSC_2043.jpg", "land": true}, {"f": "DSC_2060.jpg", "land": false}, {"f": "DSC_2071.jpg", "land": false}, {"f": "DSC_2174-BW.jpg", "land": false}, {"f": "DSC_2236-BW.jpg", "land": true}, {"f": "DSC_2702-BW.jpg", "land": true}, {"f": "DSC_4505-BW.jpg", "land": true}, {"f": "DSC_4553-BW.jpg", "land": true}, {"f": "DSC_4568-BW.jpg", "land": true}, {"f": "DSC_6722-BW.jpg", "land": true}, {"f": "DSC_7450_after.jpg", "land": false}, {"f": "DSC_8438-BW.jpg", "land": true}, {"f": "DSC_8449-BW.jpg", "land": false}, {"f": "DSC_8604-BW.jpg", "land": true}, {"f": "DSC_9236-BW.jpg", "land": true}, {"f": "DSC_9309-BW.jpg", "land": true}, {"f": "DSC_9341-BW.jpg", "land": true}, {"f": "IMG_8354.jpg", "land": false}];
+var SLOTS  = [{"id": "hero", "label": "Hero", "ratio": "2.2 / 1", "cur": "DSC_2030-BW.jpg", "note": "Full width, capped at 72% of screen height"}, {"id": "empower-1", "label": "Imagery, left", "ratio": "2 / 3", "cur": "DSC_0798-BW.jpg", "note": "Portrait"}, {"id": "empower-2", "label": "Imagery, centre", "ratio": "2 / 3", "cur": "DSC_2060.jpg", "note": "Portrait"}, {"id": "empower-3", "label": "Imagery, right", "ratio": "2 / 3", "cur": "DSC_0475-BW.jpg", "note": "Portrait"}, {"id": "jess", "label": "Your headshot", "ratio": "2 / 3", "cur": "6Y2A9515.jpg", "note": "Portrait, beside the About copy"}, {"id": "review-1", "label": "Review 1, Miss J.", "ratio": "3 / 2", "cur": "DSC_2236-BW.jpg", "note": "Landscape, above the quote"}, {"id": "review-2", "label": "Review 2, Miss S.", "ratio": "3 / 2", "cur": "DSC_2043.jpg", "note": "Landscape, above the quote"}, {"id": "review-3", "label": "Review 3, Miss M.", "ratio": "3 / 2", "cur": "DSC_0630-BW.jpg", "note": "Landscape, above the quote"}, {"id": "optin", "label": "Email band", "ratio": "3 / 2", "cur": "DSC_9341-BW.jpg", "note": "Landscape, half the band width"}];
+
+var picks = {};                       // slot id -> filename (only when changed)
+var DEFAULTS = {};
+SLOTS.forEach(function(s){ DEFAULTS[s.id] = s.cur; });
+
+var elPage = document.getElementById('page');
+var elStatus = document.getElementById('status');
+var elVeil = document.getElementById('veil');
+var elGrid = document.getElementById('cgrid');
+var elChSlot = document.getElementById('chslot');
+var elChNote = document.getElementById('chnote');
+var elCnt = document.getElementById('cnt');
+var active = null;
+var ref = null;
+
+function cur(id){ return picks[id] || DEFAULTS[id]; }
+
+function groups(){
+  return [
+    {hd:'Hero', ids:['hero'], cls:''},
+    {hd:'Imagery, three across', ids:['empower-1','empower-2','empower-3'], cls:'row3'},
+    {hd:'About', ids:['jess'], cls:'half'},
+    {hd:'Reviews', ids:['review-1','review-2','review-3'], cls:'row3'},
+    {hd:'Email band', ids:['optin'], cls:'half'}
+  ];
+}
+
+function slotEl(s){
+  var b = document.createElement('button');
+  b.className = 'slot' + (picks[s.id] ? ' changed' : '');
+  b.type = 'button';
+  b.setAttribute('aria-label', 'Change the photo for ' + s.label);
+  b.innerHTML =
+    '<span class="dot"></span>' +
+    '<span class="swap">Swap</span>' +
+    '<span class="img" style="aspect-ratio:' + s.ratio + '">' +
+      '<img src="assets/pick/' + cur(s.id) + '" alt="">' +
+    '</span>' +
+    '<span class="cap"><span class="lb"></span><span class="fn"></span></span>';
+  b.querySelector('.lb').textContent = s.label;
+  b.querySelector('.fn').textContent = cur(s.id);
+  b.addEventListener('click', function(){ open(s); });
+  return b;
+}
+
+function render(){
+  elPage.innerHTML = '';
+  groups().forEach(function(g){
+    var sec = document.createElement('div');
+    sec.className = 'sect';
+    var hd = document.createElement('p');
+    hd.className = 'hd';
+    hd.textContent = g.hd;
+    sec.appendChild(hd);
+    var wrap = document.createElement('div');
+    if (g.cls === 'row3') wrap.className = 'row3';
+    else if (g.cls === 'half') wrap.className = 'row2';
+    g.ids.forEach(function(id){
+      var s = SLOTS.filter(function(x){ return x.id === id; })[0];
+      wrap.appendChild(slotEl(s));
+    });
+    if (g.cls === 'half') wrap.appendChild(document.createElement('div'));
+    sec.appendChild(wrap);
+    elPage.appendChild(sec);
+  });
+  var n = Object.keys(picks).length;
+  elCnt.innerHTML = n ? ('<b>' + n + '</b> photo' + (n>1?'s':'') + ' changed') : 'No changes yet';
+}
+
+function open(s){
+  active = s;
+  elChSlot.textContent = s.label;
+  elChNote.textContent = s.note + ' \u00b7 currently ' + cur(s.id);
+  elGrid.innerHTML = '';
+  PHOTOS.forEach(function(p){
+    var o = document.createElement('button');
+    o.className = 'opt' + (p.f === cur(s.id) ? ' is' : '');
+    o.type = 'button';
+    o.innerHTML =
+      '<span class="ip" style="aspect-ratio:' + s.ratio + '">' +
+        '<img src="assets/pick/' + p.f + '" alt="" loading="lazy">' +
+      '</span>' +
+      '<span class="cp"><span class="nm"></span>' +
+      '<span class="or ' + (p.land ? 'ok' : 'wn') + '">' + (p.land ? 'Land' : 'Port') + '</span></span>';
+    o.querySelector('.nm').textContent = p.f;
+    o.addEventListener('click', function(){ choose(p.f); });
+    elGrid.appendChild(o);
+  });
+  elVeil.classList.add('on');
+  document.body.style.overflow = 'hidden';
+  elVeil.scrollTop = 0;
+}
+
+function close(){
+  elVeil.classList.remove('on');
+  document.body.style.overflow = '';
+  active = null;
+}
+
+function choose(f){
+  if (!active) return;
+  if (f === DEFAULTS[active.id]) delete picks[active.id];
+  else picks[active.id] = f;
+  save();
+  render();
+  close();
+}
+
+function save(){
+  if (!ref) return;
+  ref.set({ picks: picks, updatedAt: Date.now() }).catch(function(){
+    elStatus.textContent = 'Could not save that one. Your picks are still on screen, so use Copy picks.';
+    elStatus.className = 'status warn';
+  });
+}
+
+document.getElementById('chclose').addEventListener('click', close);
+elVeil.addEventListener('click', function(e){ if (e.target === elVeil) close(); });
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && active) close(); });
+
+document.getElementById('reset').addEventListener('click', function(){
+  picks = {}; save(); render();
+});
+
+document.getElementById('copy').addEventListener('click', function(){
+  var lines = SLOTS.map(function(s){ return s.id + ': ' + cur(s.id); }).join('\n');
+  var btn = document.getElementById('copy');
+  try {
+    navigator.clipboard.writeText(lines).then(function(){
+      btn.textContent = 'Copied';
+      setTimeout(function(){ btn.textContent = 'Copy picks'; }, 1600);
+    });
+  } catch (e) {
+    btn.textContent = 'Copy failed';
+  }
+});
+
+render();
+
+(async function(){
+  var db = null;
+  try { db = await claude.use('db'); } catch (e) { db = null; }
+  if (!db) {
+    elStatus.textContent = 'Picks will not save here, so make your changes and hit Copy picks before you leave.';
+    elStatus.className = 'status warn';
+    return;
+  }
+  ref = db.doc('picks/homepage-v2');
+  ref.onSnapshot(function(snap){
+    var d = snap && snap.data ? (typeof snap.data === 'function' ? snap.data() : snap.data) : null;
+    if (d && d.picks && typeof d.picks === 'object') {
+      picks = {};
+      Object.keys(d.picks).forEach(function(k){
+        if (DEFAULTS[k] && typeof d.picks[k] === 'string') picks[k] = d.picks[k];
+      });
+      render();
+    }
+    elStatus.textContent = 'Saved automatically. I can read your picks from here.';
+    elStatus.className = 'status';
+  }, function(){
+    elStatus.textContent = 'Reading saved picks failed. Changes still work, use Copy picks when done.';
+    elStatus.className = 'status warn';
+  });
+})();
+</script>
+</body>
+</html>
