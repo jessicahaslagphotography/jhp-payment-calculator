@@ -83,6 +83,10 @@
 
 /* ---------- 2 · hero ---------- */
 .jhp-home .jhp-hero{position:relative}
+/* the photo's own proportions make it ~950px tall on a laptop, which pushes
+   the headline below the fold. Capped so the whole hero reads at a glance.
+   object-position keeps the subject centred as the top and bottom trim. */
+.jhp-home .jhp-hero img{max-height:72vh;object-fit:cover;object-position:center 42%}
 .jhp-home .jhp-hero .jhp-over{position:absolute;inset:0;display:flex;flex-direction:column;
   align-items:flex-start;justify-content:flex-end;gap:16px;text-align:left;
   padding:0 clamp(20px,5vw,60px) clamp(30px,4.5vw,52px);
@@ -270,7 +274,7 @@
   <div class="jhp-over">
     <div>
       <p class="jhp-kicker">The email list</p>
-      <h2 class="jhp-h">Stay in the know for all things JHP Boudoir</h2>
+      <h2 class="jhp-h">Stay In The Know For All Things JHP Boudoir</h2>
       <p class="jhp-p">Exclusive sales, specialty sessions and last-minute openings, before they go public.</p>
       <div class="jhp-field">
         <input type="text" placeholder="First name" aria-label="First name">
@@ -286,7 +290,7 @@
 <section class="jhp-vip">
   <div class="inner">
     <p class="jhp-kicker">The VIP Facebook group</p>
-    <h2 class="jhp-h">Where it starts for most women</h2>
+    <h2 class="jhp-h">Where It Starts For Most Women</h2>
     <p class="jhp-p">A private group of women who have already been photographed here, and women still deciding. Behind the scenes, first looks, and the occasional opening that never makes it to the website.</p>
     <!-- REPLACE href with your Facebook group link -->
     <a class="jhp-btn" href="#" target="_blank" rel="noopener">Join the VIP Facebook group</a>
@@ -297,7 +301,7 @@
 <section class="jhp-sec" style="border-bottom:none">
   <div class="jhp-center" style="margin-bottom:24px">
     <p class="jhp-handle">@jhpboudoir_</p>
-    <h2 class="jhp-h" style="margin-bottom:0">Follow along</h2>
+    <h2 class="jhp-h" style="margin-bottom:0">Follow Along</h2>
   </div>
   <div class="jhp-ig">
     <img src="assets/ig-1.jpg" alt="Recent JHP Boudoir work">
