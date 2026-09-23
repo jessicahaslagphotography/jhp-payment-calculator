@@ -13,8 +13,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap');
 
-.tn{--ground:#13100E;--surface:#1C1714;--raised:#241D18;
-  --ink:#F2ECE2;--muted:#A99A86;--dim:#7D7161;
+.tn{--ground:#13100E;--surface:#1C1714;--ink:#F2ECE2;--muted:#A99A86;--dim:#7D7161;
   --gold:#C9A24B;--gold-bright:#E6C576;
   --line:rgba(201,162,75,.22);--line-soft:rgba(242,236,226,.10);
   --serif:'Cormorant Garamond',Georgia,serif;
@@ -25,16 +24,24 @@
 .tn *,.tn *::before,.tn *::after{box-sizing:border-box}
 .tn h1,.tn h2,.tn p{margin:0}
 
-.tn .head{padding:18px 20px 14px;text-align:center;
-  border-bottom:1px solid var(--line-soft)}
+.tn .head{padding:16px 20px 12px;text-align:center}
 .tn .head .k{font-size:10px;letter-spacing:.3em;text-transform:uppercase;
   color:var(--gold);margin-bottom:6px}
-.tn .head h1{font-family:var(--serif);font-weight:500;font-size:26px;
-  letter-spacing:.01em}
+.tn .head h1{font-family:var(--serif);font-weight:500;font-size:26px}
 .tn .head p{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.55}
 
-/* Which photograph. A wrapping row of pills, not a scroller: four labels fit
-   in two rows on the narrowest phone and nothing is hidden off-screen. */
+/* Two levels of choice: which page, then which photograph on it. The pager is
+   a segmented control so it reads as a switch rather than more tabs. */
+.tn .pager{display:flex;gap:0;justify-content:center;padding:4px 20px 0}
+.tn .pager button{flex:1;max-width:160px;font-family:var(--sans);font-size:11px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+  background:transparent;border:1px solid var(--line-soft);padding:12px 8px;
+  cursor:pointer;transition:all .25s;-webkit-tap-highlight-color:transparent}
+.tn .pager button:first-child{border-radius:2px 0 0 2px}
+.tn .pager button:last-child{border-radius:0 2px 2px 0;border-left:none}
+.tn .pager button[aria-selected="true"]{color:var(--ground);background:var(--gold);
+  border-color:var(--gold)}
+
 .tn .tabs{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
   padding:14px 14px 12px}
 .tn .tabs button{font-family:var(--sans);font-size:11px;letter-spacing:.14em;
@@ -44,35 +51,42 @@
 .tn .tabs button[aria-selected="true"]{color:var(--ground);background:var(--gold);
   border-color:var(--gold)}
 
-/* The stage is the real thing at the real width. touch-action:none so a drag
-   moves the crop instead of scrolling the page under it. */
+/* The stage mirrors the real band: its own column count, gap and side padding,
+   at the phone's real width. A three-across row previewed full-bleed would
+   have shown tiles wider than the page ever draws them. */
 .tn .stage{position:relative;width:100vw;margin-left:calc(50% - 50vw);
-  background:#000;touch-action:none;user-select:none;-webkit-user-select:none;
-  cursor:grab}
+  display:grid;grid-template-columns:repeat(var(--cols,1),minmax(0,1fr));
+  gap:var(--gap,0px);padding:0 var(--pad,0px);
+  touch-action:none;user-select:none;-webkit-user-select:none;cursor:grab}
 .tn .stage:active{cursor:grabbing}
-.tn .band{position:relative;overflow:hidden;width:100%}
-.tn .band + .band{margin-top:12px}
+.tn .band{position:relative;overflow:hidden;width:100%;background:#000}
 .tn .band img{display:block;width:100%;height:100%;position:absolute;inset:0;
   object-fit:cover;filter:saturate(.96) contrast(1.02);pointer-events:none}
-.tn .band .sp{display:block;width:100%}
 .tn .plate{position:absolute;inset:0;display:flex;flex-direction:column;
-  justify-content:flex-end;padding:0 22px 28px;pointer-events:none;
+  justify-content:flex-end;align-items:flex-start;gap:12px;
+  padding:0 22px 26px;pointer-events:none;
   background:linear-gradient(0deg,rgba(19,16,14,.92) 0%,rgba(19,16,14,.74) 24%,
     rgba(19,16,14,.34) 52%,rgba(19,16,14,.04) 82%)}
+.tn .plate.hero{background:
+    linear-gradient(0deg,rgba(19,16,14,.95) 0%,rgba(19,16,14,.82) 22%,
+      rgba(19,16,14,.42) 48%,rgba(19,16,14,.08) 80%),
+    linear-gradient(90deg,rgba(19,16,14,.55) 0%,rgba(19,16,14,.12) 45%,
+      rgba(19,16,14,0) 70%)}
 .tn .plate.mid{justify-content:center;align-items:center;text-align:center;
   padding:0 22px;
   background:radial-gradient(ellipse 64% 118% at 50% 50%,rgba(19,16,14,.50) 0%,
       rgba(19,16,14,0) 76%),
     linear-gradient(180deg,rgba(19,16,14,.70) 0%,rgba(19,16,14,.58) 46%,
       rgba(19,16,14,.74) 100%)}
-.tn .plate h2{font-family:var(--serif);font-weight:500;font-size:34px;
-  line-height:1.08;color:var(--ink)}
-.tn .plate.mid h2{font-size:27px}
+.tn .plate .eb{font-size:11px;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--gold)}
+.tn .plate h2{font-family:var(--serif);font-weight:500;font-size:31px;
+  line-height:1.06;color:var(--ink)}
+.tn .plate.mid h2{font-size:26px}
 .tn .hint{position:absolute;left:50%;top:12px;transform:translateX(-50%);
-  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
-  color:rgba(242,236,226,.82);background:rgba(19,16,14,.55);
-  padding:6px 12px;border-radius:99px;pointer-events:none;
-  transition:opacity .5s;backdrop-filter:blur(3px)}
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;z-index:3;
+  color:rgba(242,236,226,.82);background:rgba(19,16,14,.6);
+  padding:6px 12px;border-radius:99px;pointer-events:none;transition:opacity .5s}
 
 .tn .ctl{padding:20px 20px 30px;max-width:520px;margin:0 auto}
 .tn .row{margin-bottom:20px}
@@ -80,20 +94,18 @@
   margin-bottom:9px}
 .tn .row .lab span:first-child{font-size:10px;letter-spacing:.24em;
   text-transform:uppercase;color:var(--gold)}
-.tn .row .lab span:last-child{font-family:var(--serif);font-size:19px;
-  color:var(--ink)}
+.tn .row .lab span:last-child{font-family:var(--serif);font-size:19px;color:var(--ink)}
 .tn .row.off{opacity:.38}
 .tn .row .note{font-size:11.5px;color:var(--dim);margin-top:7px;line-height:1.5}
 
-/* 30px thumb: a slider you can actually land on with a thumb on a phone. */
 .tn input[type=range]{-webkit-appearance:none;appearance:none;width:100%;
   background:transparent;margin:0;height:30px}
 .tn input[type=range]::-webkit-slider-runnable-track{height:2px;
   background:var(--line);border-radius:2px}
 .tn input[type=range]::-moz-range-track{height:2px;background:var(--line)}
-.tn input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;
-  width:30px;height:30px;border-radius:50%;background:var(--gold);
-  border:none;margin-top:-14px;cursor:pointer}
+.tn input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;
+  height:30px;border-radius:50%;background:var(--gold);border:none;
+  margin-top:-14px;cursor:pointer}
 .tn input[type=range]::-moz-range-thumb{width:30px;height:30px;border:none;
   border-radius:50%;background:var(--gold);cursor:pointer}
 .tn input[type=range]:focus-visible::-webkit-slider-thumb{
@@ -102,7 +114,7 @@
 .tn .acts{display:flex;gap:10px;margin-top:26px}
 .tn .acts button{flex:1;font-family:var(--sans);font-weight:500;font-size:12px;
   letter-spacing:.16em;text-transform:uppercase;border-radius:2px;
-  padding:15px 10px;cursor:pointer;transition:all .3s;
+  padding:15px 8px;cursor:pointer;transition:all .3s;
   -webkit-tap-highlight-color:transparent}
 .tn .send{color:var(--ground);background:var(--gold);border:none}
 .tn .send:active{background:var(--gold-bright)}
@@ -124,132 +136,176 @@
 <div class="head">
   <p class="k">JHP Boudoir</p>
   <h1>Crop Tuner</h1>
-  <p>Drag the photo to move it. Slide to change the height.
-     When you like it, tap <em>Copy settings</em> and paste it to me.</p>
+  <p>Drag a photo to move it. Slide to change the height.
+     Tap <em>Copy settings</em> and paste it to me.</p>
 </div>
 
+<div class="pager" id="pager"></div>
 <div class="tabs" id="tabs" role="tablist"></div>
 
-<div class="stage" id="stage">
-  <div class="hint" id="hint">Drag the photo</div>
-</div>
+<div class="stage" id="stage"><div class="hint" id="hint">Drag the photo</div></div>
 
 <div class="ctl">
   <div class="row" id="rowH">
-    <div class="lab"><span>Height</span><span id="vH">—</span></div>
+    <div class="lab"><span>Height</span><span id="vH">&mdash;</span></div>
     <input type="range" id="sH" min="0" max="100" step="1" aria-label="Height">
     <p class="note" id="nH"></p>
   </div>
   <div class="row" id="rowX">
-    <div class="lab"><span>Left &ndash; right</span><span id="vX">—</span></div>
+    <div class="lab"><span>Left &ndash; right</span><span id="vX">&mdash;</span></div>
     <input type="range" id="sX" min="0" max="100" step="1" aria-label="Horizontal position">
     <p class="note" id="nX"></p>
   </div>
   <div class="row" id="rowY">
-    <div class="lab"><span>Up &ndash; down</span><span id="vY">—</span></div>
+    <div class="lab"><span>Up &ndash; down</span><span id="vY">&mdash;</span></div>
     <input type="range" id="sY" min="0" max="100" step="1" aria-label="Vertical position">
     <p class="note" id="nY"></p>
   </div>
-
   <div class="acts">
     <button class="send" id="copy">Copy settings</button>
     <button class="ghost" id="reset">Reset this one</button>
   </div>
-
   <div class="out">
     <div class="t">What I will apply</div>
     <pre id="out"></pre>
   </div>
 </div>
 
-<p class="foot">Your changes are remembered on this phone.<br>
-  The live page is at <a href="/jhpboudoir1/about/">/about</a>.</p>
+<p class="foot">Changes are remembered on this phone.<br>
+  <a href="/jhpboudoir1/home-preview/">Home page</a> &nbsp;&middot;&nbsp;
+  <a href="/jhpboudoir1/about/">About page</a></p>
 
 <script>
 (function(){
 var CDN = 'assets/';
 
-/* Each band carries its natural pixel size because that is what decides which
-   way cover crops it, and therefore which of the two position sliders does
-   anything at a given height. `def` is what the live page uses today. */
-var BANDS = [
-  {id:'opener', label:'Opener', nat:[2000,1333],
-   src:['about-lead.jpg'],
-   def:{h:300,x:76,y:72}, range:[200,520],
-   plate:'bottom', title:'Meet Your Photographer'},
-
-  {id:'portrait', label:'Portrait of you', nat:[1100,1650],
-   src:['about-portrait.jpg'],
-   def:{h:437,x:50,y:20}, range:[260,660]},
-
-  {id:'frames', label:'Your session', nat:[2000,1333],
-   src:['about-wide-1.jpg',
-        'about-wide-2.jpg',
-        'about-cta.jpg'],
-   def:{h:260,x:50,y:50}, range:[150,430]},
-
-  {id:'closing', label:'Closing band', nat:[2000,1331],
-   src:['about-cta.jpg'],
-   def:{h:277,x:64,y:46}, range:[190,500],
-   plate:'mid', title:'If You Read This Far, We’d Get Along'}
+/* cols/gap/pad mirror how each band is actually laid out on a phone, so a
+   three-across row previews at the width the page really gives it. def is
+   what the live page does today. Natural image size is read off the loaded
+   file rather than written down here - it is the one number that decides
+   which way cover crops, and getting it wrong silently would be worse than
+   not knowing it. */
+var PAGES = [
+ {id:'home', label:'Home page', bands:[
+   {id:'hero', label:'Hero', src:['hero.jpg'],
+    cols:1, gap:0, pad:0, def:{h:625,x:46,y:50}, range:[280,760],
+    plate:'hero', eb:'Jefferson City, Missouri',
+    title:'Central Missouri’s Premier Boudoir Studio'},
+   {id:'trio', label:'Three portraits',
+    src:['empower-1.jpg','empower-2.jpg',
+         'empower-3.jpg'],
+    cols:3, gap:8, pad:20, def:{h:168,x:50,y:50}, range:[110,300]},
+   {id:'jess', label:'Portrait of you', src:['jess.jpg'],
+    cols:1, gap:0, pad:20, def:{h:527,x:50,y:50}, range:[300,700]},
+   {id:'mission', label:'Mission pair',
+    src:['before.jpg','after.jpg'],
+    cols:2, gap:14, pad:20, def:{h:253,x:50,y:50}, range:[160,420]},
+   {id:'reviews', label:'Review photos',
+    src:['review-1.jpg','review-2.jpg',
+         'review-3.jpg'],
+    cols:1, gap:20, pad:20, def:{h:232,x:50,y:50}, range:[140,400]},
+   {id:'optin', label:'Sign-up picture', src:['optin.jpg'],
+    cols:1, gap:0, pad:0, def:{h:259,x:50,y:50}, range:[150,440]}
+ ]},
+ {id:'about', label:'About page', bands:[
+   {id:'opener', label:'Opener', src:['about-lead.jpg'],
+    cols:1, gap:0, pad:0, def:{h:200,x:50,y:62}, range:[140,420],
+    plate:'bottom', title:'Meet Your Photographer'},
+   {id:'portrait', label:'Portrait of you',
+    src:['about-portrait.jpg'],
+    cols:1, gap:0, pad:0, def:{h:503,x:50,y:59}, range:[300,680]},
+   {id:'frames', label:'Your session',
+    src:['about-wide-1.jpg',
+         'about-wide-2.jpg',
+         'about-wide-3.jpg'],
+    cols:1, gap:12, pad:0, def:{h:260,x:50,y:50}, range:[150,430]},
+   {id:'closing', label:'Closing band',
+    src:['about-cta.jpg'],
+    cols:1, gap:0, pad:0, def:{h:190,x:64,y:16}, range:[150,420],
+    plate:'mid', title:'If You Read This Far, We’d Get Along'}
+ ]}
 ];
 
-var KEY = 'jhp-crop-v1';
+var KEY = 'jhp-crop-v2';
 var state = {};
-try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e) { state = {}; }
-
-BANDS.forEach(function(b){
-  if (!state[b.id]) state[b.id] = {h:b.def.h, x:b.def.x, y:b.def.y};
+try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){ state = {}; }
+PAGES.forEach(function(pg){
+  pg.bands.forEach(function(b){
+    var k = pg.id + '.' + b.id;
+    if (!state[k]) state[k] = {h:b.def.h, x:b.def.x, y:b.def.y};
+  });
 });
 
-var cur = BANDS[0];
+var curPage = PAGES[0], cur = curPage.bands[0];
 var $ = function(id){ return document.getElementById(id); };
 var stage = $('stage'), hint = $('hint');
+var key = function(){ return curPage.id + '.' + cur.id; };
 
-function save(){
-  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e) {}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){} }
+
+function tileW(){
+  var W = window.innerWidth;
+  return (W - cur.pad*2 - cur.gap*(cur.cols-1)) / cur.cols;
 }
 
-/* Which way cover crops, at this width and this height. If the box is wider
-   than the photo's own shape the whole height shows and only x can move it;
-   if it is taller, the reverse. This is what greys out the dead slider. */
-function slack(b, h){
-  var W = stage.clientWidth || window.innerWidth;
-  var s = Math.max(W / b.nat[0], h / b.nat[1]);
-  return {x: Math.round(b.nat[0]*s - W), y: Math.round(b.nat[1]*s - h)};
+/* How much of the photo is off the edges, per axis, at this tile size. Read
+   from the loaded image so it is right even for files whose size I never
+   looked up. Zero natural size means it has not decoded yet. */
+function slack(h){
+  var img = stage.querySelector('.band img');
+  if (!img || !img.naturalWidth) return {x:0,y:0,ready:false};
+  var w = tileW();
+  var s = Math.max(w/img.naturalWidth, h/img.naturalHeight);
+  return {x:Math.round(img.naturalWidth*s - w),
+          y:Math.round(img.naturalHeight*s - h), ready:true};
+}
+
+function buildPager(){
+  var el = $('pager'); el.innerHTML = '';
+  PAGES.forEach(function(pg){
+    var b = document.createElement('button');
+    b.type='button'; b.textContent = pg.label;
+    b.setAttribute('aria-selected', pg.id===curPage.id ? 'true':'false');
+    b.addEventListener('click', function(){
+      curPage = pg; cur = pg.bands[0]; buildPager(); buildTabs(); paint(true); });
+    el.appendChild(b);
+  });
 }
 
 function buildTabs(){
-  var t = $('tabs');
-  t.innerHTML = '';
-  BANDS.forEach(function(b){
+  var t = $('tabs'); t.innerHTML = '';
+  curPage.bands.forEach(function(b){
     var el = document.createElement('button');
-    el.type = 'button';
-    el.textContent = b.label;
-    el.setAttribute('role','tab');
-    el.setAttribute('aria-selected', b.id === cur.id ? 'true' : 'false');
+    el.type='button'; el.textContent = b.label; el.setAttribute('role','tab');
+    el.setAttribute('aria-selected', b.id===cur.id ? 'true':'false');
     el.addEventListener('click', function(){ cur = b; buildTabs(); paint(true); });
     t.appendChild(el);
   });
 }
 
 function paint(rebuild){
-  var st = state[cur.id];
+  var st = state[key()];
 
   if (rebuild){
     stage.innerHTML = '';
+    stage.style.setProperty('--cols', cur.cols);
+    stage.style.setProperty('--gap', cur.gap + 'px');
+    stage.style.setProperty('--pad', cur.pad + 'px');
     cur.src.forEach(function(file, i){
       var band = document.createElement('div');
       band.className = 'band';
       var img = document.createElement('img');
-      img.src = CDN + file;
-      img.alt = '';
+      img.src = CDN + file; img.alt = '';
+      img.addEventListener('load', function(){ paint(false); });
       band.appendChild(img);
       if (cur.plate && i === 0){
         var p = document.createElement('div');
-        p.className = 'plate' + (cur.plate === 'mid' ? ' mid' : '');
-        p.innerHTML = '<h2></h2>';
-        p.querySelector('h2').textContent = cur.title;
+        p.className = 'plate' + (cur.plate === 'mid' ? ' mid'
+                               : cur.plate === 'hero' ? ' hero' : '');
+        if (cur.eb){ var e = document.createElement('p');
+          e.className='eb'; e.textContent = cur.eb; p.appendChild(e); }
+        var h = document.createElement('h2'); h.textContent = cur.title;
+        p.appendChild(h);
         band.appendChild(p);
       }
       stage.appendChild(band);
@@ -259,74 +315,76 @@ function paint(rebuild){
   }
 
   [].forEach.call(stage.querySelectorAll('.band'), function(el){
-    el.style.height = st.h + 'px';
-  });
+    el.style.height = st.h + 'px'; });
   [].forEach.call(stage.querySelectorAll('.band img'), function(el){
-    el.style.objectPosition = st.x + '% ' + st.y + '%';
-  });
+    el.style.objectPosition = st.x + '% ' + st.y + '%'; });
 
-  var sl = slack(cur, st.h);
+  var sl = slack(st.h);
   $('sH').min = cur.range[0]; $('sH').max = cur.range[1];
   $('sH').value = st.h; $('sX').value = st.x; $('sY').value = st.y;
   $('vH').textContent = st.h + 'px';
   $('vX').textContent = st.x + '%';
   $('vY').textContent = st.y + '%';
 
-  var W = stage.clientWidth || window.innerWidth;
-  $('nH').textContent = 'On this screen, ' + W + 'px wide. '
-    + (cur.src.length > 1 ? 'Applies to all three.' : '');
+  var w = Math.round(tileW());
+  $('nH').textContent = (cur.cols > 1 || cur.src.length > 1
+      ? 'Each one, ' + w + 'px wide on this screen.'
+      : w + 'px wide on this screen.');
   $('rowX').className = 'row' + (sl.x > 2 ? '' : ' off');
   $('rowY').className = 'row' + (sl.y > 2 ? '' : ' off');
-  $('nX').textContent = sl.x > 2
-    ? sl.x + 'px of the photo is off-screen sideways, so this moves it.'
-    : 'Nothing to move sideways at this height — the whole width fits.';
-  $('nY').textContent = sl.y > 2
-    ? sl.y + 'px of the photo is off-screen top and bottom, so this moves it.'
-    : 'Nothing to move up or down at this height — the whole height fits.';
+  $('nX').textContent = !sl.ready ? 'Loading…'
+    : sl.x > 2 ? sl.x + 'px hangs off the sides, so this moves it.'
+    : 'Nothing to move sideways at this height.';
+  $('nY').textContent = !sl.ready ? 'Loading…'
+    : sl.y > 2 ? sl.y + 'px hangs off the top and bottom, so this moves it.'
+    : 'Nothing to move up or down at this height.';
 
   $('out').textContent = report();
 }
 
 function report(){
-  var W = stage.clientWidth || window.innerWidth;
-  var lines = ['screen ' + W + 'px wide'];
-  BANDS.forEach(function(b){
-    var s = state[b.id];
-    var same = (s.h === b.def.h && s.x === b.def.x && s.y === b.def.y);
-    lines.push(b.label.toLowerCase() + ': ' + s.h + 'px, ' + s.x + '% ' + s.y + '%'
-      + (same ? '  (unchanged)' : ''));
+  var lines = ['screen ' + window.innerWidth + 'px wide'];
+  PAGES.forEach(function(pg){
+    var any = pg.bands.some(function(b){
+      var s = state[pg.id + '.' + b.id];
+      return s.h !== b.def.h || s.x !== b.def.x || s.y !== b.def.y; });
+    lines.push('');
+    lines.push(pg.label.toUpperCase() + (any ? '' : '  (all unchanged)'));
+    pg.bands.forEach(function(b){
+      var s = state[pg.id + '.' + b.id];
+      var same = (s.h===b.def.h && s.x===b.def.x && s.y===b.def.y);
+      lines.push('  ' + b.label.toLowerCase() + ': ' + s.h + 'px, '
+        + s.x + '% ' + s.y + '%' + (same ? '  (unchanged)' : ''));
+    });
   });
   return lines.join('\n');
 }
 
 ['sH','sX','sY'].forEach(function(id){
   $(id).addEventListener('input', function(){
-    var st = state[cur.id];
-    if (id === 'sH') st.h = +this.value;
-    if (id === 'sX') st.x = +this.value;
-    if (id === 'sY') st.y = +this.value;
+    var st = state[key()];
+    if (id==='sH') st.h = +this.value;
+    if (id==='sX') st.x = +this.value;
+    if (id==='sY') st.y = +this.value;
     save(); paint(false);
   });
 });
 
-/* Dragging maps a finger's travel onto object-position as a share of the slack,
-   so the photo tracks the thumb one-to-one rather than at some invented rate.
-   With no slack on an axis the drag simply does nothing on it. */
 var drag = null;
 stage.addEventListener('pointerdown', function(e){
-  var st = state[cur.id];
-  drag = {px:e.clientX, py:e.clientY, x:st.x, y:st.y, sl:slack(cur, st.h)};
+  var st = state[key()];
+  drag = {px:e.clientX, py:e.clientY, x:st.x, y:st.y, sl:slack(st.h)};
   stage.setPointerCapture(e.pointerId);
   hint.style.opacity = '0';
 });
 stage.addEventListener('pointermove', function(e){
   if (!drag) return;
   e.preventDefault();
-  var st = state[cur.id];
+  var st = state[key()];
   if (drag.sl.x > 2)
-    st.x = Math.max(0, Math.min(100, drag.x - (e.clientX - drag.px) / drag.sl.x * 100));
+    st.x = Math.max(0, Math.min(100, drag.x - (e.clientX-drag.px)/drag.sl.x*100));
   if (drag.sl.y > 2)
-    st.y = Math.max(0, Math.min(100, drag.y - (e.clientY - drag.py) / drag.sl.y * 100));
+    st.y = Math.max(0, Math.min(100, drag.y - (e.clientY-drag.py)/drag.sl.y*100));
   st.x = Math.round(st.x); st.y = Math.round(st.y);
   paint(false);
 });
@@ -336,29 +394,27 @@ stage.addEventListener('pointermove', function(e){
 
 $('copy').addEventListener('click', function(){
   var txt = report(), btn = this;
-  var done = function(){ btn.textContent = 'Copied'; setTimeout(function(){
-    btn.textContent = 'Copy settings'; }, 1600); };
-  if (navigator.clipboard && navigator.clipboard.writeText){
-    navigator.clipboard.writeText(txt).then(done, function(){ fallback(txt, done); });
-  } else fallback(txt, done);
+  var done = function(){ btn.textContent='Copied'; setTimeout(function(){
+    btn.textContent='Copy settings'; }, 1600); };
+  if (navigator.clipboard && navigator.clipboard.writeText)
+    navigator.clipboard.writeText(txt).then(done, function(){ fallback(txt,done); });
+  else fallback(txt, done);
 });
 function fallback(txt, done){
   var ta = document.createElement('textarea');
-  ta.value = txt; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  ta.value = txt; ta.style.position='fixed'; ta.style.opacity='0';
   document.body.appendChild(ta); ta.select();
-  try { document.execCommand('copy'); done(); } catch(e) {}
+  try { document.execCommand('copy'); done(); } catch(e){}
   document.body.removeChild(ta);
 }
 
 $('reset').addEventListener('click', function(){
-  state[cur.id] = {h:cur.def.h, x:cur.def.x, y:cur.def.y};
+  state[key()] = {h:cur.def.h, x:cur.def.x, y:cur.def.y};
   save(); paint(false);
 });
-
 window.addEventListener('resize', function(){ paint(false); });
 
-buildTabs();
-paint(true);
+buildPager(); buildTabs(); paint(true);
 })();
 </script>
 </div>
