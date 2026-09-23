@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Band Tuner | JHP Boudoir</title>
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;padding:0;background:#13100E}body{overflow-x:hidden}</style>
+</head>
+<body>
+<div class="tn">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Jost:wght@300;400;500&display=swap');
+.tn{--ground:#13100E;--surface:#1C1714;--raised:#241D18;--ink:#F2ECE2;
+  --muted:#A99A86;--dim:#7D7161;--gold:#C9A24B;--gold-bright:#E6C576;
+  --line:rgba(201,162,75,.22);--line-soft:rgba(242,236,226,.09);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost',-apple-system,'Segoe UI',system-ui,sans-serif;
+  background:var(--ground);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  min-height:100vh;padding-bottom:40px}
+.tn *,.tn *::before,.tn *::after{box-sizing:border-box}
+.tn h1,.tn h2,.tn p{margin:0}
+.tn .head{text-align:center;padding:26px 20px 18px}
+.tn .head .k{font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold)}
+.tn .head h1{font-family:var(--serif);font-weight:500;font-size:34px;
+  line-height:1.1;margin:8px 0 0}
+.tn .head p{font-size:13.5px;color:var(--muted);margin-top:8px;
+  max-width:46ch;margin-inline:auto}
+.tn .switch{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;
+  padding:0 16px 14px}
+.tn .switch button{font-family:var(--sans);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--muted);background:transparent;
+  border:1px solid var(--line-soft);border-radius:2px;padding:10px 16px;
+  cursor:pointer;transition:all .25s}
+.tn .switch button[aria-pressed=true]{color:var(--ground);background:var(--gold);
+  border-color:var(--gold)}
+.tn .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
+.tn .stage{position:relative;overflow:hidden;background:var(--raised);
+  border:1px solid var(--line-soft);cursor:grab;touch-action:none;
+  margin:0 auto}
+.tn .stage.drag{cursor:grabbing}
+.tn .frame{position:absolute;top:0;left:0;transform-origin:top left;
+  overflow:hidden}
+.tn .frame img{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;display:block;filter:saturate(.96) contrast(1.02);
+  pointer-events:none;-webkit-user-drag:none;user-select:none}
+.tn .over{position:absolute;inset:0;display:flex;flex-direction:column;
+  pointer-events:none}
+.tn .over.center{align-items:center;justify-content:flex-end;text-align:center;
+  padding:0 60px 46px;
+  background:linear-gradient(0deg,rgba(19,16,14,.94) 0%,rgba(19,16,14,.78) 24%,
+    rgba(19,16,14,.34) 52%,rgba(19,16,14,.04) 82%)}
+.tn .over.left{align-items:flex-start;justify-content:center;text-align:left;
+  padding:0 74px;
+  background:linear-gradient(0deg,rgba(19,16,14,.8) 0%,rgba(19,16,14,.42) 55%,
+      rgba(19,16,14,.3) 100%),
+    linear-gradient(90deg,rgba(19,16,14,.72) 0%,rgba(19,16,14,.34) 38%,
+      rgba(19,16,14,0) 68%)}
+.tn .over .ek{font-family:var(--sans);font-size:11px;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.tn .over .tt{font-family:var(--serif);font-weight:500;font-size:46px;
+  line-height:1.1;max-width:24ch}
+.tn .over.left .tt{max-width:17ch;margin-bottom:8px}
+.tn .over .sub{font-family:var(--sans);font-weight:300;font-size:15.5px;
+  color:var(--muted);margin-bottom:22px}
+.tn .over .btn{align-self:flex-start;font-family:var(--sans);font-weight:500;
+  font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ground);background:var(--gold);padding:14px 28px;border-radius:2px}
+.tn .hint{position:absolute;left:50%;top:14px;transform:translateX(-50%);
+  font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--ink);background:rgba(19,16,14,.6);padding:7px 13px;
+  border-radius:2px;pointer-events:none;transition:opacity .4s;z-index:3}
+.tn .ctl{max-width:620px;margin:20px auto 0;padding:0 16px}
+.tn .row{margin-bottom:16px}
+.tn .lab{display:flex;justify-content:space-between;font-size:11px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+  margin-bottom:8px}
+.tn .lab span:last-child{color:var(--gold);letter-spacing:.08em}
+.tn input[type=range]{-webkit-appearance:none;appearance:none;width:100%;
+  background:transparent;margin:0;height:30px}
+.tn input[type=range]::-webkit-slider-runnable-track{height:2px;
+  background:var(--line)}
+.tn input[type=range]::-moz-range-track{height:2px;background:var(--line)}
+.tn input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:30px;
+  height:30px;border-radius:50%;background:var(--gold);border:none;
+  margin-top:-14px}
+.tn input[type=range]::-moz-range-thumb{width:30px;height:30px;border:none;
+  border-radius:50%;background:var(--gold)}
+.tn .note{font-size:11.5px;color:var(--dim);margin-top:6px}
+.tn .acts{display:flex;gap:10px;margin:22px 0 18px}
+.tn .acts button{flex:1;font-family:var(--sans);font-size:12px;
+  letter-spacing:.18em;text-transform:uppercase;padding:15px 10px;
+  border-radius:2px;cursor:pointer;border:1px solid var(--gold)}
+.tn .send{color:var(--ground);background:var(--gold)}
+.tn .ghost{color:var(--gold);background:transparent}
+.tn .out{border:1px solid var(--line-soft);border-radius:2px;
+  background:var(--surface);padding:14px 15px}
+.tn .out .t{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:8px}
+.tn pre{margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:11.5px;line-height:1.75;color:var(--muted);white-space:pre-wrap}
+.tn .pick{max-width:1180px;margin:26px auto 0;padding:0 16px}
+.tn .pick h2{font-family:var(--serif);font-weight:500;font-size:24px;
+  margin-bottom:10px}
+.tn select{font-family:var(--sans);font-size:14px;color:var(--ink);
+  background:var(--raised);border:1px solid var(--line);border-radius:2px;
+  padding:11px 12px;width:100%;max-width:420px}
+.tn .strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:10px;margin-top:14px}
+.tn .strip button{position:relative;padding:0;border:1px solid transparent;
+  background:var(--raised);border-radius:2px;overflow:hidden;cursor:pointer;
+  aspect-ratio:3/2}
+.tn .strip button[aria-pressed=true]{border-color:var(--gold)}
+.tn .strip img{width:100%;height:100%;object-fit:cover;display:block}
+.tn .strip .nm{position:absolute;left:0;right:0;bottom:0;font-family:var(--sans);
+  font-size:10px;letter-spacing:.1em;color:var(--ink);padding:14px 6px 5px;
+  background:linear-gradient(180deg,rgba(19,16,14,0),rgba(19,16,14,.8))}
+.tn .foot{text-align:center;font-size:11.5px;color:var(--dim);padding:30px 20px 0}
+.tn .foot a{color:var(--gold)}
+@media (prefers-reduced-motion:reduce){.tn *{transition:none!important}}
+</style>
+
+<div class="head">
+  <p class="k">JHP Boudoir</p>
+  <h1>Band Tuner</h1>
+  <p>The two photographs on the Portfolio page. Pick a frame, drag it to move
+     it, and slide to change the height. The words on top are the real ones,
+     at the real size, so what you see is what the page does. Then tap
+     <em>Copy settings</em> and paste it to me.</p>
+</div>
+
+<div class="switch" id="bandSw"></div>
+<div class="switch" id="viewSw">
+  <button data-v="desktop" aria-pressed="true">Desktop</button>
+  <button data-v="phone" aria-pressed="false">Phone</button>
+</div>
+
+<div class="wrap">
+  <div class="stage" id="stage">
+    <div class="hint" id="hint">Drag the photograph</div>
+    <div class="frame" id="frame"><img id="img" alt=""><div class="over" id="over"></div></div>
+  </div>
+</div>
+
+<div class="ctl">
+  <div class="row">
+    <div class="lab"><span>Height</span><span id="vH">&mdash;</span></div>
+    <input type="range" id="sH" aria-label="Height">
+    <p class="note" id="nH"></p>
+  </div>
+  <div class="row">
+    <div class="lab"><span>Left &ndash; right</span><span id="vX">&mdash;</span></div>
+    <input type="range" id="sX" min="0" max="100" step="1" aria-label="Across">
+    <p class="note" id="nX"></p>
+  </div>
+  <div class="row">
+    <div class="lab"><span>Up &ndash; down</span><span id="vY">&mdash;</span></div>
+    <input type="range" id="sY" min="0" max="100" step="1" aria-label="Up and down">
+    <p class="note" id="nY"></p>
+  </div>
+  <div class="acts">
+    <button class="send" id="copy">Copy settings</button>
+    <button class="ghost" id="reset">Reset this band</button>
+  </div>
+  <div class="out">
+    <div class="t">What I will apply</div>
+    <pre id="out"></pre>
+  </div>
+</div>
+
+<div class="pick">
+  <h2>Choose the photograph</h2>
+  <select id="grp" aria-label="Which set of photographs"></select>
+  <div class="strip" id="strip"></div>
+</div>
+
+<p class="foot">Your changes are remembered on this device.<br>
+  <a href="../portfolio/">The Portfolio page</a></p>
+
+<script>
+(function(){
+var CDN = 'https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/';
+var BANDS = [{"id":"top","label":"Top of the page","file":"6ab3ee808d8128ee4caa5fd3.jpg","name":"DSC_4553-BW","def":{"dw":37,"dx":50,"dy":34,"ph":340,"px":50,"py":30},"kicker":"Portfolio","title":"Take a look at the ones who came before you","align":"center"},{"id":"info","label":"The Info band","file":"6ab3ee7718384d888bb3d80d.jpg","name":"DSC_2043","def":{"dw":34,"dx":50,"dy":22,"ph":320,"px":50,"py":22},"kicker":"What’s included","title":"What Your Session Includes","sub":"From the first call to the final reveal.","cta":"Learn more","align":"left"}];
+var GROUPS = [{"name":"Website folder","items":[["6ab3ee3dec718870e138ecd3.jpg","DSC_0273-BW"],["6ab3ee3efef86e60d5226609.jpg","DSC_0511-BW"],["6ab3ee4018384d888bb3d12d.jpg","DSC_0630-BW"],["6ab3ee4218384d888bb3d179.jpg","DSC_0776-BW"],["6ab3ee468bf21de2ae407ab5.jpg","DSC_0927-BW"],["6ab3ee66fef86e60d5226c4e.jpg","DSC_1205-BW"],["6ab3ee688d8128ee4caa5d2e.jpg","DSC_1279-BW"],["6ab3ee6dc745ba551e348f67.jpg","DSC_1312-BW"],["6ab3ee6fec718870e138f320.jpg","DSC_1324-BW"],["6ab3ee738d8128ee4caa5e67.jpg","DSC_1803"],["6ab3ee75fef86e60d5226e19.jpg","DSC_1936-BW"],["6ab3ee768d8128ee4caa5f03.jpg","DSC_2030-BW"],["6ab3ee7718384d888bb3d80d.jpg","DSC_2043"],["6ab3ee79ec718870e138f42f.jpg","DSC_2236-BW"],["6ab3ee7bec718870e138f478.jpg","DSC_2702-BW"],["6ab3ee7f8d8128ee4caa5fbf.jpg","DSC_4505-BW"],["6ab3ee808d8128ee4caa5fd3.jpg","DSC_4553-BW"],["6ab3ee828bf21de2ae408336.jpg","DSC_4568-BW"],["6ab3ee828bf21de2ae408342.jpg","DSC_6722-BW"],["6ab3ee86fef86e60d5226fb9.jpg","DSC_8438-BW"],["6ab3ee8c8d8128ee4caa612d.jpg","DSC_8604-BW"],["6ab3ee8e8bf21de2ae4084c4.jpg","DSC_9236-BW"],["6ab3ee9118384d888bb3dac8.jpg","DSC_9309-BW"],["6ab3ee94b2c147832f66932d.jpg","DSC_9341-BW"]]},{"name":"Miss K — miss-k","items":[["f9de4c0c-ba8e-48bb-b559-a9a11beac76c.jpg","DSC_0031"],["9f1fc262-da9d-4d11-bd26-b6611457de66.jpg","DSC_3158"],["4f13aaa3-d73b-4c77-9879-25cee2ef85cb.jpg","DSC_3267"],["87bffd19-4979-4c04-acfc-d98e5d81f1d4.jpg","DSC_3288"],["968e3a4f-7517-4d3c-888a-5d27d495c860.jpg","DSC_3304"],["5646ce67-fe9d-4a67-93eb-3139511db94d.jpg","DSC_3380"],["339e8a28-c69d-4a2e-b8ed-0d794c94593f.jpg","DSC_3476"],["111088ec-e685-41e0-9a5e-4f85e6eae5b7.jpg","DSC_3642"],["9cae59b9-cf07-4eaa-ae03-46a91ecfecf0.jpg","DSC_3688"],["ca084190-e68e-4aa4-8199-4ab253bb3448.jpg","DSC_9865"]]},{"name":"Miss K — miss-k-2","items":[["31d25310-5201-4208-9c1f-851fa9b3396c.jpg","DSC_0978"],["59e55be6-e1c1-40c2-b680-80f2e59935f2.jpg","DSC_1050"],["5a0ce3ad-ebae-4164-a984-8ec4b8ee6464.jpg","DSC_1101"],["89263bf0-e9e1-466c-bc2c-15a3ef0a23a2.jpg","DSC_1109"],["445ea1a6-73da-457a-b04f-9ee0bf2c37b1.jpg","DSC_1149"],["93f69d04-91ee-4dbb-ae40-fc251cd4ba14.jpg","DSC_1296"],["4716023c-e3c6-4092-bbe1-e87dfc670de9.jpg","DSC_1301"],["bcccd582-d5dc-4ff6-a125-325d25ea7e37.jpg","DSC_1308"]]},{"name":"Miss A — miss-a","items":[["4658db4c-10a8-4a66-9668-be17cd9b2446.jpg","DSC_0258-BW"],["539a4153-27fe-4052-ac38-b29a83b2f08d.jpg","DSC_0361-BW"],["9c98f657-389c-423a-b9ee-a96dae308e03.jpg","DSC_0378-BW"],["1b359085-f63d-4012-baab-a15cdcd11e83.jpg","DSC_0402-BW"],["678293dc-8167-4463-a41b-8a20bfaee783.jpg","DSC_0472-BW"],["d445399a-272f-4c98-b850-dff4f1c2e344.jpg","DSC_0487-BW"],["961d576f-58ff-439c-8ec0-24189055a29a.jpg","DSC_0511-BW"],["6a2e52f3-5251-4dc9-8fb7-d04a7b57a60b.jpg","DSC_0532-BW"],["2cd0d6d3-4add-4c30-ab9c-908cdac4c768.jpg","DSC_0579-BW"],["e97887f5-3339-4512-afe8-cc9c39dbe7b2.jpg","DSC_0630-BW"],["2b4d228c-6db8-499f-b4ab-d1f82f8864d9.jpg","DSC_0633-BW"]]},{"name":"Miss S — miss-s","items":[["bb39fdd4-bba3-44e0-85ab-abc659310563.jpg","DSC_9119-BW"],["86b12e76-13a0-4bb2-8d4e-4de14a88fce3.jpg","DSC_9143-BW"],["ae1a19f7-af39-428c-8a4b-fbc9ea507f3b.jpg","DSC_9158-BW"],["96944810-5683-4599-9f6c-433e00538b08.jpg","DSC_9178-BW"],["a54d0afc-f504-4944-90b2-676be92b819a.jpg","DSC_9209-BW"],["a973519b-d1d0-4448-a749-a1cf175116a1.jpg","DSC_9266-BW"],["1f13b9e2-4d0e-44be-830d-752b24c0f9ee.jpg","DSC_9277-BW"],["fa017ef4-ffb7-4415-92d5-a76760f916a3.jpg","DSC_9280-BW"],["d152c940-a1c4-4618-980c-30dd57cdf676.jpg","DSC_9284-BW"],["31196c8e-202f-429f-bbcd-7134a55a8caa.jpg","DSC_9309-BW"],["3bb651bb-686b-45bb-8585-166b4c129dcc.jpg","DSC_9334-BW"],["2024e568-713b-46a9-826b-9c2b59a02389.jpg","DSC_9341-BW"]]},{"name":"Miss S — miss-s-2","items":[["58c9091c-f82d-441c-866c-0e314c9c63be.jpg","DSC_3416"],["849f4004-8fc9-45f9-8423-bee3d6a70579.jpg","DSC_3456"],["958c1b0e-53b1-4d18-b5ed-7b4b2ae1ccc5.jpg","DSC_6294-BW"],["0508d94b-359f-4108-b7a0-606ae0d62b86.jpg","DSC_6443-BW"],["d6c96166-d29e-45c6-9784-c3a296e0354c.jpg","DSC_6621-BW"],["06bc953e-5308-426a-b233-148b188615f8.jpg","DSC_7910"],["098f0f35-8591-4419-a442-a9ab15cda198.jpg","DSC_8161"],["0b23ce94-efdd-41e9-9976-3a27e895c451.jpg","DSC_8295"],["ee4ca777-4556-4c08-bcc7-9a266e1b8f34.jpg","DSC_8323"],["397cc15d-a867-4127-ad38-f5639991923a.jpg","DSC_8357"]]},{"name":"Miss T — miss-t","items":[["9046eb81-ab96-4074-a4ba-3165318905fb.jpg","DSC_1045-BW"],["80df5d3e-43e6-4eb5-84c2-673a346bbec3.jpg","DSC_1056-BW"],["b3b421b2-9d59-410f-bec8-d57bf4efdad8.jpg","DSC_1123-BW"],["3e609494-ded6-4bab-b31c-755449e3c004.jpg","DSC_1205-BW"],["ce79ce12-548d-4471-b9b2-282da4e1c2e9.jpg","DSC_1279-BW"],["92138463-6253-40ca-a072-7005daa9d96a.jpg","DSC_1312-BW"],["1ab7f22b-d658-4b14-939c-4e51cf578306.jpg","DSC_1324-BW"],["6534200a-d8d2-49c0-ab71-dec4207da0b3.jpg","DSC_1347-BW"],["d75c7ea3-fcb9-40d1-afa3-9cecb65a18c9.jpg","DSC_1386-BW"]]},{"name":"Miss J — miss-j","items":[["787efe63-665d-4fb1-9592-18387a23a1a5.jpg","DSC_1897-BW"],["0dce95dc-0bf1-45b4-8894-758a9b8b7f4c.jpg","DSC_1909-BW"],["56a80874-333f-46ed-b43b-7a9192a30391.jpg","DSC_1919-BW"],["9e0f9991-50ec-4e36-a932-7703bd83a427.jpg","DSC_1927-BW"],["78e3da43-f19a-4c5b-a450-c76cd27ad02f.jpg","DSC_1936-BW"],["0386b0d7-84ce-42fe-acf8-29991035d624.jpg","DSC_1952-BW"],["f38d849f-8d2a-4a14-aa75-c48e19be4eff.jpg","DSC_1996-BW"],["80c6df72-a86f-4f4b-8aa6-57c57947eece.jpg","DSC_2030-BW"],["e35d0154-8f72-466d-9021-ded7ec9e732a.jpg","DSC_2050-BW"],["3092823b-efc9-44f8-97ef-b73b65d8ae2f.jpg","DSC_2236-BW"]]},{"name":"Miss P — miss-p","items":[["0057316f-fdd7-4d44-8c79-371c0ca7dcaa.jpg","DSC_0675-BW"],["8a91728b-dbb1-4728-8eb5-7361f93c0611.jpg","DSC_0726-BW"],["cc59046e-9c15-41ea-9c2d-a46d9e12da42.jpg","DSC_0776-BW"],["538477d1-c964-4c26-babe-89e797786880.jpg","DSC_0807-BW"],["efe22738-f7c6-46fe-8ddb-026cb92b1f03.jpg","DSC_0817-BW"],["adac48d8-f4b9-47f9-b8ae-2bd8648dda53.jpg","DSC_0863-BW"],["124ed6c5-19bc-42f6-aa51-19cbdbdc02be.jpg","DSC_0872-BW"],["ee6ad307-bf10-4c16-b32a-3b904f9a7cc0.jpg","DSC_0901-BW"],["f7fbfbb3-5380-4094-85e1-8699a3ff59b9.jpg","DSC_0927-BW"],["18ddcc48-1d6c-471f-9bb1-5c5ba7d34a51.jpg","DSC_0938-BW"],["8b4ec950-ae3c-47cc-b91e-22dec0695652.jpg","DSC_0946-BW"],["f29ec40b-fff2-4dfc-8874-cf8bb54ab700.jpg","DSC_0959-BW"],["25391b31-9287-4bd5-b9e1-9cb91b114474.jpg","DSC_0979-BW"]]},{"name":"Miss E — miss-e","items":[["fe2033e0-3571-441e-8c98-089358e06f10.jpg","DSC_1755"],["3c79d8b4-6604-49c1-a18f-b75f2df6a13d.jpg","DSC_1761"],["8ca0ed15-2374-45e9-9dc8-7217355b7711.jpg","DSC_1794"],["7777176f-8a26-4a9c-a860-9beddecad465.jpg","DSC_1808"],["02ef9739-c960-4bec-bd86-158582bc3635.jpg","DSC_1885"],["a49b539c-efd1-4cee-91e9-0adaaf4f733c.jpg","DSC_2000"],["ef0725c4-a930-45c6-b3c6-75e23806e317.jpg","DSC_2043"],["04a9a7bd-5d0a-446a-b97d-3fd50075c535.jpg","DSC_2086"]]},{"name":"Miss V — miss-v","items":[["ccf4123c-1072-4d3f-a7f5-34f78e7a31de.jpg","DSC_7238"],["cedf6df5-7f30-4461-90a5-b83d2bc9351b.jpg","DSC_7245"],["cc3fcce9-b0fe-40a5-b109-e74010e4ebee.jpg","DSC_7260"],["e62565c9-be52-4456-91b0-b63598200d6b.jpg","DSC_7266"],["b95af7db-20c2-46bc-b245-c2a029524f44.jpg","DSC_7274"],["1d6d5e7e-7f3d-490b-9883-371ecaa5f1d0.jpg","DSC_7307"],["5b8e5b74-d59a-4a27-84f1-d1aa04522be4.jpg","DSC_7432"],["25994089-f2cf-4d1c-8b9b-dc69b025e055.jpg","DSC_7695"]]},{"name":"Miss M — miss-m","items":[["0fdb17d5-6ba5-4265-bc97-c5e24b27145a.jpg","DSC_7267-BW"],["473b2ea3-52b8-4ccb-b971-1eca57d180bb.jpg","DSC_7354-BW"],["75fa539d-9493-4c5a-8119-200b913c1d13.jpg","DSC_7376-BW"],["b50cc3f3-4983-4eb6-b738-5c61b94188d1.jpg","DSC_7404-BW"],["b4a72aea-672e-4acf-a066-5d33f18b2f65.jpg","DSC_7462-BW"],["6364d32b-08c1-4b14-a952-7da9abf15927.jpg","DSC_7465-BW"],["4e983ade-7381-40d6-be53-5b40f5065800.jpg","DSC_7479-BW"],["18226c6b-9f06-4a25-bb29-8d5cdfa53189.jpg","DSC_7562-BW"]]},{"name":"Miss H — miss-h","items":[["6e2048c7-d0cc-42b7-b5b2-7794a85a898c.jpg","DSC_6087-BW"],["a9a16a2d-2fe5-4ab6-879b-1fab9f3f6896.jpg","DSC_6110-BW"],["0e28f5a0-e4e4-4405-a152-4ee646395c3e.jpg","DSC_6169-BW"],["9cf5e3f2-9f5e-4e21-904d-0655e516571b.jpg","DSC_6199-BW"],["8b97e6f2-a565-43cd-80fc-e34def7baa57.jpg","DSC_6203-BW"],["e92df05a-548b-4953-af93-e9abd173cdfc.jpg","DSC_6211-BW"],["bcda8ff5-025b-4351-baa3-c56d57fde5ca.jpg","DSC_6278-BW"],["8737c7d5-b248-41ba-80fc-54fa73952d8f.jpg","DSC_6413-BW"]]}];
+var KEY = 'jhp-band-tuner-v1';
+
+var state = {};
+try { state = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch(e){}
+BANDS.forEach(function(b){
+  if (!state[b.id]) state[b.id] = {file:b.file, name:b.name,
+    dw:b.def.dw, dx:b.def.dx, dy:b.def.dy,
+    ph:b.def.ph, px:b.def.px, py:b.def.py};
+});
+var save = function(){ try{ localStorage.setItem(KEY, JSON.stringify(state)); }catch(e){} };
+
+var $ = function(id){ return document.getElementById(id); };
+var band = BANDS[0], view = 'desktop';
+/* 1440 is the laptop the page is usually judged on; 390 is her phone. The
+   preview is drawn at those widths and scaled down to fit, so nothing here
+   is an approximation of the crop -- only of the screen. */
+var REAL = {desktop:1440, phone:390};
+
+function st(){ return state[band.id]; }
+function isDesk(){ return view === 'desktop'; }
+function heightPx(){
+  var s = st();
+  if (!isDesk()) return s.ph;
+  return Math.max(320, Math.min(600, REAL.desktop * s.dw / 100));
+}
+function pos(){ var s = st(); return isDesk() ? [s.dx, s.dy] : [s.px, s.py]; }
+function setPos(x, y){
+  var s = st();
+  if (isDesk()) { s.dx = x; s.dy = y; } else { s.px = x; s.py = y; }
+}
+
+function draw(){
+  var s = st(), W = REAL[view], H = heightPx();
+  var avail = $('stage').parentNode.clientWidth - 32;
+  var scale = Math.min(1, avail / W);
+  $('stage').style.width = Math.round(W * scale) + 'px';
+  $('stage').style.height = Math.round(H * scale) + 'px';
+  var f = $('frame');
+  f.style.width = W + 'px'; f.style.height = H + 'px';
+  f.style.transform = 'scale(' + scale + ')';
+  $('img').src = CDN + s.file;
+  var p = pos();
+  $('img').style.objectPosition = p[0] + '% ' + p[1] + '%';
+
+  var o = $('over');
+  o.className = 'over ' + band.align;
+  var html = '<p class="ek">' + band.kicker + '</p>' +
+             '<p class="tt">' + band.title + '</p>';
+  if (band.sub) html += '<p class="sub">' + band.sub + '</p>';
+  if (band.cta) html += '<span class="btn">' + band.cta + '</span>';
+  o.innerHTML = html;
+
+  $('sH').min = isDesk() ? 20 : 220;
+  $('sH').max = isDesk() ? 55 : 560;
+  $('sH').step = 1;
+  $('sH').value = isDesk() ? s.dw : s.ph;
+  $('vH').textContent = isDesk()
+    ? s.dw + '% of the screen (' + Math.round(H) + 'px here)'
+    : s.ph + 'px';
+  $('sX').value = p[0]; $('vX').textContent = p[0] + '%';
+  $('sY').value = p[1]; $('vY').textContent = p[1] + '%';
+  notes(W, H);
+  out();
+}
+
+/* How much room the crop actually has. A frame wider than its box only
+   moves sideways; one taller than its box only moves up and down. Saying
+   so stops a slider that does nothing from looking broken. */
+function notes(W, H){
+  var im = $('img');
+  var iw = im.naturalWidth, ih = im.naturalHeight;
+  if (!iw) { $('nX').textContent = $('nY').textContent = ''; return; }
+  var sc = Math.max(W / iw, H / ih);
+  var ox = Math.round(iw * sc - W), oy = Math.round(ih * sc - H);
+  $('nH').textContent = isDesk()
+    ? 'A share of the screen width, which is what the page uses.'
+    : 'A flat height, the way the page sets it on a phone.';
+  $('nX').textContent = ox > 2
+    ? Math.round(ox) + 'px of the photograph is off the sides here.'
+    : 'Nothing to move sideways at this height.';
+  $('nY').textContent = oy > 2
+    ? Math.round(oy) + 'px of the photograph is off the top and bottom.'
+    : 'Nothing to move up or down at this height.';
+}
+
+function out(){
+  var t = [];
+  BANDS.forEach(function(b){
+    var s = state[b.id];
+    t.push(b.label.toUpperCase());
+    t.push('  photo: ' + s.name + '  [' + s.file + ']');
+    t.push('  desktop: height ' + s.dw + '% of width, crop ' + s.dx +
+           '% across / ' + s.dy + '% down');
+    t.push('  phone:   height ' + s.ph + 'px, crop ' + s.px +
+           '% across / ' + s.py + '% down');
+  });
+  $('out').textContent = t.join('\n');
+}
+
+/* Drag. The pointer moves in screen pixels, the crop moves in percent of
+   whatever is hanging off the edge, and the preview is scaled -- so the
+   delta is divided by the scale before it is turned into percent. */
+var drag = null;
+$('stage').addEventListener('pointerdown', function(e){
+  var im = $('img'), W = REAL[view], H = heightPx();
+  var sc = Math.max(W / im.naturalWidth, H / im.naturalHeight);
+  var p = pos();
+  drag = {x:e.clientX, y:e.clientY, px:p[0], py:p[1],
+          ox:im.naturalWidth * sc - W, oy:im.naturalHeight * sc - H,
+          s:Math.min(1, ($('stage').parentNode.clientWidth - 32) / W)};
+  $('stage').setPointerCapture(e.pointerId);
+  $('stage').classList.add('drag');
+  $('hint').style.opacity = 0;
+});
+$('stage').addEventListener('pointermove', function(e){
+  if (!drag) return;
+  var dx = (e.clientX - drag.x) / drag.s, dy = (e.clientY - drag.y) / drag.s;
+  var nx = drag.ox > 2 ? drag.px - dx / drag.ox * 100 : drag.px;
+  var ny = drag.oy > 2 ? drag.py - dy / drag.oy * 100 : drag.py;
+  setPos(Math.max(0, Math.min(100, Math.round(nx))),
+         Math.max(0, Math.min(100, Math.round(ny))));
+  save(); draw();
+});
+['pointerup','pointercancel'].forEach(function(ev){
+  $('stage').addEventListener(ev, function(){ drag = null;
+    $('stage').classList.remove('drag'); });
+});
+
+$('sH').addEventListener('input', function(){
+  var v = +this.value; if (isDesk()) st().dw = v; else st().ph = v;
+  save(); draw();
+});
+$('sX').addEventListener('input', function(){
+  var p = pos(); setPos(+this.value, p[1]); save(); draw();
+});
+$('sY').addEventListener('input', function(){
+  var p = pos(); setPos(p[0], +this.value); save(); draw();
+});
+$('reset').addEventListener('click', function(){
+  state[band.id] = {file:band.file, name:band.name, dw:band.def.dw,
+    dx:band.def.dx, dy:band.def.dy, ph:band.def.ph, px:band.def.px,
+    py:band.def.py};
+  save(); draw(); strip();
+});
+$('copy').addEventListener('click', function(){
+  var txt = $('out').textContent, b = this;
+  var done = function(){ b.textContent = 'Copied'; setTimeout(function(){
+    b.textContent = 'Copy settings'; }, 1600); };
+  if (navigator.clipboard) navigator.clipboard.writeText(txt).then(done, done);
+  else { var t = document.createElement('textarea'); t.value = txt;
+    document.body.appendChild(t); t.select(); document.execCommand('copy');
+    document.body.removeChild(t); done(); }
+});
+
+var sw = $('bandSw');
+BANDS.forEach(function(b, i){
+  var el = document.createElement('button');
+  el.textContent = b.label;
+  el.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+  el.addEventListener('click', function(){
+    band = b;
+    [].forEach.call(sw.children, function(c){
+      c.setAttribute('aria-pressed', c === el ? 'true' : 'false'); });
+    draw(); strip();
+  });
+  sw.appendChild(el);
+});
+[].forEach.call($('viewSw').children, function(el){
+  el.addEventListener('click', function(){
+    view = el.dataset.v;
+    [].forEach.call($('viewSw').children, function(c){
+      c.setAttribute('aria-pressed', c === el ? 'true' : 'false'); });
+    draw();
+  });
+});
+
+GROUPS.forEach(function(g, i){
+  var op = document.createElement('option');
+  op.value = i; op.textContent = g.name + ' (' + g.items.length + ')';
+  $('grp').appendChild(op);
+});
+function strip(){
+  var g = GROUPS[+$('grp').value || 0], host = $('strip');
+  host.innerHTML = '';
+  g.items.forEach(function(it){
+    var b = document.createElement('button');
+    b.setAttribute('aria-pressed', it[0] === st().file ? 'true' : 'false');
+    b.innerHTML = '<img loading="lazy" src="' + CDN + it[0] + '" alt="">' +
+                  '<span class="nm">' + it[1] + '</span>';
+    b.addEventListener('click', function(){
+      st().file = it[0]; st().name = it[1]; save(); draw(); strip();
+    });
+    host.appendChild(b);
+  });
+}
+$('grp').addEventListener('change', strip);
+
+$('img').addEventListener('load', function(){ notes(REAL[view], heightPx()); });
+window.addEventListener('resize', draw);
+draw(); strip();
+})();
+</script>
+</div>
+</body>
+</html>
