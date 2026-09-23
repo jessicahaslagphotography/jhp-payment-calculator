@@ -261,7 +261,9 @@
   grid-template-columns:minmax(0,1.7fr) minmax(0,1fr) minmax(0,1.15fr);
   gap:clamp(26px,4vw,56px);max-width:1120px;margin:0 auto;align-items:start}
 .jhp-home .jhp-foot .logo-mark{display:inline-block;margin:0 0 20px}
-.jhp-home .jhp-foot .logo-mark img{width:auto;height:clamp(74px,7vw,94px);
+/* The real mark is 300x100, so it is held to 48px tall (144px wide, 288
+   device pixels at 2x) to stay inside its own resolution. */
+.jhp-home .jhp-foot .logo-mark img{width:auto;height:clamp(38px,3.6vw,48px);
   max-width:100%;filter:none}
 .jhp-home .jhp-foot .blurb{font-family:var(--sans);font-weight:300;font-size:15px;
   line-height:1.8;color:var(--muted);margin:0;max-width:44ch}
@@ -499,14 +501,18 @@
   <div class="cols">
 
     <div>
-      <!-- JHP 1 (1).png, 1080x1080 with a real alpha channel. -->
+      <!-- The flat vector-style mark: 82% of its pixels are fully transparent
+           and it holds only 71 distinct colours, so it is artwork, not a photo.
+           JHP 1 (1).png was tried here first and measured photographic — 10,731
+           colours and 41% partial transparency — which is why it is not used. -->
       <a class="logo-mark" href="/" aria-label="JHP Boudoir, home">
-        <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/68805f8f8ffd9ed471b8be66.png" alt="JHP Boudoir" width="1080" height="1080">
+        <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/b417d121-14dd-4baf-aa83-04fbd7d305bf.png" alt="JHP Boudoir" width="300" height="100">
       </a>
-      <p class="blurb">A boudoir photography studio in Jefferson City, Missouri,
-         working with women from across central Missouri. Sessions are fully
-         guided, so you are never left wondering what to do with your hands, and
-         you choose your images at a private one-on-one reveal.</p>
+      <p class="blurb">JHP Boudoir is a boudoir photography studio just outside
+         Jefferson City, Missouri, working with women from all across Missouri.
+         A luxury studio and an elevated experience from the first call to the
+         final reveal, proudly serving women of all walks of life and all bodies
+         since 2021.</p>
     </div>
 
     <nav aria-labelledby="ft-explore">
