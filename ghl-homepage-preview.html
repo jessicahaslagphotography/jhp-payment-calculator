@@ -258,23 +258,37 @@
 .jhp-home .jhp-foot .cols{display:grid;
   grid-template-columns:minmax(0,1.7fr) minmax(0,1fr) minmax(0,1.15fr);
   gap:clamp(26px,4vw,56px);max-width:1120px;margin:0 auto;align-items:start}
-/* Wordmark. jhp-logo-light.png, Jessica's own file from Drive, uploaded into
-   the GHL media library. It is colour type 2 (RGB, no alpha), so it carries a
-   solid canvas rather than transparency, and two independent partial decodes
-   both read that canvas as black with light grey lettering on it. So the canvas
-   is dropped out with mix-blend-mode:screen, which against --surface leaves
-   only the lettering: black blends to exactly the footer colour.
+/* Wordmark. jhp-logo.png, Jessica's own file from Drive, uploaded into the GHL
+   media library. NOT jhp-logo-light.png, which was tried first and is corrupt:
+   its IDAT chunk fails its CRC and 5,960 bytes of junk follow the image data,
+   so no browser will render it. This one passes every chunk CRC and decodes to
+   500x500 RGB - the JHP monogram in white on a solid black canvas, no alpha
+   channel. The canvas is dropped out with mix-blend-mode:screen, which against
+   --surface leaves only the lettering: black blends to exactly the footer
+   colour.
+
+   The artwork only occupies y 106-386 of the 500px square, so a plain 500x500
+   box would surround the mark with 21% dead space above and 23% below and push
+   the blurb down. The anchor is therefore a window .562 of the image's height -
+   the ink's exact share - with the image pulled up by .212 of it, the exact top
+   padding. overflow:hidden clips, and because it creates no stacking context
+   the blend still composites against the footer.
 
    The type styles stay on the anchor deliberately. If the image ever fails to
    load, the browser renders its alt text in them and the footer still has a
    wordmark instead of a broken-image icon. */
-.jhp-home .jhp-foot .logo-mark{display:inline-block;margin:0 0 20px;
+.jhp-home .jhp-foot .logo-mark{--logo-h:clamp(92px,9.5vw,112px);
+  display:block;width:fit-content;height:calc(var(--logo-h) * .562);
+  overflow:hidden;margin:0 0 20px;
   font-family:var(--serif);font-weight:500;font-size:clamp(25px,2.7vw,31px);
   letter-spacing:.15em;line-height:1;color:var(--gold);text-transform:uppercase;
   transition:color .3s,opacity .3s}
 .jhp-home .jhp-foot .logo-mark:hover{color:var(--gold-bright);opacity:.84}
-.jhp-home .jhp-foot .logo-mark img{width:auto;height:clamp(64px,7vw,84px);
-  max-width:100%;filter:none;mix-blend-mode:screen}
+.jhp-home .jhp-foot .logo-mark img{width:auto;height:var(--logo-h);max-width:none;
+  filter:none;mix-blend-mode:screen;margin-top:calc(var(--logo-h) * -.212)}
+@media (max-width:860px){
+  .jhp-home .jhp-foot .logo-mark{margin-left:auto;margin-right:auto}
+}
 .jhp-home .jhp-foot .blurb{font-family:var(--sans);font-weight:300;font-size:15px;
   line-height:1.8;color:var(--muted);margin:0;max-width:44ch}
 .jhp-home .jhp-foot h3{font-family:var(--sans);font-weight:400;font-size:11px;
@@ -520,7 +534,7 @@
 
     <div>
       <a class="logo-mark" href="/">
-        <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/e0933b17-dcaf-4699-9cf8-b4104745a65a.png"
+        <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/3933909c-0f61-45aa-a608-4790cf3af1d3.png"
              width="500" height="500" alt="JHP Boudoir">
       </a>
       <p class="blurb">JHP Boudoir is a boudoir photography studio just outside
