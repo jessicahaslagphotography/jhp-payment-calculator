@@ -72,6 +72,22 @@
 .jhp-home .jhp-nav a:hover{color:var(--gold)}
 .jhp-home .jhp-logo{font-family:var(--serif);font-size:22px;letter-spacing:.14em;
   color:var(--gold);text-transform:uppercase}
+/* Five items at 11px with .24em tracking measure 364px of ink before any gaps,
+   so on a phone the row wrapped and left "Book a Call" alone on a second line -
+   at 320px it stranded two. Shrinking the type enough to fit four links plus
+   the mark on one line meant 9px, which is too small to read in caps.
+
+   So it stops pretending to be a row. The mark takes a line of its own and the
+   four links fall into two even columns beneath it: a deliberate block rather
+   than a row that happens to have broken. Costs about 30px of height at the top
+   of the page and gives every link a 37px tap target, up from 19px. */
+@media (max-width:620px){
+  .jhp-home .jhp-nav{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;
+    padding:14px 18px 8px;justify-items:center;line-height:1.2}
+  .jhp-home .jhp-nav .jhp-logo{grid-column:1 / -1;order:-1;font-size:24px;
+    padding-bottom:6px}
+  .jhp-home .jhp-nav a{padding:11px 0;font-size:10.5px;letter-spacing:.2em}
+}
 
 /* ---------- closing band ---------- */
 .jhp-home .jhp-vip{background:var(--surface);border-top:1px solid var(--line);
@@ -194,6 +210,23 @@
   .jhp-home .jhp-pair{grid-template-columns:1fr;gap:12px;max-width:460px}
 }
 
+/* On a phone every photograph runs edge to edge and only the text keeps its
+   margins. Before this the opener and the closing band were full width while
+   the portrait and the three frames sat inset by 20px, so the page changed its
+   left edge four times on the way down - which is most of what made it feel
+   unsettled. The sections keep their padding; these two children step back out
+   of it by exactly half the difference between the content box and the
+   viewport, which is the padding, whatever the clamp resolves to. */
+@media (max-width:620px){
+  .jhp-home .jhp-intro .shot,
+  .jhp-home .jhp-pair{max-width:none;
+    margin-inline:calc((100% - 100vw) / 2);width:auto}
+  /* The portrait swaps its ratio box for a height at these widths. Held at
+     150% it tracked the width it had just been given, so a 619px phone would
+     have opened a 929px tower; 150vw is the same shape up to about 410px and
+     then stops. */
+  .jhp-home .jhp-intro .shot::before{padding-top:0;height:clamp(430px,150vw,620px)}
+}
 /* Footer. Three columns on desktop, a centred stack on a phone. No photos;
    the only image is the logo. */
 .jhp-home .jhp-foot{background:var(--surface);border-top:1px solid var(--line);
@@ -337,7 +370,7 @@
 
 <section class="jhp-sec">
   <div class="jhp-intro">
-    <figure class="shot" style="margin:0">
+    <figure class="shot">
       <img src="assets/about-portrait.jpg"
            alt="Jessica Haslag in the JHP Boudoir studio, holding her camera">
     </figure>
