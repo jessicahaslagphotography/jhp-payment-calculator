@@ -135,22 +135,24 @@
    the page title, so the intro below it does not repeat it: the kicker there
    gives her role and the heading gives her name, which is new information.
 
-   Cut to match the closing band at the foot of the page, so the page opens and
-   closes on the same shape. That band's height is padding plus three short
-   lines, which comes out at 277px on a phone and 332px at 1440 - near enough
-   flat across the whole range - so this one is driven off width rather than
-   height to track it: 300px up to about 1250px wide, then easing to 380.
+   A letterbox rather than the portrait it used to be, driven off width rather
+   than viewport height. 300px is the floor, which is where every phone lands;
+   above about 1200px it opens out to 25vw, capped at 440.
 
-   That makes it a letterbox rather than the portrait it used to be, and the
-   two ends of the range crop in opposite directions. On a phone the box is
-   wider than 3:2, so cover shows the full height of the frame and trims a
-   little off the sides - the x in object-position is what matters there. On a
-   desktop it is far wider, so cover shows the full width and takes a band out
-   of the middle - and there only the y matters. One pair of values has to
-   serve both. */
-.jhp-home .jhp-lead{position:relative;height:clamp(300px,24vw,380px);overflow:hidden}
+   Jessica set the desktop end herself on a 1728px screen: 433px tall with the
+   crop at 54%. 25vw puts it at 432 there. That deliberately runs taller than
+   the 332px closing band it used to match - her call, and the page still opens
+   and closes on the same letterbox shape, just not the same height.
+
+   The two ends of the range crop in opposite directions, which is why one pair
+   of values can serve both. On a phone the box is wider than 3:2, so cover
+   shows the full height of the frame and trims the sides - only the x moves
+   anything. On a desktop it is far wider, so cover shows the full width and
+   takes a band out of the middle - only the y moves anything. The 76% is the
+   phone's setting and the 54% is the desktop's; neither touches the other. */
+.jhp-home .jhp-lead{position:relative;height:clamp(300px,25vw,440px);overflow:hidden}
 .jhp-home .jhp-lead img{height:100%;max-height:none;object-fit:cover;
-  object-position:76% 72%}
+  object-position:76% 54%}
 .jhp-home .jhp-lead .plate{position:absolute;inset:0;display:flex;
   flex-direction:column;align-items:flex-start;justify-content:flex-end;
   padding:0 clamp(20px,5vw,60px) clamp(28px,4vw,48px);
