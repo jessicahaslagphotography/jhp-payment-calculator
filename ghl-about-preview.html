@@ -101,14 +101,27 @@
   /* Height, and the title sized against it. At 625px the opener took 74% of a
      390x844 phone - you scrolled a full screen before reaching a word of the
      page - and the 28px title read as a caption under all that photograph.
-     52vh lands it at 439px, a little over half the screen, which leaves the
-     first paragraph visible at the fold and lets the title come up to 35px.
 
-     The shorter box is also a better crop. A 3:2 frame squeezed into a tall
-     portrait keeps only ~42% of its width; at 439px it keeps 59%, so the
-     composition survives instead of being reduced to a fragment. */
-  .jhp-home .jhp-lead img{height:clamp(340px,52vh,460px);max-height:none;
-    object-position:84% 42%}
+     The band is built in two parts. --img-h is how tall the photograph is
+     drawn, and it is what sets the horizontal framing: object-fit cover scales
+     a 3:2 landscape to fill a portrait box, so a taller draw means a narrower
+     slice of the frame. 52vh (439px on a 390x844 phone) keeps 59% of the
+     width, enough for the composition to survive.
+
+     --crop-top is then taken off the top and nothing else: the band is that
+     much shorter, the image is pulled up by the same amount, and overflow
+     clips it. The top of this frame is bare floorboard and rug, so 13vh of it
+     is dead height; removing it brings the band to 329px, 39% of the screen,
+     without touching the framing or moving the title off the bottom edge.
+
+     It has to be done this way round rather than with object-position. The
+     photo is wider than the box at every height above 260px, so cover never
+     has any vertical overflow to shift - the whole height of the frame is
+     always on screen, and object-position:y has nothing to move. */
+  .jhp-home .jhp-lead{--img-h:clamp(340px,52vh,460px);--crop-top:clamp(84px,13vh,124px);
+    height:calc(var(--img-h) - var(--crop-top));overflow:hidden}
+  .jhp-home .jhp-lead img{height:var(--img-h);max-height:none;
+    object-position:84% 42%;margin-top:calc(var(--crop-top) * -1)}
   .jhp-home .jhp-lead h1{font-size:clamp(32px,9vw,40px);line-height:1.08}
   .jhp-home .jhp-lead .plate{padding:0 22px 34px}
 }
