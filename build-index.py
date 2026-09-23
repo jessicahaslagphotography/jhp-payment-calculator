@@ -69,7 +69,8 @@ def main():
     src = (ROOT / "scalogy-portfolio.html").read_text()
 
     # Swap the gallery CSS block.
-    a = src.index("/* THE GALLERY")
+    mark = "/* THE GALLERY" if "/* THE GALLERY" in src else "/* THE INDEX"
+    a = src.index(mark)
     b = src.index("/* The closing band carries no photograph.")
     src = src[:a] + GAL_CSS + src[b:]
     src = src.replace(
@@ -82,7 +83,7 @@ def main():
     for g in galleries:
         f, label, w, h = cover(g["photos"])
         cards.append(
-            '    <a href="/%s"><img src="%s%s" width="%d" height="%d"%s '
+            '    <a href="../%s/"><img src="%s%s" width="%d" height="%d"%s '
             'alt="%s &mdash; a boudoir session at JHP Boudoir">'
             '<span class="nm">%s</span></a>'
             % (g["slug"], CDN, f, w, h,

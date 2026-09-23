@@ -20,7 +20,8 @@ ROOT = pathlib.Path(__file__).resolve().parent
 src = (ROOT / "scalogy-portfolio.html").read_text()
 
 # Everything from the shared-system banner down to the gallery's own rules.
-head = src[:src.index("/* THE GALLERY")]
+MARK = "/* THE GALLERY" if "/* THE GALLERY" in src else "/* THE INDEX"
+head = src[:src.index(MARK)]
 tail = src[src.index("/* The closing band carries no photograph."):]
 shared_css = tail[:tail.index("</style>")]
 shared_css = shared_css[shared_css.index(".jhp-home .jhp-vip .jhp-h"):]
@@ -92,7 +93,7 @@ BODY = """
 {% for p in row %}      <figure style="flex:{{ p.ar }} 1 0"><img src="{{ cdn }}{{ p.file }}" width="{{ p.w }}" height="{{ p.h }}"{% if not (loop.first and loop.index0 == 0) %} loading="lazy"{% endif %} alt="{{ p.alt }}"></figure>
 {% endfor %}    </div>
 {% endfor %}  </div>
-  <a class="jhp-back" href="/portfolio">&larr; All sessions</a>
+  <a class="jhp-back" href="../portfolio/">&larr; All sessions</a>
 </section>
 
 <section class="jhp-vip">

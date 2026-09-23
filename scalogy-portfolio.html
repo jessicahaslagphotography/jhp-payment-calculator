@@ -162,35 +162,45 @@
 @media (prefers-reduced-motion:reduce){.jhp-home *{transition:none!important}}
 
 
-/* THE GALLERY
-   -----------
-   A fixed grid of squares, twelve frames, three across and four rows down --
-   Jessica's layout, and her twelve, chosen in this order. A fixed ratio has
-   to cut the work: a square takes a third off the sides of her landscape
-   frames and off the top and bottom of her tall ones, from the centre in
-   both cases. That is the price of the grid, and it is deliberate.
+/* THE INDEX
+   ---------
+   Ten sessions, one square each. Squares crop -- a third off the sides of
+   a wide frame, off the top and bottom of a tall one, centred either way --
+   because a contact sheet wants one rhythm and mixed shapes do not give
+   you one. The galleries behind these squares crop nothing.
 
-   The frames are 1600px web copies sitting beside her originals in the
-   Website folder. Four of her picks were unprocessed exports of 17 to 26 MB
-   -- 92 MB across the page. At 1600px the set is 2.9 MB and still twice the
-   resolution a 423px tile asks for on a retina screen. */
-.jhp-home .jhp-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
-  max-width:1300px;margin:0 auto}
-.jhp-home .jhp-gal figure{margin:0;position:relative;aspect-ratio:1/1;
+   auto-fit rather than a fixed column count, so the row rebalances when
+   Jessica adds or retires a client instead of stranding one on a line of
+   its own. At full width ten lands as two rows of five. */
+.jhp-home .jhp-gal{display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:14px;max-width:1300px;margin:0 auto}
+.jhp-home .jhp-gal a{position:relative;display:block;aspect-ratio:1/1;
   overflow:hidden;background:rgba(19,16,14,.06)}
 .jhp-home .jhp-gal img{position:absolute;inset:0;width:100%;height:100%;
-  display:block;object-fit:cover;object-position:50% 50%}
-@media (max-width:960px){
-  .jhp-home .jhp-gal{gap:12px}
-}
-/* Two across on a phone. Three would draw each square at about 120px, which
-   is a thumbnail, not a photograph -- so the four rows become six. */
+  display:block;object-fit:cover;object-position:50% 50%;
+  transition:transform .7s ease}
+.jhp-home .jhp-gal a:hover img{transform:scale(1.045)}
+.jhp-home .jhp-gal a:focus-visible{outline:2px solid var(--gold-bright);
+  outline-offset:3px}
+
+/* The name sits on the photograph rather than under it, so the squares
+   stay a grid of pictures and the row does not gain a band of text. The
+   gradient is there to keep the name legible over a bright frame. */
+.jhp-home .jhp-gal .nm{position:absolute;left:0;right:0;bottom:0;
+  padding:30px 10px 13px;font-family:var(--sans);font-size:11px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--ink);
+  text-align:center;
+  background:linear-gradient(180deg,rgba(19,16,14,0),rgba(19,16,14,.78))}
+
 @media (max-width:620px){
   .jhp-home .jhp-gal{grid-template-columns:repeat(2,1fr);gap:8px;
     max-width:none;margin-inline:calc((100% - 100vw) / 2)}
+  .jhp-home .jhp-gal .nm{padding:24px 6px 10px;font-size:10px;
+    letter-spacing:.18em}
 }
-/* The closing band carries no photograph. The grid above it is twelve, so a
-   thirteenth behind the text would have said nothing new - and with no
+/* The closing band carries no photograph. The grid above it is ten sessions, so an
+   eleventh behind the text would have said nothing new - and with no
    paragraph under it the button needs its own gap. */
 .jhp-home .jhp-vip .jhp-h{margin-bottom:clamp(22px,2.6vw,30px)}
 </style>
@@ -214,18 +224,16 @@
 
 <section class="jhp-sec" style="border-bottom:none;padding-top:0">
   <div class="jhp-gal">
-    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/1f4d4981-8f29-4add-9192-55f6b12b4ede.jpg" alt="Boudoir portrait in the JHP studio"></figure>
-    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/cde2ed84-bc30-439b-a73b-c69ba1f77d2c.jpg" alt="Boudoir portrait beside a candlelit fireplace"></figure>
-    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/24d4aef0-5301-43df-99ff-7efbb2f0a583.jpg" alt="Boudoir portrait on a leather chair before a wall of books"></figure>
-    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/2221f21e-4309-4eb3-9a0e-8401f77d9336.jpg" loading="lazy" alt="Boudoir portrait in a feathered robe beside a gilt mirror"></figure>
-    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/c7763ea1-92df-462e-84db-374daf786172.jpg" loading="lazy" alt="Boudoir portrait in the JHP studio"></figure>
-    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/4291058c-275c-46fa-99fe-ec48736f5a6b.jpg" loading="lazy" alt="Boudoir portrait in the JHP studio"></figure>
-    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/8cb46aab-1227-4abc-9dd1-33ade566bd64.jpg" loading="lazy" alt="Boudoir portrait reclining on green velvet"></figure>
-    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/14025c9b-43c8-4413-825e-a05e43d503dc.jpg" loading="lazy" alt="Boudoir portrait in the JHP studio"></figure>
-    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/f0e4aed0-a6ea-46a9-8d7a-d8b72a05159b.jpg" loading="lazy" alt="Boudoir portrait in the JHP studio"></figure>
-    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/fb8720ae-b385-43fc-b102-a0b371342d2e.jpg" loading="lazy" alt="Boudoir portrait beside a tall studio mirror"></figure>
-    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/be9a66a2-e082-4acd-bf6b-304ca3661d18.jpg" loading="lazy" alt="Boudoir portrait in lace on a green velvet sofa"></figure>
-    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/a23a3587-9865-4ddc-ad18-1956719221bf.jpg" loading="lazy" alt="Boudoir portrait in red lace before a gilt mirror"></figure>
+    <a href="../portfolio-miss-k/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/cb23b47d-e3d5-4c48-9c9b-2b72b000cc53.jpg" width="1065" height="1600" alt="Miss K &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss K</span></a>
+    <a href="../portfolio-miss-k-2/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/5a0ce3ad-ebae-4164-a984-8ec4b8ee6464.jpg" width="1600" height="1070" alt="Miss K &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss K</span></a>
+    <a href="../portfolio-miss-a/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/4658db4c-10a8-4a66-9668-be17cd9b2446.jpg" width="1600" height="1065" alt="Miss A &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss A</span></a>
+    <a href="../portfolio-miss-s/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/bb39fdd4-bba3-44e0-85ab-abc659310563.jpg" width="1600" height="1065" alt="Miss S &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss S</span></a>
+    <a href="../portfolio-miss-s-2/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/d87d0e96-cc24-4d42-83fe-079b2cd00541.jpg" width="719" height="1080" alt="Miss S &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss S</span></a>
+    <a href="../portfolio-miss-t/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/9046eb81-ab96-4074-a4ba-3165318905fb.jpg" width="1600" height="1065" loading="lazy" alt="Miss T &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss T</span></a>
+    <a href="../portfolio-miss-j/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/787efe63-665d-4fb1-9592-18387a23a1a5.jpg" width="1600" height="1065" loading="lazy" alt="Miss J &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss J</span></a>
+    <a href="../portfolio-miss-p/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/0057316f-fdd7-4d44-8c79-371c0ca7dcaa.jpg" width="1600" height="1065" loading="lazy" alt="Miss P &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss P</span></a>
+    <a href="../portfolio-miss-e/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/1e44aaad-a5a2-43de-a0e4-fc0c345d5fa7.jpg" width="1065" height="1600" loading="lazy" alt="Miss E &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss E</span></a>
+    <a href="../portfolio-miss-v/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/84146de3-e705-4f70-926f-3693bb6ff256.jpg" width="1134" height="1600" loading="lazy" alt="Miss V &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss V</span></a>
   </div>
 </section>
 
