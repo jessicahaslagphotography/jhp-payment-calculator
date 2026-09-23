@@ -108,13 +108,32 @@ GAL_CSS = """/* THE INDEX
    at both ends rather than running wall to wall, with a small gold lozenge
    on the centre -- the same gold the kickers and the button use, so the
    page gains a rhythm mark and not a new colour. Purely decorative, so it
-   is hidden from screen readers. */
-.jhp-home .jhp-div{position:relative;height:1px;max-width:1080px;
-  margin:0 auto;background:linear-gradient(90deg,transparent,
+   is hidden from screen readers.
+
+   The line is drawn on ::before rather than as a background on the element
+   itself, because the reveal below scales the line and the lozenge must
+   not scale with it.
+
+   The movement: each divider draws outward from its own centre as it comes
+   into view, and the lozenge settles in behind it. Once per divider. It is
+   opt in from the script at the foot of the page -- without the js-rev
+   class these rules never apply and the dividers are simply drawn, so a
+   reader with JavaScript off, or one whose system asks for reduced motion,
+   gets the mark rather than an empty gap. */
+.jhp-home .jhp-div{position:relative;height:1px;max-width:1080px;margin:0 auto}
+.jhp-home .jhp-div::before{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,
     var(--line) 20%,var(--line) 80%,transparent)}
 .jhp-home .jhp-div::after{content:"";position:absolute;left:50%;top:50%;
   width:7px;height:7px;margin:-4px 0 0 -4px;transform:rotate(45deg);
   background:var(--ground);border:1px solid var(--gold)}
+.jhp-home.js-rev .jhp-div::before{transform:scaleX(0);transform-origin:50% 50%;
+  transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+.jhp-home.js-rev .jhp-div::after{opacity:0;transform:rotate(45deg) scale(.4);
+  transition:opacity .45s ease .34s,
+    transform .5s cubic-bezier(.34,1.28,.64,1) .34s}
+.jhp-home.js-rev .jhp-div.in::before{transform:scaleX(1)}
+.jhp-home.js-rev .jhp-div.in::after{opacity:1;transform:rotate(45deg) scale(1)}
 
 /* THE QUOTE
    ---------

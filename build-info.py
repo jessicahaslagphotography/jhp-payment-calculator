@@ -306,6 +306,34 @@ BODY = """
     <span class="jhp-btn">Walk me through it</span>
   </span>
 </a>
+
+<script>
+  /* Draws each divider in as it arrives. Everything here is an
+     enhancement: the CSS renders the dividers finished, and js-rev is what
+     collapses them ready to animate, so if any one of these checks fails
+     the page keeps its dividers and simply does not move them.
+
+     unobserve on the first intersection is what makes it run once. Landing
+     part way down the page leaves the dividers above the fold undrawn, and
+     that is correct: scrolling up brings them on screen from the top,
+     which the observer sees exactly as it sees one arriving from the
+     bottom. */
+  (() => {
+    const home = document.querySelector(".jhp-home");
+    const rules = home ? home.querySelectorAll(".jhp-div") : [];
+    if (!rules.length || !("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    home.classList.add("js-rev");
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -12%% 0px" });
+    rules.forEach((r) => io.observe(r));
+  })();
+</script>
 """ % {"cdn": CDN}
 
 out = HEAD + shared[shared.index("/* SHARED DESIGN SYSTEM"):] + parts + vip \

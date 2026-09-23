@@ -273,6 +273,53 @@
   .jhp-home .jhp-ig-row{grid-template-columns:repeat(3,minmax(0,1fr));
     gap:8px;max-width:560px}
 }
+/* THE DIVIDER
+   -----------
+   The same mark the Portfolio and the FAQ carry: a hairline that fades out
+   at both ends rather than running wall to wall, with a small gold lozenge
+   on its centre -- the gold the kickers and the buttons already use, so the
+   page gains a rhythm mark and not a new colour. Decorative, so the markup
+   hides it from screen readers.
+
+   The line is drawn on ::before rather than as a background on the element
+   itself, because the reveal below scales the line and the lozenge must not
+   scale with it.
+
+   The movement: each divider draws outward from its own centre as it comes
+   into view, and the lozenge settles in behind it. Once per divider and
+   never again. A mark that keeps moving is a decoration competing with the
+   photographs; this one only has to say "you have arrived somewhere new",
+   and then stop.
+
+   It is opt in from script. Without the js-rev class the dividers are
+   simply drawn, so a reader with JavaScript off -- or one whose system asks
+   for reduced motion, which the script checks before it does anything --
+   gets the mark rather than an empty gap. */
+.jhp-home .jhp-div{position:relative;height:1px;max-width:1080px;margin:0 auto}
+.jhp-home .jhp-div::before{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,
+    var(--line) 20%,var(--line) 80%,transparent)}
+.jhp-home .jhp-div::after{content:"";position:absolute;left:50%;top:50%;
+  width:7px;height:7px;margin:-4px 0 0 -4px;transform:rotate(45deg);
+  background:var(--ground);border:1px solid var(--gold)}
+.jhp-home.js-rev .jhp-div::before{transform:scaleX(0);transform-origin:50% 50%;
+  transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+.jhp-home.js-rev .jhp-div::after{opacity:0;transform:rotate(45deg) scale(.4);
+  transition:opacity .45s ease .34s,
+    transform .5s cubic-bezier(.34,1.28,.64,1) .34s}
+.jhp-home.js-rev .jhp-div.in::before{transform:scaleX(1)}
+.jhp-home.js-rev .jhp-div.in::after{opacity:1;transform:rotate(45deg) scale(1)}
+/* A section on either side of a divider keeps its padding and drops its own
+   hairline, so the ornament is the only rule at that seam rather than the
+   middle of three. A browser without :has() shows the faint one above as
+   well, which is the whole cost of not supporting it. */
+.jhp-home section:has(+ .jhp-div){border-bottom:none}
+.jhp-home .jhp-div + section{border-top:none}
+/* The opt-in band carries no padding of its own -- it is a photograph and a
+   form side by side -- so the divider above it would sit on the frame's top
+   edge without this. */
+.jhp-home .jhp-div + .jhp-optin{margin-top:clamp(42px,6vw,72px)}
+
 .jhp-home .jhp-handle{font-family:var(--sans);font-size:11px;letter-spacing:.26em;
   text-transform:uppercase;color:var(--gold);margin:0 0 8px}
 
@@ -436,6 +483,7 @@
 </section>
 
 <!-- ===== 4 · Jess ===== -->
+<div class="jhp-div" aria-hidden="true"></div>
 <section class="jhp-sec">
   <div class="jhp-two">
     <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f2825a8484f2e31df9.jpg"
@@ -451,6 +499,7 @@
 </section>
 
 <!-- ===== 6 · three Google reviews ===== -->
+<div class="jhp-div" aria-hidden="true"></div>
 <section class="jhp-mission">
   <div class="band">
     <!-- DSC_0811.jpg -->
@@ -476,6 +525,7 @@
   </div>
 </section>
 
+<div class="jhp-div" aria-hidden="true"></div>
 <section class="jhp-sec">
   <div class="jhp-center">
     <h2 class="jhp-h jhp-h-lg">What They Said Afterwards</h2>
@@ -512,6 +562,7 @@
      The fields below are STYLING ONLY and submit nowhere.
      Replace this whole section with a native GHL form element
      before this page goes live at www. -->
+<div class="jhp-div" aria-hidden="true"></div>
 <section class="jhp-optin">
   <div class="pic">
     <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/688057eb3696d10fce20e76f.jpeg" alt="">
@@ -542,6 +593,7 @@
 </section>
 
 <!-- ===== 9 · instagram ===== -->
+<div class="jhp-div" aria-hidden="true"></div>
 <section class="jhp-sec" style="border-bottom:none;padding-top:clamp(32px,4vw,48px);padding-bottom:clamp(32px,4vw,48px)">
   <div class="jhp-center" style="margin-bottom:18px">
     <p class="jhp-handle" style="margin-bottom:0">@jhpboudoir_</p>
@@ -650,6 +702,36 @@
     <p class="fc">&copy; 2026 JHP Boudoir &nbsp;&middot;&nbsp; Jefferson City, Missouri</p>
   </div>
 </footer>
+
+<script>
+  /* Draws each divider in as it arrives. Everything here is an
+     enhancement: the CSS renders the dividers finished, and js-rev is what
+     collapses them ready to animate, so if any one of these checks fails
+     the page keeps its dividers and simply does not move them.
+
+     unobserve on the first intersection is what makes it run once.
+
+     Landing part way down the page -- a restored scroll position, say --
+     leaves the dividers above the fold undrawn, and that is correct: they
+     draw the moment they come on screen, and scrolling up brings them on
+     screen from the top, which the observer sees exactly as it sees one
+     arriving from the bottom. Verified both directions. */
+  (() => {
+    const home = document.querySelector(".jhp-home");
+    const rules = home ? home.querySelectorAll(".jhp-div") : [];
+    if (!rules.length || !("IntersectionObserver" in window)) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    home.classList.add("js-rev");
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("in");
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -12% 0px" });
+    rules.forEach((r) => io.observe(r));
+  })();
+</script>
 </div>
 
 {% endraw %}
