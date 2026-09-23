@@ -15,10 +15,12 @@
 {% raw %}
 <!-- ============================================================
      JHP BOUDOIR — HOMEPAGE
-     Paste this whole thing into ONE Custom HTML/JS element in GHL.
-     Everything is scoped to .jhp-home so it cannot touch the rest
-     of the page, and nothing here loads external JavaScript.
-     Photos are served from your own GHL media library.
+     Committed copy of the live Scalogy template jhp-home-2026,
+     served at https://pages.scalogy.com/jhpboudoir1/home-preview/
+     Photos are served from the GHL media library; the Instagram row
+     is the live Behold feed jnoM4Us1mPFmRBXBMriG.
+     The body is wrapped in a Jinja raw block so the CSS braces are
+     not parsed as template syntax.
      ============================================================ -->
 
 <div class="jhp-home">
@@ -142,24 +144,27 @@
   text-transform:uppercase;color:var(--gold);margin:0}
 
 /* ---------- 7 · email opt-in ---------- */
-.jhp-home .jhp-optin{position:relative;border-top:1px solid var(--line-soft)}
-.jhp-home .jhp-optin .jhp-over{position:absolute;inset:0;display:flex;flex-direction:column;
-  align-items:flex-end;justify-content:center;text-align:left;padding:24px clamp(18px,4vw,50px);
-  background:linear-gradient(90deg, rgba(19,16,14,0) 0%, rgba(19,16,14,.10) 32%,
-    rgba(19,16,14,.62) 52%, rgba(19,16,14,.90) 74%, rgba(19,16,14,.94) 100%)}
-.jhp-home .jhp-optin .jhp-over > *{width:min(44%,440px)}
-@media (max-width:900px){.jhp-home .jhp-optin .jhp-over > *{width:min(58%,400px)}}
-@media (max-width:620px){
-  .jhp-home .jhp-optin .jhp-over{position:static;background:var(--surface);
-    padding:32px 18px;align-items:stretch}
-  .jhp-home .jhp-optin .jhp-over > *{width:100%}
-}
-.jhp-home .jhp-field{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
-.jhp-home .jhp-field input{flex:1 1 140px;min-width:0;font-family:var(--sans);font-size:15px;
+/* Split band. The height is capped because the photo at half width would
+   otherwise render around 900px tall and drag the section with it. */
+.jhp-home .jhp-optin{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;
+  border-top:1px solid var(--line-soft);min-height:340px;max-height:400px;overflow:hidden}
+.jhp-home .jhp-optin .pic{overflow:hidden}
+.jhp-home .jhp-optin .pic img{height:100%;object-fit:cover;object-position:center 45%}
+.jhp-home .jhp-optin .txt{padding:clamp(28px,3.5vw,44px) clamp(20px,3vw,42px);
+  display:flex;flex-direction:column;justify-content:center;background:var(--ground)}
+.jhp-home .jhp-optin .jhp-h{font-size:clamp(23px,2.6vw,29px);margin-bottom:10px}
+.jhp-home .jhp-optin .jhp-p{font-size:15.5px;line-height:1.65;margin-bottom:16px}
+.jhp-home .jhp-field{display:flex;flex-direction:column;gap:9px}
+.jhp-home .jhp-field .pair{display:flex;gap:9px}
+.jhp-home .jhp-field input{flex:1 1 0;min-width:0;font-family:var(--sans);font-size:15px;
   color:var(--ink);background:var(--raised);border:1px solid var(--line);
-  border-radius:2px;padding:13px 14px}
+  border-radius:2px;padding:12px 13px}
 .jhp-home .jhp-field input::placeholder{color:var(--dim)}
-.jhp-home .jhp-field .jhp-btn{flex:1 1 100%;margin-top:2px}
+.jhp-home .jhp-field .jhp-btn{padding:13px 24px}
+@media (max-width:760px){
+  .jhp-home .jhp-optin{grid-template-columns:1fr;max-height:none}
+  .jhp-home .jhp-optin .pic img{height:auto;max-height:38vh}
+}
 
 /* ---------- 8 · VIP ---------- */
 .jhp-home .jhp-vip{background:var(--surface);border-top:1px solid var(--line);
@@ -169,7 +174,7 @@
 /* ---------- 9 · instagram ---------- */
 /* Behold pulls the live @jhpboudoir_ feed. Columns and gap are set in the
    Behold dashboard; this only bounds the width so it lines up with the page. */
-.jhp-home .jhp-ig-wrap{max-width:1040px;margin:0 auto}
+.jhp-home .jhp-ig-wrap{max-width:720px;margin:0 auto}
 .jhp-home .jhp-ig-wrap behold-widget{display:block;width:100%}
 .jhp-home .jhp-handle{font-family:var(--sans);font-size:11px;letter-spacing:.26em;
   text-transform:uppercase;color:var(--gold);margin:0 0 8px}
@@ -213,7 +218,7 @@
     <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f12e45fddc3851d27f.jpg" alt="JHP Boudoir client portrait">
   </div>
   <div class="jhp-center-wide">
-    <h2 class="jhp-h">An Empowering Transformation, Inside And Out</h2>
+    <h2 class="jhp-h">Your Empowering Transformation, Inside &amp; Out</h2>
     <p class="jhp-empower-sub">The photographs are the part you can hold.<br>How you carry yourself afterwards is the part that lasts.</p>
   </div>
 </section>
@@ -274,18 +279,20 @@
      Replace this whole section with a native GHL form element
      before this page goes live at www. -->
 <section class="jhp-optin">
-  <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f2804f2db9b749cc0d.jpg" alt="">
-  <div class="jhp-over">
-    <div>
-      <p class="jhp-kicker">The email list</p>
-      <h2 class="jhp-h">Stay In The Know For All Things JHP Boudoir</h2>
-      <p class="jhp-p">Exclusive sales, specialty sessions and last-minute openings, before they go public.</p>
-      <div class="jhp-field">
+  <div class="pic">
+    <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/688057eb3696d10fce20e76f.jpeg" alt="">
+  </div>
+  <div class="txt">
+    <p class="jhp-kicker">The email list</p>
+    <h2 class="jhp-h">First Look, Before Anyone Else</h2>
+    <p class="jhp-p">Exclusive sales, specialty sessions and last-minute openings, before they go public.</p>
+    <div class="jhp-field">
+      <div class="pair">
         <input type="text" placeholder="First name" aria-label="First name">
         <input type="text" placeholder="Last name" aria-label="Last name">
-        <input type="email" placeholder="Email address" aria-label="Email address">
-        <button class="jhp-btn" type="button">Sign me up</button>
       </div>
+      <input type="email" placeholder="Email address" aria-label="Email address">
+      <button class="jhp-btn" type="button">Sign me up</button>
     </div>
   </div>
 </section>
@@ -301,10 +308,9 @@
 </section>
 
 <!-- ===== 9 · instagram ===== -->
-<section class="jhp-sec" style="border-bottom:none">
-  <div class="jhp-center" style="margin-bottom:24px">
-    <p class="jhp-handle">@jhpboudoir_</p>
-    <h2 class="jhp-h" style="margin-bottom:0">Follow Along</h2>
+<section class="jhp-sec" style="border-bottom:none;padding-top:clamp(32px,4vw,48px);padding-bottom:clamp(32px,4vw,48px)">
+  <div class="jhp-center" style="margin-bottom:18px">
+    <p class="jhp-handle" style="margin-bottom:0">@jhpboudoir_</p>
   </div>
   <div class="jhp-ig-wrap">
     <behold-widget feed-id="jnoM4Us1mPFmRBXBMriG"></behold-widget>
