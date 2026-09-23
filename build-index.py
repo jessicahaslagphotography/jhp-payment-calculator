@@ -22,13 +22,14 @@ GAL_CSS = """/* THE INDEX
    either way -- because a contact sheet wants one rhythm and mixed shapes
    do not give you one. The galleries behind these squares crop nothing.
 
-   Two columns rather than five: at full width that draws each session at
-   about 613px instead of 249px, which is the difference between a
-   thumbnail you skim and a photograph that stops you. Ten lands as five
-   rows, and the count stays the same on a phone -- only the gap and the
-   full-bleed change -- so the page reads the same way on every screen. */
+   Two columns rather than five, and held to 1000px rather than the 1240
+   the galleries use: that draws each session at about 493px. Five across
+   was 249px, a thumbnail you skim; the full 1240 was 613px, which crowded
+   the screen. This sits between them. Ten lands as five rows, and the
+   count stays the same on a phone -- only the gap and the full-bleed
+   change -- so the page reads the same way on every screen. */
 .jhp-home .jhp-gal{display:grid;grid-template-columns:repeat(2,1fr);
-  gap:14px;max-width:1240px;margin:0 auto}
+  gap:14px;max-width:1000px;margin:0 auto}
 .jhp-home .jhp-gal a{position:relative;display:block;aspect-ratio:1/1;
   overflow:hidden;background:rgba(19,16,14,.06)}
 .jhp-home .jhp-gal img{position:absolute;inset:0;width:100%;height:100%;
@@ -40,11 +41,10 @@ GAL_CSS = """/* THE INDEX
 
 /* The name sits on the photograph rather than under it, so the squares
    stay a grid of pictures and the row does not gain a band of text. The
-   gradient is there to keep the name legible over a bright frame. At this
-   size the name can afford to be a little larger. */
+   gradient is there to keep the name legible over a bright frame. */
 .jhp-home .jhp-gal .nm{position:absolute;left:0;right:0;bottom:0;
-  padding:42px 12px 18px;font-family:var(--sans);font-size:12px;
-  letter-spacing:.26em;text-transform:uppercase;color:var(--ink);
+  padding:36px 12px 15px;font-family:var(--sans);font-size:11.5px;
+  letter-spacing:.25em;text-transform:uppercase;color:var(--ink);
   text-align:center;
   background:linear-gradient(180deg,rgba(19,16,14,0),rgba(19,16,14,.78))}
 
