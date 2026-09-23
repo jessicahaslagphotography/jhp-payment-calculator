@@ -23,6 +23,7 @@ src = (ROOT / "scalogy-portfolio.html").read_text()
 head = src[:src.index("/* THE GALLERY")]
 tail = src[src.index("/* The closing band carries no photograph."):]
 shared_css = tail[:tail.index("</style>")]
+shared_css = shared_css[shared_css.index(".jhp-home .jhp-vip .jhp-h"):]
 after_style = tail[tail.index("</style>"):]
 
 # nav + footer come over verbatim; only the middle is this page's own.
@@ -32,32 +33,40 @@ foot = after_style[after_style.index("<footer class=\"jhp-foot\">"):]
 
 GAL_CSS = """/* THE CLIENT GALLERY
    ------------------
-   Uncropped, unlike the twelve squares on the index. The index is a
-   contact sheet and wants one rhythm; a session is the work itself and
-   every frame keeps the shape it was taken in. Multi-column absorbs the
-   difference between her tall and wide frames without cutting either.
+   Justified rows, not a grid. Every frame keeps the shape it was taken in
+   -- the index crops to squares because a contact sheet wants one rhythm,
+   but a session is the work itself and nothing here is cut.
 
-   Reading order runs down a column rather than across the page, which
-   costs nothing here -- there are no captions and no narrative, just a
-   set. */
-.jhp-home .jhp-set{columns:3;column-gap:16px;max-width:1240px;margin:0 auto}
-.jhp-home .jhp-set figure{break-inside:avoid;margin:0 0 16px}
+   The trick is one declaration: within a row each figure gets flex-grow
+   equal to its own aspect ratio, so widths come out proportional to shape
+   and every frame in the row lands on exactly the same height. The row
+   fills the width with no arithmetic and no letterboxing, at any size.
+
+   Row composition is chosen per gallery from the actual mix of tall and
+   wide frames -- one wide alone, then three, then a pair -- so the page
+   changes shape as you scroll instead of repeating. */
+.jhp-home .jhp-set{max-width:1240px;margin:0 auto;
+  display:flex;flex-direction:column;gap:14px}
+.jhp-home .jhp-set .row{display:flex;gap:14px}
+.jhp-home .jhp-set figure{margin:0;min-width:0}
 .jhp-home .jhp-set img{width:100%;height:auto;display:block}
-@media (max-width:960px){
-  .jhp-home .jhp-set{columns:2;column-gap:12px}
-  .jhp-home .jhp-set figure{margin-bottom:12px}
-}
-/* One column edge to edge on a phone, the rule the About page follows:
-   photographs take the full width, only text keeps its margins. */
-@media (max-width:620px){
-  .jhp-home .jhp-set{columns:1;max-width:none;
-    margin-inline:calc((100% - 100vw) / 2)}
-  .jhp-home .jhp-set figure{margin-bottom:10px}
-}
 
-/* A single photograph is not a gallery -- it is a portrait, so it gets
-   drawn as one rather than stretched across three dead columns. */
-.jhp-home .jhp-set.one{columns:1;max-width:760px}
+/* Between tablet and desktop a row of three is too tight, so rows wrap.
+   Each wrapped line re-justifies itself by the same flex-grow rule, which
+   is why the heights still agree after the break. */
+@media (max-width:900px){
+  .jhp-home .jhp-set .row{flex-wrap:wrap}
+  .jhp-home .jhp-set .row figure{min-width:calc(50% - 7px)}
+}
+/* One frame per row edge to edge on a phone -- the rule the About page
+   follows, where photographs take the full width and only text keeps its
+   margins. Three across would draw each one at about 120px. */
+@media (max-width:620px){
+  .jhp-home .jhp-set{max-width:none;gap:10px;
+    margin-inline:calc((100% - 100vw) / 2)}
+  .jhp-home .jhp-set .row{flex-direction:column;gap:10px}
+  .jhp-home .jhp-set .row figure{min-width:0}
+}
 
 /* The way back. A gallery is a dead end without it, and the browser's
    back button is not a design. */
@@ -78,8 +87,10 @@ BODY = """
 </section>
 
 <section class="jhp-sec" style="border-bottom:none;padding-top:0">
-  <div class="jhp-set{% if photos|length == 1 %} one{% endif %}">
-{% for p in photos %}    <figure><img src="{{ cdn }}{{ p.file }}"{% if not loop.first %} loading="lazy"{% endif %} alt="{{ p.alt }}"></figure>
+  <div class="jhp-set">
+{% for row in rows %}    <div class="row">
+{% for p in row %}      <figure style="flex:{{ p.ar }} 1 0"><img src="{{ cdn }}{{ p.file }}" width="{{ p.w }}" height="{{ p.h }}"{% if not (loop.first and loop.index0 == 0) %} loading="lazy"{% endif %} alt="{{ p.alt }}"></figure>
+{% endfor %}    </div>
 {% endfor %}  </div>
   <a class="jhp-back" href="/portfolio">&larr; All sessions</a>
 </section>
