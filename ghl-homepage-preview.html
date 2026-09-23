@@ -185,6 +185,27 @@
   border-bottom:1px solid var(--line-soft);
   padding:clamp(46px,6vw,76px) clamp(18px,5vw,40px);text-align:center}
 .jhp-home .jhp-mission .inner{max-width:760px;margin:0 auto}
+/* Two showcase photos flank the statement. Each sits in a 150.3%
+   padding-ratio box (6048/4024), the exact shape of every portrait in the
+   media library, so cover has nothing to crop. The row is centre-aligned
+   rather than stretched: if the copy is taller than the photos, the photos
+   stay their own shape instead of being pulled into slivers. */
+.jhp-home .jhp-mission .band{display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,2.4fr) minmax(0,1fr);
+  gap:clamp(18px,3vw,44px);align-items:center;max-width:1120px;margin:0 auto}
+.jhp-home .jhp-mission .shot{position:relative;min-width:0}
+.jhp-home .jhp-mission .shot::before{content:"";display:block;padding-top:150.3%}
+.jhp-home .jhp-mission .shot img{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center center}
+@media (max-width:900px){
+  /* Too narrow to flank: the copy takes the full width and the pair sits
+     underneath it, side by side, still uncropped. */
+  .jhp-home .jhp-mission .band{grid-template-columns:1fr 1fr;gap:14px;max-width:520px}
+  /* order:-1 matters: the photos bracket the copy in the source, so without it
+     auto-placement gives three rows (photo, copy, photo) instead of the copy
+     above a 2-up row. */
+  .jhp-home .jhp-mission .inner{grid-column:1 / -1;order:-1;margin-bottom:6px}
+}
 .jhp-home .jhp-mission .jhp-kicker{margin-bottom:18px}
 .jhp-home .jhp-mission-lead{font-family:var(--serif);font-weight:400;
   font-size:clamp(22px,2.9vw,30px);line-height:1.42;letter-spacing:.01em;
@@ -265,14 +286,20 @@
 
 <!-- ===== 6 · three Google reviews ===== -->
 <section class="jhp-mission">
-  <div class="inner">
-    <p class="jhp-kicker">My mission</p>
-    <p class="jhp-mission-lead">To build a room where you don&rsquo;t have to hold your stomach in, apologize for your body, or be anyone&rsquo;s idea of beautiful but your own &mdash; and then to photograph you in it.</p>
-    <p class="jhp-p">It&rsquo;s the ultimate thing to do for yourself. Let&rsquo;s celebrate what you look like when you&rsquo;ve stopped apologizing for it.</p>
-    <!-- GHL calendar "Organic Consultation Call Calendar", id Ymk9FIg5KPX4lpCCdYmn,
-         slug jhp-organic-consult-call. 20-minute inbound phone call, Mon-Fri
-         8am-5pm, bookable from +2h out to 4 days ahead. -->
-    <a class="jhp-btn" href="https://api.leadconnectorhq.com/widget/booking/Ymk9FIg5KPX4lpCCdYmn" target="_blank" rel="noopener">Book a call</a>
+  <div class="band">
+    <!-- DSC_0754.jpg -->
+    <figure class="shot"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/688057eb3696d159e320e773.jpeg" alt="JHP Boudoir client portrait"></figure>
+    <div class="inner">
+      <p class="jhp-kicker">My mission</p>
+      <p class="jhp-mission-lead">To build a room where you don&rsquo;t have to hold your stomach in, apologize for your body, or be anyone&rsquo;s idea of beautiful but your own &mdash; and then to photograph you in it.</p>
+      <p class="jhp-p">It&rsquo;s the ultimate thing to do for yourself. Let&rsquo;s celebrate what you look like when you&rsquo;ve stopped apologizing for it.</p>
+      <!-- GHL calendar "JHP Boudoir Consultation Calendar", id Ymk9FIg5KPX4lpCCdYmn,
+           slug jhp-organic-consult-call. 20-minute inbound phone call, Mon-Fri
+           8am-5pm, bookable from +2h out to 4 days ahead. -->
+      <a class="jhp-btn" href="https://api.leadconnectorhq.com/widget/booking/Ymk9FIg5KPX4lpCCdYmn" target="_blank" rel="noopener">Book a call</a>
+    </div>
+    <!-- DSC_5295.jpg -->
+    <figure class="shot"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/688057eb3696d1b95e20e770.jpeg" alt="JHP Boudoir client portrait"></figure>
   </div>
 </section>
 
