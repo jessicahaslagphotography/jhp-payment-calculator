@@ -129,6 +129,23 @@
    the gap the type scale uses between a heading and the paragraph that
    follows it. A button is not a paragraph, so it takes its own. */
 .jhp-home .jhp-vip.has-photo .jhp-h{margin-bottom:clamp(22px,2.6vw,30px)}
+/* Jessica's phone setting: a 190px band with the crop at 16%.
+
+   This band is the one thing on the page whose height is not set directly -
+   it is padding plus whatever the label, heading and button come to, and on a
+   phone those measure 160px exactly. 190 therefore means 15px of padding top
+   and bottom, which is what the number resolves to here. It is tight by any
+   normal measure and it was chosen against a preview that showed only the
+   heading, but nothing clips or overflows at any phone width, so it stands
+   until she says otherwise.
+
+   The 16% is hers too and applies here only. On a desktop this band is 332px
+   against a 958px draw, so the y has 626px of slack and 46% is doing real work
+   up there; overwriting it globally would have moved a crop she never saw. */
+@media (max-width:620px){
+  .jhp-home .jhp-vip.has-photo{padding:15px clamp(18px,5vw,34px)}
+  .jhp-home .jhp-vip.has-photo > img{object-position:64% 16%}
+}
 
 /* The lead plate. Same construction as the homepage hero - photo, gradient,
    text over it, bottom-left - so the two pages open the same way. It carries
@@ -162,11 +179,25 @@
   font-size:clamp(28px,5.4vw,58px);line-height:1.06;letter-spacing:.01em;
   margin:0;color:var(--ink);text-wrap:balance}
 @media (max-width:620px){
+  /* Jessica's phone setting, taken in the crop tuner on a 440px screen: a flat
+     200px band with the crop at 62%. Flat rather than a share of the width
+     because at 200px the band is wider than 3:2 at every phone size, so the
+     shape is already doing what she picked; scaling it would only make small
+     phones shorter for no reason.
+
+     Note the crop reverses here against the desktop rule above. At 432px on a
+     wide screen and at 200px on a phone the box is wider than the frame both
+     times, so it is the y that moves in both - but she set them separately and
+     they are different numbers, 54% up there and 62% here. Her x of 100% does
+     nothing at this height and is left out rather than written down as if it
+     did something. */
+  .jhp-home .jhp-lead{height:200px}
+  .jhp-home .jhp-lead img{object-position:50% 62%}
   /* The title is sized against the band rather than the viewport. Left on the
      shared scale it came out at 28px, which read as a caption under all that
      photograph; this takes it to 35px on a 390px phone. */
   .jhp-home .jhp-lead h1{font-size:clamp(32px,9vw,40px);line-height:1.08}
-  .jhp-home .jhp-lead .plate{padding:0 22px 28px}
+  .jhp-home .jhp-lead .plate{padding:0 22px 24px}
 }
 
 /* ABOUT PAGE
@@ -223,17 +254,16 @@
   .jhp-home .jhp-intro .shot,
   .jhp-home .jhp-pair{max-width:none;
     margin-inline:calc((100% - 100vw) / 2);width:auto}
-  /* The portrait swaps its ratio box for a height at these widths. Held at its
-     own 150% it ran 585px on a 390px phone - 69% of the screen, and nearly
-     double the 300px opener above it, which put the largest thing on the page
-     in the middle of it rather than at the top. 112vw brings it to 437px, in
-     the same family as the opener at 300 and the closing band at 277.
+  /* The portrait swaps its ratio box for a height at these widths, because held
+     at its own 150% it tracked whatever width it was given and ran to a 929px
+     tower on a large phone.
 
-     Cropping a 2:3 frame to 0.89 keeps the full width and loses a quarter of
-     the height, so the crop sits high: her head keeps its room and the
-     chandelier behind her stays in, at the cost of her feet. */
-  .jhp-home .jhp-intro .shot::before{padding-top:0;height:clamp(360px,112vw,480px)}
-  .jhp-home .jhp-intro .shot img{object-position:center 20%}
+     Jessica set this one too: 503px with the crop at 59%, on a 440px screen.
+     114.3vw is that exact ratio, so every phone gets the shape she chose rather
+     than the number - 446px at 390, 503 at 440 - with a floor and a cap either
+     side to stop the extremes. */
+  .jhp-home .jhp-intro .shot::before{padding-top:0;height:clamp(360px,114.3vw,540px)}
+  .jhp-home .jhp-intro .shot img{object-position:center 59%}
 }
 /* Footer. Three columns on desktop, a centred stack on a phone. No photos;
    the only image is the logo. */
