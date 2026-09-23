@@ -38,13 +38,9 @@ nav = after_style[after_style.index('<nav class="jhp-nav">'):
                   after_style.index("</nav>") + len("</nav>\n")]
 foot = after_style[after_style.index('<footer class="jhp-foot">'):]
 
-# The index's grid never appears here, and neither does the Portfolio's own
-# <head>. Until the Info tab is a two-item menu, this page's nav points its
-# own Info link at itself rather than at a /info that does not exist.
-nav = nav.replace('<a href="/info">Info</a>', '<a href="../faq/">Info</a>')
-foot = foot.replace('<li><a href="/info">Info</a></li>',
-                    '<li><a href="../faq/">FAQ</a></li>\n'
-                    '        <li><a href="../experience/">The Experience</a></li>')
+# The nav and the footer come over exactly as the Portfolio writes them --
+# Info already points at this page. When The Experience exists the Info
+# item becomes a two-item menu, and it changes once, there.
 
 HEAD = """<!DOCTYPE html>
 <html lang="en">
