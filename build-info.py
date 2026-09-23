@@ -14,7 +14,10 @@ photograph wants a different crop, and the Portfolio's numbers are
 Jessica's, set on her own frames in the band tuner.
 
 The answers that are still blanks are marked <span class="fill"> so they
-read as blanks on the page instead of as facts. There are three.
+read as blanks on the page instead of as facts. One is left: where
+pricing starts. The session length and the reveal turnaround were filled
+in on 23 September, from Jessica's own numbers -- two to three hours at
+the studio, seven to fourteen business days to the reveal.
 
 The live template is one byte smaller than this file: Scalogy trims
 trailing whitespace on templates_create, and the page had to be published
@@ -242,16 +245,16 @@ BODY = """
     <details name="faq">
       <summary><span class="mk" aria-hidden="true"></span>How long does the day take?</summary>
       <div class="a">
-        <p>Plan on <span class="fill">how long</span> at the studio, hair and
-           makeup included. It is not a rushed hour &mdash; part of what makes
-           the photographs work is that there is time to settle in.</p>
+        <p>Plan on two to three hours at the studio, hair and makeup
+           included. It is not a rushed hour &mdash; part of what makes the
+           photographs work is that there is time to settle in.</p>
       </div>
     </details>
 
     <details name="faq">
       <summary><span class="mk" aria-hidden="true"></span>When do I see the photographs?</summary>
       <div class="a">
-        <p>At your reveal, <span class="fill">how long after</span> the
+        <p>At your reveal, seven to fourteen business days after your
            session. We sit down together and go through them, and you choose
            the ones you want to keep.</p>
         <p>You are not sent a link and left to work it out alone. The reveal is
