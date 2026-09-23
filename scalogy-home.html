@@ -260,11 +260,16 @@
 .jhp-home .jhp-foot .cols{display:grid;
   grid-template-columns:minmax(0,1.7fr) minmax(0,1fr) minmax(0,1.15fr);
   gap:clamp(26px,4vw,56px);max-width:1120px;margin:0 auto;align-items:start}
-.jhp-home .jhp-foot .logo-mark{display:inline-block;margin:0 0 20px}
-/* The real mark is 300x100, so it is held to 48px tall (144px wide, 288
-   device pixels at 2x) to stay inside its own resolution. */
-.jhp-home .jhp-foot .logo-mark img{width:auto;height:clamp(38px,3.6vw,48px);
-  max-width:100%;filter:none}
+/* Wordmark set in type, not an image. There is no logo file in the GHL media
+   library: JHP 1 (1).png and JHP POlaroids.png both measure photographic, and
+   the 300x100 PNG that measured as flat artwork turned out to be the five-star
+   rating graphic — five identical 54px gold shapes at 6px intervals. Swap this
+   for an <img> once a real mark (ideally an SVG) is uploaded. */
+.jhp-home .jhp-foot .logo-mark{display:inline-block;margin:0 0 20px;
+  font-family:var(--serif);font-weight:500;font-size:clamp(25px,2.7vw,31px);
+  letter-spacing:.15em;line-height:1;color:var(--gold);text-transform:uppercase;
+  transition:color .3s}
+.jhp-home .jhp-foot .logo-mark:hover{color:var(--gold-bright)}
 .jhp-home .jhp-foot .blurb{font-family:var(--sans);font-weight:300;font-size:15px;
   line-height:1.8;color:var(--muted);margin:0;max-width:44ch}
 .jhp-home .jhp-foot h3{font-family:var(--sans);font-weight:400;font-size:11px;
@@ -506,13 +511,7 @@
   <div class="cols">
 
     <div>
-      <!-- The flat vector-style mark: 82% of its pixels are fully transparent
-           and it holds only 71 distinct colours, so it is artwork, not a photo.
-           JHP 1 (1).png was tried here first and measured photographic — 10,731
-           colours and 41% partial transparency — which is why it is not used. -->
-      <a class="logo-mark" href="/" aria-label="JHP Boudoir, home">
-        <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/b417d121-14dd-4baf-aa83-04fbd7d305bf.png" alt="JHP Boudoir" width="300" height="100">
-      </a>
+      <a class="logo-mark" href="/">JHP Boudoir</a>
       <p class="blurb">JHP Boudoir is a boudoir photography studio just outside
          Jefferson City, Missouri, working with women from all across Missouri.
          A luxury studio and an elevated experience from the first call to the
