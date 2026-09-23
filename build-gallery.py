@@ -107,7 +107,6 @@ GAL_CSS = """/* THE CLIENT GALLERY
 BODY = """
 <section class="jhp-sec" style="border-bottom:none;padding-bottom:clamp(24px,3vw,34px)">
   <div class="jhp-center">
-    <p class="jhp-kicker">A session</p>
     <h1 class="jhp-h jhp-h-lg" style="margin-bottom:0">{{ name }}</h1>
   </div>
 </section>
