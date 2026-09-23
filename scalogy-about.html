@@ -221,11 +221,17 @@
   .jhp-home .jhp-intro .shot,
   .jhp-home .jhp-pair{max-width:none;
     margin-inline:calc((100% - 100vw) / 2);width:auto}
-  /* The portrait swaps its ratio box for a height at these widths. Held at
-     150% it tracked the width it had just been given, so a 619px phone would
-     have opened a 929px tower; 150vw is the same shape up to about 410px and
-     then stops. */
-  .jhp-home .jhp-intro .shot::before{padding-top:0;height:clamp(430px,150vw,620px)}
+  /* The portrait swaps its ratio box for a height at these widths. Held at its
+     own 150% it ran 585px on a 390px phone - 69% of the screen, and nearly
+     double the 300px opener above it, which put the largest thing on the page
+     in the middle of it rather than at the top. 112vw brings it to 437px, in
+     the same family as the opener at 300 and the closing band at 277.
+
+     Cropping a 2:3 frame to 0.89 keeps the full width and loses a quarter of
+     the height, so the crop sits high: her head keeps its room and the
+     chandelier behind her stays in, at the cost of her feet. */
+  .jhp-home .jhp-intro .shot::before{padding-top:0;height:clamp(360px,112vw,480px)}
+  .jhp-home .jhp-intro .shot img{object-position:center 20%}
 }
 /* Footer. Three columns on desktop, a centred stack on a phone. No photos;
    the only image is the logo. */
