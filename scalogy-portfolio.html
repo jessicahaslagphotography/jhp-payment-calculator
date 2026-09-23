@@ -164,18 +164,17 @@
 
 /* THE INDEX
    ---------
-   Ten sessions, three to a row, one square each. Squares crop -- a third
-   off the sides of a wide frame, off the top and bottom of a tall one,
-   centred either way -- because a contact sheet wants one rhythm and mixed
-   shapes do not give you one. The galleries behind these squares crop
-   nothing.
+   One session per square, three to a row. Squares crop -- a third off the
+   sides of a wide frame, off the top and bottom of a tall one, centred
+   either way -- because a contact sheet wants one rhythm and mixed shapes
+   do not give you one. The galleries behind these squares crop nothing.
 
-   Ten does not divide by three, so the tenth would sit alone at the left
-   of a fourth row looking like a mistake. Columns are capped rather than
+   A count that leaves one over would put that last square alone at the
+   left of its row looking like a mistake. Columns are capped rather than
    fractional so the grid can centre itself in the page, and a last square
    that lands in column one on its own is moved to the middle -- a
    deliberate-looking full stop instead of an orphan. Both rules are
-   conditional, so nine clients or twelve need no change here.
+   conditional, so a count that divides evenly is left alone.
 
    Two across on a phone: three would draw each session at about 120px. */
 .jhp-home .jhp-gal{display:grid;
@@ -204,7 +203,7 @@
 @media (max-width:620px){
   .jhp-home .jhp-gal{grid-template-columns:repeat(2,1fr);gap:8px;
     margin-inline:calc((100% - 100vw) / 2)}
-  /* Two columns divide ten exactly, so nothing is orphaned and the
+  /* An even count divides by two, so nothing is orphaned here and the
      middle-column rule has to be switched back off. */
   .jhp-home .jhp-gal a:last-child:nth-child(3n+1){grid-column:auto}
   .jhp-home .jhp-gal .nm{padding:24px 6px 10px;font-size:10px;
@@ -221,7 +220,7 @@
 
    Shorter than the home page's hero on purpose. That one is the front
    door and can afford the whole screen; this one is a heading with a
-   picture behind it, and the ten sessions need to be in reach. */
+   picture behind it, and the sessions need to be in reach. */
 .jhp-home .jhp-intro{position:relative}
 .jhp-home .jhp-intro img{width:100%;height:clamp(320px,37vw,600px);
   max-height:none;object-fit:cover;object-position:50% 34%}
@@ -240,9 +239,9 @@
   .jhp-home .jhp-intro img{height:340px;object-position:50% 30%}
   .jhp-home .jhp-intro h1{max-width:20ch}
 }
-/* The closing band carries no photograph. The grid above it is ten sessions, so an
-   eleventh behind the text would have said nothing new - and with no
-   paragraph under it the button needs its own gap. */
+/* The closing band carries no photograph. The grid above it is 12
+   sessions, so one more behind the text would have said nothing new -
+   and with no paragraph under it the button needs its own gap. */
 .jhp-home .jhp-vip .jhp-h{margin-bottom:clamp(22px,2.6vw,30px)}
 </style>
 
@@ -264,15 +263,7 @@
   </div>
 </section>
 
-<section class="jhp-sec" style="border-bottom:none;padding-bottom:clamp(24px,3vw,34px)">
-  <div class="jhp-center">
-    <p class="jhp-p" style="margin-bottom:0">Ten sessions. Women of every age and
-       every body, photographed in the studio just outside Jefferson City.
-       Every name opens her own gallery.</p>
-  </div>
-</section>
-
-<section class="jhp-sec" style="border-bottom:none;padding-top:0">
+<section class="jhp-sec" style="border-bottom:none">
   <div class="jhp-gal">
     <a href="../portfolio-miss-k/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/cb23b47d-e3d5-4c48-9c9b-2b72b000cc53.jpg" width="1065" height="1600" alt="Miss K &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss K</span></a>
     <a href="../portfolio-miss-k-2/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/5a0ce3ad-ebae-4164-a984-8ec4b8ee6464.jpg" width="1600" height="1070" alt="Miss K &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss K</span></a>
@@ -284,6 +275,8 @@
     <a href="../portfolio-miss-p/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/0057316f-fdd7-4d44-8c79-371c0ca7dcaa.jpg" width="1600" height="1065" loading="lazy" alt="Miss P &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss P</span></a>
     <a href="../portfolio-miss-e/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/1e44aaad-a5a2-43de-a0e4-fc0c345d5fa7.jpg" width="1065" height="1600" loading="lazy" alt="Miss E &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss E</span></a>
     <a href="../portfolio-miss-v/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/84146de3-e705-4f70-926f-3693bb6ff256.jpg" width="1134" height="1600" loading="lazy" alt="Miss V &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss V</span></a>
+    <a href="../portfolio-miss-m/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/0fdb17d5-6ba5-4265-bc97-c5e24b27145a.jpg" width="1600" height="1065" loading="lazy" alt="Miss M &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss M</span></a>
+    <a href="../portfolio-miss-h/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6e2048c7-d0cc-42b7-b5b2-7794a85a898c.jpg" width="1600" height="1065" loading="lazy" alt="Miss H &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss H</span></a>
   </div>
 </section>
 

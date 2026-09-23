@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
 """Rewrites the portfolio index as ten linked client covers.
 
-The index stops being twelve loose photographs and becomes a way in to ten
+The index stops being twelve loose photographs and becomes a way in to her
 sessions. Each square is a link, and carries the client's heading so a
 visitor knows it opens rather than just sits there -- a hover state alone
 would say nothing on a phone.
+
+Every count in the page is read from galleries.json, so adding a client is
+this script and nothing else.
 
 Squares still crop, which is the price of one rhythm across the row; the
 galleries behind them do not. Covers are chosen as the frame that loses
@@ -17,18 +20,17 @@ CDN = "https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/"
 
 GAL_CSS = """/* THE INDEX
    ---------
-   Ten sessions, three to a row, one square each. Squares crop -- a third
-   off the sides of a wide frame, off the top and bottom of a tall one,
-   centred either way -- because a contact sheet wants one rhythm and mixed
-   shapes do not give you one. The galleries behind these squares crop
-   nothing.
+   One session per square, three to a row. Squares crop -- a third off the
+   sides of a wide frame, off the top and bottom of a tall one, centred
+   either way -- because a contact sheet wants one rhythm and mixed shapes
+   do not give you one. The galleries behind these squares crop nothing.
 
-   Ten does not divide by three, so the tenth would sit alone at the left
-   of a fourth row looking like a mistake. Columns are capped rather than
+   A count that leaves one over would put that last square alone at the
+   left of its row looking like a mistake. Columns are capped rather than
    fractional so the grid can centre itself in the page, and a last square
    that lands in column one on its own is moved to the middle -- a
    deliberate-looking full stop instead of an orphan. Both rules are
-   conditional, so nine clients or twelve need no change here.
+   conditional, so a count that divides evenly is left alone.
 
    Two across on a phone: three would draw each session at about 120px. */
 .jhp-home .jhp-gal{display:grid;
@@ -57,7 +59,7 @@ GAL_CSS = """/* THE INDEX
 @media (max-width:620px){
   .jhp-home .jhp-gal{grid-template-columns:repeat(2,1fr);gap:8px;
     margin-inline:calc((100% - 100vw) / 2)}
-  /* Two columns divide ten exactly, so nothing is orphaned and the
+  /* An even count divides by two, so nothing is orphaned here and the
      middle-column rule has to be switched back off. */
   .jhp-home .jhp-gal a:last-child:nth-child(3n+1){grid-column:auto}
   .jhp-home .jhp-gal .nm{padding:24px 6px 10px;font-size:10px;
@@ -74,7 +76,7 @@ GAL_CSS = """/* THE INDEX
 
    Shorter than the home page's hero on purpose. That one is the front
    door and can afford the whole screen; this one is a heading with a
-   picture behind it, and the ten sessions need to be in reach. */
+   picture behind it, and the sessions need to be in reach. */
 .jhp-home .jhp-intro{position:relative}
 .jhp-home .jhp-intro img{width:100%;height:clamp(320px,37vw,600px);
   max-height:none;object-fit:cover;object-position:50% 34%}
@@ -114,11 +116,15 @@ def main():
     a = src.index(mark)
     b = src.index("/* The closing band carries no photograph.")
     src = src[:a] + GAL_CSS + src[b:]
-    src = src.replace(
-        "   thirteenth behind the text would have said nothing new - and with no",
-        "   eleventh behind the text would have said nothing new - and with no")
-    src = src.replace("The grid above it is twelve, so a",
-                      "The grid above it is ten sessions, so an")
+    # The closing band's comment counts the grid above it, so it is written
+    # from the data rather than left to go stale on the next client.
+    a = src.index("/* The closing band carries no photograph.")
+    b = src.index("*/", a) + 2
+    src = src[:a] + (
+        "/* The closing band carries no photograph. The grid above it is %d\n"
+        "   sessions, so one more behind the text would have said nothing new -\n"
+        "   and with no paragraph under it the button needs its own gap. */"
+        % len(galleries)) + src[b:]
 
     cards = []
     for g in galleries:
