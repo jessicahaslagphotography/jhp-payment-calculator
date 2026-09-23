@@ -162,8 +162,8 @@ GAL_CSS = """/* THE INDEX
    legal and the click area the full width. Shorter than the intro band
    above -- it is a door, not a heading. */
 .jhp-home .jhp-band{position:relative;display:block;overflow:hidden}
-.jhp-home .jhp-band img{width:100%;height:clamp(300px,30vw,440px);
-  max-height:none;object-fit:cover;object-position:50% 42%;
+.jhp-home .jhp-band img{width:100%;height:clamp(320px,34vw,520px);
+  max-height:none;object-fit:cover;object-position:50% 22%;
   transition:transform .8s ease}
 .jhp-home .jhp-band:hover img{transform:scale(1.04)}
 .jhp-home .jhp-band:focus-visible{outline:2px solid var(--gold-bright);
@@ -215,10 +215,13 @@ def main():
     a = src.index("/* The closing band carries no photograph.")
     b = src.index("*/", a) + 2
     src = src[:a] + (
-        "/* The closing band carries no photograph. The grid above it is %d\n"
-        "   sessions, so one more behind the text would have said nothing new -\n"
-        "   and with no paragraph under it the button needs its own gap. */"
-        % len(galleries)) + src[b:]
+        "/* The closing band carries no photograph. This page no longer\n"
+        "   carries the band at all -- the way on to Info does that work, and\n"
+        "   two dark bands in a row said the same thing twice -- but the rule\n"
+        "   stays: the galleries slice their design system from this file and\n"
+        "   each of them still closes on Your Turn.\n\n"
+        "   That first sentence is also the marker build-gallery.py cuts on.\n"
+        "   Keep it verbatim. */") + src[b:]
 
     cards = []
     for g in galleries:

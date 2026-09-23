@@ -306,8 +306,8 @@
    legal and the click area the full width. Shorter than the intro band
    above -- it is a door, not a heading. */
 .jhp-home .jhp-band{position:relative;display:block;overflow:hidden}
-.jhp-home .jhp-band img{width:100%;height:clamp(300px,30vw,440px);
-  max-height:none;object-fit:cover;object-position:50% 42%;
+.jhp-home .jhp-band img{width:100%;height:clamp(320px,34vw,520px);
+  max-height:none;object-fit:cover;object-position:50% 22%;
   transition:transform .8s ease}
 .jhp-home .jhp-band:hover img{transform:scale(1.04)}
 .jhp-home .jhp-band:focus-visible{outline:2px solid var(--gold-bright);
@@ -333,9 +333,14 @@
 /* The divider immediately above the band would otherwise sit on the
    photograph's top edge -- the band carries no padding of its own. */
 .jhp-home .jhp-div + .jhp-band{margin-top:clamp(42px,6vw,72px)}
-/* The closing band carries no photograph. The grid above it is 12
-   sessions, so one more behind the text would have said nothing new -
-   and with no paragraph under it the button needs its own gap. */
+/* The closing band carries no photograph. This page no longer
+   carries the band at all -- the way on to Info does that work, and
+   two dark bands in a row said the same thing twice -- but the rule
+   stays: the galleries slice their design system from this file and
+   each of them still closes on Your Turn.
+
+   That first sentence is also the marker build-gallery.py cuts on.
+   Keep it verbatim. */
 .jhp-home .jhp-vip .jhp-h{margin-bottom:clamp(22px,2.6vw,30px)}
 </style>
 
@@ -408,14 +413,6 @@
     <span class="jhp-btn">Learn more</span>
   </span>
 </a>
-
-<section class="jhp-vip">
-  <div class="inner">
-    <p class="jhp-kicker">When you are ready</p>
-    <h2 class="jhp-h">Your Turn</h2>
-    <a class="jhp-btn" href="/contact">Book Your Session</a>
-  </div>
-</section>
 
 <footer class="jhp-foot">
   <div class="cols">
