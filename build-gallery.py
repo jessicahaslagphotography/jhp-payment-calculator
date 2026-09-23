@@ -28,8 +28,11 @@ shared_css = shared_css[shared_css.index(".jhp-home .jhp-vip .jhp-h"):]
 after_style = tail[tail.index("</style>"):]
 
 # nav + footer come over verbatim; only the middle is this page's own.
+# Bounded by the nav's own closing tag, not by the first section: the
+# portfolio page's first section is its intro banner now, and slicing to
+# that would have carried the banner into every gallery.
 nav = after_style[after_style.index("<nav class=\"jhp-nav\">"):
-                  after_style.index("<section class=\"jhp-sec\"")]
+                  after_style.index("</nav>") + len("</nav>\n")]
 foot = after_style[after_style.index("<footer class=\"jhp-foot\">"):]
 
 GAL_CSS = """/* THE CLIENT GALLERY
@@ -69,13 +72,36 @@ GAL_CSS = """/* THE CLIENT GALLERY
   .jhp-home .jhp-set .row figure{min-width:0}
 }
 
-/* The way back. A gallery is a dead end without it, and the browser's
-   back button is not a design. */
-.jhp-home .jhp-back{display:block;text-align:center;
-  font-family:var(--sans);font-size:11px;letter-spacing:.24em;
-  text-transform:uppercase;color:var(--dim);padding:26px 18px 0;
-  transition:color .3s}
-.jhp-home .jhp-back:hover{color:var(--gold)}
+/* The way on. A gallery is a dead end without it, and the browser's back
+   button is not a design. Three cells rather than three inline links, so
+   "All sessions" is centred on the page instead of on whatever the two
+   client names happen to measure. Bottom-aligned, which lines the three
+   names up with each other whether or not a cell carries an eyebrow.
+
+   The order wraps: the last session's Next is the first one, so nobody
+   reaches a link that isn't there. */
+.jhp-home .jhp-move{display:grid;grid-template-columns:1fr auto 1fr;
+  align-items:end;gap:12px;max-width:1240px;margin:26px auto 0;
+  padding-top:22px;border-top:1px solid var(--line-soft)}
+.jhp-home .jhp-move a{display:block;font-family:var(--sans);font-size:11px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--dim);
+  padding:8px 0;transition:color .3s}
+.jhp-home .jhp-move a:hover{color:var(--gold)}
+.jhp-home .jhp-move .c{text-align:center}
+.jhp-home .jhp-move .x{text-align:right}
+.jhp-home .jhp-move .d{display:block;font-size:9.5px;letter-spacing:.2em;
+  color:var(--dim);opacity:.72;margin-bottom:6px}
+.jhp-home .jhp-move a:focus-visible{outline:2px solid var(--gold-bright);
+  outline-offset:3px}
+/* On a phone the three cells are tight, so the eyebrows go and the arrows
+   carry the direction on their own. */
+@media (max-width:620px){
+  .jhp-home .jhp-move{gap:8px;padding-inline:18px}
+  .jhp-home .jhp-move .d{display:none}
+  /* One line instead of two, so the padding has to carry the tap target
+     up to the 44px a thumb needs on its own. */
+  .jhp-home .jhp-move a{font-size:10px;letter-spacing:.14em;padding:14px 0}
+}
 """
 
 BODY = """
@@ -93,7 +119,11 @@ BODY = """
 {% for p in row %}      <figure style="flex:{{ p.ar }} 1 0"><img src="{{ cdn }}{{ p.file }}" width="{{ p.w }}" height="{{ p.h }}"{% if not (loop.first and loop.index0 == 0) %} loading="lazy"{% endif %} alt="{{ p.alt }}"></figure>
 {% endfor %}    </div>
 {% endfor %}  </div>
-  <a class="jhp-back" href="../portfolio/">&larr; All sessions</a>
+  <nav class="jhp-move" aria-label="More sessions">
+    <a class="p" href="../{{ prev.slug }}/"><span class="d">Previous</span>&larr;&nbsp;{{ prev.name }}</a>
+    <a class="c" href="../portfolio/">All sessions</a>
+    <a class="x" href="../{{ nxt.slug }}/"><span class="d">Next</span>{{ nxt.name }}&nbsp;&rarr;</a>
+  </nav>
 </section>
 
 <section class="jhp-vip">

@@ -96,9 +96,16 @@ def main():
 
         hs = [round((WIDTH - GAP * (len(r) - 1)) / sum(p["ar"] for p in r))
               for r in rows]
+        # The bar at the foot of the gallery walks Jessica's own order and
+        # wraps at both ends, so no session is a dead end.
+        i = galleries.index(g)
+        prev = galleries[i - 1]
+        nxt = galleries[(i + 1) % len(galleries)]
         payload = {"name": g["name"], "blurb":
                    "Photographed in the studio just outside Jefferson City.",
-                   "cdn": CDN, "rows": rows}
+                   "cdn": CDN, "rows": rows,
+                   "prev": {"name": prev["name"], "slug": prev["slug"]},
+                   "nxt": {"name": nxt["name"], "slug": nxt["slug"]}}
         (out_dir / (g["slug"] + ".json")).write_text(
             json.dumps(payload, separators=(",", ":")))
         summary.append((g["slug"], g["name"], len(photos), len(wide), len(tall),

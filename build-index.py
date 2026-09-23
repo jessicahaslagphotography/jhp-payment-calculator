@@ -17,19 +17,23 @@ CDN = "https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/"
 
 GAL_CSS = """/* THE INDEX
    ---------
-   Ten sessions, two to a row, one square each. Squares crop -- a third off
-   the sides of a wide frame, off the top and bottom of a tall one, centred
-   either way -- because a contact sheet wants one rhythm and mixed shapes
-   do not give you one. The galleries behind these squares crop nothing.
+   Ten sessions, three to a row, one square each. Squares crop -- a third
+   off the sides of a wide frame, off the top and bottom of a tall one,
+   centred either way -- because a contact sheet wants one rhythm and mixed
+   shapes do not give you one. The galleries behind these squares crop
+   nothing.
 
-   Two columns rather than five, and held to 1000px rather than the 1240
-   the galleries use: that draws each session at about 493px. Five across
-   was 249px, a thumbnail you skim; the full 1240 was 613px, which crowded
-   the screen. This sits between them. Ten lands as five rows, and the
-   count stays the same on a phone -- only the gap and the full-bleed
-   change -- so the page reads the same way on every screen. */
-.jhp-home .jhp-gal{display:grid;grid-template-columns:repeat(2,1fr);
-  gap:14px;max-width:1000px;margin:0 auto}
+   Ten does not divide by three, so the tenth would sit alone at the left
+   of a fourth row looking like a mistake. Columns are capped rather than
+   fractional so the grid can centre itself in the page, and a last square
+   that lands in column one on its own is moved to the middle -- a
+   deliberate-looking full stop instead of an orphan. Both rules are
+   conditional, so nine clients or twelve need no change here.
+
+   Two across on a phone: three would draw each session at about 120px. */
+.jhp-home .jhp-gal{display:grid;
+  grid-template-columns:repeat(3,minmax(0,370px));
+  justify-content:center;gap:14px;margin:0 auto}
 .jhp-home .jhp-gal a{position:relative;display:block;aspect-ratio:1/1;
   overflow:hidden;background:rgba(19,16,14,.06)}
 .jhp-home .jhp-gal img{position:absolute;inset:0;width:100%;height:100%;
@@ -38,21 +42,56 @@ GAL_CSS = """/* THE INDEX
 .jhp-home .jhp-gal a:hover img{transform:scale(1.045)}
 .jhp-home .jhp-gal a:focus-visible{outline:2px solid var(--gold-bright);
   outline-offset:3px}
+/* The centring itself: only when the final square would start a row alone. */
+.jhp-home .jhp-gal a:last-child:nth-child(3n+1){grid-column:2}
 
 /* The name sits on the photograph rather than under it, so the squares
    stay a grid of pictures and the row does not gain a band of text. The
    gradient is there to keep the name legible over a bright frame. */
 .jhp-home .jhp-gal .nm{position:absolute;left:0;right:0;bottom:0;
-  padding:36px 12px 15px;font-family:var(--sans);font-size:11.5px;
-  letter-spacing:.25em;text-transform:uppercase;color:var(--ink);
+  padding:32px 10px 13px;font-family:var(--sans);font-size:11px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--ink);
   text-align:center;
   background:linear-gradient(180deg,rgba(19,16,14,0),rgba(19,16,14,.78))}
 
 @media (max-width:620px){
-  .jhp-home .jhp-gal{gap:8px;max-width:none;
+  .jhp-home .jhp-gal{grid-template-columns:repeat(2,1fr);gap:8px;
     margin-inline:calc((100% - 100vw) / 2)}
+  /* Two columns divide ten exactly, so nothing is orphaned and the
+     middle-column rule has to be switched back off. */
+  .jhp-home .jhp-gal a:last-child:nth-child(3n+1){grid-column:auto}
   .jhp-home .jhp-gal .nm{padding:24px 6px 10px;font-size:10px;
     letter-spacing:.18em}
+}
+
+/* THE INTRO
+   ---------
+   The page opens on a photograph rather than on type. The band crops: a
+   3:2 frame cut to this height keeps its full width and loses about a
+   third of its height, taken a little above centre because that is where
+   faces sit. Frame and crop are one line each to change -- the src below
+   and the object-position here.
+
+   Shorter than the home page's hero on purpose. That one is the front
+   door and can afford the whole screen; this one is a heading with a
+   picture behind it, and the ten sessions need to be in reach. */
+.jhp-home .jhp-intro{position:relative}
+.jhp-home .jhp-intro img{width:100%;height:clamp(320px,37vw,600px);
+  max-height:none;object-fit:cover;object-position:50% 34%}
+.jhp-home .jhp-intro .jhp-over{position:absolute;inset:0;display:flex;
+  flex-direction:column;align-items:center;justify-content:flex-end;
+  text-align:center;
+  padding:0 clamp(20px,5vw,60px) clamp(26px,3.6vw,46px);
+  background:linear-gradient(0deg,rgba(19,16,14,.94) 0%,
+    rgba(19,16,14,.78) 24%,rgba(19,16,14,.34) 52%,rgba(19,16,14,.04) 82%)}
+.jhp-home .jhp-intro h1{margin:0;max-width:24ch}
+@media (max-width:620px){
+  /* A flat height again, as on the home page: a share of the width would
+     draw this at about 120px on a phone, which is a stripe, not a picture.
+     Cropping 3:2 that tall throws away the width instead, so the
+     horizontal position is what matters here. */
+  .jhp-home .jhp-intro img{height:340px;object-position:50% 30%}
+  .jhp-home .jhp-intro h1{max-width:20ch}
 }
 """
 
