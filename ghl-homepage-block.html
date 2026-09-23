@@ -253,7 +253,14 @@
    the row look ragged. The logo is centred against that matched pair. */
 .jhp-home .jhp-foot .cols{display:grid;
   grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
-  gap:clamp(26px,4vw,56px);max-width:1120px;margin:0 auto;align-items:start}
+  gap:clamp(26px,4vw,56px);max-width:1120px;margin:0 auto;
+  align-items:stretch;text-align:center}
+/* The contact column fills the row and spreads its blocks over it, so both
+   side columns end on the same line however the paragraph happens to wrap.
+   Where there is no spare height - on a phone, or if the paragraph is short -
+   the margins below govern and nothing moves. */
+.jhp-home .jhp-foot .contact{display:flex;flex-direction:column;
+  justify-content:space-between}
 /* Wordmark. jhp-logo.png, Jessica's own file from Drive, uploaded into the GHL
    media library. NOT jhp-logo-light.png, which was tried first and is corrupt:
    its IDAT chunk fails its CRC and 5,960 bytes of junk follow the image data,
@@ -274,17 +281,27 @@
    load, the browser renders its alt text in them and the footer still has a
    wordmark instead of a broken-image icon. */
 .jhp-home .jhp-foot .logo-mark{--logo-h:clamp(124px,13.5vw,176px);
-  display:block;width:fit-content;height:calc(var(--logo-h) * .562);
+  display:block;width:calc(var(--logo-h) * .838);
+  height:calc(var(--logo-h) * .562);
   overflow:hidden;margin:0 auto;align-self:center;
-  font-family:var(--serif);font-weight:500;font-size:clamp(25px,2.7vw,31px);
-  letter-spacing:.15em;line-height:1;color:var(--gold);text-transform:uppercase}
+  font-family:var(--serif);font-weight:500;font-size:clamp(17px,1.8vw,22px);
+  letter-spacing:.15em;line-height:1.3;color:var(--gold);text-transform:uppercase}
 .jhp-home .jhp-foot .logo-mark img{width:auto;height:var(--logo-h);max-width:none;
-  filter:none;mix-blend-mode:screen;margin-top:calc(var(--logo-h) * -.212)}
-/* 36ch, not the 44ch it started at. The measure is what squares the row off:
-   the paragraph wraps to the same depth as the contact block beside it, so the
-   two side columns finish 7px apart instead of 55px. */
+  filter:none;mix-blend-mode:screen;
+  margin-top:calc(var(--logo-h) * -.212);
+  margin-left:calc(var(--logo-h) * -.092)}
+/* 27ch, matched to the contact block, which measures 26ch at its widest line.
+   This is what centres the logo, and it is worth spelling out why. The columns
+   are equal and the logo column sits between them, so the logo is always on the
+   geometric centre - but the eye judges it against the two blocks of text, not
+   against the empty columns. With blocks of different widths you can have equal
+   gaps either side of the logo, or the logo on the true centre, but not both:
+   the gaps differ by exactly the difference in block widths. At 36ch the
+   paragraph ran 74px wider than the contact block, which put the logo 21px
+   right of where it looked like it should be, with 112px of space one side and
+   144px the other. Matching the widths removes the choice. */
 .jhp-home .jhp-foot .blurb{font-family:var(--sans);font-weight:300;font-size:15px;
-  line-height:1.8;color:var(--muted);margin:0;max-width:36ch}
+  line-height:1.8;color:var(--muted);margin:0 auto;max-width:27ch}
 .jhp-home .jhp-foot h3{font-family:var(--sans);font-weight:400;font-size:11px;
   letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
 .jhp-home .jhp-foot ul{list-style:none;display:flex;flex-direction:column;gap:11px}
@@ -320,7 +337,7 @@
    script, so they cost no extra request and inherit currentColor. 44px
    touch targets. */
 .jhp-home .jhp-foot .social{display:flex;gap:12px;flex-wrap:wrap;
-  align-items:center;margin-top:20px}
+  align-items:center;justify-content:center;margin-top:20px}
 .jhp-home .jhp-foot .social a{display:inline-flex;align-items:center;
   justify-content:center;width:44px;height:44px;border:1px solid var(--line);
   border-radius:50%;color:var(--muted);
@@ -341,9 +358,7 @@
   /* Stacked, the mark reads as the head of the block, so it goes first even
      though the paragraph comes first in the source. */
   .jhp-home .jhp-foot .logo-mark{order:-1}
-  .jhp-home .jhp-foot .blurb{margin:0 auto}
   .jhp-home .jhp-foot ul{align-items:center}
-  .jhp-home .jhp-foot .social{justify-content:center}
 }
 
 @media (prefers-reduced-motion:reduce){.jhp-home *{transition:none!important}}
@@ -559,7 +574,7 @@
            width="500" height="500" alt="JHP Boudoir">
     </div>
 
-    <div>
+    <div class="contact">
       <h3>Get In Touch</h3>
       <a class="mail" href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a>
       <p class="hrs">
