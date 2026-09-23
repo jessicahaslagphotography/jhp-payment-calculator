@@ -98,8 +98,12 @@
   font-size:clamp(28px,5.4vw,58px);line-height:1.06;letter-spacing:.01em;
   margin:0;color:var(--ink);text-wrap:balance}
 @media (max-width:620px){
-  .jhp-home .jhp-lead img{height:clamp(360px,54vh,480px);max-height:none;
-    object-position:center center}
+  /* The same clamp the homepage hero uses, so both pages open at the same
+     height on a phone: this was 456px against the homepage's 625px. The taller
+     crop keeps only ~42% of a 3:2 frame's width, so the focal point moves right
+     of centre - at 50% the right edge cuts through her face. */
+  .jhp-home .jhp-lead img{height:clamp(440px,74vh,660px);max-height:none;
+    object-position:76% 42%}
 }
 
 /* ABOUT PAGE
@@ -120,7 +124,10 @@
   /* Stacked, the photo leads: it is the first thing that should say who this
      page is about. Capped so it does not become a full-screen portrait. */
   .jhp-home .jhp-intro{grid-template-columns:1fr;gap:26px;max-width:520px}
-  .jhp-home .jhp-intro .shot{max-width:340px;margin:0 auto;width:100%}
+  /* No width cap on the photo: the homepage's "Hello, I'm Jess" portrait fills
+     its column when stacked, and a 340px cap here made this one 11px narrower
+     than that one on the same phone. */
+  .jhp-home .jhp-intro .shot{margin:0 auto;width:100%}
 }
 
 /* The quick-fire list. Rows rather than cards: each is one short label and one
@@ -148,8 +155,9 @@
 .jhp-home .jhp-pair figure::before{content:"";display:block;padding-top:66.6%}
 .jhp-home .jhp-pair img{position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:center center}
-@media (max-width:640px){
-  .jhp-home .jhp-pair{gap:6px}
+@media (max-width:700px){
+  /* 8px, the gap the homepage trio uses at this width. */
+  .jhp-home .jhp-pair{gap:8px}
 }
 
 /* Footer. Three columns on desktop, a centred stack on a phone. No photos;
