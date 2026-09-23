@@ -257,7 +257,12 @@
   padding:clamp(44px,5vw,66px) clamp(18px,5vw,40px) 0;text-align:left}
 /* Three columns: the studio paragraph, the logo as a centre divider, then the
    contact block. The two side columns are equal so the logo lands on the exact
-   centre line of the footer; the middle column is auto, sized by the mark. */
+   centre line of the footer; the middle column is auto, sized by the mark.
+
+   Both side columns are headed by the same gold label and start at the same
+   line, and the paragraph's measure is set so the two of them come out close
+   to the same height - they finished 55px apart before, which was what made
+   the row look ragged. The logo is centred against that matched pair. */
 .jhp-home .jhp-foot .cols{display:grid;
   grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
   gap:clamp(26px,4vw,56px);max-width:1120px;margin:0 auto;align-items:start}
@@ -280,25 +285,27 @@
    The type styles stay on the anchor deliberately. If the image ever fails to
    load, the browser renders its alt text in them and the footer still has a
    wordmark instead of a broken-image icon. */
-.jhp-home .jhp-foot .logo-mark{--logo-h:clamp(104px,12vw,150px);
+.jhp-home .jhp-foot .logo-mark{--logo-h:clamp(124px,13.5vw,176px);
   display:block;width:fit-content;height:calc(var(--logo-h) * .562);
   overflow:hidden;margin:0 auto;align-self:center;
   font-family:var(--serif);font-weight:500;font-size:clamp(25px,2.7vw,31px);
-  letter-spacing:.15em;line-height:1;color:var(--gold);text-transform:uppercase;
-  transition:color .3s,opacity .3s}
-.jhp-home .jhp-foot .logo-mark:hover{color:var(--gold-bright);opacity:.84}
+  letter-spacing:.15em;line-height:1;color:var(--gold);text-transform:uppercase}
 .jhp-home .jhp-foot .logo-mark img{width:auto;height:var(--logo-h);max-width:none;
   filter:none;mix-blend-mode:screen;margin-top:calc(var(--logo-h) * -.212)}
+/* 36ch, not the 44ch it started at. The measure is what squares the row off:
+   the paragraph wraps to the same depth as the contact block beside it, so the
+   two side columns finish 7px apart instead of 55px. */
 .jhp-home .jhp-foot .blurb{font-family:var(--sans);font-weight:300;font-size:15px;
-  line-height:1.8;color:var(--muted);margin:0;max-width:44ch}
+  line-height:1.8;color:var(--muted);margin:0;max-width:36ch}
 .jhp-home .jhp-foot h3{font-family:var(--sans);font-weight:400;font-size:11px;
   letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
 .jhp-home .jhp-foot ul{list-style:none;display:flex;flex-direction:column;gap:11px}
 .jhp-home .jhp-foot ul a{font-family:var(--sans);font-size:14px;font-weight:300;
   color:var(--muted);transition:color .3s}
 .jhp-home .jhp-foot ul a:hover,.jhp-home .jhp-foot .mail:hover{color:var(--gold)}
-.jhp-home .jhp-foot .mail{font-family:var(--sans);font-size:15px;font-weight:300;
-  color:var(--ink);transition:color .3s;word-break:break-word}
+.jhp-home .jhp-foot .mail{display:inline-block;font-family:var(--sans);
+  font-size:15px;font-weight:300;color:var(--ink);transition:color .3s;
+  word-break:break-word}
 .jhp-home .jhp-foot .hrs{font-family:var(--sans);font-weight:300;font-size:14px;
   line-height:1.75;color:var(--muted);margin:20px 0 0}
 .jhp-home .jhp-foot .hrs b{display:block;font-weight:400;color:var(--ink)}
@@ -325,7 +332,7 @@
    script, so they cost no extra request and inherit currentColor. 44px
    touch targets. */
 .jhp-home .jhp-foot .social{display:flex;gap:12px;flex-wrap:wrap;
-  align-items:center;margin-top:22px}
+  align-items:center;margin-top:20px}
 .jhp-home .jhp-foot .social a{display:inline-flex;align-items:center;
   justify-content:center;width:44px;height:44px;border:1px solid var(--line);
   border-radius:50%;color:var(--muted);
@@ -336,7 +343,11 @@
   display:block;pointer-events:none}
 .jhp-home .jhp-foot a:focus-visible{outline:2px solid var(--gold-bright);
   outline-offset:3px}
-@media (max-width:860px){
+/* Stacks at 920px rather than the 860px used elsewhere. Between about 860 and
+   920 the side columns get narrow enough to push the paragraph onto an extra
+   line, which pulls the row 34px out of square; stacking before that keeps the
+   three-column form only at widths where it sits level. */
+@media (max-width:920px){
   .jhp-home .jhp-foot{text-align:center}
   .jhp-home .jhp-foot .cols{grid-template-columns:1fr;gap:34px}
   /* Stacked, the mark reads as the head of the block, so it goes first even
@@ -549,16 +560,19 @@
 <footer class="jhp-foot">
   <div class="cols">
 
-    <p class="blurb">JHP Boudoir is a boudoir photography studio just outside
-       Jefferson City, Missouri, working with women from all across Missouri.
-       A luxury studio and an elevated experience from the first call to the
-       final reveal, proudly serving women of all walks of life and all bodies
-       since 2021.</p>
+    <div>
+      <h3>The Studio</h3>
+      <p class="blurb">JHP Boudoir is a boudoir photography studio just outside
+         Jefferson City, Missouri, working with women from all across Missouri.
+         A luxury studio and an elevated experience from the first call to the
+         final reveal, proudly serving women of all walks of life and all bodies
+         since 2021.</p>
+    </div>
 
-    <a class="logo-mark" href="/">
+    <div class="logo-mark">
       <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/3933909c-0f61-45aa-a608-4790cf3af1d3.png"
            width="500" height="500" alt="JHP Boudoir">
-    </a>
+    </div>
 
     <div>
       <h3>Get In Touch</h3>
