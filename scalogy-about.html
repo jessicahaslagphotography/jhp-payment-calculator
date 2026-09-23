@@ -98,12 +98,19 @@
   font-size:clamp(28px,5.4vw,58px);line-height:1.06;letter-spacing:.01em;
   margin:0;color:var(--ink);text-wrap:balance}
 @media (max-width:620px){
-  /* The same clamp the homepage hero uses, so both pages open at the same
-     height on a phone: this was 456px against the homepage's 625px. The taller
-     crop keeps only ~42% of a 3:2 frame's width, so the focal point moves right
-     of centre - at 50% the right edge cuts through her face. */
-  .jhp-home .jhp-lead img{height:clamp(440px,74vh,660px);max-height:none;
-    object-position:76% 42%}
+  /* Height, and the title sized against it. At 625px the opener took 74% of a
+     390x844 phone - you scrolled a full screen before reaching a word of the
+     page - and the 28px title read as a caption under all that photograph.
+     52vh lands it at 439px, a little over half the screen, which leaves the
+     first paragraph visible at the fold and lets the title come up to 35px.
+
+     The shorter box is also a better crop. A 3:2 frame squeezed into a tall
+     portrait keeps only ~42% of its width; at 439px it keeps 59%, so the
+     composition survives instead of being reduced to a fragment. */
+  .jhp-home .jhp-lead img{height:clamp(340px,52vh,460px);max-height:none;
+    object-position:84% 42%}
+  .jhp-home .jhp-lead h1{font-size:clamp(32px,9vw,40px);line-height:1.08}
+  .jhp-home .jhp-lead .plate{padding:0 22px 34px}
 }
 
 /* ABOUT PAGE
@@ -145,10 +152,10 @@
   .jhp-home .jhp-things{grid-template-columns:1fr;max-width:460px}
 }
 
-/* Her own session. Three landscape frames in a row, each in a 66.6% box - the
-   shape of every landscape original in the library - so none is cropped and
-   the row sits level. Three across at every width, like the trio on the
-   homepage: they are photographs, and a photograph still reads small. */
+/* Her own session. Three landscape frames, each in a 66.6% box - the shape of
+   every landscape original in the library - so none is cropped and they sit
+   level. A row of three on desktop and tablet; a single stacked column below
+   700px, where three across would leave each one too small to read. */
 .jhp-home .jhp-pair{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
   gap:clamp(8px,1.4vw,16px);max-width:1200px;margin:0 auto}
 .jhp-home .jhp-pair figure{position:relative;min-width:0;margin:0}
@@ -156,8 +163,12 @@
 .jhp-home .jhp-pair img{position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:center center}
 @media (max-width:700px){
-  /* 8px, the gap the homepage trio uses at this width. */
-  .jhp-home .jhp-pair{gap:8px}
+  /* Three across a phone gave each frame 112x74px. At that size a photograph
+     stops being a photograph - you cannot see a face, let alone a room - so
+     below 700px they stack and run the full column instead: 354x236 on a 390px
+     phone, better than three times the linear size. The 460px cap stops the
+     last of them becoming a billboard on a small tablet. */
+  .jhp-home .jhp-pair{grid-template-columns:1fr;gap:12px;max-width:460px}
 }
 
 /* Footer. Three columns on desktop, a centred stack on a phone. No photos;
