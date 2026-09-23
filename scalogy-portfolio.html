@@ -34,7 +34,6 @@
   --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
   --sans:'Jost',-apple-system,'Segoe UI',system-ui,sans-serif;
 
-  
   width:100vw; position:relative; left:50%; right:50%;
   margin-left:-50vw; margin-right:-50vw; max-width:100vw;
 
@@ -156,7 +155,6 @@
 @media (max-width:920px){
   .jhp-home .jhp-foot{text-align:center}
   .jhp-home .jhp-foot .cols{grid-template-columns:1fr;gap:34px}
-  
   .jhp-home .jhp-foot .logo-mark{order:-1}
   .jhp-home .jhp-foot ul{align-items:center}
 }
@@ -166,33 +164,32 @@
 
 /* THE GALLERY
    -----------
-   Multi-column rather than a grid of fixed boxes, because a portfolio should
-   not crop the work. Every photograph keeps its own shape and the column
-   absorbs the difference. With 24 landscape frames and 16 portrait ones in
-   this set, any fixed-ratio grid would have had to cut one or the other.
+   A fixed grid of squares, twelve frames, three across and four rows down --
+   Jessica's layout, and her twelve, chosen in this order. A fixed ratio has
+   to cut the work: a square takes a third off the sides of her landscape
+   frames and off the top and bottom of her tall ones, from the centre in
+   both cases. That is the price of the grid, and it is deliberate.
 
-   The trade is reading order: columns fill top to bottom, so the sequence runs
-   down one column before starting the next rather than left to right across
-   the page. For a gallery with no captions and no narrative that costs
-   nothing, and it is what buys the uncropped frames. */
-.jhp-home .jhp-gal{columns:3;column-gap:16px;max-width:1300px;margin:0 auto}
-.jhp-home .jhp-gal figure{break-inside:avoid;margin:0 0 16px}
-.jhp-home .jhp-gal img{width:100%;height:auto;display:block}
+   The frames come from her own media library at full resolution, so what
+   she picked is what is served -- no downscaled intermediate copy. */
+.jhp-home .jhp-gal{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  max-width:1300px;margin:0 auto}
+.jhp-home .jhp-gal figure{margin:0;position:relative;aspect-ratio:1/1;
+  overflow:hidden;background:rgba(19,16,14,.06)}
+.jhp-home .jhp-gal img{position:absolute;inset:0;width:100%;height:100%;
+  display:block;object-fit:cover;object-position:50% 50%}
 @media (max-width:960px){
-  .jhp-home .jhp-gal{columns:2;column-gap:12px}
-  .jhp-home .jhp-gal figure{margin-bottom:12px}
+  .jhp-home .jhp-gal{gap:12px}
 }
-/* One column on a phone, edge to edge - the same rule the About page follows,
-   where photographs take the full width and only text keeps its margins. Two
-   columns here would have drawn each frame at about 190px. */
+/* Two across on a phone. Three would draw each square at about 120px, which
+   is a thumbnail, not a photograph -- so the four rows become six. */
 @media (max-width:620px){
-  .jhp-home .jhp-gal{columns:1;max-width:none;
-    margin-inline:calc((100% - 100vw) / 2)}
-  .jhp-home .jhp-gal figure{margin-bottom:10px}
+  .jhp-home .jhp-gal{grid-template-columns:repeat(2,1fr);gap:8px;
+    max-width:none;margin-inline:calc((100% - 100vw) / 2)}
 }
-/* The closing band carries no photograph. Every other band on this page is
-   one, so a forty-first behind the text would have said nothing new - and
-   with no paragraph under it the button needs its own gap. */
+/* The closing band carries no photograph. The grid above it is twelve, so a
+   thirteenth behind the text would have said nothing new - and with no
+   paragraph under it the button needs its own gap. */
 .jhp-home .jhp-vip .jhp-h{margin-bottom:clamp(22px,2.6vw,30px)}
 </style>
 
@@ -215,50 +212,18 @@
 
 <section class="jhp-sec" style="border-bottom:none;padding-top:0">
   <div class="jhp-gal">
-    <!-- PLACEHOLDERS. Downscaled to 1100px and served from the public repo
-         rather than uploaded to the GHL media library, because Jessica is
-         sending the set she actually wants shown. Swap these for CDN urls
-         when that arrives. -->
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/6y2a9498.jpg" width="1100" height="1650" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/6y2a9504.jpg" width="1100" height="1650" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/6y2a9510.jpg" width="1100" height="1650" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/6y2a9514.jpg" width="1100" height="1650" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/6y2a9515.jpg" width="1100" height="1650" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-0148-bw.jpg" width="1100" height="1653" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-0273-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-0475-bw.jpg" width="1100" height="1653" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-0484-bw.jpg" width="1100" height="1653" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-0511-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-0609-bw.jpg" width="1100" height="1653" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-0630-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-0776-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-0798-bw.jpg" width="1100" height="1653" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-0927-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-1205-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-1279-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-1312-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-1324-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-1803.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-1936-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-2030-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-2043.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-2060.jpg" width="1100" height="1653" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-2071.jpg" width="1100" height="1653" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-2174-bw.jpg" width="1100" height="1653" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-2236-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-2702-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-4505-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-4553-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-4568-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-6722-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-7450-after.jpg" width="1100" height="1653" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-8438-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-8449-bw.jpg" width="1100" height="1653" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-8604-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-9236-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-9309-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/dsc-9341-bw.jpg" width="1100" height="732" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
-    <figure><img src="https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/img-8354.jpg" width="1050" height="1400" loading="lazy" alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee3df07a3cb6d49044cd.jpg" alt="Boudoir portrait in the JHP studio"></figure>
+    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee7918384d888bb3d890.jpg" alt="Boudoir portrait beside a candlelit fireplace"></figure>
+    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee86fef86e60d5226fb9.jpg" alt="Boudoir portrait on a leather chair before a wall of books"></figure>
+    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee468bf21de2ae407ab5.jpg" loading="lazy" alt="Boudoir portrait in a feathered robe beside a gilt mirror"></figure>
+    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee7dec718870e138f4be.jpg" loading="lazy" alt="Boudoir portrait in the JHP studio"></figure>
+    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee3fec718870e138ed24.jpg" loading="lazy" alt="Boudoir portrait in the JHP studio"></figure>
+    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee6fec718870e138f320.jpg" loading="lazy" alt="Boudoir portrait reclining on green velvet"></figure>
+    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee3fc745ba551e3488d8.jpg" loading="lazy" alt="Boudoir portrait in the JHP studio"></figure>
+    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee7bb2c147832f6690cd.jpg" loading="lazy" alt="Boudoir portrait in the JHP studio"></figure>
+    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee828bf21de2ae408336.jpg" loading="lazy" alt="Boudoir portrait beside a tall studio mirror"></figure>
+    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee75fef86e60d5226e19.jpg" loading="lazy" alt="Boudoir portrait in lace on a green velvet sofa"></figure>
+    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee9118384d888bb3dac8.jpg" loading="lazy" alt="Boudoir portrait in red lace before a gilt mirror"></figure>
   </div>
 </section>
 
