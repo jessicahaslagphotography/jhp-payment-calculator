@@ -78,6 +78,30 @@
   padding:clamp(40px,5vw,60px) clamp(18px,5vw,34px);text-align:center}
 .jhp-home .jhp-vip .inner{max-width:54ch;margin:0 auto}
 
+/* The lead plate. Same construction as the homepage hero - photo, gradient,
+   text over it, bottom-left - so the two pages open the same way. It carries
+   the page title, which is why the intro below it no longer needs a kicker:
+   two "About" labels in the first screen would have been one too many.
+
+   The photo is a 3:2 landscape. Left at its own ratio it would be only 260px
+   tall on a phone, too short to hold the title, so below 620px it takes an
+   explicit height and cover crops it to a portrait - the same treatment, and
+   the same reasoning, as the homepage hero. */
+.jhp-home .jhp-lead{position:relative}
+.jhp-home .jhp-lead img{max-height:56vh;object-fit:cover;object-position:center 38%}
+.jhp-home .jhp-lead .plate{position:absolute;inset:0;display:flex;
+  flex-direction:column;align-items:flex-start;justify-content:flex-end;
+  padding:0 clamp(20px,5vw,60px) clamp(28px,4vw,48px);
+  background:linear-gradient(0deg, rgba(19,16,14,.92) 0%, rgba(19,16,14,.74) 24%,
+    rgba(19,16,14,.34) 52%, rgba(19,16,14,.04) 82%)}
+.jhp-home .jhp-lead h1{font-family:var(--serif);font-weight:500;
+  font-size:clamp(28px,5.4vw,58px);line-height:1.06;letter-spacing:.01em;
+  margin:0;color:var(--ink);text-wrap:balance}
+@media (max-width:620px){
+  .jhp-home .jhp-lead img{height:clamp(360px,54vh,480px);max-height:none;
+    object-position:center center}
+}
+
 /* ABOUT PAGE
    ----------
    The intro is a portrait beside the copy, the same two-column shape as the
@@ -114,19 +138,18 @@
   .jhp-home .jhp-things{grid-template-columns:1fr;max-width:460px}
 }
 
-/* Her own session. Two landscape frames side by side, each in a 66.6% box -
-   the shape of every landscape original in the library - so neither is cropped
-   and the pair sits level. */
-.jhp-home .jhp-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:clamp(10px,1.6vw,18px);max-width:1120px;margin:0 auto}
+/* Her own session. Three landscape frames in a row, each in a 66.6% box - the
+   shape of every landscape original in the library - so none is cropped and
+   the row sits level. Three across at every width, like the trio on the
+   homepage: they are photographs, and a photograph still reads small. */
+.jhp-home .jhp-pair{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:clamp(8px,1.4vw,16px);max-width:1200px;margin:0 auto}
 .jhp-home .jhp-pair figure{position:relative;min-width:0;margin:0}
 .jhp-home .jhp-pair figure::before{content:"";display:block;padding-top:66.6%}
 .jhp-home .jhp-pair img{position:absolute;inset:0;width:100%;height:100%;
   object-fit:cover;object-position:center center}
 @media (max-width:640px){
-  /* Kept two across on a phone, like the trio on the homepage: they are
-     photographs, and a photograph still reads at half a phone's width. */
-  .jhp-home .jhp-pair{gap:8px}
+  .jhp-home .jhp-pair{gap:6px}
 }
 
 /* Footer. Three columns on desktop, a centred stack on a phone. No photos;
@@ -262,6 +285,14 @@
   <a href="/contact">Book a Call</a>
 </nav>
 
+<section class="jhp-lead">
+  <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/c63fc43f-3039-4140-a7cf-178903dce69e.jpg"
+       alt="Jessica Haslag photographed in her own studio">
+  <div class="plate">
+    <h1>Meet Your Photographer</h1>
+  </div>
+</section>
+
 <section class="jhp-sec">
   <div class="jhp-intro">
     <figure class="shot" style="margin:0">
@@ -269,8 +300,7 @@
            alt="Jessica Haslag in the JHP Boudoir studio, holding her camera">
     </figure>
     <div>
-      <p class="jhp-kicker">About</p>
-      <h1 class="jhp-h jhp-h-lg" style="margin-bottom:22px">Hi, I&rsquo;m Jess</h1>
+      <h2 class="jhp-h jhp-h-lg" style="margin-bottom:22px">Hi, I&rsquo;m Jess</h2>
       <p class="jhp-p">I grew up on a farm in Central Missouri, and I have never
          lived anywhere else. Not for a lack of chances &mdash; I just never
          found anywhere I liked more.</p>
@@ -316,6 +346,7 @@
   <div class="jhp-pair">
     <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/40896e46-4f5c-401b-a592-390df4375ae9.jpg" alt="Jessica Haslag photographed in her own studio"></figure>
     <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/986b3da7-2fdd-4470-b373-60853e23c44d.jpg" alt="Jessica Haslag photographed in her own studio"></figure>
+    <figure><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/9c456dc4-d15a-4d96-a9a7-1d88c2aa4888.jpg" alt="Jessica Haslag photographed in her own studio"></figure>
   </div>
 </section>
 
