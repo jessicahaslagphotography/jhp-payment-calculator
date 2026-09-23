@@ -150,21 +150,6 @@
   .jhp-home .jhp-intro .shot{margin:0 auto;width:100%}
 }
 
-/* The quick-fire list. Rows rather than cards: each is one short label and one
-   short answer, and a hairline between them does the work a border box would
-   do with far less weight. Two columns on desktop, one on a phone. */
-.jhp-home .jhp-things{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:0 clamp(28px,5vw,64px);max-width:960px;margin:0 auto}
-.jhp-home .jhp-things div{display:flex;flex-direction:column;gap:5px;
-  padding:17px 0;border-top:1px solid var(--line-soft)}
-.jhp-home .jhp-things dt{font-family:var(--sans);font-weight:400;font-size:10.5px;
-  letter-spacing:.26em;text-transform:uppercase;color:var(--gold)}
-.jhp-home .jhp-things dd{font-family:var(--sans);font-weight:300;font-size:16px;
-  line-height:1.6;color:var(--ink);margin:0}
-@media (max-width:700px){
-  .jhp-home .jhp-things{grid-template-columns:1fr;max-width:460px}
-}
-
 /* Her own session. Three landscape frames, each in a 66.6% box - the shape of
    every landscape original in the library - so none is cropped and they sit
    level. A row of three on desktop and tablet; a single stacked column below
@@ -352,24 +337,6 @@
 </section>
 
 <section class="jhp-sec" style="background:var(--surface)">
-  <div class="jhp-center" style="margin-bottom:clamp(24px,3vw,36px)">
-    <h2 class="jhp-h">A Few True Things</h2>
-  </div>
-  <dl class="jhp-things">
-    <div><dt>Coffee order</dt><dd>Dutch Bros Protein Golden Eagle, sugar-free
-      vanilla, sugar-free hazelnut</dd></div>
-    <div><dt>Playing in the studio</dt><dd>Dolly Parton, 2000s hip hop, Taylor
-      Swift, 90s country. Depends entirely on my mood.</dd></div>
-    <div><dt>Rewatched too many times</dt><dd>Grey&rsquo;s Anatomy</dd></div>
-    <div><dt>Always in my car</dt><dd>Hair ties around the shifter</dd></div>
-    <div><dt>Genuinely terrible at</dt><dd>Sports. Do not put me on your team.
-      We will lose.</dd></div>
-    <div><dt>Comfort food</dt><dd>Pasta with any kind of red sauce, and cheese</dd></div>
-    <div><dt>My friends tease me about</dt><dd>How much I baby my dog</dd></div>
-  </dl>
-</section>
-
-<section class="jhp-sec">
   <div class="jhp-center" style="margin-bottom:clamp(26px,3.4vw,40px)">
     <p class="jhp-kicker">In front of the camera</p>
     <h2 class="jhp-h">I Have Done This Myself</h2>
