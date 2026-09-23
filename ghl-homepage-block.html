@@ -243,8 +243,11 @@
    the only image is the logo. */
 .jhp-home .jhp-foot{background:var(--surface);border-top:1px solid var(--line);
   padding:clamp(44px,5vw,66px) clamp(18px,5vw,40px) 0;text-align:left}
+/* Three columns: the studio paragraph, the logo as a centre divider, then the
+   contact block. The two side columns are equal so the logo lands on the exact
+   centre line of the footer; the middle column is auto, sized by the mark. */
 .jhp-home .jhp-foot .cols{display:grid;
-  grid-template-columns:minmax(0,1.7fr) minmax(0,1fr) minmax(0,1.15fr);
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
   gap:clamp(26px,4vw,56px);max-width:1120px;margin:0 auto;align-items:start}
 /* Wordmark. jhp-logo.png, Jessica's own file from Drive, uploaded into the GHL
    media library. NOT jhp-logo-light.png, which was tried first and is corrupt:
@@ -265,18 +268,15 @@
    The type styles stay on the anchor deliberately. If the image ever fails to
    load, the browser renders its alt text in them and the footer still has a
    wordmark instead of a broken-image icon. */
-.jhp-home .jhp-foot .logo-mark{--logo-h:clamp(92px,9.5vw,112px);
+.jhp-home .jhp-foot .logo-mark{--logo-h:clamp(104px,12vw,150px);
   display:block;width:fit-content;height:calc(var(--logo-h) * .562);
-  overflow:hidden;margin:0 0 20px;
+  overflow:hidden;margin:0 auto;align-self:center;
   font-family:var(--serif);font-weight:500;font-size:clamp(25px,2.7vw,31px);
   letter-spacing:.15em;line-height:1;color:var(--gold);text-transform:uppercase;
   transition:color .3s,opacity .3s}
 .jhp-home .jhp-foot .logo-mark:hover{color:var(--gold-bright);opacity:.84}
 .jhp-home .jhp-foot .logo-mark img{width:auto;height:var(--logo-h);max-width:none;
   filter:none;mix-blend-mode:screen;margin-top:calc(var(--logo-h) * -.212)}
-@media (max-width:860px){
-  .jhp-home .jhp-foot .logo-mark{margin-left:auto;margin-right:auto}
-}
 .jhp-home .jhp-foot .blurb{font-family:var(--sans);font-weight:300;font-size:15px;
   line-height:1.8;color:var(--muted);margin:0;max-width:44ch}
 .jhp-home .jhp-foot h3{font-family:var(--sans);font-weight:400;font-size:11px;
@@ -290,12 +290,23 @@
 .jhp-home .jhp-foot .hrs{font-family:var(--sans);font-weight:300;font-size:14px;
   line-height:1.75;color:var(--muted);margin:20px 0 0}
 .jhp-home .jhp-foot .hrs b{display:block;font-weight:400;color:var(--ink)}
-/* The base bar carries only the copyright now that the icons have moved up
-   into the contact column, so it centres rather than sitting off to one side. */
+/* The base bar runs the Explore links as one row across the bottom of the page,
+   with the copyright beneath them; they were a vertical list in the middle
+   column before. Set in the same 11px uppercase as the top nav, so the two
+   navigations read as the same kind of thing. */
 .jhp-home .jhp-foot .base{max-width:1120px;
-  margin:clamp(32px,4vw,48px) auto 0;padding:20px 0 26px;
-  border-top:1px solid var(--line-soft);display:flex;flex-wrap:wrap;gap:12px 26px;
-  align-items:center;justify-content:center;text-align:center}
+  margin:clamp(32px,4vw,48px) auto 0;padding:22px 0 26px;
+  border-top:1px solid var(--line-soft);display:flex;flex-direction:column;
+  align-items:center;gap:16px;text-align:center}
+.jhp-home .jhp-foot .ftnav ul{flex-direction:row;flex-wrap:wrap;
+  justify-content:center;align-items:center;gap:0 clamp(16px,2.4vw,28px)}
+/* The padding is the tap target, not decoration: as plain inline links these
+   measured 13px tall, which is far too small to hit on a phone, and the bar
+   wraps to three rows at 320px. 14px top and bottom takes each one to about
+   45px. The row gap is 0 to compensate - the padding itself is what separates
+   the rows - so the bar looks the same as it would have with a 28px gap. */
+.jhp-home .jhp-foot .ftnav a{display:inline-block;padding:14px 0;
+  font-size:11px;letter-spacing:.24em;text-transform:uppercase}
 .jhp-home .jhp-foot .fc{font-family:var(--sans);font-size:12px;color:var(--dim);
   letter-spacing:.04em;margin:0}
 /* Social icons are inline SVG rather than an icon font or a third-party
@@ -316,6 +327,9 @@
 @media (max-width:860px){
   .jhp-home .jhp-foot{text-align:center}
   .jhp-home .jhp-foot .cols{grid-template-columns:1fr;gap:34px}
+  /* Stacked, the mark reads as the head of the block, so it goes first even
+     though the paragraph comes first in the source. */
+  .jhp-home .jhp-foot .logo-mark{order:-1}
   .jhp-home .jhp-foot .blurb{margin:0 auto}
   .jhp-home .jhp-foot ul{align-items:center}
   .jhp-home .jhp-foot .social{justify-content:center}
@@ -330,7 +344,7 @@
   <a href="/portfolio">Portfolio</a>
   <a href="/" class="jhp-logo">JHP</a>
   <a href="/investment">Investment</a>
-  <a href="https://api.leadconnectorhq.com/widget/booking/Ymk9FIg5KPX4lpCCdYmn" target="_blank" rel="noopener">Book a Call</a>
+  <a href="/contact">Book a Call</a>
 </nav>
 
 <!-- ===== 2 · hero ===== -->
@@ -382,10 +396,13 @@
       <div class="jhp-mission-rule" aria-hidden="true"></div>
       <p class="jhp-mission-lead">To build a room where you don&rsquo;t have to hold your stomach in, apologize for your body, or be anyone&rsquo;s idea of beautiful but your own &mdash; and then to photograph you in it.</p>
       <p class="jhp-p">It&rsquo;s the ultimate thing to do for yourself. Let&rsquo;s celebrate what you look like when you&rsquo;ve stopped apologizing for it.</p>
-      <!-- GHL calendar "JHP Boudoir Consultation Calendar", id Ymk9FIg5KPX4lpCCdYmn,
-           slug jhp-organic-consult-call. 20-minute inbound phone call, Mon-Fri
-           8am-5pm, bookable from +2h out to 4 days ahead. -->
-      <a class="jhp-btn" href="https://api.leadconnectorhq.com/widget/booking/Ymk9FIg5KPX4lpCCdYmn" target="_blank" rel="noopener">Book a call</a>
+      <!-- Points at /contact rather than straight at the booking widget: every
+           book-a-call and book-a-session button on the page funnels through the
+           contact page. The GHL calendar "JHP Boudoir Consultation Calendar"
+           (id Ymk9FIg5KPX4lpCCdYmn, slug jhp-organic-consult-call, 20-minute
+           inbound phone call, Mon-Fri 8am-5pm, bookable from +2h out to four
+           days ahead) belongs on that page. -->
+      <a class="jhp-btn" href="/contact">Book a call</a>
     </div>
     <!-- ig-2.jpg. Only 560x560: the centre square of DSC_8604-BW.jpg, cut for
          the old static Instagram row. It upscales about 36% in this box on a
@@ -517,30 +534,16 @@
 <footer class="jhp-foot">
   <div class="cols">
 
-    <div>
-      <a class="logo-mark" href="/">
-        <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/3933909c-0f61-45aa-a608-4790cf3af1d3.png"
-             width="500" height="500" alt="JHP Boudoir">
-      </a>
-      <p class="blurb">JHP Boudoir is a boudoir photography studio just outside
-         Jefferson City, Missouri, working with women from all across Missouri.
-         A luxury studio and an elevated experience from the first call to the
-         final reveal, proudly serving women of all walks of life and all bodies
-         since 2021.</p>
-    </div>
+    <p class="blurb">JHP Boudoir is a boudoir photography studio just outside
+       Jefferson City, Missouri, working with women from all across Missouri.
+       A luxury studio and an elevated experience from the first call to the
+       final reveal, proudly serving women of all walks of life and all bodies
+       since 2021.</p>
 
-    <nav aria-labelledby="ft-explore">
-      <h3 id="ft-explore">Explore</h3>
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/about">About</a></li>
-        <li><a href="/portfolio">Portfolio</a></li>
-        <li><a href="/investment">Investment</a></li>
-        <li><a href="/specialty-sessions">Specialty Sessions</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="https://api.leadconnectorhq.com/widget/booking/Ymk9FIg5KPX4lpCCdYmn" target="_blank" rel="noopener">Book a Call</a></li>
-      </ul>
-    </nav>
+    <a class="logo-mark" href="/">
+      <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/3933909c-0f61-45aa-a608-4790cf3af1d3.png"
+           width="500" height="500" alt="JHP Boudoir">
+    </a>
 
     <div>
       <h3>Get In Touch</h3>
@@ -549,10 +552,6 @@
         <b>Studio hours</b>
         By appointment only<br>
         Consultation calls Mon&ndash;Fri, 8am&ndash;5pm
-      </p>
-      <p class="hrs">
-        <b>Where to find me</b>
-        Jefferson City, Missouri
       </p>
       <div class="social">
         <a href="https://www.instagram.com/jhpboudoir_" target="_blank" rel="noopener" aria-label="JHP Boudoir on Instagram">
@@ -570,6 +569,17 @@
   </div>
 
   <div class="base">
+    <nav class="ftnav" aria-label="Explore">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/portfolio">Portfolio</a></li>
+        <li><a href="/investment">Investment</a></li>
+        <li><a href="/specialty-sessions">Specialty Sessions</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/contact">Book a Call</a></li>
+      </ul>
+    </nav>
     <p class="fc">&copy; 2026 JHP Boudoir &nbsp;&middot;&nbsp; Jefferson City, Missouri</p>
   </div>
 </footer>
