@@ -86,10 +86,14 @@
 
 /* ---------- 2 · hero ---------- */
 .jhp-home .jhp-hero{position:relative}
-/* the photo's own proportions make it ~950px tall on a laptop, which pushes
-   the headline below the fold. Capped so the whole hero reads at a glance.
-   object-position keeps the subject centred as the top and bottom trim. */
-.jhp-home .jhp-hero img{max-height:72vh;object-fit:cover;object-position:center 42%}
+/* Jessica set this one in the crop tuner on a 1728px screen: 628px tall with
+   the crop at 56% across and 30% down. 36.35vw lands on 628 there.
+
+   It used to be capped by 72vh instead, which made the hero's height depend on
+   how tall the browser window happened to be - drag the window shorter and the
+   photo followed. Driving it off width is both what she picked and steadier. */
+.jhp-home .jhp-hero img{height:clamp(300px,36.35vw,700px);max-height:none;
+  object-fit:cover;object-position:56% 30%}
 /* The overlay sits on the photo at every width, phones included. At its own
    3:2 ratio the hero is only about 260px tall on a 390px screen, nowhere near
    enough to hold the eyebrow, a two-line headline and a button, so on a phone
@@ -99,8 +103,17 @@
    left of centre in this frame, and 46% keeps her in while trimming the bright
    window at the right edge. */
 @media (max-width:620px){
-  .jhp-home .jhp-hero img{height:clamp(440px,74vh,660px);max-height:none;
-    object-position:46% center}
+  /* Her phone setting, taken on a 440px screen: 280px with the crop at 51%
+     across and 0% down. Flat rather than a share of the width because the
+     overlay below it needs about 190px whatever the screen, and a ratio would
+     have squeezed that on a small phone.
+
+     Which slider does the work flips inside the phone range here, which is
+     worth knowing before either number gets touched again. The crossover is at
+     280 x 1.503, about 421px wide: above that the box is wider than the frame
+     so only the y moves it, below it only the x. Her 51% is doing the work on
+     a 390px phone and her 0% on a 440px one. */
+  .jhp-home .jhp-hero img{height:280px;max-height:none;object-position:51% 0%}
 }
 .jhp-home .jhp-hero .jhp-over{position:absolute;inset:0;display:flex;flex-direction:column;
   align-items:flex-start;justify-content:flex-end;gap:16px;text-align:left;
