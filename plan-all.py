@@ -101,9 +101,7 @@ def main():
         i = galleries.index(g)
         prev = galleries[i - 1]
         nxt = galleries[(i + 1) % len(galleries)]
-        payload = {"name": g["name"], "blurb":
-                   "Photographed in the studio just outside Jefferson City.",
-                   "cdn": CDN, "rows": rows,
+        payload = {"name": g["name"], "cdn": CDN, "rows": rows,
                    "prev": {"name": prev["name"], "slug": prev["slug"]},
                    "nxt": {"name": nxt["name"], "slug": nxt["slug"]}}
         (out_dir / (g["slug"] + ".json")).write_text(
