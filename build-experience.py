@@ -160,29 +160,44 @@ PAGE_CSS = """
 
 /* THE PROCESS
    -----------
-   Six steps down a single column rather than across a row. A row of six
-   forces every step to the length of the shortest one, and these are not
-   the same length -- "you reach out" is a sentence and the reveal is a
-   paragraph. Down the page each step can say what it needs to.
+   Two columns of three: one, two, three down the left and four, five,
+   six down the right, which is how a numbered list is set in two columns
+   anywhere else.
 
-   The spine is a real line on the list, with each step's number sitting
-   on it in a disc of the page's own background so the line appears to
-   pass behind. Numbers are the serif face: they are the only figures on
-   the page and they should read as type, not as a UI.
+   Each column is joined by a real hairline with the step numbers sitting
+   on it, in discs of the page's own background so the line appears to
+   pass behind them. Numbers are the serif face: they are the only
+   figures on the page and they should read as type, not as a UI.
 
-   It is drawn as one segment per step rather than one line down the
-   whole list, because a single line has no way of knowing where the last
-   number is: it ran on past step six to the foot of its paragraph. A
-   segment belongs to its own step, and the last step simply has none, so
-   the line ends inside the sixth disc. */
-.jhp-home .jhp-flow{position:relative;max-width:760px;margin:clamp(30px,4vw,44px) auto 0;
-  list-style:none;padding:0}
+   The line is one segment per step rather than one line per column,
+   because a single line has no way of knowing where its last number is
+   -- it ran on past the bottom step to the foot of its paragraph. A
+   segment belongs to its own step, and the step at the foot of each
+   column simply has none, so the line ends inside that disc.
+
+   Segments run to the bottom of their grid row rather than to the bottom
+   of their own text, so the six steps can be six different lengths and
+   the line still comes out continuous. That is also why there is no row
+   gap: the space between steps is padding inside them, which the segment
+   covers, and a gap would have broken the line into dashes.
+
+   Nothing joins the foot of the left column to the head of the right.
+   The numbers carry that jump, as they do in print -- and so does the
+   draw-in below, which runs down the left column and then down the
+   right, in reading order. */
+.jhp-home .jhp-flow{position:relative;max-width:1080px;
+  margin:clamp(30px,4vw,44px) auto 0;list-style:none;padding:0;
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  grid-template-rows:repeat(3,auto);grid-auto-flow:column;
+  column-gap:clamp(34px,5vw,76px)}
 .jhp-home .jhp-flow li{position:relative;padding:0 0 clamp(26px,3.4vw,38px) 62px;
   text-align:left}
 .jhp-home .jhp-flow li::before{content:"";position:absolute;left:21px;top:10px;
   bottom:0;width:1px;background:var(--line)}
-.jhp-home .jhp-flow li:last-child::before{content:none}
-.jhp-home .jhp-flow li:last-child{padding-bottom:0}
+.jhp-home .jhp-flow li:nth-child(3)::before,
+.jhp-home .jhp-flow li:nth-child(6)::before{content:none}
+.jhp-home .jhp-flow li:nth-child(3),
+.jhp-home .jhp-flow li:nth-child(6){padding-bottom:0}
 .jhp-home .jhp-flow .n{position:absolute;left:0;top:-2px;width:43px;height:43px;
   display:flex;align-items:center;justify-content:center;border-radius:50%;
   background:var(--ground);border:1px solid var(--line);
@@ -198,6 +213,16 @@ PAGE_CSS = """
 .jhp-home .jhp-flow .when{display:inline-block;margin:0 0 9px;
   font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.24em;
   text-transform:uppercase;color:var(--gold)}
+/* Below a tablet the two columns would be about 340px each, which is a
+   40-character measure with a 62px indent taken out of it first. One
+   column of six instead -- and then step three is in the middle of the
+   run again and needs its segment back, while step six is the only one
+   at the foot of anything. */
+@media (max-width:820px){
+  .jhp-home .jhp-flow{display:block;max-width:760px}
+  .jhp-home .jhp-flow li:nth-child(3)::before{content:""}
+  .jhp-home .jhp-flow li:nth-child(3){padding-bottom:clamp(26px,3.4vw,38px)}
+}
 @media (max-width:620px){
   .jhp-home .jhp-flow li::before{left:17px}
   .jhp-home .jhp-flow li{padding-left:50px}
@@ -213,14 +238,21 @@ PAGE_CSS = """
 .jhp-home.js-rev .jhp-flow li::before{transform:scaleY(0);transform-origin:50% 0;
   transition:transform .34s linear}
 .jhp-home.js-rev .jhp-flow.in li::before{transform:scaleY(1)}
-/* Staggered so it reads as one line travelling down the list rather than
-   as six lines growing at once. Six steps, written out: a nth-child sum
-   would be shorter and would silently stop working at step seven. */
+/* Staggered so it reads as one line travelling through the steps rather
+   than as four lines growing at once -- down the left column, then down
+   the right, which is the only thing on the page that shows the jump
+   from step three to step four. Steps three and six carry no segment, so
+   they take no delay. */
 .jhp-home.js-rev .jhp-flow.in li:nth-child(1)::before{transition-delay:.05s}
 .jhp-home.js-rev .jhp-flow.in li:nth-child(2)::before{transition-delay:.39s}
-.jhp-home.js-rev .jhp-flow.in li:nth-child(3)::before{transition-delay:.73s}
-.jhp-home.js-rev .jhp-flow.in li:nth-child(4)::before{transition-delay:1.07s}
-.jhp-home.js-rev .jhp-flow.in li:nth-child(5)::before{transition-delay:1.41s}
+.jhp-home.js-rev .jhp-flow.in li:nth-child(4)::before{transition-delay:.73s}
+.jhp-home.js-rev .jhp-flow.in li:nth-child(5)::before{transition-delay:1.07s}
+/* One column, so the run is one to five and step three is back in it. */
+@media (max-width:820px){
+  .jhp-home.js-rev .jhp-flow.in li:nth-child(3)::before{transition-delay:.73s}
+  .jhp-home.js-rev .jhp-flow.in li:nth-child(4)::before{transition-delay:1.07s}
+  .jhp-home.js-rev .jhp-flow.in li:nth-child(5)::before{transition-delay:1.41s}
+}
 
 /* This page's bands carry different photographs from the Portfolio's, so
    they carry different crops. Every other line of the two bands is the
@@ -298,7 +330,7 @@ BODY = """
 <section class="jhp-sec" style="border-bottom:none">
   <div class="jhp-center-wide">
     <p class="jhp-kicker">The Studio</p>
-    <h2 class="jhp-h jhp-h-lg">A room built for exactly this</h2>
+    <h2 class="jhp-h jhp-h-lg">A Studio Designed Exactly for Boudoir</h2>
     <p class="jhp-p">High ceilings, wood beams, chandeliers and brick, and
        more than one set to move between &mdash; so a single session gives you
        photographs that do not all look like they were taken in the same
@@ -357,30 +389,30 @@ BODY = """
 <section class="jhp-sec" style="border-bottom:none">
   <div class="jhp-center-wide">
     <p class="jhp-kicker">Included</p>
-    <h2 class="jhp-h jhp-h-lg">What comes with every session</h2>
+    <h2 class="jhp-h jhp-h-lg">What Comes With Every Session</h2>
   </div>
 
   <div class="jhp-inc">
     <div class="it">
-      <h3>Professional hair and makeup</h3>
+      <h3>Professional Hair and Makeup</h3>
       <p>Done here at the studio before we shoot, by someone who does this for
          a living. You do not need to arrive ready and you do not need to book
          it separately &mdash; it is part of the session.</p>
     </div>
     <div class="it">
-      <h3>The client wardrobe</h3>
+      <h3>The Client Wardrobe</h3>
       <p>A full wardrobe here for you to borrow from, so you are not shopping
          for something you will wear once. Bring what you love if you have it;
          pull from mine if you do not.</p>
     </div>
     <div class="it">
-      <h3>The studio itself</h3>
+      <h3>The Studio Itself</h3>
       <p>High ceilings, wood beams, chandeliers, and several sets to work
          through in one session &mdash; brick and candlelight, the gilt mirror
          under the windows, green velvet, the library wall.</p>
     </div>
     <div class="it">
-      <h3>Posing, head to toe</h3>
+      <h3>Professional Posing, Head to Toe</h3>
       <p>Where your chin goes, what your hands are doing, where your weight
          sits. I show you rather than describe it, and I do it for the whole
          session. You will never be left standing there guessing.</p>
@@ -393,13 +425,13 @@ BODY = """
 <section class="jhp-sec" style="border-bottom:none">
   <div class="jhp-center-wide">
     <p class="jhp-kicker">Step by step</p>
-    <h2 class="jhp-h jhp-h-lg">How it all works</h2>
+    <h2 class="jhp-h jhp-h-lg">How It All Works</h2>
   </div>
 
   <ol class="jhp-flow">
     <li>
       <span class="n" aria-hidden="true">1</span>
-      <h3>You reach out</h3>
+      <h3>You Reach Out</h3>
       <p>Send me a message and I will send you the Session Guide &mdash; the
          studio, the experience, what a session includes and where pricing
          starts, all in one place. Read it in your own time, with no one
@@ -408,14 +440,14 @@ BODY = """
     <li>
       <span class="n" aria-hidden="true">2</span>
       <p class="when">Fifteen minutes</p>
-      <h3>We talk it through</h3>
+      <h3>We Talk It Through</h3>
       <p>A short call &mdash; fifteen minutes at the most. We go over the
          details, I answer anything the guide did not, and if it feels right we
          get your session on the calendar.</p>
     </li>
     <li>
       <span class="n" aria-hidden="true">3</span>
-      <h3>You get ready</h3>
+      <h3>You Get Ready</h3>
       <p>Prep guides arrive by email in the weeks before your session: what to
          wear, what to bring, how to prepare, what to expect on the day. You
          will not be left to work any of it out on your own.</p>
@@ -423,7 +455,7 @@ BODY = """
     <li>
       <span class="n" aria-hidden="true">4</span>
       <p class="when">Two to three hours</p>
-      <h3>Session day</h3>
+      <h3>Session Day</h3>
       <p>Hair and makeup first, then we shoot. Plan on two to three hours at
          the studio &mdash; it is not a rushed hour, and part of what makes the
          photographs work is having the time to settle in.</p>
@@ -431,7 +463,7 @@ BODY = """
     <li>
       <span class="n" aria-hidden="true">5</span>
       <p class="when">7&ndash;14 business days later</p>
-      <h3>Your reveal</h3>
+      <h3>Your Reveal</h3>
       <p>We sit down together and go through your images for the first time,
          seven to fourteen business days after your session. You choose which
          ones you want to keep and how you want them &mdash; and you order them
@@ -441,7 +473,7 @@ BODY = """
     </li>
     <li>
       <span class="n" aria-hidden="true">6</span>
-      <h3>Everything comes home</h3>
+      <h3>Everything Comes Home</h3>
       <p>Your digital images are yours the moment the reveal ends. Albums, wall
          art and anything else printed are made to order and arrive at your
          door within six weeks of that appointment.</p>
