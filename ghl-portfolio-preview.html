@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio | JHP Boudoir</title>
+<meta name="description" content="Boudoir photography by JHP Boudoir, Jefferson City, Missouri. Women of every age and every body, photographed in the studio.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Portfolio | JHP Boudoir">
+<meta property="og:description" content="Boudoir photography in Jefferson City, Missouri.">
+<meta property="og:type" content="website">
+<style>html,body{margin:0;padding:0;background:#13100E}body{overflow-x:hidden}</style>
+</head>
+<body>
+<div class="jhp-home">
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
+
+.jhp-home{
+  --ground:#13100E; --surface:#1C1714; --raised:#241D18;
+  --ink:#F2ECE2; --muted:#A99A86; --dim:#7D7161;
+  --gold:#C9A24B; --gold-bright:#E6C576;
+  --line:rgba(201,162,75,.22); --line-soft:rgba(242,236,226,.09);
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Jost',-apple-system,'Segoe UI',system-ui,sans-serif;
+
+  /* full-bleed escape from a centred host container.
+     If the section it sits in is already full width, delete these 5 lines. */
+  width:100vw; position:relative; left:50%; right:50%;
+  margin-left:-50vw; margin-right:-50vw; max-width:100vw;
+
+  background:var(--ground); color:var(--ink);
+  font-family:var(--sans); font-size:16px; line-height:1.55;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+.jhp-home *,.jhp-home *::before,.jhp-home *::after{box-sizing:border-box}
+.jhp-home p,.jhp-home h1,.jhp-home h2,.jhp-home h3,.jhp-home ul,.jhp-home figure{margin:0;padding:0}
+.jhp-home img{display:block;width:100%;height:auto;max-width:100%;border:0;
+  filter:saturate(.96) contrast(1.02)}
+.jhp-home a{text-decoration:none;color:inherit}
+
+/* ---------- shared type ---------- */
+.jhp-home .jhp-kicker{font-family:var(--sans);font-weight:400;font-size:11px;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
+.jhp-home .jhp-h{font-family:var(--serif);font-weight:500;font-size:clamp(26px,4vw,34px);
+  line-height:1.16;letter-spacing:.01em;margin:0 0 16px;color:var(--ink);
+  text-wrap:balance}
+.jhp-home .jhp-p{font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.75;
+  color:var(--muted);margin:0 0 18px}
+.jhp-home .jhp-sec{padding:clamp(42px,6vw,72px) clamp(18px,5vw,40px);
+  border-bottom:1px solid var(--line-soft)}
+.jhp-home .jhp-center{text-align:center;max-width:660px;margin:0 auto}
+.jhp-home .jhp-center-wide{text-align:center;max-width:880px;margin:0 auto}
+.jhp-home .jhp-h-lg{font-size:clamp(31px,5vw,46px);line-height:1.1}
+
+/* ---------- buttons ---------- */
+.jhp-home .jhp-btn,.jhp-home .jhp-btn2{display:inline-block;font-family:var(--sans);
+  font-weight:500;font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+  border-radius:2px;padding:14px 28px;cursor:pointer;transition:all .35s;border:none}
+.jhp-home .jhp-btn{color:var(--ground);background:var(--gold)}
+.jhp-home .jhp-btn:hover{background:var(--gold-bright)}
+.jhp-home .jhp-btn2{color:var(--gold);background:transparent;border:1px solid var(--gold);padding:13px 27px}
+.jhp-home .jhp-btn2:hover{color:var(--gold-bright);border-color:var(--gold-bright)}
+.jhp-home .jhp-btn:focus-visible,.jhp-home .jhp-btn2:focus-visible{
+  outline:2px solid var(--gold-bright);outline-offset:3px}
+
+/* ---------- 1 · header ---------- */
+.jhp-home .jhp-nav{display:flex;align-items:center;justify-content:center;gap:26px;
+  flex-wrap:wrap;padding:20px 18px;border-bottom:1px solid var(--line-soft)}
+.jhp-home .jhp-nav a{font-family:var(--sans);font-weight:400;font-size:11px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.jhp-home .jhp-nav a:hover{color:var(--gold)}
+.jhp-home .jhp-logo{font-family:var(--serif);font-size:22px;letter-spacing:.14em;
+  color:var(--gold);text-transform:uppercase}
+/* Five items at 11px with .24em tracking measure 364px of ink before any gaps,
+   so on a phone the row wrapped and left "Book a Call" alone on a second line -
+   at 320px it stranded two. Shrinking the type enough to fit four links plus
+   the mark on one line meant 9px, which is too small to read in caps.
+
+   So it stops pretending to be a row. The mark takes a line of its own and the
+   four links fall into two even columns beneath it: a deliberate block rather
+   than a row that happens to have broken. Costs about 30px of height at the top
+   of the page and gives every link a 37px tap target, up from 19px. */
+@media (max-width:620px){
+  .jhp-home .jhp-nav{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;
+    padding:14px 18px 8px;justify-items:center;line-height:1.2}
+  .jhp-home .jhp-nav .jhp-logo{grid-column:1 / -1;order:-1;font-size:24px;
+    padding-bottom:6px}
+  .jhp-home .jhp-nav a{padding:11px 0;font-size:10.5px;letter-spacing:.2em}
+}
+
+/* ---------- closing band ---------- */
+.jhp-home .jhp-vip{background:var(--surface);border-top:1px solid var(--line);
+  padding:clamp(40px,5vw,60px) clamp(18px,5vw,34px);text-align:center}
+.jhp-home .jhp-vip .inner{max-width:54ch;margin:0 auto}
+
+/* THE GALLERY
+   -----------
+   Multi-column rather than a grid of fixed boxes, because a portfolio should
+   not crop the work. Every photograph keeps its own shape and the column
+   absorbs the difference. With 24 landscape frames and 16 portrait ones in
+   this set, any fixed-ratio grid would have had to cut one or the other.
+
+   The trade is reading order: columns fill top to bottom, so the sequence runs
+   down one column before starting the next rather than left to right across
+   the page. For a gallery with no captions and no narrative that costs
+   nothing, and it is what buys the uncropped frames. */
+.jhp-home .jhp-gal{columns:3;column-gap:16px;max-width:1300px;margin:0 auto}
+.jhp-home .jhp-gal figure{break-inside:avoid;margin:0 0 16px}
+.jhp-home .jhp-gal img{width:100%;height:auto;display:block}
+@media (max-width:960px){
+  .jhp-home .jhp-gal{columns:2;column-gap:12px}
+  .jhp-home .jhp-gal figure{margin-bottom:12px}
+}
+/* One column on a phone, edge to edge - the same rule the About page follows,
+   where photographs take the full width and only text keeps its margins. Two
+   columns here would have drawn each frame at about 190px. */
+@media (max-width:620px){
+  .jhp-home .jhp-gal{columns:1;max-width:none;
+    margin-inline:calc((100% - 100vw) / 2)}
+  .jhp-home .jhp-gal figure{margin-bottom:10px}
+}
+/* The closing band carries no photograph. Every other band on this page is
+   one, so a forty-first behind the text would have said nothing new - and
+   without a paragraph under it the button needs its own gap. */
+.jhp-home .jhp-vip .jhp-h{margin-bottom:clamp(22px,2.6vw,30px)}
+
+/* Footer. Three columns on desktop, a centred stack on a phone. No photos;
+   the only image is the logo. */
+.jhp-home .jhp-foot{background:var(--surface);border-top:1px solid var(--line);
+  padding:clamp(44px,5vw,66px) clamp(18px,5vw,40px) 0;text-align:left}
+/* Three columns: the studio paragraph, the logo as a centre divider, then the
+   contact block. The two side columns are equal so the logo lands on the exact
+   centre line of the footer; the middle column is auto, sized by the mark.
+
+   Both side columns are headed by the same gold label and start at the same
+   line, and the paragraph's measure is set so the two of them come out close
+   to the same height - they finished 55px apart before, which was what made
+   the row look ragged. The logo is centred against that matched pair. */
+.jhp-home .jhp-foot .cols{display:grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  gap:clamp(26px,4vw,56px);max-width:1120px;margin:0 auto;
+  align-items:stretch;text-align:center}
+/* The contact column fills the row and spreads its blocks over it, so both
+   side columns end on the same line however the paragraph happens to wrap.
+   Where there is no spare height - on a phone, or if the paragraph is short -
+   the margins below govern and nothing moves. */
+.jhp-home .jhp-foot .contact{display:flex;flex-direction:column;
+  justify-content:space-between}
+/* Wordmark. jhp-logo.png, Jessica's own file from Drive, uploaded into the GHL
+   media library. NOT jhp-logo-light.png, which was tried first and is corrupt:
+   its IDAT chunk fails its CRC and 5,960 bytes of junk follow the image data,
+   so no browser will render it. This one passes every chunk CRC and decodes to
+   500x500 RGB - the JHP monogram in white on a solid black canvas, no alpha
+   channel. The canvas is dropped out with mix-blend-mode:screen, which against
+   --surface leaves only the lettering: black blends to exactly the footer
+   colour.
+
+   The artwork only occupies y 106-386 of the 500px square, so a plain 500x500
+   box would surround the mark with 21% dead space above and 23% below and push
+   the blurb down. The anchor is therefore a window .562 of the image's height -
+   the ink's exact share - with the image pulled up by .212 of it, the exact top
+   padding. overflow:hidden clips, and because it creates no stacking context
+   the blend still composites against the footer.
+
+   The type styles stay on the anchor deliberately. If the image ever fails to
+   load, the browser renders its alt text in them and the footer still has a
+   wordmark instead of a broken-image icon. */
+.jhp-home .jhp-foot .logo-mark{--logo-h:clamp(124px,13.5vw,176px);
+  display:block;width:calc(var(--logo-h) * .838);
+  height:calc(var(--logo-h) * .562);
+  overflow:hidden;margin:0 auto;align-self:center;
+  font-family:var(--serif);font-weight:500;font-size:clamp(17px,1.8vw,22px);
+  letter-spacing:.15em;line-height:1.3;color:var(--gold);text-transform:uppercase}
+.jhp-home .jhp-foot .logo-mark img{width:auto;height:var(--logo-h);max-width:none;
+  filter:none;mix-blend-mode:screen;
+  margin-top:calc(var(--logo-h) * -.212);
+  margin-left:calc(var(--logo-h) * -.092)}
+/* 27ch, matched to the contact block, which measures 26ch at its widest line.
+   This is what centres the logo, and it is worth spelling out why. The columns
+   are equal and the logo column sits between them, so the logo is always on the
+   geometric centre - but the eye judges it against the two blocks of text, not
+   against the empty columns. With blocks of different widths you can have equal
+   gaps either side of the logo, or the logo on the true centre, but not both:
+   the gaps differ by exactly the difference in block widths. At 36ch the
+   paragraph ran 74px wider than the contact block, which put the logo 21px
+   right of where it looked like it should be, with 112px of space one side and
+   144px the other. Matching the widths removes the choice. */
+.jhp-home .jhp-foot .blurb{font-family:var(--sans);font-weight:300;font-size:15px;
+  line-height:1.8;color:var(--muted);margin:0 auto;max-width:27ch}
+.jhp-home .jhp-foot h3{font-family:var(--sans);font-weight:400;font-size:11px;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
+.jhp-home .jhp-foot ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.jhp-home .jhp-foot ul a{font-family:var(--sans);font-size:14px;font-weight:300;
+  color:var(--muted);transition:color .3s}
+.jhp-home .jhp-foot ul a:hover,.jhp-home .jhp-foot .mail:hover{color:var(--gold)}
+.jhp-home .jhp-foot .mail{display:inline-block;font-family:var(--sans);
+  font-size:15px;font-weight:300;color:var(--ink);transition:color .3s;
+  word-break:break-word}
+.jhp-home .jhp-foot .hrs{font-family:var(--sans);font-weight:300;font-size:14px;
+  line-height:1.75;color:var(--muted);margin:20px 0 0}
+.jhp-home .jhp-foot .hrs b{display:block;font-weight:400;color:var(--ink)}
+/* The base bar runs the Explore links as one row across the bottom of the page,
+   with the copyright beneath them; they were a vertical list in the middle
+   column before. Set in the same 11px uppercase as the top nav, so the two
+   navigations read as the same kind of thing. */
+.jhp-home .jhp-foot .base{max-width:1120px;
+  margin:clamp(32px,4vw,48px) auto 0;padding:22px 0 26px;
+  border-top:1px solid var(--line-soft);display:flex;flex-direction:column;
+  align-items:center;gap:16px;text-align:center}
+.jhp-home .jhp-foot .ftnav ul{flex-direction:row;flex-wrap:wrap;
+  justify-content:center;align-items:center;gap:0 clamp(16px,2.4vw,28px)}
+/* The padding is the tap target, not decoration: as plain inline links these
+   measured 13px tall, which is far too small to hit on a phone, and the bar
+   wraps to three rows at 320px. 14px top and bottom takes each one to about
+   45px. The row gap is 0 to compensate - the padding itself is what separates
+   the rows - so the bar looks the same as it would have with a 28px gap. */
+.jhp-home .jhp-foot .ftnav a{display:inline-block;padding:14px 0;
+  font-size:11px;letter-spacing:.24em;text-transform:uppercase}
+.jhp-home .jhp-foot .fc{font-family:var(--sans);font-size:12px;color:var(--dim);
+  letter-spacing:.04em;margin:0}
+/* Social icons are inline SVG rather than an icon font or a third-party
+   script, so they cost no extra request and inherit currentColor. 44px
+   touch targets. */
+.jhp-home .jhp-foot .social{display:flex;gap:12px;flex-wrap:wrap;
+  align-items:center;justify-content:center;margin-top:20px}
+.jhp-home .jhp-foot .social a{display:inline-flex;align-items:center;
+  justify-content:center;width:44px;height:44px;border:1px solid var(--line);
+  border-radius:50%;color:var(--muted);
+  transition:color .3s,border-color .3s,background .3s}
+.jhp-home .jhp-foot .social a:hover{color:var(--ground);background:var(--gold);
+  border-color:var(--gold)}
+.jhp-home .jhp-foot .social svg{width:17px;height:17px;fill:currentColor;
+  display:block;pointer-events:none}
+.jhp-home .jhp-foot a:focus-visible{outline:2px solid var(--gold-bright);
+  outline-offset:3px}
+/* Stacks at 920px rather than the 860px used elsewhere. Between about 860 and
+   920 the side columns get narrow enough to push the paragraph onto an extra
+   line, which pulls the row 34px out of square; stacking before that keeps the
+   three-column form only at widths where it sits level. */
+@media (max-width:920px){
+  .jhp-home .jhp-foot{text-align:center}
+  .jhp-home .jhp-foot .cols{grid-template-columns:1fr;gap:34px}
+  /* Stacked, the mark reads as the head of the block, so it goes first even
+     though the paragraph comes first in the source. */
+  .jhp-home .jhp-foot .logo-mark{order:-1}
+  .jhp-home .jhp-foot ul{align-items:center}
+}
+
+@media (prefers-reduced-motion:reduce){.jhp-home *{transition:none!important}}
+</style>
+
+<nav class="jhp-nav">
+  <a href="/about">About</a>
+  <a href="/portfolio">Portfolio</a>
+  <a href="/" class="jhp-logo">JHP</a>
+  <a href="/investment">Investment</a>
+  <a href="/contact">Book a Call</a>
+</nav>
+
+<section class="jhp-sec" style="border-bottom:none;padding-bottom:clamp(24px,3vw,34px)">
+  <div class="jhp-center">
+    <p class="jhp-kicker">The work</p>
+    <h1 class="jhp-h jhp-h-lg" style="margin-bottom:14px">Portfolio</h1>
+    <p class="jhp-p" style="margin-bottom:0">Women of every age and every body,
+       photographed in the studio just outside Jefferson City.</p>
+  </div>
+</section>
+
+<section class="jhp-sec" style="border-bottom:none;padding-top:0">
+  <div class="jhp-gal">
+    <figure><img src="assets/portfolio/6y2a9498.jpg" width="1100" height="1650" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/6y2a9504.jpg" width="1100" height="1650" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/6y2a9510.jpg" width="1100" height="1650" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/6y2a9514.jpg" width="1100" height="1650" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/6y2a9515.jpg" width="1100" height="1650" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-0148-bw.jpg" width="1100" height="1653" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-0273-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-0475-bw.jpg" width="1100" height="1653" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-0484-bw.jpg" width="1100" height="1653" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-0511-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-0609-bw.jpg" width="1100" height="1653" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-0630-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-0776-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-0798-bw.jpg" width="1100" height="1653" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-0927-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-1205-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-1279-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-1312-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-1324-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-1803.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-1936-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-2030-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-2043.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-2060.jpg" width="1100" height="1653" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-2071.jpg" width="1100" height="1653" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-2174-bw.jpg" width="1100" height="1653" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-2236-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-2702-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-4505-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-4553-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-4568-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-6722-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-7450-after.jpg" width="1100" height="1653" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-8438-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-8449-bw.jpg" width="1100" height="1653" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-8604-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-9236-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-9309-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/dsc-9341-bw.jpg" width="1100" height="732" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+    <figure><img src="assets/portfolio/img-8354.jpg" width="1050" height="1400" loading="lazy" decoding="async"
+      alt="Boudoir portrait by JHP Boudoir"></figure>
+  </div>
+</section>
+
+<section class="jhp-vip">
+  <div class="inner">
+    <p class="jhp-kicker">When you are ready</p>
+    <h2 class="jhp-h">Your Turn</h2>
+    <a class="jhp-btn" href="/contact">Book Your Session</a>
+  </div>
+</section>
+
+<footer class="jhp-foot">
+  <div class="cols">
+
+    <div>
+      <h3>The Studio</h3>
+      <p class="blurb">JHP Boudoir is a boudoir photography studio just outside
+         Jefferson City, Missouri, working with women from all across Missouri.
+         A luxury studio and an elevated experience from the first call to the
+         final reveal, proudly serving women of all walks of life and all bodies
+         since 2021.</p>
+    </div>
+
+    <div class="logo-mark">
+      <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/3933909c-0f61-45aa-a608-4790cf3af1d3.png"
+           width="500" height="500" alt="JHP Boudoir">
+    </div>
+
+    <div class="contact">
+      <h3>Get In Touch</h3>
+      <a class="mail" href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a>
+      <p class="hrs">
+        <b>Studio Hours</b>
+        By Appointment Only<br>
+        Consultation Calls Mon&ndash;Fri, 8am&ndash;5pm
+      </p>
+      <div class="social">
+        <a href="https://www.instagram.com/jhpboudoir_" target="_blank" rel="noopener" aria-label="JHP Boudoir on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.3-.79-.72-1.46-1.38-2.13C21.32 1.35 20.65.93 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100082843870968" target="_blank" rel="noopener" aria-label="JHP Boudoir on Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@jhpboudoir" target="_blank" rel="noopener" aria-label="JHP Boudoir on TikTok">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.55 3h-3.3v13.2a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .76-5.06V10.3a5.94 5.94 0 0 0-.76-.05 5.94 5.94 0 1 0 5.94 5.94V9.4a7.56 7.56 0 0 0 4.4 1.4V7.5a4.28 4.28 0 0 1-3.4-3.08z"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="base">
+    <nav class="ftnav" aria-label="Explore">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/portfolio">Portfolio</a></li>
+        <li><a href="/investment">Investment</a></li>
+        <li><a href="/specialty-sessions">Specialty Sessions</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/contact">Book a Call</a></li>
+      </ul>
+    </nav>
+    <p class="fc">&copy; 2026 JHP Boudoir &nbsp;&middot;&nbsp; Jefferson City, Missouri</p>
+  </div>
+</footer>
+</div>
+</body>
+</html>
