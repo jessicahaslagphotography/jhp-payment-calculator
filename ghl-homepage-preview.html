@@ -251,24 +251,30 @@
   text-transform:uppercase;color:var(--gold);margin:0 0 8px}
 
 /* ---------- 10 · footer ---------- */
-/* Footer. Three columns on desktop, a centred stack on a phone. No photos:
-   the logo is the only image, and it is the transparent PNG, because a logo
-   saved without transparency would sit in a pale box on this dark ground. */
+/* Footer. Three columns on desktop, a centred stack on a phone. No photos;
+   the only image is the logo. */
 .jhp-home .jhp-foot{background:var(--surface);border-top:1px solid var(--line);
   padding:clamp(44px,5vw,66px) clamp(18px,5vw,40px) 0;text-align:left}
 .jhp-home .jhp-foot .cols{display:grid;
   grid-template-columns:minmax(0,1.7fr) minmax(0,1fr) minmax(0,1.15fr);
   gap:clamp(26px,4vw,56px);max-width:1120px;margin:0 auto;align-items:start}
-/* Wordmark set in type, not an image. There is no logo file in the GHL media
-   library: JHP 1 (1).png and JHP POlaroids.png both measure photographic, and
-   the 300x100 PNG that measured as flat artwork turned out to be the five-star
-   rating graphic — five identical 54px gold shapes at 6px intervals. Swap this
-   for an <img> once a real mark (ideally an SVG) is uploaded. */
+/* Wordmark. jhp-logo-light.png, Jessica's own file from Drive, uploaded into
+   the GHL media library. It is colour type 2 (RGB, no alpha), so it carries a
+   solid canvas rather than transparency, and two independent partial decodes
+   both read that canvas as black with light grey lettering on it. So the canvas
+   is dropped out with mix-blend-mode:screen, which against --surface leaves
+   only the lettering: black blends to exactly the footer colour.
+
+   The type styles stay on the anchor deliberately. If the image ever fails to
+   load, the browser renders its alt text in them and the footer still has a
+   wordmark instead of a broken-image icon. */
 .jhp-home .jhp-foot .logo-mark{display:inline-block;margin:0 0 20px;
   font-family:var(--serif);font-weight:500;font-size:clamp(25px,2.7vw,31px);
   letter-spacing:.15em;line-height:1;color:var(--gold);text-transform:uppercase;
-  transition:color .3s}
-.jhp-home .jhp-foot .logo-mark:hover{color:var(--gold-bright)}
+  transition:color .3s,opacity .3s}
+.jhp-home .jhp-foot .logo-mark:hover{color:var(--gold-bright);opacity:.84}
+.jhp-home .jhp-foot .logo-mark img{width:auto;height:clamp(64px,7vw,84px);
+  max-width:100%;filter:none;mix-blend-mode:screen}
 .jhp-home .jhp-foot .blurb{font-family:var(--sans);font-weight:300;font-size:15px;
   line-height:1.8;color:var(--muted);margin:0;max-width:44ch}
 .jhp-home .jhp-foot h3{font-family:var(--sans);font-weight:400;font-size:11px;
@@ -513,7 +519,10 @@
   <div class="cols">
 
     <div>
-      <a class="logo-mark" href="/">JHP Boudoir</a>
+      <a class="logo-mark" href="/">
+        <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/e0933b17-dcaf-4699-9cf8-b4104745a65a.png"
+             width="500" height="500" alt="JHP Boudoir">
+      </a>
       <p class="blurb">JHP Boudoir is a boudoir photography studio just outside
          Jefferson City, Missouri, working with women from all across Missouri.
          A luxury studio and an elevated experience from the first call to the
