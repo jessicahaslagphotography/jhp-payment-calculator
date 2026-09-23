@@ -240,12 +240,49 @@
   text-transform:uppercase;color:var(--gold);margin:0 0 8px}
 
 /* ---------- 10 · footer ---------- */
-.jhp-home .jhp-foot{padding:36px 24px;text-align:center;border-top:1px solid var(--line)}
-.jhp-home .jhp-foot .fl{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
-.jhp-home .jhp-foot .fl a{font-family:var(--sans);font-size:11px;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--muted);transition:color .3s}
-.jhp-home .jhp-foot .fl a:hover{color:var(--gold)}
-.jhp-home .jhp-foot .fc{font-family:var(--sans);font-size:12px;color:var(--dim);letter-spacing:.05em}
+/* Footer. Three columns on desktop, a centred stack on a phone. No photos:
+   the logo is the only image, and it is the transparent PNG, because a logo
+   saved without transparency would sit in a pale box on this dark ground. */
+.jhp-home .jhp-foot{background:var(--surface);border-top:1px solid var(--line);
+  padding:clamp(44px,5vw,66px) clamp(18px,5vw,40px) 0;text-align:left}
+.jhp-home .jhp-foot .cols{display:grid;
+  grid-template-columns:minmax(0,1.7fr) minmax(0,1fr) minmax(0,1.15fr);
+  gap:clamp(26px,4vw,56px);max-width:1120px;margin:0 auto;align-items:start}
+.jhp-home .jhp-foot .logo-mark{display:inline-block;margin:0 0 20px}
+.jhp-home .jhp-foot .logo-mark img{width:auto;height:clamp(74px,7vw,94px);
+  max-width:100%;filter:none}
+.jhp-home .jhp-foot .blurb{font-family:var(--sans);font-weight:300;font-size:15px;
+  line-height:1.8;color:var(--muted);margin:0;max-width:44ch}
+.jhp-home .jhp-foot h3{font-family:var(--sans);font-weight:400;font-size:11px;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
+.jhp-home .jhp-foot ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.jhp-home .jhp-foot ul a{font-family:var(--sans);font-size:14px;font-weight:300;
+  color:var(--muted);transition:color .3s}
+.jhp-home .jhp-foot ul a:hover,.jhp-home .jhp-foot .mail:hover{color:var(--gold)}
+.jhp-home .jhp-foot .mail{font-family:var(--sans);font-size:15px;font-weight:300;
+  color:var(--ink);transition:color .3s;word-break:break-word}
+.jhp-home .jhp-foot .hrs{font-family:var(--sans);font-weight:300;font-size:14px;
+  line-height:1.75;color:var(--muted);margin:20px 0 0}
+.jhp-home .jhp-foot .hrs b{display:block;font-weight:400;color:var(--ink)}
+.jhp-home .jhp-foot .base{max-width:1120px;
+  margin:clamp(32px,4vw,48px) auto 0;padding:20px 0 26px;
+  border-top:1px solid var(--line-soft);display:flex;flex-wrap:wrap;gap:12px 26px;
+  align-items:center;justify-content:space-between}
+.jhp-home .jhp-foot .fc{font-family:var(--sans);font-size:12px;color:var(--dim);
+  letter-spacing:.04em;margin:0}
+.jhp-home .jhp-foot .social{display:flex;gap:20px;flex-wrap:wrap}
+.jhp-home .jhp-foot .social a{font-family:var(--sans);font-size:11px;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.jhp-home .jhp-foot .social a:hover{color:var(--gold)}
+.jhp-home .jhp-foot a:focus-visible{outline:2px solid var(--gold-bright);
+  outline-offset:3px}
+@media (max-width:860px){
+  .jhp-home .jhp-foot{text-align:center}
+  .jhp-home .jhp-foot .cols{grid-template-columns:1fr;gap:34px}
+  .jhp-home .jhp-foot .blurb{margin:0 auto}
+  .jhp-home .jhp-foot ul{align-items:center}
+  .jhp-home .jhp-foot .base{justify-content:center;text-align:center}
+}
 
 @media (prefers-reduced-motion:reduce){.jhp-home *{transition:none!important}}
 </style>
@@ -444,15 +481,54 @@
 
 <!-- ===== 10 · footer ===== -->
 <footer class="jhp-foot">
-  <div class="fl">
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/portfolio">Portfolio</a>
-    <a href="/investment">Investment</a>
-    <a href="/specialty-sessions">Specialty Sessions</a>
-    <a href="/blog">Blog</a>
-    <a href="https://api.leadconnectorhq.com/widget/booking/Ymk9FIg5KPX4lpCCdYmn" target="_blank" rel="noopener">Book a call</a>
+  <div class="cols">
+
+    <div>
+      <!-- JHP 1 (1).png, 1080x1080 with a real alpha channel. -->
+      <a class="logo-mark" href="/" aria-label="JHP Boudoir, home">
+        <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/68805f8f8ffd9ed471b8be66.png" alt="JHP Boudoir" width="1080" height="1080">
+      </a>
+      <p class="blurb">A boudoir photography studio in Jefferson City, Missouri,
+         working with women from across central Missouri. Sessions are fully
+         guided, so you are never left wondering what to do with your hands, and
+         you choose your images at a private one-on-one reveal.</p>
+    </div>
+
+    <nav aria-labelledby="ft-explore">
+      <h3 id="ft-explore">Explore</h3>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/portfolio">Portfolio</a></li>
+        <li><a href="/investment">Investment</a></li>
+        <li><a href="/specialty-sessions">Specialty Sessions</a></li>
+        <li><a href="/blog">Blog</a></li>
+      </ul>
+    </nav>
+
+    <div>
+      <h3>Get In Touch</h3>
+      <a class="mail" href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a>
+      <p class="hrs">
+        <b>Studio hours</b>
+        By appointment only<br>
+        Consultation calls Mon&ndash;Fri, 8am&ndash;5pm
+      </p>
+      <p class="hrs">
+        <b>Where to find me</b>
+        Jefferson City, Missouri
+      </p>
+    </div>
+
   </div>
-  <p class="fc">@jhpboudoir_ &nbsp;&middot;&nbsp; Jefferson City, MO</p>
+
+  <div class="base">
+    <p class="fc">&copy; 2026 JHP Boudoir &nbsp;&middot;&nbsp; Jefferson City, Missouri</p>
+    <div class="social">
+      <a href="https://www.instagram.com/jhpboudoir_" target="_blank" rel="noopener">@jhpboudoir_</a>
+      <a href="https://www.facebook.com/groups/1107773373084834" target="_blank" rel="noopener">VIP Group</a>
+      <a href="https://api.leadconnectorhq.com/widget/booking/Ymk9FIg5KPX4lpCCdYmn" target="_blank" rel="noopener">Book a Call</a>
+    </div>
+  </div>
 </footer>
 </div>
