@@ -431,7 +431,7 @@ BODY = """
   <ol class="jhp-flow">
     <li>
       <span class="n" aria-hidden="true">1</span>
-      <h3>You Reach Out</h3>
+      <h3>Inquire</h3>
       <p>Send me a message and I will send you the Session Guide &mdash; the
          studio, the experience, what a session includes and where pricing
          starts, all in one place. Read it in your own time, with no one
@@ -440,14 +440,14 @@ BODY = """
     <li>
       <span class="n" aria-hidden="true">2</span>
       <p class="when">Fifteen minutes</p>
-      <h3>We Talk It Through</h3>
+      <h3>Consultation Call</h3>
       <p>A short call &mdash; fifteen minutes at the most. We go over the
          details, I answer anything the guide did not, and if it feels right we
          get your session on the calendar.</p>
     </li>
     <li>
       <span class="n" aria-hidden="true">3</span>
-      <h3>You Get Ready</h3>
+      <h3>Before the Session</h3>
       <p>Prep guides arrive by email in the weeks before your session: what to
          wear, what to bring, how to prepare, what to expect on the day. You
          will not be left to work any of it out on your own.</p>
@@ -463,7 +463,7 @@ BODY = """
     <li>
       <span class="n" aria-hidden="true">5</span>
       <p class="when">7&ndash;14 business days later</p>
-      <h3>Your Reveal</h3>
+      <h3>Image Reveal</h3>
       <p>We sit down together and go through your images for the first time,
          seven to fourteen business days after your session. You choose which
          ones you want to keep and how you want them &mdash; and you order them
@@ -473,7 +473,7 @@ BODY = """
     </li>
     <li>
       <span class="n" aria-hidden="true">6</span>
-      <h3>Everything Comes Home</h3>
+      <h3>Product Delivery</h3>
       <p>Your digital images are yours the moment the reveal ends. Albums, wall
          art and anything else printed are made to order and arrive at your
          door within six weeks of that appointment.</p>
