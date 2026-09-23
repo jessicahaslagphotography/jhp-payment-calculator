@@ -228,8 +228,26 @@
 /* ---------- 9 · instagram ---------- */
 /* Behold pulls the live @jhpboudoir_ feed. Columns and gap are set in the
    Behold dashboard; this only bounds the width so it lines up with the page. */
-.jhp-home .jhp-ig-wrap{max-width:720px;margin:0 auto}
-.jhp-home .jhp-ig-wrap behold-widget{display:block;width:100%}
+/* The Instagram row is rendered from Behold's JSON feed rather than by their
+   widget. Their widget puts itself in a shadow DOM, so its column count can
+   only be changed in their dashboard; rendering it here means the layout is
+   ours, and no third-party script runs on the page. */
+.jhp-home .jhp-ig-row{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:10px;max-width:1120px;margin:0 auto}
+.jhp-home .jhp-ig-row a{position:relative;display:block;overflow:hidden;
+  background:var(--raised);border-radius:2px}
+.jhp-home .jhp-ig-row a::before{content:"";display:block;padding-top:100%}
+.jhp-home .jhp-ig-row img{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;transition:transform .5s ease,opacity .3s}
+.jhp-home .jhp-ig-row a:hover img{transform:scale(1.06);opacity:.88}
+.jhp-home .jhp-ig-row a:focus-visible{outline:2px solid var(--gold-bright);
+  outline-offset:2px}
+@media (max-width:820px){
+  /* Six across on a phone is about 55px a side, too small to read as a photo.
+     Three keeps them legible; the strip is still one line on any real screen. */
+  .jhp-home .jhp-ig-row{grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:8px;max-width:560px}
+}
 .jhp-home .jhp-handle{font-family:var(--sans);font-size:11px;letter-spacing:.26em;
   text-transform:uppercase;color:var(--gold);margin:0 0 8px}
 
@@ -391,17 +409,47 @@
   <div class="jhp-center" style="margin-bottom:18px">
     <p class="jhp-handle" style="margin-bottom:0">@jhpboudoir_</p>
   </div>
-  <div class="jhp-ig-wrap">
-    <behold-widget feed-id="jnoM4Us1mPFmRBXBMriG"></behold-widget>
-  </div>
+  <div class="jhp-ig-row" id="jhpIgRow"></div>
   <script>
     (() => {
-      if (window.__bhldScript) return;
-      window.__bhldScript = true;
-      const d = document, s = d.createElement("script");
-      s.type = "module";
-      s.src = "https://w.behold.so/widget.js";
-      setTimeout(() => { d.head.append(s); }, 0);
+      const host = document.getElementById("jhpIgRow");
+      if (!host) return;
+      const FEED = "https://feeds.behold.so/jnoM4Us1mPFmRBXBMriG";
+      fetch(FEED)
+        .then(r => r.ok ? r.json() : Promise.reject(r.status))
+        .then(data => {
+          const posts = (data.posts || []).slice(0, 6);
+          if (!posts.length) throw new Error("empty feed");
+          const frag = document.createDocumentFragment();
+          posts.forEach(p => {
+            const sm = (p.sizes || {}).small, md = (p.sizes || {}).medium;
+            const src = (sm || md || {}).mediaUrl;
+            if (!src) return;
+            const a = document.createElement("a");
+            a.href = p.permalink;
+            a.target = "_blank";
+            a.rel = "noopener";
+            const img = document.createElement("img");
+            img.src = src;
+            if (sm && md) {
+              img.srcset = sm.mediaUrl + " 400w, " + md.mediaUrl + " 700w";
+              img.sizes = "(max-width:820px) 33vw, 180px";
+            }
+            img.loading = "lazy";
+            img.decoding = "async";
+            img.alt = (p.prunedCaption || "Recent work by JHP Boudoir")
+                        .replace(/\s+/g, " ").trim().slice(0, 110);
+            a.appendChild(img);
+            frag.appendChild(a);
+          });
+          if (!frag.childElementCount) throw new Error("no usable images");
+          host.appendChild(frag);
+        })
+        .catch(() => {
+          // Feed unreachable: drop the row rather than leave six empty boxes.
+          // The handle above and the Follow button below still stand alone.
+          host.remove();
+        });
     })();
   </script>
   <div class="jhp-center" style="margin-top:26px">
