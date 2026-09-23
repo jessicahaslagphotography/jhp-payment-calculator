@@ -164,17 +164,18 @@
 
 /* THE INDEX
    ---------
-   Ten sessions, one square each. Squares crop -- a third off the sides of
-   a wide frame, off the top and bottom of a tall one, centred either way --
-   because a contact sheet wants one rhythm and mixed shapes do not give
-   you one. The galleries behind these squares crop nothing.
+   Ten sessions, two to a row, one square each. Squares crop -- a third off
+   the sides of a wide frame, off the top and bottom of a tall one, centred
+   either way -- because a contact sheet wants one rhythm and mixed shapes
+   do not give you one. The galleries behind these squares crop nothing.
 
-   auto-fit rather than a fixed column count, so the row rebalances when
-   Jessica adds or retires a client instead of stranding one on a line of
-   its own. At full width ten lands as two rows of five. */
-.jhp-home .jhp-gal{display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:14px;max-width:1300px;margin:0 auto}
+   Two columns rather than five: at full width that draws each session at
+   about 613px instead of 249px, which is the difference between a
+   thumbnail you skim and a photograph that stops you. Ten lands as five
+   rows, and the count stays the same on a phone -- only the gap and the
+   full-bleed change -- so the page reads the same way on every screen. */
+.jhp-home .jhp-gal{display:grid;grid-template-columns:repeat(2,1fr);
+  gap:14px;max-width:1240px;margin:0 auto}
 .jhp-home .jhp-gal a{position:relative;display:block;aspect-ratio:1/1;
   overflow:hidden;background:rgba(19,16,14,.06)}
 .jhp-home .jhp-gal img{position:absolute;inset:0;width:100%;height:100%;
@@ -186,16 +187,17 @@
 
 /* The name sits on the photograph rather than under it, so the squares
    stay a grid of pictures and the row does not gain a band of text. The
-   gradient is there to keep the name legible over a bright frame. */
+   gradient is there to keep the name legible over a bright frame. At this
+   size the name can afford to be a little larger. */
 .jhp-home .jhp-gal .nm{position:absolute;left:0;right:0;bottom:0;
-  padding:30px 10px 13px;font-family:var(--sans);font-size:11px;
-  letter-spacing:.24em;text-transform:uppercase;color:var(--ink);
+  padding:42px 12px 18px;font-family:var(--sans);font-size:12px;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--ink);
   text-align:center;
   background:linear-gradient(180deg,rgba(19,16,14,0),rgba(19,16,14,.78))}
 
 @media (max-width:620px){
-  .jhp-home .jhp-gal{grid-template-columns:repeat(2,1fr);gap:8px;
-    max-width:none;margin-inline:calc((100% - 100vw) / 2)}
+  .jhp-home .jhp-gal{gap:8px;max-width:none;
+    margin-inline:calc((100% - 100vw) / 2)}
   .jhp-home .jhp-gal .nm{padding:24px 6px 10px;font-size:10px;
     letter-spacing:.18em}
 }
