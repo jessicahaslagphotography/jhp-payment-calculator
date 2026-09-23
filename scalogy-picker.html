@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pick your twelve | JHP Boudoir</title>
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{margin:0;padding:0;background:#13100E}body{overflow-x:hidden}</style>
+</head>
+<body>
+{% raw %}
+<div class="pk">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Jost:wght@300;400;500&display=swap');
+
+.pk{--ground:#13100E;--surface:#1C1714;--ink:#F2ECE2;--muted:#A99A86;--dim:#7D7161;
+  --gold:#C9A24B;--gold-bright:#E6C576;
+  --line:rgba(201,162,75,.22);--line-soft:rgba(242,236,226,.10);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Jost',-apple-system,'Segoe UI',system-ui,sans-serif;
+  background:var(--ground);color:var(--ink);font-family:var(--sans);
+  font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  min-height:100vh;overflow-x:hidden;padding-bottom:96px}
+.pk *,.pk *::before,.pk *::after{box-sizing:border-box}
+.pk h1,.pk h2,.pk p{margin:0}
+
+.pk .head{padding:18px 20px 14px;text-align:center}
+.pk .head .k{font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:6px}
+.pk .head h1{font-family:var(--serif);font-weight:500;font-size:28px}
+.pk .head p{font-size:13px;color:var(--muted);margin-top:8px;line-height:1.6;
+  max-width:52ch;margin-left:auto;margin-right:auto}
+
+/* The shape control. Four rows of three is a fixed grid, so every frame has
+   to be cut to one shape -- she chooses which, and sees it applied live. */
+.pk .shape{display:flex;justify-content:center;gap:0;padding:6px 20px 0}
+.pk .shape button{font-family:var(--sans);font-size:10.5px;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);background:transparent;
+  border:1px solid var(--line-soft);padding:11px 14px;cursor:pointer;
+  transition:all .25s;-webkit-tap-highlight-color:transparent}
+.pk .shape button+button{border-left:none}
+.pk .shape button:first-child{border-radius:2px 0 0 2px}
+.pk .shape button:last-child{border-radius:0 2px 2px 0}
+.pk .shape button.on{color:var(--ground);background:var(--gold);
+  border-color:var(--gold)}
+
+/* Which pool of photographs we are looking through. */
+.pk .tabs{display:flex;justify-content:center;gap:26px;padding:20px 20px 0;
+  border-bottom:1px solid var(--line-soft);margin:16px 16px 0}
+.pk .tabs button{font-family:var(--sans);font-size:11px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);background:transparent;border:none;
+  border-bottom:2px solid transparent;padding:0 2px 12px;cursor:pointer;
+  transition:all .25s;-webkit-tap-highlight-color:transparent}
+.pk .tabs button.on{color:var(--gold-bright);border-bottom-color:var(--gold)}
+
+.pk .note{max-width:52ch;margin:14px auto 0;padding:0 20px;font-size:12px;
+  color:var(--dim);line-height:1.6;text-align:center}
+
+/* The contact sheet. Whole frames, uncropped, so she is choosing the
+   photograph and not a crop of it. */
+.pk .sheet{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));
+  gap:10px;padding:18px 16px 0;max-width:1240px;margin:0 auto}
+.pk .cell{position:relative;background:var(--surface);border:1px solid transparent;
+  cursor:pointer;padding:0;overflow:hidden;-webkit-tap-highlight-color:transparent;
+  transition:border-color .2s,transform .2s;display:block;width:100%}
+.pk .cell img{display:block;width:100%;height:190px;object-fit:contain;
+  background:#0D0B09}
+.pk .cell .nm{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--dim);padding:7px 8px;text-align:center;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pk .cell.on{border-color:var(--gold)}
+.pk .cell.on img{opacity:.72}
+.pk .cell .num{position:absolute;top:8px;left:8px;width:26px;height:26px;
+  border-radius:50%;background:var(--gold);color:var(--ground);font-size:12px;
+  font-weight:500;display:none;align-items:center;justify-content:center;
+  letter-spacing:0}
+.pk .cell.on .num{display:flex}
+.pk .cell.full{opacity:.38}
+
+/* The twelve, laid out the way the portfolio will lay them out. */
+.pk .chosen{padding:26px 16px 0;max-width:520px;margin:0 auto;
+  transition:max-width .3s}
+.pk .chosen.big{max-width:1040px}
+.pk .chosen h2{font-family:var(--serif);font-weight:500;font-size:22px;
+  text-align:center;margin-bottom:4px}
+.pk .chosen .sub{font-size:12px;color:var(--dim);text-align:center;
+  margin-bottom:10px}
+.pk .zoom{text-align:center;margin-bottom:16px}
+.pk .zoom button{font-family:var(--sans);font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim);background:transparent;border:none;
+  border-bottom:1px solid var(--line-soft);padding:2px 0 3px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent}
+.pk .zoom button:hover{color:var(--gold-bright);border-bottom-color:var(--gold)}
+.pk .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pk .slot{position:relative;background:var(--surface);
+  border:1px dashed var(--line-soft);overflow:hidden}
+.pk .slot img{display:block;width:100%;height:100%;object-fit:cover;
+  position:absolute;inset:0}
+.pk .slot .bar{position:absolute;left:0;right:0;bottom:0;display:flex;
+  background:rgba(13,11,9,.72);opacity:0;transition:opacity .2s}
+.pk .slot:hover .bar,.pk .slot:focus-within .bar{opacity:1}
+.pk .slot .bar button{flex:1;background:transparent;border:none;color:var(--ink);
+  font-size:13px;padding:7px 0;cursor:pointer;
+  -webkit-tap-highlight-color:transparent}
+.pk .slot .bar button:hover{background:rgba(201,162,75,.22)}
+.pk .slot .idx{position:absolute;top:6px;left:6px;font-size:10px;
+  letter-spacing:.1em;color:var(--dim);z-index:1}
+.pk .slot.empty::after{content:attr(data-n);position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:26px;color:rgba(242,236,226,.14)}
+@media (max-width:620px){
+  .pk .slot .bar{opacity:1}
+  .pk .sheet{grid-template-columns:repeat(2,1fr);gap:8px;padding:16px 12px 0}
+  .pk .cell img{height:150px}
+  .pk .tabs{gap:18px}
+}
+
+/* Everything she needs to finish sits on screen, always. */
+.pk .bar-fixed{position:fixed;left:0;right:0;bottom:0;z-index:20;
+  background:rgba(19,16,14,.94);backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);padding:12px 16px;
+  display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.pk .count{font-size:11px;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--muted)}
+.pk .count b{color:var(--gold-bright);font-weight:500}
+.pk .count.flash{animation:pkflash .5s ease}
+@keyframes pkflash{0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.pk .bar-fixed button{font-family:var(--sans);font-size:10.5px;letter-spacing:.2em;
+  text-transform:uppercase;padding:12px 20px;cursor:pointer;border-radius:2px;
+  transition:all .25s;-webkit-tap-highlight-color:transparent}
+.pk .go{background:var(--gold);color:var(--ground);border:1px solid var(--gold)}
+.pk .go:disabled{background:transparent;color:var(--dim);
+  border-color:var(--line-soft);cursor:default}
+.pk .ghost{background:transparent;color:var(--muted);border:1px solid var(--line-soft)}
+.pk .ghost:hover{color:var(--ink);border-color:var(--line)}
+
+.pk .out{max-width:760px;margin:22px auto 0;padding:0 16px}
+.pk .out textarea{width:100%;height:230px;background:var(--surface);
+  color:var(--ink);border:1px solid var(--line-soft);border-radius:2px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;
+  line-height:1.6;padding:12px;resize:vertical}
+.pk .out.hide{display:none}
+</style>
+
+<div class="head">
+  <div class="k">Portfolio</div>
+  <h1>Pick your twelve</h1>
+  <p>Tap twelve photographs and they fill the grid below in the order you tap
+     them. Four rows of three means every frame gets cut to one shape &mdash;
+     choose the shape first, and the grid shows you the real cut.</p>
+</div>
+
+<div class="shape" id="shape"></div>
+
+<div class="chosen">
+  <h2>Your portfolio</h2>
+  <div class="sub" id="sub">Nothing chosen yet</div>
+  <div class="zoom"><button id="zoom">See them bigger</button></div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<div class="tabs" id="tabs"></div>
+<div class="note" id="note"></div>
+<div class="sheet" id="sheet"></div>
+
+<div class="out hide" id="out">
+  <textarea id="txt" readonly></textarea>
+</div>
+
+<div class="bar-fixed">
+  <div class="count" id="cnt"><b id="n">0</b> of 12</div>
+  <button class="go" id="copy" disabled>Copy my picks</button>
+  <button class="ghost" id="clear">Start over</button>
+</div>
+</div>
+
+<script>
+(function(){
+  var POOLS = [{"key":"r","title":"The set you sent","base":"https://raw.githubusercontent.com/jessicahaslagphotography/jhp-payment-calculator/claude/website-revamp-g9od7u/assets/portfolio/","items":[["6y2a9498.jpg","6y2a9498"],["6y2a9504.jpg","6y2a9504"],["6y2a9510.jpg","6y2a9510"],["6y2a9514.jpg","6y2a9514"],["6y2a9515.jpg","6y2a9515"],["dsc-0148-bw.jpg","dsc-0148-bw"],["dsc-0273-bw.jpg","dsc-0273-bw"],["dsc-0475-bw.jpg","dsc-0475-bw"],["dsc-0484-bw.jpg","dsc-0484-bw"],["dsc-0511-bw.jpg","dsc-0511-bw"],["dsc-0609-bw.jpg","dsc-0609-bw"],["dsc-0630-bw.jpg","dsc-0630-bw"],["dsc-0776-bw.jpg","dsc-0776-bw"],["dsc-0798-bw.jpg","dsc-0798-bw"],["dsc-0927-bw.jpg","dsc-0927-bw"],["dsc-1205-bw.jpg","dsc-1205-bw"],["dsc-1279-bw.jpg","dsc-1279-bw"],["dsc-1312-bw.jpg","dsc-1312-bw"],["dsc-1324-bw.jpg","dsc-1324-bw"],["dsc-1803.jpg","dsc-1803"],["dsc-1936-bw.jpg","dsc-1936-bw"],["dsc-2030-bw.jpg","dsc-2030-bw"],["dsc-2043.jpg","dsc-2043"],["dsc-2060.jpg","dsc-2060"],["dsc-2071.jpg","dsc-2071"],["dsc-2174-bw.jpg","dsc-2174-bw"],["dsc-2236-bw.jpg","dsc-2236-bw"],["dsc-2702-bw.jpg","dsc-2702-bw"],["dsc-4505-bw.jpg","dsc-4505-bw"],["dsc-4553-bw.jpg","dsc-4553-bw"],["dsc-4568-bw.jpg","dsc-4568-bw"],["dsc-6722-bw.jpg","dsc-6722-bw"],["dsc-7450-after.jpg","dsc-7450-after"],["dsc-8438-bw.jpg","dsc-8438-bw"],["dsc-8449-bw.jpg","dsc-8449-bw"],["dsc-8604-bw.jpg","dsc-8604-bw"],["dsc-9236-bw.jpg","dsc-9236-bw"],["dsc-9309-bw.jpg","dsc-9309-bw"],["dsc-9341-bw.jpg","dsc-9341-bw"],["img-8354.jpg","img-8354"]]},{"key":"g","title":"Your media library","base":"https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/","items":[["fbd692b0-d484-411a-9761-b0326110c010.jpg","about-cta"],["9c456dc4-d15a-4d96-a9a7-1d88c2aa4888.jpg","about-wide-3"],["c63fc43f-3039-4140-a7cf-178903dce69e.jpg","about-lead"],["986b3da7-2fdd-4470-b373-60853e23c44d.jpg","about-wide-2"],["40896e46-4f5c-401b-a592-390df4375ae9.jpg","about-wide-1"],["7106f756-905c-4054-882b-38307fdc7b4f.jpg","about-portrait"],["6e05169c-c272-4cba-b448-d34681628472.jpg","treehouse-email-set-hottub"],["68a1188a-6717-4bd0-b31b-30b4ca7fbb23.jpg","treehouse-email-set-indoor"],["156e3a47-efbf-48ef-8e09-9c91d0600c2a.jpg","treehouse-email-set-house"],["796b8391-e0b3-4de4-b8b2-ee348b08d207.jpg","treehouse-email-hero"],["688071289a702e38200e32bd.jpeg","Missy 1"],["68805f8f8ffd9ed471b8be66.png","JHP 1  (1)"],["68805e8d71a4ed545589225e.png","JHP POlaroids"],["688057ec8ffd9ee298b8b791.jpeg","DSC_5035"],["688057eb3696d159e320e773.jpeg","DSC_0754"],["688057eb3696d1b95e20e770.jpeg","DSC_5295"],["688057eb3696d175db20e772.jpeg","DSC_5922"],["688057eb3696d10fce20e76f.jpeg","DSC_6016"],["688057eb3696d153fa20e771.jpeg","DSC_0811"],["688057eb8c69c80e8f30f062.jpeg","DSC_6040"],["688057eb8ffd9e52ebb8b78f.jpeg","DSC_5716"],["688057eb9a702e25660e19ab.jpeg","DSC_1906"],["688057eb9a702e782d0e19aa.jpeg","DSC_4382"],["688057eb71a4edad5f891b31.jpeg","DSC_4474"],["688057eb71a4ed7302891b30.jpeg","DSC_4472"],["688057eb71a4ed4407891b2f.jpeg","DSC_6075"],["688057eb71a4edf6ac891b2e.jpeg","DSC_6156"],["688057eb8ffd9e0ea7b8b78e.jpeg","DSC_4544"],["d2354434-e2ba-427c-bd06-bcc776bdb377.png","Bri"],["8ab54303-b65e-434b-a7bd-d8766d1f0852.jpeg","Photo Apr 06 2024, 9 53 57 AM (9)"],["744d8998-c979-4145-869e-b2891efc8246.jpeg","Photo Apr 06 2022, 5 46 06 PM"],["b417d121-14dd-4baf-aa83-04fbd7d305bf.png","33045d7e-5160-4c8f-998e-672414b11c99"],["fa818889-9e14-4fd6-8949-a7a82da49892.jpeg","TCP_0495"],["77e5477b-38f6-4e20-9243-3d1df5120a7b.png","Bri Boudoir"]]}];
+  var SHAPES = [
+    {key:'tall',  label:'Tall 4:5',   pct:125},
+    {key:'square',label:'Square',     pct:100},
+    {key:'wide',  label:'Wide 3:2',   pct:66.667}
+  ];
+  var NOTES = {
+    r:'The forty you sent me. These are the working copies — the ' +
+      'full-size originals go up once you have chosen.',
+    g:'Everything sitting in your GoHighLevel media library right now.'
+  };
+  var KEY = 'jhp-portfolio-pick';
+  var ALL = {};
+  POOLS.forEach(function(p){
+    p.items = p.items.map(function(row){
+      var it = {id: p.key + ':' + row[0], label: row[1], url: p.base + row[0]};
+      ALL[it.id] = it;
+      return it;
+    });
+  });
+
+  var st = {pool:POOLS[0].key, shape:'tall', picks:[]};
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (saved && saved.picks) {
+      st.shape = saved.shape || st.shape;
+      // Drop anything that is no longer in either pool, so a stale save
+      // cannot leave her staring at a broken frame.
+      st.picks = saved.picks.filter(function(id){ return ALL[id]; }).slice(0,12);
+    }
+  } catch(e){}
+  function save(){
+    try { localStorage.setItem(KEY, JSON.stringify(st)); } catch(e){}
+  }
+
+  var el = function(id){ return document.getElementById(id); };
+
+  function shapePct(){
+    for (var i=0;i<SHAPES.length;i++) if (SHAPES[i].key===st.shape) return SHAPES[i].pct;
+    return 125;
+  }
+
+  function drawShape(){
+    var box = el('shape'); box.innerHTML = '';
+    SHAPES.forEach(function(s){
+      var b = document.createElement('button');
+      b.textContent = s.label;
+      if (s.key === st.shape) b.className = 'on';
+      b.onclick = function(){ st.shape = s.key; save(); drawShape(); drawGrid(); };
+      box.appendChild(b);
+    });
+  }
+
+  function drawTabs(){
+    var box = el('tabs'); box.innerHTML = '';
+    POOLS.forEach(function(p){
+      var b = document.createElement('button');
+      b.textContent = p.title + ' (' + p.items.length + ')';
+      if (p.key === st.pool) b.className = 'on';
+      b.onclick = function(){ st.pool = p.key; drawTabs(); drawSheet(); };
+      box.appendChild(b);
+    });
+    el('note').textContent = NOTES[st.pool] || '';
+  }
+
+  function drawSheet(){
+    var pool = POOLS.filter(function(p){ return p.key === st.pool; })[0];
+    var box = el('sheet'); box.innerHTML = '';
+    var full = st.picks.length >= 12;
+    pool.items.forEach(function(it){
+      var pos = st.picks.indexOf(it.id);
+      var c = document.createElement('button');
+      c.className = 'cell' + (pos >= 0 ? ' on' : (full ? ' full' : ''));
+      c.innerHTML = '<span class="num">' + (pos + 1) + '</span>' +
+        '<img loading="lazy" src="' + it.url + '" alt="">' +
+        '<div class="nm">' + it.label + '</div>';
+      c.onclick = function(){ toggle(it.id); };
+      box.appendChild(c);
+    });
+  }
+
+  function toggle(id){
+    var pos = st.picks.indexOf(id);
+    if (pos >= 0) st.picks.splice(pos, 1);
+    else if (st.picks.length < 12) st.picks.push(id);
+    else {
+      // Twelve already. Say so instead of swallowing the tap.
+      var c = el('cnt'); c.className = 'count';
+      void c.offsetWidth; c.className = 'count flash';
+      return;
+    }
+    save(); drawSheet(); drawGrid();
+  }
+
+  function move(i, d){
+    var j = i + d;
+    if (j < 0 || j >= st.picks.length) return;
+    var t = st.picks[i]; st.picks[i] = st.picks[j]; st.picks[j] = t;
+    save(); drawSheet(); drawGrid();
+  }
+
+  function drawGrid(){
+    var box = el('grid'); box.innerHTML = '';
+    var pct = shapePct();
+    for (var i = 0; i < 12; i++) {
+      var id = st.picks[i];
+      var s = document.createElement('div');
+      s.className = 'slot' + (id ? '' : ' empty');
+      s.setAttribute('data-n', i + 1);
+      s.style.paddingTop = pct + '%';
+      if (id) {
+        var it = ALL[id];
+        s.innerHTML = '<img src="' + it.url + '" alt="">' +
+          '<span class="idx">' + (i + 1) + '</span>' +
+          '<div class="bar">' +
+            '<button data-a="l" title="Move left">&#9664;</button>' +
+            '<button data-a="x" title="Remove">&#10005;</button>' +
+            '<button data-a="r" title="Move right">&#9654;</button>' +
+          '</div>';
+        (function(idx, pid){
+          s.querySelectorAll('.bar button').forEach(function(b){
+            b.onclick = function(){
+              var a = b.getAttribute('data-a');
+              if (a === 'x') toggle(pid);
+              else move(idx, a === 'l' ? -1 : 1);
+            };
+          });
+        })(i, id);
+      }
+      box.appendChild(s);
+    }
+    var n = st.picks.length;
+    el('n').textContent = n;
+    el('copy').disabled = n === 0;
+    el('sub').textContent = n === 0 ? 'Nothing chosen yet'
+      : n < 12 ? n + ' chosen, ' + (12 - n) + ' to go'
+      : 'All twelve chosen — reorder with the arrows, then copy';
+  }
+
+  function text(){
+    var s = SHAPES.filter(function(x){ return x.key === st.shape; })[0];
+    var lines = ['PORTFOLIO PICKS', 'Tile shape: ' + s.label, ''];
+    st.picks.forEach(function(id, i){
+      lines.push((i + 1) + '. ' + ALL[id].label + '  [' + id + ']');
+    });
+    if (st.picks.length < 12) {
+      lines.push('', '(' + (12 - st.picks.length) + ' still to choose)');
+    }
+    return lines.join('\n');
+  }
+
+  el('copy').onclick = function(){
+    var t = text();
+    el('txt').value = t;
+    el('out').className = 'out';
+    var done = function(){
+      el('copy').textContent = 'Copied — paste it to me';
+      setTimeout(function(){ el('copy').textContent = 'Copy my picks'; }, 2600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(t).then(done, function(){
+        el('txt').select(); done();
+      });
+    } else { el('txt').select(); done(); }
+  };
+
+  el('clear').onclick = function(){
+    st.picks = []; save(); drawSheet(); drawGrid();
+    el('out').className = 'out hide';
+  };
+
+  el('zoom').onclick = function(){
+    var c = document.querySelector('.pk .chosen');
+    var big = c.className.indexOf('big') >= 0;
+    c.className = big ? 'chosen' : 'chosen big';
+    el('zoom').textContent = big ? 'See them bigger' : 'See them smaller';
+  };
+
+  drawShape(); drawTabs(); drawSheet(); drawGrid();
+})();
+</script>
+{% endraw %}
+</body>
+</html>
