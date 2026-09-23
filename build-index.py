@@ -95,6 +95,74 @@ GAL_CSS = """/* THE INDEX
   .jhp-home .jhp-intro img{height:340px;object-position:50% 30%}
   .jhp-home .jhp-intro h1{max-width:20ch}
 }
+
+/* THE DIVIDER
+   -----------
+   Between the grid, the quote and the way on. A hairline that fades out
+   at both ends rather than running wall to wall, with a small gold lozenge
+   on the centre -- the same gold the kickers and the button use, so the
+   page gains a rhythm mark and not a new colour. Purely decorative, so it
+   is hidden from screen readers. */
+.jhp-home .jhp-div{position:relative;height:1px;max-width:1080px;
+  margin:0 auto;background:linear-gradient(90deg,transparent,
+    var(--line) 20%,var(--line) 80%,transparent)}
+.jhp-home .jhp-div::after{content:"";position:absolute;left:50%;top:50%;
+  width:7px;height:7px;margin:-4px 0 0 -4px;transform:rotate(45deg);
+  background:var(--ground);border:1px solid var(--gold)}
+
+/* THE QUOTE
+   ---------
+   One review, not three. The home page carries the wall of them; here a
+   single voice after twelve galleries says the thing the photographs
+   cannot -- what it felt like. Serif italic at reading width, centred,
+   because a short quote centred reads as a statement and a long one
+   centred reads as a chore. */
+.jhp-home .jhp-quote{max-width:760px;margin:0 auto;text-align:center}
+.jhp-home .jhp-quote .qt{font-family:var(--serif);font-style:italic;
+  font-size:clamp(19px,2.2vw,25px);line-height:1.55;color:var(--ink);
+  margin:0 0 20px;text-wrap:pretty}
+.jhp-home .jhp-quote .qa{font-family:var(--sans);font-size:11px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0}
+.jhp-home .jhp-quote .src{display:inline-block;margin-top:18px;
+  font-family:var(--sans);font-size:12px;letter-spacing:.06em;
+  color:var(--dim);border-bottom:1px solid var(--line);padding-bottom:2px;
+  transition:color .3s,border-color .3s}
+.jhp-home .jhp-quote .src:hover{color:var(--gold);border-color:var(--gold)}
+
+/* THE WAY ON
+   ----------
+   The whole band is the link, so there is no small target to find: the
+   button inside it is a span, not a second anchor, which keeps the markup
+   legal and the click area the full width. Shorter than the intro band
+   above -- it is a door, not a heading. */
+.jhp-home .jhp-band{position:relative;display:block;overflow:hidden}
+.jhp-home .jhp-band img{width:100%;height:clamp(300px,30vw,440px);
+  max-height:none;object-fit:cover;object-position:50% 42%;
+  transition:transform .8s ease}
+.jhp-home .jhp-band:hover img{transform:scale(1.04)}
+.jhp-home .jhp-band:focus-visible{outline:2px solid var(--gold-bright);
+  outline-offset:-4px}
+/* Type to the left, as on the home page's hero. The band crops only
+   vertically -- it is wider than the frame at every screen -- so the
+   subject stays centred whatever the crop does, and centred type would
+   land on her face. Two gradients: one up from the floor for the words,
+   one in from the left so they hold against a bright frame. */
+.jhp-home .jhp-band .over{position:absolute;inset:0;display:flex;
+  flex-direction:column;align-items:flex-start;justify-content:center;
+  text-align:left;padding:0 clamp(22px,6vw,74px);
+  background:
+    linear-gradient(0deg,rgba(19,16,14,.8) 0%,rgba(19,16,14,.42) 55%,
+      rgba(19,16,14,.3) 100%),
+    linear-gradient(90deg,rgba(19,16,14,.72) 0%,rgba(19,16,14,.34) 38%,
+      rgba(19,16,14,0) 68%)}
+.jhp-home .jhp-band h2{margin:0 0 8px;max-width:17ch}
+.jhp-home .jhp-band .sub{font-family:var(--sans);font-weight:300;
+  font-size:15.5px;color:var(--muted);margin:0 0 22px;max-width:30ch}
+/* A span dressed as the button: the band is already the anchor. */
+.jhp-home .jhp-band .jhp-btn{pointer-events:none}
+/* The divider immediately above the band would otherwise sit on the
+   photograph's top edge -- the band carries no padding of its own. */
+.jhp-home .jhp-div + .jhp-band{margin-top:clamp(42px,6vw,72px)}
 """
 
 
