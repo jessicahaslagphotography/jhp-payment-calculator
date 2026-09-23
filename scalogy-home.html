@@ -207,12 +207,20 @@
      above a 2-up row. */
   .jhp-home .jhp-mission .inner{grid-column:1 / -1;order:-1;margin-bottom:6px}
 }
-.jhp-home .jhp-mission .jhp-kicker{margin-bottom:18px}
+/* "My Mission" was an 11px kicker, the same size as the small gold labels
+   elsewhere, so it vanished. It is a real heading now: the same uppercase
+   gold character, scaled up into the serif, with a hairline under it. The
+   statement below steps down in size so the title clearly leads. */
+.jhp-home .jhp-mission-ttl{font-family:var(--serif);font-weight:500;
+  font-size:clamp(27px,3.6vw,40px);line-height:1.12;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--gold);margin:0 0 16px}
+.jhp-home .jhp-mission-rule{width:46px;height:1px;background:var(--gold);
+  opacity:.65;margin:0 auto 24px}
 .jhp-home .jhp-mission-lead{font-family:var(--serif);font-weight:400;
-  font-size:clamp(22px,2.9vw,30px);line-height:1.42;letter-spacing:.01em;
-  color:var(--ink);margin:0 0 18px;text-wrap:balance}
-.jhp-home .jhp-mission .jhp-p{margin:0;text-wrap:balance}
-.jhp-home .jhp-mission .jhp-btn{margin-top:26px}
+  font-size:clamp(20px,2.5vw,27px);line-height:1.46;letter-spacing:.01em;
+  color:var(--ink);margin:0 0 16px;text-wrap:balance}
+.jhp-home .jhp-mission .jhp-p{font-size:16px;margin:0;text-wrap:balance}
+.jhp-home .jhp-mission .jhp-btn{margin-top:30px}
 
 .jhp-home .jhp-vip{background:var(--surface);border-top:1px solid var(--line);
   padding:clamp(40px,5vw,60px) clamp(18px,5vw,34px);text-align:center}
@@ -291,7 +299,8 @@
     <!-- DSC_0811.jpg -->
     <figure class="shot"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/688057eb3696d153fa20e771.jpeg" alt="JHP Boudoir client portrait"></figure>
     <div class="inner">
-      <p class="jhp-kicker">My mission</p>
+      <h2 class="jhp-mission-ttl">My Mission</h2>
+      <div class="jhp-mission-rule" aria-hidden="true"></div>
       <p class="jhp-mission-lead">To build a room where you don&rsquo;t have to hold your stomach in, apologize for your body, or be anyone&rsquo;s idea of beautiful but your own &mdash; and then to photograph you in it.</p>
       <p class="jhp-p">It&rsquo;s the ultimate thing to do for yourself. Let&rsquo;s celebrate what you look like when you&rsquo;ve stopped apologizing for it.</p>
       <!-- GHL calendar "JHP Boudoir Consultation Calendar", id Ymk9FIg5KPX4lpCCdYmn,
