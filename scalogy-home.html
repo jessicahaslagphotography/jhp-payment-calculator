@@ -137,7 +137,6 @@
 .jhp-home .jhp-rev article{background:var(--surface);border:1px solid var(--line-soft);
   border-radius:3px;overflow:hidden;display:flex;flex-direction:column}
 .jhp-home .jhp-rev .rv{padding:20px 20px 22px;flex:1;display:flex;flex-direction:column;text-align:left}
-.jhp-home .jhp-rev .stars{color:var(--gold);font-size:13px;letter-spacing:.24em;margin:0 0 12px}
 .jhp-home .jhp-rev .qt{font-family:var(--serif);font-style:italic;font-size:17px;
   line-height:1.6;color:var(--muted);margin:0 0 14px;flex:1}
 .jhp-home .jhp-rev .qa{font-family:var(--sans);font-size:11px;letter-spacing:.2em;
@@ -285,10 +284,18 @@
   align-items:center;justify-content:space-between}
 .jhp-home .jhp-foot .fc{font-family:var(--sans);font-size:12px;color:var(--dim);
   letter-spacing:.04em;margin:0}
-.jhp-home .jhp-foot .social{display:flex;gap:20px;flex-wrap:wrap}
-.jhp-home .jhp-foot .social a{font-family:var(--sans);font-size:11px;
-  letter-spacing:.2em;text-transform:uppercase;color:var(--muted);transition:color .3s}
-.jhp-home .jhp-foot .social a:hover{color:var(--gold)}
+/* Social icons are inline SVG rather than an icon font or a third-party
+   script, so they cost no extra request and inherit currentColor. 44px
+   touch targets. */
+.jhp-home .jhp-foot .social{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.jhp-home .jhp-foot .social a{display:inline-flex;align-items:center;
+  justify-content:center;width:44px;height:44px;border:1px solid var(--line);
+  border-radius:50%;color:var(--muted);
+  transition:color .3s,border-color .3s,background .3s}
+.jhp-home .jhp-foot .social a:hover{color:var(--ground);background:var(--gold);
+  border-color:var(--gold)}
+.jhp-home .jhp-foot .social svg{width:17px;height:17px;fill:currentColor;
+  display:block;pointer-events:none}
 .jhp-home .jhp-foot a:focus-visible{outline:2px solid var(--gold-bright);
   outline-offset:3px}
 @media (max-width:860px){
@@ -381,7 +388,6 @@
     <article>
       <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f32e45fddc3851d2a4.jpg" alt="JHP Boudoir client">
       <div class="rv">
-        <p class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
         <p class="qt">&ldquo;This was a very great experience! Not only is the work impeccable, Jess makes you feel comfortable and helps you embrace your body as is and see the beauty that is there. She walks you through the whole process making it easy and comfortable. I went from I could never do something like this, to excited about booking my next shoot.&rdquo;</p>
         <p class="qa">Miss J.</p>
       </div>
@@ -389,7 +395,6 @@
     <article>
       <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f3825a8484f2e31e0d.jpg" alt="JHP Boudoir client">
       <div class="rv">
-        <p class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
         <p class="qt">&ldquo;Jessica was absolutely amazing! She made me feel so confident in my skin and felt so beautiful. Even after a few wardrobe malfunctions, she did not make me feel embarrassed in the slightest! I recommend this for everyone! We all need to feel beautiful because we are, let Jessica show you!&rdquo;</p>
         <p class="qa">Miss S.</p>
       </div>
@@ -397,7 +402,6 @@
     <article>
       <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f3804f2db9b749cc2e.jpg" alt="JHP Boudoir client">
       <div class="rv">
-        <p class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
         <p class="qt">&ldquo;I couldn&rsquo;t have been happier with how my shoot and image reveal went! I was made to feel so sexy and confident, and Jess captured the glow I have been working so hard to get back! I would recommend JHP Photography to any woman!&rdquo;</p>
         <p class="qa">Miss M.</p>
       </div>
@@ -522,6 +526,7 @@
         <li><a href="/investment">Investment</a></li>
         <li><a href="/specialty-sessions">Specialty Sessions</a></li>
         <li><a href="/blog">Blog</a></li>
+        <li><a href="https://api.leadconnectorhq.com/widget/booking/Ymk9FIg5KPX4lpCCdYmn" target="_blank" rel="noopener">Book a Call</a></li>
       </ul>
     </nav>
 
@@ -544,9 +549,15 @@
   <div class="base">
     <p class="fc">&copy; 2026 JHP Boudoir &nbsp;&middot;&nbsp; Jefferson City, Missouri</p>
     <div class="social">
-      <a href="https://www.instagram.com/jhpboudoir_" target="_blank" rel="noopener">@jhpboudoir_</a>
-      <a href="https://www.facebook.com/groups/1107773373084834" target="_blank" rel="noopener">VIP Group</a>
-      <a href="https://api.leadconnectorhq.com/widget/booking/Ymk9FIg5KPX4lpCCdYmn" target="_blank" rel="noopener">Book a Call</a>
+      <a href="https://www.instagram.com/jhpboudoir_" target="_blank" rel="noopener" aria-label="JHP Boudoir on Instagram">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.3-.79-.72-1.46-1.38-2.13C21.32 1.35 20.65.93 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg>
+      </a>
+      <a href="https://www.facebook.com/profile.php?id=100082843870968" target="_blank" rel="noopener" aria-label="JHP Boudoir on Facebook">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z"/></svg>
+      </a>
+      <a href="https://www.tiktok.com/@jhpboudoir" target="_blank" rel="noopener" aria-label="JHP Boudoir on TikTok">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.55 3h-3.3v13.2a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .76-5.06V10.3a5.94 5.94 0 0 0-.76-.05 5.94 5.94 0 1 0 5.94 5.94V9.4a7.56 7.56 0 0 0 4.4 1.4V7.5a4.28 4.28 0 0 1-3.4-3.08z"/></svg>
+      </a>
     </div>
   </div>
 </footer>
