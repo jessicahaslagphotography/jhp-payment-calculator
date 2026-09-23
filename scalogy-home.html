@@ -144,13 +144,23 @@
   text-transform:uppercase;color:var(--gold);margin:0}
 
 /* ---------- 7 · email opt-in ---------- */
-/* Split band. The height is capped because the photo at half width would
-   otherwise render around 900px tall and drag the section with it. */
-.jhp-home .jhp-optin{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;
-  border-top:1px solid var(--line-soft);min-height:340px;max-height:400px;overflow:hidden}
-.jhp-home .jhp-optin .pic{overflow:hidden}
-.jhp-home .jhp-optin .pic img{height:100%;object-fit:cover;object-position:center 45%}
-.jhp-home .jhp-optin .txt{padding:clamp(28px,3.5vw,44px) clamp(20px,3vw,42px);
+/* Split band. Two rules keep it honest:
+   - No max-height and no overflow:hidden, so the sign-up button can never be
+     clipped when the copy wraps to an extra line.
+   - The photo half is shaped by a padding-ratio box (66.53% = 4024/6048,
+     DSC_6016.jpg), so the band is as tall as the photo needs and cover has
+     almost nothing to crop. Deliberately NOT aspect-ratio: on a stretched
+     grid item that feeds back into the column's minimum width, which inflated
+     the photo column, squeezed the copy, and clipped the photo's right edge
+     between about 760px and 1010px. Percentage padding contributes nothing to
+     intrinsic width, so there is no such feedback. */
+.jhp-home .jhp-optin{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  align-items:stretch;border-top:1px solid var(--line-soft)}
+.jhp-home .jhp-optin .pic{position:relative;min-width:0}
+.jhp-home .jhp-optin .pic::before{content:"";display:block;padding-top:66.53%}
+.jhp-home .jhp-optin .pic img{position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center center}
+.jhp-home .jhp-optin .txt{padding:clamp(30px,3.5vw,44px) clamp(22px,3vw,42px);
   display:flex;flex-direction:column;justify-content:center;background:var(--ground)}
 .jhp-home .jhp-optin .jhp-h{font-size:clamp(23px,2.6vw,29px);margin-bottom:10px}
 .jhp-home .jhp-optin .jhp-p{font-size:15.5px;line-height:1.65;margin-bottom:16px}
@@ -161,9 +171,14 @@
   border-radius:2px;padding:12px 13px}
 .jhp-home .jhp-field input::placeholder{color:var(--dim)}
 .jhp-home .jhp-field .jhp-btn{padding:13px 24px}
-@media (max-width:760px){
-  .jhp-home .jhp-optin{grid-template-columns:1fr;max-height:none}
-  .jhp-home .jhp-optin .pic img{height:auto;max-height:38vh}
+/* Stacks at 1000px, not the usual 760px: below that the photo half is too
+   short for the copy beside it, so the grid would squeeze the photo into a
+   near-square. Stacked, it runs full width at its own 3:2 and is never cropped. */
+@media (max-width:1000px){
+  .jhp-home .jhp-optin{grid-template-columns:1fr}
+}
+@media (max-width:440px){
+  .jhp-home .jhp-field .pair{flex-direction:column}
 }
 
 /* ---------- 8 · VIP ---------- */
