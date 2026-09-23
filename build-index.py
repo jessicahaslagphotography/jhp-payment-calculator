@@ -114,12 +114,27 @@ GAL_CSS = """/* THE INDEX
    ---------
    One review, not three. The home page carries the wall of them; here a
    single voice after twelve galleries says the thing the photographs
-   cannot -- what it felt like. Serif italic at reading width, centred,
-   because a short quote centred reads as a statement and a long one
-   centred reads as a chore. */
-.jhp-home .jhp-quote{max-width:760px;margin:0 auto;text-align:center}
+   cannot -- what it felt like.
+
+   A frame stands beside it, in the 150.3% box every portrait in the
+   library fits, so cover has nothing to crop. It is a photograph of a JHP
+   client, not of the woman who wrote the review, and it carries no name
+   for that reason: it is there to give the words a face's worth of weight,
+   the way a magazine sets a pull-quote against an image.
+
+   Set left rather than centred at this width -- centred type beside a
+   photograph reads as a caption. It re-centres when the two stack. */
+.jhp-home .jhp-quote{display:grid;
+  grid-template-columns:minmax(0,.62fr) minmax(0,1fr);
+  gap:clamp(26px,4.5vw,64px);align-items:center;
+  max-width:1040px;margin:0 auto;text-align:left}
+.jhp-home .jhp-quote .shot{position:relative;min-width:0;margin:0}
+.jhp-home .jhp-quote .shot::before{content:"";display:block;padding-top:150.3%}
+.jhp-home .jhp-quote .shot img{position:absolute;inset:0;width:100%;
+  height:100%;object-fit:cover;object-position:center center}
+.jhp-home .jhp-quote blockquote{margin:0}
 .jhp-home .jhp-quote .qt{font-family:var(--serif);font-style:italic;
-  font-size:clamp(19px,2.2vw,25px);line-height:1.55;color:var(--ink);
+  font-size:clamp(18px,1.95vw,23px);line-height:1.55;color:var(--ink);
   margin:0 0 20px;text-wrap:pretty}
 .jhp-home .jhp-quote .qa{font-family:var(--sans);font-size:11px;
   letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0}
@@ -128,6 +143,17 @@ GAL_CSS = """/* THE INDEX
   color:var(--dim);border-bottom:1px solid var(--line);padding-bottom:2px;
   transition:color .3s,border-color .3s}
 .jhp-home .jhp-quote .src:hover{color:var(--gold);border-color:var(--gold)}
+@media (max-width:820px){
+  /* Side by side the photograph would be narrower than the words are tall.
+     Stacked it leads, and the quote centres under it. */
+  .jhp-home .jhp-quote{grid-template-columns:1fr;gap:24px;max-width:520px;
+    text-align:center}
+}
+@media (max-width:620px){
+  /* The page's phone rule: photographs run edge to edge, only text keeps
+     its margins. */
+  .jhp-home .jhp-quote .shot{margin-inline:calc((100% - 100vw) / 2)}
+}
 
 /* THE WAY ON
    ----------
