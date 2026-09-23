@@ -1,4 +1,40 @@
-<!DOCTYPE html>
+#!/usr/bin/env python3
+"""Generates scalogy-picker.html — the twelve-image portfolio picker.
+
+Every candidate comes from Jessica's own GHL media library at full
+resolution: her Website folder first, the rest of the library second.
+Which ones the live home and about pages already use was read off those
+pages, not remembered, so the badge cannot drift.
+
+The picker is self-contained: selection lives in localStorage and leaves
+by the clipboard, because a page-api token only lives fifteen minutes and
+choosing twelve takes longer than that.
+"""
+import json, pathlib
+
+ROOT = pathlib.Path("/home/user/jhp-payment-calculator")
+
+POOLS_RAW = json.loads((ROOT
+                        / "picker-pools.json").read_text())
+
+GHL = "https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/"
+
+
+def order(rows):
+    """Anything the site already uses sinks to the bottom of its tab."""
+    return sorted(rows, key=lambda r: (len(r) > 2, r[1].lower()))
+
+
+POOLS = [
+    {"key": "w", "title": "Website folder", "base": GHL,
+     "items": order(POOLS_RAW["site"])},
+    {"key": "l", "title": "Rest of the library", "base": GHL,
+     "items": order(POOLS_RAW["rest"])},
+]
+
+data = json.dumps(POOLS, separators=(",", ":"))
+
+HTML = """<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -193,14 +229,14 @@
 
 <script>
 (function(){
-  var POOLS = [{"key":"w","title":"Website folder","base":"https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/","items":[["6ab3ee3b8d8128ee4caa5711.jpg","6Y2A9498"],["6ab3ee3bc745ba551e348849.jpg","6Y2A9504"],["6ab3ee3b8bf21de2ae4078c9.jpg","6Y2A9510"],["6ab3ee3bc745ba551e34884f.jpg","6Y2A9514"],["6ab3ee3bfb1f2e9eeb86110e.jpg","6Y2A9515"],["6ab1b5f12e45fddc3851d27e.jpg","after"],["6ab1b5f1804f2db9b749cbea.jpg","before"],["6ab3ee3b8bf21de2ae4078ca.jpg","DSC_0148-BW"],["6ab3ee3dec718870e138ecd3.jpg","DSC_0273-BW"],["6ab3ee3dc745ba551e34888c.jpg","DSC_0361-BW"],["6ab3ee3db2c147832f6689c8.jpg","DSC_0472-BW"],["6ab3ee3d18384d888bb3d0b1.jpg","DSC_0475-BW"],["6ab3ee3df07a3cb6d49044cd.jpg","DSC_0478-BW"],["6ab3ee3d8d8128ee4caa576d.jpg","DSC_0484-BW"],["6ab3ee3efef86e60d5226609.jpg","DSC_0511-BW"],["6ab3ee3fec718870e138ed24.jpg","DSC_0532-BW"],["6ab3ee3fc745ba551e3488d8.jpg","DSC_0601-BW"],["6ab3ee40fef86e60d5226635.jpg","DSC_0609-BW"],["6ab3ee4018384d888bb3d12d.jpg","DSC_0630-BW"],["6ab3ee41c745ba551e348938.jpg","DSC_0633-BW"],["6ab3ee4218384d888bb3d179.jpg","DSC_0776-BW"],["6ab3ee448bf21de2ae407a63.jpg","DSC_0798-BW"],["6ab3ee468bf21de2ae407ab5.jpg","DSC_0927-BW"],["6ab3ee4925d854bb65f7c8bc.jpg","DSC_1050"],["6ab3ee648d8128ee4caa5cd6.jpg","DSC_1101"],["6ab3ee66fef86e60d5226c4e.jpg","DSC_1205-BW"],["6ab3ee688d8128ee4caa5d2e.jpg","DSC_1279-BW"],["6ab3ee6bc745ba551e348efb.jpg","DSC_1301"],["6ab3ee6dc745ba551e348f67.jpg","DSC_1312-BW"],["6ab3ee6fec718870e138f320.jpg","DSC_1324-BW"],["6ab3ee72fb1f2e9eeb8617c4.jpg","DSC_1752-BW"],["6ab3ee738d8128ee4caa5e67.jpg","DSC_1803"],["6ab3ee74f07a3cb6d4904b68.jpg","DSC_1927"],["6ab3ee75fef86e60d5226e19.jpg","DSC_1936-BW"],["6ab3ee768d8128ee4caa5f03.jpg","DSC_2030-BW"],["6ab3ee7718384d888bb3d80d.jpg","DSC_2043"],["6ab3ee77f07a3cb6d4904bf0.jpg","DSC_2060"],["6ab3ee7918384d888bb3d890.jpg","DSC_2071"],["6ab3ee79b2c147832f669099.jpg","DSC_2174-BW"],["6ab3ee79ec718870e138f42f.jpg","DSC_2236-BW"],["6ab3ee7bec718870e138f478.jpg","DSC_2702-BW"],["6ab3ee7bb2c147832f6690cd.jpg","DSC_2998-BW"],["6ab3ee7cf07a3cb6d4904c51.jpg","DSC_3210"],["6ab3ee7df07a3cb6d4904c78.jpg","DSC_3273"],["6ab3ee7dec718870e138f4be.jpg","DSC_3688"],["6ab3ee7f8d8128ee4caa5fbf.jpg","DSC_4505-BW"],["6ab3ee808d8128ee4caa5fd3.jpg","DSC_4553-BW"],["6ab3ee828bf21de2ae408336.jpg","DSC_4568-BW"],["6ab3ee828bf21de2ae408342.jpg","DSC_6722-BW"],["6ab3ee84ec718870e138f57a.jpg","DSC_7431-BW"],["6ab3ee84fef86e60d5226f91.jpg","DSC_7450_(2)"],["6ab3ee86fef86e60d5226fb9.jpg","DSC_8438-BW"],["6ab3ee89fb1f2e9eeb8619d3.jpg","DSC_8449-BW"],["6ab3ee8c8d8128ee4caa612d.jpg","DSC_8604-BW"],["6ab3ee8e8bf21de2ae4084c4.jpg","DSC_9236-BW"],["6ab3ee90f07a3cb6d4904e20.jpg","DSC_9298-BW"],["6ab3ee9118384d888bb3dac8.jpg","DSC_9309-BW"],["6ab3ee93fb1f2e9eeb861b29.jpg","DSC_9334-BW"],["6ab3ee94b2c147832f66932d.jpg","DSC_9341-BW"],["6ab1b5f2966c1acf6d4ad508.jpg","ig-1"],["6ab1b5f2804f2db9b749cc02.jpg","ig-3"],["6ab1b5f2966c1acf6d4ad513.jpg","ig-4"],["6ab3ee96f07a3cb6d4904ea6.jpg","IMG_0302"],["6ab3ee988bf21de2ae408599.jpg","IMG_0326"],["6ab3ee988bf21de2ae4085aa.jpg","IMG_0353"],["6ab3ee9bfef86e60d52271d5.jpg","IMG_0389"],["6ab3ee9b25d854bb65f7d1f6.jpg","IMG_0391"],["6ab1b5f2804f2db9b749cc0d.jpg","optin"],["6ab1b5f1966c1acf6d4ad4f4.jpg","empower-1","home"],["6ab1b5f14091fa65e6bdd7ac.jpg","empower-2","home"],["6ab1b5f12e45fddc3851d27f.jpg","empower-3","home"],["6ab1b5f198fc609c5dbd2205.jpg","hero","home"],["6ab1b5f230b0f957cccd65d3.jpg","ig-2","home"],["6ab1b5f2825a8484f2e31df9.jpg","jess","home"],["6ab1b5f3825a8484f2e31e0d.jpg","review-1","home"],["6ab1b5f3804f2db9b749cc2e.jpg","review-2","home"],["6ab1b5f32e45fddc3851d2a4.jpg","review-3","home"]]},{"key":"l","title":"Rest of the library","base":"https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/","items":[["b417d121-14dd-4baf-aa83-04fbd7d305bf.png","33045d7e-5160-4c8f-998e-672414b11c99"],["d2354434-e2ba-427c-bd06-bcc776bdb377.png","Bri"],["77e5477b-38f6-4e20-9243-3d1df5120a7b.png","Bri Boudoir"],["688057eb3696d159e320e773.jpeg","DSC_0754"],["688057eb9a702e25660e19ab.jpeg","DSC_1906"],["688057eb9a702e782d0e19aa.jpeg","DSC_4382"],["688057eb71a4ed7302891b30.jpeg","DSC_4472"],["688057eb71a4edad5f891b31.jpeg","DSC_4474"],["688057eb8ffd9e0ea7b8b78e.jpeg","DSC_4544"],["688057ec8ffd9ee298b8b791.jpeg","DSC_5035"],["688057eb3696d1b95e20e770.jpeg","DSC_5295"],["688057eb8ffd9e52ebb8b78f.jpeg","DSC_5716"],["688057eb3696d175db20e772.jpeg","DSC_5922"],["688057eb8c69c80e8f30f062.jpeg","DSC_6040"],["688057eb71a4ed4407891b2f.jpeg","DSC_6075"],["688057eb71a4edf6ac891b2e.jpeg","DSC_6156"],["68805f8f8ffd9ed471b8be66.png","JHP 1  (1)"],["68805e8d71a4ed545589225e.png","JHP POlaroids"],["688071289a702e38200e32bd.jpeg","Missy 1"],["744d8998-c979-4145-869e-b2891efc8246.jpeg","Photo Apr 06 2022, 5 46 06 PM"],["8ab54303-b65e-434b-a7bd-d8766d1f0852.jpeg","Photo Apr 06 2024, 9 53 57 AM (9)"],["fa818889-9e14-4fd6-8949-a7a82da49892.jpeg","TCP_0495"],["796b8391-e0b3-4de4-b8b2-ee348b08d207.jpg","treehouse-email-hero"],["6e05169c-c272-4cba-b448-d34681628472.jpg","treehouse-email-set-hottub"],["156e3a47-efbf-48ef-8e09-9c91d0600c2a.jpg","treehouse-email-set-house"],["68a1188a-6717-4bd0-b31b-30b4ca7fbb23.jpg","treehouse-email-set-indoor"],["fbd692b0-d484-411a-9761-b0326110c010.jpg","about-cta","about"],["c63fc43f-3039-4140-a7cf-178903dce69e.jpg","about-lead","about"],["7106f756-905c-4054-882b-38307fdc7b4f.jpg","about-portrait","about"],["40896e46-4f5c-401b-a592-390df4375ae9.jpg","about-wide-1","about"],["986b3da7-2fdd-4470-b373-60853e23c44d.jpg","about-wide-2","about"],["9c456dc4-d15a-4d96-a9a7-1d88c2aa4888.jpg","about-wide-3","about"],["688057eb3696d153fa20e771.jpeg","DSC_0811","home"],["688057eb3696d10fce20e76f.jpeg","DSC_6016","home"]]}];
+  var POOLS = __DATA__;
   var SHAPES = [
     {key:'tall',  label:'Tall 4:5',   pct:125},
     {key:'square',label:'Square',     pct:100},
     {key:'wide',  label:'Wide 3:2',   pct:66.667}
   ];
   var NOTES = {
-    w:'User Uploads / Website — 77 photographs, full resolution.',
+    w:'User Uploads / Website \u2014 77 photographs, full resolution.',
     l:'Everything else in your media library, including the six in ' +
       'Relocated Item.'
   };
@@ -355,7 +391,7 @@
     if (st.picks.length < 12) {
       lines.push('', '(' + (12 - st.picks.length) + ' still to choose)');
     }
-    return lines.join('\n');
+    return lines.join('\\n');
   }
 
   el('copy').onclick = function(){
@@ -395,3 +431,10 @@
 {% endraw %}
 </body>
 </html>
+"""
+
+out = HTML.replace("__DATA__", data)
+(ROOT / "scalogy-picker.html").write_text(out)
+print("wrote", len(out), "bytes;",
+      " + ".join("%s %d (%d placed)" % (p["title"], len(p["items"]),
+      sum(1 for r in p["items"] if len(r) > 2)) for p in POOLS))
