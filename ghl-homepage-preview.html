@@ -89,6 +89,18 @@
    the headline below the fold. Capped so the whole hero reads at a glance.
    object-position keeps the subject centred as the top and bottom trim. */
 .jhp-home .jhp-hero img{max-height:72vh;object-fit:cover;object-position:center 42%}
+/* The overlay sits on the photo at every width, phones included. At its own
+   3:2 ratio the hero is only about 260px tall on a 390px screen, nowhere near
+   enough to hold the eyebrow, a two-line headline and a button, so on a phone
+   the photo is given a real height and cover crops it to a portrait.
+   Cropping 3:2 to portrait keeps the full height and throws away about 54% of
+   the width, so the horizontal position is the whole game: the figure sits
+   left of centre in this frame, and 46% keeps her in while trimming the bright
+   window at the right edge. */
+@media (max-width:620px){
+  .jhp-home .jhp-hero img{height:clamp(440px,74vh,660px);max-height:none;
+    object-position:46% center}
+}
 .jhp-home .jhp-hero .jhp-over{position:absolute;inset:0;display:flex;flex-direction:column;
   align-items:flex-start;justify-content:flex-end;gap:16px;text-align:left;
   padding:0 clamp(20px,5vw,60px) clamp(30px,4.5vw,52px);
@@ -101,11 +113,6 @@
 .jhp-home .jhp-hero .jhp-ttl{font-family:var(--serif);font-weight:500;
   font-size:clamp(30px,6.2vw,72px);line-height:1.04;letter-spacing:.01em;margin:0}
 /* on a phone the photo is too short to hold type, so it moves below */
-@media (max-width:620px){
-  .jhp-home .jhp-hero .jhp-over{position:static;background:var(--ground);
-    padding:26px 18px 32px;align-items:flex-start}
-}
-
 /* ---------- 3 · imagery + line ---------- */
 /* Three across at every width, phones included. They are three identical
    900x1352 crops, so the row stays even with no ratio box needed; at 390px
