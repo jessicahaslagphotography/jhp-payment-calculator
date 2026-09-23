@@ -223,7 +223,7 @@
    picture behind it, and the sessions need to be in reach. */
 .jhp-home .jhp-intro{position:relative}
 .jhp-home .jhp-intro img{width:100%;height:clamp(320px,37vw,600px);
-  max-height:none;object-fit:cover;object-position:50% 34%}
+  max-height:none;object-fit:cover;object-position:50% 77%}
 .jhp-home .jhp-intro .jhp-over{position:absolute;inset:0;display:flex;
   flex-direction:column;align-items:center;justify-content:flex-end;
   text-align:center;
@@ -232,11 +232,12 @@
     rgba(19,16,14,.78) 24%,rgba(19,16,14,.34) 52%,rgba(19,16,14,.04) 82%)}
 .jhp-home .jhp-intro h1{margin:0;max-width:24ch}
 @media (max-width:620px){
-  /* A flat height again, as on the home page: a share of the width would
-     draw this at about 120px on a phone, which is a stripe, not a picture.
-     Cropping 3:2 that tall throws away the width instead, so the
-     horizontal position is what matters here. */
-  .jhp-home .jhp-intro img{height:340px;object-position:50% 30%}
+  /* A flat height, as on the home page: a share of the width would draw
+     this at about 120px on a phone, which is a stripe, not a picture.
+     Jessica set 220 in the band tuner, with the crop at 43% across and 89%
+     down -- low enough that the band is the floor and her legs rather than
+     the windows, which is where the headline wanted to sit. */
+  .jhp-home .jhp-intro img{height:220px;object-position:43% 89%}
   .jhp-home .jhp-intro h1{max-width:20ch}
 }
 
