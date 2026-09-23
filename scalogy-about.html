@@ -77,6 +77,41 @@
 .jhp-home .jhp-vip{background:var(--surface);border-top:1px solid var(--line);
   padding:clamp(40px,5vw,60px) clamp(18px,5vw,34px);text-align:center}
 .jhp-home .jhp-vip .inner{max-width:54ch;margin:0 auto}
+/* The About page's closing band puts a photograph behind that text. The rule
+   above is shared with the homepage and stays untouched; this modifier is the
+   only thing the About page adds, so the two copies of the design system
+   cannot drift apart.
+
+   Behind the text rather than beside it because every other shape on this page
+   is already taken: the opener is a full-bleed plate, the intro is a photo
+   beside copy, and the band above is a column of frames. This is the one that
+   is left, and it bookends the page against the opener.
+
+   The scrim weights come from the frame itself. Its top third means 143 in
+   luma and its bottom third means 11, so one flat overlay would either crush
+   the dark end or leave the bright end too light to set cream type over. The
+   gradient is heaviest at the top for that reason: even the brightest tenth of
+   the photo then lands about 8.8:1 against --ink, and the darkest part of the
+   frame stays a photograph rather than going to black.
+
+   The ellipse over it is not about contrast, it is about where the eye goes.
+   At this crop her face falls behind the headline, and two things competing
+   for the same spot makes both of them harder to read. Darkening only the
+   middle gives the type a quiet pocket and leaves the photograph legible out
+   at both edges, which a heavier flat scrim would have flattened away. */
+.jhp-home .jhp-vip.has-photo{position:relative;overflow:hidden;isolation:isolate;
+  padding:clamp(58px,7vw,92px) clamp(18px,5vw,34px)}
+.jhp-home .jhp-vip.has-photo > img{position:absolute;inset:0;z-index:-2;
+  width:100%;height:100%;object-fit:cover;object-position:64% 46%}
+.jhp-home .jhp-vip.has-photo::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:
+    radial-gradient(ellipse 64% 118% at 50% 50%,
+      rgba(19,16,14,.50) 0%, rgba(19,16,14,0) 76%),
+    linear-gradient(180deg, rgba(19,16,14,.70) 0%,
+      rgba(19,16,14,.58) 46%, rgba(19,16,14,.74) 100%)}
+/* --muted is a warm grey meant for a flat panel; over a photograph it loses
+   the line. The one sentence in this band goes to --ink instead. */
+.jhp-home .jhp-vip.has-photo .jhp-p{color:var(--ink)}
 
 /* The lead plate. Same construction as the homepage hero - photo, gradient,
    text over it, bottom-left - so the two pages open the same way. It carries
@@ -350,7 +385,9 @@
   </div>
 </section>
 
-<section class="jhp-vip">
+<section class="jhp-vip has-photo">
+  <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/fbd692b0-d484-411a-9761-b0326110c010.jpg"
+       alt="Boudoir portrait made at the JHP Boudoir studio">
   <div class="inner">
     <p class="jhp-kicker">Come say hi</p>
     <h2 class="jhp-h">If You Read This Far, We&rsquo;d Get Along</h2>
