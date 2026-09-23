@@ -74,16 +74,12 @@
 .jhp-home .jhp-nav a{font-family:var(--sans);font-weight:400;font-size:11px;
   letter-spacing:.24em;text-transform:uppercase;color:var(--muted);transition:color .3s}
 .jhp-home .jhp-nav a:hover{color:var(--gold)}
-.jhp-home .jhp-logo{font-family:var(--serif);font-size:22px;letter-spacing:.14em;
-  color:var(--gold);text-transform:uppercase}
-
-@media (max-width:620px){
-  .jhp-home .jhp-nav{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;
-    padding:14px 18px 8px;justify-items:center;line-height:1.2}
-  .jhp-home .jhp-nav .jhp-logo{grid-column:1 / -1;order:-1;font-size:24px;
-    padding-bottom:6px}
-  .jhp-home .jhp-nav a{padding:11px 0;font-size:10.5px;letter-spacing:.2em}
-}
+/* Written as .jhp-logo, this lost every line of itself to `.jhp-nav a`
+   above, which is one class heavier -- so the wordmark has been rendering
+   as an eleven-pixel sans nav link that happens to read JHP. Qualified by
+   the element it actually is, it wins and the mark is a mark again. */
+.jhp-home .jhp-nav a.jhp-logo{font-family:var(--serif);font-size:22px;
+  letter-spacing:.14em;color:var(--gold);text-transform:uppercase}
 
 .jhp-home .jhp-vip{background:var(--surface);border-top:1px solid var(--line);
   padding:clamp(40px,5vw,60px) clamp(18px,5vw,34px);text-align:center}
@@ -159,6 +155,72 @@
 }
 
 @media (prefers-reduced-motion:reduce){.jhp-home *{transition:none!important}}
+
+/* THE PHONE
+   ---------
+   One scale at phone width for every page that shares this system,
+   declared here as tokens so no section invents its own. Before it the
+   Portfolio page carried a 31px heading over a 220px band and another
+   31px heading over a 320px one, three different side margins, and a
+   footer paragraph set to 27 characters -- nine lines of it on a 390px
+   screen. One page, four rhythms.
+
+   The rule the tokens encode: text keeps a single margin, photographs run
+   edge to edge, and there is one display size, one heading size under it,
+   one body size and one label size. Nothing else.
+
+   This block only overrides. It adds no new selectors to the shared
+   system, so it can be pasted into the About page whole when that page
+   gets the same pass -- it has not had it yet, and until it does, this is
+   the one place the two copies differ. */
+@media (max-width:620px){
+  .jhp-home{
+    --ph-gut:22px;      /* the one side margin, for text */
+    --ph-display:27px;  /* the page's big heading */
+    --ph-head:23px;     /* section headings under it */
+    --ph-body:15.5px;
+    --ph-sub:14.5px;
+    --ph-label:10px;    /* kickers, nav, names, footer links */
+  }
+  .jhp-home .jhp-sec{padding:40px var(--ph-gut)}
+  .jhp-home .jhp-kicker{font-size:var(--ph-label);letter-spacing:.26em;
+    margin-bottom:10px}
+  .jhp-home .jhp-h{font-size:var(--ph-head);line-height:1.22}
+  .jhp-home .jhp-h-lg{font-size:var(--ph-display);line-height:1.2}
+  .jhp-home .jhp-p{font-size:var(--ph-body);line-height:1.7}
+  /* 12px with the tracking still clears 44px of height on the padding. */
+  .jhp-home .jhp-btn,.jhp-home .jhp-btn2{font-size:12px;letter-spacing:.16em;
+    padding:16px 26px}
+  .jhp-home .jhp-btn2{padding:15px 25px}
+
+  /* Four links and a wordmark. At this size they fit on one line inside
+     the margin, which the two-column grid they used to sit in did not --
+     that grid set its own column widths and came out ragged. */
+  .jhp-home .jhp-nav{display:flex;flex-wrap:wrap;justify-content:center;
+    gap:0 18px;padding:14px var(--ph-gut) 10px;line-height:1.2}
+  .jhp-home .jhp-nav a.jhp-logo{flex:0 0 100%;order:-1;text-align:center;
+    font-size:26px;padding-bottom:8px}
+  .jhp-home .jhp-nav a{padding:11px 0;font-size:var(--ph-label);
+    letter-spacing:.2em}
+
+  .jhp-home .jhp-vip{padding:44px var(--ph-gut)}
+  .jhp-home .jhp-foot{padding:44px var(--ph-gut) 0}
+  /* 27 characters is a column for a newspaper set in three of them, and
+     it drew this paragraph nine lines deep on a 390px screen. The footer
+     has the whole width; 38 fills it and stops at six. */
+  .jhp-home .jhp-foot .blurb{max-width:38ch;font-size:var(--ph-body);
+    line-height:1.7}
+  .jhp-home .jhp-foot h3{font-size:var(--ph-label);letter-spacing:.24em;
+    margin-bottom:12px}
+  .jhp-home .jhp-foot .mail{font-size:16px}
+  .jhp-home .jhp-foot .hrs{font-size:13.5px;line-height:1.7;margin-top:16px}
+  .jhp-home .jhp-foot ul a{font-size:var(--ph-body)}
+  .jhp-home .jhp-foot .base{gap:12px;padding:20px 0 24px}
+  .jhp-home .jhp-foot .ftnav ul{gap:0 16px}
+  .jhp-home .jhp-foot .ftnav a{font-size:var(--ph-label);letter-spacing:.2em;
+    padding:13px 0}
+  .jhp-home .jhp-foot .fc{font-size:11px}
+}
 
 
 /* THE CLIENT GALLERY

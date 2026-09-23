@@ -62,8 +62,8 @@ GAL_CSS = """/* THE INDEX
   /* An even count divides by two, so nothing is orphaned here and the
      middle-column rule has to be switched back off. */
   .jhp-home .jhp-gal a:last-child:nth-child(3n+1){grid-column:auto}
-  .jhp-home .jhp-gal .nm{padding:24px 6px 10px;font-size:10px;
-    letter-spacing:.18em}
+  .jhp-home .jhp-gal .nm{padding:26px 6px 11px;font-size:var(--ph-label);
+    letter-spacing:.2em}
 }
 
 /* THE INTRO
@@ -94,7 +94,12 @@ GAL_CSS = """/* THE INDEX
      down -- low enough that the band is the floor and her legs rather than
      the windows, which is where the headline wanted to sit. */
   .jhp-home .jhp-intro img{height:220px;object-position:43% 89%}
-  .jhp-home .jhp-intro h1{max-width:20ch}
+  /* The height is hers and does not move, so the headline has to be the
+     thing that fits it: at the page's display size it takes two lines and
+     leaves the top half of the band as photograph. 20ch would have broken
+     it into three. */
+  .jhp-home .jhp-intro h1{max-width:23ch}
+  .jhp-home .jhp-intro .jhp-over{padding:0 var(--ph-gut) 24px}
 }
 
 /* THE DIVIDER
@@ -152,8 +157,19 @@ GAL_CSS = """/* THE INDEX
 }
 @media (max-width:620px){
   /* The page's phone rule: photographs run edge to edge, only text keeps
-     its margins. */
-  .jhp-home .jhp-quote .shot{margin-inline:calc((100% - 100vw) / 2)}
+     its margins.
+
+     Edge to edge in the 150.3% box the portrait is drawn 586px tall on a
+     390px screen, which is a wall you scroll past rather than a picture
+     you see. Capped to a plate instead -- the box goes and a height takes
+     its place, and cover crops the difference off the top and bottom,
+     centred, which on this frame is headroom and floor. */
+  .jhp-home .jhp-quote .shot{margin-inline:calc((100% - 100vw) / 2);
+    height:430px}
+  .jhp-home .jhp-quote .shot::before{content:none}
+  .jhp-home .jhp-quote .qt{font-size:19px;line-height:1.6;margin-bottom:18px}
+  .jhp-home .jhp-quote .qa{font-size:var(--ph-label);letter-spacing:.22em}
+  .jhp-home .jhp-quote .src{font-size:12px;margin-top:16px}
 }
 
 /* THE WAY ON
@@ -190,6 +206,27 @@ GAL_CSS = """/* THE INDEX
 /* The divider immediately above the band would otherwise sit on the
    photograph's top edge -- the band carries no padding of its own. */
 .jhp-home .jhp-div + .jhp-band{margin-top:clamp(42px,6vw,72px)}
+@media (max-width:620px){
+  /* Jessica set this band's height and crop in the tuner, so neither
+     moves. What changes is that a phone crops the frame the other way --
+     the band is now taller than the frame's shape, so it is scaled to
+     the height and cut at the sides, which puts the subject in the middle
+     of the picture instead of off to the right. The left gradient alone
+     could not hold the words against her. So: a heavier scrim, and
+     measures short enough that neither line reaches her.
+
+     The words stay left rather than centring to match the band at the top
+     of the page -- centred here would put them straight on her face. */
+  .jhp-home .jhp-band .over{padding:0 var(--ph-gut);
+    background:
+      linear-gradient(0deg,rgba(19,16,14,.86) 0%,rgba(19,16,14,.52) 58%,
+        rgba(19,16,14,.4) 100%),
+      linear-gradient(90deg,rgba(19,16,14,.9) 0%,rgba(19,16,14,.66) 50%,
+        rgba(19,16,14,.16) 100%)}
+  .jhp-home .jhp-band h2{max-width:16ch;margin-bottom:10px}
+  .jhp-home .jhp-band .sub{font-size:var(--ph-sub);max-width:22ch;
+    margin-bottom:20px}
+}
 """
 
 
