@@ -62,6 +62,14 @@ by their own CSS and need no change in the markup.
   without its `{% endraw %}` is rejected. After a patch, `pages_render`.
   A rendered page is the template less 21 bytes (the raw fence); check
   it every time.
+- **One review, one page.** No Google review appears twice on the site.
+  Miss M.'s was on three pages at once, beside three different faces, which
+  reads as three women who happened to write the identical paragraph. The
+  nine reviews Jessica has supplied, where each one sits and why, and the
+  three still held back are in `reviews.md` -- read it before adding or
+  moving a review, and update it in the same commit. The photograph beside a
+  pull-quote is not the woman who wrote it and carries no name for that
+  reason, so a review can change pages without the frame changing with it.
 - **Photographs are judged at real size.** A frame that looks clear of a
   heading on a contact sheet is often sitting on the subject at 1440. And
   one page, one client per frame -- the same face opening and closing a
