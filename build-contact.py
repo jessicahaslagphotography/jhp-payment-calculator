@@ -23,12 +23,20 @@ foot; the two say different things and neither is a copy of the other.
 
 WHAT THIS PAGE IS, AND IS NOT
 
-It is not a booking page. Every "Book a Call" button on the site lands here,
-but the exchange this page offers is the Session Guide, and the link to book a
-consultation call lives INSIDE that guide -- Jessica's sequence, 24 September.
-So the page asks for an email address and nothing else is promised on it. If
-the button labels across the site are ever reworded, that is a separate edit
-to six templates and does not belong here.
+It is the booking page now, and it was not before. Until 24 September the
+exchange was the Session Guide alone and the link to book a consultation call
+lived INSIDE that guide; a woman who pressed "Book a Call" anywhere on the
+site landed on a form and no calendar, which is the one place the site's own
+labels did not tell the truth. Jessica closed that the same day: a submission
+now goes straight to her GHL "Info" calendar, and the magazine still arrives
+by email off the same webhook. She gets both, and the page says so above the
+form before she gives up four fields for it.
+
+Two consequences worth holding on to. The button still reads "Send Me the
+Session Guide", which now under-describes what pressing it does -- her
+wording to settle, not something to quietly reword. And the thank-you state
+is no longer part of the flow: see the note on it below before assuming it
+is dead code.
 
 IT IS A MAGAZINE, AND SAYING SO IS THE POINT. Jessica's note, 24 September:
 a woman should be able to tell what actually arrives. So the page names the
@@ -271,10 +279,11 @@ BODY = """
   <div class="jhp-center">
     <p class="jhp-p">Ready to learn even more about working with the
        studio?</p>
-    <p class="jhp-p">Fill in the form and your copy of the Session Guide
-       Magazine comes straight over &mdash; the studio itself, how a session
-       day runs, everything a session includes, and where pricing
-       starts.</p>
+    <p class="jhp-p">Fill in the form and two things happen. Your copy of
+       the Session Guide Magazine comes straight over &mdash; the studio
+       itself, how a session day runs, everything a session includes, and
+       where pricing starts &mdash; and you go straight through to my
+       calendar to book your consultation call.</p>
     <p class="jhp-p">Fill it in accurately so that I can reach you, and if
        the magazine has not arrived within five or ten minutes, please check
        your spam folder.</p>
@@ -318,16 +327,29 @@ BODY = """
     </noscript>
   </form>
 
+  <!-- THE FALLBACK, NOT THE FLOW. Nobody reaches this in the ordinary
+       case: a submission goes straight to the calendar. It shows in two
+       situations only -- a filled honeypot, which is a bot and gets a
+       thank-you and no request, and a redirect the browser refused, which
+       an extension or a locked-down in-app webview can do.
+
+       So it has to stand on its own as the last thing a woman sees, which
+       is why the button is here rather than a line of prose about a link.
+       Keep the email address on it: with the page no longer ending here,
+       this and the footer are what is left if the POST failed silently. -->
   <div class="jhp-done" id="jhp-done" hidden>
     <h2 class="jhp-h">It Is On Its Way</h2>
     <p>Check your inbox &mdash; the magazine is heading there now, and should
        land within five or ten minutes. Have a proper look at it when you
        have a quiet ten minutes of your own.</p>
-    <p>Inside it there is a link to book your consultation call, for whenever
-       you are ready. Fifteen minutes, and nothing is decided on it that you
-       do not decide.</p>
-    <p>If it has not arrived, look in your spam folder first, then write to
-       me at <a href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a>
+    <p>Then book your consultation call whenever you are ready. Fifteen
+       minutes, and nothing is decided on it that you do not decide.</p>
+    <p style="margin-bottom:24px"><a class="jhp-btn" id="jhp-cal"
+       href="https://api.leadconnectorhq.com/widget/booking/mi2EqYRq4gGEbBJHe82b"
+       style="border-bottom:0">Schedule My Call</a></p>
+    <p>If the magazine has not arrived, look in your spam folder first, then
+       write to me at
+       <a href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a>
        and I will send it by hand.</p>
   </div>
 </section>
@@ -416,6 +438,26 @@ BODY = """
 
     const ENDPOINT = "{{WEBHOOK}}";
 
+    /* THE CALENDAR THIS PAGE HANDS OFF TO
+
+       Jessica's GHL "Info" calendar, round robin and active, which her own
+       Showit revamp notes had already earmarked for website contact. She
+       chose it on 24 September and she chose the hand-off: straight there
+       on submit, no confirmation screen in between.
+
+       The four fields she has just typed are carried over as query
+       parameters, so she does not type her name and email a second time on
+       the far side. GHL's booking widget reads these; anything it does not
+       recognise it ignores. */
+    const CALENDAR = "https://api.leadconnectorhq.com/widget/booking/mi2EqYRq4gGEbBJHe82b";
+
+    const calendarFor = (b, first, last) => {
+      const q = new URLSearchParams({
+        first_name: first, last_name: last, email: b.email, phone: b.phone,
+      });
+      return CALENDAR + "?" + q.toString();
+    };
+
     const token = () => {
       try {
         if (crypto && crypto.randomUUID) return crypto.randomUUID();
@@ -448,6 +490,11 @@ BODY = """
         user_agent: navigator.userAgent.slice(0, 400),
       };
 
+      /* keepalive is the whole reason this still works now that the page
+         navigates away in the same breath. Without it the browser is free
+         to cancel an in-flight request when the document goes, and the
+         lead would be lost on the way to the calendar. The body is a few
+         hundred bytes, far inside keepalive's 64KB ceiling. */
       try {
         fetch(ENDPOINT, {
           method: "POST",
@@ -456,11 +503,20 @@ BODY = """
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         }).catch(() => {});
-      } catch (e) { /* nothing to recover: the thank-you names the email */ }
+      } catch (e) { /* the redirect still happens: booking the call reaches
+                       Jessica even if this POST never landed */ }
 
-      form.hidden = true;
-      done.hidden = false;
-      done.scrollIntoView({ block: "center", behavior: "smooth" });
+      /* Straight to the calendar -- Jessica's choice, 24 September. The
+         fallback below is not a second thought about that: it only runs if
+         the assignment throws or is blocked, which a browser extension or
+         a locked-down webview can do. In the ordinary case nobody sees it. */
+      try {
+        window.location.href = calendarFor(body, first, last);
+      } catch (e) {
+        form.hidden = true;
+        done.hidden = false;
+        done.scrollIntoView({ block: "center", behavior: "smooth" });
+      }
     });
   })();
 </script>

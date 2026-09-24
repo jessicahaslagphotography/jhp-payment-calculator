@@ -132,30 +132,53 @@ of Jessica's own: the About page's closing band was 190px and is now about
   All seven templates carry the same nav markup byte-for-byte; check that
   with an md5 of the `<nav>` block before believing a change landed
   everywhere.
-- **Contact is the Session Guide, not a calendar.** `/contact` asks for a
-  name, email and phone and promises the **Session Guide Magazine**; the
-  link to book a consultation call is inside that magazine, not on the site.
-  The page names it in full where a visitor first meets it and says "the
-  magazine" after -- Jessica's note, 24 September, so a woman can tell what
+- **Contact is the Session Guide AND the calendar. She gets both.**
+  Jessica's ask, 24 September; until then it was the guide alone and the
+  booking link lived inside it, which meant every "Book a Call" button on
+  the site landed on a page with no calendar on it. That is closed now.
+  `/contact` asks for a name, email and phone, and on submit the page goes
+  **straight to her GHL `Info` calendar**
+  (`api.leadconnectorhq.com/widget/booking/mi2EqYRq4gGEbBJHe82b`) with the
+  four fields she just typed carried over as query parameters, while the
+  magazine still arrives by email off the same webhook. No confirmation
+  screen in between -- her choice, made against the alternative of pausing
+  on one. The copy above the form says both things happen, because a
+  calendar nobody was told about is a surprise, not a hand-off.
+  **`keepalive:true` on that fetch is load-bearing now in a way it was not
+  before.** The page navigates away in the same breath as the POST; without
+  keepalive the browser is free to cancel the in-flight request and the
+  lead is lost on the way to the calendar. Verified against a server that
+  deliberately waited 1.2s to acknowledge: the page was already on the
+  calendar at 400ms and the body still arrived. Do not drop it, and do not
+  move the redirect above the fetch.
+  The page still names the **Session Guide Magazine** in full where a
+  visitor first meets it and says "the magazine" after, so she can tell what
   actually arrives. "The guide" is the same object and is still correct in
-  prose; the string that must never follow the copy is the GHL tag below. Every "Book a
-  Call" button on all seven templates lands there, so the label and the page
-  do not quite agree -- that is Jessica's wording to settle, not something to
-  quietly reword. A submission goes: the form POSTs no-cors to the
-  `site-lead-submit` webhook, workflow `site-leads-ingest` writes a
-  `site_leads` row and upserts the contact into GHL tagged
-  **`Session Guide - Requested`**, and a GHL workflow watching that tag is
-  what actually sends the guide. That tag string is the whole contract
-  between this site and the guide: if guides stop arriving, check GHL before
-  touching the page. `site_leads` holds PII and must never be attached to an
-  app. The page needs JavaScript and says so in a `<noscript>`. A no-cors
-  POST cannot be confirmed, so a woman whose submission failed silently
-  needs a route that does not depend on the form: the footer's Get In Touch
-  column is the only one always on the page, with the `<noscript>` line
-  (scripting off) and the thank-you state (after submitting) behind it.
-  Jessica has removed the two that used to sit in the flow -- the block at
-  the foot and the note under the button. **The footer one is load-bearing.**
-  Take it out and this page has no recourse at all for a failed submission.
+  prose; the string that must never follow the copy is the GHL tag below.
+  The submit button still reads "Send Me the Session Guide", which now
+  under-describes what pressing it does -- Jessica's wording to settle, not
+  something to quietly reword.
+  A submission goes: the form POSTs no-cors to the `site-lead-submit`
+  webhook, workflow `site-leads-ingest` writes a `site_leads` row and
+  upserts the contact into GHL tagged **`Session Guide - Requested`**, and a
+  GHL workflow watching that tag is what actually sends the guide. That tag
+  string is the whole contract between this site and the guide: if guides
+  stop arriving, check GHL before touching the page. `site_leads` holds PII
+  and must never be attached to an app. The page needs JavaScript and says
+  so in a `<noscript>`.
+  **The thank-you state is a fallback, not the flow, and is not dead code.**
+  It shows in exactly two cases: a filled honeypot (a bot, which gets a
+  thank-you and no request) and a redirect the browser refused, which an
+  extension or a locked-down in-app webview can do. It therefore has to
+  stand alone as the last thing a woman sees, which is why it carries a
+  Schedule My Call button rather than a sentence about a link.
+  A no-cors POST still cannot be confirmed, so a woman whose submission
+  failed silently needs a route that does not depend on the form. With the
+  page no longer ending on the thank-you, **the footer's Get In Touch column
+  is what is left** -- along with the `<noscript>` line if scripting is off.
+  Take the footer one out and this page has no recourse at all. The one
+  consolation is that booking the call reaches Jessica even when the POST
+  did not, so a silent failure now costs the magazine rather than the lead.
 - **/contact is one paragraph and a form, and that is deliberate.** It had a
   five-point contents list and a review; Jessica cut both on 24 September --
   353 words and 3941px on a phone is ten screens of scrolling to collect
@@ -168,7 +191,9 @@ of Jessica's own: the About page's closing band was 190px and is now about
   the dash, and the magazine is named in that paragraph's first sentence
   because nothing above it names the thing any more. Adding a section back
   is a decision to re-make, not an omission to repair -- and anything added
-  should be measured against 2388px, which is what the page is now.
+  should be measured against 2380px, which is what the page is now. (It was
+  2388 before the calendar hand-off; the third paragraph gained a clause and
+  the copy re-wrapped 8px shorter, so nothing was spent.)
 - **The VIP group is on two pages and is one link.** The Facebook group
   (`facebook.com/groups/1107773373084834`) is the homepage's `.jhp-vip`
   panel -- mid-page, no photograph -- and the closing `.jhp-band` at the
