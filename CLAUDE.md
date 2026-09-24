@@ -47,6 +47,20 @@ by their own CSS and need no change in the markup.
   line beneath Info. All six templates carry the same nav markup
   byte-for-byte; check that with an md5 of the `<nav>` block before
   believing a change landed everywhere.
+- **Contact is the Session Guide, not a calendar.** `/contact` asks for a
+  name, email and phone and promises the Session Guide; the link to book a
+  consultation call is inside that guide, not on the site. Every "Book a
+  Call" button on all seven templates lands there, so the label and the page
+  do not quite agree -- that is Jessica's wording to settle, not something to
+  quietly reword. A submission goes: the form POSTs no-cors to the
+  `site-lead-submit` webhook, workflow `site-leads-ingest` writes a
+  `site_leads` row and upserts the contact into GHL tagged
+  **`Session Guide - Requested`**, and a GHL workflow watching that tag is
+  what actually sends the guide. That tag string is the whole contract
+  between this site and the guide: if guides stop arriving, check GHL before
+  touching the page. `site_leads` holds PII and must never be attached to an
+  app. The page needs JavaScript and says so in a `<noscript>`; the email
+  address is on the page twice for exactly that reason.
 - **Links are relative** (`../about/`), so they resolve on
   `pages.scalogy.com/jhpboudoir1/` now and on the real domain later. The
   one link that has to change at launch is the JHP wordmark:

@@ -488,7 +488,7 @@ BODY = """
 
 <div class="jhp-div" aria-hidden="true"></div>
 
-<a class="jhp-band" href="/contact">
+<a class="jhp-band" href="../contact/">
   <img src="%(cdn)s31196c8e-202f-429f-bbcd-7134a55a8caa.jpg"
        width="1600" height="1065" loading="lazy"
        alt="A client photographed in front of the gilt mirror at the JHP Boudoir studio">

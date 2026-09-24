@@ -128,7 +128,7 @@ BODY = """
   <div class="inner">
     <p class="jhp-kicker">When you are ready</p>
     <h2 class="jhp-h">Your Turn</h2>
-    <a class="jhp-btn" href="/contact">Book Your Session</a>
+    <a class="jhp-btn" href="../contact/">Book Your Session</a>
   </div>
 </section>
 

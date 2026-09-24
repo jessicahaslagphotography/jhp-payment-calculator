@@ -18,6 +18,7 @@ an existing light edit that predates this file.
 | Portfolio pull-quote | Miss R. | "Jess is amazing to work with!..." |
 | FAQ pull-quote | Miss A. | "Jessica is great to work with..." |
 | The Experience pull-quote | Miss N. | "Jessica was fabulous from the very first contact..." |
+| Contact pull-quote | Miss H. | "Jessica is amazing! Such a lovely day..." |
 
 Why those three, and not others:
 
@@ -31,6 +32,10 @@ Why those three, and not others:
 - **The Experience — Miss N.** "From the very first contact to the image
   reveal" is the arc that page walks step by step. It was already there and
   did not need moving.
+- **Contact — Miss H.** The only review on the site about the room itself
+  ("she really makes the studio a safe and comfortable place"), on the page a
+  woman is reading at the moment she is deciding whether she could walk into
+  it. Placed 24 September when /contact was built.
 
 Miss M.'s was in three slots at once -- home, portfolio and FAQ -- beside
 three different faces, which reads as three women who happened to write the
@@ -38,9 +43,9 @@ identical paragraph. It is now on the home page only.
 
 ## Held, with nowhere to put them yet
 
-Three reviews are unused because there are only six slots. Candidates for
-`/contact` when it is built, and for an About pull-quote if that page gets
-one (it currently carries no review at all).
+Two reviews are unused, and both are held for the same reason rather than for
+want of a slot. The obvious remaining slot is an About pull-quote: that page
+still carries no review at all.
 
 > "Oh my gosh Jessica is Amazing! She makes you feel so comfortable and
 > beautiful in your own skin. Really she is so professional and fun and I
@@ -53,20 +58,14 @@ one (it currently carries no review at all).
 > such a fun and easy process. Thank you!!!"
 > -- **Miss K.**
 
-> "Jessica is amazing! Such a lovely day. She is so fun and professional!
-> She really makes the studio a safe and comfortable place! Recommend to
-> anyone who wants to feel good about themselves or just have a fun
-> self-love day!"
-> -- **Miss H.**
-
 **Two different women both sign as Miss K.** On the portfolio that is fine
 -- there are two Miss K galleries and they are plainly two sessions -- but
 two reviews signed identically read as one woman posting twice, which is the
 exact thing the one-review-one-page rule exists to prevent. Both are held
 until Jessica says how to tell them apart. Neither is on the site.
 
-Miss H.'s is the best review the site has about the *studio* ("a safe and
-comfortable place"), so it wants a page where the room is the subject.
+Miss H.'s went to /contact on 24 September, which is why it is no longer in
+this list.
 
 ## Things this register is for
 
