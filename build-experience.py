@@ -329,7 +329,6 @@ BODY = """
 
 <section class="jhp-sec" style="border-bottom:none">
   <div class="jhp-center-wide">
-    <p class="jhp-kicker">The Studio</p>
     <h2 class="jhp-h jhp-h-lg">A Studio Designed Exactly for Boudoir</h2>
     <p class="jhp-p">High ceilings, wood beams, chandeliers and brick, and
        more than one set to move between &mdash; so a single session gives you
@@ -372,12 +371,11 @@ BODY = """
            alt="A boudoir portrait made at the JHP Boudoir studio">
     </figure>
     <blockquote>
-      <p class="qt">&ldquo;This was a very great experience! Not only is the work
-         impeccable, Jess makes you feel comfortable and helps you embrace your
-         body as is and see the beauty that is there. She walks you through the
-         whole process making it easy and comfortable. I went from I could never
-         do something like this, to excited about booking my next shoot.&rdquo;</p>
-      <p class="qa">Miss J.</p>
+      <p class="qt">&ldquo;Jessica was fabulous from the very first contact to
+         the image reveal! Very professional and made the whole experience
+         amazing! Would definitely do this experience again with her and highly
+         recommend!&rdquo;</p>
+      <p class="qa">Miss N.</p>
       <a class="src" href="https://www.google.com/search?q=JHP+Boudoir&amp;kgmid=/g/11v3x9fqm9"
          target="_blank" rel="noopener">Read all reviews on Google</a>
     </blockquote>
@@ -456,16 +454,15 @@ BODY = """
       <span class="n" aria-hidden="true">4</span>
       <p class="when">Two to three hours</p>
       <h3>Session Day</h3>
-      <p>Hair and makeup first, then we shoot. Plan on two to three hours at
-         the studio &mdash; it is not a rushed hour, and part of what makes the
-         photographs work is having the time to settle in.</p>
+      <p>Hair and makeup first, then we shoot. Your session experience will
+         last 2&ndash;3 hours on average.</p>
     </li>
     <li>
       <span class="n" aria-hidden="true">5</span>
       <p class="when">7&ndash;14 business days later</p>
       <h3>Image Reveal</h3>
       <p>We sit down together and go through your images for the first time,
-         seven to fourteen business days after your session. You choose which
+         7&ndash;14 business days after your session. You choose which
          ones you want to keep and how you want them &mdash; and you order them
          here, at the same appointment.</p>
       <p>You are not sent a link and left to work it out alone. It is most
@@ -476,10 +473,12 @@ BODY = """
       <h3>Product Delivery</h3>
       <p>Your digital images are yours the moment the reveal ends. Albums, wall
          art and anything else printed are made to order and arrive at your
-         door within six weeks of that appointment.</p>
+         door within 6 weeks of that appointment.</p>
     </li>
   </ol>
 </section>
+
+<div class="jhp-div" aria-hidden="true"></div>
 
 <a class="jhp-band" href="/contact">
   <img src="%(cdn)s31196c8e-202f-429f-bbcd-7134a55a8caa.jpg"
