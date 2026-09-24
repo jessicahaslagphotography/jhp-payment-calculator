@@ -90,23 +90,47 @@ of Jessica's own: the About page's closing band was 190px and is now about
   header. Reading order is About, Portfolio, Info, Specialty Sessions,
   Book a Call.
 - **Info is a menu, not a page.** Under Info sit FAQ and The Experience.
-  Info itself is a `<span>` and goes nowhere -- there is no Info page. The
-  menu uses no JavaScript: both links are always in the markup and in the
-  tab order, and the panel is revealed by `:hover` and `:focus-within`,
-  never by `display` or `visibility` (either would take the links out of
-  the tab order and `:focus-within` could then never fire). On a phone
-  there is no hover, so both wrappers go `display:contents` and the nav
-  becomes one flat wrapping row: mark, then About / Portfolio / Info, then
-  FAQ / The Experience, then Specialty Sessions / Book a Call. 165px at
-  every width from 320 to 430.
-  **`.jhp-sub` carries no `order` in that phone block, and must not.** It
-  said `order:1` for as long as the four links fitted on one line, which
-  put it last and next in the same place. The moment Specialty Sessions
-  pushed Book a Call onto a second row the two Info pages landed *under
-  Book a Call* -- two links adrift from the word they belong to. It is
-  `flex:0 0 100%` that breaks the line under Info; document order does the
-  rest. All seven templates carry the same nav markup byte-for-byte; check
-  that with an md5 of the `<nav>` block before believing a change landed
+  Info itself is a `<span>` and goes nowhere -- there is no Info page. On a
+  desktop the menu uses no JavaScript: both links are always in the markup
+  and in the tab order, and the panel is revealed by `:hover` and
+  `:focus-within`, never by `display` or `visibility` (either would take
+  the links out of the tab order and `:focus-within` could then never
+  fire). On a phone Info is not a menu at all -- it is a section label
+  inside the drawer, with its two pages as ordinary rows indented beneath
+  it. A word that goes nowhere does not get a 44px tap target.
+- **On a phone the whole nav is a drawer, and it is a `<details>`.**
+  Jessica's ask, 24 September. Flat, six links and a wordmark came to four
+  rows and 165px of bar before a visitor saw a photograph. Closed it is now
+  one 71px row -- the mark left, the word **Menu** and a chevron right --
+  and the hero starts 94px higher. Open, the panel hangs off `.jhp-nav`
+  (which is the positioned ancestor and carries `z-index:30`), so it
+  overlays the hero rather than pushing the page down: 306px, full width,
+  one link per row on a hairline, every row 44px or more.
+  Still no JavaScript, but not by the same trick as the desktop panel: a
+  phone has no hover, so this needs a real open and shut. `<details>` gives
+  a focusable control, Enter and Space, and a disclosure a screen reader
+  announces as one -- none of which a checkbox dressed as a button gets
+  right. The FAQ's accordion is the same element, so the site now uses it
+  twice for the same reason.
+  **Two rules keep the two states apart, and neither is optional.** Up top
+  the wrapper is dissolved (`.jhp-navd{display:contents}`, the summary
+  hidden) AND `::details-content` is forced visible, because browsers hide
+  a closed `<details>` two different ways -- older engines with a display
+  rule on the children, which a child can override, newer ones with
+  `content-visibility` on that pseudo, which a child cannot. Setting both
+  means the desktop bar is always drawn whatever state the details is left
+  in, including the state a visitor leaves it in by opening the menu on a
+  phone and turning the phone sideways. In the phone block, because those
+  overrides are inherited, the closed state has to be stated outright:
+  `.jhp-navd:not([open]) .jhp-navr{display:none}`. Leave that line out and
+  the drawer hangs open on every phone.
+  **It does not close on an outside tap.** No-JS `<details>` closes only
+  from its own summary. Tapping a link navigates away, so the only cost is
+  a menu left open over the hero until Menu is tapped again. Closing it on
+  an outside tap needs a few lines of JavaScript, and that is a trade to
+  make deliberately rather than by accident.
+  All seven templates carry the same nav markup byte-for-byte; check that
+  with an md5 of the `<nav>` block before believing a change landed
   everywhere.
 - **Contact is the Session Guide, not a calendar.** `/contact` asks for a
   name, email and phone and promises the **Session Guide Magazine**; the
