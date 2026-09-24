@@ -102,8 +102,14 @@ of Jessica's own: the About page's closing band was 190px and is now about
   what actually sends the guide. That tag string is the whole contract
   between this site and the guide: if guides stop arriving, check GHL before
   touching the page. `site_leads` holds PII and must never be attached to an
-  app. The page needs JavaScript and says so in a `<noscript>`; the email
-  address is on the page twice for exactly that reason.
+  app. The page needs JavaScript and says so in a `<noscript>`. A no-cors
+  POST cannot be confirmed, so a woman whose submission failed silently
+  needs a route that does not depend on the form: the footer's Get In Touch
+  column is the only one always on the page, with the `<noscript>` line
+  (scripting off) and the thank-you state (after submitting) behind it.
+  Jessica has removed the two that used to sit in the flow -- the block at
+  the foot and the note under the button. **The footer one is load-bearing.**
+  Take it out and this page has no recourse at all for a failed submission.
 - **/contact is one paragraph and a form, and that is deliberate.** It had a
   five-point contents list and a review; Jessica cut both on 24 September --
   353 words and 3941px on a phone is ten screens of scrolling to collect
@@ -116,7 +122,7 @@ of Jessica's own: the About page's closing band was 190px and is now about
   the dash, and the magazine is named in that paragraph's first sentence
   because nothing above it names the thing any more. Adding a section back
   is a decision to re-make, not an omission to repair -- and anything added
-  should be measured against 2472px, which is what the page is now.
+  should be measured against 2388px, which is what the page is now.
 - **The VIP group is on two pages and is one link.** The Facebook group
   (`facebook.com/groups/1107773373084834`) is the homepage's `.jhp-vip`
   panel -- mid-page, no photograph -- and the closing `.jhp-band` at the

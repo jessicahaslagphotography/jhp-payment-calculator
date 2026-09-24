@@ -65,11 +65,22 @@ through.
 
 NO JAVASCRIPT, NO FORM. That is stated on the page rather than hidden: a
 no-cors POST needs fetch, and a plain HTML POST would navigate the visitor to
-a JSON response and send the wrong content type besides. The <noscript> line
-gives the email address instead, and the note under the form and the footer's
-Get In Touch column carry it too, so the page still does its job with
-scripting off. Jessica removed the block that used to repeat it at the foot,
-so those three are now the whole of it -- do not let the last one go. This is the same
+a JSON response and send the wrong content type besides.
+
+WHERE THE EMAIL ADDRESS LIVES, AND WHY THE COUNT MATTERS. A no-cors POST
+cannot be confirmed, so a woman whose submission failed silently needs a way
+through that does not depend on the form having worked. There are three, and
+only one of them is on the page unconditionally:
+
+  the footer's Get In Touch column   always visible   <- the load-bearing one
+  the <noscript> line                scripting off
+  the thank-you state                after submitting
+
+Jessica has now removed two that used to sit in the flow -- the block at the
+foot of the page, and the note under the submit button (24 September). Both
+were hers to remove and neither was the last one. THE FOOTER ONE IS. If a
+future change takes the email out of the footer, this page stops having any
+recourse for a failed submission and something else has to replace it first. This is the same
 bargain the dividers make -- the page is finished without JavaScript, and
 JavaScript only ever adds.
 
@@ -299,10 +310,6 @@ BODY = """
     <div class="go">
       <button class="jhp-btn" type="submit">Send Me the Session Guide</button>
     </div>
-    <p class="note">Your details come to me and nobody else. If you would
-       rather just write to me,
-       <a href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a>
-       reaches me directly.</p>
     <noscript>
       <p class="note">This form needs JavaScript, which your browser has
          switched off. Email me at
