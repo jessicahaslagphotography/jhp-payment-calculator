@@ -447,8 +447,9 @@ BODY = """
       <p class="when">Fifteen minutes</p>
       <h3>Consultation Call</h3>
       <p>A short call &mdash; fifteen minutes at the most. We go over the
-         details, I answer anything the guide did not, and if it feels right we
-         get your session on the calendar.</p>
+         details and I answer anything the guide did not. If it feels right, we
+         get your session on the calendar, choose your collection and set up
+         its interest-free payment plan.</p>
     </li>
     <li>
       <span class="n" aria-hidden="true">3</span>
