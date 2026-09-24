@@ -406,6 +406,27 @@
 }
 .jhp-home .jhp-vip .jhp-h{margin-bottom:clamp(22px,2.6vw,30px)}
 
+/* THE REVIEW'S FRAME
+   -------------------
+   The shared pull-quote stands a 2:3 portrait beside the words. The frame
+   Jessica chose for it is a landscape 3:2, which in that box loses 56% of
+   its width, so on this page the photograph goes above the review instead
+   and keeps its own shape. The words centre under it, which is what the
+   shared rule already does when the two stack on a narrow screen.
+
+   760 rather than the full 1040: a 3:2 frame the width of the text block
+   would be 693px tall and the review would be below the fold of it. */
+.jhp-home .jhp-quote{grid-template-columns:1fr;max-width:760px;
+  gap:clamp(22px,3vw,34px);text-align:center}
+.jhp-home .jhp-quote .shot::before{padding-top:66.6%}
+@media (max-width:620px){
+  /* The shared phone rule caps this frame to a 430px plate because a 2:3
+     portrait edge to edge is a wall. A 3:2 is not: edge to edge it draws
+     260px on a 390px screen, so it can simply keep its shape. */
+  .jhp-home .jhp-quote .shot{height:auto}
+  .jhp-home .jhp-quote .shot::before{content:"";display:block;padding-top:66.6%}
+}
+
 /* THE INTRO'S SENTENCE
    --------------------
    The Portfolio and the FAQ open on a kicker and a heading and nothing
@@ -430,50 +451,35 @@
 
 /* THE STUDIO
    ----------
-   One tall frame beside two wide ones. The shape is the argument: the
-   room is the thing being sold here, and a row of three equal tiles would
-   have had to crop all three to the same box -- which on a 3:2 frame of a
-   whole room means throwing away the room and keeping the woman.
+   Three photographs, all of them landscape, so all three keep their own
+   3:2 and nothing is cropped at all -- there is no object-position in
+   this block because there is no crop to position.
 
-   So the wide frames stay wide. Only they carry a ratio box, which makes
-   the right-hand column set the height of the row; the tall frame has no
-   height of its own at all and is stretched to whatever that comes to by
-   the grid, which is why the two columns line up at every width without a
-   fixed number anywhere. At 1440 the row is 918px and the tall frame is
-   486 across, so it crops about 60px off each side of its 3:2 -- the
-   mantel and the candles are well inside that.
+   It was built the other way round: a tall frame beside two wide ones.
+   Jessica picked three landscape frames, and a 3:2 photograph forced into
+   that tall box loses 65% of its width -- a narrow slice out of the
+   middle of a room. The shape of the section is the cheaper thing to
+   change, so it changed.
 
-   The frames were chosen for three different sets -- brick and candles,
-   the gilt mirror under the windows, the green velvet against brick --
-   because "multiple sets" is a claim in the copy beside them and one
-   room photographed three times would quietly contradict it. */
+   One across the top and two beneath gives the first frame the weight the
+   tall one used to have, without asking any of them to be a shape they
+   are not. */
 .jhp-home .jhp-studio{display:grid;
-  grid-template-columns:minmax(0,.72fr) minmax(0,1fr);
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:clamp(12px,1.4vw,18px);max-width:1180px;margin:clamp(30px,4vw,46px) auto 0}
-.jhp-home .jhp-studio .stack{display:grid;gap:clamp(12px,1.4vw,18px);
-  grid-template-rows:1fr 1fr;min-width:0}
+.jhp-home .jhp-studio .lead{grid-column:1 / -1}
 .jhp-home .jhp-studio figure{position:relative;margin:0;min-width:0;
   overflow:hidden;background:var(--surface)}
+.jhp-home .jhp-studio figure::before{content:"";display:block;padding-top:66.6%}
 .jhp-home .jhp-studio figure img{position:absolute;inset:0;width:100%;
   height:100%;object-fit:cover;transition:transform .9s ease}
 .jhp-home .jhp-studio figure:hover img{transform:scale(1.03)}
-.jhp-home .jhp-studio .wide::before{content:"";display:block;padding-top:66.6%}
-/* The two frames in the right column are landscape and the left one is a
-   portrait of a whole wall; cover would take the mantel off the top of
-   one and the ceiling off the other. Each is anchored where its room is. */
-.jhp-home .jhp-studio .tall img{object-position:50% 34%}
-.jhp-home .jhp-studio .wide-a img{object-position:50% 40%}
-.jhp-home .jhp-studio .wide-b img{object-position:50% 46%}
 @media (max-width:820px){
   /* One column, edge to edge, which is this site's rule for photographs
-     on a phone. There is no second column left for the tall frame to be
-     stretched against, so here it is the one that needs a box of its own
-     -- shallower than its 3:2, because full height it would be a 520px
-     wall to scroll past. */
+     on a phone. Each frame keeps its 3:2, so the column is three rooms
+     deep and none of them is cut. */
   .jhp-home .jhp-studio{grid-template-columns:1fr;
     margin-inline:calc((100% - 100vw) / 2);gap:0}
-  .jhp-home .jhp-studio .stack{grid-template-rows:auto auto;gap:0}
-  .jhp-home .jhp-studio .tall::before{content:"";display:block;padding-top:133%}
   .jhp-home .jhp-studio figure:hover img{transform:none}
 }
 
@@ -605,19 +611,18 @@
    they carry different crops. Every other line of the two bands is the
    Portfolio's, sliced above.
 
-   The top band is the library: bookcase wall, clock, the mirror and the
-   window beyond it. Anchored high, at 20%, so the heading lands on the
-   dark lower shelves and the whole room stays in -- a centred crop put
-   the second line of the heading across her legs.
+   The closing band is Jessica's own frame and its numbers were swept at
+   1440 with the real heading on them: she stands centre-right against the
+   gilt mirror, the words sit on the plant and the dark wall beside her,
+   and on a phone the crop is anchored hard left to walk her further from
+   them still.
 
-   The closing band's heading is set left, so it needed the left third
-   quiet: she stands centre-right against the gilt mirror and the words
-   sit on the plant and the dark wall beside her.
-
-   Both were swept at 1440 with the real words on them rather than judged
-   from a contact sheet. At a quarter scale a heading looks clear of a
-   subject it is in fact sitting on top of. */
-.jhp-home .jhp-intro img{object-position:50% 20%}
+   The top band is a frame I have not been able to see -- this container
+   is blocked from the media CDN -- so it is centred, which is the honest
+   default and not a decision. It crops 44% of its height at every width,
+   and the heading is centred on the floor of it. If the words land on
+   her, the vertical number here is the one line to change. */
+.jhp-home .jhp-intro img{object-position:50% 50%}
 .jhp-home .jhp-band img{object-position:50% 50%}
 /* 1024 rather than the 620 the rest of the page breaks at, because what
    changes here is not the phone: it is the band losing its depth. At 1440
@@ -636,7 +641,7 @@
    this wide scales to the width, so only the vertical number does
    anything, and the closing band's crop below is for the phone alone. */
 @media (max-width:1024px){
-  .jhp-home .jhp-intro img{height:320px;object-position:50% 78%}
+  .jhp-home .jhp-intro img{height:320px;object-position:50% 50%}
   .jhp-home .jhp-intro .jhp-over{background:linear-gradient(0deg,
     rgba(19,16,14,.96) 0%,rgba(19,16,14,.88) 30%,
     rgba(19,16,14,.52) 62%,rgba(19,16,14,.1) 88%)}
@@ -670,9 +675,9 @@
 </nav>
 
 <section class="jhp-intro">
-  <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee86fef86e60d5226fb9.jpg"
+  <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/ae1a19f7-af39-428c-8a4b-fbc9ea507f3b.jpg"
        width="1600" height="1065"
-       alt="The library set at the JHP Boudoir studio, a client photographed in front of the bookcase wall">
+       alt="A client photographed at the JHP Boudoir studio, Jefferson City, Missouri">
   <div class="jhp-over">
     <p class="jhp-kicker">The Experience</p>
     <h1 class="jhp-h jhp-h-lg">What the Day Looks Like</h1>
@@ -695,23 +700,21 @@
   </div>
 
   <div class="jhp-studio">
-    <figure class="tall">
-      <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee7918384d888bb3d890.jpg"
-           width="1065" height="1600" loading="lazy"
-           alt="The fireplace set at JHP Boudoir, exposed brick and a mantel lit with candles">
+    <figure class="lead">
+      <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/2b4d228c-6db8-499f-b4ab-d1f82f8864d9.jpg"
+           width="1600" height="1065" loading="lazy"
+           alt="A client photographed at the JHP Boudoir studio">
     </figure>
-    <div class="stack">
-      <figure class="wide wide-a">
-        <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab3ee828bf21de2ae408336.jpg"
-             width="1600" height="1065" loading="lazy"
-             alt="A client photographed beside the floor-to-ceiling gilt mirror under the studio windows">
-      </figure>
-      <figure class="wide wide-b">
-        <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/ce79ce12-548d-4471-b9b2-282da4e1c2e9.jpg"
-             width="1600" height="1065" loading="lazy"
-             alt="A client photographed on the green velvet sofa against the studio's brick wall">
-      </figure>
-    </div>
+    <figure>
+      <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/1f13b9e2-4d0e-44be-830d-752b24c0f9ee.jpg"
+           width="1600" height="1065" loading="lazy"
+           alt="A client photographed at the JHP Boudoir studio">
+    </figure>
+    <figure>
+      <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/b4a72aea-672e-4acf-a066-5d33f18b2f65.jpg"
+           width="1600" height="1065" loading="lazy"
+           alt="A client photographed at the JHP Boudoir studio">
+    </figure>
   </div>
 </section>
 
@@ -720,9 +723,9 @@
 <section class="jhp-sec" style="border-bottom:none">
   <div class="jhp-quote">
     <figure class="shot">
-      <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/46a7d597-eea6-449f-9299-c3798b846f22.jpg"
-           width="1065" height="1600" loading="lazy"
-           alt="A boudoir portrait made at the JHP Boudoir studio">
+      <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/75fa539d-9493-4c5a-8119-200b913c1d13.jpg"
+           width="1600" height="1065" loading="lazy"
+           alt="A boudoir photograph made at the JHP Boudoir studio">
     </figure>
     <blockquote>
       <p class="qt">&ldquo;Jessica was fabulous from the very first contact to

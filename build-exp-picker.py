@@ -47,37 +47,39 @@ for key, group in (("site", "Website folder"), ("rest", "Library")):
 # reason this matters: at 390px the top band is 320px tall, not 144, and a
 # preview at the desktop ratio would be showing a crop that never happens.
 SLOTS = [
-    {"k": "intro", "n": "Top band", "ratio": 2.70, "fit": "50% 20%",
-     "ph": 320, "pfit": "50% 78%", "over": "intro",
+    {"k": "intro", "n": "Top band", "ratio": 2.70, "fit": "50% 50%",
+     "ph": 320, "pfit": "50% 50%", "over": "intro",
      "note": "Kicker, heading and one line, centred on the floor of the band. "
-             "Needs a frame whose bottom third is quiet."},
-    {"k": "tall", "n": "Studio — tall", "ratio": 0.53, "fit": "50% 34%",
-     "pratio": 0.752, "over": "",
-     "note": "The left-hand frame of the studio set. Cut narrower than a "
-             "portrait, so the room has to read from its middle."},
-    {"k": "wideA", "n": "Studio — upper", "ratio": 1.50, "fit": "50% 40%",
-     "pratio": 1.50, "over": "",
-     "note": "Top right of the studio set. A whole room, uncropped at "
-             "the sides."},
-    {"k": "wideB", "n": "Studio — lower", "ratio": 1.50, "fit": "50% 46%",
-     "pratio": 1.50, "over": "",
-     "note": "Bottom right of the studio set. Pick a different room from "
-             "the other two."},
-    {"k": "quote", "n": "Review portrait", "ratio": 0.665, "fit": "50% 50%",
-     "ph": 430, "over": "",
-     "note": "Stands beside Miss N's review. A 2:3 portrait fits this box "
-             "exactly, so nothing is cropped."},
+             "Crops 44% of its height, so it wants a frame whose middle "
+             "band is the part worth keeping."},
+    {"k": "lead", "n": "Studio — top", "ratio": 1.50, "pratio": 1.50,
+     "fit": "50% 50%", "over": "",
+     "note": "Across the top of the studio set, at its own 3:2 — nothing "
+             "is cropped. Landscape. An upright frame here would be cut to "
+             "a slice; send it to me and I will reshape the section."},
+    {"k": "left", "n": "Studio — left", "ratio": 1.50, "pratio": 1.50,
+     "fit": "50% 50%", "over": "",
+     "note": "Bottom left of the studio set. Landscape, uncropped. Pick a "
+             "different room from the other two."},
+    {"k": "right", "n": "Studio — right", "ratio": 1.50, "pratio": 1.50,
+     "fit": "50% 50%", "over": "",
+     "note": "Bottom right of the studio set. Landscape, uncropped."},
+    {"k": "quote", "n": "Review frame", "ratio": 1.50, "pratio": 1.50,
+     "fit": "50% 50%", "over": "",
+     "note": "Sits above Miss N's review at its own 3:2, uncropped. "
+             "Landscape, since the review now reads under the photograph "
+             "rather than beside it."},
     {"k": "band", "n": "Closing band", "ratio": 2.94, "fit": "50% 50%",
      "ph": 320, "pfit": "0% 50%", "over": "band",
      "note": "Heading, one line and the button, all set left. Needs a frame "
              "whose left third is quiet."},
 ]
-CURRENT = {"intro": "6ab3ee86fef86e60d5226fb9.jpg",
-           "tall": "6ab3ee7918384d888bb3d890.jpg",
-           "wideA": "6ab3ee828bf21de2ae408336.jpg",
-           "wideB": "ce79ce12-548d-4471-b9b2-282da4e1c2e9.jpg",
-           "quote": "46a7d597-eea6-449f-9299-c3798b846f22.jpg",
-           "band": "31196c8e-202f-429f-bbcd-7134a55a8caa.jpg"}
+CURRENT = {"intro": "ae1a19f7-af39-428c-8a4b-fbc9ea507f3b.jpg",
+           "lead":  "2b4d228c-6db8-499f-b4ab-d1f82f8864d9.jpg",
+           "left":  "1f13b9e2-4d0e-44be-830d-752b24c0f9ee.jpg",
+           "right": "b4a72aea-672e-4acf-a066-5d33f18b2f65.jpg",
+           "quote": "75fa539d-9493-4c5a-8119-200b913c1d13.jpg",
+           "band":  "31196c8e-202f-429f-bbcd-7134a55a8caa.jpg"}
 
 DATA = json.dumps({"cdn": CDN, "items": items, "slots": SLOTS,
                    "current": CURRENT}, separators=(",", ":"),
