@@ -114,13 +114,14 @@ Where each one lives, so a revision does not have to be hunted for:
 - **Neither form quotes a price.** That is deliberate -- see the note on
   `/inquire`'s acknowledgment below.
 
-**The PDF itself is not in this repo and is still wrong.** It lives in Canva
-and goes out of GHL to every woman who fills in `/contact`, quoting a $500
-session fee and Collections from $2,800. Nothing in this repo can fix that
-and no code change makes it less urgent: the site now promises a document
-that undercuts it by $197 and $1,550. It also contradicts itself, offering a
-20-minute consultation on page 11 and 30 minutes on page 15; the GHL calendar
-is 20 minutes, which is what `/inquire` says.
+**The Canva PDF is superseded and must stop being sent.** It quotes a $500
+session fee and Collections from $2,800, undercutting the site by $197 and
+$1,550, and it contradicts itself on the consultation length (20 minutes on
+page 11, 30 on page 15; the GHL calendar is 20). It is replaced by
+`/session-guide` -- see the note on it below -- so the GHL workflow behind the
+`Session Guide - Requested` tag wants to send **the link, not the
+attachment**. Until Jessica changes that workflow the old file is still going
+out, and nothing in this repo can stop it.
 
 ## SEO: the site is switched off, and that is on purpose
 
@@ -358,6 +359,69 @@ Still to do, roughly in order of what it is worth:
   The closing band hands the undecided woman to `/contact` rather than
   repeating the VIP group, because a woman who opened the inquiry form and
   found she was not ready should meet the guide, not a Facebook link.
+- **The Session Guide is a page now, and that is the point.** `/session-guide`,
+  template `jhp-guide-2026`, generator `build-guide.py`. It is her own 21-page
+  Canva magazine rebuilt in the site's design system, her voice kept down to
+  "best ass-sets" and "bodacious babe", with only what her 24 September figures
+  forced. **A PDF is a photograph of the truth on the day it was exported** --
+  every number in it had to be retyped in Canva and re-uploaded to GHL before a
+  single woman saw a correction, which is exactly how it came to contradict
+  this site in nine places. The figures now live in `F` at the top of the
+  generator, once, and the copy is built around them.
+  **Three of her figures rewrote sections rather than editing them.** The day
+  went 4-5 hours to 2-3; the reveal moved from same-day and in person to a Zoom
+  appointment a fortnight later; delivery is measured from the reveal, not the
+  session. Her old session-day page was a schedule built around same-day
+  ordering -- 10am start, lunch at 12, back by 2:30 -- and none of it survives
+  that, so HOW THE SESSION DAY WORKS and YOUR IMAGE REVEAL are written fresh
+  from her facts. The line she cared about is kept in substance: you are not
+  sent a link and left alone with it.
+  **The build refuses to run if a stale figure is still in the file.** `stale`
+  in `build-guide.py` holds every superseded number -- $500, $2,800, 18 months,
+  4-5 hours, 9am-4pm, 6-8 weeks, "in-person reveal", "located in Jefferson
+  City" -- and `raise SystemExit` beats finding one of them in somebody's
+  inbox. It also checks that every contents anchor has a matching id, and that
+  no photograph is drawn twice.
+  **FOUR THINGS ARE DELIBERATELY ABSENT** and are marked ASK in the generator:
+  the session-fee split (it was 2 x $250 against a $500 fee, and half of $697
+  is not a number to invent), standalone album pricing (the old guide said
+  $1,500 to $3,500 and she has not restated it), her age and "photographing for
+  4 years" (both decay, and the second already disagrees with "since 2021"),
+  and the session start time. Putting any of them back is a decision.
+- **It greets her by name, out of the link.** GHL builds the URL with its own
+  merge field -- `.../session-guide/?n={{contact.first_name}}` -- and three
+  slots change: the eyebrow over the title, the first line, the sign-off. Three
+  and no more, because a document that says her name every other paragraph
+  reads like a mail merge.
+  **That parameter is a stranger's text and is treated as hostile.** It is
+  validated against `^\p{L}[\p{L}'-]{1,23}$` rather than scrubbed, and written
+  with `textContent`. Scrubbing `<img src=x onerror=...>` leaves "Img" and the
+  page then greets her as Img; validating means anything that is not a name is
+  simply not a name, and the default copy stands. `innerHTML` here would be a
+  cross-site scripting hole on a page she emails to clients. Tested against
+  script tags, event handlers, 300-character strings and an unresolved merge
+  field: none of them executes and none of them renders.
+  **Every slot holds real words, not an empty span.** No parameter, a forwarded
+  link, JavaScript off -- the page reads properly anyway. That is why the
+  default lead is "Welcome -- I am so glad you are here" rather than a blank
+  waiting to be filled.
+- **`build-guide.py --pdf` renders the same page to a file**, for when she
+  wants an attachment rather than a link. Three things had to be true and each
+  one is a trap that fails silently:
+  - **It needs `JHP_IMG_CACHE=<dir>` holding the photographs**, because the
+    build sandbox cannot reach `assets.cdn.filesafe.space`. Without the guard
+    the PDF renders with seven empty frames and nobody notices until it is
+    sent. Scalogy's own egress (`http_request` with `max_bytes` raised; the
+    default 64KiB silently truncates a 300KB JPEG) can fetch them.
+  - **`loading="lazy"` is stripped for the render.** A print render never
+    scrolls, so a lazy frame below the first screen is never fetched -- the
+    first build came out with three photographs instead of seven.
+  - **The image grade is turned off in print.** `filter:saturate(.96)
+    contrast(1.02)` forces the engine to rasterise every frame and re-embed it
+    as an upscaled RGBA PNG: 21MB instead of 1.1MB, for a grade nobody can see
+    on paper.
+  The PDF is generic. Personalisation is a page feature and does not belong in
+  a file that gets forwarded.
 - **The VIP group is on two pages and is one link.** The Facebook group
   (`facebook.com/groups/1107773373084834`) is the homepage's `.jhp-vip`
   panel -- mid-page, no photograph -- and the closing `.jhp-band` at the
@@ -382,12 +446,13 @@ Still to do, roughly in order of what it is worth:
   wants to become the absolute subdomain. Decide it with the wordmark link
   above, not separately. **`/blog` in the same footer is still dead** and
   still 404s in all seven.
-- **Changing the footer means nineteen pages, not eight.** The footer lives
+- **Changing the footer means twenty pages, not nine.** The footer lives
   in `scalogy-home.html` and `scalogy-about.html` by hand and in
   `scalogy-portfolio.html` for everything sliced from it, so a footer edit
-  is three files plus a rebuild -- and then **eight** templates to patch and
-  **nineteen** pages to render, because the twelve galleries all share
-  `jhp-gallery-2026`. It was seven and eighteen until `/inquire` existed;
+  is three files plus a rebuild -- and then **nine** templates to patch and
+  **twenty** pages to render, because the twelve galleries all share
+  `jhp-gallery-2026`. It was seven and eighteen before `/inquire`, eight and
+  nineteen before `/session-guide`;
   the count moves every time a page is added, so count it rather than
   trusting this sentence. THE GALLERIES RENDER FROM DATA: `pages_render` on one
   of them without its payload from `renders/<slug>.json` would publish an

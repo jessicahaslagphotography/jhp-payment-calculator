@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Session Guide | Jefferson City, MO | JHP Boudoir</title>
+<meta name="description" content="Everything a boudoir session at JHP Boudoir involves: the studio, the day, the reveal, what it costs and how to book. Just outside Jefferson City, Missouri.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="canonical" href="https://pages.scalogy.com/jhpboudoir1/session-guide/">
+<meta name="theme-color" content="#13100E">
+<meta property="og:site_name" content="JHP Boudoir">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="The Session Guide | JHP Boudoir">
+<meta property="og:description" content="The studio, the day, the reveal, what it costs and how to book.">
+<meta property="og:url" content="https://pages.scalogy.com/jhpboudoir1/session-guide/">
+<meta property="og:image" content="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/fe2033e0-3571-441e-8c98-089358e06f10.jpg">
+<meta property="og:image:alt" content="A client photographed in the window light at the JHP Boudoir studio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Session Guide | JHP Boudoir">
+<meta name="twitter:description" content="The studio, the day, the reveal, what it costs and how to book.">
+<meta name="twitter:image" content="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/fe2033e0-3571-441e-8c98-089358e06f10.jpg">
+<meta property="og:type" content="article">
+<style>html,body{margin:0;padding:0;background:#13100E}body{overflow-x:hidden}</style>
+</head>
+<body>
+{% raw %}
+<div class="jhp-home">
+<style>
+/* SHARED DESIGN SYSTEM
+   --------------------
+   Tokens, type, buttons, nav, the closing band and the footer, copied out of
+   the About page at build time so the pages cannot drift. The comments that
+   explain why each of those rules is the way it is live in scalogy-about.html
+   and are deliberately not duplicated here - four copies of an argument is
+   four things to keep true. Only what is specific to this page is commented
+   below. */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
+
+.jhp-home{
+  --ground:#13100E; --surface:#1C1714; --raised:#241D18;
+  --ink:#F2ECE2; --muted:#A99A86; --dim:#7D7161;
+  --gold:#C9A24B; --gold-bright:#E6C576;
+  --line:rgba(201,162,75,.22); --line-soft:rgba(242,236,226,.09);
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Jost',-apple-system,'Segoe UI',system-ui,sans-serif;
+
+  width:100vw; position:relative; left:50%; right:50%;
+  margin-left:-50vw; margin-right:-50vw; max-width:100vw;
+
+  background:var(--ground); color:var(--ink);
+  font-family:var(--sans); font-size:16px; line-height:1.55;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+.jhp-home *,.jhp-home *::before,.jhp-home *::after{box-sizing:border-box}
+.jhp-home p,.jhp-home h1,.jhp-home h2,.jhp-home h3,.jhp-home ul,.jhp-home figure{margin:0;padding:0}
+.jhp-home img{display:block;width:100%;height:auto;max-width:100%;border:0;
+  filter:saturate(.96) contrast(1.02)}
+.jhp-home a{text-decoration:none;color:inherit}
+
+.jhp-home .jhp-kicker{font-family:var(--sans);font-weight:400;font-size:11px;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
+.jhp-home .jhp-h{font-family:var(--serif);font-weight:600;font-size:clamp(30px,3.5vw,46px);
+  line-height:1.14;letter-spacing:0;margin:0 0 18px;color:var(--ink);
+  text-wrap:balance}
+.jhp-home .jhp-p{font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.75;
+  color:var(--muted);margin:0 0 18px}
+.jhp-home .jhp-sec{padding:clamp(42px,6vw,72px) clamp(18px,5vw,40px);
+  border-bottom:1px solid var(--line-soft)}
+.jhp-home .jhp-center{text-align:center;max-width:660px;margin:0 auto}
+.jhp-home .jhp-center-wide{text-align:center;max-width:880px;margin:0 auto}
+.jhp-home .jhp-h-lg{font-size:clamp(38px,5.6vw,66px);line-height:1.06;
+  letter-spacing:-.012em}
+
+.jhp-home .jhp-btn,.jhp-home .jhp-btn2{display:inline-block;font-family:var(--sans);
+  font-weight:500;font-size:13px;letter-spacing:.18em;text-transform:uppercase;
+  border-radius:2px;padding:14px 28px;cursor:pointer;transition:all .35s;border:none}
+.jhp-home .jhp-btn{color:var(--ground);background:var(--gold)}
+.jhp-home .jhp-btn:hover{background:var(--gold-bright)}
+.jhp-home .jhp-btn2{color:var(--gold);background:transparent;border:1px solid var(--gold);padding:13px 27px}
+.jhp-home .jhp-btn2:hover{color:var(--gold-bright);border-color:var(--gold-bright)}
+.jhp-home .jhp-btn:focus-visible,.jhp-home .jhp-btn2:focus-visible{
+  outline:2px solid var(--gold-bright);outline-offset:3px}
+
+/* Wordmark hard left, everything else hard right -- Jessica's ask,
+   24 September. It was one centred row before, with the mark sitting in the
+   middle of the links.
+
+   The right-hand group is its own flex row rather than the links being
+   direct children of the nav, because space-between on seven children would
+   spread them across the whole bar instead of gathering them. It takes
+   align-self:stretch so it still fills the nav's content height, which is
+   what the Info panel's 21px offset is measured from -- see the note on
+   .jhp-navg below. Without that the panel detaches from the rule under the
+   header. */
+.jhp-home .jhp-nav{display:flex;align-items:center;justify-content:space-between;
+  gap:26px;
+  flex-wrap:wrap;padding:20px 18px;border-bottom:1px solid var(--line-soft);
+  position:relative;z-index:30}
+/* THE DRAWER WRAPPER, AND WHY IT IS INVISIBLE UP HERE
+
+   On a phone the whole right-hand group lives inside a <details>, which is
+   what gives the menu a real open and shut with no JavaScript -- a real
+   button, keyboard-operable, announced as a disclosure. On a desktop there
+   is no menu to open: the links are the bar. So the wrapper is dissolved
+   with display:contents and the summary is hidden, and the row below lays
+   out as a direct child of the nav exactly as it did before the details
+   existed.
+
+   The third rule is the one that is easy to leave out and is doing real
+   work. Browsers hide a closed details' contents two different ways and
+   have been changing which: the older engines put a display rule on the
+   children, which anything the child declares overrides, and the newer
+   ones hide ::details-content with content-visibility, which a child
+   cannot override at all. Only the pseudo can. Set both and the desktop
+   nav is simply always drawn, whatever state the details is left in --
+   including the state a visitor leaves it in by opening the menu on a
+   phone and then turning the phone sideways. */
+.jhp-home .jhp-navd{display:contents}
+.jhp-home .jhp-navt{display:none}
+.jhp-home .jhp-navd::details-content{display:contents;content-visibility:visible;
+  block-size:auto;overflow:visible}
+.jhp-home .jhp-navr{display:flex;align-items:center;align-self:stretch;
+  gap:26px;flex-wrap:wrap;justify-content:flex-end}
+.jhp-home .jhp-nav a{font-family:var(--sans);font-weight:400;font-size:11px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--muted);transition:color .3s}
+.jhp-home .jhp-nav a:hover{color:var(--gold)}
+/* Written as .jhp-logo, this lost every line of itself to `.jhp-nav a`
+   above, which is one class heavier -- so the wordmark has been rendering
+   as an eleven-pixel sans nav link that happens to read JHP. Qualified by
+   the element it actually is, it wins and the mark is a mark again. */
+.jhp-home .jhp-nav a.jhp-logo{font-family:var(--serif);font-size:22px;
+  letter-spacing:.14em;color:var(--gold);text-transform:uppercase}
+
+/* INFO, AND THE TWO PAGES UNDER IT
+
+   A menu that needs no JavaScript. Both links are always in the markup and
+   always in the tab order; the panel is revealed by :hover for a mouse and
+   by :focus-within for a keyboard. Nothing here uses display or visibility,
+   because either one would take the links out of the tab order and then
+   :focus-within could never fire -- so the panel is hidden with opacity and
+   made unclickable with pointer-events instead.
+
+   Info itself is a span, not a link. There is no Info page: the two pages
+   under it are the destinations, and a parent that also navigates somewhere
+   is the thing that makes these menus miserable on a phone. */
+/* align-self:stretch is what makes the 21px below an exact number rather
+   than a tuned one. Without it the group is only as tall as the word Info
+   and sits centred against the taller wordmark, so the distance down to
+   the nav's bottom border is that centring slack plus the padding, and it
+   moves whenever the wordmark does. Stretched, the group's bottom IS the
+   nav's content edge, and 21px is the nav's padding-bottom plus its 1px
+   border -- the panel lands on the rule under the header by construction. */
+.jhp-home .jhp-navg{position:relative;display:inline-flex;align-items:center;
+  align-self:stretch}
+.jhp-home .jhp-navg-t{font-family:var(--sans);font-weight:400;font-size:11px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--muted);
+  cursor:default;transition:color .3s}
+/* A 4px square with two of its sides drawn, turned 45 degrees: the chevron
+   that says there is something underneath. */
+.jhp-home .jhp-navg-t::after{content:"";display:inline-block;
+  width:4px;height:4px;margin:-3px 0 0 8px;vertical-align:middle;
+  border-right:1px solid currentColor;border-bottom:1px solid currentColor;
+  transform:rotate(45deg)}
+.jhp-home .jhp-navg:hover .jhp-navg-t,
+.jhp-home .jhp-navg:focus-within .jhp-navg-t{color:var(--gold)}
+/* The panel opens level with the foot of the nav rather than against the
+   word, and this covers the gap between the two so the pointer can cross
+   it without the menu closing under the cursor. */
+.jhp-home .jhp-navg::after{content:"";position:absolute;top:100%;left:50%;
+  width:150px;height:22px;transform:translateX(-50%)}
+.jhp-home .jhp-nav .jhp-sub{position:absolute;top:100%;left:50%;z-index:2;
+  display:flex;flex-direction:column;gap:13px;white-space:nowrap;
+  margin-top:21px;padding:17px 24px;text-align:left;
+  background:var(--surface);border:1px solid var(--line);
+  opacity:0;pointer-events:none;transform:translate(-50%,-6px);
+  transition:opacity .3s ease,transform .3s ease}
+.jhp-home .jhp-navg:hover .jhp-sub,
+.jhp-home .jhp-navg:focus-within .jhp-sub{
+  opacity:1;pointer-events:auto;transform:translate(-50%,0)}
+
+.jhp-home .jhp-vip{background:var(--surface);border-top:1px solid var(--line);
+  padding:clamp(40px,5vw,60px) clamp(18px,5vw,34px);text-align:center}
+.jhp-home .jhp-vip .inner{max-width:54ch;margin:0 auto}
+
+.jhp-home .jhp-foot{background:var(--surface);border-top:1px solid var(--line);
+  padding:clamp(44px,5vw,66px) clamp(18px,5vw,40px) 0;text-align:left}
+
+.jhp-home .jhp-foot .cols{display:grid;
+  grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);
+  gap:clamp(26px,4vw,56px);max-width:1120px;margin:0 auto;
+  align-items:stretch;text-align:center}
+
+.jhp-home .jhp-foot .contact{display:flex;flex-direction:column;
+  justify-content:space-between}
+
+.jhp-home .jhp-foot .logo-mark{--logo-h:clamp(124px,13.5vw,176px);
+  display:block;width:calc(var(--logo-h) * .838);
+  height:calc(var(--logo-h) * .562);
+  overflow:hidden;margin:0 auto;align-self:center;
+  font-family:var(--serif);font-weight:500;font-size:clamp(17px,1.8vw,22px);
+  letter-spacing:.15em;line-height:1.3;color:var(--gold);text-transform:uppercase}
+.jhp-home .jhp-foot .logo-mark img{width:auto;height:var(--logo-h);max-width:none;
+  filter:none;mix-blend-mode:screen;
+  margin-top:calc(var(--logo-h) * -.212);
+  margin-left:calc(var(--logo-h) * -.092)}
+
+.jhp-home .jhp-foot .blurb{font-family:var(--sans);font-weight:300;font-size:15px;
+  line-height:1.8;color:var(--muted);margin:0 auto;max-width:27ch}
+.jhp-home .jhp-foot h3{font-family:var(--sans);font-weight:400;font-size:11px;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin:0 0 16px}
+.jhp-home .jhp-foot ul{list-style:none;display:flex;flex-direction:column;gap:11px}
+.jhp-home .jhp-foot ul a{font-family:var(--sans);font-size:14px;font-weight:300;
+  color:var(--muted);transition:color .3s}
+.jhp-home .jhp-foot ul a:hover,.jhp-home .jhp-foot .mail:hover{color:var(--gold)}
+.jhp-home .jhp-foot .mail{display:inline-block;font-family:var(--sans);
+  font-size:15px;font-weight:300;color:var(--ink);transition:color .3s;
+  word-break:break-word}
+.jhp-home .jhp-foot .hrs{font-family:var(--sans);font-weight:300;font-size:14px;
+  line-height:1.75;color:var(--muted);margin:20px 0 0}
+.jhp-home .jhp-foot .hrs b{display:block;font-weight:400;color:var(--ink)}
+
+.jhp-home .jhp-foot .base{max-width:1120px;
+  margin:clamp(32px,4vw,48px) auto 0;padding:22px 0 26px;
+  border-top:1px solid var(--line-soft);display:flex;flex-direction:column;
+  align-items:center;gap:16px;text-align:center}
+.jhp-home .jhp-foot .ftnav ul{flex-direction:row;flex-wrap:wrap;
+  justify-content:center;align-items:center;gap:0 clamp(16px,2.4vw,28px)}
+
+.jhp-home .jhp-foot .ftnav a{display:inline-block;padding:14px 0;
+  font-size:11px;letter-spacing:.24em;text-transform:uppercase}
+.jhp-home .jhp-foot .fc{font-family:var(--sans);font-size:12px;color:var(--dim);
+  letter-spacing:.04em;margin:0}
+
+.jhp-home .jhp-foot .social{display:flex;gap:12px;flex-wrap:wrap;
+  align-items:center;justify-content:center;margin-top:20px}
+.jhp-home .jhp-foot .social a{display:inline-flex;align-items:center;
+  justify-content:center;width:44px;height:44px;border:1px solid var(--line);
+  border-radius:50%;color:var(--muted);
+  transition:color .3s,border-color .3s,background .3s}
+.jhp-home .jhp-foot .social a:hover{color:var(--ground);background:var(--gold);
+  border-color:var(--gold)}
+.jhp-home .jhp-foot .social svg{width:17px;height:17px;fill:currentColor;
+  display:block;pointer-events:none}
+.jhp-home .jhp-foot a:focus-visible{outline:2px solid var(--gold-bright);
+  outline-offset:3px}
+
+@media (max-width:920px){
+  .jhp-home .jhp-foot{text-align:center}
+  .jhp-home .jhp-foot .cols{grid-template-columns:1fr;gap:34px}
+  .jhp-home .jhp-foot .logo-mark{order:-1}
+  .jhp-home .jhp-foot ul{align-items:center}
+}
+
+@media (prefers-reduced-motion:reduce){.jhp-home *{transition:none!important}}
+
+/* THE PHONE
+   ---------
+   One scale at phone width for every page that shares this system,
+   declared here as tokens so no section invents its own. Before it the
+   Portfolio page carried a 31px heading over a 220px band and another
+   31px heading over a 320px one, three different side margins, and a
+   footer paragraph set to 27 characters -- nine lines of it on a 390px
+   screen. One page, four rhythms.
+
+   The rule the tokens encode: text keeps a single margin, photographs run
+   edge to edge, and there is one display size, one heading size under it,
+   one body size and one label size. Nothing else.
+
+   This block only overrides. It adds no new selectors to the shared
+   system, so it can be pasted into the About page whole when that page
+   gets the same pass -- it has not had it yet, and until it does, this is
+   the one place the two copies differ. */
+@media (max-width:620px){
+  .jhp-home{
+    --ph-gut:22px;      /* the one side margin, for text */
+    --ph-display:38px;  /* the page's big heading */
+    --ph-head:30px;     /* section headings under it */
+    --ph-body:15.5px;
+    --ph-sub:14.5px;
+    --ph-label:10px;    /* kickers, nav, names, footer links */
+  }
+  .jhp-home .jhp-sec{padding:40px var(--ph-gut)}
+  .jhp-home .jhp-kicker{font-size:var(--ph-label);letter-spacing:.26em;
+    margin-bottom:10px}
+  /* These two now match the floors of the desktop clamps exactly, which is
+     the point: the home page and the About page have no --ph tokens of their
+     own, so on a phone they land on those floors. Setting the tokens to the
+     same numbers means every page agrees at 390px by construction rather
+     than by two figures somebody has to remember to keep in step. */
+  .jhp-home .jhp-h{font-size:var(--ph-head);line-height:1.2}
+  .jhp-home .jhp-h-lg{font-size:var(--ph-display);line-height:1.12}
+  .jhp-home .jhp-p{font-size:var(--ph-body);line-height:1.7}
+  /* 12px with the tracking still clears 44px of height on the padding. */
+  .jhp-home .jhp-btn,.jhp-home .jhp-btn2{font-size:12px;letter-spacing:.16em;
+    padding:16px 26px}
+  .jhp-home .jhp-btn2{padding:15px 25px}
+
+  /* THE PHONE MENU IS A DRAWER
+
+     Jessica's ask, 24 September. Six links and a wordmark laid flat came
+     to four rows and 165px of bar before a visitor saw a photograph; on a
+     390px screen that is a fifth of the fold spent on navigation. Closed,
+     this is one row -- the mark and the word Menu -- and the hero starts
+     about 100px higher.
+
+     No JavaScript, as with the Info panel above, but by a different
+     mechanism: this one needs a real open and shut rather than a hover a
+     phone cannot do, so it is a native <details>. That buys a focusable
+     control, Enter and Space, and a disclosure a screen reader announces
+     as one, none of which a checkbox dressed as a button gets right.
+
+     The one rule that must not be simplified away is the :not([open])
+     line. Leaving the closed state to the browser looks like it works and
+     is not portable -- older engines hide the children with a display
+     rule, newer ones hide ::details-content with content-visibility, and
+     the desktop block above deliberately overrides BOTH so the bar is
+     always drawn up there. Those overrides are inherited here, so if this
+     did not state the closed state itself the drawer would hang open on
+     every phone. */
+  .jhp-home .jhp-nav{display:flex;flex-wrap:nowrap;align-items:center;
+    justify-content:space-between;gap:18px;padding:13px var(--ph-gut);line-height:1.2}
+  .jhp-home .jhp-nav a.jhp-logo{flex:0 0 auto;order:0;text-align:left;
+    font-size:24px;padding:0}
+  .jhp-home .jhp-navd:not([open]) .jhp-navr{display:none}
+
+  /* The control. list-style and the WebKit pseudo between them remove the
+     disclosure triangle every engine draws on a summary; the chevron that
+     replaces it is the one the Info label wears on a desktop, turned
+     through 180 degrees when the drawer is open. The padding is the tap
+     target -- 12px of line plus 16px either side is 44px, which is what a
+     thumb needs and what the old nav's links never had. */
+  .jhp-home .jhp-navd > .jhp-navt{display:block;flex:0 0 auto;
+    font-family:var(--sans);font-weight:400;font-size:var(--ph-label);
+    letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
+    padding:16px 0;cursor:pointer;list-style:none;
+    -webkit-tap-highlight-color:transparent}
+  .jhp-home .jhp-navd > .jhp-navt::-webkit-details-marker{display:none}
+  .jhp-home .jhp-navd > .jhp-navt::after{content:"";display:inline-block;
+    width:5px;height:5px;margin:-3px 0 0 9px;vertical-align:middle;
+    border-right:1px solid currentColor;border-bottom:1px solid currentColor;
+    transform:rotate(45deg);transition:transform .3s}
+  .jhp-home .jhp-navd[open] > .jhp-navt{color:var(--gold)}
+  .jhp-home .jhp-navd[open] > .jhp-navt::after{transform:rotate(-135deg)}
+
+  /* The panel itself hangs off the nav, not off the details, so it spans
+     the screen rather than the width of the word Menu -- .jhp-nav is the
+     positioned ancestor and carries z-index:30, which is what puts this
+     over the hero rather than shoving it down the page. A column, one
+     link per row, each one hairlined off the last. */
+  .jhp-home .jhp-navr{position:absolute;top:100%;left:0;right:0;z-index:3;
+    flex-direction:column;align-items:stretch;justify-content:flex-start;
+    flex-wrap:nowrap;gap:0;padding:0 var(--ph-gut) 8px;
+    background:var(--surface);border-bottom:1px solid var(--line)}
+  .jhp-home .jhp-navr > a,
+  .jhp-home .jhp-nav .jhp-sub a{display:block;padding:16px 0;
+    font-size:var(--ph-label);letter-spacing:.2em;
+    border-top:1px solid var(--line-soft)}
+  .jhp-home .jhp-navr > a:first-child{border-top:0}
+
+  /* Info keeps its two pages, but in a drawer it is a section label rather
+     than a row: it goes nowhere, and giving a dead word a 44px tap target
+     is the thing that makes phone menus miserable. So it is set small and
+     dim above its two links, which are indented under it and are ordinary
+     rows like the rest. */
+  .jhp-home .jhp-navg{display:block;align-self:auto}
+  .jhp-home .jhp-navg-t{display:block;padding:15px 0 2px;font-size:9px;
+    letter-spacing:.26em;color:var(--dim);border-top:1px solid var(--line-soft)}
+  .jhp-home .jhp-navg-t::after{content:none}
+  .jhp-home .jhp-nav .jhp-sub{position:static;display:flex;
+    flex-direction:column;gap:0;white-space:normal;
+    margin:0;padding:0 0 0 14px;background:none;border:0;
+    opacity:1;pointer-events:auto;transform:none;transition:none}
+  .jhp-home .jhp-nav .jhp-sub a:first-child{border-top:0}
+  /* The reveal rules above are not in this media query, and a tap on a
+     phone can leave :hover behind -- which was pulling this column, now a
+     static one, 50% of its own width off the left of the screen. */
+  .jhp-home .jhp-navg:hover .jhp-sub,
+  .jhp-home .jhp-navg:focus-within .jhp-sub{transform:none}
+
+  .jhp-home .jhp-vip{padding:44px var(--ph-gut)}
+  .jhp-home .jhp-foot{padding:44px var(--ph-gut) 0}
+  /* 27 characters is a column for a newspaper set in three of them, and
+     it drew this paragraph nine lines deep on a 390px screen. The footer
+     has the whole width; 38 fills it and stops at six. */
+  .jhp-home .jhp-foot .blurb{max-width:38ch;font-size:var(--ph-body);
+    line-height:1.7}
+  .jhp-home .jhp-foot h3{font-size:var(--ph-label);letter-spacing:.24em;
+    margin-bottom:12px}
+  .jhp-home .jhp-foot .mail{font-size:16px}
+  .jhp-home .jhp-foot .hrs{font-size:13.5px;line-height:1.7;margin-top:16px}
+  .jhp-home .jhp-foot ul a{font-size:var(--ph-body)}
+  .jhp-home .jhp-foot .base{gap:12px;padding:20px 0 24px}
+  .jhp-home .jhp-foot .ftnav ul{gap:0 16px}
+  .jhp-home .jhp-foot .ftnav a{font-size:var(--ph-label);letter-spacing:.2em;
+    padding:13px 0}
+  .jhp-home .jhp-foot .fc{font-size:11px}
+}
+
+
+/* THE INTRO
+   ---------
+   The page opens on a photograph rather than on type. The band crops: a
+   3:2 frame cut to this height keeps its full width and loses about a
+   third of its height, taken a little above centre because that is where
+   faces sit. Frame and crop are one line each to change -- the src below
+   and the object-position here.
+
+   Shorter than the home page's hero on purpose. That one is the front
+   door and can afford the whole screen; this one is a heading with a
+   picture behind it, and the sessions need to be in reach. */
+.jhp-home .jhp-intro{position:relative}
+.jhp-home .jhp-intro img{width:100%;height:clamp(320px,37vw,600px);
+  max-height:none;object-fit:cover;object-position:50% 77%}
+.jhp-home .jhp-intro .jhp-over{position:absolute;inset:0;display:flex;
+  flex-direction:column;align-items:center;justify-content:flex-end;
+  text-align:center;
+  padding:0 clamp(20px,5vw,60px) clamp(26px,3.6vw,46px);
+  background:linear-gradient(0deg,rgba(19,16,14,.94) 0%,
+    rgba(19,16,14,.78) 24%,rgba(19,16,14,.34) 52%,rgba(19,16,14,.04) 82%)}
+.jhp-home .jhp-intro h1{margin:0;max-width:24ch}
+@media (max-width:620px){
+  /* A flat height, as on the home page: a share of the width would draw
+     this at about 120px on a phone, which is a stripe, not a picture.
+     Jessica set 220 in the band tuner, with the crop at 43% across and 89%
+     down -- low enough that the band is the floor and her legs rather than
+     the windows, which is where the headline wanted to sit. */
+  .jhp-home .jhp-intro img{height:220px;object-position:43% 89%}
+  /* The height is hers and does not move, so the headline has to be the
+     thing that fits it: at the page's display size it takes two lines and
+     leaves the top half of the band as photograph. 20ch would have broken
+     it into three. */
+  .jhp-home .jhp-intro h1{max-width:23ch}
+  .jhp-home .jhp-intro .jhp-over{padding:0 var(--ph-gut) 24px}
+}
+
+/* THE DIVIDER
+   -----------
+   Between the grid, the quote and the way on. A hairline that fades out
+   at both ends rather than running wall to wall, with a small gold lozenge
+   on the centre -- the same gold the kickers and the button use, so the
+   page gains a rhythm mark and not a new colour. Purely decorative, so it
+   is hidden from screen readers.
+
+   The line is drawn on ::before rather than as a background on the element
+   itself, because the reveal below scales the line and the lozenge must
+   not scale with it.
+
+   The movement: each divider draws outward from its own centre as it comes
+   into view, and the lozenge settles in behind it. Once per divider. It is
+   opt in from the script at the foot of the page -- without the js-rev
+   class these rules never apply and the dividers are simply drawn, so a
+   reader with JavaScript off, or one whose system asks for reduced motion,
+   gets the mark rather than an empty gap. */
+.jhp-home .jhp-div{position:relative;height:1px;max-width:1080px;margin:0 auto}
+.jhp-home .jhp-div::before{content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,
+    var(--line) 20%,var(--line) 80%,transparent)}
+.jhp-home .jhp-div::after{content:"";position:absolute;left:50%;top:50%;
+  width:7px;height:7px;margin:-4px 0 0 -4px;transform:rotate(45deg);
+  background:var(--ground);border:1px solid var(--gold)}
+.jhp-home.js-rev .jhp-div::before{transform:scaleX(0);transform-origin:50% 50%;
+  transition:transform .9s cubic-bezier(.22,.61,.36,1)}
+.jhp-home.js-rev .jhp-div::after{opacity:0;transform:rotate(45deg) scale(.4);
+  transition:opacity .45s ease .34s,
+    transform .5s cubic-bezier(.34,1.28,.64,1) .34s}
+.jhp-home.js-rev .jhp-div.in::before{transform:scaleX(1)}
+.jhp-home.js-rev .jhp-div.in::after{opacity:1;transform:rotate(45deg) scale(1)}
+
+/* THE WAY ON
+   ----------
+   The whole band is the link, so there is no small target to find: the
+   button inside it is a span, not a second anchor, which keeps the markup
+   legal and the click area the full width. Shorter than the intro band
+   above -- it is a door, not a heading. */
+.jhp-home .jhp-band{position:relative;display:block;overflow:hidden}
+.jhp-home .jhp-band img{width:100%;height:clamp(320px,34vw,520px);
+  max-height:none;object-fit:cover;object-position:50% 22%;
+  transition:transform .8s ease}
+.jhp-home .jhp-band:hover img{transform:scale(1.04)}
+.jhp-home .jhp-band:focus-visible{outline:2px solid var(--gold-bright);
+  outline-offset:-4px}
+/* Type to the left, as on the home page's hero. The band crops only
+   vertically -- it is wider than the frame at every screen -- so the
+   subject stays centred whatever the crop does, and centred type would
+   land on her face. Two gradients: one up from the floor for the words,
+   one in from the left so they hold against a bright frame. */
+.jhp-home .jhp-band .over{position:absolute;inset:0;display:flex;
+  flex-direction:column;align-items:flex-start;justify-content:center;
+  text-align:left;padding:0 clamp(22px,6vw,74px);
+  background:
+    linear-gradient(0deg,rgba(19,16,14,.8) 0%,rgba(19,16,14,.42) 55%,
+      rgba(19,16,14,.3) 100%),
+    linear-gradient(90deg,rgba(19,16,14,.72) 0%,rgba(19,16,14,.34) 38%,
+      rgba(19,16,14,0) 68%)}
+.jhp-home .jhp-band h2{margin:0 0 8px;max-width:17ch}
+.jhp-home .jhp-band .sub{font-family:var(--sans);font-weight:300;
+  font-size:15.5px;color:var(--muted);margin:0 0 22px;max-width:30ch}
+/* A span dressed as the button: the band is already the anchor. */
+.jhp-home .jhp-band .jhp-btn{pointer-events:none}
+/* The divider immediately above the band would otherwise sit on the
+   photograph's top edge -- the band carries no padding of its own. */
+.jhp-home .jhp-div + .jhp-band{margin-top:clamp(42px,6vw,72px)}
+@media (max-width:620px){
+  /* Jessica set this band's height and crop in the tuner, so neither
+     moves. What changes is that a phone crops the frame the other way --
+     the band is now taller than the frame's shape, so it is scaled to
+     the height and cut at the sides, which puts the subject in the middle
+     of the picture instead of off to the right. The left gradient alone
+     could not hold the words against her. So: a heavier scrim, and
+     measures short enough that neither line reaches her.
+
+     The words stay left rather than centring to match the band at the top
+     of the page -- centred here would put them straight on her face. */
+  .jhp-home .jhp-band .over{padding:0 var(--ph-gut);
+    background:
+      linear-gradient(0deg,rgba(19,16,14,.86) 0%,rgba(19,16,14,.52) 58%,
+        rgba(19,16,14,.4) 100%),
+      linear-gradient(90deg,rgba(19,16,14,.9) 0%,rgba(19,16,14,.66) 50%,
+        rgba(19,16,14,.16) 100%)}
+  .jhp-home .jhp-band h2{max-width:16ch;margin-bottom:10px}
+  .jhp-home .jhp-band .sub{font-size:var(--ph-sub);max-width:22ch;
+    margin-bottom:20px}
+}
+
+/* THE GUIDE
+   ---------
+   A 21-page magazine as one page. The shape of the original is kept -- it is
+   a run of questions a woman actually asks, in her order -- because that
+   order is the thing that makes it readable rather than a specification.
+
+   ONE MEASURE, 62 CHARACTERS. The body copy never changes width, at any
+   screen, and every photograph and panel is measured against it. A long
+   document that changes its measure as it goes is what makes a reader lose
+   their place.
+
+   Nothing here is a new colour, a new typeface or a new size. The questions
+   are .jhp-h at the section size, the answers are .jhp-p, and the only new
+   objects are the three panels below -- the fact card, the included list and
+   the day. */
+.jhp-home .jhp-gd{max-width:62ch;margin:0 auto}
+.jhp-home .jhp-gd > * + *{margin-top:18px}
+.jhp-home .jhp-gd .q{margin:0 0 16px}
+/* A question after an answer needs air above it or the document reads as one
+   undifferentiated column. 56px is the same rhythm the sections use. */
+.jhp-home .jhp-gd .q:not(:first-child){margin-top:clamp(42px,5vw,64px)}
+.jhp-home .jhp-gd .lead{font-size:19px;line-height:1.7;color:var(--ink)}
+.jhp-home .jhp-gd em{font-style:italic;color:var(--ink)}
+.jhp-home .jhp-gd strong{font-weight:500;color:var(--ink)}
+.jhp-home .jhp-gd a:not(.jhp-btn){color:var(--gold);
+  border-bottom:1px solid var(--line);transition:color .3s,border-color .3s}
+.jhp-home .jhp-gd a:not(.jhp-btn):hover{color:var(--gold-bright);
+  border-color:var(--gold-bright)}
+
+/* The contents. Jessica cut a five-point list off /contact on 24 September
+   because that page is four fields and a paragraph, and a contents list over
+   a form is furniture. This document is the opposite case: it is long on
+   purpose -- her own words are "this guide is very thorough...which means
+   it's long!" -- and a woman who only wants the price should not have to
+   scroll past the retouching answer to find it. Anchors, not JavaScript. */
+.jhp-home .jhp-toc{max-width:62ch;margin:0 auto;padding:22px 26px;
+  background:var(--surface);border:1px solid var(--line);border-radius:2px}
+.jhp-home .jhp-toc h2{font-family:var(--sans);font-weight:400;font-size:11px;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--gold);
+  margin:0 0 14px}
+.jhp-home .jhp-toc ul{list-style:none;display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 26px}
+.jhp-home .jhp-toc a{display:block;padding:9px 0;font-family:var(--sans);
+  font-weight:300;font-size:14.5px;line-height:1.4;color:var(--muted);
+  border-bottom:1px solid var(--line-soft);transition:color .3s}
+.jhp-home .jhp-toc a:hover{color:var(--gold)}
+@media (max-width:620px){
+  .jhp-home .jhp-toc{padding:18px 20px}
+  .jhp-home .jhp-toc ul{grid-template-columns:1fr}
+  /* 13px of line plus 15px either side is the 44px a thumb needs, which a
+     22-item list has to honour or it is unusable on the device most of these
+     women are reading on. */
+  .jhp-home .jhp-toc a{padding:15px 0;font-size:var(--ph-body)}
+}
+
+/* A photograph that breaks the column. Full-bleed on a phone, and on a
+   desktop wider than the measure so the document breathes between answers
+   without the reader losing the left edge. */
+.jhp-home .jhp-plate{max-width:980px;margin:clamp(42px,5vw,64px) auto;
+  position:relative}
+.jhp-home .jhp-plate img{width:100%;height:auto}
+.jhp-home .jhp-plate figcaption{margin:10px 0 0;font-family:var(--sans);
+  font-weight:300;font-size:12.5px;letter-spacing:.04em;color:var(--dim);
+  text-align:center}
+@media (max-width:620px){
+  .jhp-home .jhp-plate{max-width:none;margin-inline:calc((100% - 100vw) / 2);
+    margin-block:34px}
+  .jhp-home .jhp-plate figcaption{padding:0 var(--ph-gut)}
+}
+
+/* THE FACT CARD -- what the session fee is, what a Collection starts at.
+   The figures are the thing a woman scrolls this document looking for, so
+   they are set as figures rather than buried in a sentence. Raised off the
+   page, gold hairline, the number at display size. */
+.jhp-home .jhp-card{max-width:62ch;margin:clamp(30px,3.6vw,42px) auto;
+  padding:clamp(24px,3vw,34px);background:var(--surface);
+  border:1px solid var(--line);border-radius:2px}
+.jhp-home .jhp-card .lb{font-family:var(--sans);font-weight:400;font-size:11px;
+  letter-spacing:.26em;text-transform:uppercase;color:var(--gold);
+  margin:0 0 10px}
+.jhp-home .jhp-card .fig{font-family:var(--serif);font-weight:600;
+  font-size:clamp(34px,4.4vw,52px);line-height:1;color:var(--ink);margin:0}
+.jhp-home .jhp-card .fig .u{font-family:var(--sans);font-weight:300;
+  font-size:15px;letter-spacing:.02em;color:var(--muted);margin-left:10px}
+.jhp-home .jhp-card p{font-family:var(--sans);font-weight:300;font-size:15.5px;
+  line-height:1.7;color:var(--muted);margin:14px 0 0}
+.jhp-home .jhp-card p:first-of-type{margin-top:16px}
+/* Two figures side by side for the Collections, one each. They stack on a
+   phone rather than shrinking, because a price set at 20px is not a price. */
+.jhp-home .jhp-card.two{display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,3vw,34px)}
+.jhp-home .jhp-card.two .fig{font-size:clamp(28px,3.4vw,40px)}
+@media (max-width:620px){
+  .jhp-home .jhp-card.two{grid-template-columns:1fr;gap:26px}
+}
+
+/* THE INCLUDED LIST. Her own seven lines, set as a list rather than a
+   paragraph because that is how they are read -- scanned for the one thing
+   she is checking for. The rule under each is the same hairline the footer
+   uses, not a bullet: a tick would claim these are features and they are
+   simply what is in the room. */
+.jhp-home .jhp-inc{list-style:none;margin:18px 0 0;padding:0}
+.jhp-home .jhp-inc li{padding:13px 0 13px 26px;position:relative;
+  font-family:var(--sans);font-weight:300;font-size:15.5px;line-height:1.6;
+  color:var(--muted);border-top:1px solid var(--line-soft)}
+.jhp-home .jhp-inc li:first-child{border-top:0;padding-top:4px}
+.jhp-home .jhp-inc li::before{content:"";position:absolute;left:4px;top:22px;
+  width:5px;height:5px;transform:rotate(45deg);background:var(--gold)}
+.jhp-home .jhp-inc li:first-child::before{top:13px}
+
+/* THE DAY. A numbered run rather than the process spine the Experience page
+   uses: that one is six steps from first contact to delivery and this is the
+   inside of one morning, so it wants to read as a sequence of hours. The
+   numeral is a serif figure in gold, hung in the margin. */
+.jhp-home .jhp-day{list-style:none;max-width:62ch;margin:22px auto 0;padding:0;
+  counter-reset:d}
+.jhp-home .jhp-day li{counter-increment:d;position:relative;
+  padding:0 0 22px 46px}
+.jhp-home .jhp-day li::before{content:counter(d);position:absolute;left:0;
+  top:-4px;font-family:var(--serif);font-weight:600;font-size:26px;
+  line-height:1;color:var(--gold)}
+/* The line down the margin ties the numerals together and stops at the last
+   one rather than trailing off under it. */
+.jhp-home .jhp-day li::after{content:"";position:absolute;left:11px;top:24px;
+  bottom:0;width:1px;background:var(--line-soft)}
+.jhp-home .jhp-day li:last-child{padding-bottom:0}
+.jhp-home .jhp-day li:last-child::after{content:none}
+.jhp-home .jhp-day h3{font-family:var(--sans);font-weight:500;font-size:13px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:0 0 7px}
+.jhp-home .jhp-day p{font-family:var(--sans);font-weight:300;font-size:15.5px;
+  line-height:1.7;color:var(--muted);margin:0}
+
+/* The two session types, side by side. No photographs in these -- the studio
+   and the outdoor sessions are both represented in the plates above, and a
+   thumbnail each would make them look like products on a shelf. */
+.jhp-home .jhp-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:clamp(16px,2.4vw,26px);max-width:62ch;margin:22px auto 0}
+.jhp-home .jhp-two > div{padding:clamp(20px,2.6vw,28px);
+  background:var(--surface);border:1px solid var(--line);border-radius:2px}
+.jhp-home .jhp-two h3{font-family:var(--serif);font-weight:600;font-size:23px;
+  line-height:1.2;color:var(--ink);margin:0 0 6px}
+.jhp-home .jhp-two .when{font-family:var(--sans);font-weight:400;font-size:10px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
+.jhp-home .jhp-two p{font-family:var(--sans);font-weight:300;font-size:15px;
+  line-height:1.7;color:var(--muted);margin:0}
+@media (max-width:620px){.jhp-home .jhp-two{grid-template-columns:1fr;gap:14px}}
+
+/* The rules of the studio. Short, absolute, and set apart from the prose
+   because they are the only lines in the document that are not an invitation.
+   Not shouted -- a woman reading a guide does not need to be told off -- but
+   not buried either. */
+.jhp-home .jhp-rules{max-width:62ch;margin:clamp(26px,3.2vw,36px) auto 0;
+  padding:20px 24px;border-left:2px solid var(--line);background:var(--surface)}
+.jhp-home .jhp-rules p{font-family:var(--sans);font-weight:300;font-size:15px;
+  line-height:1.7;color:var(--muted);margin:0}
+.jhp-home .jhp-rules p + p{margin-top:10px}
+
+/* The close. Her last page is a thank-you and a button, and it gets the full
+   width so the document ends on something rather than trailing off. */
+.jhp-home .jhp-end{max-width:62ch;margin:0 auto;text-align:center}
+.jhp-home .jhp-end .jhp-btn{margin-top:8px}
+.jhp-home .jhp-sig{font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:26px;color:var(--gold);margin:22px 0 0}
+
+@media (max-width:620px){
+  .jhp-home .jhp-gd,.jhp-home .jhp-card,.jhp-home .jhp-day,
+  .jhp-home .jhp-two,.jhp-home .jhp-rules,.jhp-home .jhp-end,
+  .jhp-home .jhp-toc{max-width:none}
+  .jhp-home .jhp-gd .lead{font-size:17px}
+  .jhp-home .jhp-card{padding:20px}
+  .jhp-home .jhp-rules{padding:16px 18px}
+}
+
+/* PRINTING, AND THE PDF BUILT FROM THIS PAGE.
+   build-guide.py --pdf drives headless Chromium over this file, so what it
+   emits is these rules. Two things have to be said outright: backgrounds are
+   kept (a dark magazine printed as black type on white is a different
+   document), and a question is never orphaned from its answer. */
+@media print{
+  .jhp-home{width:auto;left:auto;right:auto;margin:0;max-width:none}
+  /* The nav and the contents are navigation, and a PDF has its own. The
+     footer's Explore row is eight links to pages a reader of the file cannot
+     click, and the wordmark is a screen-blend PNG that prints as a black
+     square -- so both go, and the footer keeps the two things that are still
+     true on paper: who the studio is, and how to reach it. */
+  .jhp-home .jhp-nav,.jhp-home .jhp-toc,
+  .jhp-home .jhp-foot .logo-mark,.jhp-home .jhp-foot .ftnav,
+  .jhp-home .jhp-foot .social{display:none}
+  .jhp-home .jhp-foot .cols{grid-template-columns:1fr 1fr}
+  /* The site grades every photograph very slightly (saturate .96,
+     contrast 1.02). On screen that is free; in a print render it forces
+     the engine to rasterise each frame and re-embed it as an upscaled
+     RGBA PNG, which took this file from a few megabytes to twenty-one.
+     Off for print, the original JPEG is passed straight through. The
+     grade is imperceptible on paper and the file has to survive an
+     email. */
+  .jhp-home img{filter:none}
+  .jhp-home .jhp-gd .q,.jhp-home .jhp-two h3,.jhp-home .jhp-day h3,
+  .jhp-home .jhp-card .lb{break-after:avoid;page-break-after:avoid}
+  .jhp-home .jhp-plate,.jhp-home .jhp-card,.jhp-home .jhp-two > div,
+  .jhp-home .jhp-day li,.jhp-home .jhp-rules{break-inside:avoid;
+    page-break-inside:avoid}
+  .jhp-home .jhp-sec{padding:26px 0}
+  .jhp-home .jhp-foot{padding-top:26px}
+}
+</style>
+<nav class="jhp-nav">
+  <a href="../home-preview/" class="jhp-logo">JHP</a>
+  <details class="jhp-navd">
+    <summary class="jhp-navt">Menu</summary>
+    <div class="jhp-navr">
+      <a href="../about/">About</a>
+      <a href="../portfolio/">Portfolio</a>
+      <span class="jhp-navg">
+        <span class="jhp-navg-t">Info</span>
+        <span class="jhp-sub">
+          <a href="../faq/">FAQ</a>
+          <a href="../experience/">The Experience</a>
+        </span>
+      </span>
+      <a href="../treehouse-sessions/">Specialty Sessions</a>
+      <a href="../contact/">Book a Call</a>
+    </div>
+  </details>
+</nav>
+
+<section class="jhp-intro">
+  <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/fe2033e0-3571-441e-8c98-089358e06f10.jpg" width="1600" height="1065"
+       alt="A client photographed in the window light at the JHP Boudoir studio">
+  <div class="jhp-over">
+    <p class="jhp-kicker" data-greet="Prepared for {name}">JHP Boudoir</p>
+    <h1 class="jhp-h jhp-h-lg">Your Session Guide</h1>
+  </div>
+</section>
+
+<section class="jhp-sec" style="border-bottom:none">
+  <div class="jhp-gd">
+    <p class="jhp-p lead" data-greet="{name}, I am so glad you are here.">Welcome
+       &mdash; I am so glad you are here.</p>
+    <p class="jhp-p">This guide walks you through what a boudoir shoot is and
+       how the process works here at JHP Boudoir. I am excited to get you in
+       the studio.</p>
+    <p class="jhp-p">If you have any questions after reading it, please reach
+       out and I will get back to you as soon as I can. My studio hours are
+       Monday to Thursday, 10am&ndash;3pm, and consultation calls run Monday to Friday, 8am&ndash;5pm.</p>
+    <p class="jhp-p">This guide is very thorough &mdash; which means it is
+       long. Sit down, grab a glass of your favourite whatever, and read it
+       to the very end.</p>
+  </div>
+
+  <nav class="jhp-toc" aria-label="What is in this guide">
+    <h2>What Is in Here</h2>
+    <ul>
+      <li><a href="#about">A Bit About Me</a></li>
+      <li><a href="#studio">Where the Studio Is</a></li>
+      <li><a href="#boudoir">So, What Is Boudoir?</a></li>
+      <li><a href="#why">What Would I Do With Boudoir Portraits?</a></li>
+      <li><a href="#thinner">Can You Make Me Look Thinner?</a></li>
+      <li><a href="#portfolio">I Don&rsquo;t Look Like the Women in Your Portfolio</a></li>
+      <li><a href="#who">Who Is Going to Be There?</a></li>
+      <li><a href="#retouch">What About Retouching?</a></li>
+      <li><a href="#wear">What Will I Wear?</a></li>
+      <li><a href="#talk">Do I Get to Talk to You First?</a></li>
+      <li><a href="#types">What Types of Sessions Do You Offer?</a></li>
+      <li><a href="#day">How the Session Day Works</a></li>
+      <li><a href="#reveal">Your Image Reveal</a></li>
+      <li><a href="#delivery">When the Albums and Prints Arrive</a></li>
+      <li><a href="#book">What Do I Need to Do to Book?</a></li>
+      <li><a href="#guests">Can Someone Come With Me?</a></li>
+      <li><a href="#when">I Need My Images By a Certain Date</a></li>
+      <li><a href="#spend">What Can I Expect to Spend?</a></li>
+      <li><a href="#money">The Collections</a></li>
+      <li><a href="#ready">Ready to Book?</a></li>
+    </ul>
+  </nav>
+
+  <div class="jhp-gd">
+    <h2 class="jhp-h q" id="about">A Bit About Me</h2>
+    <p class="jhp-p">I am Jess. Wife to Zach, and I love the local weatherman
+       with all my heart. Gin, tonic, lime.</p>
+    <p class="jhp-p">Seven years of college and three degrees later, I ended up
+       running my own business full time. I would not trade the journey.</p>
+    <p class="jhp-p">I love changing lives through my art. Thank you for being
+       here and for supporting my business &mdash; I cannot wait to meet you
+       and make some of the most gorgeous photographs of yourself you will
+       ever have.</p>
+
+    <h2 class="jhp-h q" id="studio">Where the Studio Is</h2>
+    <p class="jhp-p">The studio is just outside Jefferson City, Missouri. There
+       is over 2,000 square feet of it: multiple set-ups, a hair and makeup
+       room, a wardrobe room, and a sales area full of samples.</p>
+    <p class="jhp-p">It is full of gorgeous natural light, vintage exposed
+       brick, wood beams and glass chandeliers. It is a comforting space, and
+       it was built for boudoir photography.</p>
+  </div>
+
+  <figure class="jhp-plate">
+  <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/f9de4c0c-ba8e-48bb-b559-a9a11beac76c.jpg" loading="lazy" alt="The window light in the JHP Boudoir studio, from a client session">
+  <figcaption>The studio, on an ordinary afternoon.</figcaption>
+</figure>
+
+  <div class="jhp-gd">
+    <h2 class="jhp-h q" id="boudoir">So, What Is Boudoir?</h2>
+    <p class="jhp-p">The French word <em>boudoir</em> means a woman&rsquo;s
+       dressing room or bedroom, but I like to think of it as a fancy word for
+       women&rsquo;s intimate portraiture. I want to make the most beautiful
+       portraits of you that you will ever have.</p>
+    <p class="jhp-p">Boudoir is <strong>not</strong> pornographic or overly
+       sexual. It can be fun, flirty, beautiful, cute, sexy, feminine,
+       intimate, candid, posed &mdash; or really anything else you want it to
+       be.</p>
+    <p class="jhp-p">If you have not already joined my private VIP group on
+       Facebook, I highly suggest you do:
+       <a href="https://www.facebook.com/groups/1107773373084834" target="_blank" rel="noopener">the JHP Boudoir VIP
+       group</a>.</p>
+
+    <h2 class="jhp-h q" id="why">What Would I Do With Boudoir Portraits?</h2>
+    <p class="jhp-p">I believe boudoir is the best gift you can give yourself
+       &mdash; to capture your essence as you are right now. When you need a
+       reminder of the strong, beautiful woman that you are, you will have a
+       collection of amazing portraits to look at.</p>
+    <p class="jhp-p">I love it when women come to me for themselves. The images
+       we make together will boost your self esteem and your confidence, and
+       that should be celebrated by you. It will help you reclaim your
+       femininity and your sexuality, two things that are often lost as we get
+       consumed with our lives, our jobs, our families.</p>
+    <p class="jhp-p">Put that pep back in your step and reflect on the
+       bodacious babe you are. Celebrate the body that you live in.</p>
+
+    <h2 class="jhp-h q" id="thinner">Can You Make Me Look Thinner?</h2>
+    <p class="jhp-p">I want to help you feel beautiful now, just the way you
+       are. I flatter you with hair and makeup styling, a wardrobe that
+       compliments your figure, and amazing lighting and posing techniques to
+       highlight your best ass-sets. See what I did there.</p>
+    <p class="jhp-p">I do not believe in heavy photoshopping. Do not get me
+       wrong &mdash; I retouch all of your images and will gladly remove your
+       bruises and pimples &mdash; but I do not want to over-manipulate your
+       body to make you look like someone you are not. We already live in a
+       time when we are consumed with unrealistic bodies in the media. I want
+       to show you that you are beautiful at this very moment, without over
+       the top retouching.</p>
+
+    <h2 class="jhp-h q" id="portfolio">I Don&rsquo;t Look Like the Women in
+       Your Portfolio</h2>
+    <p class="jhp-p">Actually, you do. You just have not had the chance to see
+       yourself from my perspective yet. Come into the studio and let me show
+       you how beautiful you really are.</p>
+    <p class="jhp-p">There is no such thing as the perfect body. Boudoir is for
+       every body. You are never too big, too small, too old or too young to do
+       a boudoir session &mdash; though I only photograph clients over the age
+       of 18.</p>
+
+    <h2 class="jhp-h q" id="who">Who Is Going to Be There?</h2>
+    <p class="jhp-p">You and me. Your hair and makeup artist leaves once the
+       service is finished.</p>
+    <p class="jhp-p">I have a full female staff, and the studio is designed
+       with private rooms for each portion of your day.</p>
+
+    <h2 class="jhp-h q" id="retouch">What About Retouching?</h2>
+    <p class="jhp-p">I am happy to retouch your images. I always remove pimples,
+       bruises, scratches and under eye circles. I also offer retouching on
+       cellulite, scars, small tattoos and stretch marks, if you choose to have
+       them removed.</p>
+    <p class="jhp-p">Honestly, most of my clients are wowed at how amazing
+       their images look straight out of camera and opt for less retouching
+       than they thought they needed. It is a very personal decision and one I
+       leave up to you once you have seen your images.</p>
+    <p class="jhp-p">I do not remove tan lines or correct skin tone from tanning
+       beds or spray tans, so proceed with caution. I do have editing
+       techniques to keep you from looking pasty, if that is a concern.</p>
+  </div>
+
+  <figure class="jhp-plate">
+  <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/678293dc-8167-4463-a41b-8a20bfaee783.jpg" loading="lazy" alt="A black and white portrait from a studio session at JHP Boudoir">
+  <figcaption>Posed from head to pointed toe &mdash; you will not have to work it out.</figcaption>
+</figure>
+
+  <div class="jhp-gd">
+    <h2 class="jhp-h q" id="wear">What Will I Wear?</h2>
+    <p class="jhp-p">I have a beautiful and comprehensive wardrobe guide that
+       gives you the full picture on how to look and feel like a bombshell for
+       your session. My policy is always: when in doubt, bring it.</p>
+    <p class="jhp-p">You are welcome to make a Pinterest board and share it
+       with me so I can help make your dream shoot a reality. And there is a
+       client wardrobe of over 160 pieces, sizes XS to 4X, that you are
+       more than welcome to borrow from and browse through.</p>
+
+    <h2 class="jhp-h q" id="talk">Do I Get to Talk to You First?</h2>
+    <p class="jhp-p">Most of my clients book their session over the phone,
+       which is kind of like our first date. We will have one 20 minute phone
+       consultation, so we can make sure you are ready and answer any
+       questions you have.</p>
+    <p class="jhp-p">I am here for you every step of the way. Email is how I
+       communicate most effectively with clients, so write to me any time at
+       <a href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a>.
+       Emails are typically returned within two to three business days.</p>
+    <div class="jhp-rules">
+      <p>Please, no props, no spray tans, and absolutely no weapons in the
+         studio at any time.</p>
+      <p>I also do not allow anyone under the age of 18 in the boudoir studio,
+         ever.</p>
+    </div>
+
+    <h2 class="jhp-h q" id="types">What Types of Sessions Do You Offer?</h2>
+    <p class="jhp-p">Yes, there are different types of boudoir session you can
+       book, and I am always changing it up. Right now I am offering these:</p>
+    <div class="jhp-two">
+      <div>
+        <p class="when">Year round &middot; most popular</p>
+        <h3>Traditional Studio Sessions</h3>
+        <p>In the studio, all year. Great for a first timer.</p>
+      </div>
+      <div>
+        <p class="when">Summer dates only</p>
+        <h3>Outdoor Boudoir Sessions</h3>
+        <p>Exclusive locations, on summer dates only.</p>
+      </div>
+    </div>
+    <p class="jhp-p" style="margin-top:20px">Have something else in mind? Ask
+       me. I am always up for a new adventure.</p>
+  </div>
+
+  <figure class="jhp-plate">
+  <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/1d6d5e7e-7f3d-490b-9883-371ecaa5f1d0.jpg" loading="lazy" alt="A client photographed at the JHP Boudoir studio">
+  <figcaption>Every body. Every age. Every size.</figcaption>
+</figure>
+
+  <div class="jhp-gd">
+    <h2 class="jhp-h q" id="day">How the Session Day Works</h2>
+    <p class="jhp-p">Your session day runs two to three hours from start to finish. You get
+       complimentary hair and makeup, access to the 160-piece client
+       wardrobe, and I pose you from head to pointed toe and help you with a
+       whole range of facial expressions.</p>
+    <p class="jhp-p">Be prepared to be sore afterwards. We do a lot of bending
+       and twisting &mdash; it is quite the workout.</p>
+    <ol class="jhp-day">
+      <li>
+        <h3>Hair and Makeup</h3>
+        <p>Professional hair and makeup first, so you arrive in front of the
+           camera already finished. Your artist leaves once it is done.</p>
+      </li>
+      <li>
+        <h3>Wardrobe</h3>
+        <p>We go through what you brought and what you want to borrow, and pick
+           the order we will shoot it in.</p>
+      </li>
+      <li>
+        <h3>Your Session</h3>
+        <p>The studio is private and it is just the two of us. I direct
+           everything &mdash; you do not need to know how to pose, and you will
+           not be left standing there wondering what to do with your hands.</p>
+      </li>
+      <li>
+        <h3>And That Is the Day</h3>
+        <p>Sessions run inside studio hours, Monday to Thursday, 10am&ndash;3pm. Your reveal is a
+           separate appointment, so you go home when we are done rather than
+           making decisions about pictures you have not seen yet.</p>
+      </li>
+    </ol>
+
+    <h2 class="jhp-h q" id="reveal">Your Image Reveal</h2>
+    <p class="jhp-p">Your reveal is 7&ndash;14 business days after your session. It is a
+       private appointment over Zoom, and it is where you see your images for
+       the very first time &mdash; together, with me, going through them one by
+       one.</p>
+    <p class="jhp-p">You will be shown 50 to 100 images. You choose which ones
+       you want to keep and how you want them, and you order them at that same
+       appointment.</p>
+    <p class="jhp-p">You are not sent a link and left to work it out alone.
+       That is the part most women tell me afterwards was their favourite of
+       the whole thing.</p>
+
+    <h2 class="jhp-h q" id="delivery">When the Albums and Prints Arrive</h2>
+    <p class="jhp-p">Your digital images are yours the moment the reveal ends.
+       Albums, wall art and anything else printed are made to order and arrive
+       at your door within 6 weeks of that appointment. I usually drop ship
+       everything directly to you to keep the process as simple as
+       possible.</p>
+  </div>
+
+  <figure class="jhp-plate">
+  <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/538477d1-c964-4c26-babe-89e797786880.jpg" loading="lazy" alt="A black and white portrait from a studio session at JHP Boudoir">
+  <figcaption>Your images, seen together for the first time at your reveal.</figcaption>
+</figure>
+
+  <div class="jhp-gd">
+    <h2 class="jhp-h q" id="book">What Do I Need to Do to Book?</h2>
+    <p class="jhp-p">The session fee reserves your date on my calendar. Your
+       images are purchased separately from it, at your reveal and ordering
+       appointment, and the full investment menu comes to you once the session
+       fee is paid.</p>
+    <div class="jhp-card">
+      <p class="lb">Session Fee</p>
+      <p class="fig">$697<span class="u">to reserve your date</span></p>
+      <p>It can be paid in full, or split into two payments &mdash; the first
+         to reserve the date on the calendar, the second within 14 days of it.
+         If the second payment is not made within those 14 days, the date and
+         the first payment are forfeited.</p>
+    </div>
+    <p class="jhp-p" style="margin-top:26px">What the session fee includes:</p>
+    <ul class="jhp-inc">
+      <li>Your 20 minute pre-session consultation</li>
+      <li>Private use of the boudoir studio</li>
+      <li>Professional hair and makeup application</li>
+      <li>Access to the 160-piece client wardrobe</li>
+      <li>60 minutes of photography</li>
+      <li>Complete posing and expression coaching</li>
+      <li>Your private reveal and ordering appointment over Zoom</li>
+    </ul>
+
+    <h2 class="jhp-h q" id="guests">Can Someone Come With Me?</h2>
+    <p class="jhp-p">No &mdash; I do not allow guests for any portion of the
+       time you spend with us, including the ordering appointment. What I do is
+       delivered best one to one, with your complete undivided attention.</p>
+
+    <h2 class="jhp-h q" id="when">I Need My Images By a Certain Date</h2>
+    <p class="jhp-p">The studio books up to 15 months in advance, and
+       printed products take up to six weeks after your reveal. So reach out
+       well before the date you need them.</p>
+    <p class="jhp-p">If you have a special occasion coming up, or you want a
+       holiday appointment, I recommend booking a <strong>year</strong> ahead
+       of that date. Those dates go first.</p>
+
+    <h2 class="jhp-h q" id="spend">What Can I Expect to Spend?</h2>
+    <p class="jhp-p">Before I have photographed you it is hard to give you an
+       exact figure. Some women want a basic album; others invest several
+       thousand in a Collection with a variety of products. What you spend is
+       up to you. You can buy from my Collections or a la carte, and the full
+       investment menu comes to you as soon as your booking is complete.</p>
+    <p class="jhp-p">That said &mdash; if you are looking for a quick shoot, or
+       just a few images, this is not the session for you. I offer a full
+       experience and I show you 50 to 100 images. I only offer luxury products,
+       because you are worth it. Investing in yourself is priceless. You will
+       never tire of your images, or forget the way the session day made you
+       feel.</p>
+
+    <h2 class="jhp-h q" id="money">The Collections</h2>
+    <p class="jhp-p">There are eight Collections in all, so there is
+       room to find the one that fits.</p>
+    <div class="jhp-card two">
+      <div>
+        <p class="lb">Petite Collections</p>
+        <p class="fig">from $1,250</p>
+        <p>Three digital images.</p>
+      </div>
+      <div>
+        <p class="lb">Full Collections</p>
+        <p class="fig">from $3,400</p>
+        <p>An album, your digitals and a mobile app.</p>
+      </div>
+    </div>
+    <p class="jhp-p" style="margin-top:26px">Sticker shock? I get it. I had it
+       too, the first time I booked a professional boudoir session with my own
+       dream photographer. And you know what &mdash; I would have paid her
+       double by the time it was done.</p>
+    <p class="jhp-p">I know this is an investment, which is why every Collection
+       is chosen when you book and paid for on an interest-free in-house
+       payment plan before your session. Weekly, biweekly or monthly &mdash;
+       whichever suits you, spread over the months between booking and your
+       session day. It is the same figure either way, and we set it up on
+       auto-pay so you never have to think about a late fee.</p>
+  </div>
+
+  <figure class="jhp-plate">
+  <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/958c1b0e-53b1-4d18-b5ed-7b4b2ae1ccc5.jpg" loading="lazy" alt="A black and white portrait from a studio session at JHP Boudoir">
+  <figcaption>This is the part I cannot wait for.</figcaption>
+</figure>
+
+  <div class="jhp-gd jhp-end">
+    <h2 class="jhp-h q" id="ready">Ready to Book?</h2>
+    <p class="jhp-p">If you have made it this far and you are ready to take the
+       next step, book your consultation call below. If you would rather ask
+       something first, reply to the email this guide came with and tell me you
+       would like to chat before taking the leap.</p>
+    <p class="jhp-p">I truly hope you have enjoyed reading this, and that it
+       has left you excited about the thought of having your own session. Ask
+       me anything at all &mdash; I want you to be completely comfortable, and
+       completely empowered, during your session.</p>
+    <p class="jhp-p" data-greet="{name}, I cannot wait to chat with you soon.">I
+       cannot wait to chat with you soon.</p>
+    <p class="jhp-sig">Jess</p>
+  </div>
+</section>
+
+<script>
+  /* HER NAME, OUT OF THE LINK
+     ------------------------
+     GHL builds the link with its own merge field, so the email sends her to
+     .../session-guide/?n=Sarah and the page greets her by name. Three places
+     change and no more: the eyebrow over the title, the first line, and the
+     sign-off. A guide that says her name in every other paragraph reads like
+     a mail merge, which is the opposite of the point.
+
+     WHAT IS IN THAT PARAMETER IS A STRANGER'S TEXT. Anyone can type anything
+     into a query string and send the link on, so it is treated as hostile:
+     letters, spaces, hyphens and apostrophes only, one word, 24 characters,
+     and it is written with textContent so the browser puts it on the page as
+     words rather than as markup. innerHTML here would be a cross-site
+     scripting hole on a page Jessica emails to her clients.
+
+     WITHOUT a name -- someone who forwarded the link, or a merge field that
+     came through empty -- nothing runs and the copy already in the markup
+     stands on its own. That is why each slot holds real words rather than an
+     empty span waiting to be filled. */
+  (() => {
+    const q = new URLSearchParams(location.search);
+    const raw = q.get("n") || q.get("name") || q.get("first_name") || "";
+    /* A merge field that did not resolve arrives literally. */
+    if (!raw || raw.includes("{") || raw.includes("%7B")) return;
+
+    /* Validated, not scrubbed. Stripping the bad characters out of
+       "<img src=x onerror=...>" leaves "Img", and the page then greets her as
+       Img -- safe, but it looks broken. A real first name matches this
+       outright, so anything that does not is simply not a name and the
+       default copy stands. */
+    const clean = raw.trim().split(/\s+/)[0];
+    if (!/^\p{L}[\p{L}'-]{1,23}$/u.test(clean)) return;
+    /* SARAH and sarah both become Sarah. Names like O'Brien and Mary-Kate keep
+       the capital after the punctuation, which is the whole reason this is not
+       just one toUpperCase on the first letter. */
+    const name = clean.toLowerCase().replace(
+      /(^|['-])(\p{L})/gu, (m, sep, ch) => sep + ch.toUpperCase());
+
+    document.querySelectorAll("[data-greet]").forEach((el) => {
+      el.textContent = el.dataset.greet.replace("{name}", name);
+    });
+  })();
+</script>
+
+
+<div class="jhp-div" aria-hidden="true"></div>
+
+<a class="jhp-band" href="https://api.leadconnectorhq.com/widget/booking/mi2EqYRq4gGEbBJHe82b" target="_blank" rel="noopener">
+  <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/78e3da43-f19a-4c5b-a450-c76cd27ad02f.jpg"
+       width="1600" height="1064" loading="lazy"
+       alt="A black and white portrait from a studio session at JHP Boudoir">
+  <span class="over">
+    <span class="jhp-kicker">The next step</span>
+    <h2 class="jhp-h jhp-h-lg">Book Your Consultation Call</h2>
+    <span class="sub">Twenty minutes, and nothing is committed to.</span>
+    <span class="jhp-btn">Schedule My Call</span>
+  </span>
+</a>
+
+<footer class="jhp-foot">
+  <div class="cols">
+
+    <div>
+      <h3>The Studio</h3>
+      <p class="blurb">JHP Boudoir is a boudoir photography studio just outside
+         Jefferson City, Missouri, working with women from all across Missouri.
+         A luxury studio and an elevated experience from the first call to the
+         final reveal, proudly serving women of all walks of life and all bodies
+         since 2021.</p>
+    </div>
+
+    <div class="logo-mark">
+      <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/3933909c-0f61-45aa-a608-4790cf3af1d3.png"
+           width="500" height="500" alt="JHP Boudoir">
+    </div>
+
+    <div class="contact">
+      <h3>Get In Touch</h3>
+      <a class="mail" href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a>
+      <p class="hrs">
+        <b>Studio Hours</b>
+        Mon&ndash;Thu, 10am&ndash;3pm, by appointment only<br>
+        Consultation Calls Mon&ndash;Fri, 8am&ndash;5pm
+      </p>
+      <div class="social">
+        <a href="https://www.instagram.com/jhpboudoir_" target="_blank" rel="noopener" aria-label="JHP Boudoir on Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.3-.79-.72-1.46-1.38-2.13C21.32 1.35 20.65.93 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=100082843870968" target="_blank" rel="noopener" aria-label="JHP Boudoir on Facebook">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.23.2 2.23.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/@jhpboudoir" target="_blank" rel="noopener" aria-label="JHP Boudoir on TikTok">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M16.6 5.82A4.28 4.28 0 0 1 15.55 3h-3.3v13.2a2.59 2.59 0 0 1-2.59 2.5 2.59 2.59 0 1 1 .76-5.06V10.3a5.94 5.94 0 0 0-.76-.05 5.94 5.94 0 1 0 5.94 5.94V9.4a7.56 7.56 0 0 0 4.4 1.4V7.5a4.28 4.28 0 0 1-3.4-3.08z"/></svg>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="base">
+    <nav class="ftnav" aria-label="Explore">
+      <ul>
+        <li><a href="../home-preview/">Home</a></li>
+        <li><a href="../about/">About</a></li>
+        <li><a href="../portfolio/">Portfolio</a></li>
+        <li><a href="../faq/">FAQ</a></li>
+        <li><a href="../experience/">The Experience</a></li>
+        <li><a href="../treehouse-sessions/">Specialty Sessions</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="../contact/">Book a Call</a></li>
+      </ul>
+    </nav>
+    <p class="fc">&copy; 2026 JHP Boudoir &nbsp;&middot;&nbsp; Jefferson City, Missouri</p>
+  </div>
+</footer>
+</div>
+{% endraw %}
+</body>
+</html>
