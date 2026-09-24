@@ -270,6 +270,46 @@ Still to do, roughly in order of what it is worth:
   should be measured against 2380px, which is what the page is now. (It was
   2388 before the calendar hand-off; the third paragraph gained a clause and
   the copy re-wrapped 8px shorter, so nothing was spent.)
+- **There are two forms now, and they are for two different women.**
+  `/contact` is for the woman who is still looking: four fields, the Session
+  Guide Magazine, and straight on to the calendar. `/inquire` is for the one
+  who has decided: nine questions, and it ends on a thank-you rather than a
+  scheduler. Its generator is `build-inquiry.py`, which slices the shared
+  system out of `scalogy-portfolio.html` exactly as the other generators do
+  and takes the form CSS out of `scalogy-contact.html` on top -- so the
+  inputs, the focus ring and the 16px floor are one set of rules, not two.
+  Template `jhp-inquire-2026`, page `inquire`, 52,877 bytes live.
+  The fields are first, last, email, phone, which session (studio / outdoor /
+  not sure), timeframe, occasion, how she heard, notes, an acknowledgment
+  checkbox and a honeypot. The three selects Jessica cares about are
+  whitelisted **server side as well** in `scripts/site_inquiry_ingest.py`;
+  a value the page never offered is dropped rather than stored.
+  A submission goes: no-cors POST to the `site-inquiry-submit` webhook,
+  workflow `site-inquiry-ingest` writes a `site_inquiries` row and upserts the
+  contact into GHL tagged **`Session Inquiry`**. That tag is the whole
+  contract, as `Session Guide - Requested` is for `/contact`, and **nothing in
+  GHL is watching it yet** -- until Jessica builds that workflow, inquiries
+  are captured and silent. `site_inquiries` holds PII and must never be
+  attached to an app, same as `site_leads`.
+  **`FORWARD = false` is a decision, not a stub.** One line in the generator
+  makes this page behave exactly like `/contact` and hand off to the calendar.
+  It does not, because `/contact` collected four fields and owes her nothing,
+  while this form asks nine questions including what she is spending -- and
+  throwing her at a scheduler mid-thought reads as though nobody was
+  listening. The thank-you carries a Book My Call button instead, so the
+  calendar is one tap away and is her choice.
+  **The acknowledgment checkbox deliberately carries no figure.** Her Session
+  Guide PDF and this site's FAQ disagree about the numbers -- the guide says a
+  $500 session fee and Collections from $2,800, the FAQ says the session fee
+  starts at $697 with Petite Collections from $1,250 -- along with eight other
+  conflicts (session length, delivery time, whether the reveal is in person or
+  over Zoom, when the Collection is bought, the booking window, studio hours).
+  Both are Jessica's, one of them is stale, and it is hers to settle. The
+  checkbox states only the structure both versions agree on: images are
+  purchased separately from the session fee.
+  The closing band hands the undecided woman to `/contact` rather than
+  repeating the VIP group, because a woman who opened the inquiry form and
+  found she was not ready should meet the guide, not a Facebook link.
 - **The VIP group is on two pages and is one link.** The Facebook group
   (`facebook.com/groups/1107773373084834`) is the homepage's `.jhp-vip`
   panel -- mid-page, no photograph -- and the closing `.jhp-band` at the
