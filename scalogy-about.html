@@ -242,30 +242,21 @@
 .jhp-home .jhp-lead{position:relative;height:clamp(300px,20.4vw,380px);overflow:hidden}
 .jhp-home .jhp-lead img{height:100%;max-height:none;object-fit:cover;
   object-position:50% 54%}
-.jhp-home .jhp-lead .plate{position:absolute;inset:0;display:flex;
-  flex-direction:column;align-items:flex-start;justify-content:flex-end;
-  padding:0 clamp(20px,5vw,60px) clamp(28px,4vw,48px);
-  background:linear-gradient(0deg, rgba(19,16,14,.92) 0%, rgba(19,16,14,.74) 24%,
-    rgba(19,16,14,.34) 52%, rgba(19,16,14,.04) 82%)}
-.jhp-home .jhp-lead h1{font-family:var(--serif);font-weight:500;
-  font-size:clamp(38px,6.2vw,74px);line-height:1.02;letter-spacing:-.012em;
-  margin:0;color:var(--ink);text-wrap:balance}
 @media (max-width:620px){
   /* Jessica's phone setting, taken in the crop tuner on a 440px screen: a flat
-     145px band with the crop at 62%. Flat rather than a share of the width
-     because the title over it needs about 100px whatever the screen, and a
-     ratio would have left almost nothing above it on a small phone.
+     145px band with the crop at 62%. Both are hers and neither has moved.
+
+     The reason she chose a flat height over a share of the width was that the
+     title over it needed about 100px whatever the screen. That title is gone
+     as of 24 September, so the number is now doing a job nobody asked it to
+     do: 145px of photograph on a phone is a stripe rather than an opener. It
+     stands because it is hers. Worth a second pass in the crop tuner.
 
      At 353px on a wide screen and at 145px on a phone the box is wider than the
      frame both times, so it is the y that moves in both - but she set them
      separately and they are different numbers, 54% up there and 62% here. */
   .jhp-home .jhp-lead{height:145px}
   .jhp-home .jhp-lead img{object-position:50% 62%}
-  /* The title is sized against the band rather than the viewport. Left on the
-     shared scale it came out at 28px, which read as a caption under all that
-     photograph; this takes it to 35px on a 390px phone. */
-  .jhp-home .jhp-lead h1{font-size:clamp(41px,10.4vw,46px);line-height:1.04}
-  .jhp-home .jhp-lead .plate{padding:0 22px 24px}
 }
 
 /* ABOUT PAGE
@@ -472,12 +463,19 @@
   <a href="../contact/">Book a Call</a>
 </nav>
 
+<!-- The opener is a photograph and nothing else. Jessica removed "Meet Your
+     Photographer" on 24 September, and the plate went with it: that div was
+     a gradient whose whole job was to hold cream type against the frame, so
+     with no type on it it was darkening the bottom 40% of her photograph for
+     nothing. Her tuner height and crop are untouched.
+
+     THE PAGE'S H1 MOVED DOWN, it was not deleted. It is now "Jessica Paul"
+     in the intro below -- her name, on a page about her, which is the better
+     h1 anyway. A page with no h1 at all is the one thing that could not be
+     left behind here. -->
 <section class="jhp-lead">
   <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/c63fc43f-3039-4140-a7cf-178903dce69e.jpg"
        alt="Jessica Haslag photographed in her own studio">
-  <div class="plate">
-    <h1>Meet Your Photographer</h1>
-  </div>
 </section>
 
 <section class="jhp-sec">
@@ -488,7 +486,7 @@
     </figure>
     <div>
       <p class="jhp-kicker">Owner &amp; Photographer</p>
-      <h2 class="jhp-h jhp-h-lg" style="margin-bottom:22px">Jessica Paul</h2>
+      <h1 class="jhp-h jhp-h-lg" style="margin-bottom:22px">Jessica Paul</h1>
       <p class="jhp-p">I grew up on a farm in Central Missouri, and I have never
          lived anywhere else. Not for a lack of chances &mdash; I just never
          found anywhere I liked more.</p>

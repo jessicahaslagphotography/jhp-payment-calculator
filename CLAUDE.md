@@ -60,8 +60,10 @@ are now guarded and both are worth knowing about:
 - Jessica's tuner-set band heights are fixed, so a bigger heading has to fit
   inside them rather than the other way round. The hero is 280px on a phone and
   at 46px the title wrapped to four lines and pushed the eyebrow up over the
-  nav; 40px fits, with a 36px guard below 360px. The About lead band is 145px
-  and its h1 is sized against that band, not the shared scale.
+  nav; 40px fits, with a 36px guard below 360px. The About lead band no longer
+  carries a heading at all -- Jessica removed "Meet Your Photographer" on
+  24 September and the plate went with it, so that band is a photograph and
+  the page's h1 is "Jessica Paul" in the intro under it.
 
 After any change here, measure every page at 1440, 390 and 320 and check three
 things: no horizontal scroll, no band whose overlay content is taller than the
