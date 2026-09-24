@@ -36,6 +36,17 @@ by their own CSS and need no change in the markup.
   `build-experience.py` cut the tokens, type, nav, bands, divider,
   pull-quote and footer out of `scalogy-portfolio.html` at build time so
   the pages cannot drift. Change a shared rule there and rebuild.
+- **Info is a menu, not a page.** The nav carries About, Portfolio, the
+  wordmark, Info and Book a Call, and under Info sit FAQ and The
+  Experience. Info itself is a `<span>` and goes nowhere -- there is no
+  Info page. The menu uses no JavaScript: both links are always in the
+  markup and in the tab order, and the panel is revealed by `:hover` and
+  `:focus-within`, never by `display` or `visibility` (either would take
+  the links out of the tab order and `:focus-within` could then never
+  fire). On a phone there is no hover, so the two links simply sit on the
+  line beneath Info. All six templates carry the same nav markup
+  byte-for-byte; check that with an md5 of the `<nav>` block before
+  believing a change landed everywhere.
 - **Links are relative** (`../about/`), so they resolve on
   `pages.scalogy.com/jhpboudoir1/` now and on the real domain later. The
   one link that has to change at launch is the JHP wordmark:

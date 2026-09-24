@@ -70,7 +70,8 @@
   outline:2px solid var(--gold-bright);outline-offset:3px}
 
 .jhp-home .jhp-nav{display:flex;align-items:center;justify-content:center;gap:26px;
-  flex-wrap:wrap;padding:20px 18px;border-bottom:1px solid var(--line-soft)}
+  flex-wrap:wrap;padding:20px 18px;border-bottom:1px solid var(--line-soft);
+  position:relative;z-index:30}
 .jhp-home .jhp-nav a{font-family:var(--sans);font-weight:400;font-size:11px;
   letter-spacing:.24em;text-transform:uppercase;color:var(--muted);transition:color .3s}
 .jhp-home .jhp-nav a:hover{color:var(--gold)}
@@ -80,6 +81,53 @@
    the element it actually is, it wins and the mark is a mark again. */
 .jhp-home .jhp-nav a.jhp-logo{font-family:var(--serif);font-size:22px;
   letter-spacing:.14em;color:var(--gold);text-transform:uppercase}
+
+/* INFO, AND THE TWO PAGES UNDER IT
+
+   A menu that needs no JavaScript. Both links are always in the markup and
+   always in the tab order; the panel is revealed by :hover for a mouse and
+   by :focus-within for a keyboard. Nothing here uses display or visibility,
+   because either one would take the links out of the tab order and then
+   :focus-within could never fire -- so the panel is hidden with opacity and
+   made unclickable with pointer-events instead.
+
+   Info itself is a span, not a link. There is no Info page: the two pages
+   under it are the destinations, and a parent that also navigates somewhere
+   is the thing that makes these menus miserable on a phone. */
+/* align-self:stretch is what makes the 21px below an exact number rather
+   than a tuned one. Without it the group is only as tall as the word Info
+   and sits centred against the taller wordmark, so the distance down to
+   the nav's bottom border is that centring slack plus the padding, and it
+   moves whenever the wordmark does. Stretched, the group's bottom IS the
+   nav's content edge, and 21px is the nav's padding-bottom plus its 1px
+   border -- the panel lands on the rule under the header by construction. */
+.jhp-home .jhp-navg{position:relative;display:inline-flex;align-items:center;
+  align-self:stretch}
+.jhp-home .jhp-navg-t{font-family:var(--sans);font-weight:400;font-size:11px;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--muted);
+  cursor:default;transition:color .3s}
+/* A 4px square with two of its sides drawn, turned 45 degrees: the chevron
+   that says there is something underneath. */
+.jhp-home .jhp-navg-t::after{content:"";display:inline-block;
+  width:4px;height:4px;margin:-3px 0 0 8px;vertical-align:middle;
+  border-right:1px solid currentColor;border-bottom:1px solid currentColor;
+  transform:rotate(45deg)}
+.jhp-home .jhp-navg:hover .jhp-navg-t,
+.jhp-home .jhp-navg:focus-within .jhp-navg-t{color:var(--gold)}
+/* The panel opens level with the foot of the nav rather than against the
+   word, and this covers the gap between the two so the pointer can cross
+   it without the menu closing under the cursor. */
+.jhp-home .jhp-navg::after{content:"";position:absolute;top:100%;left:50%;
+  width:150px;height:22px;transform:translateX(-50%)}
+.jhp-home .jhp-nav .jhp-sub{position:absolute;top:100%;left:50%;z-index:2;
+  display:flex;flex-direction:column;gap:13px;white-space:nowrap;
+  margin-top:21px;padding:17px 24px;text-align:left;
+  background:var(--surface);border:1px solid var(--line);
+  opacity:0;pointer-events:none;transform:translate(-50%,-6px);
+  transition:opacity .3s ease,transform .3s ease}
+.jhp-home .jhp-navg:hover .jhp-sub,
+.jhp-home .jhp-navg:focus-within .jhp-sub{
+  opacity:1;pointer-events:auto;transform:translate(-50%,0)}
 
 .jhp-home .jhp-vip{background:var(--surface);border-top:1px solid var(--line);
   padding:clamp(40px,5vw,60px) clamp(18px,5vw,34px);text-align:center}
@@ -203,6 +251,31 @@
   .jhp-home .jhp-nav a{padding:11px 0;font-size:var(--ph-label);
     letter-spacing:.2em}
 
+  /* A phone has no hover, so the two pages under Info are simply there, on
+     the line beneath it. display:contents drops the wrapper out of the flex
+     row -- the word Info sits with the other links, and the panel becomes a
+     flex item of its own that takes the full width and, by its order, the
+     last line. */
+  .jhp-home .jhp-navg{display:contents}
+  /* On a phone Info is a label that goes nowhere, so it is set a shade
+     down from the links either side of it, and the two that do go
+     somewhere are left the same colour as every other link in the nav.
+     The other way round looked tidier and told the opposite lie. */
+  .jhp-home .jhp-navg-t{padding:11px 0;font-size:var(--ph-label);letter-spacing:.2em;
+    color:var(--dim)}
+  .jhp-home .jhp-navg-t::after{content:none}
+  .jhp-home .jhp-nav .jhp-sub{position:static;order:1;flex:0 0 100%;
+    flex-direction:row;justify-content:center;gap:0 18px;
+    margin:0;padding:0;background:none;border:0;
+    opacity:1;pointer-events:auto;transform:none;transition:none}
+  .jhp-home .jhp-nav .jhp-sub a{padding:0 0 10px;font-size:var(--ph-label);
+    letter-spacing:.2em}
+  /* The reveal rules above are not in this media query, and a tap on a
+     phone can leave :hover behind -- which was pulling this row, now a
+     static one, 50% of its own width off the left of the screen. */
+  .jhp-home .jhp-navg:hover .jhp-sub,
+  .jhp-home .jhp-navg:focus-within .jhp-sub{transform:none}
+
   .jhp-home .jhp-vip{padding:44px var(--ph-gut)}
   .jhp-home .jhp-foot{padding:44px var(--ph-gut) 0}
   /* 27 characters is a column for a newspaper set in three of them, and
@@ -297,7 +370,13 @@
   <a href="../about/">About</a>
   <a href="../portfolio/">Portfolio</a>
   <a href="../home-preview/" class="jhp-logo">JHP</a>
-  <a href="../faq/">Info</a>
+  <span class="jhp-navg">
+    <span class="jhp-navg-t">Info</span>
+    <span class="jhp-sub">
+      <a href="../faq/">FAQ</a>
+      <a href="../experience/">The Experience</a>
+    </span>
+  </span>
   <a href="/contact">Book a Call</a>
 </nav>
 
@@ -374,7 +453,8 @@
         <li><a href="../home-preview/">Home</a></li>
         <li><a href="../about/">About</a></li>
         <li><a href="../portfolio/">Portfolio</a></li>
-        <li><a href="../faq/">Info</a></li>
+        <li><a href="../faq/">FAQ</a></li>
+        <li><a href="../experience/">The Experience</a></li>
         <li><a href="/specialty-sessions">Specialty Sessions</a></li>
         <li><a href="/blog">Blog</a></li>
         <li><a href="/contact">Book a Call</a></li>
