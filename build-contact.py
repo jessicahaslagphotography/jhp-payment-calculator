@@ -4,9 +4,22 @@
 Like the FAQ and The Experience, this page slices its design system out of
 scalogy-portfolio.html at build time rather than keeping a copy, so a change
 to the tokens, the nav, the footer or the phone scale reaches it without
-anyone remembering to. It takes the intro band, the divider and the
-pull-quote. It does NOT take the closing band: this page is the end of
-the funnel and has nowhere to send anyone next.
+anyone remembering to. It takes the intro band, the divider, the pull-quote
+and the closing band.
+
+THE CLOSING BAND GOES TO FACEBOOK, NOT ONWARD THROUGH THE SITE. On every
+other page that band is the door to the next page; here there is no next
+page, because this is the end of the funnel. So it is the VIP Facebook
+group instead -- Jessica's ask, 24 September. That makes it the one band on
+the site whose anchor leaves the site, which is why it alone carries
+target="_blank" and rel="noopener".
+
+It is deliberately the same .jhp-band construction as the other three, not a
+new shape: a woman who has just handed over her email should recognise the
+foot of this page as the foot of any other, and the group is a softer ask
+than the one she has already said yes to. The home page also has a VIP
+block, in its own plainer .jhp-vip shape and mid-page rather than at the
+foot; the two say different things and neither is a copy of the other.
 
 WHAT THIS PAGE IS, AND IS NOT
 
@@ -65,11 +78,13 @@ CDN = "https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/"
 src = (ROOT / "scalogy-portfolio.html").read_text()
 
 # --- the slices -----------------------------------------------------------
-# Same cut points build-info.py uses, except this page stops before THE WAY
-# ON: no closing band, so none of its CSS ships.
+# The same cut points build-info.py uses. THE WAY ON is included: the VIP
+# band at the foot of this page is a .jhp-band, the same construction as the
+# closing band on Portfolio, the FAQ and The Experience, so it takes that
+# CSS rather than carrying a second copy of it here.
 MARK_END = "/* The closing band carries no photograph."
 shared = src[:src.index("/* THE INDEX")]                     # tokens .. phone
-parts = src[src.index("/* THE INTRO"):src.index("/* THE WAY ON")]
+parts = src[src.index("/* THE INTRO"):src.index(MARK_END)]
 tail = src[src.index(MARK_END):]
 after_style = tail[tail.index("</style>"):]
 nav = after_style[after_style.index('<nav class="jhp-nav">'):
@@ -333,6 +348,45 @@ BODY = """
     </blockquote>
   </div>
 </section>
+
+<div class="jhp-div" aria-hidden="true"></div>
+
+<!-- The way on, which here means off the site. See the note at the head of
+     build-contact.py: the band is the link, the button inside it is a span,
+     and this is the only one of the four whose href leaves jhpboudoir.com.
+
+     ONE CLIENT PER FRAME. Miss P is on Portfolio and the FAQ but on neither
+     of this page's two other photographs -- the intro band is Miss T and
+     the pull-quote is Miss V -- so no face appears twice here. Her set is
+     black and white throughout, which is the reason to use it rather than a
+     coincidence: the scrim over this band has to hold cream type and a gold
+     kicker, and a frame with no colour of its own is the easiest thing in
+     the library to set them against.
+
+     THE CROP IS INHERITED, NOT CHOSEN. There is no object-position here, so
+     this frame takes the shared band crop of 50% 22% along with the other
+     three -- which is a tuned number, but tuned against their frames and
+     not against this one. Preferring it to a fresh 50% 50% keeps the four
+     bands one crop rather than three plus an exception, and means this page
+     adds no new untuned figure of its own. It is still a figure nobody has
+     checked at 1440 against this photograph. Band tuner.
+
+     The band crops vertically at every width above a phone, so the subject
+     stays centred and the type is on the left away from her; below 620px
+     the frame is cut at the sides instead and the heavier phone scrim takes
+     over. -->
+<a class="jhp-band" href="https://www.facebook.com/groups/1107773373084834"
+   target="_blank" rel="noopener">
+  <img src="{{CDN}}8a91728b-dbb1-4728-8eb5-7361f93c0611.jpg"
+       width="1600" height="1065" loading="lazy"
+       alt="A client photographed in black and white at JHP Boudoir">
+  <span class="over">
+    <span class="jhp-kicker">The VIP Facebook group</span>
+    <h2 class="jhp-h jhp-h-lg">The Women Who Went First</h2>
+    <span class="sub">Behind the scenes, and first looks.</span>
+    <span class="jhp-btn">Join the group</span>
+  </span>
+</a>
 
 <script>
   /* Draws each divider in as it arrives. Everything here is an

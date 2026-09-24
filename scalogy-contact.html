@@ -428,6 +428,61 @@
   .jhp-home .jhp-quote .src{font-size:12px;margin-top:16px}
 }
 
+/* THE WAY ON
+   ----------
+   The whole band is the link, so there is no small target to find: the
+   button inside it is a span, not a second anchor, which keeps the markup
+   legal and the click area the full width. Shorter than the intro band
+   above -- it is a door, not a heading. */
+.jhp-home .jhp-band{position:relative;display:block;overflow:hidden}
+.jhp-home .jhp-band img{width:100%;height:clamp(320px,34vw,520px);
+  max-height:none;object-fit:cover;object-position:50% 22%;
+  transition:transform .8s ease}
+.jhp-home .jhp-band:hover img{transform:scale(1.04)}
+.jhp-home .jhp-band:focus-visible{outline:2px solid var(--gold-bright);
+  outline-offset:-4px}
+/* Type to the left, as on the home page's hero. The band crops only
+   vertically -- it is wider than the frame at every screen -- so the
+   subject stays centred whatever the crop does, and centred type would
+   land on her face. Two gradients: one up from the floor for the words,
+   one in from the left so they hold against a bright frame. */
+.jhp-home .jhp-band .over{position:absolute;inset:0;display:flex;
+  flex-direction:column;align-items:flex-start;justify-content:center;
+  text-align:left;padding:0 clamp(22px,6vw,74px);
+  background:
+    linear-gradient(0deg,rgba(19,16,14,.8) 0%,rgba(19,16,14,.42) 55%,
+      rgba(19,16,14,.3) 100%),
+    linear-gradient(90deg,rgba(19,16,14,.72) 0%,rgba(19,16,14,.34) 38%,
+      rgba(19,16,14,0) 68%)}
+.jhp-home .jhp-band h2{margin:0 0 8px;max-width:17ch}
+.jhp-home .jhp-band .sub{font-family:var(--sans);font-weight:300;
+  font-size:15.5px;color:var(--muted);margin:0 0 22px;max-width:30ch}
+/* A span dressed as the button: the band is already the anchor. */
+.jhp-home .jhp-band .jhp-btn{pointer-events:none}
+/* The divider immediately above the band would otherwise sit on the
+   photograph's top edge -- the band carries no padding of its own. */
+.jhp-home .jhp-div + .jhp-band{margin-top:clamp(42px,6vw,72px)}
+@media (max-width:620px){
+  /* Jessica set this band's height and crop in the tuner, so neither
+     moves. What changes is that a phone crops the frame the other way --
+     the band is now taller than the frame's shape, so it is scaled to
+     the height and cut at the sides, which puts the subject in the middle
+     of the picture instead of off to the right. The left gradient alone
+     could not hold the words against her. So: a heavier scrim, and
+     measures short enough that neither line reaches her.
+
+     The words stay left rather than centring to match the band at the top
+     of the page -- centred here would put them straight on her face. */
+  .jhp-home .jhp-band .over{padding:0 var(--ph-gut);
+    background:
+      linear-gradient(0deg,rgba(19,16,14,.86) 0%,rgba(19,16,14,.52) 58%,
+        rgba(19,16,14,.4) 100%),
+      linear-gradient(90deg,rgba(19,16,14,.9) 0%,rgba(19,16,14,.66) 50%,
+        rgba(19,16,14,.16) 100%)}
+  .jhp-home .jhp-band h2{max-width:16ch;margin-bottom:10px}
+  .jhp-home .jhp-band .sub{font-size:var(--ph-sub);max-width:22ch;
+    margin-bottom:20px}
+}
 
 /* WHAT IS INSIDE THE GUIDE
    ------------------------
@@ -677,6 +732,45 @@
     </blockquote>
   </div>
 </section>
+
+<div class="jhp-div" aria-hidden="true"></div>
+
+<!-- The way on, which here means off the site. See the note at the head of
+     build-contact.py: the band is the link, the button inside it is a span,
+     and this is the only one of the four whose href leaves jhpboudoir.com.
+
+     ONE CLIENT PER FRAME. Miss P is on Portfolio and the FAQ but on neither
+     of this page's two other photographs -- the intro band is Miss T and
+     the pull-quote is Miss V -- so no face appears twice here. Her set is
+     black and white throughout, which is the reason to use it rather than a
+     coincidence: the scrim over this band has to hold cream type and a gold
+     kicker, and a frame with no colour of its own is the easiest thing in
+     the library to set them against.
+
+     THE CROP IS INHERITED, NOT CHOSEN. There is no object-position here, so
+     this frame takes the shared band crop of 50% 22% along with the other
+     three -- which is a tuned number, but tuned against their frames and
+     not against this one. Preferring it to a fresh 50% 50% keeps the four
+     bands one crop rather than three plus an exception, and means this page
+     adds no new untuned figure of its own. It is still a figure nobody has
+     checked at 1440 against this photograph. Band tuner.
+
+     The band crops vertically at every width above a phone, so the subject
+     stays centred and the type is on the left away from her; below 620px
+     the frame is cut at the sides instead and the heavier phone scrim takes
+     over. -->
+<a class="jhp-band" href="https://www.facebook.com/groups/1107773373084834"
+   target="_blank" rel="noopener">
+  <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/8a91728b-dbb1-4728-8eb5-7361f93c0611.jpg"
+       width="1600" height="1065" loading="lazy"
+       alt="A client photographed in black and white at JHP Boudoir">
+  <span class="over">
+    <span class="jhp-kicker">The VIP Facebook group</span>
+    <h2 class="jhp-h jhp-h-lg">The Women Who Went First</h2>
+    <span class="sub">Behind the scenes, and first looks.</span>
+    <span class="jhp-btn">Join the group</span>
+  </span>
+</a>
 
 <script>
   /* Draws each divider in as it arrives. Everything here is an

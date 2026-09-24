@@ -100,6 +100,15 @@ of Jessica's own: the About page's closing band was 190px and is now about
   touching the page. `site_leads` holds PII and must never be attached to an
   app. The page needs JavaScript and says so in a `<noscript>`; the email
   address is on the page twice for exactly that reason.
+- **The VIP group is on two pages and is one link.** The Facebook group
+  (`facebook.com/groups/1107773373084834`) is the homepage's `.jhp-vip`
+  panel -- mid-page, no photograph -- and the closing `.jhp-band` at the
+  foot of `/contact`. They are worded differently on purpose but they point
+  at the same group, so changing the group means editing both
+  `scalogy-home.html` and `build-contact.py`. Contact's is the only one of
+  the four closing bands whose href leaves the site, which is why it alone
+  carries `target="_blank"` and `rel="noopener"`; it is also why `/contact`
+  now slices `THE WAY ON` out of the portfolio, which it used not to.
 - **Links are relative** (`../about/`), so they resolve on
   `pages.scalogy.com/jhpboudoir1/` now and on the real domain later. The
   one link that has to change at launch is the JHP wordmark:
