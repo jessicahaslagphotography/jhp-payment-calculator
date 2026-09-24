@@ -77,17 +77,37 @@ of Jessica's own: the About page's closing band was 190px and is now about
   `build-experience.py` cut the tokens, type, nav, bands, divider,
   pull-quote and footer out of `scalogy-portfolio.html` at build time so
   the pages cannot drift. Change a shared rule there and rebuild.
-- **Info is a menu, not a page.** The nav carries About, Portfolio, the
-  wordmark, Info and Book a Call, and under Info sit FAQ and The
-  Experience. Info itself is a `<span>` and goes nowhere -- there is no
-  Info page. The menu uses no JavaScript: both links are always in the
-  markup and in the tab order, and the panel is revealed by `:hover` and
-  `:focus-within`, never by `display` or `visibility` (either would take
-  the links out of the tab order and `:focus-within` could then never
-  fire). On a phone there is no hover, so the two links simply sit on the
-  line beneath Info. All six templates carry the same nav markup
-  byte-for-byte; check that with an md5 of the `<nav>` block before
-  believing a change landed everywhere.
+- **The nav is the wordmark hard left and everything else hard right.**
+  Jessica's ask, 24 September; before it the bar was one centred row with
+  JHP sitting in the middle of the links. The mark is a direct child of
+  `.jhp-nav`, which is `justify-content:space-between`; every link lives in
+  a `.jhp-navr` flex row beside it. The wrapper exists because
+  space-between across seven children would spread them over the whole bar
+  rather than gather them, and it takes **`align-self:stretch`** so it
+  still fills the nav's content height -- that height is what the Info
+  panel's `margin-top:21px` (padding-bottom plus the 1px border) is
+  measured from, and without it the panel floats off the rule under the
+  header. Reading order is About, Portfolio, Info, Specialty Sessions,
+  Book a Call.
+- **Info is a menu, not a page.** Under Info sit FAQ and The Experience.
+  Info itself is a `<span>` and goes nowhere -- there is no Info page. The
+  menu uses no JavaScript: both links are always in the markup and in the
+  tab order, and the panel is revealed by `:hover` and `:focus-within`,
+  never by `display` or `visibility` (either would take the links out of
+  the tab order and `:focus-within` could then never fire). On a phone
+  there is no hover, so both wrappers go `display:contents` and the nav
+  becomes one flat wrapping row: mark, then About / Portfolio / Info, then
+  FAQ / The Experience, then Specialty Sessions / Book a Call. 165px at
+  every width from 320 to 430.
+  **`.jhp-sub` carries no `order` in that phone block, and must not.** It
+  said `order:1` for as long as the four links fitted on one line, which
+  put it last and next in the same place. The moment Specialty Sessions
+  pushed Book a Call onto a second row the two Info pages landed *under
+  Book a Call* -- two links adrift from the word they belong to. It is
+  `flex:0 0 100%` that breaks the line under Info; document order does the
+  rest. All seven templates carry the same nav markup byte-for-byte; check
+  that with an md5 of the `<nav>` block before believing a change landed
+  everywhere.
 - **Contact is the Session Guide, not a calendar.** `/contact` asks for a
   name, email and phone and promises the **Session Guide Magazine**; the
   link to book a consultation call is inside that magazine, not on the site.
@@ -168,7 +188,29 @@ of Jessica's own: the About page's closing band was 190px and is now about
   template has to stay Jinja-parseable at every step -- a `{% raw %}`
   without its `{% endraw %}` is rejected. After a patch, `pages_render`.
   A rendered page is the template less 21 bytes (the raw fence); check
-  it every time.
+  it every time. The gallery template has no fence, so its pages render
+  at the template's own size.
+- **The repo copy and the live template are not byte-identical, and two
+  files differ by more than whitespace.** Patches are cut by diffing the
+  working file against `git show HEAD:`, so the two have to agree *in the
+  region being patched* -- not everywhere. Known gaps, all checked on
+  24 September and all harmless:
+  - `scalogy-faq.html` and `scalogy-portfolio.html` are 1 byte larger
+    locally. Scalogy trims trailing whitespace on save.
+  - `scalogy-about.html` is 24 bytes smaller locally.
+  - `scalogy-home.html` is **2,253 bytes larger locally**: the repo copy
+    carries the section comments (`/* ---------- 2 · hero ---------- */`,
+    the `<!-- ===== 7 · email opt-in ===== -->` markers, the file header)
+    and three rule-sets that nothing on the page uses -- `.jhp-empower`,
+    `.jhp-band` and `.jhp-ba`. Dead CSS; the live page is not missing
+    anything it renders. (`.jhp-empower-sub` is the one that *is* used,
+    and it is live.)
+
+  The failure mode here is loud, not silent: `templates_patch` requires
+  each search to match exactly once and applies nothing if one does not,
+  so a search string that strays into one of those comment blocks errors
+  rather than landing in the wrong place. Do not "fix" the gap by pushing
+  comments live unless there is another reason to touch those files.
 - **One review, one page.** No Google review appears twice on the site.
   Miss M.'s was on three pages at once, beside three different faces, which
   reads as three women who happened to write the identical paragraph. The
