@@ -87,8 +87,12 @@ of Jessica's own: the About page's closing band was 190px and is now about
   byte-for-byte; check that with an md5 of the `<nav>` block before
   believing a change landed everywhere.
 - **Contact is the Session Guide, not a calendar.** `/contact` asks for a
-  name, email and phone and promises the Session Guide; the link to book a
-  consultation call is inside that guide, not on the site. Every "Book a
+  name, email and phone and promises the **Session Guide Magazine**; the
+  link to book a consultation call is inside that magazine, not on the site.
+  The page names it in full where a visitor first meets it and says "the
+  magazine" after -- Jessica's note, 24 September, so a woman can tell what
+  actually arrives. "The guide" is the same object and is still correct in
+  prose; the string that must never follow the copy is the GHL tag below. Every "Book a
   Call" button on all seven templates lands there, so the label and the page
   do not quite agree -- that is Jessica's wording to settle, not something to
   quietly reword. A submission goes: the form POSTs no-cors to the

@@ -30,6 +30,19 @@ So the page asks for an email address and nothing else is promised on it. If
 the button labels across the site are ever reworded, that is a separate edit
 to six templates and does not belong here.
 
+IT IS A MAGAZINE, AND SAYING SO IS THE POINT. Jessica's note, 24 September:
+a woman should be able to tell what actually arrives. So the page names the
+Session Guide Magazine in full where she first meets it, calls it "the
+magazine" after that, and sets the expectation before she submits rather
+than only in the thank-you -- get your details right, five or ten minutes,
+then the spam folder. The short form "the guide" is still the same object
+and still correct; what is not correct is a page that never says what shape
+the thing is.
+
+That name is copy and nothing else. The GHL tag is still
+"Session Guide - Requested" and renaming anything a visitor reads must not
+go near it -- see HOW A SUBMISSION TRAVELS below.
+
 HOW A SUBMISSION TRAVELS
 
   the form  ->  POST (no-cors) to the site-lead-submit webhook
@@ -244,9 +257,11 @@ BODY = """
 
 <section class="jhp-sec">
   <div class="jhp-center">
-    <h2 class="jhp-h">What&rsquo;s Inside the Guide</h2>
-    <p class="jhp-p">Everything you would want to know before you speak to
-       anybody. Read it in your own time, with no one waiting on an
+    <h2 class="jhp-h">What&rsquo;s Inside the Magazine</h2>
+    <p class="jhp-p">Ready to learn more about working with the studio? Your
+       copy of the Session Guide Magazine comes over the moment you fill in
+       the form below &mdash; everything you would want to know before you
+       speak to anybody, to read in your own time with no one waiting on an
        answer.</p>
   </div>
   <ul class="jhp-inside">
@@ -264,8 +279,10 @@ BODY = """
   <div class="jhp-center">
     <p class="jhp-kicker">No obligation</p>
     <h2 class="jhp-h">Send Me the Guide</h2>
-    <p class="jhp-p">Tell me where to send it and it comes straight to your
-       inbox.</p>
+    <p class="jhp-p">Tell me where to send it and the magazine comes straight
+       to your inbox. Do check your details are right so that I can reach
+       you, and if it has not arrived within five or ten minutes, have a
+       look in your spam folder.</p>
   </div>
 
   <form class="jhp-ask-form" id="jhp-guide" novalidate>
@@ -312,8 +329,9 @@ BODY = """
 
   <div class="jhp-done" id="jhp-done" hidden>
     <h2 class="jhp-h">It Is On Its Way</h2>
-    <p>Check your inbox &mdash; the Session Guide is heading there now. Have
-       a proper look when you have a quiet ten minutes.</p>
+    <p>Check your inbox &mdash; the magazine is heading there now, and should
+       land within five or ten minutes. Have a proper look at it when you
+       have a quiet ten minutes of your own.</p>
     <p>Inside it there is a link to book your consultation call, for whenever
        you are ready. Fifteen minutes, and nothing is decided on it that you
        do not decide.</p>
