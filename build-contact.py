@@ -382,9 +382,9 @@ BODY = """
        alt="A client photographed in black and white at JHP Boudoir">
   <span class="over">
     <span class="jhp-kicker">The VIP Facebook group</span>
-    <h2 class="jhp-h jhp-h-lg">The Women Who Went First</h2>
-    <span class="sub">Behind the scenes, and first looks.</span>
-    <span class="jhp-btn">Join the group</span>
+    <h2 class="jhp-h jhp-h-lg">Become One of My VIPs</h2>
+    <span class="sub">Perks, first looks, early openings.</span>
+    <span class="jhp-btn">Become a VIP</span>
   </span>
 </a>
 
