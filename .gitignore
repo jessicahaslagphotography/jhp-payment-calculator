@@ -1,1 +1,5 @@
 photos/
+
+# Before/after screenshots for the 24 Sep heading pass. Artifacts, not source --
+# 2MB of PNGs that can be regenerated from the templates at any time.
+headings/
