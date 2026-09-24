@@ -244,15 +244,20 @@ BODY = """
 </section>
 
 <section class="jhp-sec" style="border-bottom:none">
+  <!-- No heading. Jessica removed it on 24 September, so this paragraph is
+       the whole of the page's copy and the h1 in the band above is what
+       heads it. The name moved down into the first sentence when the
+       heading went: without it "your copy" and the list after the dash
+       refer to nothing, and the page would ask for four fields having
+       never said what it is sending. -->
   <div class="jhp-center">
-    <h2 class="jhp-h">What&rsquo;s Inside the JHP Boudoir Session Guide
-        Magazine?</h2>
     <p class="jhp-p">Ready to learn even more about working with the studio?
-       Inside: the studio itself, how a session day runs, everything a
-       session includes, and where pricing starts. Fill in the form and your
-       copy comes straight over &mdash; fill it in accurately so that I can
-       reach you, and if the magazine has not arrived within five or ten
-       minutes, please check your spam folder.</p>
+       Fill in the form and your copy of the Session Guide Magazine comes
+       straight over &mdash; the studio itself, how a session day runs,
+       everything a session includes, and where pricing starts. Fill it in
+       accurately so that I can reach you, and if the magazine has not
+       arrived within five or ten minutes, please check your spam
+       folder.</p>
   </div>
 
   <form class="jhp-ask-form" id="jhp-guide" novalidate>

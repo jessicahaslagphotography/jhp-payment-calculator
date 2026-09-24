@@ -108,8 +108,11 @@ of Jessica's own: the About page's closing band was 190px and is now about
   five-point contents list and a review; Jessica cut both on 24 September --
   353 words and 3941px on a phone is ten screens of scrolling to collect
   four fields, and a review below the form persuades nobody. What is left is
-  the band, her paragraph, the form and the VIP band. The list's substance
-  survives as the "Inside:" clause in that paragraph. Adding a section back
+  the band, her paragraph, the form and the VIP band -- and the paragraph
+  has no heading over it either, which went the same day, so the band's h1
+  heads the whole page. The list's substance survives as the clause after
+  the dash, and the magazine is named in that paragraph's first sentence
+  because nothing above it names the thing any more. Adding a section back
   is a decision to re-make, not an omission to repair -- and anything added
   should be measured against 2510px, which is what the page is now.
 - **The VIP group is on two pages and is one link.** The Facebook group
