@@ -405,6 +405,44 @@ Still to do, roughly in order of what it is worth:
   link, JavaScript off -- the page reads properly anyway. That is why the
   default lead is "Welcome -- I am so glad you are here" rather than a blank
   waiting to be filled.
+- **The guide is four parts and two columns, since 24 September.** Jessica
+  asked for the questions in two columns, for more formatting, and for the
+  whole thing to be more beautiful; those are one problem, because a 14,500px
+  column of undifferentiated prose is not a magazine, it is a scroll. The
+  nineteen questions are now grouped into four parts -- who I am, the things
+  women worry about, how it works, what it costs -- and each is a card in a
+  two-column run. **10,906px at 1440, down from 12,669.**
+  **The parts are what make two columns legible**, not decoration. Balanced
+  columns read down the left then down the right, which is only tolerable when
+  each item is self-contained and the run between headings is short. Four
+  short runs, not one of twenty.
+  **CSS columns, not a grid, and the reason matters.** A two-track grid aligns
+  cards in rows, so every row is as tall as its tallest card and a short answer
+  beside a long one leaves a hole. `columns:2` lets each card take the height
+  it needs. `break-inside:avoid` is what keeps a question with its answer --
+  without it a card splits at the column break and the second half of an answer
+  turns up at the top of the right-hand column. Anything that must not be
+  squeezed into half a page takes `.jhp-wide` (`column-span:all`): the fee, the
+  Collections, the day, the session types, the photographs.
+  **On a phone the card becomes a rule.** One column, and the padding, border
+  and panel background all come off -- they do work at desktop widths that they
+  do not do in a single column. Without that the restructure ADDED about
+  2,000px at 390, which is five more screens of thumb; with it the page is
+  14,871px against 14,576 before, for a document that is now grouped and has a
+  contents list you can aim with.
+  **The print rules have to be last in the sheet.** A media query adds no
+  specificity, so `@media print` appearing before an equally specific normal
+  rule loses to it while printing. That is why the print block is appended
+  after everything else and not left where it was written.
+  **`.jhp-lift` is not the review pull-quote.** `.qt`/`.qr` belong to somebody
+  else's words and have rules in `reviews.md` about where a review may appear.
+  A lifted line is Jessica quoting herself: a whole sentence, verbatim, from
+  the body a few hundred pixels above, set large between two parts. Repeating
+  it is the point and not an accident.
+  **The parts are DATA, in `PARTS`.** The contents list, the anchors and the
+  headings all derive from one structure, because when they were three blocks
+  of HTML they were three chances to disagree. The build fails if an anchor has
+  no id or two things share one.
 - **`build-guide.py --pdf` renders the same page to a file**, for when she
   wants an attachment rather than a link. Three things had to be true and each
   one is a trap that fails silently:

@@ -306,10 +306,210 @@ GUIDE_CSS = """
 }
 """
 
+
+# The second half of the guide's CSS: what the 24 September restructure added.
+# Jessica asked for the questions in two columns, for more formatting, and for
+# the whole thing to be more beautiful. All three are one problem -- a 14,500px
+# column of undifferentiated prose is not a magazine, it is a scroll.
+GUIDE_CSS += """
+/* FOUR PARTS, AND WHY THE DOCUMENT HAS THEM NOW
+   ---------------------------------------------
+   Twenty questions in a row is a list. The same twenty grouped into four
+   parts is a document with a shape, and the shape is what tells a woman how
+   far in she is and what kind of answer to expect next: who I am, what you
+   are worried about, how it works, what it costs.
+
+   The grouping is also what makes two columns legible. Balanced columns read
+   down the left and then down the right, which is only acceptable when each
+   item is self-contained and the run between headings is short. Four short
+   runs, not one of twenty. */
+.jhp-home .jhp-part{max-width:1080px;text-align:center;
+  margin:clamp(58px,7vw,96px) auto clamp(26px,3vw,40px)}
+.jhp-home .jhp-part .no{font-family:var(--sans);font-weight:400;font-size:10px;
+  letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.jhp-home .jhp-part h2{font-family:var(--serif);font-weight:600;
+  font-size:clamp(27px,3.1vw,40px);line-height:1.14;color:var(--ink);margin:0;
+  text-wrap:balance}
+/* A short rule rather than a full-width one: it closes the heading off
+   without drawing a line across the page every time a part begins. */
+.jhp-home .jhp-part .rule{width:34px;height:1px;background:var(--gold);
+  margin:18px auto 0;opacity:.8}
+
+/* THE TWO COLUMNS
+   ---------------
+   CSS columns rather than a grid, deliberately. A two-track grid aligns the
+   cards in rows, so every row is as tall as its tallest card and a short
+   answer beside a long one leaves a hole. Columns let each card take the
+   height it needs and balance the two sides, which is what a magazine does.
+
+   break-inside:avoid is what keeps a question with its answer. Without it a
+   card splits across the column break and the reader finds the second half of
+   an answer at the top of the right-hand column.
+
+   One column below 860px. Two columns of 15px type on a phone is four words
+   a line, and nobody reads that. */
+.jhp-home .jhp-qs{columns:2;column-gap:clamp(22px,2.8vw,36px);
+  max-width:1080px;margin:0 auto}
+.jhp-home .jhp-qs > *{break-inside:avoid;page-break-inside:avoid;
+  margin:0 0 clamp(18px,2.2vw,26px)}
+@media (max-width:860px){
+  .jhp-home .jhp-qs{columns:1;max-width:62ch}
+}
+
+/* A question, as a card. The border is the soft hairline rather than the gold
+   one -- twenty gold-edged boxes would be a spreadsheet. It warms on hover,
+   which is the only movement on the page and costs nothing. */
+.jhp-home .jhp-q{padding:clamp(22px,2.6vw,30px);background:var(--surface);
+  border:1px solid var(--line-soft);border-radius:2px;
+  transition:border-color .45s ease}
+.jhp-home .jhp-q:hover{border-color:var(--line)}
+.jhp-home .jhp-q h3{font-family:var(--serif);font-weight:600;
+  font-size:clamp(20px,2vw,25px);line-height:1.2;color:var(--ink);
+  margin:0 0 13px;text-wrap:balance}
+.jhp-home .jhp-q p{font-family:var(--sans);font-weight:300;font-size:15.5px;
+  line-height:1.75;color:var(--muted);margin:0 0 13px}
+.jhp-home .jhp-q p:last-child{margin-bottom:0}
+.jhp-home .jhp-q em{font-style:italic;color:var(--ink)}
+.jhp-home .jhp-q strong{font-weight:500;color:var(--ink)}
+.jhp-home .jhp-q a{color:var(--gold);border-bottom:1px solid var(--line);
+  transition:color .3s,border-color .3s}
+.jhp-home .jhp-q a:hover{color:var(--gold-bright);border-color:var(--gold-bright)}
+
+/* Anything that must not be squeezed into half a page -- the session fee, the
+   Collections, the day, a photograph -- spans both columns and resets the
+   flow around itself. That alternation is the rhythm of the document: a pair
+   of columns, a full-width thing, a pair of columns. */
+.jhp-home .jhp-wide{column-span:all;margin-top:clamp(10px,1.4vw,18px)}
+.jhp-home .jhp-wide.q{max-width:760px;margin-inline:auto}
+
+/* THE LIFTED LINE
+   ---------------
+   A sentence of hers, set large between two parts. This is NOT the review
+   pull-quote object -- that one is .qt/.qr and belongs to somebody else's
+   words, with rules in CLAUDE.md about where a review may appear. This is
+   Jessica quoting herself, which is what a magazine does with its own copy.
+
+   The line is repeated verbatim from the body a few hundred pixels above.
+   That is the point of a lifted line and not an accident: it gives the eye
+   somewhere to rest between two dense runs, and it puts the sentence she most
+   wants remembered in the largest type on the page. Whole sentences only --
+   nothing is trimmed to make it fit. */
+.jhp-home .jhp-lift{max-width:900px;margin:clamp(50px,6.4vw,84px) auto;
+  padding:0 clamp(18px,4vw,40px);text-align:center}
+.jhp-home .jhp-lift::before{content:"";display:block;width:7px;height:7px;
+  margin:0 auto clamp(20px,2.4vw,30px);transform:rotate(45deg);
+  border:1px solid var(--gold)}
+.jhp-home .jhp-lift p{font-family:var(--serif);font-style:italic;font-weight:400;
+  font-size:clamp(23px,3.1vw,38px);line-height:1.3;color:var(--ink);margin:0;
+  text-wrap:balance}
+.jhp-home .jhp-lift .gl{color:var(--gold)}
+
+/* The opening paragraph takes a drop cap, which is the one place on this site
+   that does. It is the first thing under the title and it marks where the
+   reading starts -- and the guide is the only document here long enough for
+   that to mean anything. Not on the greeting line above it: that line is one
+   sentence and is rewritten by the name script, and a capital the size of
+   three lines over a paragraph one line deep looks like a mistake. */
+.jhp-home .jhp-gd .opener::first-letter{float:left;font-family:var(--serif);
+  font-weight:600;font-size:60px;line-height:.82;color:var(--gold);
+  padding:6px 13px 0 0}
+@media (max-width:620px){
+  .jhp-home .jhp-gd .opener::first-letter{font-size:48px;padding:4px 10px 0 0}
+}
+
+/* The close gets the full width and sits on its own, because the last thing
+   in a long document should not look like the twenty-first question. */
+.jhp-home .jhp-end{max-width:62ch}
+.jhp-home .jhp-end .jhp-h{margin-bottom:18px}
+"""
+
+# The contents list is grouped now, and the panels inside a question card sit
+# a heading level lower than they did, so both need their own rules.
+GUIDE_CSS += """
+/* THE CONTENTS, GROUPED THE WAY THE DOCUMENT IS. Four columns of four or five
+   rows beats one list of twenty: a woman looking for the price finds The
+   Investment as a heading rather than reading every question to get there. */
+.jhp-home .jhp-toc{max-width:1080px}
+.jhp-home .jhp-toc .cols{display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,2.4vw,34px)}
+.jhp-home .jhp-toc ul{display:block}
+.jhp-home .jhp-toc .pt{margin:0 0 8px}
+.jhp-home .jhp-toc .pt a{display:block;padding:0 0 9px;font-family:var(--sans);
+  font-weight:400;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--gold);border-bottom:1px solid var(--line)}
+.jhp-home .jhp-toc .pt a:hover{color:var(--gold-bright)}
+@media (max-width:900px){
+  .jhp-home .jhp-toc .cols{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:560px){
+  .jhp-home .jhp-toc .cols{grid-template-columns:1fr;gap:22px}
+}
+
+/* A question is an h3 now, so the headings inside the day and the session
+   types dropped to h4. Same type, one level down the document. */
+.jhp-home .jhp-day h4{font-family:var(--sans);font-weight:500;font-size:13px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:0 0 7px}
+.jhp-home .jhp-two h4{font-family:var(--serif);font-weight:600;font-size:23px;
+  line-height:1.2;color:var(--ink);margin:0 0 6px}
+/* The panels sit inside a card now rather than in the prose column, so they
+   lose the auto margins that used to centre them against the 62ch measure. */
+.jhp-home .jhp-q .jhp-card,.jhp-home .jhp-q .jhp-day,
+.jhp-home .jhp-q .jhp-two,.jhp-home .jhp-q .jhp-rules{max-width:none}
+.jhp-home .jhp-q .jhp-card{margin-inline:0}
+.jhp-home .jhp-q .jhp-p{font-size:15.5px;line-height:1.75;margin:0 0 13px}
+
+/* WHAT THE CARDS COST ON A PHONE, AND CLAWING IT BACK.
+   In two columns the restructure made the document shorter -- 12,669px to
+   10,906px at 1440. In one column it made it LONGER: nineteen cards of
+   padding, four part headings and two lifted lines added about 2,000px at
+   390, which is five more screens of thumb.
+
+   So on a phone the card stops being a box and becomes a rule. Same
+   grouping, same order, same headings -- it is still four parts and nineteen
+   questions -- but without the padding, the border and the panel background,
+   which were doing work at desktop widths that they do not do in a single
+   column. That is most of the 2,000px back. */
+@media (max-width:620px){
+  .jhp-home .jhp-q{padding:22px 0 0;background:none;border:0;
+    border-top:1px solid var(--line-soft);border-radius:0}
+  .jhp-home .jhp-q:hover{border-color:var(--line-soft)}
+  .jhp-home .jhp-qs > *{margin-bottom:22px}
+  .jhp-home .jhp-part{margin:clamp(40px,9vw,52px) auto 22px}
+  .jhp-home .jhp-lift{margin:38px auto}
+  .jhp-home .jhp-toc .cols{gap:18px}
+}
+"""
+
+# The print overrides have to come LAST in the sheet, not in the block above.
+# A media query adds no specificity, so an @media print rule that appears
+# before an equally specific normal rule loses to it while printing -- which
+# would have left the PDF trying to lay out two columns with spanners in them,
+# something print engines handle badly and inconsistently.
+GUIDE_CSS += """
+@media print{
+  /* One column on paper. Two columns of 15px type in a Letter page is a
+     newspaper, and the spanners that make the screen layout work have no
+     reliable print behaviour across engines. */
+  .jhp-home .jhp-qs{columns:1;max-width:none}
+  .jhp-home .jhp-wide{column-span:none}
+  .jhp-home .jhp-q,.jhp-home .jhp-part,.jhp-home .jhp-lift{
+    break-inside:avoid;page-break-inside:avoid}
+  .jhp-home .jhp-part{break-after:avoid;page-break-after:avoid}
+  .jhp-home .jhp-q{background:none;border:0;border-top:1px solid var(--line-soft);
+    border-radius:0;padding:14px 0 0}
+  .jhp-home .jhp-lift{margin:30px auto}
+}
+"""
+
 # ------------------------------------------------------------------ the copy
-# Her guide, page by page, in her order. The voice is hers throughout -- where
-# a sentence reads oddly formal or oddly blunt, that is because it is a
-# transcription and not a rewrite.
+# Her guide, in her order, grouped into four parts. The voice is hers
+# throughout -- where a sentence reads oddly formal or oddly blunt, that is
+# because it is a transcription and not a rewrite.
+#
+# WHY THIS IS DATA AND NOT MARKUP. The contents list, the anchors and the
+# headings all have to agree, and when they were three separate blocks of HTML
+# they were three chances to disagree. One structure generates all three, and
+# the build fails if an anchor has no id.
 #
 # The photographs are eight different women, one frame each, which is the
 # house rule: the same face opening and closing a document reads as the only
@@ -319,34 +519,347 @@ GUIDE_CSS = """
 # described them; that is a note in CLAUDE.md, not a thing to invent here.
 HERO = "fe2033e0-3571-441e-8c98-089358e06f10.jpg"
 
-TOC = [
-    ("about",    "A Bit About Me"),
-    ("studio",   "Where the Studio Is"),
-    ("boudoir",  "So, What Is Boudoir?"),
-    ("why",      "What Would I Do With Boudoir Portraits?"),
-    ("thinner",  "Can You Make Me Look Thinner?"),
-    ("portfolio","I Don&rsquo;t Look Like the Women in Your Portfolio"),
-    ("who",      "Who Is Going to Be There?"),
-    ("retouch",  "What About Retouching?"),
-    ("wear",     "What Will I Wear?"),
-    ("talk",     "Do I Get to Talk to You First?"),
-    ("types",    "What Types of Sessions Do You Offer?"),
-    ("day",      "How the Session Day Works"),
-    ("reveal",   "Your Image Reveal"),
-    ("delivery", "When the Albums and Prints Arrive"),
-    ("book",     "What Do I Need to Do to Book?"),
-    ("guests",   "Can Someone Come With Me?"),
-    ("when",     "I Need My Images By a Certain Date"),
-    ("spend",    "What Can I Expect to Spend?"),
-    ("money",    "The Collections"),
-    ("ready",    "Ready to Book?"),
-]
 
-def plate(f, alt, cap):
-    return ('<figure class="jhp-plate">\n'
+def plate(f, alt, cap, wide=True):
+    """A photograph that breaks the column."""
+    return ('<figure class="jhp-plate%s">\n'
             '  <img src="%s%s" loading="lazy" alt="%s">\n'
             '  <figcaption>%s</figcaption>\n'
-            '</figure>' % (CDN, f, alt, cap))
+            '</figure>' % (" jhp-wide" if wide else "", CDN, f, alt, cap))
+
+
+def lift(html):
+    """One of her own sentences, set large between two parts."""
+    return '<div class="jhp-lift">\n  <p>%s</p>\n</div>' % html
+
+
+def q(qid, question, answer, wide=False):
+    return {"id": qid, "q": question, "a": answer, "wide": wide}
+
+
+# The two panels that are too wide for a column, written once here and dropped
+# into their questions below.
+DAY = """
+    <ol class="jhp-day">
+      <li>
+        <h4>Hair and Makeup</h4>
+        <p>Professional hair and makeup first, so you arrive in front of the
+           camera already finished. Your artist leaves once it is done.</p>
+      </li>
+      <li>
+        <h4>Wardrobe</h4>
+        <p>We go through what you brought and what you want to borrow, and pick
+           the order we will shoot it in.</p>
+      </li>
+      <li>
+        <h4>Your Session</h4>
+        <p>The studio is private and it is just the two of us. I direct
+           everything &mdash; you do not need to know how to pose, and you will
+           not be left standing there wondering what to do with your hands.</p>
+      </li>
+      <li>
+        <h4>And That Is the Day</h4>
+        <p>Sessions run inside studio hours, {studio_hours}. Your reveal is a
+           separate appointment, so you go home when we are done rather than
+           making decisions about pictures you have not seen yet.</p>
+      </li>
+    </ol>"""
+
+FEE = """
+    <div class="jhp-card">
+      <p class="lb">Session Fee</p>
+      <p class="fig">{fee}<span class="u">to reserve your date</span></p>
+      <p>It can be paid in full, or split into two payments &mdash; the first
+         to reserve the date on the calendar, the second within 14 days of it.
+         If the second payment is not made within those 14 days, the date and
+         the first payment are forfeited.</p>
+    </div>
+    <p class="jhp-p" style="margin-top:26px">What the session fee includes:</p>
+    <ul class="jhp-inc">
+      <li>Your {consult} pre-session consultation</li>
+      <li>Private use of the boudoir studio</li>
+      <li>Professional hair and makeup application</li>
+      <li>Access to the {wardrobe}-piece client wardrobe</li>
+      <li>60 minutes of photography</li>
+      <li>Complete posing and expression coaching</li>
+      <li>Your private reveal and ordering appointment over Zoom</li>
+    </ul>"""
+
+COLLECTIONS = """
+    <p class="jhp-p">There are {collections} Collections in all, so there is
+       room to find the one that fits.</p>
+    <div class="jhp-card two">
+      <div>
+        <p class="lb">Petite Collections</p>
+        <p class="fig">from {petite}</p>
+        <p>Three digital images.</p>
+      </div>
+      <div>
+        <p class="lb">Full Collections</p>
+        <p class="fig">from {full}</p>
+        <p>An album, your digitals and a mobile app.</p>
+      </div>
+    </div>
+    <p class="jhp-p" style="margin-top:26px">Sticker shock? I get it. I had it
+       too, the first time I booked a professional boudoir session with my own
+       dream photographer. And you know what &mdash; I would have paid her
+       double by the time it was done.</p>
+    <p class="jhp-p">I know this is an investment, which is why every Collection
+       is chosen when you book and paid for on an interest-free in-house
+       payment plan before your session. Weekly, biweekly or monthly &mdash;
+       whichever suits you, spread over the months between booking and your
+       session day. It is the same figure either way, and we set it up on
+       auto-pay so you never have to think about a late fee.</p>"""
+
+TYPES = """
+    <p class="jhp-p">Yes, there are different types of boudoir session you can
+       book, and I am always changing it up. Right now I am offering these:</p>
+    <div class="jhp-two">
+      <div>
+        <p class="when">Year round &middot; most popular</p>
+        <h4>Traditional Studio Sessions</h4>
+        <p>In the studio, all year. Great for a first timer.</p>
+      </div>
+      <div>
+        <p class="when">Summer dates only</p>
+        <h4>Outdoor Boudoir Sessions</h4>
+        <p>Exclusive locations, on summer dates only.</p>
+      </div>
+    </div>
+    <p class="jhp-p" style="margin-top:20px">Have something else in mind? Ask
+       me. I am always up for a new adventure.</p>"""
+
+PARTS = [
+ {"no": "Part One", "id": "begin", "title": "Before We Begin", "items": [
+   q("about", "A Bit About Me", """
+    <p>I am Jess. Wife to Zach, and I love the local weatherman with all my
+       heart. Gin, tonic, lime.</p>
+    <p>Seven years of college and three degrees later, I ended up running my
+       own business full time. I would not trade the journey.</p>
+    <p>I love changing lives through my art. Thank you for being here and for
+       supporting my business &mdash; I cannot wait to meet you and make some
+       of the most gorgeous photographs of yourself you will ever have.</p>"""),
+   q("studio", "Where the Studio Is", """
+    <p>The studio is just outside Jefferson City, Missouri. There is over
+       {sqft} square feet of it: multiple set-ups, a hair and makeup room, a
+       wardrobe room, and a sales area full of samples.</p>
+    <p>It is full of gorgeous natural light, vintage exposed brick, wood beams
+       and glass chandeliers. It is a comforting space, and it was built for
+       boudoir photography.</p>"""),
+   q("boudoir", "So, What Is Boudoir?", """
+    <p>The French word <em>boudoir</em> means a woman&rsquo;s dressing room or
+       bedroom, but I like to think of it as a fancy word for women&rsquo;s
+       intimate portraiture. I want to make the most beautiful portraits of you
+       that you will ever have.</p>
+    <p>Boudoir is <strong>not</strong> pornographic or overly sexual. It can be
+       fun, flirty, beautiful, cute, sexy, feminine, intimate, candid, posed
+       &mdash; or really anything else you want it to be.</p>
+    <p>If you have not already joined my private VIP group on Facebook, I
+       highly suggest you do:
+       <a href="{vip}" target="_blank" rel="noopener">the JHP Boudoir VIP
+       group</a>.</p>"""),
+   q("why", "What Would I Do With Boudoir Portraits?", """
+    <p>I believe boudoir is the best gift you can give yourself &mdash; to
+       capture your essence as you are right now. When you need a reminder of
+       the strong, beautiful woman that you are, you will have a collection of
+       amazing portraits to look at.</p>
+    <p>I love it when women come to me for themselves. The images we make
+       together will boost your self esteem and your confidence, and that
+       should be celebrated by you. It will help you reclaim your femininity
+       and your sexuality, two things that are often lost as we get consumed
+       with our lives, our jobs, our families.</p>
+    <p>Put that pep back in your step and reflect on the bodacious babe you
+       are. Celebrate the body that you live in.</p>"""),
+ ]},
+
+ {"no": "Part Two", "id": "worries", "title": "The Things Women Worry About",
+  "items": [
+   q("thinner", "Can You Make Me Look Thinner?", """
+    <p>I want to help you feel beautiful now, just the way you are. I flatter
+       you with hair and makeup styling, a wardrobe that compliments your
+       figure, and amazing lighting and posing techniques to highlight your
+       best ass-sets. See what I did there.</p>
+    <p>I do not believe in heavy photoshopping. Do not get me wrong &mdash; I
+       retouch all of your images and will gladly remove your bruises and
+       pimples &mdash; but I do not want to over-manipulate your body to make
+       you look like someone you are not. We already live in a time when we are
+       consumed with unrealistic bodies in the media. I want to show you that
+       you are beautiful at this very moment, without over the top
+       retouching.</p>"""),
+   q("portfolio", "I Don&rsquo;t Look Like the Women in Your Portfolio", """
+    <p>Actually, you do. You just have not had the chance to see yourself from
+       my perspective yet. Come into the studio and let me show you how
+       beautiful you really are.</p>
+    <p>There is no such thing as the perfect body. Boudoir is for every body.
+       You are never too big, too small, too old or too young to do a boudoir
+       session &mdash; though I only photograph clients over the age of 18.</p>"""),
+   q("who", "Who Is Going to Be There?", """
+    <p>You and me. Your hair and makeup artist leaves once the service is
+       finished.</p>
+    <p>I have a full female staff, and the studio is designed with private
+       rooms for each portion of your day.</p>"""),
+   q("retouch", "What About Retouching?", """
+    <p>I am happy to retouch your images. I always remove pimples, bruises,
+       scratches and under eye circles. I also offer retouching on cellulite,
+       scars, small tattoos and stretch marks, if you choose to have them
+       removed.</p>
+    <p>Honestly, most of my clients are wowed at how amazing their images look
+       straight out of camera and opt for less retouching than they thought
+       they needed. It is a very personal decision and one I leave up to you
+       once you have seen your images.</p>
+    <p>I do not remove tan lines or correct skin tone from tanning beds or
+       spray tans, so proceed with caution. I do have editing techniques to
+       keep you from looking pasty, if that is a concern.</p>"""),
+   q("wear", "What Will I Wear?", """
+    <p>I have a beautiful and comprehensive wardrobe guide that gives you the
+       full picture on how to look and feel like a bombshell for your session.
+       My policy is always: when in doubt, bring it.</p>
+    <p>You are welcome to make a Pinterest board and share it with me so I can
+       help make your dream shoot a reality. And there is a client wardrobe of
+       over {wardrobe} pieces, sizes XS to 4X, that you are more than welcome
+       to borrow from and browse through.</p>"""),
+ ]},
+
+ {"no": "Part Three", "id": "works", "title": "How It All Works", "items": [
+   q("talk", "Do I Get to Talk to You First?", """
+    <p>Most of my clients book their session over the phone, which is kind of
+       like our first date. We will have one {consult} phone consultation, so
+       we can make sure you are ready and answer any questions you have.</p>
+    <p>I am here for you every step of the way. Email is how I communicate most
+       effectively with clients, so write to me any time at
+       <a href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a>.
+       Emails are typically returned within two to three business days.</p>
+    <div class="jhp-rules">
+      <p>Please, no props, no spray tans, and absolutely no weapons in the
+         studio at any time.</p>
+      <p>I also do not allow anyone under the age of 18 in the boudoir studio,
+         ever.</p>
+    </div>"""),
+   q("types", "What Types of Sessions Do You Offer?", TYPES, wide=True),
+   q("day", "How the Session Day Works", """
+    <p class="jhp-p">Your session day runs {day} from start to finish. You get
+       complimentary hair and makeup, access to the {wardrobe}-piece client
+       wardrobe, and I pose you from head to pointed toe and help you with a
+       whole range of facial expressions.</p>
+    <p class="jhp-p">Be prepared to be sore afterwards. We do a lot of bending
+       and twisting &mdash; it is quite the workout.</p>""" + DAY, wide=True),
+   q("reveal", "Your Image Reveal", """
+    <p>Your reveal is {reveal_wait} after your session. It is a private
+       appointment over Zoom, and it is where you see your images for the very
+       first time &mdash; together, with me, going through them one by one.</p>
+    <p>You will be shown {shown} images. You choose which ones you want to keep
+       and how you want them, and you order them at that same appointment.</p>
+    <p>You are not sent a link and left to work it out alone. That is the part
+       most women tell me afterwards was their favourite of the whole
+       thing.</p>"""),
+   q("delivery", "When the Albums and Prints Arrive", """
+    <p>Your digital images are yours the moment the reveal ends. Albums, wall
+       art and anything else printed are made to order and arrive at your door
+       {delivery} of that appointment. I usually drop ship everything directly
+       to you to keep the process as simple as possible.</p>"""),
+ ]},
+
+ {"no": "Part Four", "id": "investment", "title": "The Investment", "items": [
+   q("book", "What Do I Need to Do to Book?", """
+    <p class="jhp-p">The session fee reserves your date on my calendar. Your
+       images are purchased separately from it, at your reveal and ordering
+       appointment, and the full investment menu comes to you once the session
+       fee is paid.</p>""" + FEE, wide=True),
+   q("guests", "Can Someone Come With Me?", """
+    <p>No &mdash; I do not allow guests for any portion of the time you spend
+       with us, including the ordering appointment. What I do is delivered best
+       one to one, with your complete undivided attention.</p>"""),
+   q("when", "I Need My Images By a Certain Date", """
+    <p>The studio books up to {booking_window} in advance, and printed products
+       take up to six weeks after your reveal. So reach out well before the
+       date you need them.</p>
+    <p>If you have a special occasion coming up, or you want a holiday
+       appointment, I recommend booking a <strong>year</strong> ahead of that
+       date. Those dates go first.</p>"""),
+   q("spend", "What Can I Expect to Spend?", """
+    <p>Before I have photographed you it is hard to give you an exact figure.
+       Some women want a basic album; others invest several thousand in a
+       Collection with a variety of products. What you spend is up to you. You
+       can buy from my Collections or a la carte, and the full investment menu
+       comes to you as soon as your booking is complete.</p>
+    <p>That said &mdash; if you are looking for a quick shoot, or just a few
+       images, this is not the session for you. I offer a full experience and I
+       show you {shown} images. I only offer luxury products, because you are
+       worth it. Investing in yourself is priceless. You will never tire of
+       your images, or forget the way the session day made you feel.</p>"""),
+   q("money", "The Collections", COLLECTIONS, wide=True),
+ ]},
+]
+
+# Where the photographs and the lifted lines fall, keyed to the part they
+# follow. Each lifted line is a whole sentence of hers from the part above it.
+AFTER = {
+ "begin": plate("f9de4c0c-ba8e-48bb-b559-a9a11beac76c.jpg",
+                "The window light in the JHP Boudoir studio, from a client session",
+                "The studio, on an ordinary afternoon.")
+          + "\n" + lift("Celebrate the body that you <span class=\"gl\">live in</span>."),
+ "worries": plate("678293dc-8167-4463-a41b-8a20bfaee783.jpg",
+                  "A black and white portrait from a studio session at JHP Boudoir",
+                  "Posed from head to pointed toe &mdash; you will not have to work it out."),
+ "works": plate("1d6d5e7e-7f3d-490b-9883-371ecaa5f1d0.jpg",
+                "A client photographed at the JHP Boudoir studio",
+                "Every body. Every age. Every size.")
+          + "\n" + lift("There is no such thing as the perfect body. "
+                        "Boudoir is for <span class=\"gl\">every body</span>."),
+ "investment": plate("538477d1-c964-4c26-babe-89e797786880.jpg",
+                     "A black and white portrait from a studio session at JHP Boudoir",
+                     "Your images, seen together for the first time at your reveal."),
+}
+
+# One plate sits INSIDE Part Three rather than after it. That part is the
+# longest and its two full-width panels -- the session types and the day --
+# leave a run of column pairs either side; a photograph between them is what
+# stops the middle of the document reading as a specification.
+INSIDE = {"day": plate("958c1b0e-53b1-4d18-b5ed-7b4b2ae1ccc5.jpg",
+                       "A black and white portrait from a studio session at JHP Boudoir",
+                       "This is the part I cannot wait for.")}
+
+# ---------------------------------------------------------------- the renderer
+def render_parts():
+    """Four parts, each a heading and a two-column run of question cards."""
+    out = []
+    for part in PARTS:
+        out.append(
+            '<header class="jhp-part" id="%s">\n'
+            '  <p class="no">%s</p>\n'
+            '  <h2>%s</h2>\n'
+            '  <div class="rule" aria-hidden="true"></div>\n'
+            '</header>\n' % (part["id"], part["no"], part["title"]))
+        cards = []
+        for it in part["items"]:
+            cards.append(
+                '  <article class="jhp-q%s" id="%s">\n'
+                '    <h3>%s</h3>%s\n'
+                '  </article>' % (" jhp-wide q" if it["wide"] else "",
+                                  it["id"], it["q"], it["a"]))
+            if it["id"] in INSIDE:
+                cards.append("  " + INSIDE[it["id"]].replace("\n", "\n  "))
+        out.append('<div class="jhp-qs">\n%s\n</div>\n' % "\n".join(cards))
+        if part["id"] in AFTER:
+            out.append(AFTER[part["id"]] + "\n")
+    return "\n".join(out)
+
+
+def render_toc():
+    """The contents, grouped the way the document is. Generated from the same
+    structure as the headings, so the two cannot drift apart -- and the build
+    still checks every anchor has an id, because a typo here would be silent
+    and a broken contents list is worse than none."""
+    cols = []
+    for part in PARTS:
+        rows = "".join('\n        <li><a href="#%s">%s</a></li>' % (i["id"], i["q"])
+                       for i in part["items"])
+        cols.append(
+            '    <div>\n'
+            '      <p class="pt"><a href="#%s">%s &middot; %s</a></p>\n'
+            '      <ul>%s\n      </ul>\n'
+            '    </div>' % (part["id"], part["no"], part["title"], rows))
+    return "\n".join(cols)
 
 SCRIPT = """<script>
   /* HER NAME, OUT OF THE LINK
@@ -408,301 +921,26 @@ BODY = """
   <div class="jhp-gd">
     <p class="jhp-p lead" data-greet="{{name}}, I am so glad you are here.">Welcome
        &mdash; I am so glad you are here.</p>
-    <p class="jhp-p">This guide walks you through what a boudoir shoot is and
-       how the process works here at JHP Boudoir. I am excited to get you in
-       the studio.</p>
-    <p class="jhp-p">If you have any questions after reading it, please reach
-       out and I will get back to you as soon as I can. My studio hours are
+    <p class="jhp-p opener">This guide walks you through what a boudoir shoot
+       is and how the process works here at JHP Boudoir. It is in four parts:
+       who I am, the things women worry about before they book, how the day
+       itself works, and what it costs. Read it in order or jump to the part
+       you came for.</p>
+    <p class="jhp-p">If you have any questions afterwards, please reach out and
+       I will get back to you as soon as I can. My studio hours are
        {studio_hours}, and consultation calls run {call_hours}.</p>
-    <p class="jhp-p">This guide is very thorough &mdash; which means it is
-       long. Sit down, grab a glass of your favourite whatever, and read it
-       to the very end.</p>
   </div>
 
   <nav class="jhp-toc" aria-label="What is in this guide">
     <h2>What Is in Here</h2>
-    <ul>{toc}</ul>
+    <div class="cols">
+{toc}
+    </div>
   </nav>
 
-  <div class="jhp-gd">
-    <h2 class="jhp-h q" id="about">A Bit About Me</h2>
-    <p class="jhp-p">I am Jess. Wife to Zach, and I love the local weatherman
-       with all my heart. Gin, tonic, lime.</p>
-    <p class="jhp-p">Seven years of college and three degrees later, I ended up
-       running my own business full time. I would not trade the journey.</p>
-    <p class="jhp-p">I love changing lives through my art. Thank you for being
-       here and for supporting my business &mdash; I cannot wait to meet you
-       and make some of the most gorgeous photographs of yourself you will
-       ever have.</p>
-
-    <h2 class="jhp-h q" id="studio">Where the Studio Is</h2>
-    <p class="jhp-p">The studio is just outside Jefferson City, Missouri. There
-       is over {sqft} square feet of it: multiple set-ups, a hair and makeup
-       room, a wardrobe room, and a sales area full of samples.</p>
-    <p class="jhp-p">It is full of gorgeous natural light, vintage exposed
-       brick, wood beams and glass chandeliers. It is a comforting space, and
-       it was built for boudoir photography.</p>
-  </div>
-
-  {plate1}
-
-  <div class="jhp-gd">
-    <h2 class="jhp-h q" id="boudoir">So, What Is Boudoir?</h2>
-    <p class="jhp-p">The French word <em>boudoir</em> means a woman&rsquo;s
-       dressing room or bedroom, but I like to think of it as a fancy word for
-       women&rsquo;s intimate portraiture. I want to make the most beautiful
-       portraits of you that you will ever have.</p>
-    <p class="jhp-p">Boudoir is <strong>not</strong> pornographic or overly
-       sexual. It can be fun, flirty, beautiful, cute, sexy, feminine,
-       intimate, candid, posed &mdash; or really anything else you want it to
-       be.</p>
-    <p class="jhp-p">If you have not already joined my private VIP group on
-       Facebook, I highly suggest you do:
-       <a href="{vip}" target="_blank" rel="noopener">the JHP Boudoir VIP
-       group</a>.</p>
-
-    <h2 class="jhp-h q" id="why">What Would I Do With Boudoir Portraits?</h2>
-    <p class="jhp-p">I believe boudoir is the best gift you can give yourself
-       &mdash; to capture your essence as you are right now. When you need a
-       reminder of the strong, beautiful woman that you are, you will have a
-       collection of amazing portraits to look at.</p>
-    <p class="jhp-p">I love it when women come to me for themselves. The images
-       we make together will boost your self esteem and your confidence, and
-       that should be celebrated by you. It will help you reclaim your
-       femininity and your sexuality, two things that are often lost as we get
-       consumed with our lives, our jobs, our families.</p>
-    <p class="jhp-p">Put that pep back in your step and reflect on the
-       bodacious babe you are. Celebrate the body that you live in.</p>
-
-    <h2 class="jhp-h q" id="thinner">Can You Make Me Look Thinner?</h2>
-    <p class="jhp-p">I want to help you feel beautiful now, just the way you
-       are. I flatter you with hair and makeup styling, a wardrobe that
-       compliments your figure, and amazing lighting and posing techniques to
-       highlight your best ass-sets. See what I did there.</p>
-    <p class="jhp-p">I do not believe in heavy photoshopping. Do not get me
-       wrong &mdash; I retouch all of your images and will gladly remove your
-       bruises and pimples &mdash; but I do not want to over-manipulate your
-       body to make you look like someone you are not. We already live in a
-       time when we are consumed with unrealistic bodies in the media. I want
-       to show you that you are beautiful at this very moment, without over
-       the top retouching.</p>
-
-    <h2 class="jhp-h q" id="portfolio">I Don&rsquo;t Look Like the Women in
-       Your Portfolio</h2>
-    <p class="jhp-p">Actually, you do. You just have not had the chance to see
-       yourself from my perspective yet. Come into the studio and let me show
-       you how beautiful you really are.</p>
-    <p class="jhp-p">There is no such thing as the perfect body. Boudoir is for
-       every body. You are never too big, too small, too old or too young to do
-       a boudoir session &mdash; though I only photograph clients over the age
-       of 18.</p>
-
-    <h2 class="jhp-h q" id="who">Who Is Going to Be There?</h2>
-    <p class="jhp-p">You and me. Your hair and makeup artist leaves once the
-       service is finished.</p>
-    <p class="jhp-p">I have a full female staff, and the studio is designed
-       with private rooms for each portion of your day.</p>
-
-    <h2 class="jhp-h q" id="retouch">What About Retouching?</h2>
-    <p class="jhp-p">I am happy to retouch your images. I always remove pimples,
-       bruises, scratches and under eye circles. I also offer retouching on
-       cellulite, scars, small tattoos and stretch marks, if you choose to have
-       them removed.</p>
-    <p class="jhp-p">Honestly, most of my clients are wowed at how amazing
-       their images look straight out of camera and opt for less retouching
-       than they thought they needed. It is a very personal decision and one I
-       leave up to you once you have seen your images.</p>
-    <p class="jhp-p">I do not remove tan lines or correct skin tone from tanning
-       beds or spray tans, so proceed with caution. I do have editing
-       techniques to keep you from looking pasty, if that is a concern.</p>
-  </div>
-
-  {plate2}
-
-  <div class="jhp-gd">
-    <h2 class="jhp-h q" id="wear">What Will I Wear?</h2>
-    <p class="jhp-p">I have a beautiful and comprehensive wardrobe guide that
-       gives you the full picture on how to look and feel like a bombshell for
-       your session. My policy is always: when in doubt, bring it.</p>
-    <p class="jhp-p">You are welcome to make a Pinterest board and share it
-       with me so I can help make your dream shoot a reality. And there is a
-       client wardrobe of over {wardrobe} pieces, sizes XS to 4X, that you are
-       more than welcome to borrow from and browse through.</p>
-
-    <h2 class="jhp-h q" id="talk">Do I Get to Talk to You First?</h2>
-    <p class="jhp-p">Most of my clients book their session over the phone,
-       which is kind of like our first date. We will have one {consult} phone
-       consultation, so we can make sure you are ready and answer any
-       questions you have.</p>
-    <p class="jhp-p">I am here for you every step of the way. Email is how I
-       communicate most effectively with clients, so write to me any time at
-       <a href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a>.
-       Emails are typically returned within two to three business days.</p>
-    <div class="jhp-rules">
-      <p>Please, no props, no spray tans, and absolutely no weapons in the
-         studio at any time.</p>
-      <p>I also do not allow anyone under the age of 18 in the boudoir studio,
-         ever.</p>
-    </div>
-
-    <h2 class="jhp-h q" id="types">What Types of Sessions Do You Offer?</h2>
-    <p class="jhp-p">Yes, there are different types of boudoir session you can
-       book, and I am always changing it up. Right now I am offering these:</p>
-    <div class="jhp-two">
-      <div>
-        <p class="when">Year round &middot; most popular</p>
-        <h3>Traditional Studio Sessions</h3>
-        <p>In the studio, all year. Great for a first timer.</p>
-      </div>
-      <div>
-        <p class="when">Summer dates only</p>
-        <h3>Outdoor Boudoir Sessions</h3>
-        <p>Exclusive locations, on summer dates only.</p>
-      </div>
-    </div>
-    <p class="jhp-p" style="margin-top:20px">Have something else in mind? Ask
-       me. I am always up for a new adventure.</p>
-  </div>
-
-  {plate3}
-
-  <div class="jhp-gd">
-    <h2 class="jhp-h q" id="day">How the Session Day Works</h2>
-    <p class="jhp-p">Your session day runs {day} from start to finish. You get
-       complimentary hair and makeup, access to the {wardrobe}-piece client
-       wardrobe, and I pose you from head to pointed toe and help you with a
-       whole range of facial expressions.</p>
-    <p class="jhp-p">Be prepared to be sore afterwards. We do a lot of bending
-       and twisting &mdash; it is quite the workout.</p>
-    <ol class="jhp-day">
-      <li>
-        <h3>Hair and Makeup</h3>
-        <p>Professional hair and makeup first, so you arrive in front of the
-           camera already finished. Your artist leaves once it is done.</p>
-      </li>
-      <li>
-        <h3>Wardrobe</h3>
-        <p>We go through what you brought and what you want to borrow, and pick
-           the order we will shoot it in.</p>
-      </li>
-      <li>
-        <h3>Your Session</h3>
-        <p>The studio is private and it is just the two of us. I direct
-           everything &mdash; you do not need to know how to pose, and you will
-           not be left standing there wondering what to do with your hands.</p>
-      </li>
-      <li>
-        <h3>And That Is the Day</h3>
-        <p>Sessions run inside studio hours, {studio_hours}. Your reveal is a
-           separate appointment, so you go home when we are done rather than
-           making decisions about pictures you have not seen yet.</p>
-      </li>
-    </ol>
-
-    <h2 class="jhp-h q" id="reveal">Your Image Reveal</h2>
-    <p class="jhp-p">Your reveal is {reveal_wait} after your session. It is a
-       private appointment over Zoom, and it is where you see your images for
-       the very first time &mdash; together, with me, going through them one by
-       one.</p>
-    <p class="jhp-p">You will be shown {shown} images. You choose which ones
-       you want to keep and how you want them, and you order them at that same
-       appointment.</p>
-    <p class="jhp-p">You are not sent a link and left to work it out alone.
-       That is the part most women tell me afterwards was their favourite of
-       the whole thing.</p>
-
-    <h2 class="jhp-h q" id="delivery">When the Albums and Prints Arrive</h2>
-    <p class="jhp-p">Your digital images are yours the moment the reveal ends.
-       Albums, wall art and anything else printed are made to order and arrive
-       at your door {delivery} of that appointment. I usually drop ship
-       everything directly to you to keep the process as simple as
-       possible.</p>
-  </div>
-
-  {plate4}
-
-  <div class="jhp-gd">
-    <h2 class="jhp-h q" id="book">What Do I Need to Do to Book?</h2>
-    <p class="jhp-p">The session fee reserves your date on my calendar. Your
-       images are purchased separately from it, at your reveal and ordering
-       appointment, and the full investment menu comes to you once the session
-       fee is paid.</p>
-    <div class="jhp-card">
-      <p class="lb">Session Fee</p>
-      <p class="fig">{fee}<span class="u">to reserve your date</span></p>
-      <p>It can be paid in full, or split into two payments &mdash; the first
-         to reserve the date on the calendar, the second within 14 days of it.
-         If the second payment is not made within those 14 days, the date and
-         the first payment are forfeited.</p>
-    </div>
-    <p class="jhp-p" style="margin-top:26px">What the session fee includes:</p>
-    <ul class="jhp-inc">
-      <li>Your {consult} pre-session consultation</li>
-      <li>Private use of the boudoir studio</li>
-      <li>Professional hair and makeup application</li>
-      <li>Access to the {wardrobe}-piece client wardrobe</li>
-      <li>60 minutes of photography</li>
-      <li>Complete posing and expression coaching</li>
-      <li>Your private reveal and ordering appointment over Zoom</li>
-    </ul>
-
-    <h2 class="jhp-h q" id="guests">Can Someone Come With Me?</h2>
-    <p class="jhp-p">No &mdash; I do not allow guests for any portion of the
-       time you spend with us, including the ordering appointment. What I do is
-       delivered best one to one, with your complete undivided attention.</p>
-
-    <h2 class="jhp-h q" id="when">I Need My Images By a Certain Date</h2>
-    <p class="jhp-p">The studio books up to {booking_window} in advance, and
-       printed products take up to six weeks after your reveal. So reach out
-       well before the date you need them.</p>
-    <p class="jhp-p">If you have a special occasion coming up, or you want a
-       holiday appointment, I recommend booking a <strong>year</strong> ahead
-       of that date. Those dates go first.</p>
-
-    <h2 class="jhp-h q" id="spend">What Can I Expect to Spend?</h2>
-    <p class="jhp-p">Before I have photographed you it is hard to give you an
-       exact figure. Some women want a basic album; others invest several
-       thousand in a Collection with a variety of products. What you spend is
-       up to you. You can buy from my Collections or a la carte, and the full
-       investment menu comes to you as soon as your booking is complete.</p>
-    <p class="jhp-p">That said &mdash; if you are looking for a quick shoot, or
-       just a few images, this is not the session for you. I offer a full
-       experience and I show you {shown} images. I only offer luxury products,
-       because you are worth it. Investing in yourself is priceless. You will
-       never tire of your images, or forget the way the session day made you
-       feel.</p>
-
-    <h2 class="jhp-h q" id="money">The Collections</h2>
-    <p class="jhp-p">There are {collections} Collections in all, so there is
-       room to find the one that fits.</p>
-    <div class="jhp-card two">
-      <div>
-        <p class="lb">Petite Collections</p>
-        <p class="fig">from {petite}</p>
-        <p>Three digital images.</p>
-      </div>
-      <div>
-        <p class="lb">Full Collections</p>
-        <p class="fig">from {full}</p>
-        <p>An album, your digitals and a mobile app.</p>
-      </div>
-    </div>
-    <p class="jhp-p" style="margin-top:26px">Sticker shock? I get it. I had it
-       too, the first time I booked a professional boudoir session with my own
-       dream photographer. And you know what &mdash; I would have paid her
-       double by the time it was done.</p>
-    <p class="jhp-p">I know this is an investment, which is why every Collection
-       is chosen when you book and paid for on an interest-free in-house
-       payment plan before your session. Weekly, biweekly or monthly &mdash;
-       whichever suits you, spread over the months between booking and your
-       session day. It is the same figure either way, and we set it up on
-       auto-pay so you never have to think about a late fee.</p>
-  </div>
-
-  {plate5}
-
+{parts}
   <div class="jhp-gd jhp-end">
-    <h2 class="jhp-h q" id="ready">Ready to Book?</h2>
+    <h2 class="jhp-h" id="ready">Ready to Book?</h2>
     <p class="jhp-p">If you have made it this far and you are ready to take the
        next step, book your consultation call below. If you would rather ask
        something first, reply to the email this guide came with and tell me you
@@ -733,7 +971,6 @@ BODY = """
   </span>
 </a>
 """
-
 HEAD = """<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -764,28 +1001,16 @@ HEAD = """<!DOCTYPE html>
 <style>
 """ % (HERO, HERO)
 
-toc_html = "".join(
-    '\n      <li><a href="#%s">%s</a></li>' % (i, t) for i, t in TOC) + "\n    "
+# The parts carry the figures, so they are formatted FIRST and the result is
+# dropped into the shell as one value -- str.format does not recurse into what
+# it substitutes, so a placeholder left inside `parts` would survive to the
+# published page.
+parts_html = render_parts().format(vip=VIP, **F)
+assert "{" not in parts_html.replace("{% raw %}", "").replace("{% endraw %}", ""), \
+    "a figure placeholder survived into the parts"
 
-body = BODY.format(
-    cdn=CDN, hero=HERO, vip=VIP, calendar=CALENDAR, toc=toc_html,
-    script=SCRIPT,
-    plate1=plate("f9de4c0c-ba8e-48bb-b559-a9a11beac76c.jpg",
-                 "The window light in the JHP Boudoir studio, from a client session",
-                 "The studio, on an ordinary afternoon."),
-    plate2=plate("678293dc-8167-4463-a41b-8a20bfaee783.jpg",
-                 "A black and white portrait from a studio session at JHP Boudoir",
-                 "Posed from head to pointed toe &mdash; you will not have to work it out."),
-    plate3=plate("1d6d5e7e-7f3d-490b-9883-371ecaa5f1d0.jpg",
-                 "A client photographed at the JHP Boudoir studio",
-                 "Every body. Every age. Every size."),
-    plate4=plate("538477d1-c964-4c26-babe-89e797786880.jpg",
-                 "A black and white portrait from a studio session at JHP Boudoir",
-                 "Your images, seen together for the first time at your reveal."),
-    plate5=plate("958c1b0e-53b1-4d18-b5ed-7b4b2ae1ccc5.jpg",
-                 "A black and white portrait from a studio session at JHP Boudoir",
-                 "This is the part I cannot wait for."),
-    **F)
+body = BODY.format(cdn=CDN, hero=HERO, calendar=CALENDAR,
+                   toc=render_toc(), parts=parts_html, script=SCRIPT, **F)
 
 out = (HEAD.replace("__CDN__", CDN)
        + shared[shared.index("/* SHARED DESIGN SYSTEM"):]
@@ -806,9 +1031,12 @@ for s, why in stale.items():
     if s in out:
         raise SystemExit("REFUSING TO BUILD: %r is still in the guide (%s)" % (s, why))
 
-for i, t in TOC:
-    if 'id="%s"' % i not in out:
-        raise SystemExit("contents points at #%s and nothing has that id" % i)
+anchors = [p["id"] for p in PARTS] + [i["id"] for p in PARTS for i in p["items"]]
+for a in anchors:
+    if 'id="%s"' % a not in out:
+        raise SystemExit("contents points at #%s and nothing has that id" % a)
+if len(anchors) != len(set(anchors)):
+    raise SystemExit("two things share an id, so one contents row is a dead link")
 
 assert out.count("{% raw %}") == 1 and out.count("{% endraw %}") == 1, "fence"
 assert out.count("<h1") == 1, "one h1"
@@ -823,8 +1051,10 @@ dupes = [f for f in set(photos) if photos.count(f) > 1]
 assert not dupes, "a frame is drawn twice: %s" % dupes
 
 (ROOT / "scalogy-guide.html").write_text(out)
-print("wrote %d bytes, %d questions, %d photographs, %d contents rows"
-      % (len(out.encode()), out.count('class="jhp-h q"'), len(photos), len(TOC)))
+print("wrote %d bytes, %d parts, %d questions, %d photographs, %d lifted lines"
+      % (len(out.encode()), len(PARTS),
+         sum(len(p["items"]) for p in PARTS), len(photos),
+         out.count('class="jhp-lift"')))
 
 # ---------------------------------------------------------------------- the PDF
 # --pdf drives headless Chromium over the built file and writes
