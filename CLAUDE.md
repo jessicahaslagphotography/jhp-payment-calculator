@@ -138,6 +138,26 @@ of Jessica's own: the About page's closing band was 190px and is now about
   `pages.scalogy.com/jhpboudoir1/` now and on the real domain later. The
   one link that has to change at launch is the JHP wordmark:
   `../home-preview/` becomes `/`.
+- **Specialty Sessions in the footer is the Treehouse page.** It pointed at
+  `/specialty-sessions`, which 404s, in all seven footers; it is
+  `../treehouse-sessions/` now -- Jessica's own live landing page for the
+  Treehouse Specialty Sessions. It is relative like every other link, which
+  is right today. AT LAUNCH IT MAY NOT BE: that page also has its own
+  custom domain, `treehouse.jhpboudoir.com`, and a Scalogy custom domain
+  maps to ONE page, so if `jhpboudoir.com` ends up serving only the home
+  page then `/treehouse-sessions/` will not exist under it and this link
+  wants to become the absolute subdomain. Decide it with the wordmark link
+  above, not separately. **`/blog` in the same footer is still dead** and
+  still 404s in all seven.
+- **Changing the footer means eighteen pages, not seven.** The footer lives
+  in `scalogy-home.html` and `scalogy-about.html` by hand and in
+  `scalogy-portfolio.html` for everything sliced from it, so a footer edit
+  is three files plus a rebuild -- and then seven templates to patch and
+  **eighteen** pages to render, because the twelve galleries all share
+  `jhp-gallery-2026`. THE GALLERIES RENDER FROM DATA: `pages_render` on one
+  of them without its payload from `renders/<slug>.json` would publish an
+  empty page. Render each with its payload and check the byte count against
+  a local Jinja render of `scalogy-gallery.html` first.
 - **Movement is opt-in.** The CSS renders every page finished; a script
   at the foot adds `js-rev`, which is what collapses the dividers and the
   process spine ready to animate. JavaScript off, no IntersectionObserver
