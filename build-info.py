@@ -249,10 +249,9 @@ BODY = """
         <p>The session fee starts at $697. That covers professional hair and
            makeup, access to the client wardrobe, your fully guided session,
            and your image reveal and product ordering appointment.</p>
-        <p>Your photographs are bought separately, as a collection. That is
-           in addition to the session fee, not included in it. Every client
-           chooses a collection at booking, and pays for it on an interest-free
-           plan or in full.</p>
+        <p>Your prints &amp; products are bought separately, as a collection.
+           Every client chooses a package when she books, and pays for it on an
+           interest-free pre-payment plan or may pay in full.</p>
         <p>We go through all of it on your consultation call, before you commit
            to anything. No surprises and no pressure &mdash; if it is not right
            for you, it is not right for you.</p>
