@@ -73,6 +73,55 @@ band, and no h2 larger than that page's h1. The one number that moved off one
 of Jessica's own: the About page's closing band was 190px and is now about
 199px, because it is padding plus content rather than a set height.
 
+## The figures, settled -- and the Session Guide PDF is the stale one
+
+Jessica gave the whole set on **24 September**, after her own Session Guide
+Magazine PDF turned out to contradict this site's FAQ in nine places. **The
+FAQ was right about almost all of it and the PDF is the older document.**
+These are the current numbers and nothing on the site may state another:
+
+    session fee          $697
+    Petite Collections   from $1,250   3 digital images
+    Full Collections     from $3,400   album, digitals, mobile app
+    how many             eight collections in all
+    session length       2-3 hours
+    reveal               7-14 business days after the session, over Zoom
+    product delivery     within 6 weeks of the Zoom reveal
+    the Collection       chosen at booking, prepaid before the session
+    booking window       up to 15 months in advance
+    studio hours         Mon-Thu, 10am-3pm, by appointment only
+    consultation calls   Mon-Fri, 8am-5pm  (the GHL calendar's own window)
+    location             just outside Jefferson City
+
+Two of these were new to BOTH documents and are the only ones that moved on
+the site: the booking window (the guide said 18 months, the FAQ said 12) and
+the studio hours (the guide said M-F 9-4, the FAQ's footer said Mon-Fri
+8am-5pm, which was in fact the call window). The studio hours and the call
+hours are **two different things and the footer now says both**, because her
+GHL calendar takes bookings across the wider window and a site that
+contradicts the scheduler is worse than a site that explains it.
+
+Where each one lives, so a revision does not have to be hunted for:
+
+- **Every figure above is in the FAQ**, in `build-info.py`, and the FAQ's
+  `FAQPage` JSON-LD is parsed back out of the built accordion -- so changing
+  an answer changes what Google reads in the same pass. Never write a figure
+  into the JSON-LD by hand.
+- **Session length, the reveal and delivery** are also the process spine in
+  `build-experience.py`, steps 4, 5 and 6.
+- **$697 is also in the home page's `Offer` schema**, in `scalogy-home.html`.
+  It is the one figure in two files.
+- **Neither form quotes a price.** That is deliberate -- see the note on
+  `/inquire`'s acknowledgment below.
+
+**The PDF itself is not in this repo and is still wrong.** It lives in Canva
+and goes out of GHL to every woman who fills in `/contact`, quoting a $500
+session fee and Collections from $2,800. Nothing in this repo can fix that
+and no code change makes it less urgent: the site now promises a document
+that undercuts it by $197 and $1,550. It also contradicts itself, offering a
+20-minute consultation on page 11 and 30 minutes on page 15; the GHL calendar
+is 20 minutes, which is what `/inquire` says.
+
 ## SEO: the site is switched off, and that is on purpose
 
 **Every page is `noindex, nofollow`.** That is not an oversight and it is
@@ -298,15 +347,14 @@ Still to do, roughly in order of what it is worth:
   throwing her at a scheduler mid-thought reads as though nobody was
   listening. The thank-you carries a Book My Call button instead, so the
   calendar is one tap away and is her choice.
-  **The acknowledgment checkbox deliberately carries no figure.** Her Session
-  Guide PDF and this site's FAQ disagree about the numbers -- the guide says a
-  $500 session fee and Collections from $2,800, the FAQ says the session fee
-  starts at $697 with Petite Collections from $1,250 -- along with eight other
-  conflicts (session length, delivery time, whether the reveal is in person or
-  over Zoom, when the Collection is bought, the booking window, studio hours).
-  Both are Jessica's, one of them is stale, and it is hers to settle. The
-  checkbox states only the structure both versions agree on: images are
-  purchased separately from the session fee.
+  **The acknowledgment checkbox carries no figure, and now that is for a
+  different reason.** It was written while the Session Guide PDF and the FAQ
+  still disagreed; Jessica settled every figure on 24 September (see *The
+  figures, settled* below) and the FAQ was right. The checkbox stays as it is
+  because a form is still the wrong place to quote a price -- the FAQ is where
+  a number belongs, and one number in two places is one number that can go
+  stale. What it states is the structure, which no revision has changed:
+  images are purchased separately from the session fee.
   The closing band hands the undecided woman to `/contact` rather than
   repeating the VIP group, because a woman who opened the inquiry form and
   found she was not ready should meet the guide, not a Facebook link.
@@ -334,12 +382,14 @@ Still to do, roughly in order of what it is worth:
   wants to become the absolute subdomain. Decide it with the wordmark link
   above, not separately. **`/blog` in the same footer is still dead** and
   still 404s in all seven.
-- **Changing the footer means eighteen pages, not seven.** The footer lives
+- **Changing the footer means nineteen pages, not eight.** The footer lives
   in `scalogy-home.html` and `scalogy-about.html` by hand and in
   `scalogy-portfolio.html` for everything sliced from it, so a footer edit
-  is three files plus a rebuild -- and then seven templates to patch and
-  **eighteen** pages to render, because the twelve galleries all share
-  `jhp-gallery-2026`. THE GALLERIES RENDER FROM DATA: `pages_render` on one
+  is three files plus a rebuild -- and then **eight** templates to patch and
+  **nineteen** pages to render, because the twelve galleries all share
+  `jhp-gallery-2026`. It was seven and eighteen until `/inquire` existed;
+  the count moves every time a page is added, so count it rather than
+  trusting this sentence. THE GALLERIES RENDER FROM DATA: `pages_render` on one
   of them without its payload from `renders/<slug>.json` would publish an
   empty page. Render each with its payload and check the byte count against
   a local Jinja render of `scalogy-gallery.html` first.
@@ -360,8 +410,11 @@ Still to do, roughly in order of what it is worth:
   working file against `git show HEAD:`, so the two have to agree *in the
   region being patched* -- not everywhere. Known gaps, all checked on
   24 September and all harmless:
-  - `scalogy-faq.html` and `scalogy-portfolio.html` are 1 byte larger
-    locally. Scalogy trims trailing whitespace on save.
+  - `scalogy-faq.html` and `scalogy-inquire.html` are 1 byte larger
+    locally -- a trailing newline at end of file that Scalogy trims on save.
+    `scalogy-portfolio.html` used to be listed here too and is now byte for
+    byte identical to its template, checked 24 September after the studio
+    hours went through both copies.
   - `scalogy-about.html` is 24 bytes smaller locally.
   - `scalogy-home.html` is **2,253 bytes larger locally**: the repo copy
     carries the section comments (`/* ---------- 2 · hero ---------- */`,

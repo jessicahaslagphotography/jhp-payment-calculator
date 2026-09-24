@@ -19,7 +19,9 @@ makeup is done at a local salon beforehand and not at the studio, the
 image reveal is a Zoom appointment and not an in-person one, wardrobe is
 not planned on the consultation call but sent as a styling guide, and
 consent runs through a model release each client signs rather than an
-ad-hoc written permission. Session fees start at $697.
+ad-hoc written permission. Session fees start at $697 and the booking window is 15 months --
+both confirmed by Jessica on 24 September, against a Session Guide PDF
+that still says $500 and 18 months. This file is the current one.
 
 The .fill span is kept in the stylesheet on purpose. It is how the next
 unanswered thing gets drawn -- as a visible blank rather than as an
@@ -277,7 +279,8 @@ BODY = """
            are spending before your session rather than after it.</p>
         <p>Petite Collections start at $1,250 and include 3 digital images.
            Full Collections start at $3,400 and include an album, digitals,
-           and a mobile app.</p>
+           and a mobile app. There are eight collections in all, so there is
+           room to find the one that fits.</p>
       </div>
     </details>
 
@@ -288,7 +291,7 @@ BODY = """
            when you book, and pay weekly, biweekly or monthly &mdash; whichever
            suits you.</p>
         <p>They are interest free. It is the same figure either way, spread
-           out. You may book your session 12 months in advance.</p>
+           out. You may book your session up to 15 months in advance.</p>
       </div>
     </details>
 
