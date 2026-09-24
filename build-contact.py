@@ -77,12 +77,20 @@ Substitution here is .replace("{{CDN}}", CDN), not %-formatting as in
 build-info.py. The form CSS is full of percentages and a single undoubled %
 in a %-formatted string is a build error three sections away from its cause.
 
-THE TWO PHOTOGRAPHS ARE UNTUNED. Both crops are a neutral 50% 50% and were
-chosen on aspect ratio and on which client was least used elsewhere -- Miss T
-for the band, Miss V for the quote, one client per frame. Nobody has looked
-at either one at 1440 or on a phone yet. Jessica has the band tuner for
-exactly this; until she has been through it, treat both object-position
-values as placeholders and not as decisions.
+THE TWO PHOTOGRAPHS ARE UNTUNED. Miss T on the intro band at 50% 50%, and
+Miss P on the closing band, which sets no object-position at all and so
+takes the shared 50% 22% -- a tuned number, but tuned against the other
+pages' frames. Nobody has looked at either at 1440 or on a phone. Jessica
+has the band tuner for exactly this; until she has been through it, treat
+both as placeholders and not as decisions.
+
+WHAT THIS PAGE USED TO HAVE, AND WHY IT DOES NOT. It carried a five-point
+contents list and Miss H.'s review. Jessica cut both on 24 September: at 353
+words and 3941px on a phone it was ten screens of scrolling to collect four
+fields, and the review sat below the form, where proof persuades nobody. The
+list's substance survives as the "Inside:" clause in the one paragraph. The
+review went back to the held list in reviews.md. If either is wanted again,
+that is a decision to re-make and not an omission to repair.
 """
 import pathlib
 
@@ -97,7 +105,8 @@ src = (ROOT / "scalogy-portfolio.html").read_text()
 # CSS rather than carrying a second copy of it here.
 MARK_END = "/* The closing band carries no photograph."
 shared = src[:src.index("/* THE INDEX")]                     # tokens .. phone
-parts = src[src.index("/* THE INTRO"):src.index(MARK_END)]
+parts = (src[src.index("/* THE INTRO"):src.index("/* THE QUOTE")]
+         + src[src.index("/* THE WAY ON"):src.index(MARK_END)])
 tail = src[src.index(MARK_END):]
 after_style = tail[tail.index("</style>"):]
 nav = after_style[after_style.index('<nav class="jhp-nav">'):
@@ -126,26 +135,6 @@ HEAD = """<!DOCTYPE html>
 """
 
 FORM_CSS = """
-/* WHAT IS INSIDE THE GUIDE
-   ------------------------
-   A numbered list without the numbers: what matters is that there are five
-   of them and that they are short, not what order they are in. Each item is
-   one line of gold rule and one line of type, so the block reads as a
-   contents page rather than as a sales list -- which is the honest shape,
-   because a contents page is what it is describing. */
-.jhp-home .jhp-inside{list-style:none;max-width:680px;margin:0 auto;
-  padding:0;display:grid;gap:0}
-.jhp-home .jhp-inside li{display:flex;gap:16px;align-items:baseline;
-  padding:17px 0;border-top:1px solid var(--line-soft);
-  font-family:var(--sans);font-weight:300;font-size:16.5px;line-height:1.7;
-  color:var(--muted);text-wrap:pretty}
-.jhp-home .jhp-inside li:last-child{border-bottom:1px solid var(--line-soft)}
-/* A small gold lozenge, the divider's mark at half size, so the list is
-   marked in the page's own vocabulary rather than with a bullet. */
-.jhp-home .jhp-inside li::before{content:"";flex:0 0 5px;height:5px;
-  margin-top:.62em;transform:rotate(45deg);
-  background:var(--ground);border:1px solid var(--gold)}
-
 /* THE FORM
    --------
    Four fields. Every one of them is something Jessica needs in order to
@@ -239,7 +228,6 @@ FORM_CSS = """
   .jhp-home .jhp-ask-form .row + .f{margin-top:0}
   .jhp-home .jhp-ask-form .go .jhp-btn{max-width:none}
   .jhp-home .jhp-ask-form .note{font-size:13px}
-  .jhp-home .jhp-inside li{font-size:var(--ph-body);gap:13px;padding:15px 0}
   .jhp-home .jhp-done p{font-size:var(--ph-body)}
 }
 """
@@ -255,34 +243,16 @@ BODY = """
   </div>
 </section>
 
-<section class="jhp-sec">
+<section class="jhp-sec" style="border-bottom:none">
   <div class="jhp-center">
     <h2 class="jhp-h">What&rsquo;s Inside the JHP Boudoir Session Guide
         Magazine?</h2>
-    <p class="jhp-p">Ready to learn more about working with the studio? Your
-       copy comes over the moment you fill in the form below &mdash;
-       everything you would want to know before you speak to anybody, to
-       read in your own time with no one waiting on an answer.</p>
-  </div>
-  <ul class="jhp-inside">
-    <li>The studio, and what it is like to be in it.</li>
-    <li>How a session day runs, from hair and makeup to the last frame.</li>
-    <li>Everything a session includes.</li>
-    <li>Where pricing starts, and how the interest-free payment plans
-        work.</li>
-    <li>A link to book your consultation call &mdash; for whenever you are
-        ready, and not before.</li>
-  </ul>
-</section>
-
-<section class="jhp-sec" style="border-bottom:none">
-  <div class="jhp-center">
-    <p class="jhp-kicker">No obligation</p>
-    <h2 class="jhp-h">Send Me the Guide</h2>
-    <p class="jhp-p">Tell me where to send it and the magazine comes straight
-       to your inbox. Do check your details are right so that I can reach
-       you, and if it has not arrived within five or ten minutes, have a
-       look in your spam folder.</p>
+    <p class="jhp-p">Ready to learn even more about working with the studio?
+       Inside: the studio itself, how a session day runs, everything a
+       session includes, and where pricing starts. Fill in the form and your
+       copy comes straight over &mdash; fill it in accurately so that I can
+       reach you, and if the magazine has not arrived within five or ten
+       minutes, please check your spam folder.</p>
   </div>
 
   <form class="jhp-ask-form" id="jhp-guide" novalidate>
@@ -343,39 +313,14 @@ BODY = """
 
 <div class="jhp-div" aria-hidden="true"></div>
 
-<section class="jhp-sec" style="border-bottom:none">
-  <!-- ONE REVIEW, ONE PAGE -- the rule is written out in
-       scalogy-portfolio.html and the register is reviews.md. Miss H.'s is
-       here because it is the only review on the site about the room itself,
-       and this is the page a woman is on at the moment she is deciding
-       whether she could walk into it. -->
-  <div class="jhp-quote">
-    <figure class="shot">
-      <img src="{{CDN}}85a53ea4-6572-4c9a-a28b-40ec240427c5.jpg"
-           width="1065" height="1600" loading="lazy"
-           alt="A boudoir portrait made at the JHP Boudoir studio">
-    </figure>
-    <blockquote>
-      <p class="qt">&ldquo;Jessica is amazing! Such a lovely day. She is so fun
-         and professional! She really makes the studio a safe and comfortable
-         place! Recommend to anyone who wants to feel good about themselves or
-         just have a fun self-love day!&rdquo;</p>
-      <p class="qa">Miss H.</p>
-      <a class="src" href="https://www.google.com/search?q=JHP+Boudoir&amp;kgmid=/g/11v3x9fqm9"
-         target="_blank" rel="noopener">Read all reviews on Google</a>
-    </blockquote>
-  </div>
-</section>
-
-<div class="jhp-div" aria-hidden="true"></div>
-
 <!-- The way on, which here means off the site. See the note at the head of
      build-contact.py: the band is the link, the button inside it is a span,
      and this is the only one of the four whose href leaves jhpboudoir.com.
 
-     ONE CLIENT PER FRAME. Miss P is on Portfolio and the FAQ but on neither
-     of this page's two other photographs -- the intro band is Miss T and
-     the pull-quote is Miss V -- so no face appears twice here. Her set is
+     ONE CLIENT PER FRAME. Miss P is on Portfolio and the FAQ but is not the
+     intro band at the top of this page, which is Miss T -- and since the
+     cut-down those two frames are the whole of the page, so no face appears
+     twice here. (Miss V was the pull-quote and went with it.) Her set is
      black and white throughout, which is the reason to use it rather than a
      coincidence: the scrim over this band has to hold cream type and a gold
      kicker, and a frame with no colour of its own is the easiest thing in

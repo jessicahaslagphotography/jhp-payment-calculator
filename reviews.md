@@ -18,7 +18,6 @@ an existing light edit that predates this file.
 | Portfolio pull-quote | Miss R. | "Jess is amazing to work with!..." |
 | FAQ pull-quote | Miss A. | "Jessica is great to work with..." |
 | The Experience pull-quote | Miss N. | "Jessica was fabulous from the very first contact..." |
-| Contact pull-quote | Miss H. | "Jessica is amazing! Such a lovely day..." |
 
 Why those three, and not others:
 
@@ -32,10 +31,12 @@ Why those three, and not others:
 - **The Experience — Miss N.** "From the very first contact to the image
   reveal" is the arc that page walks step by step. It was already there and
   did not need moving.
-- **Contact — Miss H.** The only review on the site about the room itself
-  ("she really makes the studio a safe and comfortable place"), on the page a
-  woman is reading at the moment she is deciding whether she could walk into
-  it. Placed 24 September when /contact was built.
+/contact has no review. It carried Miss H.'s from the morning of
+24 September until that afternoon, when Jessica cut the page back to her own
+copy and the form -- it was 753px of a 3941px page, below the form where
+proof does nothing, and 430px of it was a portrait the phone crop was
+slicing through. Miss H. is unplaced again and is in the held list below,
+not lost.
 
 Miss M.'s was in three slots at once -- home, portfolio and FAQ -- beside
 three different faces, which reads as three women who happened to write the
@@ -64,8 +65,18 @@ two reviews signed identically read as one woman posting twice, which is the
 exact thing the one-review-one-page rule exists to prevent. Both are held
 until Jessica says how to tell them apart. Neither is on the site.
 
-Miss H.'s went to /contact on 24 September, which is why it is no longer in
-this list.
+> "Jessica is amazing! Such a lovely day. She is so fun and professional!
+> She really makes the studio a safe and comfortable place! Recommend to
+> anyone who wants to feel good about themselves or just have a fun
+> self-love day!"
+> -- **Miss H.**
+
+**Miss H. is held for want of a page, not for want of merit.** Hers is the
+only review on the site that talks about the room itself, which makes it the
+natural one for a page about walking into the studio. It was on /contact for
+a few hours on 24 September and came off with everything else when that page
+was cut back. The Experience is where it would go next if Miss N. ever
+moves.
 
 ## Things this register is for
 

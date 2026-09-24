@@ -372,62 +372,6 @@
 .jhp-home.js-rev .jhp-div.in::before{transform:scaleX(1)}
 .jhp-home.js-rev .jhp-div.in::after{opacity:1;transform:rotate(45deg) scale(1)}
 
-/* THE QUOTE
-   ---------
-   One review, not three. The home page carries the wall of them; here a
-   single voice after twelve galleries says the thing the photographs
-   cannot -- what it felt like.
-
-   A frame stands beside it, in the 150.3% box every portrait in the
-   library fits, so cover has nothing to crop. It is a photograph of a JHP
-   client, not of the woman who wrote the review, and it carries no name
-   for that reason: it is there to give the words a face's worth of weight,
-   the way a magazine sets a pull-quote against an image.
-
-   Set left rather than centred at this width -- centred type beside a
-   photograph reads as a caption. It re-centres when the two stack. */
-.jhp-home .jhp-quote{display:grid;
-  grid-template-columns:minmax(0,.62fr) minmax(0,1fr);
-  gap:clamp(26px,4.5vw,64px);align-items:center;
-  max-width:1040px;margin:0 auto;text-align:left}
-.jhp-home .jhp-quote .shot{position:relative;min-width:0;margin:0}
-.jhp-home .jhp-quote .shot::before{content:"";display:block;padding-top:150.3%}
-.jhp-home .jhp-quote .shot img{position:absolute;inset:0;width:100%;
-  height:100%;object-fit:cover;object-position:center center}
-.jhp-home .jhp-quote blockquote{margin:0}
-.jhp-home .jhp-quote .qt{font-family:var(--serif);font-style:italic;
-  font-size:clamp(19px,2.1vw,27px);line-height:1.5;color:var(--ink);
-  margin:0 0 20px;text-wrap:pretty}
-.jhp-home .jhp-quote .qa{font-family:var(--sans);font-size:11px;
-  letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0}
-.jhp-home .jhp-quote .src{display:inline-block;margin-top:18px;
-  font-family:var(--sans);font-size:12px;letter-spacing:.06em;
-  color:var(--dim);border-bottom:1px solid var(--line);padding-bottom:2px;
-  transition:color .3s,border-color .3s}
-.jhp-home .jhp-quote .src:hover{color:var(--gold);border-color:var(--gold)}
-@media (max-width:820px){
-  /* Side by side the photograph would be narrower than the words are tall.
-     Stacked it leads, and the quote centres under it. */
-  .jhp-home .jhp-quote{grid-template-columns:1fr;gap:24px;max-width:520px;
-    text-align:center}
-}
-@media (max-width:620px){
-  /* The page's phone rule: photographs run edge to edge, only text keeps
-     its margins.
-
-     Edge to edge in the 150.3% box the portrait is drawn 586px tall on a
-     390px screen, which is a wall you scroll past rather than a picture
-     you see. Capped to a plate instead -- the box goes and a height takes
-     its place, and cover crops the difference off the top and bottom,
-     centred, which on this frame is headroom and floor. */
-  .jhp-home .jhp-quote .shot{margin-inline:calc((100% - 100vw) / 2);
-    height:430px}
-  .jhp-home .jhp-quote .shot::before{content:none}
-  .jhp-home .jhp-quote .qt{font-size:21px;line-height:1.55;margin-bottom:18px}
-  .jhp-home .jhp-quote .qa{font-size:var(--ph-label);letter-spacing:.22em}
-  .jhp-home .jhp-quote .src{font-size:12px;margin-top:16px}
-}
-
 /* THE WAY ON
    ----------
    The whole band is the link, so there is no small target to find: the
@@ -483,26 +427,6 @@
   .jhp-home .jhp-band .sub{font-size:var(--ph-sub);max-width:22ch;
     margin-bottom:20px}
 }
-
-/* WHAT IS INSIDE THE GUIDE
-   ------------------------
-   A numbered list without the numbers: what matters is that there are five
-   of them and that they are short, not what order they are in. Each item is
-   one line of gold rule and one line of type, so the block reads as a
-   contents page rather than as a sales list -- which is the honest shape,
-   because a contents page is what it is describing. */
-.jhp-home .jhp-inside{list-style:none;max-width:680px;margin:0 auto;
-  padding:0;display:grid;gap:0}
-.jhp-home .jhp-inside li{display:flex;gap:16px;align-items:baseline;
-  padding:17px 0;border-top:1px solid var(--line-soft);
-  font-family:var(--sans);font-weight:300;font-size:16.5px;line-height:1.7;
-  color:var(--muted);text-wrap:pretty}
-.jhp-home .jhp-inside li:last-child{border-bottom:1px solid var(--line-soft)}
-/* A small gold lozenge, the divider's mark at half size, so the list is
-   marked in the page's own vocabulary rather than with a bullet. */
-.jhp-home .jhp-inside li::before{content:"";flex:0 0 5px;height:5px;
-  margin-top:.62em;transform:rotate(45deg);
-  background:var(--ground);border:1px solid var(--gold)}
 
 /* THE FORM
    --------
@@ -597,7 +521,6 @@
   .jhp-home .jhp-ask-form .row + .f{margin-top:0}
   .jhp-home .jhp-ask-form .go .jhp-btn{max-width:none}
   .jhp-home .jhp-ask-form .note{font-size:13px}
-  .jhp-home .jhp-inside li{font-size:var(--ph-body);gap:13px;padding:15px 0}
   .jhp-home .jhp-done p{font-size:var(--ph-body)}
 }
 </style>
@@ -626,34 +549,16 @@
   </div>
 </section>
 
-<section class="jhp-sec">
+<section class="jhp-sec" style="border-bottom:none">
   <div class="jhp-center">
     <h2 class="jhp-h">What&rsquo;s Inside the JHP Boudoir Session Guide
         Magazine?</h2>
-    <p class="jhp-p">Ready to learn more about working with the studio? Your
-       copy comes over the moment you fill in the form below &mdash;
-       everything you would want to know before you speak to anybody, to
-       read in your own time with no one waiting on an answer.</p>
-  </div>
-  <ul class="jhp-inside">
-    <li>The studio, and what it is like to be in it.</li>
-    <li>How a session day runs, from hair and makeup to the last frame.</li>
-    <li>Everything a session includes.</li>
-    <li>Where pricing starts, and how the interest-free payment plans
-        work.</li>
-    <li>A link to book your consultation call &mdash; for whenever you are
-        ready, and not before.</li>
-  </ul>
-</section>
-
-<section class="jhp-sec" style="border-bottom:none">
-  <div class="jhp-center">
-    <p class="jhp-kicker">No obligation</p>
-    <h2 class="jhp-h">Send Me the Guide</h2>
-    <p class="jhp-p">Tell me where to send it and the magazine comes straight
-       to your inbox. Do check your details are right so that I can reach
-       you, and if it has not arrived within five or ten minutes, have a
-       look in your spam folder.</p>
+    <p class="jhp-p">Ready to learn even more about working with the studio?
+       Inside: the studio itself, how a session day runs, everything a
+       session includes, and where pricing starts. Fill in the form and your
+       copy comes straight over &mdash; fill it in accurately so that I can
+       reach you, and if the magazine has not arrived within five or ten
+       minutes, please check your spam folder.</p>
   </div>
 
   <form class="jhp-ask-form" id="jhp-guide" novalidate>
@@ -714,39 +619,14 @@
 
 <div class="jhp-div" aria-hidden="true"></div>
 
-<section class="jhp-sec" style="border-bottom:none">
-  <!-- ONE REVIEW, ONE PAGE -- the rule is written out in
-       scalogy-portfolio.html and the register is reviews.md. Miss H.'s is
-       here because it is the only review on the site about the room itself,
-       and this is the page a woman is on at the moment she is deciding
-       whether she could walk into it. -->
-  <div class="jhp-quote">
-    <figure class="shot">
-      <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/85a53ea4-6572-4c9a-a28b-40ec240427c5.jpg"
-           width="1065" height="1600" loading="lazy"
-           alt="A boudoir portrait made at the JHP Boudoir studio">
-    </figure>
-    <blockquote>
-      <p class="qt">&ldquo;Jessica is amazing! Such a lovely day. She is so fun
-         and professional! She really makes the studio a safe and comfortable
-         place! Recommend to anyone who wants to feel good about themselves or
-         just have a fun self-love day!&rdquo;</p>
-      <p class="qa">Miss H.</p>
-      <a class="src" href="https://www.google.com/search?q=JHP+Boudoir&amp;kgmid=/g/11v3x9fqm9"
-         target="_blank" rel="noopener">Read all reviews on Google</a>
-    </blockquote>
-  </div>
-</section>
-
-<div class="jhp-div" aria-hidden="true"></div>
-
 <!-- The way on, which here means off the site. See the note at the head of
      build-contact.py: the band is the link, the button inside it is a span,
      and this is the only one of the four whose href leaves jhpboudoir.com.
 
-     ONE CLIENT PER FRAME. Miss P is on Portfolio and the FAQ but on neither
-     of this page's two other photographs -- the intro band is Miss T and
-     the pull-quote is Miss V -- so no face appears twice here. Her set is
+     ONE CLIENT PER FRAME. Miss P is on Portfolio and the FAQ but is not the
+     intro band at the top of this page, which is Miss T -- and since the
+     cut-down those two frames are the whole of the page, so no face appears
+     twice here. (Miss V was the pull-quote and went with it.) Her set is
      black and white throughout, which is the reason to use it rather than a
      coincidence: the scrim over this band has to hold cream type and a gold
      kicker, and a frame with no colour of its own is the easiest thing in
