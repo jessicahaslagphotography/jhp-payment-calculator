@@ -4,8 +4,8 @@
 Like the FAQ and The Experience, this page slices its design system out of
 scalogy-portfolio.html at build time rather than keeping a copy, so a change
 to the tokens, the nav, the footer or the phone scale reaches it without
-anyone remembering to. It takes the intro band, the divider, the pull-quote
-and the VIP block. It does NOT take the closing band: this page is the end of
+anyone remembering to. It takes the intro band, the divider and the
+pull-quote. It does NOT take the closing band: this page is the end of
 the funnel and has nowhere to send anyone next.
 
 WHAT THIS PAGE IS, AND IS NOT
@@ -40,8 +40,10 @@ through.
 NO JAVASCRIPT, NO FORM. That is stated on the page rather than hidden: a
 no-cors POST needs fetch, and a plain HTML POST would navigate the visitor to
 a JSON response and send the wrong content type besides. The <noscript> line
-gives the email address instead, and the VIP block at the foot gives it
-again, so the page still does its job with scripting off. This is the same
+gives the email address instead, and the note under the form and the footer's
+Get In Touch column carry it too, so the page still does its job with
+scripting off. Jessica removed the block that used to repeat it at the foot,
+so those three are now the whole of it -- do not let the last one go. This is the same
 bargain the dividers make -- the page is finished without JavaScript, and
 JavaScript only ever adds.
 
@@ -70,7 +72,6 @@ shared = src[:src.index("/* THE INDEX")]                     # tokens .. phone
 parts = src[src.index("/* THE INTRO"):src.index("/* THE WAY ON")]
 tail = src[src.index(MARK_END):]
 after_style = tail[tail.index("</style>"):]
-vip = tail[tail.index(".jhp-home .jhp-vip .jhp-h"):tail.index("</style>")]
 nav = after_style[after_style.index('<nav class="jhp-nav">'):
                   after_style.index("</nav>") + len("</nav>\n")]
 foot = after_style[after_style.index('<footer class="jhp-foot">'):]
@@ -190,14 +191,6 @@ FORM_CSS = """
 .jhp-home .jhp-done a:hover{color:var(--gold-bright);
   border-color:var(--gold-bright)}
 .jhp-home [hidden]{display:none!important}
-
-.jhp-home .jhp-vip .mail{display:inline-block;margin-top:4px;
-  font-family:var(--serif);font-size:clamp(20px,2.3vw,26px);
-  letter-spacing:.01em;color:var(--gold);
-  border-bottom:1px solid var(--line);padding-bottom:3px;
-  transition:color .3s,border-color .3s;word-break:break-word}
-.jhp-home .jhp-vip .mail:hover{color:var(--gold-bright);
-  border-color:var(--gold-bright)}
 
 /* This page's band is its own photograph, so it is the one crop overridden
    -- and it has NOT been looked at yet. Neutral until Jessica has run it
@@ -335,17 +328,6 @@ BODY = """
   </div>
 </section>
 
-<section class="jhp-vip">
-  <div class="inner">
-    <p class="jhp-kicker">Or just ask</p>
-    <h2 class="jhp-h">Rather Ask Me Something First?</h2>
-    <p class="jhp-p">You do not have to take the guide to talk to me. Write to
-       me with the one thing you want to know and I will answer it
-       myself.</p>
-    <a class="mail" href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a>
-  </div>
-</section>
-
 <script>
   /* Draws each divider in as it arrives. Everything here is an
      enhancement: the CSS renders the dividers finished, and js-rev is what
@@ -440,7 +422,7 @@ BODY = """
 </script>
 """
 
-out = (HEAD + shared[shared.index("/* SHARED DESIGN SYSTEM"):] + parts + vip
+out = (HEAD + shared[shared.index("/* SHARED DESIGN SYSTEM"):] + parts
        + FORM_CSS + "</style>\n\n" + nav + BODY + "\n" + foot)
 out = out.replace("{{CDN}}", CDN).replace("{{WEBHOOK}}", WEBHOOK)
 (ROOT / "scalogy-contact.html").write_text(out)
