@@ -188,8 +188,6 @@ BODY = """
            pose myself, and I talk you through it while you find it, so you are
            never left guessing. You will be told what to do for the whole
            session.</p>
-        <p>The women who arrive certain they are the awkward one are usually
-           the ones who leave with the photographs they love most.</p>
       </div>
     </details>
 
@@ -253,8 +251,8 @@ BODY = """
            and your image reveal and product ordering appointment.</p>
         <p>Your photographs are bought separately, as a collection. That is
            in addition to the session fee, not included in it. Every client
-           chooses a collection when she books, and pays for it on an
-           interest-free plan.</p>
+           chooses a collection at booking, and pays for it on an interest-free
+           plan or in full.</p>
         <p>We go through all of it on your consultation call, before you commit
            to anything. No surprises and no pressure &mdash; if it is not right
            for you, it is not right for you.</p>
@@ -264,24 +262,22 @@ BODY = """
     <details name="faq">
       <summary><span class="mk" aria-hidden="true"></span>Is a product purchase required?</summary>
       <div class="a">
-        <p>Yes. Every client chooses a collection when she books and sets up a
-           prepayment plan for it then, so you know what you are spending
-           before your session rather than after it.</p>
-        <p>Petite Collections start at $1,250 and include three digital images.
-           Full Collections start at $3,400 and include an album, your digital
-           images and a mobile app. Both sit alongside your session fee rather
-           than inside it.</p>
+        <p>Yes. Every client chooses a collection at booking and sets up a
+           prepayment plan or may pay in full.</p>
+        <p>Petite Collections start at $1,250 and include 3 digital images.
+           Full Collections start at $3,400 and include an album, digitals,
+           and a mobile app.</p>
       </div>
     </details>
 
     <details name="faq">
       <summary><span class="mk" aria-hidden="true"></span>Do you offer payment plans?</summary>
       <div class="a">
-        <p>Yes, and every collection is bought through one. You set yours up
-           when you book, and pay weekly, biweekly or monthly &mdash; whichever
-           suits you.</p>
-        <p>They are interest free. It is the same figure either way, spread
-           out.</p>
+        <p>Yes. You choose your collection at booking and set up a prepayment
+           plan for it there, paying weekly, biweekly or monthly &mdash;
+           whichever suits you. You are welcome to pay in full instead.</p>
+        <p>The plans are interest free. Spreading it out costs no more than
+           paying all at once.</p>
       </div>
     </details>
 
@@ -311,8 +307,6 @@ BODY = """
         <p>Just outside Jefferson City, Missouri. It is by appointment only, so
            the address comes to you as soon as you book &mdash; along with the
            salon where your hair and makeup happens beforehand.</p>
-        <p>I photograph women from all across Missouri &mdash; plenty of them
-           drive in for the day.</p>
       </div>
     </details>
 
