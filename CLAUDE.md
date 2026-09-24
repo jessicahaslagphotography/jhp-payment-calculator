@@ -443,24 +443,24 @@ Still to do, roughly in order of what it is worth:
   headings all derive from one structure, because when they were three blocks
   of HTML they were three chances to disagree. The build fails if an anchor has
   no id or two things share one.
-- **The Short Version is the first thing under the greeting, and it is facts
-  only.** Six lines -- fee, Collections, session length, reveal, delivery,
-  booking window -- and a Book My Call button, above the prose rather than
-  three thousand words below it. The guide is 2,332 words, about eleven
-  minutes, and it goes to a woman thirty seconds after she typed her email in.
-  The length is not the problem; making her scroll eleven minutes to find out
-  what a session costs was.
-  **Facts up here, argument below, and that division is the design.** The
-  reassurance -- you do look like the women in the portfolio, you will not be
-  left wondering what to do with your hands -- stays in the body, because that
-  is what converts a woman who is nervous rather than undecided. Put it in the
-  panel too and the panel cannibalises the document it introduces. Every value
-  is read from `F`, so it cannot quietly disagree with the answer below it.
-  **It is measured, not eyeballed.** On a phone each fact is a row rather than
-  a block (label column, figure column, qualifier under the figure) because six
-  stacked blocks put the button 1,475px down -- nearly two screens, which
-  defeated the whole point. It is 957px now. In print the panel stays and the
-  button goes, since paper cannot follow a calendar link.
+- **The contents is four drop-downs, and there is no summary panel.** Jessica
+  asked for both on 24 September: the categories collapsed, and a short-version
+  panel of figures **removed** after trying it. The panel was built, measured
+  and taken out again -- do not re-add one without asking, and if it ever comes
+  back the argument for it is in the history, not here.
+  **The drop-downs are `<details>`, which makes three on this site** -- the FAQ
+  accordion, the phone nav drawer, and now the contents -- for the same three
+  reasons every time: no JavaScript, a real focusable control with Enter and
+  Space, and a disclosure a screen reader announces as one. A div with a click
+  handler gets none of that for free.
+  `name="guide-toc"` makes the four mutually exclusive, so opening one shuts
+  the last and the block never grows past about a screen. Same trick the FAQ
+  uses; where a browser does not support it they simply open independently,
+  which is worse and not broken. **All four are closed by default** -- the
+  point is that the top of the guide is four rows rather than twenty, and
+  defaulting one open gives that back for nothing. Each summary carries its own
+  count, so a woman can see The Investment is five questions before she taps
+  it. It took about 990px off the page on a phone.
 - **`build-guide.py --pdf` renders the same page to a file**, for when she
   wants an attachment rather than a link. Three things had to be true and each
   one is a trap that fails silently:

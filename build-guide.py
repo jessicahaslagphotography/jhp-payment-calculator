@@ -78,7 +78,6 @@ F = {
     "sqft":           "2,000",
     "shown":          "50 to 100",
 }
-F["collections_cap"] = F["collections"].capitalize()
 CALENDAR = "https://api.leadconnectorhq.com/widget/booking/mi2EqYRq4gGEbBJHe82b"
 VIP = "https://www.facebook.com/groups/1107773373084834"
 
@@ -427,23 +426,68 @@ GUIDE_CSS += """
 # The contents list is grouped now, and the panels inside a question card sit
 # a heading level lower than they did, so both need their own rules.
 GUIDE_CSS += """
-/* THE CONTENTS, GROUPED THE WAY THE DOCUMENT IS. Four columns of four or five
-   rows beats one list of twenty: a woman looking for the price finds The
-   Investment as a heading rather than reading every question to get there. */
+/* THE CONTENTS, AS FOUR DROP-DOWNS
+   --------------------------------
+   Jessica's ask, 24 September. Twenty links laid flat is a wall at the top of
+   a document that is already long; four category rows is something a woman
+   can take in without reading, and one tap gets her the five questions
+   underneath.
+
+   <details> again, which makes three places on this site that use it -- the
+   FAQ accordion, the phone nav drawer, and now this -- for the same three
+   reasons every time: no JavaScript, a real focusable control with Enter and
+   Space, and a disclosure a screen reader announces as one. A div with a
+   click handler gets none of that for free.
+
+   The name attribute makes the four mutually exclusive, so opening one shuts
+   the last and the block never grows past about one screen. That is the same
+   trick the FAQ uses. Where a browser does not support it the four simply open
+   independently, which is a worse block and not a broken one.
+
+   Closed by default, all four. The point of the drop-downs is that the top of
+   the guide is four rows rather than twenty, and defaulting one open would
+   give that back for no reason. */
 .jhp-home .jhp-toc{max-width:1080px}
-.jhp-home .jhp-toc .cols{display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,2.4vw,34px)}
-.jhp-home .jhp-toc ul{display:block}
-.jhp-home .jhp-toc .pt{margin:0 0 8px}
-.jhp-home .jhp-toc .pt a{display:block;padding:0 0 9px;font-family:var(--sans);
-  font-weight:400;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
-  color:var(--gold);border-bottom:1px solid var(--line)}
-.jhp-home .jhp-toc .pt a:hover{color:var(--gold-bright)}
-@media (max-width:900px){
-  .jhp-home .jhp-toc .cols{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media (max-width:560px){
-  .jhp-home .jhp-toc .cols{grid-template-columns:1fr;gap:22px}
+.jhp-home .jhp-toc .cols{display:block}
+.jhp-home .jhp-seg{border-top:1px solid var(--line-soft)}
+.jhp-home .jhp-seg:first-child{border-top:0}
+/* list-style and the WebKit pseudo between them remove the disclosure
+   triangle every engine draws; the chevron that replaces it is the one the
+   Info menu and the phone drawer already wear. 14px of line plus 16px either
+   side clears the 44px a thumb needs. */
+.jhp-home .jhp-seg > summary{display:flex;align-items:center;
+  justify-content:space-between;gap:16px;padding:16px 0;cursor:pointer;
+  list-style:none;-webkit-tap-highlight-color:transparent;
+  font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--muted);transition:color .3s}
+.jhp-home .jhp-seg > summary::-webkit-details-marker{display:none}
+.jhp-home .jhp-seg > summary:hover{color:var(--gold)}
+.jhp-home .jhp-seg[open] > summary{color:var(--gold)}
+.jhp-home .jhp-seg > summary:focus-visible{outline:2px solid var(--gold-bright);
+  outline-offset:3px}
+/* The count sits with the chevron so the right-hand edge reads as one object:
+   how much is in here, and the way in. */
+.jhp-home .jhp-seg .rt{display:inline-flex;align-items:center;gap:12px;
+  flex:0 0 auto;font-size:10px;letter-spacing:.2em;color:var(--dim)}
+.jhp-home .jhp-seg .rt::after{content:"";width:5px;height:5px;
+  margin-top:-3px;border-right:1px solid currentColor;
+  border-bottom:1px solid currentColor;transform:rotate(45deg);
+  transition:transform .3s}
+.jhp-home .jhp-seg[open] .rt{color:var(--gold)}
+.jhp-home .jhp-seg[open] .rt::after{transform:rotate(-135deg);margin-top:2px}
+.jhp-home .jhp-seg ul{display:block;padding:0 0 12px}
+.jhp-home .jhp-seg li a{display:block;padding:11px 0 11px 18px;
+  font-family:var(--sans);font-weight:300;font-size:14.5px;line-height:1.45;
+  color:var(--muted);border-top:1px solid var(--line-soft);transition:color .3s}
+.jhp-home .jhp-seg li:first-child a{border-top:0}
+.jhp-home .jhp-seg li a:hover{color:var(--gold)}
+@media (max-width:620px){
+  /* Same 44px rule as everywhere else on a phone, and the part name drops a
+     size so "The Things Women Worry About" stays on one line beside its
+     count rather than wrapping under it. */
+  .jhp-home .jhp-seg > summary{padding:15px 0;font-size:10px;
+    letter-spacing:.18em;gap:12px}
+  .jhp-home .jhp-seg li a{padding:14px 0 14px 14px;font-size:var(--ph-body)}
 }
 
 /* A question is an h3 now, so the headings inside the day and the session
@@ -481,82 +525,6 @@ GUIDE_CSS += """
 }
 """
 
-# The short version: the six facts a woman scrolls this document hunting for,
-# put where she lands instead of where she has to dig.
-GUIDE_CSS += """
-/* THE SHORT VERSION
-   -----------------
-   The guide is 2,332 words, about eleven minutes, and it is sent to a woman
-   thirty seconds after she typed her email in. The length is not the problem
-   -- it earns it, and the woman who reads to the end and still books is
-   pre-sold -- but making her scroll eleven minutes to find out what a session
-   costs is. So the facts go at the top and the argument stays below them.
-
-   FACTS ONLY, AND THAT IS THE WHOLE DESIGN. The reassurance -- you do look
-   like the women in the portfolio, you will not be left wondering what to do
-   with your hands -- stays in the body, because that is what converts a woman
-   who is nervous rather than undecided. Put reassurance up here too and the
-   panel cannibalises the document it introduces. Facts are what people scroll
-   hunting for; the argument is what changes their mind. Surfacing the first
-   removes the hunt without removing the second.
-
-   Every figure comes from F, like the rest of the guide, so this panel cannot
-   quietly disagree with the answer three thousand words below it. */
-.jhp-home .jhp-short{max-width:1080px;margin:clamp(34px,4vw,52px) auto 0;
-  padding:clamp(24px,3.2vw,38px);background:var(--surface);
-  border:1px solid var(--line);border-radius:2px}
-.jhp-home .jhp-short h2{font-family:var(--sans);font-weight:400;font-size:11px;
-  letter-spacing:.26em;text-transform:uppercase;color:var(--gold);margin:0 0 20px}
-.jhp-home .jhp-short dl{display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:clamp(20px,2.6vw,34px);margin:0}
-.jhp-home .jhp-short dt{font-family:var(--sans);font-weight:400;font-size:10px;
-  letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}
-.jhp-home .jhp-short dd{margin:7px 0 0;font-family:var(--serif);font-weight:600;
-  font-size:clamp(19px,1.9vw,23px);line-height:1.25;color:var(--ink)}
-/* The qualifier rides with the figure rather than under it, so the eye takes
-   "$697 to reserve your date" as one fact and not two. */
-.jhp-home .jhp-short dd .u{display:block;margin-top:5px;font-family:var(--sans);
-  font-weight:300;font-size:13.5px;line-height:1.5;color:var(--muted)}
-
-/* The way out for a woman who has read the six lines and is done deciding.
-   She should not have to scroll past nineteen questions to find a button. */
-.jhp-home .jhp-short .go{display:flex;flex-wrap:wrap;align-items:center;
-  gap:clamp(14px,2vw,24px);margin-top:clamp(24px,3vw,32px);
-  padding-top:clamp(20px,2.4vw,26px);border-top:1px solid var(--line-soft)}
-.jhp-home .jhp-short .go .more{font-family:var(--sans);font-weight:300;
-  font-size:14.5px;line-height:1.6;color:var(--muted)}
-.jhp-home .jhp-short .go .more a{color:var(--gold);
-  border-bottom:1px solid var(--line);transition:color .3s,border-color .3s}
-.jhp-home .jhp-short .go .more a:hover{color:var(--gold-bright);
-  border-color:var(--gold-bright)}
-
-@media (max-width:900px){
-  .jhp-home .jhp-short dl{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media (max-width:620px){
-  /* One column, and each fact becomes a row: label left, figure right, on a
-     hairline. Six stacked blocks is 360px of panel before the guide starts;
-     six rows is half that and reads like the spec sheet it is. */
-  .jhp-home .jhp-short{padding:20px;margin-top:28px}
-  .jhp-home .jhp-short dl{grid-template-columns:1fr;gap:0}
-  .jhp-home .jhp-short dl > div{display:grid;
-    grid-template-columns:minmax(0,7.5rem) minmax(0,1fr);
-    align-items:baseline;gap:4px 12px;
-    padding:11px 0;border-top:1px solid var(--line-soft)}
-  .jhp-home .jhp-short dl > div:first-child{border-top:0;padding-top:0}
-  .jhp-home .jhp-short dt{grid-column:1}
-  .jhp-home .jhp-short dd{grid-column:2;margin:0;font-size:17px;line-height:1.2}
-  /* The qualifier goes under the figure, inside the figure's own column, so
-     the label column stays a label column all the way down and the eye can
-     run the left edge without reading anything. */
-  .jhp-home .jhp-short dd .u{margin-top:3px;font-size:12.5px;line-height:1.45}
-  .jhp-home .jhp-short .go{flex-direction:column;align-items:stretch;
-    text-align:center;gap:14px}
-  .jhp-home .jhp-short .go .jhp-btn{width:100%}
-}
-"""
-
 # The print overrides have to come LAST in the sheet, not in the block above.
 # A media query adds no specificity, so an @media print rule that appears
 # before an equally specific normal rule loses to it while printing -- which
@@ -575,9 +543,6 @@ GUIDE_CSS += """
   .jhp-home .jhp-q{background:none;border:0;border-top:1px solid var(--line-soft);
     border-radius:0;padding:14px 0 0}
   .jhp-home .jhp-lift{margin:30px auto}
-  .jhp-home .jhp-short{break-inside:avoid;page-break-inside:avoid}
-  /* The button is a link to a calendar, which paper cannot follow. */
-  .jhp-home .jhp-short .go{display:none}
 }
 """
 
@@ -926,20 +891,26 @@ def render_parts():
 
 
 def render_toc():
-    """The contents, grouped the way the document is. Generated from the same
+    """The contents as four drop-downs, one per part. Generated from the same
     structure as the headings, so the two cannot drift apart -- and the build
     still checks every anchor has an id, because a typo here would be silent
-    and a broken contents list is worse than none."""
-    cols = []
+    and a broken contents list is worse than none.
+
+    Every summary carries its own count. A woman deciding whether to open
+    'The Investment' should be able to see it is five questions and not
+    fifteen before she taps it."""
+    segs = []
     for part in PARTS:
         rows = "".join('\n        <li><a href="#%s">%s</a></li>' % (i["id"], i["q"])
                        for i in part["items"])
-        cols.append(
-            '    <div>\n'
-            '      <p class="pt"><a href="#%s">%s &middot; %s</a></p>\n'
-            '      <ul>%s\n      </ul>\n'
-            '    </div>' % (part["id"], part["no"], part["title"], rows))
-    return "\n".join(cols)
+        segs.append(
+            '      <details class="jhp-seg" name="guide-toc">\n'
+            '        <summary>%s &middot; %s'
+            '<span class="rt">%d</span></summary>\n'
+            '        <ul>%s\n        </ul>\n'
+            '      </details>' % (part["no"], part["title"],
+                                  len(part["items"]), rows))
+    return "\n".join(segs)
 
 SCRIPT = """<script>
   /* HER NAME, OUT OF THE LINK
@@ -987,46 +958,6 @@ SCRIPT = """<script>
 </script>
 """
 
-# Six facts and a button. Every value is read from F, so the panel and the
-# answer three thousand words below it move together or not at all.
-SHORT = """
-  <section class="jhp-short" aria-labelledby="short-h">
-    <h2 id="short-h">The Short Version</h2>
-    <dl>
-      <div>
-        <dt>Session fee</dt>
-        <dd>{fee}<span class="u">Reserves your date. Images are separate.</span></dd>
-      </div>
-      <div>
-        <dt>Collections</dt>
-        <dd>from {petite}<span class="u">{collections_cap} in all. Full Collections from {full}.</span></dd>
-      </div>
-      <div>
-        <dt>Session day</dt>
-        <dd>{day}<span class="u">Hair and makeup included.</span></dd>
-      </div>
-      <div>
-        <dt>Your reveal</dt>
-        <dd>{reveal_wait}<span class="u">A private appointment over Zoom.</span></dd>
-      </div>
-      <div>
-        <dt>Prints and albums</dt>
-        <dd>{delivery}<span class="u">Measured from your reveal. Digitals are instant.</span></dd>
-      </div>
-      <div>
-        <dt>Booking ahead</dt>
-        <dd>up to {booking_window}<span class="u">A year ahead for a holiday or a special date.</span></dd>
-      </div>
-    </dl>
-    <div class="go">
-      <a class="jhp-btn" href="{calendar}" target="_blank" rel="noopener">Book My Call</a>
-      <p class="more">Already know? That is everything you need. If you would
-         rather see the whole picture first, it is all
-         <a href="#begin">just below</a>.</p>
-    </div>
-  </section>
-"""
-
 BODY = """
 <section class="jhp-intro">
   <img src="{cdn}{hero}" width="1600" height="1065"
@@ -1041,18 +972,13 @@ BODY = """
   <div class="jhp-gd">
     <p class="jhp-p lead" data-greet="{{name}}, I am so glad you are here.">Welcome
        &mdash; I am so glad you are here.</p>
-  </div>
-
-{short}
-
-  <div class="jhp-gd" style="margin-top:clamp(34px,4vw,52px)">
-    <p class="jhp-p opener">That is the whole of it in six lines. The rest of
-       this guide is the long answer to each of them &mdash; what a boudoir
-       shoot actually is, the things women tell me they were worried about
-       before they came, how the day itself runs, and where the money goes.</p>
-    <p class="jhp-p">It is in four parts, so read it in order or jump to the
-       part you came for. If you have questions afterwards, please reach out
-       and I will get back to you as soon as I can. My studio hours are
+    <p class="jhp-p opener">This guide walks you through what a boudoir shoot
+       is and how the process works here at JHP Boudoir. It is in four parts:
+       who I am, the things women worry about before they book, how the day
+       itself works, and what it costs. Read it in order or jump to the part
+       you came for.</p>
+    <p class="jhp-p">If you have any questions afterwards, please reach out and
+       I will get back to you as soon as I can. My studio hours are
        {studio_hours}, and consultation calls run {call_hours}.</p>
   </div>
 
@@ -1135,7 +1061,6 @@ assert "{" not in parts_html.replace("{% raw %}", "").replace("{% endraw %}", ""
     "a figure placeholder survived into the parts"
 
 body = BODY.format(cdn=CDN, hero=HERO, calendar=CALENDAR,
-                   short=SHORT.format(calendar=CALENDAR, **F),
                    toc=render_toc(), parts=parts_html, script=SCRIPT, **F)
 
 out = (HEAD.replace("__CDN__", CDN)
