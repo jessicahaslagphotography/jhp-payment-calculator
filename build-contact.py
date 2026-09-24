@@ -244,20 +244,29 @@ BODY = """
 </section>
 
 <section class="jhp-sec" style="border-bottom:none">
-  <!-- No heading. Jessica removed it on 24 September, so this paragraph is
-       the whole of the page's copy and the h1 in the band above is what
-       heads it. The name moved down into the first sentence when the
-       heading went: without it "your copy" and the list after the dash
-       refer to nothing, and the page would ask for four fields having
-       never said what it is sending. -->
+  <!-- No heading. Jessica removed it on 24 September, so these three
+       paragraphs are the whole of the page's copy and the h1 in the band
+       above is what heads them. The name moved down into the first
+       sentence when the heading went: without it "your copy" and the list
+       after the dash refer to nothing, and the page would ask for four
+       fields having never said what it is sending.
+
+       THREE PARAGRAPHS, NOT ONE, and Jessica set the breaks. As one block
+       this ran eight lines deep on a phone and a woman had to find the
+       practical part inside it. Split, each paragraph is one thought: the
+       invitation, what arrives, and what to do if it does not. The break
+       points are hers -- if this copy is ever rewritten, keep them. It
+       costs 36px, which on a 2384px page is the cheapest thing here. -->
   <div class="jhp-center">
-    <p class="jhp-p">Ready to learn even more about working with the studio?
-       Fill in the form and your copy of the Session Guide Magazine comes
-       straight over &mdash; the studio itself, how a session day runs,
-       everything a session includes, and where pricing starts. Fill it in
-       accurately so that I can reach you, and if the magazine has not
-       arrived within five or ten minutes, please check your spam
-       folder.</p>
+    <p class="jhp-p">Ready to learn even more about working with the
+       studio?</p>
+    <p class="jhp-p">Fill in the form and your copy of the Session Guide
+       Magazine comes straight over &mdash; the studio itself, how a session
+       day runs, everything a session includes, and where pricing
+       starts.</p>
+    <p class="jhp-p">Fill it in accurately so that I can reach you, and if
+       the magazine has not arrived within five or ten minutes, please check
+       your spam folder.</p>
   </div>
 
   <form class="jhp-ask-form" id="jhp-guide" novalidate>
