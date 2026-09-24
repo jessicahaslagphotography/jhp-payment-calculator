@@ -236,8 +236,9 @@ Still to do, roughly in order of what it is worth:
   phone has no hover, so this needs a real open and shut. `<details>` gives
   a focusable control, Enter and Space, and a disclosure a screen reader
   announces as one -- none of which a checkbox dressed as a button gets
-  right. The FAQ's accordion is the same element, so the site now uses it
-  twice for the same reason.
+  right. The FAQ's accordion is the same element, and so is every question in
+  the Session Guide, so the site now uses it three times for the same three
+  reasons.
   **Two rules keep the two states apart, and neither is optional.** Up top
   the wrapper is dissolved (`.jhp-navd{display:contents}`, the summary
   hidden) AND `::details-content` is forced visible, because browsers hide
@@ -405,31 +406,57 @@ Still to do, roughly in order of what it is worth:
   link, JavaScript off -- the page reads properly anyway. That is why the
   default lead is "Welcome -- I am so glad you are here" rather than a blank
   waiting to be filled.
-- **The guide is four parts and two columns, since 24 September.** Jessica
-  asked for the questions in two columns, for more formatting, and for the
-  whole thing to be more beautiful; those are one problem, because a 14,500px
-  column of undifferentiated prose is not a magazine, it is a scroll. The
-  nineteen questions are now grouped into four parts -- who I am, the things
-  women worry about, how it works, what it costs -- and each is a card in a
-  two-column run. **10,906px at 1440, down from 12,669.**
-  **The parts are what make two columns legible**, not decoration. Balanced
-  columns read down the left then down the right, which is only tolerable when
-  each item is self-contained and the run between headings is short. Four
-  short runs, not one of twenty.
-  **CSS columns, not a grid, and the reason matters.** A two-track grid aligns
-  cards in rows, so every row is as tall as its tallest card and a short answer
-  beside a long one leaves a hole. `columns:2` lets each card take the height
-  it needs. `break-inside:avoid` is what keeps a question with its answer --
-  without it a card splits at the column break and the second half of an answer
-  turns up at the top of the right-hand column. Anything that must not be
-  squeezed into half a page takes `.jhp-wide` (`column-span:all`): the fee, the
-  Collections, the day, the session types, the photographs.
-  **On a phone the card becomes a rule.** One column, and the padding, border
-  and panel background all come off -- they do work at desktop widths that they
-  do not do in a single column. Without that the restructure ADDED about
-  2,000px at 390, which is five more screens of thumb; with it the page is
-  14,871px against 14,576 before, for a document that is now grouped and has a
-  contents list you can aim with.
+- **The guide is four parts and one question at a time, since 24 September.**
+  Jessica asked in two passes and the second one overruled the first. She asked
+  first for the questions in two columns and for more formatting; then she asked
+  that a headline drop its own text when it is clicked, and that the next
+  headline appear once she has finished the one she is reading. **Those two
+  cannot coexist and the second one wins.** A reveal that works down a page has
+  to work down ONE column -- in two balanced columns the next headline appears
+  in whichever column CSS decides to put it, which on a wide screen is often
+  off to the right of what she is reading, and the reading order stops being an
+  order at all. So the two-column run is gone. It is a single column now, and
+  that is a decision, not an oversight: the columns are one line in the
+  generator if she ever wants them back and the reveal dropped instead.
+  What survives from the first pass is the grouping, which was the part that
+  actually did the work: the nineteen questions are in four parts -- who I am,
+  the things women worry about, how it works, what it costs -- with a part
+  heading, a rule and a number over each.
+  **Each question is a `<details>` and each part reveals one at a time.**
+  Closed, the guide is nineteen headlines' worth of nothing: **4,718px at 1440
+  and 3,998px on a phone, against 14,871px before.** Clicking a headline drops
+  its answer under it. Within a part only the FIRST question is present to
+  start with; the next appears when she reaches the end of the one she opened.
+  **It watches the END of the answer, not the click.** Revealing the next
+  headline the moment she opens one would put it on screen before she has read
+  a word, which is the thing she asked me to stop. Each answer carries an empty
+  `.end` sentinel as its last child and an IntersectionObserver watches that.
+  A short answer whose end is already on screen advances immediately, which is
+  right -- she can see the whole thing.
+  **The reveal is OPT-IN, like every other piece of movement on this site.**
+  The markup ships with all nineteen headlines and the CSS renders them; the
+  script is what HIDES the ones she has not reached. No JavaScript, no
+  IntersectionObserver, a crawler, a printer, Find on Page, or a woman who just
+  wants to search the document -- every one of them gets the whole guide.
+  A guide that hides itself from anyone who cannot run scripts is not
+  progressive, it is broken.
+  **The part headings are never hidden, and neither is Show Every Question.**
+  A woman who came for the price can still see The Investment and go straight
+  to it; trapping her in a linear walk through nineteen questions to find one
+  number is the opposite of what a guide is for. The control only appears once
+  something is hidden and removes itself when nothing is.
+  **A deep link opens everything first.** `#money` from a bookmark or a link
+  she was sent must not land on a hidden question. `jumpTo()` runs AFTER the
+  groups are set up -- running it first only had the loop hide the target again
+  a millisecond later, which is a bug found in a browser rather than reasoned
+  about.
+  **`.jhp-wide` is what is left of the columns.** With one column it no longer
+  spans anything, but the class still marks the questions whose panels are too
+  wide to squeeze -- the fee, the Collections, the day, the session types -- and
+  it is what the columns would key off if they came back.
+  **On a phone the card becomes a rule.** The padding, border and panel
+  background all come off; they do work at desktop widths that they do not do in
+  a single column.
   **The print rules have to be last in the sheet.** A media query adds no
   specificity, so `@media print` appearing before an equally specific normal
   rule loses to it while printing. That is why the print block is appended
@@ -439,30 +466,20 @@ Still to do, roughly in order of what it is worth:
   A lifted line is Jessica quoting herself: a whole sentence, verbatim, from
   the body a few hundred pixels above, set large between two parts. Repeating
   it is the point and not an accident.
-  **The parts are DATA, in `PARTS`.** The contents list, the anchors and the
-  headings all derive from one structure, because when they were three blocks
-  of HTML they were three chances to disagree. The build fails if an anchor has
-  no id or two things share one.
-- **The contents is four drop-downs, and there is no summary panel.** Jessica
-  asked for both on 24 September: the categories collapsed, and a short-version
-  panel of figures **removed** after trying it. The panel was built, measured
-  and taken out again -- do not re-add one without asking, and if it ever comes
-  back the argument for it is in the history, not here.
-  **The drop-downs are `<details>`, which makes three on this site** -- the FAQ
-  accordion, the phone nav drawer, and now the contents -- for the same three
-  reasons every time: no JavaScript, a real focusable control with Enter and
-  Space, and a disclosure a screen reader announces as one. A div with a click
-  handler gets none of that for free.
-  `name="guide-toc"` makes the four mutually exclusive, so opening one shuts
-  the last and the block never grows past about a screen. Same trick the FAQ
-  uses; where a browser does not support it they simply open independently,
-  which is worse and not broken. **All four are closed by default** -- the
-  point is that the top of the guide is four rows rather than twenty, and
-  defaulting one open gives that back for nothing. Each summary carries its own
-  count, so a woman can see The Investment is five questions before she taps
-  it. It took about 990px off the page on a phone.
+  **The parts are DATA, in `PARTS`.** The anchors and the headings derive from
+  one structure, because when they were separate blocks of HTML they were
+  separate chances to disagree. The build fails if an anchor has no id or two
+  things share one.
+- **There is no contents list and no summary panel, and both were built.**
+  Jessica had a twenty-link contents, then asked for it as four drop-down
+  categories, and separately asked for a short version of the figures and then
+  for it removed. Both were built, measured and taken out -- the panel on her
+  say-so, the contents because the reveal replaced it: nineteen headlines that
+  appear as she reads them ARE the contents, and a second list of the same
+  nineteen at the top is the wall she asked me to take down. **Do not re-add
+  either without asking.** The argument for each is in the history, not here.
 - **`build-guide.py --pdf` renders the same page to a file**, for when she
-  wants an attachment rather than a link. Three things had to be true and each
+  wants an attachment rather than a link. Four things had to be true and each
   one is a trap that fails silently:
   - **It needs `JHP_IMG_CACHE=<dir>` holding the photographs**, because the
     build sandbox cannot reach `assets.cdn.filesafe.space`. Without the guard
@@ -476,6 +493,19 @@ Still to do, roughly in order of what it is worth:
     contrast(1.02)` forces the engine to rasterise every frame and re-embed it
     as an upscaled RGBA PNG: 21MB instead of 1.1MB, for a grade nobody can see
     on paper.
+  - **The print block forces every answer open, and that one bit twice.** A
+    question is a `<details>` since the reveal, and a closed one prints as its
+    summary alone -- the first render after the rewrite came out NINE PAGES OF
+    HEADINGS with not a word of copy under any of them, and the file looked
+    fine from the outside. Paper does not tap. Both hiding mechanisms have to be
+    undone, the same pair the phone nav spells out: older engines hide a closed
+    `<details>`'s children with a display rule, newer ones hide
+    `::details-content` with `content-visibility`. `.pending` goes the same way
+    -- the stepper does call `openAll()` on `beforeprint`, but a headless render
+    that emulates print media without firing that event would print one
+    question per part, and a stylesheet must not depend on an event. Fifteen
+    pages, all nineteen questions, 1.1MB. **Count the pages after any change
+    here**; nine means the answers are shut again.
   The PDF is generic. Personalisation is a page feature and does not belong in
   a file that gets forwarded.
 - **The VIP group is on two pages and is one link.** The Facebook group
@@ -531,8 +561,9 @@ Still to do, roughly in order of what it is worth:
   working file against `git show HEAD:`, so the two have to agree *in the
   region being patched* -- not everywhere. Known gaps, all checked on
   24 September and all harmless:
-  - `scalogy-faq.html` and `scalogy-inquire.html` are 1 byte larger
-    locally -- a trailing newline at end of file that Scalogy trims on save.
+  - `scalogy-faq.html`, `scalogy-inquire.html` and `scalogy-guide.html` are
+    1 byte larger locally -- a trailing newline at end of file that Scalogy
+    trims on save.
     `scalogy-portfolio.html` used to be listed here too and is now byte for
     byte identical to its template, checked 24 September after the studio
     hours went through both copies.
