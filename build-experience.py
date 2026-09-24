@@ -473,7 +473,7 @@ BODY = """
          want to keep and how you want them &mdash; and you order them at that
          same appointment.</p>
       <p>You are not sent a link and left to work it out alone. It is most
-         women&rsquo;s favourite part of the whole thing.</p>
+         women&rsquo;s favorite part of the whole thing.</p>
     </li>
     <li>
       <span class="n" aria-hidden="true">6</span>
