@@ -53,8 +53,8 @@
 /* ---------- shared type ---------- */
 .jhp-home .jhp-kicker{font-family:var(--sans);font-weight:400;font-size:11px;
   letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
-.jhp-home .jhp-h{font-family:var(--serif);font-weight:500;font-size:clamp(26px,4vw,34px);
-  line-height:1.16;letter-spacing:.01em;margin:0 0 16px;color:var(--ink);
+.jhp-home .jhp-h{font-family:var(--serif);font-weight:600;font-size:clamp(30px,3.5vw,46px);
+  line-height:1.14;letter-spacing:0;margin:0 0 18px;color:var(--ink);
   text-wrap:balance}
 .jhp-home .jhp-p{font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.75;
   color:var(--muted);margin:0 0 18px}
@@ -62,7 +62,8 @@
   border-bottom:1px solid var(--line-soft)}
 .jhp-home .jhp-center{text-align:center;max-width:660px;margin:0 auto}
 .jhp-home .jhp-center-wide{text-align:center;max-width:880px;margin:0 auto}
-.jhp-home .jhp-h-lg{font-size:clamp(31px,5vw,46px);line-height:1.1}
+.jhp-home .jhp-h-lg{font-size:clamp(38px,5.6vw,66px);line-height:1.06;
+  letter-spacing:-.012em}
 
 /* ---------- buttons ---------- */
 .jhp-home .jhp-btn,.jhp-home .jhp-btn2{display:inline-block;font-family:var(--sans);
@@ -171,6 +172,14 @@
      static one, 50% of its own width off the left of the screen. */
   .jhp-home .jhp-navg:hover .jhp-sub,
   .jhp-home .jhp-navg:focus-within .jhp-sub{transform:none}
+
+  /* On every other page .jhp-h-lg IS the page's display heading. Here it is
+     not -- .jhp-ttl in the hero is, and h-lg does section duty ("What They
+     Said Afterwards"). Left on the shared 38px it outranked a hero that
+     cannot grow past about 40px without wrapping to four lines inside the
+     280px band Jessica set in the tuner, so home alone steps it down. The
+     ladder then reads hero 40 > section display 34 > section 30 > body 17. */
+  .jhp-home .jhp-h-lg{font-size:34px;line-height:1.12}
 }
 
 /* ---------- 2 · hero ---------- */
@@ -214,7 +223,16 @@
 .jhp-home .jhp-hero .jhp-eb{font-family:var(--sans);font-size:13px;letter-spacing:.34em;
   text-transform:uppercase;color:var(--gold)}
 .jhp-home .jhp-hero .jhp-ttl{font-family:var(--serif);font-weight:500;
-  font-size:clamp(30px,6.2vw,72px);line-height:1.04;letter-spacing:.01em;margin:0}
+  font-size:clamp(40px,6.4vw,78px);line-height:1.02;letter-spacing:.01em;margin:0}
+/* At 320px the title's first line wraps, so it takes three lines rather than
+   two, and at 40px the overlay came out 4px taller than the 280px band -- which
+   with justify-content:flex-end pushes the eyebrow up over the nav rather than
+   clipping it. Four pixels off the title buys back twelve and leaves eight to
+   spare, and nobody on a 320px screen will see the difference between 40 and
+   36. Still ahead of the 34px section headings, so the ladder holds. */
+@media (max-width:360px){
+  .jhp-home .jhp-hero .jhp-ttl{font-size:36px}
+}
 /* on a phone the photo is too short to hold type, so it moves below */
 /* ---------- 3 · imagery + line ---------- */
 /* Three across at every width, phones included. They are three identical
@@ -275,7 +293,7 @@
   object-fit:cover;object-position:center center}
 .jhp-home .jhp-optin .txt{padding:clamp(30px,3.5vw,44px) clamp(22px,3vw,42px);
   display:flex;flex-direction:column;justify-content:center;background:var(--ground)}
-.jhp-home .jhp-optin .jhp-h{font-size:clamp(23px,2.6vw,29px);margin-bottom:10px}
+.jhp-home .jhp-optin .jhp-h{font-size:clamp(26px,2.9vw,38px);margin-bottom:12px}
 .jhp-home .jhp-optin .jhp-p{font-size:15.5px;line-height:1.65;margin-bottom:16px}
 .jhp-home .jhp-field{display:flex;flex-direction:column;gap:9px}
 .jhp-home .jhp-field .pair{display:flex;gap:9px}
@@ -325,12 +343,12 @@
    gold character, scaled up into the serif, with a hairline under it. The
    statement below steps down in size so the title clearly leads. */
 .jhp-home .jhp-mission-ttl{font-family:var(--serif);font-weight:500;
-  font-size:clamp(27px,3.6vw,40px);line-height:1.12;letter-spacing:.1em;
+  font-size:clamp(32px,4.4vw,54px);line-height:1.08;letter-spacing:.09em;
   text-transform:uppercase;color:var(--gold);margin:0 0 16px}
 .jhp-home .jhp-mission-rule{width:46px;height:1px;background:var(--gold);
   opacity:.65;margin:0 auto 24px}
 .jhp-home .jhp-mission-lead{font-family:var(--serif);font-weight:400;
-  font-size:clamp(20px,2.5vw,27px);line-height:1.46;letter-spacing:.01em;
+  font-size:clamp(21px,2.7vw,30px);line-height:1.46;letter-spacing:.01em;
   color:var(--ink);margin:0 0 16px;text-wrap:balance}
 .jhp-home .jhp-mission .jhp-p{font-size:16px;margin:0;text-wrap:balance}
 .jhp-home .jhp-mission .jhp-btn{margin-top:30px}

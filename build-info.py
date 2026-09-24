@@ -93,7 +93,7 @@ FAQ_CSS = """
 .jhp-home .jhp-ask summary{list-style:none;cursor:pointer;display:flex;
   gap:18px;align-items:flex-start;padding:22px 0;
   font-family:var(--serif);font-weight:500;
-  font-size:clamp(19px,1.9vw,23px);line-height:1.35;letter-spacing:.01em;
+  font-size:clamp(21px,2.2vw,28px);line-height:1.3;letter-spacing:0;
   color:var(--ink);text-wrap:pretty;transition:color .3s}
 .jhp-home .jhp-ask summary::-webkit-details-marker{display:none}
 .jhp-home .jhp-ask summary:hover{color:var(--gold-bright)}
@@ -159,7 +159,7 @@ FAQ_CSS = """
       rgba(19,16,14,.3) 100%),
     linear-gradient(90deg,rgba(19,16,14,.78) 0%,rgba(19,16,14,.44) 50%,
       rgba(19,16,14,.06) 100%)}
-  .jhp-home .jhp-ask summary{font-size:18px;padding:19px 0;gap:14px}
+  .jhp-home .jhp-ask summary{font-size:21px;padding:19px 0;gap:14px}
   .jhp-home .jhp-ask .a{padding:0 0 22px 28px}
   .jhp-home .jhp-ask .a p{font-size:var(--ph-body);line-height:1.75}
 }

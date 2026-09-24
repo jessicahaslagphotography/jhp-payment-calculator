@@ -157,7 +157,7 @@ PAGE_CSS = """
   width:7px;height:7px;transform:rotate(45deg);
   background:var(--ground);border:1px solid var(--gold)}
 .jhp-home .jhp-inc h3{font-family:var(--serif);font-weight:500;
-  font-size:clamp(19px,1.8vw,22px);line-height:1.3;color:var(--ink);
+  font-size:clamp(21px,2.1vw,28px);line-height:1.3;color:var(--ink);
   margin:0 0 9px;letter-spacing:.01em}
 .jhp-home .jhp-inc p{font-family:var(--sans);font-weight:300;font-size:16px;
   line-height:1.75;color:var(--muted);margin:0}
@@ -213,7 +213,7 @@ PAGE_CSS = """
   font-family:var(--serif);font-size:19px;font-weight:500;color:var(--gold);
   letter-spacing:.02em}
 .jhp-home .jhp-flow h3{font-family:var(--serif);font-weight:500;
-  font-size:clamp(20px,1.9vw,24px);line-height:1.3;color:var(--ink);
+  font-size:clamp(22px,2.2vw,30px);line-height:1.3;color:var(--ink);
   margin:5px 0 9px;letter-spacing:.01em}
 .jhp-home .jhp-flow p{font-family:var(--sans);font-weight:300;font-size:16.5px;
   line-height:1.78;color:var(--muted);margin:0 0 12px}

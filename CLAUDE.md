@@ -30,6 +30,45 @@ loud; the `.lede` under a band heading; the `.sub` line in a band; body
 copy. Kickers and the small `.when` labels are already set in uppercase
 by their own CSS and need no change in the markup.
 
+## The type scale is one scale, and it lives in three files
+
+Jessica asked on 24 September for headings that stand out. What was making
+them recede was not only size -- Cormorant Garamond is a high-contrast serif
+with light stems, and at `font-weight:500` it went quiet at any size. The
+weight is now **600** everywhere, which is loaded already (the `@import` asks
+for 400, 500 and 600) and so costs nothing.
+
+The scale, and the only numbers to touch:
+
+    .jhp-h      section heading     clamp(30px, 3.5vw, 46px)   weight 600
+    .jhp-h-lg   page display        clamp(38px, 5.6vw, 66px)
+    --ph-head   phone section       30px      = the .jhp-h floor
+    --ph-display phone display      38px      = the .jhp-h-lg floor
+
+The two phone tokens deliberately equal the two desktop floors. The home page
+and the About page carry their own copy of the design system and have no `--ph`
+tokens, so on a phone they land on the floors; making the tokens the same
+numbers means all seven templates agree at 390px by construction rather than by
+two figures somebody has to keep in step.
+
+**A heading must never out-rank the page's own h1.** Both places that broke it
+are now guarded and both are worth knowing about:
+
+- The home page's display heading is `.jhp-ttl` in the hero, not `.jhp-h-lg` --
+  h-lg does section duty there ("What They Said Afterwards"). So home alone
+  steps its phone h-lg down to 34px, under a 40px hero.
+- Jessica's tuner-set band heights are fixed, so a bigger heading has to fit
+  inside them rather than the other way round. The hero is 280px on a phone and
+  at 46px the title wrapped to four lines and pushed the eyebrow up over the
+  nav; 40px fits, with a 36px guard below 360px. The About lead band is 145px
+  and its h1 is sized against that band, not the shared scale.
+
+After any change here, measure every page at 1440, 390 and 320 and check three
+things: no horizontal scroll, no band whose overlay content is taller than the
+band, and no h2 larger than that page's h1. The one number that moved off one
+of Jessica's own: the About page's closing band was 190px and is now about
+199px, because it is padding plus content rather than a set height.
+
 ## The rest of the system, in one place
 
 - **The design system is sliced, not copied.** `build-info.py` and

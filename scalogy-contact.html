@@ -49,8 +49,8 @@
 
 .jhp-home .jhp-kicker{font-family:var(--sans);font-weight:400;font-size:11px;
   letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin:0 0 12px}
-.jhp-home .jhp-h{font-family:var(--serif);font-weight:500;font-size:clamp(26px,4vw,34px);
-  line-height:1.16;letter-spacing:.01em;margin:0 0 16px;color:var(--ink);
+.jhp-home .jhp-h{font-family:var(--serif);font-weight:600;font-size:clamp(30px,3.5vw,46px);
+  line-height:1.14;letter-spacing:0;margin:0 0 18px;color:var(--ink);
   text-wrap:balance}
 .jhp-home .jhp-p{font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.75;
   color:var(--muted);margin:0 0 18px}
@@ -58,7 +58,8 @@
   border-bottom:1px solid var(--line-soft)}
 .jhp-home .jhp-center{text-align:center;max-width:660px;margin:0 auto}
 .jhp-home .jhp-center-wide{text-align:center;max-width:880px;margin:0 auto}
-.jhp-home .jhp-h-lg{font-size:clamp(31px,5vw,46px);line-height:1.1}
+.jhp-home .jhp-h-lg{font-size:clamp(38px,5.6vw,66px);line-height:1.06;
+  letter-spacing:-.012em}
 
 .jhp-home .jhp-btn,.jhp-home .jhp-btn2{display:inline-block;font-family:var(--sans);
   font-weight:500;font-size:13px;letter-spacing:.18em;text-transform:uppercase;
@@ -225,8 +226,8 @@
 @media (max-width:620px){
   .jhp-home{
     --ph-gut:22px;      /* the one side margin, for text */
-    --ph-display:27px;  /* the page's big heading */
-    --ph-head:23px;     /* section headings under it */
+    --ph-display:38px;  /* the page's big heading */
+    --ph-head:30px;     /* section headings under it */
     --ph-body:15.5px;
     --ph-sub:14.5px;
     --ph-label:10px;    /* kickers, nav, names, footer links */
@@ -234,8 +235,13 @@
   .jhp-home .jhp-sec{padding:40px var(--ph-gut)}
   .jhp-home .jhp-kicker{font-size:var(--ph-label);letter-spacing:.26em;
     margin-bottom:10px}
-  .jhp-home .jhp-h{font-size:var(--ph-head);line-height:1.22}
-  .jhp-home .jhp-h-lg{font-size:var(--ph-display);line-height:1.2}
+  /* These two now match the floors of the desktop clamps exactly, which is
+     the point: the home page and the About page have no --ph tokens of their
+     own, so on a phone they land on those floors. Setting the tokens to the
+     same numbers means every page agrees at 390px by construction rather
+     than by two figures somebody has to remember to keep in step. */
+  .jhp-home .jhp-h{font-size:var(--ph-head);line-height:1.2}
+  .jhp-home .jhp-h-lg{font-size:var(--ph-display);line-height:1.12}
   .jhp-home .jhp-p{font-size:var(--ph-body);line-height:1.7}
   /* 12px with the tracking still clears 44px of height on the padding. */
   .jhp-home .jhp-btn,.jhp-home .jhp-btn2{font-size:12px;letter-spacing:.16em;
@@ -390,7 +396,7 @@
   height:100%;object-fit:cover;object-position:center center}
 .jhp-home .jhp-quote blockquote{margin:0}
 .jhp-home .jhp-quote .qt{font-family:var(--serif);font-style:italic;
-  font-size:clamp(18px,1.95vw,23px);line-height:1.55;color:var(--ink);
+  font-size:clamp(19px,2.1vw,27px);line-height:1.5;color:var(--ink);
   margin:0 0 20px;text-wrap:pretty}
 .jhp-home .jhp-quote .qa{font-family:var(--sans);font-size:11px;
   letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0}
@@ -417,7 +423,7 @@
   .jhp-home .jhp-quote .shot{margin-inline:calc((100% - 100vw) / 2);
     height:430px}
   .jhp-home .jhp-quote .shot::before{content:none}
-  .jhp-home .jhp-quote .qt{font-size:19px;line-height:1.6;margin-bottom:18px}
+  .jhp-home .jhp-quote .qt{font-size:21px;line-height:1.55;margin-bottom:18px}
   .jhp-home .jhp-quote .qa{font-size:var(--ph-label);letter-spacing:.22em}
   .jhp-home .jhp-quote .src{font-size:12px;margin-top:16px}
 }
