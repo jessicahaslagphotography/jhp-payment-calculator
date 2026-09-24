@@ -328,10 +328,11 @@ BODY = """
            alt="A boudoir portrait made at the JHP Boudoir studio">
     </figure>
     <blockquote>
-      <p class="qt">&ldquo;Jessica is great to work with and the whole process was
-         an awesome experience!! From the pampering of hair and makeup to the
-         photo shoot to the one on one with photo selection!! Would recommend
-         to anyone!!&rdquo;</p>
+      <p class="qt">&ldquo;Jessica is great to work with and the whole process
+         was an awesome experience!!</p>
+      <p class="qr">From <span class="hl">the pampering of hair and
+         makeup</span> to the photo shoot to the one on one with photo
+         selection!! Would recommend to anyone!!&rdquo;</p>
       <p class="qa">Miss A.</p>
       <a class="src" href="https://www.google.com/search?q=JHP+Boudoir&amp;kgmid=/g/11v3x9fqm9"
          target="_blank" rel="noopener">Read all reviews on Google</a>

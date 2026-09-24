@@ -15,9 +15,32 @@ an existing light edit that predates this file.
 | Home, first of three | Miss J. | "This was a very great experience!..." |
 | Home, second | Miss S. | "Jessica was absolutely amazing!..." |
 | Home, third | Miss M. | "I couldn't have been happier..." |
-| Portfolio pull-quote | Miss R. | "Jess is amazing to work with!..." |
-| FAQ pull-quote | Miss A. | "Jessica is great to work with..." |
+| Portfolio pull-quote | Miss R. | "The confidence boost I had..." |
+| FAQ pull-quote | Miss A. | "Jessica is great to work with and the whole process..." |
 | The Experience pull-quote | Miss N. | "Jessica was fabulous from the very first contact..." |
+
+## The lifted line
+
+Jessica asked on 24 September for the most impactful part of each review to
+be its big introductory line, with the rest underneath. The three
+pull-quotes are set that way now: a `.qt` that leads, a `.qr` that carries
+everything else, and one phrase inside `.qr` in gold.
+
+**The split is always at a sentence boundary.** Not a word is reworded,
+trimmed or joined to make a better headline -- a sentence is lifted whole or
+it is not lifted, and the remainder keeps her original order. The three
+pull-quotes above are still verbatim; only the order of one sentence has
+changed, and only on the portfolio.
+
+| Page | Lifted as the big line | Why that one | Gold phrase |
+|---|---|---|---|
+| Portfolio | "The confidence boost I had from this experience was unparalleled!" | It is the outcome, not the service. Her third sentence, moved to the front; the other three run in her order behind it. | "I was so nervous" -- the page is read by women who think everyone else was braver |
+| FAQ | "Jessica is great to work with and the whole process was an awesome experience!!" | Her own first sentence, unmoved. The enumeration that follows is why this review is on this page, so it belongs in the body where it can be read. | "the pampering of hair and makeup" |
+| The Experience | "Jessica was fabulous from the very first contact to the image reveal!" | Her own first sentence, unmoved, and it is the exact arc this page walks step by step. | "Would definitely do this experience again" |
+
+The home page's three reviews are a wall of three, not pull-quotes, and are
+untouched. That layout has no room for a display line per review; giving
+them this treatment is a separate decision about what that section is.
 
 Why those three, and not others:
 

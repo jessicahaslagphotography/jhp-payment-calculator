@@ -378,9 +378,10 @@ BODY = """
     </figure>
     <blockquote>
       <p class="qt">&ldquo;Jessica was fabulous from the very first contact to
-         the image reveal! Very professional and made the whole experience
-         amazing! Would definitely do this experience again with her and highly
-         recommend!&rdquo;</p>
+         the image reveal!</p>
+      <p class="qr">Very professional and made the whole experience amazing!
+         <span class="hl">Would definitely do this experience again</span> with
+         her and highly recommend!&rdquo;</p>
       <p class="qa">Miss N.</p>
       <a class="src" href="https://www.google.com/search?q=JHP+Boudoir&amp;kgmid=/g/11v3x9fqm9"
          target="_blank" rel="noopener">Read all reviews on Google</a>

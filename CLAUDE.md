@@ -157,6 +157,15 @@ of Jessica's own: the About page's closing band was 190px and is now about
   moving a review, and update it in the same commit. The photograph beside a
   pull-quote is not the woman who wrote it and carries no name for that
   reason, so a review can change pages without the frame changing with it.
+- **A pull-quote leads on its most impactful line.** Jessica's note,
+  24 September: each of the three pull-quotes is now a big `.qt` line, a
+  `.qr` paragraph with the rest of what she wrote, and one phrase inside it
+  in gold (`.hl`). **The split is always at a sentence boundary** -- a
+  sentence is lifted whole or not at all, nothing is reworded or trimmed to
+  make a better headline, and the remainder keeps her original order. Which
+  sentence was lifted from which review, and why, is the table in
+  `reviews.md`. The home page's three are a wall, not pull-quotes, and are
+  deliberately left alone.
 - **Photographs are judged at real size.** A frame that looks clear of a
   heading on a contact sheet is often sitting on the subject at 1440. And
   one page, one client per frame -- the same face opening and closing a

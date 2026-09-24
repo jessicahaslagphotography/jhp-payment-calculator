@@ -395,11 +395,46 @@
 .jhp-home .jhp-quote .shot img{position:absolute;inset:0;width:100%;
   height:100%;object-fit:cover;object-position:center center}
 .jhp-home .jhp-quote blockquote{margin:0}
-.jhp-home .jhp-quote .qt{font-family:var(--serif);font-style:italic;
-  font-size:clamp(19px,2.1vw,27px);line-height:1.5;color:var(--ink);
-  margin:0 0 20px;text-wrap:pretty}
-.jhp-home .jhp-quote .qa{font-family:var(--sans);font-size:11px;
-  letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0}
+/* THE PULLED LINE, AND THE REST OF IT
+
+   Jessica's note, 24 September: take the most impactful part of each review
+   and make it the big introductory line, with the rest underneath. So a
+   review is now two elements rather than one -- .qt is the line that does
+   the persuading, .qr is everything else she wrote.
+
+   THE SPLIT IS ALWAYS AT A SENTENCE BOUNDARY. Not a word of any review is
+   reworded or trimmed to make a better headline; a sentence is lifted whole
+   or it is not lifted. Where the lifted sentence was not the first one, the
+   remainder still runs in her original order. Which sentence was chosen and
+   why is in reviews.md, next to the review it came from.
+
+   Upright rather than italic, and roughly a section heading's size. At
+   27px italic this was a caption beside a photograph; upright at 40 it is
+   the first thing read in the section, which is the whole point of the
+   change. It is still a <p> and not a heading -- it must not enter the
+   document outline and start out-ranking the page's real headings -- so the
+   size stops short of .jhp-h-lg and the quote marks stay, because a line
+   this big no longer looks like a quotation without them. */
+.jhp-home .jhp-quote .qt{font-family:var(--serif);font-weight:500;
+  font-size:clamp(26px,3.1vw,40px);line-height:1.16;letter-spacing:-.006em;
+  color:var(--ink);margin:0 0 20px;text-wrap:balance}
+/* The rest of the review, at body size and a step down in colour, so the
+   eye takes the big line first and comes here only if it wants the detail. */
+.jhp-home .jhp-quote .qr{font-family:var(--sans);font-weight:300;
+  font-size:16px;line-height:1.75;color:var(--muted);margin:0 0 24px;
+  text-wrap:pretty}
+/* One phrase inside that paragraph, in the page's gold. It is the second
+   most telling thing she wrote -- the nerves, the pampering, the coming
+   back -- and it gives the small type one place for the eye to land. Not
+   <em>: nothing here is emphasis in the semantic sense, it is typographic
+   colour, so it is a span and the sentence reads the same without it. */
+.jhp-home .jhp-quote .hl{color:var(--gold-bright)}
+/* The name was an 11px uppercase label, which under a 40px line read as a
+   caption on a caption. It is a signature now: the serif, at the size the
+   body copy would be if it were a heading, in gold. */
+.jhp-home .jhp-quote .qa{font-family:var(--serif);font-weight:500;
+  font-size:clamp(20px,1.9vw,25px);line-height:1.2;letter-spacing:.01em;
+  color:var(--gold);margin:0}
 .jhp-home .jhp-quote .src{display:inline-block;margin-top:18px;
   font-family:var(--sans);font-size:12px;letter-spacing:.06em;
   color:var(--dim);border-bottom:1px solid var(--line);padding-bottom:2px;
@@ -423,8 +458,9 @@
   .jhp-home .jhp-quote .shot{margin-inline:calc((100% - 100vw) / 2);
     height:430px}
   .jhp-home .jhp-quote .shot::before{content:none}
-  .jhp-home .jhp-quote .qt{font-size:21px;line-height:1.55;margin-bottom:18px}
-  .jhp-home .jhp-quote .qa{font-size:var(--ph-label);letter-spacing:.22em}
+  .jhp-home .jhp-quote .qt{font-size:26px;line-height:1.2;margin-bottom:16px}
+  .jhp-home .jhp-quote .qr{font-size:var(--ph-body);margin-bottom:20px}
+  .jhp-home .jhp-quote .qa{font-size:21px;letter-spacing:.01em}
   .jhp-home .jhp-quote .src{font-size:12px;margin-top:16px}
 }
 
@@ -814,9 +850,10 @@
     </figure>
     <blockquote>
       <p class="qt">&ldquo;Jessica was fabulous from the very first contact to
-         the image reveal! Very professional and made the whole experience
-         amazing! Would definitely do this experience again with her and highly
-         recommend!&rdquo;</p>
+         the image reveal!</p>
+      <p class="qr">Very professional and made the whole experience amazing!
+         <span class="hl">Would definitely do this experience again</span> with
+         her and highly recommend!&rdquo;</p>
       <p class="qa">Miss N.</p>
       <a class="src" href="https://www.google.com/search?q=JHP+Boudoir&amp;kgmid=/g/11v3x9fqm9"
          target="_blank" rel="noopener">Read all reviews on Google</a>
