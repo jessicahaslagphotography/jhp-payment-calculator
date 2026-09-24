@@ -3,12 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>{{ name }} | JHP Boudoir</title>
-<meta name="description" content="A boudoir session photographed by JHP Boudoir, Jefferson City, Missouri.">
+<title>{{ name }} &mdash; A Boudoir Session | JHP Boudoir</title>
+<meta name="description" content="A real boudoir session photographed at the JHP Boudoir studio just outside Jefferson City, Missouri. {{ rows|sum(start=[])|length }} frames from {{ name }}'s day.">
 <meta name="robots" content="noindex, nofollow">
-<meta property="og:title" content="{{ name }} | JHP Boudoir">
-<meta property="og:description" content="A boudoir session at JHP Boudoir, Jefferson City, Missouri.">
-<meta property="og:type" content="website">
+<link rel="canonical" href="https://pages.scalogy.com/jhpboudoir1/{{ slug }}/">
+<meta name="theme-color" content="#13100E">
+<meta property="og:site_name" content="JHP Boudoir">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="{{ name }} &mdash; A Boudoir Session | JHP Boudoir">
+<meta property="og:description" content="A real client session, photographed near Jefferson City, Missouri.">
+<meta property="og:url" content="https://pages.scalogy.com/jhpboudoir1/{{ slug }}/">
+<meta property="og:image" content="{{ cdn }}{{ rows[0][0].file }}">
+<meta property="og:image:alt" content="A boudoir portrait from {{ name }}'s session at JHP Boudoir">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ name }} &mdash; A Boudoir Session | JHP Boudoir">
+<meta name="twitter:description" content="A real client session, photographed near Jefferson City, Missouri.">
+<meta name="twitter:image" content="{{ cdn }}{{ rows[0][0].file }}">
+<meta property="og:type" content="article">
 <style>html,body{margin:0;padding:0;background:#13100E}body{overflow-x:hidden}</style>
 </head>
 <body>

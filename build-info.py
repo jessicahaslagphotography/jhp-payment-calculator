@@ -56,11 +56,22 @@ HEAD = """<!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FAQ | JHP Boudoir</title>
-<meta name="description" content="What to wear, who sees your photographs, whether you need to know how to pose. The questions women ask JHP Boudoir before they book a session in Jefferson City, Missouri.">
+<title>Boudoir Session FAQ | Jefferson City, MO | JHP Boudoir</title>
+<meta name="description" content="What to wear, who sees your photographs, what a session costs, and whether you need to know how to pose. The questions women ask JHP Boudoir before booking.">
 <meta name="robots" content="noindex, nofollow">
-<meta property="og:title" content="FAQ | JHP Boudoir">
+<link rel="canonical" href="https://pages.scalogy.com/jhpboudoir1/faq/">
+<meta name="theme-color" content="#13100E">
+<meta property="og:site_name" content="JHP Boudoir">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Boudoir Session FAQ | JHP Boudoir">
 <meta property="og:description" content="The questions women ask before they book a boudoir session.">
+<meta property="og:url" content="https://pages.scalogy.com/jhpboudoir1/faq/">
+<meta property="og:image" content="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/f7fbfbb3-5380-4094-85e1-8699a3ff59b9.jpg">
+<meta property="og:image:alt" content="A client photographed at the JHP Boudoir studio">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Boudoir Session FAQ | JHP Boudoir">
+<meta name="twitter:description" content="The questions women ask before they book a boudoir session.">
+<meta name="twitter:image" content="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/f7fbfbb3-5380-4094-85e1-8699a3ff59b9.jpg">
 <meta property="og:type" content="website">
 <style>html,body{margin:0;padding:0;background:#13100E}body{overflow-x:hidden}</style>
 </head>
@@ -383,9 +394,49 @@ BODY = """
 </script>
 """ % {"cdn": CDN}
 
+# ---------------------------------------------------------------- FAQ SCHEMA
+# FAQPage structured data, DERIVED from the accordion above rather than
+# written out a second time. Two copies of eleven answers is two things to
+# keep true, and the copy Google reads drifting from the copy a woman reads
+# is exactly the mismatch the guidelines call out. Parse what was built.
+#
+# Only the questions inside .jhp-ask are eligible: the phone nav is a
+# <details>/<summary> too, and its summary reads "Menu".
+def faq_schema(body_html):
+    import html as _html, json as _json, re as _re
+    ask = _re.search(r'<div class="jhp-ask">(.*?)</div>\s*</section>',
+                     body_html, _re.S)
+    if not ask:
+        raise SystemExit("FAQ schema: could not find the .jhp-ask block")
+    items = []
+    for block in _re.findall(r'<details name="faq">(.*?)</details>',
+                             ask.group(1), _re.S):
+        q = _re.search(r'<summary[^>]*>(.*?)</summary>', block, _re.S)
+        if not q:
+            continue
+        def text(frag):
+            frag = _re.sub(r'<span class="mk"[^>]*></span>', '', frag)
+            return _html.unescape(_re.sub(r'\s+', ' ',
+                                  _re.sub(r'<[^>]+>', ' ', frag))).strip()
+        answer = " ".join(text(x) for x in
+                          _re.findall(r'<p[^>]*>(.*?)</p>', block[q.end():], _re.S))
+        answer = _re.sub(r'\s+', ' ', answer).strip()
+        if not answer:
+            continue
+        items.append({"@type": "Question", "name": text(q.group(1)),
+                      "acceptedAnswer": {"@type": "Answer", "text": answer}})
+    if len(items) < 8:
+        raise SystemExit("FAQ schema: only %d questions parsed, expected 11"
+                         % len(items))
+    doc = {"@context": "https://schema.org", "@type": "FAQPage",
+           "mainEntity": items}
+    return ('<script type="application/ld+json">\n'
+            + _json.dumps(doc, indent=1, ensure_ascii=False)
+            + "\n</script>\n")
+
 out = HEAD + shared[shared.index("/* SHARED DESIGN SYSTEM"):] + parts + vip \
     + FAQ_CSS + "</style>\n\n" + nav + BODY + "\n" + foot
-out = out.replace("</html>\n", "</html>\n")
+out = out.replace("</body>", faq_schema(BODY) + "</body>")
 (ROOT / "scalogy-faq.html").write_text(out)
 print("wrote", len(out.encode()), "bytes,",
       out.count('<details name="faq">'), "questions,", out.count('class="fill"'), "blanks")

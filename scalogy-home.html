@@ -3,11 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>JHP Boudoir | Central Missouri's Premier Boudoir Studio</title>
-<meta name="description" content="Luxury boudoir photography in Jefferson City, Missouri. A guided session, hair and makeup, and a one-on-one image reveal. Booking 2026 and 2027.">
+<title>Boudoir Photography in Jefferson City, MO | JHP Boudoir</title>
+<meta name="description" content="Luxury boudoir photography just outside Jefferson City, Missouri. Hair and makeup, posing guided head to toe, and a private image reveal. Booking 2026 and 2027.">
 <meta name="robots" content="noindex, nofollow">
-<meta property="og:title" content="JHP Boudoir | Central Missouri's Premier Boudoir Studio">
-<meta property="og:description" content="Luxury boudoir photography in Jefferson City, Missouri.">
+<link rel="canonical" href="https://pages.scalogy.com/jhpboudoir1/home-preview/">
+<meta name="theme-color" content="#13100E">
+<meta property="og:site_name" content="JHP Boudoir">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="JHP Boudoir | Boudoir Photography in Jefferson City, MO">
+<meta property="og:description" content="A luxury boudoir studio just outside Jefferson City, Missouri, for women of every age and every body.">
+<meta property="og:url" content="https://pages.scalogy.com/jhpboudoir1/home-preview/">
+<meta property="og:image" content="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f198fc609c5dbd2205.jpg">
+<meta property="og:image:alt" content="A boudoir portrait photographed at the JHP Boudoir studio in Jefferson City, Missouri">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="JHP Boudoir | Boudoir Photography in Jefferson City, MO">
+<meta name="twitter:description" content="A luxury boudoir studio just outside Jefferson City, Missouri, for women of every age and every body.">
+<meta name="twitter:image" content="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f198fc609c5dbd2205.jpg">
 <meta property="og:type" content="website">
 <style>html,body{margin:0;padding:0;background:#13100E}body{overflow-x:hidden}</style>
 </head>
@@ -939,5 +950,100 @@
 </div>
 
 {% endraw %}
+<!-- ============================ BUSINESS STRUCTURED DATA ====================
+     What Google reads to understand WHAT this business is and WHERE. For a
+     local service business this is the on-page half of local search; the
+     other and larger half is the Google Business Profile, which lives
+     outside this repo entirely.
+
+     THREE DELIBERATE OMISSIONS, none of them oversights:
+
+     1. No streetAddress and no telephone. Neither is written down anywhere
+        in this project, and NAP (name / address / phone) has to match the
+        Google Business Profile CHARACTER FOR CHARACTER or it works against
+        her. A guessed address is worse than none. Add both here only by
+        copying them out of the live GBP listing.
+     2. No geo coordinates, for the same reason.
+     3. No aggregateRating and no review markup, deliberately. Google does
+        not allow a business to mark up reviews of ITSELF on its own site --
+        self-serving review markup is a documented violation and risks a
+        manual action. Her Google reviews earn their weight on the GBP
+        listing, which is where they already are.
+
+     The @type is ProfessionalService, a LocalBusiness subtype that is
+     certainly valid. "PhotographyBusiness" may be more specific and would
+     be a one-word upgrade -- confirm it in Google's Rich Results Test
+     before swapping, because an invalid @type voids the whole block.
+     ======================================================================== -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "ProfessionalService",
+ "@id": "https://pages.scalogy.com/jhpboudoir1/home-preview/#business",
+ "name": "JHP Boudoir",
+ "description": "A luxury boudoir photography studio just outside Jefferson City, Missouri, working with women from all across Missouri. An elevated experience from the first call to the final reveal, for women of all walks of life and all bodies.",
+ "url": "https://pages.scalogy.com/jhpboudoir1/home-preview/",
+ "image": "https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f198fc609c5dbd2205.jpg",
+ "logo": "https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/3933909c-0f61-45aa-a608-4790cf3af1d3.png",
+ "email": "jessica@jhpboudoir.com",
+ "foundingDate": "2021",
+ "priceRange": "$$$",
+ "currenciesAccepted": "USD",
+ "address": {
+  "@type": "PostalAddress",
+  "addressLocality": "Jefferson City",
+  "addressRegion": "MO",
+  "addressCountry": "US"
+ },
+ "areaServed": {
+  "@type": "State",
+  "name": "Missouri"
+ },
+ "availableLanguage": "en-US",
+ "openingHoursSpecification": [
+  {
+   "@type": "OpeningHoursSpecification",
+   "dayOfWeek": [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday"
+   ],
+   "opens": "08:00",
+   "closes": "17:00",
+   "description": "Consultation calls. The studio itself is by appointment only."
+  }
+ ],
+ "sameAs": [
+  "https://www.instagram.com/jhpboudoir_",
+  "https://www.facebook.com/profile.php?id=100082843870968",
+  "https://www.tiktok.com/@jhpboudoir"
+ ],
+ "hasOfferCatalog": {
+  "@type": "OfferCatalog",
+  "name": "Boudoir sessions",
+  "itemListElement": [
+   {
+    "@type": "Offer",
+    "itemOffered": {
+     "@type": "Service",
+     "name": "Boudoir photography session",
+     "serviceType": "Boudoir photography",
+     "description": "A guided studio session including professional hair and makeup, posing directed head to toe, and a private one-on-one image reveal."
+    },
+    "priceCurrency": "USD",
+    "price": "697",
+    "priceSpecification": {
+     "@type": "PriceSpecification",
+     "priceCurrency": "USD",
+     "minPrice": "697",
+     "description": "Session fee starts at $697; a collection is purchased separately."
+    }
+   }
+  ]
+ }
+}
+</script>
 </body>
 </html>

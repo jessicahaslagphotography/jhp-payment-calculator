@@ -1,1 +1,175 @@
-{"name":"Miss A","cdn":"https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/","rows":[[{"file":"e5bbd29e-eaf7-4980-89f5-38009b38b8b3.jpg","label":"DSC_0262-BW","w":1065,"h":1600,"ar":0.6656,"alt":"Boudoir portrait from a session at JHP Boudoir"},{"file":"cd0b858f-d107-4cbb-91e9-38ad880a447c.jpg","label":"DSC_0550-BW","w":1065,"h":1600,"ar":0.6656,"alt":"Boudoir portrait from a session at JHP Boudoir"}],[{"file":"4658db4c-10a8-4a66-9668-be17cd9b2446.jpg","label":"DSC_0258-BW","w":1600,"h":1065,"ar":1.5023,"alt":"Boudoir portrait from a session at JHP Boudoir"},{"file":"678293dc-8167-4463-a41b-8a20bfaee783.jpg","label":"DSC_0472-BW","w":1600,"h":1065,"ar":1.5023,"alt":"Boudoir portrait from a session at JHP Boudoir"},{"file":"2cd0d6d3-4add-4c30-ab9c-908cdac4c768.jpg","label":"DSC_0579-BW","w":1600,"h":1065,"ar":1.5023,"alt":"Boudoir portrait from a session at JHP Boudoir"}],[{"file":"539a4153-27fe-4052-ac38-b29a83b2f08d.jpg","label":"DSC_0361-BW","w":1600,"h":1065,"ar":1.5023,"alt":"Boudoir portrait from a session at JHP Boudoir"}],[{"file":"4431ae69-f421-4408-bcd4-6116ede45c70.jpg","label":"DSC_0304-BW","w":1065,"h":1600,"ar":0.6656,"alt":"Boudoir portrait from a session at JHP Boudoir"},{"file":"9c98f657-389c-423a-b9ee-a96dae308e03.jpg","label":"DSC_0378-BW","w":1600,"h":1065,"ar":1.5023,"alt":"Boudoir portrait from a session at JHP Boudoir"},{"file":"6a2e52f3-5251-4dc9-8fb7-d04a7b57a60b.jpg","label":"DSC_0532-BW","w":1600,"h":1065,"ar":1.5023,"alt":"Boudoir portrait from a session at JHP Boudoir"}],[{"file":"4e6267ed-182a-4c11-8316-f7529b512418.jpg","label":"DSC_0443-BW","w":1065,"h":1600,"ar":0.6656,"alt":"Boudoir portrait from a session at JHP Boudoir"},{"file":"8fff9751-86e2-452b-b182-f79c087c1555.jpg","label":"DSC_0601-BW","w":1065,"h":1600,"ar":0.6656,"alt":"Boudoir portrait from a session at JHP Boudoir"},{"file":"e928a41b-2816-484c-9e03-15a1f18135ea.jpg","label":"DSC_0478-BW","w":1065,"h":1600,"ar":0.6656,"alt":"Boudoir portrait from a session at JHP Boudoir"}],[{"file":"1b359085-f63d-4012-baab-a15cdcd11e83.jpg","label":"DSC_0402-BW","w":1600,"h":1065,"ar":1.5023,"alt":"Boudoir portrait from a session at JHP Boudoir"},{"file":"e97887f5-3339-4512-afe8-cc9c39dbe7b2.jpg","label":"DSC_0630-BW","w":1600,"h":1065,"ar":1.5023,"alt":"Boudoir portrait from a session at JHP Boudoir"}],[{"file":"4ed33692-fb5f-4087-ac3f-f9e4894557d5.jpg","label":"DSC_0609-BW","w":1065,"h":1600,"ar":0.6656,"alt":"Boudoir portrait from a session at JHP Boudoir"},{"file":"d445399a-272f-4c98-b850-dff4f1c2e344.jpg","label":"DSC_0487-BW","w":1600,"h":1065,"ar":1.5023,"alt":"Boudoir portrait from a session at JHP Boudoir"}],[{"file":"961d576f-58ff-439c-8ec0-24189055a29a.jpg","label":"DSC_0511-BW","w":1600,"h":1065,"ar":1.5023,"alt":"Boudoir portrait from a session at JHP Boudoir"},{"file":"2b4d228c-6db8-499f-b4ab-d1f82f8864d9.jpg","label":"DSC_0633-BW","w":1600,"h":1065,"ar":1.5023,"alt":"Boudoir portrait from a session at JHP Boudoir"}]],"prev":{"name":"Miss K","slug":"portfolio-miss-k-2"},"nxt":{"name":"Miss S","slug":"portfolio-miss-s"}}
+{
+ "name": "Miss A",
+ "slug": "portfolio-miss-a",
+ "cdn": "https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/",
+ "rows": [
+  [
+   {
+    "file": "e5bbd29e-eaf7-4980-89f5-38009b38b8b3.jpg",
+    "label": "DSC_0262-BW",
+    "w": 1065,
+    "h": 1600,
+    "ar": 0.6656,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   },
+   {
+    "file": "cd0b858f-d107-4cbb-91e9-38ad880a447c.jpg",
+    "label": "DSC_0550-BW",
+    "w": 1065,
+    "h": 1600,
+    "ar": 0.6656,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   }
+  ],
+  [
+   {
+    "file": "4658db4c-10a8-4a66-9668-be17cd9b2446.jpg",
+    "label": "DSC_0258-BW",
+    "w": 1600,
+    "h": 1065,
+    "ar": 1.5023,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   },
+   {
+    "file": "678293dc-8167-4463-a41b-8a20bfaee783.jpg",
+    "label": "DSC_0472-BW",
+    "w": 1600,
+    "h": 1065,
+    "ar": 1.5023,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   },
+   {
+    "file": "2cd0d6d3-4add-4c30-ab9c-908cdac4c768.jpg",
+    "label": "DSC_0579-BW",
+    "w": 1600,
+    "h": 1065,
+    "ar": 1.5023,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   }
+  ],
+  [
+   {
+    "file": "539a4153-27fe-4052-ac38-b29a83b2f08d.jpg",
+    "label": "DSC_0361-BW",
+    "w": 1600,
+    "h": 1065,
+    "ar": 1.5023,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   }
+  ],
+  [
+   {
+    "file": "4431ae69-f421-4408-bcd4-6116ede45c70.jpg",
+    "label": "DSC_0304-BW",
+    "w": 1065,
+    "h": 1600,
+    "ar": 0.6656,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   },
+   {
+    "file": "9c98f657-389c-423a-b9ee-a96dae308e03.jpg",
+    "label": "DSC_0378-BW",
+    "w": 1600,
+    "h": 1065,
+    "ar": 1.5023,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   },
+   {
+    "file": "6a2e52f3-5251-4dc9-8fb7-d04a7b57a60b.jpg",
+    "label": "DSC_0532-BW",
+    "w": 1600,
+    "h": 1065,
+    "ar": 1.5023,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   }
+  ],
+  [
+   {
+    "file": "4e6267ed-182a-4c11-8316-f7529b512418.jpg",
+    "label": "DSC_0443-BW",
+    "w": 1065,
+    "h": 1600,
+    "ar": 0.6656,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   },
+   {
+    "file": "8fff9751-86e2-452b-b182-f79c087c1555.jpg",
+    "label": "DSC_0601-BW",
+    "w": 1065,
+    "h": 1600,
+    "ar": 0.6656,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   },
+   {
+    "file": "e928a41b-2816-484c-9e03-15a1f18135ea.jpg",
+    "label": "DSC_0478-BW",
+    "w": 1065,
+    "h": 1600,
+    "ar": 0.6656,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   }
+  ],
+  [
+   {
+    "file": "1b359085-f63d-4012-baab-a15cdcd11e83.jpg",
+    "label": "DSC_0402-BW",
+    "w": 1600,
+    "h": 1065,
+    "ar": 1.5023,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   },
+   {
+    "file": "e97887f5-3339-4512-afe8-cc9c39dbe7b2.jpg",
+    "label": "DSC_0630-BW",
+    "w": 1600,
+    "h": 1065,
+    "ar": 1.5023,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   }
+  ],
+  [
+   {
+    "file": "4ed33692-fb5f-4087-ac3f-f9e4894557d5.jpg",
+    "label": "DSC_0609-BW",
+    "w": 1065,
+    "h": 1600,
+    "ar": 0.6656,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   },
+   {
+    "file": "d445399a-272f-4c98-b850-dff4f1c2e344.jpg",
+    "label": "DSC_0487-BW",
+    "w": 1600,
+    "h": 1065,
+    "ar": 1.5023,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   }
+  ],
+  [
+   {
+    "file": "961d576f-58ff-439c-8ec0-24189055a29a.jpg",
+    "label": "DSC_0511-BW",
+    "w": 1600,
+    "h": 1065,
+    "ar": 1.5023,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   },
+   {
+    "file": "2b4d228c-6db8-499f-b4ab-d1f82f8864d9.jpg",
+    "label": "DSC_0633-BW",
+    "w": 1600,
+    "h": 1065,
+    "ar": 1.5023,
+    "alt": "Boudoir portrait from a session at JHP Boudoir"
+   }
+  ]
+ ],
+ "prev": {
+  "name": "Miss K",
+  "slug": "portfolio-miss-k-2"
+ },
+ "nxt": {
+  "name": "Miss S",
+  "slug": "portfolio-miss-s"
+ }
+}

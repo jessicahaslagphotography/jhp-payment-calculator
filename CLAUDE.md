@@ -1,10 +1,12 @@
 # JHP Boudoir — house rules for the website
 
 The site is built as Jinja templates on Scalogy and mirrored here as
-`scalogy-*.html`. The generators are `build-index.py` (home),
-`build-info.py` (FAQ), `build-experience.py` (The Experience),
+`scalogy-*.html`. The generators are `build-index.py` (the PORTFOLIO --
+not the home page, whatever this line used to say), `build-info.py` (FAQ),
+`build-experience.py` (The Experience), `build-contact.py` (/contact) and
 `build-gallery.py` + `plan-all.py` (the twelve client galleries).
-Edit the generator, never the built file.
+**`scalogy-home.html` and `scalogy-about.html` have no generator** and are
+edited by hand. Everywhere else: edit the generator, never the built file.
 
 ## Headlines are Title Case. Always.
 
@@ -70,6 +72,80 @@ things: no horizontal scroll, no band whose overlay content is taller than the
 band, and no h2 larger than that page's h1. The one number that moved off one
 of Jessica's own: the About page's closing band was 190px and is now about
 199px, because it is padding plus content rather than a set height.
+
+## SEO: the site is switched off, and that is on purpose
+
+**Every page is `noindex, nofollow`.** That is not an oversight and it is
+not a bug to fix in passing. While `www.jhpboudoir.com` still serves the
+Showit site, letting Google index the Scalogy preview would put two JHP
+Boudoir sites in the index competing with each other, and the one that
+wins might be the preview URL. The tag comes off at launch, as one
+deliberate step, with Jessica's say-so -- never as a side effect of some
+other change.
+
+Until then **every other SEO signal is built and inert**, which is the
+right order: switched on at launch it all counts from day one.
+
+What is in place, and the rules that go with it:
+
+- **Titles and descriptions carry the location.** Every `<title>` leads
+  with what the page is and names Jefferson City or Missouri, and stops
+  under about 60 characters so Google does not truncate it; descriptions
+  sit near 150. They are not headlines and the Title Case rule above does
+  not apply to them.
+- **`SITE` is `https://pages.scalogy.com/jhpboudoir1` and it is wrong at
+  launch.** Canonical and `og:url` are built from it on all seven
+  templates, and the twelve galleries build theirs from the `slug` now
+  stored in each `renders/<slug>.json`. Changing the domain means changing
+  it in three HTML files and four generators -- do it in the same pass as
+  the wordmark link and the Specialty Sessions link.
+- **Share cards exist now and did not before.** Every page has `og:image`,
+  `og:image:alt` and a `summary_large_image` Twitter card; each gallery
+  uses its own first photograph. Before this, any link she texted or
+  posted rendered as a blank grey box. The frames are 3:2 and the ideal is
+  1.91:1, so a purpose-made 1200x630 card would crop better -- worth doing,
+  not urgent.
+- **The FAQ's structured data is DERIVED, never written twice.**
+  `build-info.py` parses the built accordion and emits `FAQPage` JSON-LD
+  from it, so the copy Google reads cannot drift from the copy a woman
+  reads. It filters to `.jhp-ask` on purpose: the phone nav is a
+  `<details>`/`<summary>` too and its summary says "Menu". It hard-fails
+  the build if fewer than eight questions parse, so a markup change that
+  breaks the parser is loud rather than silent.
+- **The business schema on the home page has three deliberate holes.**
+  No `streetAddress`, no `telephone`, no `geo` -- none of those are
+  written down anywhere in this project, and NAP has to match the Google
+  Business Profile character for character or it actively costs her.
+  A guessed address is worse than no address. And no `aggregateRating` or
+  review markup at all: Google does not permit a business to mark up
+  reviews of itself on its own site. Her Google reviews do their work on
+  the GBP listing.
+- **The `@type` is `ProfessionalService`**, which is certainly a valid
+  LocalBusiness subtype. `PhotographyBusiness` may be more specific and
+  would be a one-word upgrade; confirm it in Rich Results Test first,
+  because an invalid type voids the whole block.
+
+Still to do, roughly in order of what it is worth:
+
+1. **The Google Business Profile, which is not in this repo at all.** It
+   carries about a third of local ranking weight on its own -- more than
+   everything on this site put together -- and the single biggest factor
+   inside it is the primary category. Nothing here substitutes for it.
+2. **Nothing is written for anyone to find.** There is no blog and
+   `/blog` 404s. For a local studio that is the main organic lever there
+   is, and the FAQ answers are already the raw material.
+3. **165 gallery photographs share one alt string**, word for word:
+   "Boudoir portrait from a session at JHP Boudoir". It is honest and it
+   is useless -- to Google Images and to a screen reader alike.
+4. **No `srcset` anywhere.** Full 1600px frames are served to 390px
+   phones, which is the page-speed problem on this site.
+5. **`sitemap.xml` and `robots.txt`** both want the real domain and
+   cannot be written until it is bound.
+6. **The name is inconsistent.** The About h1 says "Jessica Paul"; its
+   own meta description, its title and all six alt texts say "Jessica
+   Haslag". Search engines treat a person as an entity and entity
+   consistency matters, so this needs settling -- and it is Jessica's to
+   settle, not a find-and-replace.
 
 ## The rest of the system, in one place
 
