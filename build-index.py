@@ -50,6 +50,29 @@ GAL_CSS = """/* THE INDEX
 /* The name sits on the photograph rather than under it, so the squares
    stay a grid of pictures and the row does not gain a band of text. The
    gradient is there to keep the name legible over a bright frame. */
+/* THE LINE ABOVE THE GRID
+   ----------------------
+   Jessica asked on 24 September for a line saying the squares open. It sits
+   here rather than under the page heading, where she pointed, for a measured
+   reason: the band above is 220px on a phone -- her tuner number -- and its
+   overlay already comes to 153px inside 196px of padded height. A fourth
+   line took the block to 217px, which does not clip; it pushes the kicker
+   21px ABOVE the top of the photograph and onto the nav, the same way the
+   home hero did. The band is hers and does not grow, so the sentence moved
+   to the thing it is actually about.
+
+   Which is the better place for it regardless. It is not a lede about the
+   portfolio, it is an instruction about the squares, and it belongs beside
+   them -- close enough to read as a caption for the grid rather than as
+   more page copy. Small and dim for the same reason: it should be found by
+   someone wondering whether the photographs do anything, and skipped by
+   everyone else. */
+.jhp-home .jhp-gal-hint{font-family:var(--sans);font-weight:300;
+  font-size:14.5px;line-height:1.6;letter-spacing:.01em;color:var(--dim);
+  text-align:center;margin:0 auto 22px;max-width:46ch}
+@media (max-width:620px){
+  .jhp-home .jhp-gal-hint{font-size:13.5px;margin-bottom:18px}
+}
 .jhp-home .jhp-gal .nm{position:absolute;left:0;right:0;bottom:0;
   padding:32px 10px 13px;font-family:var(--sans);font-size:11px;
   letter-spacing:.24em;text-transform:uppercase;color:var(--ink);
@@ -159,7 +182,7 @@ GAL_CSS = """/* THE INDEX
   height:100%;object-fit:cover;object-position:center center}
 .jhp-home .jhp-quote blockquote{margin:0}
 .jhp-home .jhp-quote .qt{font-family:var(--serif);font-style:italic;
-  font-size:clamp(18px,1.95vw,23px);line-height:1.55;color:var(--ink);
+  font-size:clamp(19px,2.1vw,27px);line-height:1.5;color:var(--ink);
   margin:0 0 20px;text-wrap:pretty}
 .jhp-home .jhp-quote .qa{font-family:var(--sans);font-size:11px;
   letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin:0}
@@ -186,7 +209,7 @@ GAL_CSS = """/* THE INDEX
   .jhp-home .jhp-quote .shot{margin-inline:calc((100% - 100vw) / 2);
     height:430px}
   .jhp-home .jhp-quote .shot::before{content:none}
-  .jhp-home .jhp-quote .qt{font-size:19px;line-height:1.6;margin-bottom:18px}
+  .jhp-home .jhp-quote .qt{font-size:21px;line-height:1.55;margin-bottom:18px}
   .jhp-home .jhp-quote .qa{font-size:var(--ph-label);letter-spacing:.22em}
   .jhp-home .jhp-quote .src{font-size:12px;margin-top:16px}
 }

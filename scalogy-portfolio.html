@@ -335,6 +335,29 @@
 /* The name sits on the photograph rather than under it, so the squares
    stay a grid of pictures and the row does not gain a band of text. The
    gradient is there to keep the name legible over a bright frame. */
+/* THE LINE ABOVE THE GRID
+   ----------------------
+   Jessica asked on 24 September for a line saying the squares open. It sits
+   here rather than under the page heading, where she pointed, for a measured
+   reason: the band above is 220px on a phone -- her tuner number -- and its
+   overlay already comes to 153px inside 196px of padded height. A fourth
+   line took the block to 217px, which does not clip; it pushes the kicker
+   21px ABOVE the top of the photograph and onto the nav, the same way the
+   home hero did. The band is hers and does not grow, so the sentence moved
+   to the thing it is actually about.
+
+   Which is the better place for it regardless. It is not a lede about the
+   portfolio, it is an instruction about the squares, and it belongs beside
+   them -- close enough to read as a caption for the grid rather than as
+   more page copy. Small and dim for the same reason: it should be found by
+   someone wondering whether the photographs do anything, and skipped by
+   everyone else. */
+.jhp-home .jhp-gal-hint{font-family:var(--sans);font-weight:300;
+  font-size:14.5px;line-height:1.6;letter-spacing:.01em;color:var(--dim);
+  text-align:center;margin:0 auto 22px;max-width:46ch}
+@media (max-width:620px){
+  .jhp-home .jhp-gal-hint{font-size:13.5px;margin-bottom:18px}
+}
 .jhp-home .jhp-gal .nm{position:absolute;left:0;right:0;bottom:0;
   padding:32px 10px 13px;font-family:var(--sans);font-size:11px;
   letter-spacing:.24em;text-transform:uppercase;color:var(--ink);
@@ -567,6 +590,7 @@
 </section>
 
 <section class="jhp-sec" style="border-bottom:none">
+  <p class="jhp-gal-hint">Click any photograph to open that client&rsquo;s gallery.</p>
   <div class="jhp-gal">
     <a href="../portfolio-miss-k/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/cb23b47d-e3d5-4c48-9c9b-2b72b000cc53.jpg" width="1065" height="1600" alt="Miss K &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss K</span></a>
     <a href="../portfolio-miss-k-2/"><img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/5a0ce3ad-ebae-4164-a984-8ec4b8ee6464.jpg" width="1600" height="1070" alt="Miss K &mdash; a boudoir session at JHP Boudoir"><span class="nm">Miss K</span></a>
