@@ -130,8 +130,8 @@ straight answer in the body.
 > just had a little spark of *"maybe I could do this…"* — you are in the
 > right place.
 >
-> And honestly? There are a lot of photographers you could have asked about
-> this. You asked me. Thank you. That means more than you know. 💕
+> There are a lot of photographers you could have asked about this. You asked
+> me. Thank you. That means more than you know. 💕
 >
 > Everything about the experience is right here — what is included, what it
 > costs, how the day runs, and how to claim your spot on my calendar:
@@ -139,19 +139,20 @@ straight answer in the body.
 > **[Read your Session Guide →]**
 >
 > Your boudoir experience includes:
-> ✨ A two to three hour experience in our luxury studio
-> ✨ Professional hair and makeup at a local salon before you arrive (hellooooo makeover!)
-> ✨ Full access to the studio wardrobe — 160 pieces, sizes XS to 4X
-> ✨ A full session where I pose you from head to pointed toe
-> ✨ Expert posing and expression guidance
-> ✨ Retouching, and your private image reveal and ordering appointment
+>
+> - ✨ A two to three hour experience in our luxury studio
+> - ✨ Professional hair and makeup at a local salon before you arrive (hellooooo makeover!)
+> - ✨ Full access to the studio wardrobe — 160 pieces, sizes XS to 4X
+> - ✨ A full session where I pose you from head to pointed toe
+> - ✨ Expert posing and expression guidance
+> - ✨ Retouching, and your private image reveal and ordering appointment
 >
 > **Ready to chat?** Grab a time and bring every question you have — the
 > practical ones and the nervous ones. No pressure and no obligation. 🖤
 >
 > And if you already know you are ready to book — have a credit card handy!
 > We will process your session fee retainer right on the call and get your
-> booking finalized.
+> booking started.
 >
 > **[Book my call →]**
 >
@@ -162,19 +163,20 @@ straight answer in the body.
 
 **Text:**
 
-> Hi {{contact.first_name}}! It's Jess at JHP Boudoir 🖤 So excited you
-> reached out!
+> Hi {{contact.first_name}}! It's Jess at JHP Boudoir. I am so excited you
+> reached out about a boudoir session!
 >
-> Your Session Guide is here: [guide]
+> Everything about the experience is right here — what's included, what it
+> costs and how the day runs: [guide]
 >
 > There are plenty of photographers you could've asked — thank you for
-> asking me!
+> inquiring with my studio!
 >
 > Questions or Ready to Book? Let's Chat: [calendar]
 >
 > Reply STOP to opt out.
 
-*Three segments. The only message where that is worth it — guide, calendar,
+*Four segments. The only message where that is worth it — guide, calendar,
 thank-you and the compliance line.*
 
 ---
@@ -196,7 +198,8 @@ thank-you and the compliance line.*
 >
 > Nearly every single one. You do not need to be brave, or in shape, or
 > photogenic. You just need to show up — I will do the rest, and you will
-> love every minute of it.
+> love every minute of it. This is a full service boudoir studio, and I will
+> take great care of you throughout your boudoir experience.
 >
 > Bring your questions and we will go through them together.
 >
@@ -206,10 +209,16 @@ thank-you and the compliance line.*
 
 **Text:**
 
-> {{contact.first_name}}, just checking your Session Guide arrived — it
-> sometimes hides in your spam folder! [guide]
+> Hey, {{contact.first_name}}! Just checking to see if your session guide
+> arrived? It sometimes hides in your spam folder! [guide]
 >
-> Any questions at all, reply right here 🖤 — Jess
+> You do not need to be brave, or in shape, or photogenic — you just need to
+> show up. This is a full service boudoir studio and I will take great care
+> of you the whole way through.
+>
+> Any questions at all, reply right here or book a call! Talk soon!
+>
+> [calendar] — Jess
 
 ---
 
@@ -219,7 +228,7 @@ thank-you and the compliance line.*
 
 > Hi {{contact.first_name}},
 >
-> Totally normal. **Everyone** is.
+> Totally normal to be nervous. **Everyone** is.
 >
 > But nervous turns into empowered real quick, and you will leave feeling
 > like a damn goddess. That is just what happens in my studio.
@@ -247,11 +256,19 @@ thank-you and the compliance line.*
 
 **Text:**
 
-> {{contact.first_name}}, the question everyone asks: "what if I'm nervous?"
+> {{contact.first_name}}, the question everyone asks me: "what if I'm
+> nervous?"
 >
-> Totally normal. Everyone is! And you don't need to know how to pose — that's literally my job 🖤
+> Totally normal to be nervous. Everyone is! And you don't need to know how
+> to pose — that is literally my job. I guide you the entire time.
 >
-> Let's talk it through: [calendar] — Jess
+> Being nervous is the best reason there is to book the call. Bring every
+> worry you have and we will talk it all the way through — no pressure and
+> no obligation.
+>
+> Let's get you on the phone: [calendar]
+>
+> — Jess
 
 ---
 
@@ -261,7 +278,8 @@ thank-you and the compliance line.*
 
 > Hi {{contact.first_name}}!
 >
-> Here is the whole thing, start to finish.
+> It has been a week since you inquired with the studio, and I would love to
+> get your call on the books! So here is the whole thing, start to finish.
 >
 > **Hair and makeup first**, at a local salon — you drive over to the studio
 > already done and gorgeous.
@@ -287,11 +305,18 @@ thank-you and the compliance line.*
 
 **Text:**
 
-> {{contact.first_name}}! Have you had a chance to read through your Session Guide yet? [guide]
+> {{contact.first_name}}, it's been a week since you inquired with the
+> studio! Have you had a chance to read through your Session Guide yet?
+> [guide]
 >
-> Any questions I can answer for you? I'd love to get your call on the books 🖤
+> Hair and makeup first at a local salon, then two to three hours in the
+> studio, then your images at a private Zoom reveal where we go through
+> every one together. You are never sent a link and left to figure it out on
+> your own.
 >
-> [calendar] — Jess
+> Any questions I can answer for you? Let's get your call booked: [calendar]
+>
+> — Jess
 
 ---
 
@@ -335,9 +360,14 @@ thank-you and the compliance line.*
 
 **Text:**
 
-> {{contact.first_name}}! It's been two weeks since you reached out 🖤 I would absolutely love to get your session on the books!
+> {{contact.first_name}}! It's been two weeks since you reached out. I just
+> sent over everything about the investment — the session fee, the
+> Collections and the interest-free payment plans, all written down.
 >
-> Let's find a time to chat — bring every question you've got: [calendar]
+> If a number raises a question, bring it. No pressure and no obligation!
+>
+> I would absolutely love to get your session on the books. Let's find a
+> time to chat: [calendar]
 >
 > — Jess
 
@@ -376,9 +406,15 @@ thank-you and the compliance line.*
 
 **Text:**
 
-> {{contact.first_name}}, it's been 30 days — and I haven't forgotten about you! 🖤
+> {{contact.first_name}}, it's been 30 days — and I haven't forgotten about
+> you!
 >
-> I would love to welcome you into the studio. Let's get your call booked and your session on the calendar: [calendar]
+> Women rarely book because of a birthday. They book because they got tired
+> of waiting to feel ready. If you are still thinking about it a month
+> later, that is generally your answer.
+>
+> I would love to welcome you into the studio. Let's get your call booked
+> and your session on the calendar: [calendar]
 >
 > — Jess
 
@@ -394,12 +430,13 @@ thank-you and the compliance line.*
 > and I wanted to check in. **What questions can I answer for you?**
 >
 > In case it helps to see it again, here is what your experience includes:
-> ✨ A two to three hour experience in our luxury studio
-> ✨ Professional hair and makeup at a local salon before you arrive (hellooooo makeover!)
-> ✨ Full access to the studio wardrobe — 160 pieces, sizes XS to 4X
-> ✨ A full session where I pose you from head to pointed toe
-> ✨ Expert posing and expression guidance
-> ✨ Retouching, and your private image reveal and ordering appointment
+>
+> - ✨ A two to three hour experience in our luxury studio
+> - ✨ Professional hair and makeup at a local salon before you arrive (hellooooo makeover!)
+> - ✨ Full access to the studio wardrobe — 160 pieces, sizes XS to 4X
+> - ✨ A full session where I pose you from head to pointed toe
+> - ✨ Expert posing and expression guidance
+> - ✨ Retouching, and your private image reveal and ordering appointment
 >
 > And you never pay for it all at once. Every Collection is bought on an
 > **interest-free prepayment plan** — weekly, biweekly or monthly, set up
@@ -414,11 +451,21 @@ thank-you and the compliance line.*
 
 **Text:**
 
-> {{contact.first_name}}, three months since you reached out! What questions can I answer for you? 🖤
+> {{contact.first_name}}, three months since you reached out! What questions
+> can I answer for you?
 >
-> Hair + makeup, the wardrobe, your full session and your reveal — all included, and all on an interest-free plan.
+> Your experience includes the studio, hair and makeup at a local salon
+> beforehand, the full wardrobe — 160 pieces, XS to 4X — your session with
+> me posing you head to pointed toe, retouching, and your private image
+> reveal and ordering appointment.
 >
-> You've thought about it. Let's do it! [calendar] — Jess
+> And you never pay for it all at once. Every Collection is on an
+> interest-free prepayment plan — weekly, biweekly or monthly.
+>
+> You have thought about it. Let's do it! Book a no-obligation call:
+> [calendar]
+>
+> — Jess
 
 ---
 
@@ -445,9 +492,15 @@ thank-you and the compliance line.*
 
 **Text:**
 
-> {{contact.first_name}}, my last message — but my door is always open 🖤
+> {{contact.first_name}}, this is my last message — but my door is always
+> open.
 >
-> Whenever you're ready, I'd love to have you in. You're worth it, and I'd be honored to be the one who captures you.
+> Thank you for thinking of my studio in the first place. With everywhere
+> you could have looked, that means a great deal to me.
+>
+> Next month, next year, whenever the time is right — I would love to have
+> you in. You are worth it, and I would be honored to be the one who
+> captures you.
 >
 > [calendar] — Jess
 
@@ -474,6 +527,18 @@ never asks is just a newsletter. Messages 5, 6, 7 and 8 ask directly.
 **All eight texts are live.** An earlier draft marked three optional on the
 grounds that eight in six months might be a lot; she wrote copy for every one
 of them, which settles it.
+
+**Each text now carries its email's argument, not just its link.** Her steer
+on 25 September: *"I want these emails and texts to resemble the dubsado
+workflow emails. Create the texts based on what the email says."* So the
+72-hour text makes the nervousness case and asks for the phone call, the
+7-day text walks the day, the 14-day text names the investment, and so on.
+They are shorter than the emails and say the same thing.
+
+**No emoji in any text.** Her instruction, and it is the right one for SMS:
+a heart renders differently on every handset and some carriers still turn a
+text with emoji into an MMS, which costs more and can silently fail. The
+emails keep theirs.
 
 **The thank-you is in message 1 and message 8 and nowhere between.** Her
 note: *"there are many choices for a boudoir photographer and I appreciate
