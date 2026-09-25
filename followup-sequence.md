@@ -195,8 +195,8 @@ thank-you and the compliance line.*
 > this."*
 >
 > Nearly every single one. You do not need to be brave, or in shape, or
-> photogenic. You need to turn up — I will do the rest, and I will love
-> every minute of it.
+> photogenic. You just need to show up — I will do the rest, and you will
+> love every minute of it.
 >
 > Bring your questions and we will go through them together.
 >
