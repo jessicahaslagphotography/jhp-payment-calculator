@@ -1,46 +1,60 @@
 #!/usr/bin/env python3
-"""Read, and optionally set, two things on Jessica's consultation calendar.
+"""Read, and optionally set, the booking settings on the consultation calendar.
 
 RUNS ON SCALOGY, NOT HERE. This file is the version-controlled copy; the one
 that executes lives in the tenant artifact store at the same path and is
-fired by the manual workflow `ghl-calendar-settings`. It needs
-`ghl_api_key`, which is a tenant secret -- `http_request` refuses secret
-substitution outright, so a secret-bearing call has to be a workflow. Keep
-the two copies in step by hand; nothing enforces it.
+fired by the manual workflow `ghl-calendar-settings`. Keep the two in step by
+hand -- nothing enforces it, and this file has already drifted once.
 
-Her asks, 25 September: "For the consultation calendar, allow a lead time of
-4 days" and "Time slots on the calendar should be 20 minutes also."
+Her asks, 25 September, in the order they came:
+  "For the consultation calendar, allow a lead time of 4 days."
+  "Time slots on the calendar should be 20 minutes also."
+  "time slots on the calendar need to be 20 minutes so it doesn't disrupt my
+   giveaway call calendar availability. Change it."
+  "People should only be able to book this calendar up to 4 days in advance.
+   Change it."
+
+"LEAD TIME" WAS READ BACKWARDS THE FIRST TIME, and the fourth message is the
+correction. GHL has two opposite settings and the phrase fits either:
+
+    allowBookingAfter   the MINIMUM notice. "Not sooner than."
+    allowBookingFor     the MAXIMUM window. "Not later than."
+
+It went into allowBookingAfter, which meant nobody could book inside four
+days. She meant the other one: nobody can book beyond four days.
+
+SETTING BOTH TO 4 WOULD LEAVE NOTHING BOOKABLE -- not sooner than four days
+and not later than four days is a single instant, and in practice an empty
+calendar. So clearing the minimum notice is not tidying up after a mistake,
+it is required for her actual ask to work, and the guard at the foot refuses
+to finish if the two ever end up fighting again.
+
+DURATION AND INTERVAL ARE TWO SETTINGS AND SHE NEEDED BOTH at 20. Duration is
+how long the call is; interval is how often a bookable start appears. A 30
+minute grid here did not line up with her giveaway calendar's slots, so hours
+that should have been free on both showed as unavailable.
 
 THE 20 MINUTES WAS ALSO A CONSISTENCY FIX. The site already tells women the
 consultation is twenty minutes -- F["consult"] in build-guide.py, and an
-answer in the FAQ -- and CLAUDE.md records that her old Canva guide
-contradicted itself on it (20 minutes on page 11, 30 on page 15). The first
-read settled it: the calendar was 30. The site had been contradicting the
-scheduler, and this closed it in the scheduler's favour because she said so.
+answer in the FAQ -- and her old Canva guide contradicted itself on it
+(20 on page 11, 30 on page 15). The first read settled it: the calendar was
+30, so the site had been contradicting the scheduler.
 
 IT NEEDS A REAL USER-AGENT. urllib sends "Python-urllib/3.x", which
 Cloudflare blanket-bans in front of services.leadconnectorhq.com -- the first
 run came back 403 error 1010, "browser signature banned", before the request
-ever reached GHL. The UA below names this client honestly rather than
-pretending to be a browser; the credential doing the talking is still her own
-API key.
+ever reached GHL.
 
-THE PUT REJECTS SOME OF WHAT THE GET RETURNS. GHL's calendar object is not
-round-trippable: a PUT carrying locationId or formSubmitRedirectUrl comes
-back 422 "property X should not exist". Rather than guess at the read-only
-set, the loop below reads the names out of the 422 and drops exactly those,
-then retries. It is capped, and it never drops a field this script is trying
-to SET -- if the API ever rejects one of those, that is a real failure and it
-stops rather than quietly writing three of four values.
+THE PUT REJECTS SOME OF WHAT THE GET RETURNS. A PUT carrying locationId or
+formSubmitRedirectUrl comes back 422 "property X should not exist". The loop
+reads the rejected names out of the 422 and drops exactly those, capped, and
+never drops a field it is trying to SET.
 
-READ FIRST, ALWAYS. Run it with no argument and it only reports. Run it with
-`apply` and it writes. The read is not politeness: the update is a PUT, and a
-PUT that omits a field can blank it, so the write sends the WHOLE calendar
-object back with only the wanted values changed. It then re-reads and proves
-the change landed and that nothing else moved.
+READ FIRST, ALWAYS. No argument reports; `apply` writes the WHOLE object back
+with only the wanted values changed, then re-reads and proves it.
 
-The calendar is the Info calendar, mi2EqYRq4gGEbBJHe82b -- the one
-/contact forwards to and every Book a Call button on the site opens.
+The calendar is mi2EqYRq4gGEbBJHe82b -- the one /contact forwards to and
+every Book a Call button on the site opens.
 """
 import json
 import os
@@ -56,8 +70,9 @@ UA = "JHPBoudoir-Scalogy/1.0 (calendar settings; +https://pages.scalogy.com/jhpb
 
 # Her figures. The units are GHL's own vocabulary, not free text.
 WANT = {
-    "allowBookingAfter": 4,        # the lead time
-    "allowBookingAfterUnit": "days",
+    "allowBookingFor": 4,          # nobody books further out than four days
+    "allowBookingForUnit": "days",
+    "allowBookingAfter": None,     # and no minimum notice, or nothing is bookable
     "slotDuration": 20,            # how long the call is
     "slotDurationUnit": "mins",
     "slotInterval": 20,            # how often a bookable start appears
@@ -68,17 +83,12 @@ WANT = {
 DROP = {"id", "_id", "dateAdded", "dateUpdated", "deleted"}
 
 # What a PUT must not silently change. Compared before and after.
-# slotInterval used to be in here, guarding it against moving as a side
-# effect. It is a value she asked for now, so it moved to WANT: a 30 minute
-# grid here did not line up with her giveaway calendar's slots, so hours that
-# should have been free on both showed as unavailable.
 WATCH = ["name", "slug", "calendarType", "description",
-         "formSubmitThanksMessage",
-         "slotBufferUnit", "appoinmentPerSlot", "appoinmentPerDay",
-         "appointmentPerSlot", "appointmentPerDay", "allowBookingFor",
-         "allowBookingForUnit", "openHours", "isActive", "autoConfirm",
-         "groupId", "teamMembers", "availabilities", "eventTitle",
-         "eventType", "widgetSlug", "notifications"]
+         "formSubmitThanksMessage", "eventTitle", "slotBufferUnit",
+         "appoinmentPerSlot", "appoinmentPerDay", "appointmentPerSlot",
+         "appointmentPerDay", "openHours", "isActive", "autoConfirm",
+         "groupId", "teamMembers", "availabilities", "eventType",
+         "widgetSlug", "notifications"]
 
 
 def call(method, path, payload=None):
@@ -104,15 +114,30 @@ def call(method, path, payload=None):
 def summarise(cal, label):
     print("--- %s ---" % label)
     print("  name               : %r" % cal.get("name"))
-    print("  allowBookingAfter  : %r %r   <- the lead time"
-          % (cal.get("allowBookingAfter"), cal.get("allowBookingAfterUnit")))
-    print("  slotDuration       : %r %r   <- the slot length"
-          % (cal.get("slotDuration"), cal.get("slotDurationUnit")))
-    print("  slotInterval       : %r %r   (how often a slot starts)"
-          % (cal.get("slotInterval"), cal.get("slotIntervalUnit")))
-    print("  allowBookingFor    : %r %r   (how far ahead)"
+    print("  allowBookingFor    : %r %r   <- furthest ahead she can book"
           % (cal.get("allowBookingFor"), cal.get("allowBookingForUnit")))
+    print("  allowBookingAfter  : %r %r   <- minimum notice; must stay empty"
+          % (cal.get("allowBookingAfter"), cal.get("allowBookingAfterUnit")))
+    print("  slotDuration       : %r %r   <- how long the call is"
+          % (cal.get("slotDuration"), cal.get("slotDurationUnit")))
+    print("  slotInterval       : %r %r   <- how often a slot starts"
+          % (cal.get("slotInterval"), cal.get("slotIntervalUnit")))
     print("  isActive           : %r" % cal.get("isActive"))
+
+
+def bookable(cal):
+    """Is there any window left at all?
+
+    A minimum notice at or beyond the maximum window leaves nothing to book.
+    Worth checking out loud: an empty calendar looks fine in the API and
+    silently costs her every enquiry until somebody notices.
+    """
+    lo, hi = cal.get("allowBookingAfter"), cal.get("allowBookingFor")
+    if not lo or not hi:
+        return True
+    if cal.get("allowBookingAfterUnit") != cal.get("allowBookingForUnit"):
+        return True          # different units, not comparable here; say so
+    return lo < hi
 
 
 status, body = call("GET", "/calendars/" + CAL)
@@ -122,6 +147,7 @@ if status >= 400:
 
 cal = body.get("calendar", body)
 summarise(cal, "BEFORE")
+print("  anything bookable? : %s" % bookable(cal))
 
 before = {k: cal.get(k) for k in WATCH}
 need = {k: v for k, v in WANT.items() if cal.get(k) != v}
@@ -161,18 +187,22 @@ else:
     print("\nGave up after 6 attempts. Nothing was written.")
     sys.exit(1)
 
-print("  fields the PUT would not accept: %s" % sorted(drop - DROP))
-
 status, body = call("GET", "/calendars/" + CAL)
 after_cal = body.get("calendar", body)
 summarise(after_cal, "AFTER")
 
 wrong = {k: {"wanted": WANT[k], "got": after_cal.get(k)}
          for k in WANT if after_cal.get(k) != WANT[k]}
-print("\nwanted vs got: %s" % (wrong if wrong else "all four correct"))
+print("\nwanted vs got: %s" % (wrong if wrong else "every value correct"))
 
 moved = {k: {"was": before.get(k), "now": after_cal.get(k)} for k in WATCH
          if json.dumps(before.get(k), sort_keys=True, default=str)
          != json.dumps(after_cal.get(k), sort_keys=True, default=str)}
 print("other settings that moved: %s" % (moved if moved else "none"))
-sys.exit(0 if not wrong and not moved else 1)
+
+ok_window = bookable(after_cal)
+print("anything bookable?: %s" % ok_window)
+if not ok_window:
+    print("FAILED: the minimum notice and the maximum window leave no slots. "
+          "Her calendar would take no bookings at all.")
+sys.exit(0 if not wrong and not moved and ok_window else 1)

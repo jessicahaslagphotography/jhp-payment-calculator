@@ -605,9 +605,24 @@ Still to do, roughly in order of what it is worth:
     else moved.
   **What is set, and what it settled (25 September):**
 
-        allowBookingAfter   4 days     lead time; it was unset
+        allowBookingFor     4 days     furthest ahead anyone can book
+        allowBookingAfter   unset      minimum notice; MUST stay empty
         slotDuration        20 mins    how long the call is; it was 30
         slotInterval        20 mins    how often a slot starts; it was 30
+
+  **"LEAD TIME" MEANT THE MAXIMUM WINDOW, NOT THE MINIMUM NOTICE, and it was
+  read backwards first.** GHL has two opposite settings and the phrase fits
+  either: `allowBookingAfter` is "not sooner than", `allowBookingFor` is "not
+  later than". Her ask went into the first, which stopped anyone booking
+  INSIDE four days; she meant *"People should only be able to book this
+  calendar up to 4 days in advance."*
+  **Setting both to 4 would leave her calendar with nothing bookable at all**
+  -- not sooner than four days and not later than four days is a single
+  instant. So clearing the minimum notice was not tidying up after the
+  mistake, it was required for the ask to work. `bookable()` in the script
+  now refuses to exit 0 if the two ever fight again, because an empty
+  calendar looks perfectly healthy in the API and silently costs her every
+  enquiry until somebody notices.
 
   **The calendar was 30 minutes and the site says 20.** `F["consult"]` in the
   guide and the FAQ both say a twenty minute call, and her old Canva guide
