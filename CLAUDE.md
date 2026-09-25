@@ -578,6 +578,57 @@ Still to do, roughly in order of what it is worth:
     parts are shut again.
   The PDF is generic. Personalisation is a page feature and does not belong in
   a file that gets forwarded.
+- **The consultation calendar is configured from here, not by hand.**
+  `mi2EqYRq4gGEbBJHe82b`, the GHL calendar named **Boudoir Consultation Call**
+  -- it was called `Info`, which is what `/contact` forwards to and what every
+  Book a Call button opens. Two scripts drive it, both mirrored in `scripts/`
+  and both fired as manual Scalogy workflows:
+  `ghl_calendar_leadtime.py` (`ghl-calendar-settings`) and
+  `ghl_calendar_copy.py` (`ghl-calendar-copy`).
+  **A secret-bearing call has to be a workflow.** `http_request` refuses
+  `${VAR}` substitution outright and says so; the GHL key is a tenant secret,
+  so these run as workflows with `declared_secrets=['ghl_api_key']` and read
+  `os.environ`. The repo copy and the artifact copy are kept in step BY HAND.
+  **Three traps, each of which cost a run:**
+  - **urllib's User-Agent is banned.** Cloudflare sits in front of
+    `services.leadconnectorhq.com` and returns 403 error 1010, "browser
+    signature banned", to `Python-urllib/3.x` before the request reaches GHL
+    at all. The scripts send an honest client UA instead.
+  - **The calendar object is not round-trippable.** A PUT carrying
+    `locationId` or `formSubmitRedirectUrl` -- both of which the GET
+    returns -- comes back 422 "property X should not exist". The scripts read
+    the rejected names out of the 422 and retry without them, capped, and
+    refuse to drop a field they are trying to set.
+  - **The update is a PUT, not a PATCH.** Sending two keys could blank
+    everything else, so both scripts send the WHOLE object back with only the
+    wanted values changed, then re-read and diff a watch list to prove nothing
+    else moved.
+  **What is set, and what it settled (25 September):**
+
+        allowBookingAfter   4 days     lead time; it was unset
+        slotDuration        20 mins    it was 30 -- see below
+        slotInterval        30 mins    UNCHANGED, and see below
+
+  **The calendar was 30 minutes and the site says 20.** `F["consult"]` in the
+  guide and the FAQ both say a twenty minute call, and her old Canva guide
+  contradicted itself on it (20 on page 11, 30 on page 15). The site had been
+  contradicting the scheduler; her instruction closed it at 20.
+  **`slotInterval` is 30 and `slotDuration` is now 20, which is on purpose
+  until she says otherwise.** Interval is how often a bookable start appears;
+  duration is how long the call is. At 30/20 a woman can book on the hour and
+  the half hour and gets a twenty minute call, leaving Jessica ten minutes
+  between. Setting interval to 20 would run them back to back. **ASK** before
+  changing it -- it is her working day, not a consistency bug.
+  **The copy carries no figure**, deliberately. $697 is already in the FAQ,
+  the guide and the home page's `Offer` schema; a fourth copy on a booking
+  page is a fourth thing to update, and a stale price there is exactly how the
+  Canva guide came to undercut the site by $197. The description says the
+  session fee retainer holds the date and leaves the number to the call.
+  **The copy says PHONE, not Zoom.** The consultation is a phone call; the
+  ZOOM appointment is the image reveal, weeks later. Confusing the two leaves
+  a woman waiting at a laptop for a call that never comes.
+  **`consentLabel` is left alone** -- it is a marketing-consent checkbox with
+  compliance weight, not copy to tidy.
 - **The hero picker is temporary and must be retired.** `/guide-hero-picker`,
   template `jhp-guide-hero-picker`, generator `build-hero-picker.py`, 13,952
   bytes. It exists because **the image CDN is unreachable from this sandbox**
