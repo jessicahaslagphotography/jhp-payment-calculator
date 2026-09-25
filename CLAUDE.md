@@ -512,7 +512,9 @@ Still to do, roughly in order of what it is worth:
   she texts a client that lands on a shut part looks broken. So `jumpTo()` walks
   up from the target with `closest("details")` and opens every ancestor. With
   JavaScript off the four parts are still there and still open on a tap; all the
-  script adds is that `#money` opens The Investment on the way in. Failing is
+  script adds is that `#investment` opens The Investment on the way in (the
+  four part ids are `begin`, `worries`, `works`, `investment`; an earlier draft
+  of this line said `#money`, which is not an id on the page). Failing is
   harmless, which is the right shape for an enhancement.
   **TWO COLUMNS ARE STILL NOT BACK and the reason has changed.** They were
   dropped because a one-at-a-time reveal only reads down one column; that
@@ -663,6 +665,81 @@ Still to do, roughly in order of what it is worth:
   sentence is three chances to disagree.
   **`consentLabel` is left alone** -- it is a marketing-consent checkbox with
   compliance weight, not copy to tidy.
+- **The follow-up sequence is a Scalogy workflow, and the copy lives in one
+  file.** `Website Inquiry - 2027` (`website_inquiry_2027`), eight touches --
+  immediately, 24h, 72h, 7d, 14d, 1 month, 3 months, 6 months -- to a woman who
+  fills in the Session Guide form on `/contact`. Approved by Jessica on
+  25 September; the draft, and why each message says what it says, is
+  `followup-sequence.md`.
+  **Four moving parts, all mirrored in `ops/` in this repo:**
+
+        build_website_inquiry_2027.py   the eight messages, and the only
+                                        place they are written down
+        enroll_website_inquiry.py       site_leads -> enrollment, every 5 min
+        website_inquiry_stopgate.py     the exits, every 5 min
+        probe_website_inquiry_render.py renders all eight, sends nothing
+
+  **`build-website-inquiry-2027` is the definition of record and it REBUILDS
+  THE STEPS WHOLESALE.** It deletes every `jhp_workflow_steps` row for the
+  workflow and re-inserts from the file, so a message edited by hand in the
+  database survives exactly until the next run of the builder. Change the copy
+  in the generator, exactly as everywhere else on this project.
+  **It refuses to install rather than ship a wrong figure.** `STALE` holds
+  every superseded number -- $500, $2,800, 18 months, "50 to 100", Petite,
+  "right after your session" -- plus Klarna and the other post-payment brands,
+  which Jessica had removed from message 5. It also rejects an emoji in any
+  text, an empty field, a merge token the runner does not substitute, and a
+  link target that is neither a token nor a URL. `raise SystemExit` beats
+  finding one of them in a stranger's inbox.
+  **SMS IS WRITTEN AND PARKED, AND THAT IS A LEGAL LINE, NOT A PREFERENCE.**
+  All eight texts are in `action_config.sms`, but every step is
+  `action_kind='send_email'`, which makes the runner ignore them. `/contact`
+  takes a phone number and never asks permission to text, which is TCPA
+  exposure priced per message. Put the consent line under the phone field,
+  flip `SEND_SMS` in the builder, re-run, and all eight arm at once. **Do not
+  arm them first and add the line after.**
+  **The clock starts at enrollment, not at the step.** Every step is
+  `delay_relative_to='enrollment'`, so the whole six months is anchored to the
+  moment she pressed the button and a slow runner pass cannot drift the
+  cadence.
+  **The two URLs come off the enrollment context, not the step.** The enroller
+  stamps `guide_url` (with `?n=<First>` when the name matches the guide page's
+  own rule, unadorned when it does not) and `calendar_url` (the consultation
+  calendar prefilled with `first_name`/`last_name`/`email`/`phone`, the same
+  four parameters `/contact` forwards). **Both are new merge fields and they
+  meant a two-line addition to `workflow-runner/workflow_runner.py`** --
+  `guide_url` and `calendar_url` in `render_text`'s `values` dict, each
+  defaulting to `''` exactly as an unmapped token already did, so no existing
+  step body in the other eight live sequences can behave differently.
+  **That file is NOT mirrored in this repo** and never has been; it lives only
+  on Scalogy, and `verify-runner-syntax` byte-compiles it and exercises the
+  merge fields. Run it after touching it.
+  **THE STOPGATE'S CHECKS ALL FAIL SAFE, WHICH IS WHY IT NEEDS ITS OWN PROBE.**
+  It cancels on `booked_call` (a GHL appointment on the consultation calendar,
+  one `/calendars/events` read per run, matched on contactId), `inquired`
+  (she came back through `/inquire`), `booked_paid`, `unsubscribed` (GHL email
+  DND) and `replied` (an inbound GHL message after enrollment). A GHL error
+  never cancels anybody, because a missed exit costs one email and a false
+  exit costs the lead silently. The cost of that choice is that a broken
+  booked-call signal looks *exactly* like a healthy one in the logs -- "0
+  cancelled", every five minutes, forever. `probe-website-inquiry-stopgate`
+  exists to tell those two apart and exits non-zero when the signal is down.
+  It was run on 25 September and found her one live consultation.
+  **The enroller does not backfill.** Its first run writes a baseline to
+  `website-inquiry/state.json` and enrols nobody, so the leads already sitting
+  in `site_leads` are not sent a welcome email months late. Baselined
+  25 September 20:18 UTC. Deleting that file would mail every lead in the
+  table.
+  **The Dubsado `inquiry_website` workflow is retired**, not deleted -- it sent
+  the same 700-word email at all six of its steps and nine of its figures
+  contradicted the site.
+  **MESSAGE 1 OVERLAPS WITH HER GHL TAG WORKFLOW AND THAT IS UNRESOLVED.**
+  `site-leads-ingest` tags the contact `Session Guide - Requested`, and the GHL
+  workflow watching that tag still sends the old Canva PDF. Until Jessica
+  changes it, a new lead gets both -- this sequence's welcome email with the
+  link, and her superseded attachment quoting $500 and $2,800. Nothing in this
+  repo can stop the second one.
+
 - **The hero picker is temporary and must be retired.** `/guide-hero-picker`,
   template `jhp-guide-hero-picker`, generator `build-hero-picker.py`, 13,952
   bytes. It exists because **the image CDN is unreachable from this sandbox**
