@@ -119,51 +119,68 @@ how the Canva guide went wrong. Every message links to the guide instead.
 
 ## 1 · Immediately
 
-**Subject:** Your Session Guide is here
+**Subject:** Your Session Guide is here — and thank you
 
 > Hi {{contact.first_name}},
 >
-> Here is your Session Guide — what a boudoir session here is really like,
-> how the day runs, what the studio is like, and every question women ask
-> me before they book.
+> I am so glad you reached out.
+>
+> There are a lot of photographers you could have asked about this, and you
+> asked me. That genuinely means something, and I do not take it lightly.
+>
+> So — here is your Session Guide. What a boudoir session here is really
+> like, how the day runs, what the studio is like, and every question women
+> ask me before they book.
 >
 > **[Read your Session Guide]**
 >
-> If you have not already picked a time, the other half of this is a
-> twenty minute phone call with me. Nothing to prepare, and nothing is
-> committed to.
+> The other half of this is a twenty minute phone call with me. Bring every
+> question you have — the practical ones and the nervous ones. No pressure
+> and no obligation, I promise.
 >
 > **[Book my call]**
 >
-> Reply to this with any question at all. I read them myself.
+> I cannot wait to talk to you.
 >
 > — Jess
 
 **Text:**
 
-> Hi {{contact.first_name}}, it's Jess at JHP Boudoir. Your Session Guide
-> is here: [guide]
+> Hi {{contact.first_name}}! Jess here at JHP Boudoir — so glad you reached
+> out.
 >
-> And my calendar, if you'd like to talk it through: [calendar]
+> Your Session Guide: [guide]
+>
+> There are plenty of photographers you could have asked, and you asked me.
+> Thank you!
+>
+> Questions? Let's talk: [calendar] — no pressure, no obligation.
 >
 > Reply STOP to opt out.
+
+*This one runs to about three segments. It is the only message where that is
+worth it — it carries the guide, the calendar, the thank-you and the
+compliance line.*
 
 ---
 
 ## 2 · 24 hours
 
-**Subject:** Did the guide reach you?
+**Subject:** Did your guide arrive?
 
 > Hi {{contact.first_name}},
 >
-> Just making sure it landed — these sometimes end up in Promotions.
+> Just making sure it landed — these sometimes hide in Promotions.
 >
 > **[Your Session Guide]**
 >
-> And in case it is useful: the most common thing women say on that first
-> call is some version of *"I'm not sure I'm the kind of person who does
-> this."* Nearly everyone says it. You do not need to be brave, or in
-> shape, or photogenic. You need to turn up. I do the rest.
+> And in case it helps: the thing women say most on that first call is some
+> version of *"I'm not sure I'm the kind of person who does this."* Nearly
+> everyone says it. You do not need to be brave, or in shape, or
+> photogenic. You need to turn up. I will do the rest, and I will love
+> every minute of it.
+>
+> Bring your questions and we will go through them together.
 >
 > **[Book my call]**
 >
@@ -171,10 +188,10 @@ how the Canva guide went wrong. Every message links to the guide instead.
 
 **Text:**
 
-> {{contact.first_name}}, just checking the guide arrived — it sometimes
-> lands in Promotions. [guide]
+> {{contact.first_name}}, just checking your Session Guide arrived — it
+> sometimes hides in Promotions! [guide]
 >
-> Any questions, reply here. — Jess
+> Any questions at all, reply right here. — Jess
 
 ---
 
@@ -188,15 +205,15 @@ how the Canva guide went wrong. Every message links to the guide instead.
 >
 > The women in my galleries are teachers and nurses and mothers and
 > grandmothers. Not one of them arrived feeling ready. What they had was
-> two hours, professional hair and makeup, and someone telling them
-> exactly what to do with their hands.
+> two hours, professional hair and makeup, and someone telling them exactly
+> what to do with their hands.
 >
 > > *"Jessica is amazing! Such a lovely day. She is so fun and
 > > professional! She really makes the studio a safe and comfortable
 > > place!"*
 >
-> If that is the thing holding you, say so on the call. It is the part I
-> am best at talking about.
+> If that is the thing holding you back, bring it to the call. It is
+> genuinely my favourite thing to talk about.
 >
 > **[Book my call]**
 >
@@ -205,29 +222,31 @@ how the Canva guide went wrong. Every message links to the guide instead.
 **Text** *(optional — see above)*:
 
 > {{contact.first_name}}, the thing nearly everyone says first: "I don't
-> look like the women in your portfolio." You do. That's rather the point.
-> [guide with #worries] — Jess
+> look like the women in your portfolio."
+>
+> You do. That's rather the point. [guide with #worries] — Jess
 
 ---
 
 ## 4 · 7 days
 
-**Subject:** What a session day actually looks like
+**Subject:** What your session day actually looks like
 
 > Hi {{contact.first_name}},
 >
-> The short version.
+> Here is the whole thing, start to finish.
 >
-> Hair and makeup first, at a local salon, and you drive over to the
-> studio once it is done. We photograph for two to three hours. Then you
-> go home.
+> Hair and makeup first, at a local salon — so you arrive at the studio
+> already done. We photograph for two to three hours. Then you go home.
 >
-> Your images come later — a private Zoom appointment where we go through
-> them together, one at a time. You are not sent a link and left to figure
+> Your images come later, at a private Zoom appointment where we go through
+> every one of them together. You are never sent a link and left to figure
 > it out on your own. That is the part women tell me afterwards was their
-> favourite of the whole thing.
+> favourite of the whole experience, and it is easily mine.
 >
 > **[How it all works →]**
+>
+> Questions about any of it? Bring them all.
 >
 > **[Book my call]**
 >
@@ -235,10 +254,10 @@ how the Canva guide went wrong. Every message links to the guide instead.
 
 **Text:**
 
-> {{contact.first_name}} — the part most women are surprised by: you see
-> your images *with me*, on a call. Not alone in an inbox.
+> {{contact.first_name}} — the bit most women are surprised by: you see
+> your images WITH me, on a call. Never alone in an inbox.
 >
-> How the day runs: [guide with #works] — Jess
+> Here's how the day runs: [guide with #works] — Jess
 
 ---
 
@@ -248,7 +267,7 @@ how the Canva guide went wrong. Every message links to the guide instead.
 
 > Hi {{contact.first_name}},
 >
-> I would rather you knew before we talk than after.
+> I would much rather you knew before we talk than after.
 >
 > There is a session fee, which reserves your date. Your images are
 > purchased separately, at your reveal. There are eight Collections — the
@@ -256,10 +275,12 @@ how the Canva guide went wrong. Every message links to the guide instead.
 > and a mobile app — and you choose which one when you book, on an
 > interest-free plan.
 >
-> Every figure is in the guide, so there is nothing to be surprised by on
-> the call:
+> Every figure is written down here, so nothing on the call is a surprise:
 >
 > **[The Investment →]**
+>
+> And if a number raises a question, bring it. No pressure and no
+> obligation.
 >
 > **[Book my call]**
 >
@@ -267,9 +288,10 @@ how the Canva guide went wrong. Every message links to the guide instead.
 
 **Text** *(optional)*:
 
-> {{contact.first_name}}, in case it's the question you haven't asked:
-> every price is written down, here. [guide with #investment] No surprises
-> on the call. — Jess
+> {{contact.first_name}}, in case it's the question you haven't asked yet:
+> every price is written down, right here. [guide with #investment]
+>
+> No surprises on the call. — Jess
 
 ---
 
@@ -279,7 +301,7 @@ how the Canva guide went wrong. Every message links to the guide instead.
 
 > Hi {{contact.first_name}},
 >
-> It is rarely a birthday, though a birthday is a good enough reason.
+> It is rarely a birthday — though a birthday is a wonderful reason.
 >
 > It is usually that they got tired of waiting to feel ready.
 >
@@ -289,8 +311,8 @@ how the Canva guide went wrong. Every message links to the guide instead.
 > > *"Jessica was fabulous from the very first contact to the image
 > > reveal!"*
 >
-> If you have still been thinking about it a month later — that is
-> generally the answer.
+> If you are still thinking about it a month later, that is generally your
+> answer. And I would love to be the one you do it with.
 >
 > **[Book my call]**
 >
@@ -298,10 +320,10 @@ how the Canva guide went wrong. Every message links to the guide instead.
 
 **Text:**
 
-> {{contact.first_name}}, a month since you got the guide. Still thinking
-> about it? That's usually the sign.
+> {{contact.first_name}}, a month since your guide! Still thinking about
+> it? That's usually the sign.
 >
-> 20 minutes, nothing committed: [calendar] — Jess
+> 20 minutes, bring your questions, no obligation: [calendar] — Jess
 
 ---
 
@@ -314,11 +336,11 @@ how the Canva guide went wrong. Every message links to the guide instead.
 > Two practical things, in case they help you plan.
 >
 > I photograph on Tuesdays and Thursdays, so dates go sooner than people
-> expect. And anything printed — an album, wall art — takes up to six
-> weeks after your reveal, which is itself a week or two after your
-> session.
+> expect. And anything printed — an album, wall art — takes up to six weeks
+> after your reveal, which is itself a week or two after your session.
 >
-> So if you want images *for* something, work backwards from the date.
+> So if you want your images *for* something, work backwards from that
+> date. I am very happy to help you do exactly that on a call.
 >
 > **[Book my call]**
 >
@@ -328,7 +350,7 @@ how the Canva guide went wrong. Every message links to the guide instead.
 
 > {{contact.first_name}}, one planning note: I shoot Tue/Thu only, and
 > albums take ~6 weeks after your reveal. If you want images for a date,
-> work backwards. [calendar] — Jess
+> work backwards! [calendar] — Jess
 
 ---
 
@@ -341,25 +363,27 @@ how the Canva guide went wrong. Every message links to the guide instead.
 > This is the last one I will send unless you tell me otherwise. I would
 > rather leave the door open than keep knocking on it.
 >
+> Thank you for thinking of my studio in the first place. With everywhere
+> you could have looked, that still means a great deal to me.
+>
 > The guide is yours to keep, whenever you want it:
 >
 > **[Your Session Guide]**
 >
-> And if the time ever comes, my calendar is here:
+> And if the time ever comes, I am right here:
 >
 > **[Book my call]**
 >
-> Thank you for thinking about it, {{contact.first_name}}. I hope you do
-> it one day — with me or without me.
+> I hope you do it one day, {{contact.first_name}} — with me or without me.
 >
 > — Jess
 
 **Text:**
 
-> {{contact.first_name}}, last message from me. The guide's yours to keep
-> [guide], and the door stays open whenever you want it.
+> {{contact.first_name}}, last message from me. Your guide is yours to keep
+> [guide], and the door stays open whenever you are ready.
 >
-> Thank you. — Jess
+> Thank you for thinking of my studio. — Jess
 
 ---
 
@@ -367,18 +391,39 @@ how the Canva guide went wrong. Every message links to the guide instead.
 
 **Every message has one job.** Reassure, then name the fear, then explain
 the process, then the money, then proof, then timing, then leave. Nothing
-says "just checking in" twice, because that is the thing that makes a
-sequence feel automated.
+says "just checking in" twice, because that is what makes a sequence feel
+automated.
+
+**The thank-you is in message 1 and message 8, and nowhere in between.**
+Jessica's note, 25 September: *"there are many choices for a boudoir
+photographer and I appreciate them choosing to inquire with my studio."* It
+opens the sequence and it closes it. Put it in all eight and it stops
+reading as gratitude and starts reading as a tic.
+
+**"Bring your questions" replaced "nothing to prepare".** Her note, same
+day: *"Ask them to bring any questions they may have during this call. No
+pressure or obligation."* It is a better line because it gives her
+something to DO — a woman who has been told there is nothing to prepare
+still turns up not knowing what to ask. **The same phrase was live in two
+other places** and both were changed in the same pass: the guide's closing
+band and the GHL calendar's own description.
+
+**Upbeat, but not everywhere.** Messages 1, 2, 4 and 6 carry the energy —
+she is pleased, and it should read that way. Messages 3 and 8 deliberately
+do not. Three is answering a woman who thinks she is not good enough to be
+photographed, and eight is a goodbye; brightness in either would read as
+not listening. Warmth is not the same thing as exclamation marks, and the
+difference matters most exactly where the subject is tender.
 
 **The 6-month message is the one that gets replies.** Sequences that end by
-giving permission to go tend to hear back from people who were never going
-to answer anything else. It is also simply the decent way to finish.
+giving permission to go tend to hear back from people who would never have
+answered anything else. It is also simply the decent way to finish.
 
-**The reviews are real and are hers.** Message 3 uses Miss H., which is
-unplaced on the site — see `reviews.md`. Messages 6 uses two lines that are
-on the Portfolio and The Experience. The one-review-one-page rule in
-`CLAUDE.md` is about the website; re-using them in email is fine, and worth
-knowing about rather than discovering.
+**The reviews are real and are hers.** Message 3 uses Miss H., unplaced on
+the site — see `reviews.md`. Message 6 uses two lines that are on the
+Portfolio and The Experience. The one-review-one-page rule in `CLAUDE.md`
+is about the website; re-using them in email is fine, and worth knowing
+rather than discovering.
 
 **What is deliberately not here:** a discount, a deadline, and a "spots are
 filling up". She has none of those running, and inventing urgency for a

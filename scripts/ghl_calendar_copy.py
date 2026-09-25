@@ -74,8 +74,8 @@ WANT = {
         "We will talk through what a boudoir session here is really like, "
         "which type of session suits you, how the day itself runs, and the "
         "Collections. Bring every question you have — including the ones "
-        "you have not said out loud yet. There is no pressure and nothing to "
-        "prepare.\n\n"
+        "you have not said out loud yet. There is no pressure and no "
+        "obligation.\n\n"
         "If you already know you would like to book, have a card ready to "
         "process your session fee retainer over the phone. That is what "
         "reserves your date."
@@ -88,9 +88,9 @@ WANT = {
         "You are booked — thank you. A confirmation is on its way to your "
         "email, and it carries links to reschedule or cancel if anything "
         "changes.\n\n"
-        "If you already know you would like to book your session when we "
-        "talk, have a card ready to process your session fee retainer over "
-        "the phone.\n\n"
+        "Bring every question you have to our call. And if you already know "
+        "you would like to book your session when we talk, have a card ready "
+        "to process your session fee retainer over the phone.\n\n"
         "I cannot wait to speak with you. — Jess"
     ),
 }

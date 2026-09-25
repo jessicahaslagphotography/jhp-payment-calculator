@@ -1036,7 +1036,7 @@ BODY = """
   <span class="over">
     <span class="jhp-kicker">The next step</span>
     <h2 class="jhp-h jhp-h-lg">Book Your Consultation Call</h2>
-    <span class="sub">Twenty minutes, and nothing is committed to.</span>
+    <span class="sub">Twenty minutes. Bring your questions &mdash; no obligation.</span>
     <span class="jhp-btn">Schedule My Call</span>
   </span>
 </a>

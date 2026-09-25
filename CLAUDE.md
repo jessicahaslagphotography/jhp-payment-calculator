@@ -651,6 +651,16 @@ Still to do, roughly in order of what it is worth:
   **The copy says PHONE, not Zoom.** The consultation is a phone call; the
   ZOOM appointment is the image reveal, weeks later. Confusing the two leaves
   a woman waiting at a laptop for a call that never comes.
+  **"NOTHING TO PREPARE" IS OUT, EVERYWHERE.** It was in three places -- this
+  description, the Session Guide's closing band, and the draft follow-up
+  sequence -- and all three changed together on 25 September. Jessica: *"I
+  don't love this line. Ask them to bring any questions they may have during
+  this call. No pressure or obligation."* Her objection is a good one: a woman
+  told there is nothing to prepare still turns up not knowing what to ask.
+  "Bring your questions" gives her something to DO, and the reassurance moves
+  to "no pressure or obligation", which is what the old line meant anyway.
+  **If it comes back in one place, put it back in none** -- three copies of a
+  sentence is three chances to disagree.
   **`consentLabel` is left alone** -- it is a marketing-consent checkbox with
   compliance weight, not copy to tidy.
 - **The hero picker is temporary and must be retired.** `/guide-hero-picker`,
