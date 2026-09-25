@@ -120,11 +120,14 @@ another, and do not "tidy" the three into one figure. All three are in `F` at
 the top of `build-guide.py` with the same note.
 
 **The guide names all three in one sentence** in the intro, and the day panel
-says the session days on their own. **The footer states only two of the three**
--- studio hours and call hours -- which is true but incomplete, and a woman
-reading it could reasonably think she can be photographed on a Monday. Adding a
-session-days line there is three master files, nine templates and twenty pages;
-it is worth doing and the wording is Jessica's to choose. ASK.
+says the session days on their own. **The footer deliberately states only two of
+the three** -- studio hours and call hours. That was put to Jessica on
+25 September with a drafted session-days line and she chose to leave it: the
+footer is true, just not complete, and nothing is booked from it. Her GHL
+calendar only offers the slots she actually has, so a woman who assumed she
+could be photographed on a Monday cannot book one. **Do not add it back without
+asking her again** -- it is three master files, nine templates and twenty pages,
+and she has already declined it once.
 
 **"50 to 100 images" is off the site.** It was `F["shown"]`, in the guide twice,
 and she removed it on 25 September because how many a woman is shown depends on
