@@ -185,8 +185,8 @@ thank-you and the compliance line.*
 
 > Hi {{contact.first_name}}!
 >
-> Just making sure the Session Guide reached you — these sometimes hide in
-> Promotions. 🙈
+> Just making sure the Session Guide reached you — it sometimes hides in your
+> spam folder.
 >
 > **[Your Session Guide →]**
 >
@@ -207,7 +207,7 @@ thank-you and the compliance line.*
 **Text:**
 
 > {{contact.first_name}}, just checking your Session Guide arrived — it
-> sometimes hides in Promotions! [guide]
+> sometimes hides in your spam folder! [guide]
 >
 > Any questions at all, reply right here 🖤 — Jess
 
