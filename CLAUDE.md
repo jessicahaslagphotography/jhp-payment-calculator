@@ -606,24 +606,33 @@ Still to do, roughly in order of what it is worth:
   **What is set, and what it settled (25 September):**
 
         allowBookingAfter   4 days     lead time; it was unset
-        slotDuration        20 mins    it was 30 -- see below
-        slotInterval        30 mins    UNCHANGED, and see below
+        slotDuration        20 mins    how long the call is; it was 30
+        slotInterval        20 mins    how often a slot starts; it was 30
 
   **The calendar was 30 minutes and the site says 20.** `F["consult"]` in the
   guide and the FAQ both say a twenty minute call, and her old Canva guide
   contradicted itself on it (20 on page 11, 30 on page 15). The site had been
   contradicting the scheduler; her instruction closed it at 20.
-  **`slotInterval` is 30 and `slotDuration` is now 20, which is on purpose
-  until she says otherwise.** Interval is how often a bookable start appears;
-  duration is how long the call is. At 30/20 a woman can book on the hour and
-  the half hour and gets a twenty minute call, leaving Jessica ten minutes
-  between. Setting interval to 20 would run them back to back. **ASK** before
-  changing it -- it is her working day, not a consistency bug.
+  **DURATION AND INTERVAL ARE TWO SETTINGS AND BOTH HAD TO MOVE.** Duration is
+  how long the call is; interval is how often a bookable start appears.
+  Setting duration to 20 and leaving interval at 30 looked right on this
+  calendar alone and was wrong across her business: *"time slots on the
+  calendar need to be 20 minutes so it doesn't disrupt my giveaway call
+  calendar availability."* A 30 minute grid here does not line up with the
+  slots on her giveaway calendar, so hours that should have been free on both
+  showed as unavailable. Both are 20. **A CALENDAR SETTING IS NEVER ONLY ABOUT
+  THE CALENDAR YOU ARE LOOKING AT** -- check what else books against the same
+  hours before calling one of these settled.
   **The copy carries no figure**, deliberately. $697 is already in the FAQ,
   the guide and the home page's `Offer` schema; a fourth copy on a booking
   page is a fourth thing to update, and a stale price there is exactly how the
-  Canva guide came to undercut the site by $197. The description says the
-  session fee retainer holds the date and leaves the number to the call.
+  Canva guide came to undercut the site by $197. The description says to
+  **"have a card ready to process your session fee retainer over the phone"**
+  -- her wording, and plainer than the draft it replaced: "a card to hand"
+  left it vague about when and how, and hers says the money moves on the call.
+  The same sentence is in the thank-you, and it says "over the phone" a second
+  time, which keeps the consultation clearly apart from the Zoom image reveal.
+  The amount is still left to the call.
   **The copy says PHONE, not Zoom.** The consultation is a phone call; the
   ZOOM appointment is the image reveal, weeks later. Confusing the two leaves
   a woman waiting at a laptop for a call that never comes.
