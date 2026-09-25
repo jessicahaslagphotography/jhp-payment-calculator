@@ -531,7 +531,7 @@ GUIDE_CSS += """
 # each frame -- studio, and colour or black and white -- rather than the one
 # string the 165 gallery frames share. It would be better still if Jessica
 # described them; that is a note in CLAUDE.md, not a thing to invent here.
-HERO = "fe2033e0-3571-441e-8c98-089358e06f10.jpg"
+HERO = "92138463-6253-40ca-a072-7005daa9d96a.jpg"   # Miss T, her pick, 25 Sep
 
 
 def plate(f, alt, cap, wide=True):
@@ -985,7 +985,7 @@ SCRIPT = """<script>
 BODY = """
 <section class="jhp-intro">
   <img src="{cdn}{hero}" width="1600" height="1065"
-       alt="A client photographed in the window light at the JHP Boudoir studio">
+       alt="A client photographed at the JHP Boudoir studio">
   <div class="jhp-over">
     <p class="jhp-kicker" data-greet="Prepared for {{name}}">JHP Boudoir</p>
     <h1 class="jhp-h jhp-h-lg">Your Session Guide</h1>
@@ -1057,7 +1057,7 @@ HEAD = """<!DOCTYPE html>
 <meta property="og:description" content="The studio, the day, the reveal, what it costs and how to book.">
 <meta property="og:url" content="https://pages.scalogy.com/jhpboudoir1/session-guide/">
 <meta property="og:image" content="__CDN__%s">
-<meta property="og:image:alt" content="A client photographed in the window light at the JHP Boudoir studio">
+<meta property="og:image:alt" content="A client photographed at the JHP Boudoir studio">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Session Guide | JHP Boudoir">
 <meta name="twitter:description" content="The studio, the day, the reveal, what it costs and how to book.">
