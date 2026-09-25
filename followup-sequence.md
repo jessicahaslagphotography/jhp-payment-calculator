@@ -1,117 +1,120 @@
 # The follow-up sequence, for approval
 
-**Status: DRAFT. Nothing here is built and nothing is sending.** Jessica
-asked for this on 25 September and asked to approve before it goes live.
+**Status: DRAFT. Nothing is built and nothing is sending.**
 
-What triggers it: a woman fills in the form on `/contact`. That already
-tags her **`Session Guide - Requested`** in GHL and already forwards her
-straight to the booking calendar. Everything below is what happens after.
+Rewritten 25 September from Jessica's own Dubsado copy — the six-step
+`inquiry_website` workflow sitting in Scalogy (`jhp_workflows`,
+migration_status `mapped`, currently inactive). Her voice, her lines, her
+energy. What changed is which facts it states and what each message is for.
+
+---
+
+## What her existing workflow does, and the two things wrong with it
+
+`inquiry_website` fires six touches at 0, 3 days, 7 days, 14 days, 30 days
+and 10 weeks. The cadence is almost exactly what she asked for — she wanted
+24h, 72h, 7d, 14d, 1 month, 3 months and 6 months, which is her own schedule
+plus a day-one nudge and a proper goodbye.
+
+**All six steps send the identical 700-word email.** Not a variation — the
+same body, six times, over ten weeks. That is a Dubsado artefact: it attached
+the same questionnaire at each step. A woman who does not book gets the same
+wall of text on day 3, day 7, day 14, day 30 and week 10. **That is the
+single biggest improvement available here**, and it costs nothing: the same
+touches, each doing a different job.
+
+**And nine of its facts now contradict the site.** Her copy predates the
+figures she settled on 24 September. This is the same drift that put $500 and
+$2,800 in the Canva guide, in a second place nobody was looking.
+
+| Her inquiry email says | The site says |
+|---|---|
+| 3–4 hour experience | **2–3 hours** |
+| See your images **right after** your session | **7–14 business days later, over Zoom** |
+| Collections as low as **$3,400** | Digital from **$1,250**, Full from $3,400 |
+| Plans up to **18 months** in advance | **15 months** |
+| Wardrobe sizes **S–4X** | **XS to 4X**, 160 pieces |
+| Hair + makeup (reads as at the studio) | **at a local salon**, then she drives over |
+| $697 session fee | ✅ matches |
+| Tuesday and Thursday only | ✅ matches |
+
+**Everything below uses the settled figures.** Where her line and the site
+disagreed, the site won — that is the whole point of having settled them.
+
+### Four things only Jessica can answer
+
+Her email contains three claims that appear **nowhere on the website**, and
+one question the rewrite had to guess at. None are invented here and none are
+used below until she says.
+
+1. **"Most clients invest $5,600 with our studio."** That is a strong,
+   specific anchor and it is not on the site. Still true? If so it belongs in
+   message 5 and possibly in the FAQ.
+2. **Klarna, Affirm, AfterPay and PayPal Credit** for post-payment plans.
+   Not mentioned anywhere on the site. Still offered?
+3. **"A payment plan must be set up within 7 days of booking, first payment
+   due within 30 days."** Not on the site. Still the rule?
+4. **Which Collection floor should the emails quote?** Her email says "as low
+   as $3,400", the site says Digital Collections from $1,250. Both can be
+   true — $1,250 is the Digital floor, $3,400 is the Full floor — but they
+   anchor very differently. **Below uses $1,250**, because it is the true
+   floor and the site states it. Say the word and it anchors on $3,400
+   instead.
 
 ---
 
 ## Before any of this can run
 
-Four things need settling. The first two are blockers.
+**1. The `Session Guide - Requested` tag still sends the old Canva PDF** —
+$500 session fee, Collections from $2,800. Message 1 replaces it. This has to
+change whether or not the rest is approved.
 
-### 1. The tag still sends the old Canva PDF — BLOCKER
-
-The GHL workflow watching `Session Guide - Requested` sends the superseded
-magazine: **$500 session fee, Collections from $2,800**. That undercuts the
-live site by $197 and $1,550. Every woman who has filled in that form has
-had the wrong prices.
-
-Message 1 below replaces it with the link. **This has to change whether or
-not the rest of the sequence is approved.**
-
-### 2. There is no SMS consent on the form — BLOCKER for the texts
-
-`/contact` collects first, last, email, phone. It does not ask permission
-to text. In the US, automated marketing texts to a number collected
-without express written consent is TCPA exposure, and the penalties are
-per message.
-
-The emails can run today. **The texts should not run until the form
-carries a consent line.** One sentence under the phone field does it, for
-example:
+**2. There is no SMS consent on `/contact`.** It takes a phone number for a
+guide and never asks permission to text. In the US that is TCPA exposure,
+priced per message. **The emails can run today; the texts should wait** for
+one line under the phone field:
 
 > By giving your number you agree to receive texts from JHP Boudoir about
 > your session. Message and data rates may apply. Reply STOP to opt out.
 
-That is a form change, a rebuild and a republish — an hour's work. Say the
-word and it is done.
+An hour's work — say the word.
 
-### 3. The calendar only allows booking 4 days ahead
-
-Set on 25 September at Jessica's instruction. It means a woman opening the
-month-3 email sees the next four days and nothing else.
-
-That may be exactly right — it creates urgency and protects her diary. But
-it is worth knowing that a "book your call" button in a six-month sequence
-is showing a four-day window. If a woman is planning around an occasion
-next spring, she cannot book that far out from any of these emails.
-
-### 4. Exit conditions must exist before the first send
-
-Without these the sequence embarrasses her. A woman who booked and paid on
-Tuesday must not get "still thinking about it?" on Thursday.
-
-**Remove from the sequence the moment any of these happen:**
+**3. Exit conditions, or the sequence embarrasses her.** Remove from the
+sequence the moment any of these happen:
 
 | Trigger | Why |
 |---|---|
-| Books a consultation call | She is in the pre-call flow now, not the nurture |
-| Session fee paid / becomes a client | Obvious, and the worst one to get wrong |
+| Books a consultation call | She is in the pre-call flow now |
+| Session fee paid | Obvious, and the worst one to get wrong |
 | Replies to any text or email | It is a conversation; automation stops |
 | Unsubscribes, or replies STOP | Required, not optional |
-| Tagged `Session Inquiry` (the `/inquire` form) | She has moved further down; different sequence |
+| Tagged `Session Inquiry` (the `/inquire` form) | Further down the path; different sequence |
+
+**4. The calendar only opens 4 days ahead.** Set at her instruction today. A
+woman opening the month-3 email sees the next four days and nothing else.
+Worth knowing when a six-month sequence keeps saying "book a call".
+
+**5. Quiet hours 9am–8pm, her client's local time.** A 3am text from a
+boudoir studio is a bad look.
 
 ---
 
-## The shape of it
-
-Eight touchpoints over six months. Each one has a job — none of them is
-"just checking in" a second time.
-
-| When | The job it does | Email | Text |
-|---|---|---|---|
-| Immediately | Deliver the guide | yes | yes |
-| 24 hours | Did it land, and the first fear | yes | yes |
-| 72 hours | "I don't look like those women" | yes | *optional* |
-| 7 days | What the day actually looks like | yes | yes |
-| 14 days | What it costs, plainly | yes | *optional* |
-| 1 month | Why women finally book | yes | yes |
-| 3 months | Planning and timing | yes | *optional* |
-| 6 months | The door stays open | yes | yes |
-
-**Three texts are marked optional.** Eight texts in six months is
-comfortable; eight texts where three land within a fortnight is a lot from
-a photographer she has not met. Cut them and the text sequence is five,
-which reads as attentive rather than insistent. Her call.
-
-**Quiet hours: 9am to 8pm, her client's local time.** GHL enforces this
-per workflow. A 3am text from a boudoir studio is a bad look.
-
----
-
-## Links used throughout
+## Links
 
     Guide     https://pages.scalogy.com/jhpboudoir1/session-guide/?n={{contact.first_name}}
     Calendar  https://api.leadconnectorhq.com/widget/booking/mi2EqYRq4gGEbBJHe82b
 
-The guide greets her by name from that `?n=` parameter — three places, and
-nowhere else, so it does not read like a mail merge. **Always send the link
-with the parameter on it.**
+Deep links open that part of the guide on arrival: `#worries`, `#works`,
+`#investment`.
 
-Deep links open the relevant part of the guide on arrival:
+**Her old workflow sent a hosted questionnaire** at
+`view-form/?f=jhp-boudoir-experience-info-guide`. The Session Guide page
+replaces it — same content, current figures, and it greets her by name.
 
-    #works       How It All Works
-    #investment  The Investment
-    #worries     The Things Women Worry About
-
-**No prices in any email.** The figures live in the FAQ, the guide and the
-home page — a fourth copy in an email sequence is a fourth thing to change
-on the day a price moves, and a stale price in somebody's inbox is exactly
-how the Canva guide went wrong. Every message links to the guide instead.
+**No prices in the emails except where marked.** The figures live in the FAQ,
+the guide and the home page; a fourth copy in an inbox is a fourth thing to
+update. Message 5 is the exception, because "what does it cost" deserves a
+straight answer in the body.
 
 ---
 
@@ -119,70 +122,85 @@ how the Canva guide went wrong. Every message links to the guide instead.
 
 ## 1 · Immediately
 
-**Subject:** Your Session Guide is here — and thank you
+**Subject:** 🖤 You're in the right place
 
-> Hi {{contact.first_name}},
+> Hi {{contact.first_name}}!
 >
-> I am so glad you reached out.
+> I am **so** excited you reached out about a boudoir session with us at JHP
+> Boudoir.
 >
-> There are a lot of photographers you could have asked about this, and you
-> asked me. That genuinely means something, and I do not take it lightly.
+> Whether this is something you have been thinking about for years or you
+> just had a little spark of *"maybe I could do this…"* — you are in the
+> right place.
 >
-> So — here is your Session Guide. What a boudoir session here is really
-> like, how the day runs, what the studio is like, and every question women
-> ask me before they book.
+> And honestly? There are a lot of photographers you could have asked about
+> this. You asked me. Thank you. That means more than you know. 💕
 >
-> **[Read your Session Guide]**
+> Everything about the experience is right here — what is included, what it
+> costs, how the day runs, and how to claim your spot on my calendar:
 >
-> The other half of this is a twenty minute phone call with me. Bring every
-> question you have — the practical ones and the nervous ones. No pressure
-> and no obligation, I promise.
+> **[Read your Session Guide →]**
 >
-> **[Book my call]**
+> **Your boudoir experience includes**
+> ✨ A two to three hour experience in our luxury studio
+> ✨ Professional hair and makeup at a local salon before you arrive
+> (hellooooo makeover!)
+> ✨ Full access to the studio wardrobe — 160 pieces, sizes XS to 4X
+> ✨ A full session where I pose you from head to pointed toe
+> ✨ Expert posing and expression guidance
+> ✨ Retouching, and your private image reveal and ordering appointment
 >
-> I cannot wait to talk to you.
+> **Ready to chat?** Grab a time and bring every question you have — the
+> practical ones and the nervous ones. No pressure and no obligation. 🖤
+>
+> **[Book my call →]**
+>
+> Take your time reading through it, and if you have questions I am just a
+> message away.
 >
 > — Jess
 
 **Text:**
 
-> Hi {{contact.first_name}}! Jess here at JHP Boudoir — so glad you reached
-> out.
+> Hi {{contact.first_name}}! It's Jess at JHP Boudoir 🖤 So excited you
+> reached out!
 >
-> Your Session Guide: [guide]
+> Your Session Guide is here: [guide]
 >
-> There are plenty of photographers you could have asked, and you asked me.
-> Thank you!
+> There are plenty of photographers you could've asked — thank you for
+> asking me!
 >
-> Questions? Let's talk: [calendar] — no pressure, no obligation.
+> Questions? Let's chat: [calendar]
 >
 > Reply STOP to opt out.
 
-*This one runs to about three segments. It is the only message where that is
-worth it — it carries the guide, the calendar, the thank-you and the
-compliance line.*
+*Three segments. The only message where that is worth it — guide, calendar,
+thank-you and the compliance line.*
 
 ---
 
 ## 2 · 24 hours
 
-**Subject:** Did your guide arrive?
+**Subject:** Did your guide land?
 
-> Hi {{contact.first_name}},
+> Hi {{contact.first_name}}!
 >
-> Just making sure it landed — these sometimes hide in Promotions.
+> Just making sure the Session Guide reached you — these sometimes hide in
+> Promotions. 🙈
 >
-> **[Your Session Guide]**
+> **[Your Session Guide →]**
 >
-> And in case it helps: the thing women say most on that first call is some
-> version of *"I'm not sure I'm the kind of person who does this."* Nearly
-> everyone says it. You do not need to be brave, or in shape, or
-> photogenic. You need to turn up. I will do the rest, and I will love
+> And in case it helps to hear it: the thing women say most on that first
+> call is some version of *"I'm not sure I'm the kind of person who does
+> this."*
+>
+> Nearly every single one. You do not need to be brave, or in shape, or
+> photogenic. You need to turn up — I will do the rest, and I will love
 > every minute of it.
 >
 > Bring your questions and we will go through them together.
 >
-> **[Book my call]**
+> **[Book my call →]**
 >
 > — Jess
 
@@ -191,40 +209,49 @@ compliance line.*
 > {{contact.first_name}}, just checking your Session Guide arrived — it
 > sometimes hides in Promotions! [guide]
 >
-> Any questions at all, reply right here. — Jess
+> Any questions at all, reply right here 🖤 — Jess
 
 ---
 
 ## 3 · 72 hours
 
-**Subject:** "I don't look like the women in your portfolio"
+**Subject:** What if I'm nervous?
 
 > Hi {{contact.first_name}},
 >
-> That is the sentence I hear most, and it is almost always wrong.
+> Totally normal. **Everyone** is.
 >
-> The women in my galleries are teachers and nurses and mothers and
-> grandmothers. Not one of them arrived feeling ready. What they had was
-> two hours, professional hair and makeup, and someone telling them exactly
-> what to do with their hands.
+> But nervous turns into empowered real quick, and you will leave feeling
+> like a damn goddess. That is not a sales line — it is just what happens in
+> that room.
+>
+> *"But I don't look like the women in your portfolio."*
+>
+> You do. The women in my galleries are teachers and nurses and mothers and
+> grandmothers, and not one of them walked in feeling ready. What they had
+> was two hours, professional hair and makeup, and someone telling them
+> exactly what to do with their hands.
 >
 > > *"Jessica is amazing! Such a lovely day. She is so fun and
 > > professional! She really makes the studio a safe and comfortable
 > > place!"*
 >
-> If that is the thing holding you back, bring it to the call. It is
-> genuinely my favourite thing to talk about.
+> **And what if I don't know how to pose?** You don't need to. That is
+> literally my job. I guide you the entire time — hands, hips, face,
+> everything.
 >
-> **[Book my call]**
+> **[The things women worry about →]**
+>
+> **[Book my call →]**
 >
 > — Jess
 
-**Text** *(optional — see above)*:
+**Text** *(optional — see the note on text volume)*:
 
-> {{contact.first_name}}, the thing nearly everyone says first: "I don't
-> look like the women in your portfolio."
+> {{contact.first_name}}, the question everyone asks: "what if I'm nervous?"
 >
-> You do. That's rather the point. [guide with #worries] — Jess
+> Totally normal. Everyone is. And you don't need to know how to pose — that's
+> literally my job 🖤 [guide with #worries] — Jess
 
 ---
 
@@ -232,66 +259,82 @@ compliance line.*
 
 **Subject:** What your session day actually looks like
 
-> Hi {{contact.first_name}},
+> Hi {{contact.first_name}}!
 >
 > Here is the whole thing, start to finish.
 >
-> Hair and makeup first, at a local salon — so you arrive at the studio
-> already done. We photograph for two to three hours. Then you go home.
+> **Hair and makeup first**, at a local salon — you drive over to the studio
+> already done and gorgeous.
 >
-> Your images come later, at a private Zoom appointment where we go through
-> every one of them together. You are never sent a link and left to figure
-> it out on your own. That is the part women tell me afterwards was their
-> favourite of the whole experience, and it is easily mine.
+> **Then we photograph**, two to three hours, just the two of us. Be prepared
+> to be sore afterwards. We do a lot of bending and twisting — it is quite
+> the workout! 😅
+>
+> **Then you go home.** Your images come later, at a private Zoom
+> appointment where we go through every one of them together, one at a time.
+> You are never sent a link and left to figure it out on your own.
+>
+> That is the part women tell me afterwards was their favourite of the whole
+> experience, and it is easily mine.
 >
 > **[How it all works →]**
 >
 > Questions about any of it? Bring them all.
 >
-> **[Book my call]**
+> **[Book my call →]**
 >
 > — Jess
 
 **Text:**
 
-> {{contact.first_name}} — the bit most women are surprised by: you see
-> your images WITH me, on a call. Never alone in an inbox.
+> {{contact.first_name}} — the bit most women are surprised by: you see your
+> images WITH me, on a call. Never alone in an inbox 🖤
 >
-> Here's how the day runs: [guide with #works] — Jess
+> How the day runs: [guide with #works] — Jess
 
 ---
 
 ## 5 · 14 days
 
-**Subject:** What it costs, plainly
+**Subject:** Let's talk about the investment
 
 > Hi {{contact.first_name}},
 >
-> I would much rather you knew before we talk than after.
+> I would much rather you knew before we talk than after. So, plainly:
 >
-> There is a session fee, which reserves your date. Your images are
-> purchased separately, at your reveal. There are eight Collections — the
-> smallest is digital images, the largest is an album, all your digitals
-> and a mobile app — and you choose which one when you book, on an
-> interest-free plan.
+> **The session fee is $697.** It is non-refundable, it reserves your date,
+> and it covers everything in that list — the studio, hair and makeup, the
+> wardrobe, the full session, retouching, and your reveal and ordering
+> appointment.
 >
-> Every figure is written down here, so nothing on the call is a surprise:
+> **Your images and products are purchased separately**, at your reveal.
+> There are eight Collections. They start at **$1,250** for digital images
+> and run to **$3,400 and up** for an album, all your digitals and a mobile
+> app. Digitals, albums, prints, wall art — heirloom pieces meant to last a
+> lifetime.
 >
-> **[The Investment →]**
+> **Got a little sticker shock?** Totally get it. Most of my clients feel
+> that way at first. 🙌
 >
-> And if a number raises a question, bring it. No pressure and no
-> obligation.
+> Here is the good news: you do not pay for everything at once. Every
+> Collection is bought on an **interest-free prepayment plan**, biweekly or
+> monthly, set up when you book. This is an investment in *you*, and I am
+> here to make it as stress-free as I possibly can.
 >
-> **[Book my call]**
+> **[Every figure, written down →]**
+>
+> If a number raises a question, bring it. No pressure and no obligation.
+>
+> **[Book my call →]**
 >
 > — Jess
 
 **Text** *(optional)*:
 
 > {{contact.first_name}}, in case it's the question you haven't asked yet:
-> every price is written down, right here. [guide with #investment]
+> session fee $697, Collections from $1,250, all on interest-free plans.
 >
-> No surprises on the call. — Jess
+> Every figure: [guide with #investment] — Jess
 
 ---
 
@@ -305,23 +348,23 @@ compliance line.*
 >
 > It is usually that they got tired of waiting to feel ready.
 >
-> > *"The confidence boost I had from this experience was
-> > unparalleled!"*
+> > *"The confidence boost I had from this experience was unparalleled!"*
 >
 > > *"Jessica was fabulous from the very first contact to the image
 > > reveal!"*
 >
-> If you are still thinking about it a month later, that is generally your
-> answer. And I would love to be the one you do it with.
+> If you are still thinking about it a month later, {{contact.first_name}} —
+> that is generally your answer. And I would absolutely love to be the one
+> you do it with. 🖤
 >
-> **[Book my call]**
+> **[Book my call →]**
 >
 > — Jess
 
 **Text:**
 
-> {{contact.first_name}}, a month since your guide! Still thinking about
-> it? That's usually the sign.
+> {{contact.first_name}}, a month since your guide! Still thinking about it?
+> That's usually the sign 🖤
 >
 > 20 minutes, bring your questions, no obligation: [calendar] — Jess
 
@@ -335,28 +378,33 @@ compliance line.*
 >
 > Two practical things, in case they help you plan.
 >
-> I photograph on Tuesdays and Thursdays, so dates go sooner than people
-> expect. And anything printed — an album, wall art — takes up to six weeks
-> after your reveal, which is itself a week or two after your session.
+> **I photograph on Tuesdays and Thursdays only**, 9am to 3pm — so dates go
+> sooner than people expect, and the studio books up to 15 months ahead.
 >
-> So if you want your images *for* something, work backwards from that
-> date. I am very happy to help you do exactly that on a call.
+> **And anything printed takes time.** An album or wall art is made to order
+> and arrives within six weeks of your reveal, which is itself a week or two
+> after your session.
 >
-> **[Book my call]**
+> So if you want your images *for* something — a birthday, an anniversary, a
+> date that matters — work backwards from it. I am very happy to help you do
+> exactly that on a call.
+>
+> **[Book my call →]**
 >
 > — Jess
 
 **Text** *(optional)*:
 
-> {{contact.first_name}}, one planning note: I shoot Tue/Thu only, and
-> albums take ~6 weeks after your reveal. If you want images for a date,
-> work backwards! [calendar] — Jess
+> {{contact.first_name}}, planning note: I shoot Tue/Thu only, and albums
+> take ~6 weeks after your reveal. Want images for a date? Work backwards!
+>
+> [calendar] — Jess
 
 ---
 
 ## 8 · 6 months
 
-**Subject:** Last note from me
+**Subject:** Last note from me 🖤
 
 > Hi {{contact.first_name}},
 >
@@ -366,22 +414,21 @@ compliance line.*
 > Thank you for thinking of my studio in the first place. With everywhere
 > you could have looked, that still means a great deal to me.
 >
-> The guide is yours to keep, whenever you want it:
->
-> **[Your Session Guide]**
+> **[Your Session Guide — yours to keep →]**
 >
 > And if the time ever comes, I am right here:
 >
-> **[Book my call]**
+> **[Book my call →]**
 >
-> I hope you do it one day, {{contact.first_name}} — with me or without me.
+> I hope you do it one day, {{contact.first_name}}. With me or without me —
+> you deserve to see yourself the way other people do.
 >
 > — Jess
 
 **Text:**
 
-> {{contact.first_name}}, last message from me. Your guide is yours to keep
-> [guide], and the door stays open whenever you are ready.
+> {{contact.first_name}}, last message from me 🖤 Your guide is yours to
+> keep [guide], and the door stays open whenever you're ready.
 >
 > Thank you for thinking of my studio. — Jess
 
@@ -389,43 +436,38 @@ compliance line.*
 
 ## Notes on the writing
 
-**Every message has one job.** Reassure, then name the fear, then explain
-the process, then the money, then proof, then timing, then leave. Nothing
-says "just checking in" twice, because that is what makes a sequence feel
-automated.
+**The voice is hers, lifted from her own inquiry email.** "I'm so excited you
+reached out", "hellooooo makeover", "totally normal, everyone is", "nervous
+turns into empowered real quick", "you'll leave feeling like a damn goddess",
+"got a little sticker shock? totally get it", "that's literally my job". The
+earlier draft was far too restrained — this is how she actually writes, and
+it is better.
 
-**The thank-you is in message 1 and message 8, and nowhere in between.**
-Jessica's note, 25 September: *"there are many choices for a boudoir
-photographer and I appreciate them choosing to inquire with my studio."* It
-opens the sequence and it closes it. Put it in all eight and it stops
-reading as gratitude and starts reading as a tic.
+**Each message has one job.** Welcome, reassure, name the fear, explain the
+day, talk money, prove it, help her plan, then leave. Her Dubsado version
+sent one message six times; this is the same cadence doing six different
+things.
 
-**"Bring your questions" replaced "nothing to prepare".** Her note, same
-day: *"Ask them to bring any questions they may have during this call. No
-pressure or obligation."* It is a better line because it gives her
-something to DO — a woman who has been told there is nothing to prepare
-still turns up not knowing what to ask. **The same phrase was live in two
-other places** and both were changed in the same pass: the guide's closing
-band and the GHL calendar's own description.
+**The thank-you is in message 1 and message 8 and nowhere between.** Her
+note: *"there are many choices for a boudoir photographer and I appreciate
+them choosing to inquire with my studio."* In all eight it stops reading as
+gratitude and starts reading as a tic.
 
-**Upbeat, but not everywhere.** Messages 1, 2, 4 and 6 carry the energy —
-she is pleased, and it should read that way. Messages 3 and 8 deliberately
-do not. Three is answering a woman who thinks she is not good enough to be
-photographed, and eight is a goodbye; brightness in either would read as
-not listening. Warmth is not the same thing as exclamation marks, and the
-difference matters most exactly where the subject is tender.
+**Energy everywhere except where it would be tone-deaf.** Messages 1, 2, 4,
+5 and 6 are bright. Message 3 is warm but steady — it is answering a woman
+who thinks she is not good enough to be photographed. Message 8 is a
+goodbye. Emoji and exclamation marks in either would read as not listening.
 
-**The 6-month message is the one that gets replies.** Sequences that end by
-giving permission to go tend to hear back from people who would never have
-answered anything else. It is also simply the decent way to finish.
+**Three texts are marked optional.** Eight in six months is comfortable;
+three inside a fortnight is a lot from a photographer she has not met. Cut
+them and the text sequence is five, which reads as attentive rather than
+insistent.
 
-**The reviews are real and are hers.** Message 3 uses Miss H., unplaced on
-the site — see `reviews.md`. Message 6 uses two lines that are on the
-Portfolio and The Experience. The one-review-one-page rule in `CLAUDE.md`
-is about the website; re-using them in email is fine, and worth knowing
-rather than discovering.
+**The reviews are real.** Message 3 uses Miss H., unplaced on the site — see
+`reviews.md`. Message 6 uses two lines from the Portfolio and The Experience.
+The one-review-one-page rule in `CLAUDE.md` is about the website; re-using
+them in email is fine and worth knowing rather than discovering.
 
 **What is deliberately not here:** a discount, a deadline, and a "spots are
-filling up". She has none of those running, and inventing urgency for a
-woman deciding whether to be photographed in her underwear is the wrong
-instinct.
+filling up". She runs none of those, and manufacturing urgency for a woman
+deciding whether to be photographed in her underwear is the wrong instinct.
