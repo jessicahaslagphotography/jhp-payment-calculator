@@ -147,6 +147,13 @@ straight answer in the body.
 > - ✨ Expert posing and expression guidance
 > - ✨ Retouching, and your private image reveal and ordering appointment
 >
+> **And you never pay for it all at once.** Your images and products are
+> purchased separately from the session fee, and every Collection is bought
+> on an **interest-free prepayment plan** — weekly, biweekly or monthly,
+> whichever suits you. You can also book your session **up to 15 months in
+> advance**, so your plan spreads across as many payments as you need to keep
+> the amount manageable.
+>
 > **Ready to chat?** Grab a time and bring every question you have — the
 > practical ones and the nervous ones. No pressure and no obligation. 🖤
 >
@@ -551,13 +558,24 @@ They are shorter than the emails and say the same thing.
 **The 15-month booking window is now an affordability argument, not a
 logistics detail.** Her steer: a woman who can book that far out spreads her
 prepayment plan across that many more payments, which is what makes the
-amount manageable for most. So it appears in the three money messages -- 5
-and 7 beside the plan terms, and 6 where the call already promises to cover
-the date and the plan together -- and nowhere else. **Not** in messages 1 to
-4, which quote no figures on purpose, and not in message 8, which is a
-goodbye and would read as a last pitch. The number matches the FAQ and the
-Session Guide; 15 months is the settled figure and her old Dubsado copy's
-18 months is the stale one.
+amount manageable for most. So it sits beside the plan terms wherever those
+appear -- messages 1, 5 and 7, and message 6 where the call already promises
+to cover the date and the plan together. **Not** in messages 2, 3 and 4,
+which are about nerves and the day rather than money, and not in message 8,
+which is a goodbye and would read as a last pitch. The number matches the
+FAQ and the Session Guide; 15 months is the settled figure and her old
+Dubsado copy's 18 months is the stale one.
+
+**Message 1 carries the plan but no prices, and that line is drawn on
+purpose.** Jessica asked on 25 September for prepayment information in the
+welcome email, so it names the structure -- images and products are bought
+separately from the session fee, every Collection goes on an interest-free
+plan, weekly, biweekly or monthly, and the date can be up to 15 months out.
+It does **not** name $697, $1,250 or $3,400. Message 5 is still the one
+message that quotes a figure, which is what keeps a price in one email
+rather than two. Anything here that answers "can I afford this?" without
+stating a number belongs in message 1; the numbers themselves stay in
+message 5.
 
 **No emoji in any text.** Her instruction, and it is the right one for SMS:
 a heart renders differently on every handset and some carriers still turn a
