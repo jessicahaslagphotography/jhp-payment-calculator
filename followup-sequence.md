@@ -167,7 +167,7 @@ straight answer in the body.
 > There are plenty of photographers you could've asked — thank you for
 > asking me!
 >
-> Questions? Let's chat: [calendar]
+> Questions or Ready to Book? Let's Chat: [calendar]
 >
 > Reply STOP to opt out.
 
