@@ -58,18 +58,22 @@ UA = "JHPBoudoir-Scalogy/1.0 (calendar settings; +https://pages.scalogy.com/jhpb
 WANT = {
     "allowBookingAfter": 4,        # the lead time
     "allowBookingAfterUnit": "days",
-    "slotDuration": 20,            # the appointment length
+    "slotDuration": 20,            # how long the call is
     "slotDurationUnit": "mins",
+    "slotInterval": 20,            # how often a bookable start appears
+    "slotIntervalUnit": "mins",
 }
 
 # Known not to survive a round trip. The 422 loop finds any others.
 DROP = {"id", "_id", "dateAdded", "dateUpdated", "deleted"}
 
 # What a PUT must not silently change. Compared before and after.
-# slotInterval is in here deliberately: it is how OFTEN a bookable start
-# appears, which is a different setting from how LONG the appointment is, and
-# it must not move as a side effect of shortening the appointment.
-WATCH = ["name", "slug", "calendarType", "slotInterval", "slotIntervalUnit",
+# slotInterval used to be in here, guarding it against moving as a side
+# effect. It is a value she asked for now, so it moved to WANT: a 30 minute
+# grid here did not line up with her giveaway calendar's slots, so hours that
+# should have been free on both showed as unavailable.
+WATCH = ["name", "slug", "calendarType", "description",
+         "formSubmitThanksMessage",
          "slotBufferUnit", "appoinmentPerSlot", "appoinmentPerDay",
          "appointmentPerSlot", "appointmentPerDay", "allowBookingFor",
          "allowBookingForUnit", "openHours", "isActive", "autoConfirm",

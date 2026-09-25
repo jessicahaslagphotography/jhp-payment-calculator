@@ -76,9 +76,9 @@ WANT = {
         "Collections. Bring every question you have — including the ones "
         "you have not said out loud yet. There is no pressure and nothing to "
         "prepare.\n\n"
-        "If you already know you would like to book, have a card to hand. We "
-        "can reserve your date on the call, and it is the session fee "
-        "retainer that holds it."
+        "If you already know you would like to book, have a card ready to "
+        "process your session fee retainer over the phone. That is what "
+        "reserves your date."
     ),
 
     # Who AND what, so a diary entry a fortnight from now still makes sense.
@@ -89,7 +89,8 @@ WANT = {
         "email, and it carries links to reschedule or cancel if anything "
         "changes.\n\n"
         "If you already know you would like to book your session when we "
-        "talk, have a card to hand for the session fee retainer.\n\n"
+        "talk, have a card ready to process your session fee retainer over "
+        "the phone.\n\n"
         "I cannot wait to speak with you. — Jess"
     ),
 }
