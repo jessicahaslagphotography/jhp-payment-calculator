@@ -557,8 +557,9 @@ DAY = """
     <ol class="jhp-day">
       <li>
         <h4>Hair and Makeup</h4>
-        <p>Professional hair and makeup first, so you arrive in front of the
-           camera already finished. Your artist leaves once it is done.</p>
+        <p>Professional hair and makeup first, at a local salon. You drive over
+           to the studio once it is finished, so you arrive in front of the
+           camera already done.</p>
       </li>
       <li>
         <h4>Wardrobe</h4>
@@ -639,9 +640,7 @@ TYPES = """
         <h4>Specialty Sessions</h4>
         <p>Exclusive locations and sets, on certain dates only.</p>
       </div>
-    </div>
-    <p class="jhp-p" style="margin-top:20px">Have something else in mind? Ask
-       me. I am always up for a new adventure.</p>"""
+    </div>"""
 
 PARTS = [
  {"no": "Part One", "id": "begin", "title": "Before We Begin", "items": [
@@ -708,8 +707,8 @@ PARTS = [
        You are never too big, too small, too old or too young to do a boudoir
        session &mdash; though I only photograph clients over the age of 18.</p>"""),
    q("who", "Who Is Going to Be There?", """
-    <p>You and me. Your hair and makeup artist leaves once the service is
-       finished.</p>
+    <p>You and me. Your hair and makeup is done at a salon beforehand, so by
+       the time you reach the studio it is just the two of us.</p>
     <p>I have a full female staff, and the studio is designed with private
        rooms for each portion of your day.</p>"""),
    q("retouch", "What About Retouching?", """
@@ -728,10 +727,11 @@ PARTS = [
     <p>I have a beautiful and comprehensive wardrobe guide that gives you the
        full picture on how to look and feel like a bombshell for your session.
        My policy is always: when in doubt, bring it.</p>
-    <p>You are welcome to make a Pinterest board and share it with me so I can
-       help make your dream shoot a reality. And there is a client wardrobe of
-       over {wardrobe} pieces, sizes XS to 4X, that you are more than welcome
-       to borrow from and browse through.</p>"""),
+    <p>You are welcome to screenshot images and outfits you love from
+       <a href="https://www.instagram.com/jhpboudoir_" target="_blank" rel="noopener">my
+       Instagram</a> so I can help make your dream shoot a reality. And there is
+       a client wardrobe of over {wardrobe} pieces, sizes XS to 4X, that you are
+       more than welcome to borrow from and browse through.</p>"""),
  ]},
 
  {"no": "Part Three", "id": "works", "title": "How It All Works", "items": [
@@ -764,7 +764,10 @@ PARTS = [
     <p>You will be shown plenty of images to choose from, well above what your
        Collection includes. You choose which ones you want to keep and how you
        want them, and you order them at that same appointment.</p>
-    <p>You are not sent a link and left to work it out alone. That is the part
+    <p>And if you cannot narrow it down &mdash; most women cannot &mdash; you
+       can move up to a larger Collection right there at your reveal. Nobody is
+       ever held to the one they chose at booking.</p>
+    <p>You are not sent a link and left to figure it out on your own. That is the part
        most women tell me afterwards was their favourite of the whole
        thing.</p>"""),
    q("delivery", "When the Albums and Prints Arrive", """
