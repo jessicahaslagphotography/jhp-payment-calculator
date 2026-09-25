@@ -296,67 +296,88 @@ GUIDE_CSS += """
    down the left and then down the right, which is only acceptable when each
    item is self-contained and the run between headings is short. Four short
    runs, not one of twenty. */
-.jhp-home .jhp-part{max-width:1080px;text-align:center;
-  margin:clamp(58px,7vw,96px) auto clamp(26px,3vw,40px)}
+/* THE PART IS THE CONTROL, AND THE WHOLE PART OPENS AT ONCE
+   --------------------------------------------------------
+   Jessica's ask, 25 September, and it replaces the previous two. She had the
+   questions opening one at a time and did not like the layout: "is it possible
+   to have the header, they click it, and then all of the follow-up questions
+   underneath are shown instead of having to click each time?"
+
+   So there are FOUR controls on this page and not nineteen. Each part is a
+   <details> whose summary is the part heading, and opening it reveals that
+   whole part -- every question, every answer, and the photograph that closes
+   it -- as continuous prose. She taps once and then reads.
+
+   That means the questions themselves are no longer controls: they are plain
+   <article> headings again, which is why the card, the chevron and the
+   summary's tap padding are all gone from .jhp-q below. A heading that does
+   nothing when it is clicked must not look like a button.
+
+   Closed, the top of the guide is four rows. */
+.jhp-home .jhp-pt{max-width:1080px;margin:0 auto}
+/* A hairline between rows rather than a box round each: closed, the four read
+   as one list, which is what they are. */
+.jhp-home .jhp-pt + .jhp-pt{border-top:1px solid var(--line-soft)}
+.jhp-home .jhp-pt > summary{display:block;cursor:pointer;list-style:none;
+  -webkit-tap-highlight-color:transparent;
+  padding:clamp(30px,3.6vw,46px) 0 clamp(26px,3vw,40px)}
+.jhp-home .jhp-pt > summary::-webkit-details-marker{display:none}
+.jhp-home .jhp-pt > summary:focus-visible{outline:2px solid var(--gold-bright);
+  outline-offset:2px}
+/* The whole row is the target, so nothing here needs its own 44px: the
+   summary is 100+px tall at every width. */
+.jhp-home .jhp-part{max-width:1080px;text-align:center;margin:0 auto}
 .jhp-home .jhp-part .no{font-family:var(--sans);font-weight:400;font-size:10px;
   letter-spacing:.42em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
 .jhp-home .jhp-part h2{font-family:var(--serif);font-weight:600;
   font-size:clamp(27px,3.1vw,40px);line-height:1.14;color:var(--ink);margin:0;
-  text-wrap:balance}
+  text-wrap:balance;transition:color .3s}
+.jhp-home .jhp-pt > summary:hover h2{color:var(--gold-bright)}
 /* A short rule rather than a full-width one: it closes the heading off
    without drawing a line across the page every time a part begins. */
 .jhp-home .jhp-part .rule{width:34px;height:1px;background:var(--gold);
   margin:18px auto 0;opacity:.8}
+/* The count tells her the size of what she is about to open -- five questions
+   in The Investment is worth knowing before she taps it -- and it carries the
+   same 6px chevron the Info menu, the phone drawer and the FAQ wear, so the
+   row reads as a disclosure and not as a heading that happens to be centred. */
+.jhp-home .jhp-part .ct{display:inline-flex;align-items:center;gap:11px;
+  font-family:var(--sans);font-weight:400;font-size:10px;letter-spacing:.24em;
+  text-transform:uppercase;color:var(--dim);margin:16px 0 0;
+  transition:color .3s}
+.jhp-home .jhp-part .ct::after{content:"";width:6px;height:6px;margin-top:-4px;
+  border-right:1px solid currentColor;border-bottom:1px solid currentColor;
+  transform:rotate(45deg);transition:transform .3s}
+.jhp-home .jhp-pt > summary:hover .ct{color:var(--gold)}
+.jhp-home .jhp-pt[open] .ct{color:var(--gold)}
+.jhp-home .jhp-pt[open] .ct::after{transform:rotate(-135deg);margin-top:3px}
 
-/* ONE COLUMN, AND EVERY QUESTION IS A DISCLOSURE
-   ----------------------------------------------
-   Jessica's ask, 24 September: clicking a headline should drop that answer
-   underneath it, rather than the whole document sitting open at the bottom
-   with a list of links pointing down into it. So the contents and the body
-   are the same object now -- there is no separate list, because the list IS
-   the guide.
+/* ONE COLUMN, AND A QUESTION IS JUST A HEADING AGAIN
+   -------------------------------------------------
+   The whole part opens at once, so nothing inside it is a control. Each
+   question is a heading and its prose, separated from the next by a hairline
+   -- a magazine, read straight down, which is what it was always meant to be.
 
-   TWO COLUMNS COULD NOT SURVIVE THIS and that is worth stating plainly. The
-   columns were her ask too, two messages earlier, and they worked: balanced
-   cards, 10,906px at 1440. But revealing one headline at a time only reads
-   down a single column -- in two, the next headline appears in whichever
-   column the balancer happens to put it, which is either beside what you
-   just read or below the fold in the other lane. Progressive disclosure and
-   balanced columns want opposite things. Set .jhp-qs back to columns:2 and
-   delete the stepper to have the other one.
+   TWO COLUMNS ARE STILL NOT BACK, and the reason has changed. They were
+   dropped because a one-at-a-time reveal only reads down a single column;
+   now the reveal is per part, so that argument is spent. What replaces it is
+   plainer: this is nineteen answers of continuous prose and a balanced
+   two-column run of it would have her reading down the left of a part and
+   then back up to the top of the right, with photographs spanning across.
+   One column at an honest measure is the right shape for prose. Set
+   .jhp-qs back to columns:2 to try it; measure Part Two before believing it.
 
-   Narrower than the old two-column block, because a single column of 15px
-   type at 1080px is a 140-character line. 860 keeps the measure honest. */
+   860px, because a single column of 15px type at 1080 is a 140-character
+   line. */
 .jhp-home .jhp-qs{max-width:860px;margin:0 auto}
-.jhp-home .jhp-qs > * + *{margin-top:14px}
+.jhp-home .jhp-qs > * + *{margin-top:clamp(26px,2.8vw,34px)}
 
-/* The headline is the control. <details> again -- four places on this site
-   now -- for the same reasons: no JavaScript needed to open one, a real
-   focusable control with Enter and Space, and a disclosure a screen reader
-   announces as one. */
-.jhp-home .jhp-q{background:var(--surface);border:1px solid var(--line-soft);
-  border-radius:2px;transition:border-color .45s ease}
-.jhp-home .jhp-q:hover,.jhp-home .jhp-q[open]{border-color:var(--line)}
-.jhp-home .jhp-q > summary{display:flex;align-items:baseline;
-  justify-content:space-between;gap:18px;
-  padding:clamp(18px,2.2vw,24px) clamp(20px,2.4vw,28px);cursor:pointer;
-  list-style:none;-webkit-tap-highlight-color:transparent}
-.jhp-home .jhp-q > summary::-webkit-details-marker{display:none}
-.jhp-home .jhp-q > summary:focus-visible{outline:2px solid var(--gold-bright);
-  outline-offset:-2px}
-.jhp-home .jhp-q > summary h3{font-family:var(--serif);font-weight:600;
-  font-size:clamp(19px,1.9vw,24px);line-height:1.22;color:var(--ink);margin:0;
-  text-wrap:balance;transition:color .3s}
-.jhp-home .jhp-q:hover > summary h3,
-.jhp-home .jhp-q[open] > summary h3{color:var(--gold-bright)}
-/* The same 5px chevron the Info menu, the phone drawer and the FAQ wear. */
-.jhp-home .jhp-q > summary::after{content:"";flex:0 0 auto;width:6px;height:6px;
-  margin-top:6px;border-right:1px solid var(--gold);
-  border-bottom:1px solid var(--gold);transform:rotate(45deg);
-  transition:transform .3s}
-.jhp-home .jhp-q[open] > summary::after{transform:rotate(-135deg);margin-top:10px}
-.jhp-home .jhp-q .a{padding:0 clamp(20px,2.4vw,28px) clamp(20px,2.4vw,26px)}
-.jhp-home .jhp-q .a > *:first-child{margin-top:0}
+.jhp-home .jhp-q{border-top:1px solid var(--line-soft);
+  padding-top:clamp(22px,2.4vw,28px)}
+.jhp-home .jhp-q:first-child{border-top:0;padding-top:0}
+.jhp-home .jhp-q h3{font-family:var(--serif);font-weight:600;
+  font-size:clamp(19px,1.9vw,24px);line-height:1.22;color:var(--ink);
+  margin:0 0 14px;text-wrap:balance}
 .jhp-home .jhp-q p{font-family:var(--sans);font-weight:300;font-size:15.5px;
   line-height:1.75;color:var(--muted);margin:0 0 13px}
 .jhp-home .jhp-q p:last-child{margin-bottom:0}
@@ -366,48 +387,9 @@ GUIDE_CSS += """
   transition:color .3s,border-color .3s}
 .jhp-home .jhp-q a:hover{color:var(--gold-bright);border-color:var(--gold-bright)}
 /* .jhp-wide used to mean "span both columns". There is one column now, so it
-   only means "this one has a panel in it" and needs no layout of its own. */
+   only marks the questions that carry a panel and needs no layout of its own.
+   It is what the columns would key off if they ever came back. */
 .jhp-home .jhp-wide{margin-top:14px}
-
-/* THE STEPPER, AND WHY IT IS OPT-IN
-   ---------------------------------
-   Her second ask: add the next headline once they finish the one they are
-   reading. So within a part, only the first question is there to begin with,
-   and the next appears when the END of the open answer comes into view --
-   not when it is opened, which would reveal the next headline before she has
-   read a word of this one.
-
-   THE CSS RENDERS THE PAGE FINISHED, as everything on this site does. These
-   rules only apply under .js-step, which the script at the foot adds. No
-   JavaScript, no IntersectionObserver, a crawler, a printer, or Find on Page
-   -- every one of them gets all nineteen headlines. A document that hides
-   itself from the reader who cannot run scripts is not progressive, it is
-   broken.
-
-   The four PART headings are never hidden, and that is the escape hatch that
-   makes the whole thing safe: a woman who only wants the price can still see
-   The Investment and go straight there. Hiding those too would trap her in a
-   linear walk through nineteen questions, which is the opposite of what a
-   guide is for. */
-.jhp-home .jhp-qs.js-step .jhp-q.pending{display:none}
-/* ONE control, not one per part, and it is hidden until the script turns the
-   stepping on. Keyed off a class on the wrapper rather than a sibling
-   selector: the groups finish stepping at different times, and a rule that
-   watched the group next to it would blink out on whichever part happened to
-   be read first while three others were still hidden. */
-.jhp-home .jhp-step-all{display:none;max-width:860px;
-  margin:clamp(20px,2.4vw,28px) auto 0;text-align:center}
-.jhp-home.js-stepping .jhp-step-all{display:block}
-/* 10px of line plus 17px either side is 44px, which this needs as much as
-   any other control does -- it is the way out of the walk for anyone who
-   does not want to take it. */
-.jhp-home .jhp-step-all button{font-family:var(--sans);font-weight:400;
-  font-size:10px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--dim);background:none;border:0;padding:17px 18px;cursor:pointer;
-  transition:color .3s}
-.jhp-home .jhp-step-all button:hover{color:var(--gold)}
-.jhp-home .jhp-step-all button:focus-visible{outline:2px solid var(--gold-bright);
-  outline-offset:3px}
 
 /* THE LIFTED LINE
    ---------------
@@ -459,24 +441,21 @@ GUIDE_CSS += """
   letter-spacing:.14em;text-transform:uppercase;color:var(--ink);margin:0 0 7px}
 .jhp-home .jhp-two h4{font-family:var(--serif);font-weight:600;font-size:23px;
   line-height:1.2;color:var(--ink);margin:0 0 6px}
-/* The panels sit inside a card now rather than in the prose column, so they
-   lose the auto margins that used to centre them against the 62ch measure. */
+/* The panels sit in the question's own column rather than in the 62ch prose
+   measure, so they lose the auto margins that used to centre them. */
 .jhp-home .jhp-q .jhp-card,.jhp-home .jhp-q .jhp-day,
 .jhp-home .jhp-q .jhp-two,.jhp-home .jhp-q .jhp-rules{max-width:none}
 .jhp-home .jhp-q .jhp-card{margin-inline:0}
 .jhp-home .jhp-q .jhp-p{font-size:15.5px;line-height:1.75;margin:0 0 13px}
 
-/* ON A PHONE the disclosure keeps its box -- unlike the old card, a box here
-   is the tap target and not decoration, so it earns its padding. What comes
-   off is the width and a little of the type. */
+/* ON A PHONE the four rows tighten and the type steps down one notch. There
+   is no box to take off any more -- the questions have been hairlines and
+   prose at every width since the part became the control. */
 @media (max-width:620px){
   .jhp-home .jhp-qs{max-width:none}
-  .jhp-home .jhp-q > summary{padding:16px 18px;gap:14px}
-  .jhp-home .jhp-q > summary h3{font-size:18px}
-  .jhp-home .jhp-q .a{padding:0 18px 18px}
-  .jhp-home .jhp-part{margin:clamp(40px,9vw,52px) auto 22px}
+  .jhp-home .jhp-q h3{font-size:19px}
+  .jhp-home .jhp-pt > summary{padding:26px 0 22px}
   .jhp-home .jhp-lift{margin:38px auto}
-  .jhp-home .jhp-step-all{max-width:none}
 }
 """
 
@@ -487,30 +466,31 @@ GUIDE_CSS += """
 # something print engines handle badly and inconsistently.
 GUIDE_CSS += """
 @media print{
-  /* THE ANSWERS ARE OPEN ON PAPER, ALL NINETEEN. A question is a <details>
-     now, and a closed one prints as its summary alone -- the first render
-     after the rewrite came out nine pages of headings with not a word of copy
-     under any of them. Paper does not tap.
+  /* ALL FOUR PARTS ARE OPEN ON PAPER. A part is a <details> and a closed one
+     prints as its summary alone -- the first render after the questions became
+     disclosures came out nine pages of headings with not a word of copy under
+     any of them, and the file looked fine from the outside. Paper does not tap.
 
      Both hiding mechanisms have to be undone, the same pair the phone nav
      spells out: older engines hide a closed <details>'s children with a
      display rule, which a child can override, and newer ones hide
      ::details-content with content-visibility, which a child cannot. Setting
-     one and not the other leaves half the engines printing headings.
-
-     .pending goes the same way. The stepper is JavaScript and it does call
-     openAll() on beforeprint, but a headless render that emulates print media
-     without firing that event would otherwise print one question per part. A
-     stylesheet does not depend on an event having fired. */
-  .jhp-home .jhp-q > .a{display:block !important}
-  .jhp-home .jhp-q::details-content{content-visibility:visible !important;
+     one and not the other leaves half the engines printing headings. This does
+     not depend on any script having run, which is the point -- a stylesheet
+     must not wait on an event. */
+  .jhp-home .jhp-pt > .jhp-qs,.jhp-home .jhp-pt > figure,
+  .jhp-home .jhp-pt > .jhp-lift{display:block !important}
+  .jhp-home .jhp-pt::details-content{content-visibility:visible !important;
     display:block !important;block-size:auto !important}
-  .jhp-home .jhp-qs.js-step .jhp-q.pending{display:block !important}
-  /* A chevron is an instruction to tap and there is nothing to tap on paper,
-     and neither is the control that reveals the rest of a document that is
-     already all here. */
-  .jhp-home .jhp-q > summary::after{display:none}
-  .jhp-home .jhp-step-all,.jhp-home.js-stepping .jhp-step-all{display:none}
+  /* A chevron and a question count are instructions to tap, and there is
+     nothing to tap on paper. */
+  .jhp-home .jhp-part .ct{display:none}
+  /* A part heading starts a page rather than orphaning itself at the foot of
+     the last one. Not the first, which would leave a blank sheet in front of
+     Part One. */
+  .jhp-home .jhp-pt + .jhp-pt{break-before:page;page-break-before:always;
+    border-top:0}
+  .jhp-home .jhp-pt > summary{padding:0 0 26px}
   /* One column on paper. Two columns of 15px type in a Letter page is a
      newspaper, and the spanners that make the screen layout work have no
      reliable print behaviour across engines. */
@@ -844,146 +824,93 @@ INSIDE = {"day": plate("958c1b0e-53b1-4d18-b5ed-7b4b2ae1ccc5.jpg",
                        "This is the part I cannot wait for.")}
 
 # ---------------------------------------------------------------- the renderer
+# Spelt out because a number in a heading has to read as words: "Four
+# Questions", not "4 questions", in a document that is set in Cormorant.
+COUNTS = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six",
+          7: "Seven", 8: "Eight", 9: "Nine", 10: "Ten"}
+
+
 def render_parts():
-    """Four parts, each a heading and a run of question disclosures.
+    """Four disclosures, each holding one whole part.
 
-    There is no separate contents list any more: the headlines ARE the
-    contents, and clicking one drops its answer underneath rather than
-    scrolling to a copy of it further down the page.
+    Jessica's ask, 25 September: the part heading is the control, and opening
+    it shows every question underneath at once rather than asking her to click
+    each one. So the <details> is the PART, and the questions inside it are
+    plain articles -- headings and prose, read straight down.
 
-    Every answer ends in an empty sentinel. That is what the stepper watches
-    to decide she has reached the bottom of what she is reading, which is a
-    better proxy for "finished" than the click that opened it."""
+    Everything that belongs to a part goes inside it, the closing photograph
+    and the lifted line included. Left outside they would sit between the four
+    closed rows, which is the wall the drop-downs exist to avoid.
+
+    NOT MUTUALLY EXCLUSIVE, unlike the FAQ accordion. name="guide-part" would
+    keep the page short, but a part collapsing while she is below it removes
+    thousands of pixels from above the viewport and yanks the page under her
+    thumb. She opens what she wants and it stays open."""
     out = []
     for part in PARTS:
-        out.append(
-            '<header class="jhp-part" id="%s">\n'
-            '  <p class="no">%s</p>\n'
-            '  <h2>%s</h2>\n'
-            '  <div class="rule" aria-hidden="true"></div>\n'
-            '</header>\n' % (part["id"], part["no"], part["title"]))
         items = []
         for it in part["items"]:
             items.append(
-                '  <details class="jhp-q%s" id="%s">\n'
-                '    <summary><h3>%s</h3></summary>\n'
-                '    <div class="a">%s\n'
-                '      <span class="end" aria-hidden="true"></span>\n'
-                '    </div>\n'
-                '  </details>' % (" jhp-wide" if it["wide"] else "",
+                '  <article class="jhp-q%s" id="%s">\n'
+                '    <h3>%s</h3>%s\n'
+                '  </article>' % (" jhp-wide" if it["wide"] else "",
                                   it["id"], it["q"], it["a"]))
             if it["id"] in INSIDE:
                 items.append("  " + INSIDE[it["id"]].replace("\n", "\n  "))
-        out.append('<div class="jhp-qs">\n%s\n</div>\n' % "\n".join(items))
+        # NOT re-indented to sit inside the <details>, deliberately. Adding two
+        # spaces to every line of nineteen answers made every one of them a
+        # changed line, which turned a 5KB template patch into a 37KB one for
+        # whitespace no browser reads. The markup nests; the indentation does
+        # not have to.
+        inner = '<div class="jhp-qs">\n%s\n</div>' % "\n".join(items)
         if part["id"] in AFTER:
-            out.append(AFTER[part["id"]] + "\n")
+            inner += "\n" + AFTER[part["id"]]
+        n = len(part["items"])
+        out.append(
+            '<details class="jhp-pt" id="%s">\n'
+            '  <summary>\n'
+            '    <div class="jhp-part">\n'
+            '      <p class="no">%s</p>\n'
+            '      <h2>%s</h2>\n'
+            '      <div class="rule" aria-hidden="true"></div>\n'
+            '      <p class="ct">%s Question%s</p>\n'
+            '    </div>\n'
+            '  </summary>\n'
+            '%s\n'
+            '</details>\n'
+            % (part["id"], part["no"], part["title"],
+               COUNTS[n], "" if n == 1 else "s", inner))
     return "\n".join(out)
 
 
-# The stepper. Added to SCRIPT so the page carries one script block, not two.
+# A DEEP LINK OPENS THE PART IT POINTS INTO.
+# Added to SCRIPT so the page carries one script block and not two.
+#
+# This is the only script the reveal needs now. Native <details> does the
+# opening and shutting; what it will not do reliably across engines is open
+# itself because the URL names something inside it. Chrome and Safari have
+# started auto-expanding for fragment navigation and for Find on Page, Firefox
+# has not, and a link she texted to a client that lands on a shut part looks
+# like a broken link.
+#
+# NOTHING IS HIDDEN BY SCRIPT any more -- that is the difference from the
+# version this replaces. With JavaScript off the four parts are still there
+# and still open on a tap; all this adds is that #money opens The Investment
+# on the way in. Failing is therefore harmless, which is the right shape for
+# an enhancement.
 STEP = """
-  /* ONE HEADLINE AT A TIME
-     ----------------------
-     Jessica's ask, 24 September: show the next headline once she has finished
-     the one she is reading. Within each part only the first question is
-     present to begin with; the next appears when the END of the open answer
-     scrolls into view.
-
-     THE END, NOT THE CLICK. Revealing the next headline the moment she opens
-     one would put it on screen before she has read a word, which is the thing
-     she asked me to stop. Each answer carries an empty sentinel as its last
-     child and that is what is watched.
-
-     EVERYTHING HERE IS OPT-IN, which is the rule the rest of this site
-     follows. The markup ships with all nineteen headlines present and the CSS
-     renders them; this script is what hides the ones she has not reached. No
-     JavaScript, no IntersectionObserver, a crawler, a printer, Find on Page,
-     or a reader who simply wants to search the document -- every one of them
-     gets the whole thing. A guide that hides itself from anyone who cannot
-     run scripts is not progressive, it is broken.
-
-     THE PART HEADINGS ARE NEVER HIDDEN and neither is the Show Every Question
-     control. A woman who only came for the price can still see The Investment
-     and go straight to it. Trapping her in a linear walk through nineteen
-     questions to find one number is the opposite of what a guide is for.
-
-     Nothing here is animated, so there is no reduced-motion branch to make:
-     a headline is either there or it is not. */
   (() => {
-    const groups = document.querySelectorAll(".jhp-home .jhp-qs");
-    if (!groups.length || !("IntersectionObserver" in window)) return;
-
-    /* Reveal everything, from the control or from anything that needs the
-       whole document present -- a print, or a jump to an anchor that has not
-       been reached yet. */
-    const home = document.querySelector(".jhp-home");
-    const openAll = () => {
-      document.querySelectorAll(".jhp-home .jhp-q.pending")
-        .forEach((q) => q.classList.remove("pending"));
-      document.querySelectorAll(".jhp-home .jhp-qs.js-step")
-        .forEach((g) => g.classList.remove("js-step"));
-      if (home) home.classList.remove("js-stepping");
-    };
-
-    document.querySelectorAll(".jhp-home [data-open-all]").forEach((b) => {
-      b.addEventListener("click", openAll);
-    });
-    /* A printer gets the whole guide even mid-walk. */
-    if (window.matchMedia) {
-      const mq = window.matchMedia("print");
-      if (mq.addEventListener) mq.addEventListener("change", (e) => e.matches && openAll());
-    }
-    window.addEventListener("beforeprint", openAll);
-    groups.forEach((group) => {
-      const items = [...group.querySelectorAll(":scope > .jhp-q")];
-      if (items.length < 2) return;
-      items.slice(1).forEach((q) => q.classList.add("pending"));
-      group.classList.add("js-step");
-      if (home) home.classList.add("js-stepping");
-
-      let reached = 0;
-      const step = () => {
-        while (reached + 1 < items.length && !items[reached].open) reached++;
-        const next = items[reached + 1];
-        if (next) { next.classList.remove("pending"); reached++; }
-        if (reached >= items.length - 1) group.classList.remove("js-step");
-        /* Nothing left hidden anywhere means the control has nothing to do. */
-        if (home && !document.querySelector(".jhp-home .jhp-q.pending")) {
-          home.classList.remove("js-stepping");
-        }
-      };
-
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach((e) => {
-          if (!e.isIntersecting) return;
-          io.unobserve(e.target);
-          step();
-        });
-      }, { rootMargin: "0px 0px -8% 0px" });
-
-      items.forEach((q) => {
-        q.addEventListener("toggle", () => {
-          if (!q.open) return;
-          const end = q.querySelector(".end");
-          /* A short answer whose end is already on screen advances at once,
-             which is correct: she can see the whole thing. */
-          if (end) io.observe(end);
-        });
-      });
-    });
-
-    /* AFTER the groups are set up, not before. Someone arriving on a deep
-       link -- a bookmark, or a link she was sent -- must not land on a
-       question that is hidden, and calling this first only had the loop
-       below hide it again a millisecond later. Checked in a browser, which
-       is how that ordering bug was found rather than reasoned about. */
     const jumpTo = () => {
       if (!location.hash) return;
       let target = null;
       try { target = document.querySelector(location.hash); } catch (e) { return; }
       if (!target) return;
-      openAll();
-      if (target.tagName === "DETAILS") target.open = true;
+      /* Walk up, because the hash usually names a question and the thing that
+         has to open is the part around it. closest() includes the element
+         itself, which is what makes #begin work as well as #money. */
+      let d = target.closest("details");
+      while (d) { d.open = true; d = d.parentElement && d.parentElement.closest("details"); }
+      /* After the open, or it scrolls to where the target was while shut. */
       target.scrollIntoView();
     };
     jumpTo();
@@ -1055,15 +982,12 @@ BODY = """
     <p class="jhp-p opener">This guide walks you through what a boudoir shoot
        is and how the process works here at JHP Boudoir. It is in four parts:
        who I am, the things women worry about before they book, how the day
-       itself works, and what it costs. Open a question to read the answer,
-       and the next one will be waiting when you are done with it.</p>
+       itself works, and what it costs. Tap a part below to open it and read
+       straight through, and take them in whatever order you like.</p>
     <p class="jhp-p">If you have any questions afterwards, please reach out and
        I will get back to you as soon as I can. My studio hours are
        {studio_hours}, and consultation calls run {call_hours}.</p>
   </div>
-
-  <p class="jhp-step-all"><button type="button" data-open-all>Show every
-     question at once</button></p>
 
 {parts}
   <div class="jhp-gd jhp-end">
