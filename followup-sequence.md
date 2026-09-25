@@ -150,7 +150,7 @@ straight answer in the body.
 > practical ones and the nervous ones. No pressure and no obligation. 🖤
 >
 > And if you already know you are ready to book — have a credit card handy!
-> We can process your session fee retainer right on the call and get your
+> We will process your session fee retainer right on the call and get your
 > booking finalized.
 >
 > **[Book my call →]**
