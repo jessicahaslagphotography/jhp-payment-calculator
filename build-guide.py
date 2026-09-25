@@ -28,7 +28,7 @@ September figures forced:
   delivery       6-8 weeks after the session
                  -> within 6 weeks of the Zoom reveal
   session fee    $500 -> $697
-  Collections    from $2,800 -> Petite from $1,250, Full from $3,400, eight
+  Collections    from $2,800 -> Digital from $1,250, Full from $3,400, eight
   booking        18 months -> 15 months
   studio hours   M-F 9am-4pm -> Mon-Thu 10am-3pm
   consultation   30 minutes in one place, 20 in another -> 20, the length of
@@ -64,7 +64,7 @@ src = (ROOT / "scalogy-portfolio.html").read_text()
 # of these moves, it moves here and nowhere else in this file.
 F = {
     "fee":            "$697",
-    "petite":         "$1,250",
+    "digital":        "$1,250",
     "full":           "$3,400",
     "collections":    "eight",
     "day":            "two to three hours",
@@ -72,11 +72,16 @@ F = {
     "delivery":       "within 6 weeks",
     "booking_window": "15 months",
     "studio_hours":   "Monday to Thursday, 10am&ndash;3pm",
+    # The days she is BEHIND THE CAMERA, which is narrower than the studio
+    # hours above: the studio is open Monday to Thursday for consultations and
+    # reveals, and she photographs on two of those days. Her own, 25 September.
+    # ASK: this says 9am and the settled studio hours say 10am. One of the two
+    # is wrong and it is hers to settle -- see CLAUDE.md.
+    "shoot_days":     "Tuesdays and Thursdays, 9am&ndash;3pm",
     "call_hours":     "Monday to Friday, 8am&ndash;5pm",
     "consult":        "20 minute",
     "wardrobe":       "160",
     "sqft":           "2,000",
-    "shown":          "50 to 100",
 }
 CALENDAR = "https://api.leadconnectorhq.com/widget/booking/mi2EqYRq4gGEbBJHe82b"
 VIP = "https://www.facebook.com/groups/1107773373084834"
@@ -563,9 +568,9 @@ DAY = """
       </li>
       <li>
         <h4>And That Is the Day</h4>
-        <p>Sessions run inside studio hours, {studio_hours}. Your reveal is a
-           separate appointment, so you go home when we are done rather than
-           making decisions about pictures you have not seen yet.</p>
+        <p>I photograph on {shoot_days}. Your reveal is a separate
+           appointment, so you go home when we are done rather than making
+           decisions about pictures you have not seen yet.</p>
       </li>
     </ol>"""
 
@@ -594,8 +599,8 @@ COLLECTIONS = """
        room to find the one that fits.</p>
     <div class="jhp-card two">
       <div>
-        <p class="lb">Petite Collections</p>
-        <p class="fig">from {petite}</p>
+        <p class="lb">Digital Collections</p>
+        <p class="fig">from {digital}</p>
         <p>Three digital images.</p>
       </div>
       <div>
@@ -625,9 +630,9 @@ TYPES = """
         <p>In the studio, all year. Great for a first timer.</p>
       </div>
       <div>
-        <p class="when">Summer dates only</p>
-        <h4>Outdoor Boudoir Sessions</h4>
-        <p>Exclusive locations, on summer dates only.</p>
+        <p class="when">Certain dates only</p>
+        <h4>Specialty Sessions</h4>
+        <p>Exclusive locations and sets, on certain dates only.</p>
       </div>
     </div>
     <p class="jhp-p" style="margin-top:20px">Have something else in mind? Ask
@@ -751,15 +756,16 @@ PARTS = [
     <p>Your reveal is {reveal_wait} after your session. It is a private
        appointment over Zoom, and it is where you see your images for the very
        first time &mdash; together, with me, going through them one by one.</p>
-    <p>You will be shown {shown} images. You choose which ones you want to keep
-       and how you want them, and you order them at that same appointment.</p>
+    <p>You will be shown plenty of images to choose from, well above what your
+       Collection includes. You choose which ones you want to keep and how you
+       want them, and you order them at that same appointment.</p>
     <p>You are not sent a link and left to work it out alone. That is the part
        most women tell me afterwards was their favourite of the whole
        thing.</p>"""),
    q("delivery", "When the Albums and Prints Arrive", """
     <p>Your digital images are yours the moment the reveal ends. Albums, wall
        art and anything else printed are made to order and arrive at your door
-       {delivery} of that appointment. I usually drop ship everything directly
+       {delivery} of that appointment. I drop ship everything directly
        to you to keep the process as simple as possible.</p>"""),
  ]},
 
@@ -784,13 +790,16 @@ PARTS = [
     <p>Before I have photographed you it is hard to give you an exact figure.
        Some women want a basic album; others invest several thousand in a
        Collection with a variety of products. What you spend is up to you. You
-       can buy from my Collections or a la carte, and the full investment menu
-       comes to you as soon as your booking is complete.</p>
-    <p>That said &mdash; if you are looking for a quick shoot, or just a few
-       images, this is not the session for you. I offer a full experience and I
-       show you {shown} images. I only offer luxury products, because you are
-       worth it. Investing in yourself is priceless. You will never tire of
-       your images, or forget the way the session day made you feel.</p>"""),
+       can buy a full Collection &mdash; an album, your digital images, the
+       mobile app and more &mdash; or you can buy digitals on their own. The
+       full investment menu comes to you as soon as your booking is
+       complete.</p>
+    <p><strong>That said &mdash; if you are looking for a quick shoot, or just
+       a few images, this is not the session for you.</strong> I offer a full
+       experience, and how many images you are shown depends on the Collection
+       you have chosen. I only offer luxury products, because you are worth it.
+       Investing in yourself is priceless. You will never tire of your images,
+       or forget the way the session day made you feel.</p>"""),
    q("money", "The Collections", COLLECTIONS, wide=True),
  ]},
 ]

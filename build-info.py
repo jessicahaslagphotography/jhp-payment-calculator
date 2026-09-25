@@ -277,7 +277,7 @@ BODY = """
         <p>Yes. Every client chooses a collection when she books and sets up a
            prepayment plan or may pay in full at booking, so you know what you
            are spending before your session rather than after it.</p>
-        <p>Petite Collections start at $1,250 and include 3 digital images.
+        <p>Digital Collections start at $1,250 and include 3 digital images.
            Full Collections start at $3,400 and include an album, digitals,
            and a mobile app. There are eight collections in all, so there is
            room to find the one that fits.</p>

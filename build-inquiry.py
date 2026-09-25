@@ -23,7 +23,7 @@ that call establishing.
 THE ACKNOWLEDGMENT CARRIES NO NUMBER, DELIBERATELY. Her Session Guide PDF and
 the website's own FAQ disagree about the figures -- the guide says a $500
 session fee and Collections from $2,800; the FAQ says the session fee starts
-at $697 with Petite Collections from $1,250. Both are Jessica's, one of them
+at $697 with Digital Collections from $1,250. Both are Jessica's, one of them
 is stale, and it is not this file's job to guess which. So the acknowledgment
 uses her wording from the guide instead ("a quick shoot or just a few images,
 this is not the session for you") and states the structure -- images are
@@ -242,7 +242,7 @@ BODY = """
       <select name="session_type" required>
         <option value="" selected disabled>Choose one</option>
         <option value="studio">In the studio &mdash; year round</option>
-        <option value="outdoor">Outdoors &mdash; summer dates only</option>
+        <option value="outdoor">Specialty Session &mdash; certain dates only</option>
         <option value="not-sure">Not sure yet</option>
       </select>
     </label>

@@ -81,7 +81,7 @@ FAQ was right about almost all of it and the PDF is the older document.**
 These are the current numbers and nothing on the site may state another:
 
     session fee          $697
-    Petite Collections   from $1,250   3 digital images
+    Digital Collections  from $1,250   3 digital images
     Full Collections     from $3,400   album, digitals, mobile app
     how many             eight collections in all
     session length       2-3 hours
@@ -90,8 +90,33 @@ These are the current numbers and nothing on the site may state another:
     the Collection       chosen at booking, prepaid before the session
     booking window       up to 15 months in advance
     studio hours         Mon-Thu, 10am-3pm, by appointment only
+    shoot days           Tue and Thu, 9am-3pm      <- 25 Sep, SEE BELOW
     consultation calls   Mon-Fri, 8am-5pm  (the GHL calendar's own window)
     location             just outside Jefferson City
+
+**"Petite Collections" became "Digital Collections" on 25 September**, Jessica's
+word. It was in two places -- `build-guide.py` and `build-info.py` -- and both
+are changed, because a collection called one thing on the guide and another on
+the FAQ is the exact drift this file exists to stop. The FAQ's `FAQPage`
+JSON-LD picked the new name up in the same build, as it is meant to.
+
+**THE SHOOT DAYS AND THE STUDIO HOURS DISAGREE BY AN HOUR, AND IT IS HERS TO
+SETTLE.** She gave "I photograph on Tuesday's/Thursday's from 9am-3pm" on
+25 September. Narrower days than the studio hours is not a conflict -- the
+studio can be open Monday to Thursday for consultations and reveals and she
+photographs on two of those days -- but **9am is not 10am**. The guide now says
+9am (her newest word, in `F["shoot_days"]`) and the FAQ and all twenty footers
+still say the studio opens at 10am. One of the two is wrong. Nothing was
+changed on her behalf and no third figure was invented; ask her which, then fix
+the loser. Until then the site contradicts itself by one hour in one place.
+
+**"50 to 100 images" is off the site.** It was `F["shown"]`, in the guide twice,
+and she removed it on 25 September because how many a woman is shown depends on
+the Collection she prepaid for. The key is deleted from `F` rather than left
+unused, so it cannot quietly come back. The reveal now says "plenty of images
+to choose from, well above what your Collection includes"; the investment answer
+says how many depends on the Collection. **Do not reintroduce a number here**
+without her giving one that holds for all eight Collections.
 
 Two of these were new to BOTH documents and are the only ones that moved on
 the site: the booking window (the guide said 18 months, the FAQ said 12) and
@@ -335,6 +360,13 @@ Still to do, roughly in order of what it is worth:
   checkbox and a honeypot. The three selects Jessica cares about are
   whitelisted **server side as well** in `scripts/site_inquiry_ingest.py`;
   a value the page never offered is dropped rather than stored.
+  **THE LABEL AND THE VALUE ARE NOT THE SAME STRING, and that matters here.**
+  When the outdoor session became "Specialty Sessions" on 25 September only the
+  LABEL changed; the option is still `value="outdoor"`. The whitelist lives in
+  a Scalogy workflow that is not in this repo, so renaming the value would
+  silently bin every specialty-session inquiry until that workflow is edited to
+  match. The woman reads the label, the workflow reads the value, and they are
+  allowed to differ. Change the value only in the same pass as the workflow.
   A submission goes: no-cors POST to the `site-inquiry-submit` webhook,
   workflow `site-inquiry-ingest` writes a `site_inquiries` row and upserts the
   contact into GHL tagged **`Session Inquiry`**. That tag is the whole
@@ -383,12 +415,16 @@ Still to do, roughly in order of what it is worth:
   City" -- and `raise SystemExit` beats finding one of them in somebody's
   inbox. It also checks that every contents anchor has a matching id, and that
   no photograph is drawn twice.
-  **FOUR THINGS ARE DELIBERATELY ABSENT** and are marked ASK in the generator:
+  **THREE THINGS ARE DELIBERATELY ABSENT** and are marked ASK in the generator:
   the session-fee split (it was 2 x $250 against a $500 fee, and half of $697
   is not a number to invent), standalone album pricing (the old guide said
-  $1,500 to $3,500 and she has not restated it), her age and "photographing for
-  4 years" (both decay, and the second already disagrees with "since 2021"),
-  and the session start time. Putting any of them back is a decision.
+  $1,500 to $3,500 and she has not restated it), and her age and "photographing
+  for 4 years" (both decay, and the second already disagrees with "since 2021").
+  Putting any of them back is a decision. **The fourth, the session start time,
+  she answered on 25 September** -- Tuesdays and Thursdays, 9am to 3pm -- and
+  the day panel says so now instead of pointing at the studio hours. Read the
+  hour-long conflict that created in *The figures, settled* above before
+  touching either figure.
 - **It greets her by name, out of the link.** GHL builds the URL with its own
   merge field -- `.../session-guide/?n={{contact.first_name}}` -- and three
   slots change: the eyebrow over the title, the first line, the sign-off. Three
@@ -576,12 +612,17 @@ Still to do, roughly in order of what it is worth:
   working file against `git show HEAD:`, so the two have to agree *in the
   region being patched* -- not everywhere. Known gaps, all checked on
   24 September and all harmless:
-  - `scalogy-faq.html`, `scalogy-inquire.html` and `scalogy-guide.html` are
-    1 byte larger locally -- a trailing newline at end of file that Scalogy
-    trims on save.
+  - `scalogy-inquire.html` and `scalogy-guide.html` are 1 byte larger locally
+    -- a trailing newline at end of file that Scalogy trims on save.
     `scalogy-portfolio.html` used to be listed here too and is now byte for
     byte identical to its template, checked 24 September after the studio
-    hours went through both copies.
+    hours went through both copies. **`scalogy-faq.html` joined it on
+    25 September** and is now byte for byte identical, trailing newline and
+    all: the Petite/Digital rename turned up two blank lines that had drifted
+    between the repo copy and the live template (the shared system is sliced
+    out of the portfolio at build time, so a portfolio edit moves FAQ
+    whitespace), and both were patched rather than left to trip the next
+    search string.
   - `scalogy-about.html` is 24 bytes smaller locally.
   - `scalogy-home.html` is **2,253 bytes larger locally**: the repo copy
     carries the section comments (`/* ---------- 2 · hero ---------- */`,
