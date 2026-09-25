@@ -578,6 +578,32 @@ Still to do, roughly in order of what it is worth:
     parts are shut again.
   The PDF is generic. Personalisation is a page feature and does not belong in
   a file that gets forwarded.
+- **The hero picker is temporary and must be retired.** `/guide-hero-picker`,
+  template `jhp-guide-hero-picker`, generator `build-hero-picker.py`, 13,952
+  bytes. It exists because **the image CDN is unreachable from this sandbox**
+  (`assets.cdn.filesafe.space` is blocked by the agent proxy), so nobody here
+  can look at a photograph and say whether it works as a hero. Her browser can,
+  so the judgement moves there -- the same move the band tuner and the two
+  photo pickers already make.
+  It draws all ninety landscape frames that are not already somewhere on the
+  site, each at the hero's REAL geometry: the same clamped height, the same
+  `object-position`, the same scrim, and the real eyebrow and title over it, as
+  a scale model at a true 1440 and a true 390. A contact sheet of uncropped
+  thumbnails would be a different picture, and the house rule is that a
+  photograph is judged at real size.
+  **Its tiles are DATA, not markup**, and that is a size decision: ninety tiles
+  written out as HTML came to 42KB of a 47KB template, almost all of it the
+  same six tags around a different UUID, and anything over 20KB has to go up as
+  a create plus a run of patches. As a JSON array it is 4KB and the whole tool
+  publishes in one call.
+  **It excludes the tools from its own "already used" scan**, itself included.
+  Without that its own output names all ninety candidates, so the second build
+  reads them back as used and produces an empty picker -- which is exactly what
+  happened, and what the `< 20 frames` guard at the foot of the generator
+  caught. An empty picker is worse than a build error.
+  **RETIRE IT when she has chosen**: render the page against `jhp-temp-retired`
+  FIRST, then `pages_delete`. `pages_delete` leaves the last rendered file
+  being served by Caddy, and this one is ninety client photographs.
 - **The VIP group is on two pages and is one link.** The Facebook group
   (`facebook.com/groups/1107773373084834`) is the homepage's `.jhp-vip`
   panel -- mid-page, no photograph -- and the closing `.jhp-band` at the

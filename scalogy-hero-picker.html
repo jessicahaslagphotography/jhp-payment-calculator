@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Session Guide Hero Picker</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap');
+:root{
+  --ground:#13100E; --surface:#1C1714; --raised:#241D18;
+  --ink:#F2ECE2; --muted:#A99A86; --dim:#7D7161;
+  --gold:#C9A24B; --gold-bright:#E6C576;
+  --line:rgba(201,162,75,.22); --line-soft:rgba(242,236,226,.09);
+  --serif:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --sans:'Jost',-apple-system,'Segoe UI',system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);
+  font-weight:300;-webkit-font-smoothing:antialiased}
+header{padding:28px 22px 20px;border-bottom:1px solid var(--line-soft);
+  position:sticky;top:0;background:var(--ground);z-index:20}
+h1{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.1;
+  margin:0 0 8px}
+header p{margin:0;font-size:13px;line-height:1.6;color:var(--muted);max-width:66ch}
+header b{color:var(--gold);font-weight:500}
+
+/* THE SCALE MODEL. The hero inside .sc is drawn at a true 1440x555 -- 555 is
+   what clamp(320px,37vw,600px) resolves to at 1440 -- and the wrapper scales
+   the whole thing down. cover then crops against the real box, so what she
+   sees is what the page does, not an approximation of it. */
+.sc{display:block;width:100%;aspect-ratio:1440/555;overflow:hidden;position:relative}
+.hero{position:absolute;top:0;left:0;width:1440px;height:555px;
+  transform-origin:0 0;display:block}
+.hero img{width:1440px;height:555px;object-fit:cover;object-position:50% 77%;
+  display:block;filter:saturate(.96) contrast(1.02)}
+.hero .ov{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:flex-end;text-align:center;
+  padding:0 60px 46px;
+  background:linear-gradient(0deg,rgba(19,16,14,.94) 0%,
+    rgba(19,16,14,.78) 24%,rgba(19,16,14,.34) 52%,rgba(19,16,14,.04) 82%)}
+.hero .k{font-family:var(--sans);font-weight:400;font-size:11px;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--gold);
+  margin:0 0 12px;display:block}
+.hero .h1{font-family:var(--serif);font-weight:600;font-size:66px;
+  line-height:1.06;letter-spacing:-.012em;color:var(--ink);display:block;
+  max-width:24ch}
+
+/* The phone model: a true 390x220 with the phone's own object-position and
+   38px title, because that crop is a different photograph from the desktop
+   one and she should see both before choosing. */
+.sc.ph{aspect-ratio:390/220}
+.sc.ph .hero{width:390px;height:220px}
+.sc.ph .hero img{width:390px;height:220px;object-position:43% 89%}
+.sc.ph .hero .ov{padding:0 22px 24px}
+.sc.ph .hero .k{font-size:10px;letter-spacing:.26em;margin-bottom:10px}
+.sc.ph .hero .h1{font-size:38px;line-height:1.12;max-width:23ch}
+
+main{padding:22px}
+.grid{display:grid;gap:18px;
+  grid-template-columns:repeat(auto-fill,minmax(330px,1fr))}
+.t{padding:0;border:1px solid var(--line-soft);background:var(--surface);
+  border-radius:2px;cursor:pointer;overflow:hidden;text-align:left;
+  transition:border-color .25s;font:inherit;color:inherit;display:block}
+.t:hover{border-color:var(--line)}
+.t[aria-pressed="true"]{border-color:var(--gold-bright);box-shadow:0 0 0 1px var(--gold-bright)}
+.t:focus-visible{outline:2px solid var(--gold-bright);outline-offset:3px}
+.cap{display:block;padding:9px 12px;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--dim)}
+.t[aria-pressed="true"] .cap{color:var(--gold)}
+
+/* The chosen frame, big, at both widths, pinned where she can keep looking. */
+#out{position:sticky;bottom:0;background:var(--raised);
+  border-top:1px solid var(--line);padding:18px 22px;z-index:20}
+#out[hidden]{display:none}
+.pair{display:flex;gap:18px;align-items:flex-start;flex-wrap:wrap}
+.pair .big{flex:1 1 520px;min-width:300px}
+.pair .sm{flex:0 0 260px}
+.lab{font-size:10px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--dim);margin:0 0 7px}
+.id{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;
+  color:var(--ink);word-break:break-all;margin:12px 0 10px}
+button.copy{font-family:var(--sans);font-size:10px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ground);background:var(--gold);
+  border:0;border-radius:2px;padding:17px 22px;cursor:pointer}
+button.copy:hover{background:var(--gold-bright)}
+button.copy:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+@media (max-width:620px){
+  header{padding:20px 16px 16px}
+  h1{font-size:24px}
+  main{padding:16px}
+  .grid{grid-template-columns:1fr;gap:14px}
+  .pair .sm{flex:1 1 100%}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>Pick the Session Guide Hero</h1>
+  <p><b>90 frames</b>, every landscape photograph from your twelve galleries
+     that is not already somewhere on this site. Each one is drawn at the real
+     size and crop the hero lands at, with the real eyebrow and title over it
+     &mdash; so what you see here is what the page does. Tap one to see it big,
+     at a desktop width and a phone width, then copy the name and send it to
+     me.</p>
+</header>
+
+<main>
+  <div class="grid" id="grid"></div>
+  <noscript><p style="color:#A99A86">This picker needs JavaScript to draw the
+     ninety frames at the hero’s real size.</p></noscript>
+</main>
+
+<div id="out" hidden>
+  <div class="pair">
+    <div class="big">
+      <p class="lab">At 1440</p>
+      <span class="sc"><span class="hero" id="bigHero"></span></span>
+    </div>
+    <div class="sm">
+      <p class="lab">At 390</p>
+      <span class="sc ph"><span class="hero" id="phHero"></span></span>
+      <p class="id" id="pickId"></p>
+      <button class="copy" type="button" id="copy">Copy the Name</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const CDN = "https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/";
+  const FRAMES = [["2cd0d6d3-4add-4c30-ab9c-908cdac4c768.jpg", "Miss A"], ["539a4153-27fe-4052-ac38-b29a83b2f08d.jpg", "Miss A"], ["9c98f657-389c-423a-b9ee-a96dae308e03.jpg", "Miss A"], ["6a2e52f3-5251-4dc9-8fb7-d04a7b57a60b.jpg", "Miss A"], ["1b359085-f63d-4012-baab-a15cdcd11e83.jpg", "Miss A"], ["e97887f5-3339-4512-afe8-cc9c39dbe7b2.jpg", "Miss A"], ["d445399a-272f-4c98-b850-dff4f1c2e344.jpg", "Miss A"], ["961d576f-58ff-439c-8ec0-24189055a29a.jpg", "Miss A"], ["7777176f-8a26-4a9c-a860-9beddecad465.jpg", "Miss E"], ["ef0725c4-a930-45c6-b3c6-75e23806e317.jpg", "Miss E"], ["3c79d8b4-6604-49c1-a18f-b75f2df6a13d.jpg", "Miss E"], ["8ca0ed15-2374-45e9-9dc8-7217355b7711.jpg", "Miss E"], ["04a9a7bd-5d0a-446a-b97d-3fd50075c535.jpg", "Miss E"], ["02ef9739-c960-4bec-bd86-158582bc3635.jpg", "Miss E"], ["a49b539c-efd1-4cee-91e9-0adaaf4f733c.jpg", "Miss E"], ["9cf5e3f2-9f5e-4e21-904d-0655e516571b.jpg", "Miss H"], ["bcda8ff5-025b-4351-baa3-c56d57fde5ca.jpg", "Miss H"], ["a9a16a2d-2fe5-4ab6-879b-1fab9f3f6896.jpg", "Miss H"], ["0e28f5a0-e4e4-4405-a152-4ee646395c3e.jpg", "Miss H"], ["8737c7d5-b248-41ba-80fc-54fa73952d8f.jpg", "Miss H"], ["8b97e6f2-a565-43cd-80fc-e34def7baa57.jpg", "Miss H"], ["e92df05a-548b-4953-af93-e9abd173cdfc.jpg", "Miss H"], ["9e0f9991-50ec-4e36-a932-7703bd83a427.jpg", "Miss J"], ["e35d0154-8f72-466d-9021-ded7ec9e732a.jpg", "Miss J"], ["0dce95dc-0bf1-45b4-8894-758a9b8b7f4c.jpg", "Miss J"], ["80c6df72-a86f-4f4b-8aa6-57c57947eece.jpg", "Miss J"], ["56a80874-333f-46ed-b43b-7a9192a30391.jpg", "Miss J"], ["0386b0d7-84ce-42fe-acf8-29991035d624.jpg", "Miss J"], ["f38d849f-8d2a-4a14-aa75-c48e19be4eff.jpg", "Miss J"], ["31d25310-5201-4208-9c1f-851fa9b3396c.jpg", "Miss K"], ["445ea1a6-73da-457a-b04f-9ee0bf2c37b1.jpg", "Miss K"], ["bcccd582-d5dc-4ff6-a125-325d25ea7e37.jpg", "Miss K"], ["59e55be6-e1c1-40c2-b680-80f2e59935f2.jpg", "Miss K"], ["89263bf0-e9e1-466c-bc2c-15a3ef0a23a2.jpg", "Miss K"], ["93f69d04-91ee-4dbb-ae40-fc251cd4ba14.jpg", "Miss K"], ["4716023c-e3c6-4092-bbe1-e87dfc670de9.jpg", "Miss K"], ["968e3a4f-7517-4d3c-888a-5d27d495c860.jpg", "Miss K"], ["9cae59b9-cf07-4eaa-ae03-46a91ecfecf0.jpg", "Miss K"], ["9f1fc262-da9d-4d11-bd26-b6611457de66.jpg", "Miss K"], ["4f13aaa3-d73b-4c77-9879-25cee2ef85cb.jpg", "Miss K"], ["111088ec-e685-41e0-9a5e-4f85e6eae5b7.jpg", "Miss K"], ["87bffd19-4979-4c04-acfc-d98e5d81f1d4.jpg", "Miss K"], ["5646ce67-fe9d-4a67-93eb-3139511db94d.jpg", "Miss K"], ["ca084190-e68e-4aa4-8199-4ab253bb3448.jpg", "Miss K"], ["339e8a28-c69d-4a2e-b8ed-0d794c94593f.jpg", "Miss K"], ["b50cc3f3-4983-4eb6-b738-5c61b94188d1.jpg", "Miss M"], ["4e983ade-7381-40d6-be53-5b40f5065800.jpg", "Miss M"], ["473b2ea3-52b8-4ccb-b971-1eca57d180bb.jpg", "Miss M"], ["18226c6b-9f06-4a25-bb29-8d5cdfa53189.jpg", "Miss M"], ["6364d32b-08c1-4b14-a952-7da9abf15927.jpg", "Miss M"], ["ee6ad307-bf10-4c16-b32a-3b904f9a7cc0.jpg", "Miss P"], ["18ddcc48-1d6c-471f-9bb1-5c5ba7d34a51.jpg", "Miss P"], ["f29ec40b-fff2-4dfc-8874-cf8bb54ab700.jpg", "Miss P"], ["efe22738-f7c6-46fe-8ddb-026cb92b1f03.jpg", "Miss P"], ["8b4ec950-ae3c-47cc-b91e-22dec0695652.jpg", "Miss P"], ["25391b31-9287-4bd5-b9e1-9cb91b114474.jpg", "Miss P"], ["124ed6c5-19bc-42f6-aa51-19cbdbdc02be.jpg", "Miss P"], ["cc59046e-9c15-41ea-9c2d-a46d9e12da42.jpg", "Miss P"], ["adac48d8-f4b9-47f9-b8ae-2bd8648dda53.jpg", "Miss P"], ["098f0f35-8591-4419-a442-a9ab15cda198.jpg", "Miss S"], ["58c9091c-f82d-441c-866c-0e314c9c63be.jpg", "Miss S"], ["0508d94b-359f-4108-b7a0-606ae0d62b86.jpg", "Miss S"], ["d6c96166-d29e-45c6-9784-c3a296e0354c.jpg", "Miss S"], ["397cc15d-a867-4127-ad38-f5639991923a.jpg", "Miss S"], ["06bc953e-5308-426a-b233-148b188615f8.jpg", "Miss S"], ["0b23ce94-efdd-41e9-9976-3a27e895c451.jpg", "Miss S"], ["849f4004-8fc9-45f9-8423-bee3d6a70579.jpg", "Miss S"], ["ee4ca777-4556-4c08-bcc7-9a266e1b8f34.jpg", "Miss S"], ["86b12e76-13a0-4bb2-8d4e-4de14a88fce3.jpg", "Miss S"], ["a973519b-d1d0-4448-a749-a1cf175116a1.jpg", "Miss S"], ["96944810-5683-4599-9f6c-433e00538b08.jpg", "Miss S"], ["fa017ef4-ffb7-4415-92d5-a76760f916a3.jpg", "Miss S"], ["2024e568-713b-46a9-826b-9c2b59a02389.jpg", "Miss S"], ["a54d0afc-f504-4944-90b2-676be92b819a.jpg", "Miss S"], ["3bb651bb-686b-45bb-8585-166b4c129dcc.jpg", "Miss S"], ["d152c940-a1c4-4618-980c-30dd57cdf676.jpg", "Miss S"], ["b3b421b2-9d59-410f-bec8-d57bf4efdad8.jpg", "Miss T"], ["92138463-6253-40ca-a072-7005daa9d96a.jpg", "Miss T"], ["1ab7f22b-d658-4b14-939c-4e51cf578306.jpg", "Miss T"], ["d75c7ea3-fcb9-40d1-afa3-9cecb65a18c9.jpg", "Miss T"], ["ce79ce12-548d-4471-b9b2-282da4e1c2e9.jpg", "Miss T"], ["6534200a-d8d2-49c0-ab71-dec4207da0b3.jpg", "Miss T"], ["3e609494-ded6-4bab-b31c-755449e3c004.jpg", "Miss T"], ["cc3fcce9-b0fe-40a5-b109-e74010e4ebee.jpg", "Miss V"], ["5b8e5b74-d59a-4a27-84f1-d1aa04522be4.jpg", "Miss V"], ["ccf4123c-1072-4d3f-a7f5-34f78e7a31de.jpg", "Miss V"], ["cedf6df5-7f30-4461-90a5-b83d2bc9351b.jpg", "Miss V"], ["25994089-f2cf-4d1c-8b9b-dc69b025e055.jpg", "Miss V"], ["e62565c9-be52-4456-91b0-b63598200d6b.jpg", "Miss V"], ["b95af7db-20c2-46bc-b245-c2a029524f44.jpg", "Miss V"]];
+
+  /* Build the grid from the data. Same markup the server used to write, one
+     tile per frame, each an honest scale model of the hero. */
+  document.getElementById("grid").innerHTML = FRAMES.map(([f, g]) =>
+    '<button class="t" type="button" data-f="' + f + '" data-g="' + g + '">' +
+    '<span class="sc"><span class="hero">' +
+    '<img src="' + CDN + f + '" loading="lazy" alt="">' +
+    '<span class="ov"><span class="k">JHP Boudoir</span>' +
+    '<span class="h1">Your Session Guide</span></span></span></span>' +
+    '<span class="cap">' + g + '</span></button>').join("");
+  /* The scale models are drawn at true pixel sizes and shrunk to fit, so the
+     transform has to be recomputed whenever the box changes width -- on load,
+     on resize, and when the sticky panel first appears. */
+  const fit = (el) => {
+    const box = el.closest(".sc");
+    if (!box) return;
+    const w = box.classList.contains("ph") ? 390 : 1440;
+    el.style.transform = "scale(" + (box.clientWidth / w) + ")";
+  };
+  const fitAll = () => document.querySelectorAll(".hero").forEach(fit);
+
+  const shell = (f) =>
+    '<img src="' + CDN + f + '" alt="">' +
+    '<span class="ov"><span class="k">JHP Boudoir</span>' +
+    '<span class="h1">Your Session Guide</span></span>';
+
+  const out = document.getElementById("out");
+  const pick = (f, g) => {
+    document.querySelectorAll(".t").forEach((b) =>
+      b.setAttribute("aria-pressed", String(b.dataset.f === f)));
+    document.getElementById("bigHero").innerHTML = shell(f);
+    document.getElementById("phHero").innerHTML = shell(f);
+    document.getElementById("pickId").textContent = f;
+    out.hidden = false;
+    fitAll();
+    try { localStorage.setItem("jhp-guide-hero", f); } catch (e) {}
+  };
+
+  document.querySelectorAll(".t").forEach((b) => {
+    b.setAttribute("aria-pressed", "false");
+    b.addEventListener("click", () => pick(b.dataset.f, b.dataset.g));
+  });
+
+  document.getElementById("copy").addEventListener("click", async () => {
+    const f = document.getElementById("pickId").textContent;
+    const btn = document.getElementById("copy");
+    try { await navigator.clipboard.writeText(f); btn.textContent = "Copied"; }
+    catch (e) { btn.textContent = "Select it above and copy"; }
+    setTimeout(() => { btn.textContent = "Copy the Name"; }, 2200);
+  });
+
+  fitAll();
+  addEventListener("resize", fitAll);
+  /* The tiles load lazily, so a frame that arrives after the first fit needs
+     its own -- otherwise it draws at 1440 inside a 330px box. */
+  document.querySelectorAll(".hero img").forEach((i) =>
+    i.addEventListener("load", () => fit(i.parentElement)));
+
+  try {
+    const last = localStorage.getItem("jhp-guide-hero");
+    if (last) {
+      const b = document.querySelector('.t[data-f="' + last + '"]');
+      if (b) pick(last, b.dataset.g);
+    }
+  } catch (e) {}
+})();
+</script>
+</body>
+</html>
