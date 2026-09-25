@@ -149,6 +149,10 @@ straight answer in the body.
 > **Ready to chat?** Grab a time and bring every question you have — the
 > practical ones and the nervous ones. No pressure and no obligation. 🖤
 >
+> And if you already know you are ready to book — have a credit card handy!
+> We can process your session fee retainer right on the call and get your
+> booking finalized.
+>
 > **[Book my call →]**
 >
 > Take your time reading through it, and if you have questions I am just a
