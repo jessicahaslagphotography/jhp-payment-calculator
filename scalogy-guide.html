@@ -769,24 +769,11 @@
 .jhp-home .jhp-pt[open] .ct{color:var(--gold)}
 .jhp-home .jhp-pt[open] .ct::after{transform:rotate(-135deg);margin-top:3px}
 
-/* ONE COLUMN, AND TWO LEVELS OF DISCLOSURE
-   ---------------------------------------
-   Jessica's ask, 25 September, clarifying the one above it: "I want to click
-   the section, and all the subheadings appear at the same time below it." So
-   opening a part reveals its SUBHEADINGS, all of them at once, and each of
-   those opens its own answer. Two taps to read one answer, and the shape of
-   the whole part visible after the first.
-
-   That is a <details> inside a <details>, which is legal, keyboard-operable
-   at both levels, and announced as two nested disclosures. The part row is
-   centred and large; the question rows are left-aligned and smaller, so the
-   levels are never mistaken for each other.
-
-   NOT MUTUALLY EXCLUSIVE at either level. The FAQ's name= trick would keep a
-   part tighter, but this is a document she reads down, not a list she dips
-   into: a question collapsing as she opens the next one takes its answer out
-   from above her and moves the row she just tapped up the screen. Everything
-   she opens stays open.
+/* ONE COLUMN, AND A QUESTION IS JUST A HEADING AGAIN
+   -------------------------------------------------
+   The whole part opens at once, so nothing inside it is a control. Each
+   question is a heading and its prose, separated from the next by a hairline
+   -- a magazine, read straight down, which is what it was always meant to be.
 
    TWO COLUMNS ARE STILL NOT BACK, and the reason has changed. They were
    dropped because a one-at-a-time reveal only reads down a single column;
@@ -800,35 +787,14 @@
    860px, because a single column of 15px type at 1080 is a 140-character
    line. */
 .jhp-home .jhp-qs{max-width:860px;margin:0 auto}
-/* The rows carry their own hairlines, so they sit flush against each other.
-   Only the photographs inside a part need air. */
-.jhp-home .jhp-qs > figure{margin-block:clamp(34px,4vw,52px)}
+.jhp-home .jhp-qs > * + *{margin-top:clamp(26px,2.8vw,34px)}
 
-/* A subheading is a row on a hairline: the heading left, a chevron right,
-   nothing boxed. Boxed rows inside an already-open part read as cards inside
-   a card, which is one frame too many. */
-.jhp-home .jhp-q{border-top:1px solid var(--line-soft)}
-.jhp-home .jhp-q:first-child{border-top:0}
-.jhp-home .jhp-q > summary{display:flex;align-items:baseline;
-  justify-content:space-between;gap:18px;padding:clamp(17px,1.9vw,22px) 0;
-  cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
-.jhp-home .jhp-q > summary::-webkit-details-marker{display:none}
-.jhp-home .jhp-q > summary:focus-visible{outline:2px solid var(--gold-bright);
-  outline-offset:2px}
-.jhp-home .jhp-q > summary h3{font-family:var(--serif);font-weight:600;
-  font-size:clamp(19px,1.9vw,24px);line-height:1.22;color:var(--ink);margin:0;
-  text-wrap:balance;transition:color .3s}
-.jhp-home .jhp-q:hover > summary h3,
-.jhp-home .jhp-q[open] > summary h3{color:var(--gold-bright)}
-/* The same 6px chevron the Info menu, the phone drawer, the FAQ and the part
-   row above all wear. */
-.jhp-home .jhp-q > summary::after{content:"";flex:0 0 auto;width:6px;height:6px;
-  margin-top:6px;border-right:1px solid var(--gold);
-  border-bottom:1px solid var(--gold);transform:rotate(45deg);
-  transition:transform .3s}
-.jhp-home .jhp-q[open] > summary::after{transform:rotate(-135deg);margin-top:10px}
-.jhp-home .jhp-q .a{padding:0 0 clamp(20px,2.2vw,26px)}
-.jhp-home .jhp-q .a > *:first-child{margin-top:0}
+.jhp-home .jhp-q{border-top:1px solid var(--line-soft);
+  padding-top:clamp(22px,2.4vw,28px)}
+.jhp-home .jhp-q:first-child{border-top:0;padding-top:0}
+.jhp-home .jhp-q h3{font-family:var(--serif);font-weight:600;
+  font-size:clamp(19px,1.9vw,24px);line-height:1.22;color:var(--ink);
+  margin:0 0 14px;text-wrap:balance}
 .jhp-home .jhp-q p{font-family:var(--sans);font-weight:300;font-size:15.5px;
   line-height:1.75;color:var(--muted);margin:0 0 13px}
 .jhp-home .jhp-q p:last-child{margin-bottom:0}
@@ -895,23 +861,21 @@
 .jhp-home .jhp-q .jhp-card{margin-inline:0}
 .jhp-home .jhp-q .jhp-p{font-size:15.5px;line-height:1.75;margin:0 0 13px}
 
-/* ON A PHONE both rows tighten and the subheading steps down one notch. There
-   is no box to take off -- the rows are hairlines at every width. 15px of line
-   plus 16px either side clears the 44px a thumb needs. */
+/* ON A PHONE the four rows tighten and the type steps down one notch. There
+   is no box to take off any more -- the questions have been hairlines and
+   prose at every width since the part became the control. */
 @media (max-width:620px){
   .jhp-home .jhp-qs{max-width:none}
-  .jhp-home .jhp-q > summary{padding:16px 0;gap:14px}
-  .jhp-home .jhp-q > summary h3{font-size:18.5px}
+  .jhp-home .jhp-q h3{font-size:19px}
   .jhp-home .jhp-pt > summary{padding:26px 0 22px}
   .jhp-home .jhp-lift{margin:38px auto}
 }
 
 @media print{
-  /* BOTH LEVELS ARE OPEN ON PAPER -- four parts and nineteen questions. Each
-     is a <details> and a closed one prints as its summary alone; the first
-     render after the questions became disclosures came out nine pages of
-     headings with not a word of copy under any of them, and the file looked
-     fine from the outside. Paper does not tap, twice over now.
+  /* ALL FOUR PARTS ARE OPEN ON PAPER. A part is a <details> and a closed one
+     prints as its summary alone -- the first render after the questions became
+     disclosures came out nine pages of headings with not a word of copy under
+     any of them, and the file looked fine from the outside. Paper does not tap.
 
      Both hiding mechanisms have to be undone, the same pair the phone nav
      spells out: older engines hide a closed <details>'s children with a
@@ -921,15 +885,12 @@
      not depend on any script having run, which is the point -- a stylesheet
      must not wait on an event. */
   .jhp-home .jhp-pt > .jhp-qs,.jhp-home .jhp-pt > figure,
-  .jhp-home .jhp-pt > .jhp-lift,.jhp-home .jhp-q > .a{display:block !important}
-  .jhp-home .jhp-pt::details-content,.jhp-home .jhp-q::details-content{
-    content-visibility:visible !important;display:block !important;
-    block-size:auto !important}
+  .jhp-home .jhp-pt > .jhp-lift{display:block !important}
+  .jhp-home .jhp-pt::details-content{content-visibility:visible !important;
+    display:block !important;block-size:auto !important}
   /* A chevron and a question count are instructions to tap, and there is
      nothing to tap on paper. */
   .jhp-home .jhp-part .ct{display:none}
-  .jhp-home .jhp-q > summary::after{display:none}
-  .jhp-home .jhp-q > summary{padding:0 0 12px}
   /* A part heading starts a page rather than orphaning itself at the foot of
      the last one. Not the first, which would leave a blank sheet in front of
      Part One. */
@@ -1002,9 +963,8 @@
     </div>
   </summary>
 <div class="jhp-qs">
-  <details class="jhp-q" id="about">
-    <summary><h3>A Bit About Me</h3></summary>
-    <div class="a">
+  <article class="jhp-q" id="about">
+    <h3>A Bit About Me</h3>
     <p>I am Jess. Wife to Zach, and I love the local weatherman with all my
        heart. Gin, tonic, lime.</p>
     <p>Seven years of college and three degrees later, I ended up running my
@@ -1012,22 +972,18 @@
     <p>I love changing lives through my art. Thank you for being here and for
        supporting my business &mdash; I cannot wait to meet you and make some
        of the most gorgeous photographs of yourself you will ever have.</p>
-    </div>
-  </details>
-  <details class="jhp-q" id="studio">
-    <summary><h3>Where the Studio Is</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q" id="studio">
+    <h3>Where the Studio Is</h3>
     <p>The studio is just outside Jefferson City, Missouri. There is over
        2,000 square feet of it: multiple set-ups, a hair and makeup room, a
        wardrobe room, and a sales area full of samples.</p>
     <p>It is full of gorgeous natural light, vintage exposed brick, wood beams
        and glass chandeliers. It is a comforting space, and it was built for
        boudoir photography.</p>
-    </div>
-  </details>
-  <details class="jhp-q" id="boudoir">
-    <summary><h3>So, What Is Boudoir?</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q" id="boudoir">
+    <h3>So, What Is Boudoir?</h3>
     <p>The French word <em>boudoir</em> means a woman&rsquo;s dressing room or
        bedroom, but I like to think of it as a fancy word for women&rsquo;s
        intimate portraiture. I want to make the most beautiful portraits of you
@@ -1039,11 +995,9 @@
        highly suggest you do:
        <a href="https://www.facebook.com/groups/1107773373084834" target="_blank" rel="noopener">the JHP Boudoir VIP
        group</a>.</p>
-    </div>
-  </details>
-  <details class="jhp-q" id="why">
-    <summary><h3>What Would I Do With Boudoir Portraits?</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q" id="why">
+    <h3>What Would I Do With Boudoir Portraits?</h3>
     <p>I believe boudoir is the best gift you can give yourself &mdash; to
        capture your essence as you are right now. When you need a reminder of
        the strong, beautiful woman that you are, you will have a collection of
@@ -1055,8 +1009,7 @@
        with our lives, our jobs, our families.</p>
     <p>Put that pep back in your step and reflect on the bodacious babe you
        are. Celebrate the body that you live in.</p>
-    </div>
-  </details>
+  </article>
 </div>
 <figure class="jhp-plate jhp-wide">
   <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/f9de4c0c-ba8e-48bb-b559-a9a11beac76c.jpg" loading="lazy" alt="The window light in the JHP Boudoir studio, from a client session">
@@ -1077,9 +1030,8 @@
     </div>
   </summary>
 <div class="jhp-qs">
-  <details class="jhp-q" id="thinner">
-    <summary><h3>Can You Make Me Look Thinner?</h3></summary>
-    <div class="a">
+  <article class="jhp-q" id="thinner">
+    <h3>Can You Make Me Look Thinner?</h3>
     <p>I want to help you feel beautiful now, just the way you are. I flatter
        you with hair and makeup styling, a wardrobe that compliments your
        figure, and amazing lighting and posing techniques to highlight your
@@ -1091,31 +1043,25 @@
        consumed with unrealistic bodies in the media. I want to show you that
        you are beautiful at this very moment, without over the top
        retouching.</p>
-    </div>
-  </details>
-  <details class="jhp-q" id="portfolio">
-    <summary><h3>I Don&rsquo;t Look Like the Women in Your Portfolio</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q" id="portfolio">
+    <h3>I Don&rsquo;t Look Like the Women in Your Portfolio</h3>
     <p>Actually, you do. You just have not had the chance to see yourself from
        my perspective yet. Come into the studio and let me show you how
        beautiful you really are.</p>
     <p>There is no such thing as the perfect body. Boudoir is for every body.
        You are never too big, too small, too old or too young to do a boudoir
        session &mdash; though I only photograph clients over the age of 18.</p>
-    </div>
-  </details>
-  <details class="jhp-q" id="who">
-    <summary><h3>Who Is Going to Be There?</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q" id="who">
+    <h3>Who Is Going to Be There?</h3>
     <p>You and me. Your hair and makeup artist leaves once the service is
        finished.</p>
     <p>I have a full female staff, and the studio is designed with private
        rooms for each portion of your day.</p>
-    </div>
-  </details>
-  <details class="jhp-q" id="retouch">
-    <summary><h3>What About Retouching?</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q" id="retouch">
+    <h3>What About Retouching?</h3>
     <p>I am happy to retouch your images. I always remove pimples, bruises,
        scratches and under eye circles. I also offer retouching on cellulite,
        scars, small tattoos and stretch marks, if you choose to have them
@@ -1127,11 +1073,9 @@
     <p>I do not remove tan lines or correct skin tone from tanning beds or
        spray tans, so proceed with caution. I do have editing techniques to
        keep you from looking pasty, if that is a concern.</p>
-    </div>
-  </details>
-  <details class="jhp-q" id="wear">
-    <summary><h3>What Will I Wear?</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q" id="wear">
+    <h3>What Will I Wear?</h3>
     <p>I have a beautiful and comprehensive wardrobe guide that gives you the
        full picture on how to look and feel like a bombshell for your session.
        My policy is always: when in doubt, bring it.</p>
@@ -1139,8 +1083,7 @@
        help make your dream shoot a reality. And there is a client wardrobe of
        over 160 pieces, sizes XS to 4X, that you are more than welcome
        to borrow from and browse through.</p>
-    </div>
-  </details>
+  </article>
 </div>
 <figure class="jhp-plate jhp-wide">
   <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/678293dc-8167-4463-a41b-8a20bfaee783.jpg" loading="lazy" alt="A black and white portrait from a studio session at JHP Boudoir">
@@ -1158,9 +1101,8 @@
     </div>
   </summary>
 <div class="jhp-qs">
-  <details class="jhp-q" id="talk">
-    <summary><h3>Do I Get to Talk to You First?</h3></summary>
-    <div class="a">
+  <article class="jhp-q" id="talk">
+    <h3>Do I Get to Talk to You First?</h3>
     <p>Most of my clients book their session over the phone, which is kind of
        like our first date. We will have one 20 minute phone consultation, so
        we can make sure you are ready and answer any questions you have.</p>
@@ -1174,11 +1116,9 @@
       <p>I also do not allow anyone under the age of 18 in the boudoir studio,
          ever.</p>
     </div>
-    </div>
-  </details>
-  <details class="jhp-q jhp-wide" id="types">
-    <summary><h3>What Types of Sessions Do You Offer?</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q jhp-wide" id="types">
+    <h3>What Types of Sessions Do You Offer?</h3>
     <p class="jhp-p">Yes, there are different types of boudoir session you can
        book, and I am always changing it up. Right now I am offering these:</p>
     <div class="jhp-two">
@@ -1195,11 +1135,9 @@
     </div>
     <p class="jhp-p" style="margin-top:20px">Have something else in mind? Ask
        me. I am always up for a new adventure.</p>
-    </div>
-  </details>
-  <details class="jhp-q jhp-wide" id="day">
-    <summary><h3>How the Session Day Works</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q jhp-wide" id="day">
+    <h3>How the Session Day Works</h3>
     <p class="jhp-p">Your session day runs two to three hours from start to finish. You get
        complimentary hair and makeup, access to the 160-piece client
        wardrobe, and I pose you from head to pointed toe and help you with a
@@ -1230,15 +1168,13 @@
            making decisions about pictures you have not seen yet.</p>
       </li>
     </ol>
-    </div>
-  </details>
+  </article>
   <figure class="jhp-plate jhp-wide">
     <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/958c1b0e-53b1-4d18-b5ed-7b4b2ae1ccc5.jpg" loading="lazy" alt="A black and white portrait from a studio session at JHP Boudoir">
     <figcaption>This is the part I cannot wait for.</figcaption>
   </figure>
-  <details class="jhp-q" id="reveal">
-    <summary><h3>Your Image Reveal</h3></summary>
-    <div class="a">
+  <article class="jhp-q" id="reveal">
+    <h3>Your Image Reveal</h3>
     <p>Your reveal is 7&ndash;14 business days after your session. It is a private
        appointment over Zoom, and it is where you see your images for the very
        first time &mdash; together, with me, going through them one by one.</p>
@@ -1247,17 +1183,14 @@
     <p>You are not sent a link and left to work it out alone. That is the part
        most women tell me afterwards was their favourite of the whole
        thing.</p>
-    </div>
-  </details>
-  <details class="jhp-q" id="delivery">
-    <summary><h3>When the Albums and Prints Arrive</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q" id="delivery">
+    <h3>When the Albums and Prints Arrive</h3>
     <p>Your digital images are yours the moment the reveal ends. Albums, wall
        art and anything else printed are made to order and arrive at your door
        within 6 weeks of that appointment. I usually drop ship everything directly
        to you to keep the process as simple as possible.</p>
-    </div>
-  </details>
+  </article>
 </div>
 <figure class="jhp-plate jhp-wide">
   <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/1d6d5e7e-7f3d-490b-9883-371ecaa5f1d0.jpg" loading="lazy" alt="A client photographed at the JHP Boudoir studio">
@@ -1278,9 +1211,8 @@
     </div>
   </summary>
 <div class="jhp-qs">
-  <details class="jhp-q jhp-wide" id="book">
-    <summary><h3>What Do I Need to Do to Book?</h3></summary>
-    <div class="a">
+  <article class="jhp-q jhp-wide" id="book">
+    <h3>What Do I Need to Do to Book?</h3>
     <p class="jhp-p">The session fee reserves your date on my calendar. Your
        images are purchased separately from it, at your reveal and ordering
        appointment, and the full investment menu comes to you once the session
@@ -1303,30 +1235,24 @@
       <li>Complete posing and expression coaching</li>
       <li>Your private reveal and ordering appointment over Zoom</li>
     </ul>
-    </div>
-  </details>
-  <details class="jhp-q" id="guests">
-    <summary><h3>Can Someone Come With Me?</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q" id="guests">
+    <h3>Can Someone Come With Me?</h3>
     <p>No &mdash; I do not allow guests for any portion of the time you spend
        with us, including the ordering appointment. What I do is delivered best
        one to one, with your complete undivided attention.</p>
-    </div>
-  </details>
-  <details class="jhp-q" id="when">
-    <summary><h3>I Need My Images By a Certain Date</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q" id="when">
+    <h3>I Need My Images By a Certain Date</h3>
     <p>The studio books up to 15 months in advance, and printed products
        take up to six weeks after your reveal. So reach out well before the
        date you need them.</p>
     <p>If you have a special occasion coming up, or you want a holiday
        appointment, I recommend booking a <strong>year</strong> ahead of that
        date. Those dates go first.</p>
-    </div>
-  </details>
-  <details class="jhp-q" id="spend">
-    <summary><h3>What Can I Expect to Spend?</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q" id="spend">
+    <h3>What Can I Expect to Spend?</h3>
     <p>Before I have photographed you it is hard to give you an exact figure.
        Some women want a basic album; others invest several thousand in a
        Collection with a variety of products. What you spend is up to you. You
@@ -1337,11 +1263,9 @@
        show you 50 to 100 images. I only offer luxury products, because you are
        worth it. Investing in yourself is priceless. You will never tire of
        your images, or forget the way the session day made you feel.</p>
-    </div>
-  </details>
-  <details class="jhp-q jhp-wide" id="money">
-    <summary><h3>The Collections</h3></summary>
-    <div class="a">
+  </article>
+  <article class="jhp-q jhp-wide" id="money">
+    <h3>The Collections</h3>
     <p class="jhp-p">There are eight Collections in all, so there is
        room to find the one that fits.</p>
     <div class="jhp-card two">
@@ -1366,8 +1290,7 @@
        whichever suits you, spread over the months between booking and your
        session day. It is the same figure either way, and we set it up on
        auto-pay so you never have to think about a late fee.</p>
-    </div>
-  </details>
+  </article>
 </div>
 <figure class="jhp-plate jhp-wide">
   <img src="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/538477d1-c964-4c26-babe-89e797786880.jpg" loading="lazy" alt="A black and white portrait from a studio session at JHP Boudoir">

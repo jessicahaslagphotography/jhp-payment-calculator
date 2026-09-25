@@ -236,9 +236,9 @@ Still to do, roughly in order of what it is worth:
   phone has no hover, so this needs a real open and shut. `<details>` gives
   a focusable control, Enter and Space, and a disclosure a screen reader
   announces as one -- none of which a checkbox dressed as a button gets
-  right. The FAQ's accordion is the same element, and so are both levels of the
-  Session Guide -- its four parts and its nineteen questions -- so the site now
-  uses it three times for the same three reasons.
+  right. The FAQ's accordion is the same element, and so is each of the Session
+  Guide's four parts, so the site now uses it three times for the same three
+  reasons.
   **Two rules keep the two states apart, and neither is optional.** Up top
   the wrapper is dissolved (`.jhp-navd{display:contents}`, the summary
   hidden) AND `::details-content` is forced visible, because browsers hide
@@ -406,61 +406,67 @@ Still to do, roughly in order of what it is worth:
   link, JavaScript off -- the page reads properly anyway. That is why the
   default lead is "Welcome -- I am so glad you are here" rather than a blank
   waiting to be filled.
-- **The guide is four parts, and it discloses on two levels.**
+- **The guide is four parts, and the part heading is the only control.**
   Jessica asked four times over two days and each ask replaced the last, so what
   follows is the settled shape and the three discarded ones, because all of them
-  were built and all of them are in the history.
+  were built and all of them are in the history. **This one is confirmed**: on
+  25 September she pasted Part One's entire text back -- four subheadings, every
+  paragraph under each -- and said *"when they click on this, all of the text
+  I've pasted below should appear as one section with segments so it's easy to
+  read."* That is this. **Do not narrow it again.**
   She asked first for the nineteen questions **in two columns**. Then she asked
-  that a headline **drop its own text when clicked** and that the **next headline
-  appear once she finished the one she was reading** -- which killed the columns,
-  because a one-at-a-time reveal only reads down a single column. Then she said
-  she did not love that: *"is it possible to have the header, they click it, and
-  then all of the follow-up questions underneath are shown instead of having to
-  click each time?"* -- so the part heading became the control. Then she
-  clarified what "shown" meant: *"I want to click the section, and all the
-  subheadings appear at the same time below it."* Not the whole part's prose.
-  **The subheadings.**
-  **So it is a `<details>` inside a `<details>`.** Tap a part and all of its
-  subheadings appear at once; tap a subheading and that answer opens under it.
-  Two taps to read one answer, and the shape of the whole part visible after
-  the first. Both levels are keyboard-operable and both are announced as
-  disclosures.
-  **The two levels must never be mistaken for each other.** The part row is
-  centred, large, and carries the number, the gold rule and a spelt-out question
-  count; the subheading rows are left-aligned, smaller, and carry the site's 6px
-  chevron. Neither is boxed -- boxed rows inside an already-open part read as
-  cards inside a card, which is one frame too many.
-  **NOT mutually exclusive at either level, and this is the one place the FAQ's
-  trick is wrong.** `name=` would keep things tighter, but this is a document she
-  reads down, not a list she dips into: anything collapsing above her takes its
-  height out from over her head and moves the row she just tapped up the screen.
-  Everything she opens stays open.
-  **The numbers, all measured:** closed the page is **3,494px at 1440 and
-  3,225px on a phone**, against 14,871px before any of this. One part open is
-  3,996px -- five subheadings and no prose. One answer open on top of that is
-  4,225px. Everything open is 10,938px. Tap targets are 215px for a part row and
-  73px for a subheading at 1440; 162px and 55px at 390. No horizontal scroll and
-  no heading over the h1 at 1440, 390 or 320.
+  that a headline **drop its own text when clicked** and that the **next
+  headline appear once she finished the one she was reading** -- which killed
+  the columns, because a one-at-a-time reveal only reads down a single column.
+  Then, on 25 September, she said she did not love that layout: *"is it possible
+  to have the header, they click it, and then all of the follow-up questions
+  underneath are shown instead of having to click each time?"*
+  **So there are four controls on this page and not nineteen.** Each part is a
+  `<details>` whose summary is the part heading -- the number, the title, the
+  gold rule and a spelt-out question count -- and opening it reveals that whole
+  part at once: every question, every answer, and the photograph and lifted line
+  that close it, as continuous prose. She taps once and then reads.
+  **The questions are plain `<article>` elements -- segments, not controls.**
+  A run of them was tried as a second level of `<details>`, so that opening a
+  part showed its subheadings and each subheading opened its own answer. That is
+  what her paste ruled out: she wants the text, not the headlines. A segment is
+  therefore a hairline, an h3 and its prose at every width, and nothing in it
+  responds to a click. A heading that does nothing when clicked must not look
+  like a button, which is why the card, the chevron and the tap padding are all
+  gone. There is nothing left to take off on a phone either, which is why that
+  media query is three lines now.
+  **The count in the part row still says "Four Questions"** and is still useful
+  -- it is how much is inside, read before she opens it -- but nothing in there
+  is a question to click any more. If that wording should change it is hers to
+  change; it is copy, not a bug.
+  **Closed, the page is four rows: 3,494px at 1440 and 3,225px on a phone.**
+  It was 14,871px before any of this. One part open is 4,850px; all four is
+  10,642px.
+  **NOT mutually exclusive, and this is the one place the FAQ's trick is wrong.**
+  `name=` would keep the page short, but a part collapsing while she is below it
+  removes thousands of pixels from above the viewport and yanks the page under
+  her thumb. She opens what she wants and it stays open.
   **Everything that belongs to a part lives inside it**, closing photograph and
   lifted line included. Left outside they would sit between the four closed
-  rows, which is the wall the rows exist to avoid.
+  rows, which is the wall the drop-downs exist to avoid.
   **The only script is a deep-link opener, and nothing is hidden by script.**
-  Native `<details>` does the opening and shutting; what it will not do reliably
-  across engines is open itself because the URL names something inside it --
-  Chrome and Safari have started auto-expanding for fragment navigation, Firefox
-  has not, and a link she texts a client that lands on a shut part looks broken.
-  So `jumpTo()` walks up from the target with `closest("details")` and opens
-  every ancestor, which is what makes `#money` open The Investment AND that
-  answer. With JavaScript off the page is complete and both levels still open on
-  a tap; all the script adds is the deep link. Failing is harmless, which is the
-  right shape for an enhancement.
-  **TWO COLUMNS ARE STILL NOT BACK and the reason has changed twice.** They went
-  because a one-at-a-time reveal only reads down one column; that argument is
-  spent. What replaces it is plainer -- a balanced two-column run of disclosure
-  rows puts the second half of a part to the right of the first, and an opening
-  answer reflows the other column. `.jhp-qs{columns:2}` is the one line to try it
-  with; `.jhp-wide` still marks the questions that carry a panel, which is what
-  the columns would key off. Measure Part Two before believing it.
+  That is the difference from the version this replaced. Native `<details>` does
+  the opening and shutting; what it will not do reliably across engines is open
+  itself because the URL names something inside it -- Chrome and Safari have
+  started auto-expanding for fragment navigation, Firefox has not, and a link
+  she texts a client that lands on a shut part looks broken. So `jumpTo()` walks
+  up from the target with `closest("details")` and opens every ancestor. With
+  JavaScript off the four parts are still there and still open on a tap; all the
+  script adds is that `#money` opens The Investment on the way in. Failing is
+  harmless, which is the right shape for an enhancement.
+  **TWO COLUMNS ARE STILL NOT BACK and the reason has changed.** They were
+  dropped because a one-at-a-time reveal only reads down one column; that
+  argument is spent. What replaces it is plainer -- this is nineteen answers of
+  continuous prose, and a balanced two-column run would have her reading down
+  the left of a part and then back up to the top of the right, with photographs
+  spanning across. `.jhp-qs{columns:2}` is the one line to try it with;
+  `.jhp-wide` still marks the questions that carry a panel, which is what the
+  columns would key off. Measure Part Two before believing it.
   **The generated markup is deliberately NOT re-indented** to sit inside the
   `<details>`. Adding two spaces to every line of nineteen answers made every
   one of them a changed line, which turned a 5KB template patch into a 37KB one
@@ -483,9 +489,9 @@ Still to do, roughly in order of what it is worth:
   Jessica had a twenty-link contents, then asked for it as four drop-down
   categories, and separately asked for a short version of the figures and then
   for it removed. Both were built, measured and taken out -- the panel on her
-  say-so, the contents because the disclosure rows replaced it: four part rows
-  closed and nineteen subheadings one tap away IS a contents list, and a second
-  list of the same nineteen above it is the wall the rows exist to avoid. **Do not re-add either without asking.** The argument
+  say-so, the contents because the four part rows replaced it: a closed guide IS
+  a contents list, and a second list of the same nineteen above it is the wall
+  the rows exist to avoid. **Do not re-add either without asking.** The argument
   for each is in the history, not here.
 - **`build-guide.py --pdf` renders the same page to a file**, for when she
   wants an attachment rather than a link. Four things had to be true and each
@@ -502,19 +508,19 @@ Still to do, roughly in order of what it is worth:
     contrast(1.02)` forces the engine to rasterise every frame and re-embed it
     as an upscaled RGBA PNG: 21MB instead of 1.1MB, for a grade nobody can see
     on paper.
-  - **The print block forces BOTH levels open -- four parts and nineteen
-    questions.** Each is a `<details>` and a closed one prints as its summary
-    alone; the first render after the questions became disclosures came out NINE
-    PAGES OF HEADINGS with not a word of copy under any of them, and the file
-    looked fine from the outside. Paper does not tap, twice over now. Both hiding
-    mechanisms have to be undone at both levels, the same pair the phone nav
-    spells out: older engines hide a closed `<details>`'s children with a display
-    rule, newer ones hide `::details-content` with `content-visibility`. It must
-    not depend on a script having run either -- a headless render that emulates
-    print media without firing `beforeprint` would print four headings and
-    nothing else, so the rules are CSS and wait on no event. Fifteen pages, all
-    nineteen questions, 1.1MB. **Count the pages after any change here**; nine
-    means the parts are shut again.
+  - **The print block forces all four parts open, and that one bit twice.** A
+    part is a `<details>` and a closed one prints as its summary alone -- the
+    first render after the questions became disclosures came out NINE PAGES OF
+    HEADINGS with not a word of copy under any of them, and the file looked
+    fine from the outside. Paper does not tap. Both hiding mechanisms have to be
+    undone, the same pair the phone nav spells out: older engines hide a closed
+    `<details>`'s children with a display rule, newer ones hide
+    `::details-content` with `content-visibility`. It must not depend on a
+    script having run either -- a headless render that emulates print media
+    without firing `beforeprint` would print four headings and nothing else, so
+    the rules are CSS and wait on no event. Fifteen pages, all nineteen
+    questions, 1.1MB. **Count the pages after any change here**; nine means the
+    parts are shut again.
   The PDF is generic. Personalisation is a page feature and does not belong in
   a file that gets forwarded.
 - **The VIP group is on two pages and is one link.** The Facebook group
