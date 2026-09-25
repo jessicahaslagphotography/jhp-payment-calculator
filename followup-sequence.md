@@ -41,25 +41,22 @@ $2,800 in the Canva guide, in a second place nobody was looking.
 **Everything below uses the settled figures.** Where her line and the site
 disagreed, the site won — that is the whole point of having settled them.
 
-### Four things only Jessica can answer
+### The four open questions, answered 25 September
 
-Her email contains three claims that appear **nowhere on the website**, and
-one question the rewrite had to guess at. None are invented here and none are
-used below until she says.
+1. **"Most clients invest $5,600."** *Removed.* Not used anywhere.
+2. **Klarna, Affirm, AfterPay and PayPal Credit.** *Still offered* — in
+   message 5 now, as third-party and subject to credit approval, which is
+   how she words it.
+3. **"Plan set up within 7 days of booking, first payment due within 30
+   days."** *Still the rule* — in message 5 now.
+4. **Which floor to quote.** *"As low as $1,250."* Confirmed, which is what
+   the draft already used and what the site says.
 
-1. **"Most clients invest $5,600 with our studio."** That is a strong,
-   specific anchor and it is not on the site. Still true? If so it belongs in
-   message 5 and possibly in the FAQ.
-2. **Klarna, Affirm, AfterPay and PayPal Credit** for post-payment plans.
-   Not mentioned anywhere on the site. Still offered?
-3. **"A payment plan must be set up within 7 days of booking, first payment
-   due within 30 days."** Not on the site. Still the rule?
-4. **Which Collection floor should the emails quote?** Her email says "as low
-   as $3,400", the site says Digital Collections from $1,250. Both can be
-   true — $1,250 is the Digital floor, $3,400 is the Full floor — but they
-   anchor very differently. **Below uses $1,250**, because it is the true
-   floor and the site states it. Say the word and it anchors on $3,400
-   instead.
+**Two of those facts are on the site NOWHERE.** The post-payment options and
+the 7-day/30-day deadline are real terms of doing business with her, and
+after this they will be stated in an email and in no other place she
+controls. That is the shape of drift, not the shape of a settled figure — see
+the FAQ note at the foot of this file.
 
 ---
 
@@ -317,9 +314,15 @@ thank-you and the compliance line.*
 > that way at first. 🙌
 >
 > Here is the good news: you do not pay for everything at once. Every
-> Collection is bought on an **interest-free prepayment plan**, biweekly or
-> monthly, set up when you book. This is an investment in *you*, and I am
-> here to make it as stress-free as I possibly can.
+> Collection is bought on an **interest-free prepayment plan** — biweekly or
+> monthly, whichever suits you. Your plan is set up within 7 days of
+> booking, and your first payment is due within 30 days. This is an
+> investment in *you*, and I am here to make it as stress-free as I possibly
+> can.
+>
+> **Prefer to pay afterwards?** Post-payment plans are available through
+> third parties — Klarna, Affirm, AfterPay and PayPal Credit — subject to
+> their credit approval.
 >
 > **[Every figure, written down →]**
 >
@@ -468,6 +471,48 @@ insistent.
 The one-review-one-page rule in `CLAUDE.md` is about the website; re-using
 them in email is fine and worth knowing rather than discovering.
 
-**What is deliberately not here:** a discount, a deadline, and a "spots are
-filling up". She runs none of those, and manufacturing urgency for a woman
-deciding whether to be photographed in her underwear is the wrong instinct.
+**What is deliberately not here:** a discount, an artificial deadline, and a
+"spots are filling up". She runs none of those, and manufacturing urgency for
+a woman deciding whether to be photographed in her underwear is the wrong
+instinct. (The 7-day plan deadline in message 5 is a real term of business,
+not a pressure tactic.)
+
+---
+
+## One thing left: these two facts belong on the site too
+
+Message 5 now states two things the website does not say anywhere:
+
+- a payment plan is **set up within 7 days of booking, first payment within
+  30 days**
+- **post-payment plans** through Klarna, Affirm, AfterPay and PayPal Credit
+
+Both are Jessica's, both confirmed current on 25 September. But a term of
+business that lives in an email and nowhere else is the drift this project
+keeps finding: the Canva guide, her Dubsado emails, and now this. `CLAUDE.md`
+is explicit that **every figure lives in the FAQ**.
+
+The FAQ's payment answer currently reads:
+
+> Yes, and every collection is bought through one. You set yours up when you
+> book, and pay weekly, biweekly or monthly — whichever suits you.
+>
+> They are interest free. It is the same figure either way, spread out. You
+> may book your session up to 15 months in advance.
+
+**Proposed, for her approval** — two sentences added, nothing removed:
+
+> Yes, and every collection is bought through one. You set yours up within
+> seven days of booking and pay weekly, biweekly or monthly — whichever
+> suits you. Your first payment is due within thirty days.
+>
+> They are interest free. It is the same figure either way, spread out. You
+> may book your session up to 15 months in advance.
+>
+> If you would rather pay after your session, post-payment plans are
+> available through Klarna, Affirm, AfterPay and PayPal Credit, subject to
+> their credit approval.
+
+That is one generator, one template patch and one page render. **Not done —
+it is a deadline and a set of named third parties on a live client-facing
+page, which is hers to approve, not mine to assume.**
