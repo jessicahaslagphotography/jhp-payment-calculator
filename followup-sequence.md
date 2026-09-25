@@ -138,10 +138,9 @@ straight answer in the body.
 >
 > **[Read your Session Guide →]**
 >
-> **Your boudoir experience includes**
+> Your boudoir experience includes:
 > ✨ A two to three hour experience in our luxury studio
-> ✨ Professional hair and makeup at a local salon before you arrive
-> (hellooooo makeover!)
+> ✨ Professional hair and makeup at a local salon before you arrive (hellooooo makeover!)
 > ✨ Full access to the studio wardrobe — 160 pieces, sizes XS to 4X
 > ✨ A full session where I pose you from head to pointed toe
 > ✨ Expert posing and expression guidance
