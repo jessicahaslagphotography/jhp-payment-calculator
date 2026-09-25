@@ -222,8 +222,7 @@ thank-you and the compliance line.*
 > Totally normal. **Everyone** is.
 >
 > But nervous turns into empowered real quick, and you will leave feeling
-> like a damn goddess. That is not a sales line — it is just what happens in
-> that room.
+> like a damn goddess. That is just what happens in my studio.
 >
 > *"But I don't look like the women in your portfolio."*
 >
@@ -246,12 +245,13 @@ thank-you and the compliance line.*
 >
 > — Jess
 
-**Text** *(optional — see the note on text volume)*:
+**Text:**
 
 > {{contact.first_name}}, the question everyone asks: "what if I'm nervous?"
 >
-> Totally normal. Everyone is. And you don't need to know how to pose — that's
-> literally my job 🖤 [guide with #worries] — Jess
+> Totally normal. Everyone is! And you don't need to know how to pose — that's literally my job 🖤
+>
+> Let's talk it through: [calendar] — Jess
 
 ---
 
@@ -279,7 +279,7 @@ thank-you and the compliance line.*
 >
 > **[How it all works →]**
 >
-> Questions about any of it? Bring them all.
+> Questions about any of it? Bring them all. Let's get you booked!
 >
 > **[Book my call →]**
 >
@@ -287,10 +287,11 @@ thank-you and the compliance line.*
 
 **Text:**
 
-> {{contact.first_name}} — the bit most women are surprised by: you see your
-> images WITH me, on a call. Never alone in an inbox 🖤
+> {{contact.first_name}}! Have you had a chance to read through your Session Guide yet? [guide]
 >
-> How the day runs: [guide with #works] — Jess
+> Any questions I can answer for you? I'd love to get your call on the books 🖤
+>
+> [calendar] — Jess
 
 ---
 
@@ -300,174 +301,191 @@ thank-you and the compliance line.*
 
 > Hi {{contact.first_name}},
 >
-> I would much rather you knew before we talk than after. So, plainly:
+> It has been two weeks since you reached out to the studio, so I wanted to
+> check in with you again!
+>
+> And I would much rather you knew what this costs before we talk than
+> after. So, plainly:
 >
 > **The session fee is $697.** It is non-refundable, it reserves your date,
-> and it covers everything in that list — the studio, hair and makeup, the
-> wardrobe, the full session, retouching, and your reveal and ordering
-> appointment.
+> and it covers everything — the studio, hair and makeup, the wardrobe, the
+> full session, retouching, and your reveal and ordering appointment.
 >
 > **Your images and products are purchased separately**, at your reveal.
-> There are eight Collections. They start at **$1,250** for digital images
-> and run to **$3,400 and up** for an album, all your digitals and a mobile
-> app. Digitals, albums, prints, wall art — heirloom pieces meant to last a
-> lifetime.
+> Digital Collections begin at **$1,250**, and Full Collections — album,
+> digitals, mobile app, wall art and more — begin at **$3,400**. There are
+> eight in all, so there is room to find the one that fits.
 >
 > **Got a little sticker shock?** Totally get it. Most of my clients feel
 > that way at first. 🙌
 >
-> Here is the good news: you do not pay for everything at once. Every
-> Collection is bought on an **interest-free prepayment plan** — biweekly or
+> Here is the good news: you do not pay for it all at once. Every Collection
+> is bought on an **interest-free prepayment plan** — weekly, biweekly or
 > monthly, whichever suits you. Your plan is set up within 7 days of
-> booking, and your first payment is due within 30 days. This is an
-> investment in *you*, and I am here to make it as stress-free as I possibly
-> can.
->
-> **Prefer to pay afterwards?** Post-payment plans are available through
-> third parties — Klarna, Affirm, AfterPay and PayPal Credit — subject to
-> their credit approval.
+> booking, and your first payment is due within 30 days.
 >
 > **[Every figure, written down →]**
 >
-> If a number raises a question, bring it. No pressure and no obligation.
+> If a number raises a question, bring it. No pressure and no obligation!
+> Let's get on the phone and work through any questions you have!
 >
 > **[Book my call →]**
 >
 > — Jess
 
-**Text** *(optional)*:
+**Text:**
 
-> {{contact.first_name}}, in case it's the question you haven't asked yet:
-> session fee $697, Collections from $1,250, all on interest-free plans.
+> {{contact.first_name}}! It's been two weeks since you reached out 🖤 I would absolutely love to get your session on the books!
 >
-> Every figure: [guide with #investment] — Jess
+> Let's find a time to chat — bring every question you've got: [calendar]
+>
+> — Jess
 
 ---
 
 ## 6 · 1 month
 
-**Subject:** Why women finally book
+**Subject:** I haven't forgotten about you 🖤
 
 > Hi {{contact.first_name}},
 >
-> It is rarely a birthday — though a birthday is a wonderful reason.
+> It has been a month since you reached out — and I have not forgotten about
+> you!
 >
-> It is usually that they got tired of waiting to feel ready.
+> Here is the thing about why women finally book. It is rarely a birthday,
+> though a birthday is a wonderful reason. It is usually that they got tired
+> of waiting to feel ready.
 >
 > > *"The confidence boost I had from this experience was unparalleled!"*
 >
 > > *"Jessica was fabulous from the very first contact to the image
 > > reveal!"*
 >
-> If you are still thinking about it a month later, {{contact.first_name}} —
-> that is generally your answer. And I would absolutely love to be the one
-> you do it with. 🖤
+> If you are still thinking about it a month later, {{contact.first_name}},
+> that is generally your answer.
+>
+> **So let's get your session on the books.** Pick a time that suits you and
+> we will talk the whole thing through — the date, the Collections, the
+> payment plan, all of it.
 >
 > **[Book my call →]**
+>
+> I would love to welcome you into the studio. 🖤
 >
 > — Jess
 
 **Text:**
 
-> {{contact.first_name}}, a month since your guide! Still thinking about it?
-> That's usually the sign 🖤
+> {{contact.first_name}}, it's been 30 days — and I haven't forgotten about you! 🖤
 >
-> 20 minutes, bring your questions, no obligation: [calendar] — Jess
+> I would love to welcome you into the studio. Let's get your call booked and your session on the calendar: [calendar]
+>
+> — Jess
 
 ---
 
 ## 7 · 3 months
 
-**Subject:** If you are waiting for the right time
+**Subject:** Three months on — what can I answer for you?
 
-> Hi {{contact.first_name}},
+> Hi {{contact.first_name}}!
 >
-> Two practical things, in case they help you plan.
+> It has been three months since you reached out about a session with us,
+> and I wanted to check in. **What questions can I answer for you?**
 >
-> **I photograph on Tuesdays and Thursdays only**, 9am to 3pm — so dates go
-> sooner than people expect, and the studio books up to 15 months ahead.
+> In case it helps to see it again, here is what your experience includes:
+> ✨ A two to three hour experience in our luxury studio
+> ✨ Professional hair and makeup at a local salon before you arrive (hellooooo makeover!)
+> ✨ Full access to the studio wardrobe — 160 pieces, sizes XS to 4X
+> ✨ A full session where I pose you from head to pointed toe
+> ✨ Expert posing and expression guidance
+> ✨ Retouching, and your private image reveal and ordering appointment
 >
-> **And anything printed takes time.** An album or wall art is made to order
-> and arrives within six weeks of your reveal, which is itself a week or two
-> after your session.
+> And you never pay for it all at once. Every Collection is bought on an
+> **interest-free prepayment plan** — weekly, biweekly or monthly, set up
+> within 7 days of booking, with your first payment due within 30 days.
 >
-> So if you want your images *for* something — a birthday, an anniversary, a
-> date that matters — work backwards from it. I am very happy to help you do
-> exactly that on a call.
+> You have been thinking about this for three months, {{contact.first_name}}.
+> Let's do it!
 >
-> **[Book my call →]**
->
-> — Jess
-
-**Text** *(optional)*:
-
-> {{contact.first_name}}, planning note: I shoot Tue/Thu only, and albums
-> take ~6 weeks after your reveal. Want images for a date? Work backwards!
->
-> [calendar] — Jess
-
----
-
-## 8 · 6 months
-
-**Subject:** Last note from me 🖤
-
-> Hi {{contact.first_name}},
->
-> This is the last one I will send unless you tell me otherwise. I would
-> rather leave the door open than keep knocking on it.
->
-> Thank you for thinking of my studio in the first place. With everywhere
-> you could have looked, that still means a great deal to me.
->
-> **[Your Session Guide — yours to keep →]**
->
-> And if the time ever comes, I am right here:
->
-> **[Book my call →]**
->
-> I hope you do it one day, {{contact.first_name}}. With me or without me —
-> you deserve to see yourself the way other people do.
+> **[Book my call →]** — no obligation, just a conversation.
 >
 > — Jess
 
 **Text:**
 
-> {{contact.first_name}}, last message from me 🖤 Your guide is yours to
-> keep [guide], and the door stays open whenever you're ready.
+> {{contact.first_name}}, three months since you reached out! What questions can I answer for you? 🖤
 >
-> Thank you for thinking of my studio. — Jess
+> Hair + makeup, the wardrobe, your full session and your reveal — all included, and all on an interest-free plan.
+>
+> You've thought about it. Let's do it! [calendar] — Jess
+
+---
+
+## 8 · 6 months
+
+**Subject:** My door is always open 🖤
+
+> Hi {{contact.first_name}},
+>
+> This is the last time I will reach out, so I wanted to make it count.
+>
+> Thank you for thinking of my studio in the first place. With everywhere
+> you could have looked, that still means a great deal to me.
+>
+> **My door is always open to you.** Next month, next year, whenever the
+> time is right — I would love to have you in.
+>
+> **[Book my call →]**
+>
+> You are worth it, {{contact.first_name}}. Truly. And I would be honored to
+> be the one who captures you.
+>
+> — Jess
+
+**Text:**
+
+> {{contact.first_name}}, my last message — but my door is always open 🖤
+>
+> Whenever you're ready, I'd love to have you in. You're worth it, and I'd be honored to be the one who captures you.
+>
+> [calendar] — Jess
 
 ---
 
 ## Notes on the writing
 
-**The voice is hers, lifted from her own inquiry email.** "I'm so excited you
-reached out", "hellooooo makeover", "totally normal, everyone is", "nervous
-turns into empowered real quick", "you'll leave feeling like a damn goddess",
-"got a little sticker shock? totally get it", "that's literally my job". The
-earlier draft was far too restrained — this is how she actually writes, and
-it is better.
+**The voice is hers, lifted from her own inquiry email and then corrected by
+her line by line.** "I'm so excited you reached out", "hellooooo makeover",
+"totally normal, everyone is", "nervous turns into empowered real quick",
+"you'll leave feeling like a damn goddess", "got a little sticker shock?
+totally get it", "that's literally my job", "you've thought about it, let's
+do it", "I'd be honored to capture you."
 
 **Each message has one job.** Welcome, reassure, name the fear, explain the
-day, talk money, prove it, help her plan, then leave. Her Dubsado version
-sent one message six times; this is the same cadence doing six different
-things.
+day, talk money, ask for the booking, touch base, and finally close the door
+gently. Her Dubsado version sent one message six times; this is the same
+cadence doing eight different things.
+
+**Every message now ends on the calendar.** That was her steer on the later
+touches and it is right: a nurture sequence that explains beautifully and
+never asks is just a newsletter. Messages 5, 6, 7 and 8 ask directly.
+
+**All eight texts are live.** An earlier draft marked three optional on the
+grounds that eight in six months might be a lot; she wrote copy for every one
+of them, which settles it.
 
 **The thank-you is in message 1 and message 8 and nowhere between.** Her
 note: *"there are many choices for a boudoir photographer and I appreciate
 them choosing to inquire with my studio."* In all eight it stops reading as
 gratitude and starts reading as a tic.
 
-**Energy everywhere except where it would be tone-deaf.** Messages 1, 2, 4,
-5 and 6 are bright. Message 3 is warm but steady — it is answering a woman
-who thinks she is not good enough to be photographed. Message 8 is a
-goodbye. Emoji and exclamation marks in either would read as not listening.
-
-**Three texts are marked optional.** Eight in six months is comfortable;
-three inside a fortnight is a lot from a photographer she has not met. Cut
-them and the text sequence is five, which reads as attentive rather than
-insistent.
+**Message 3 is the one that stays steady.** Everything else carries her
+energy and exclamation marks. Three is answering a woman who thinks she is
+not good enough to be photographed, and brightness there would read as not
+listening. Message 8 used to be quiet too; she has turned it into a warm
+final ask, which is a better instinct — a goodbye that still believes in the
+woman reading it.
 
 **The reviews are real.** Message 3 uses Miss H., unplaced on the site — see
 `reviews.md`. Message 6 uses two lines from the Portfolio and The Experience.
@@ -477,23 +495,20 @@ them in email is fine and worth knowing rather than discovering.
 **What is deliberately not here:** a discount, an artificial deadline, and a
 "spots are filling up". She runs none of those, and manufacturing urgency for
 a woman deciding whether to be photographed in her underwear is the wrong
-instinct. (The 7-day plan deadline in message 5 is a real term of business,
-not a pressure tactic.)
+instinct. (The 7-day plan deadline is a real term of business, not a pressure
+tactic.)
 
 ---
 
-## One thing left: these two facts belong on the site too
+## One thing left: the payment terms belong on the site
 
-Message 5 now states two things the website does not say anywhere:
+Message 5 and message 7 both state that a plan is **set up within 7 days of
+booking, with the first payment due within 30 days**. The website does not
+say this anywhere.
 
-- a payment plan is **set up within 7 days of booking, first payment within
-  30 days**
-- **post-payment plans** through Klarna, Affirm, AfterPay and PayPal Credit
-
-Both are Jessica's, both confirmed current on 25 September. But a term of
-business that lives in an email and nowhere else is the drift this project
-keeps finding: the Canva guide, her Dubsado emails, and now this. `CLAUDE.md`
-is explicit that **every figure lives in the FAQ**.
+A term of business that lives in an email and nowhere else is the drift this
+project keeps finding — the Canva guide, her Dubsado emails, and now this.
+`CLAUDE.md` is explicit that **every figure lives in the FAQ**.
 
 The FAQ's payment answer currently reads:
 
@@ -503,19 +518,21 @@ The FAQ's payment answer currently reads:
 > They are interest free. It is the same figure either way, spread out. You
 > may book your session up to 15 months in advance.
 
-**Proposed, for her approval** — two sentences added, nothing removed:
+**Proposed, for her approval** — one sentence changed, nothing removed:
 
-> Yes, and every collection is bought through one. You set yours up within
-> seven days of booking and pay weekly, biweekly or monthly — whichever
-> suits you. Your first payment is due within thirty days.
+> Yes, and every collection is bought through one. You set yours up **within
+> seven days of booking** and pay weekly, biweekly or monthly — whichever
+> suits you. **Your first payment is due within thirty days.**
 >
 > They are interest free. It is the same figure either way, spread out. You
 > may book your session up to 15 months in advance.
->
-> If you would rather pay after your session, post-payment plans are
-> available through Klarna, Affirm, AfterPay and PayPal Credit, subject to
-> their credit approval.
 
-That is one generator, one template patch and one page render. **Not done —
-it is a deadline and a set of named third parties on a live client-facing
-page, which is hers to approve, not mine to assume.**
+One generator, one template patch, one page render. **Not done** — a payment
+deadline on a live client-facing page is hers to approve.
+
+**And post-payment plans are now nowhere at all.** Klarna, Affirm, AfterPay
+and PayPal Credit are still offered — she confirmed that on 25 September —
+but she then had them taken out of message 5, and they have never been on the
+site. So a woman who could only say yes with Klarna currently has no way to
+find out that she can. Worth a line in that same FAQ answer if she wants it;
+worth nothing at all if she would rather not lead with it.
