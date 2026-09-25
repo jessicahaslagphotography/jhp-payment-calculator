@@ -352,11 +352,24 @@ GUIDE_CSS += """
 .jhp-home .jhp-pt[open] .ct{color:var(--gold)}
 .jhp-home .jhp-pt[open] .ct::after{transform:rotate(-135deg);margin-top:3px}
 
-/* ONE COLUMN, AND A QUESTION IS JUST A HEADING AGAIN
-   -------------------------------------------------
-   The whole part opens at once, so nothing inside it is a control. Each
-   question is a heading and its prose, separated from the next by a hairline
-   -- a magazine, read straight down, which is what it was always meant to be.
+/* ONE COLUMN, AND TWO LEVELS OF DISCLOSURE
+   ---------------------------------------
+   Jessica's ask, 25 September, clarifying the one above it: "I want to click
+   the section, and all the subheadings appear at the same time below it." So
+   opening a part reveals its SUBHEADINGS, all of them at once, and each of
+   those opens its own answer. Two taps to read one answer, and the shape of
+   the whole part visible after the first.
+
+   That is a <details> inside a <details>, which is legal, keyboard-operable
+   at both levels, and announced as two nested disclosures. The part row is
+   centred and large; the question rows are left-aligned and smaller, so the
+   levels are never mistaken for each other.
+
+   NOT MUTUALLY EXCLUSIVE at either level. The FAQ's name= trick would keep a
+   part tighter, but this is a document she reads down, not a list she dips
+   into: a question collapsing as she opens the next one takes its answer out
+   from above her and moves the row she just tapped up the screen. Everything
+   she opens stays open.
 
    TWO COLUMNS ARE STILL NOT BACK, and the reason has changed. They were
    dropped because a one-at-a-time reveal only reads down a single column;
@@ -370,14 +383,35 @@ GUIDE_CSS += """
    860px, because a single column of 15px type at 1080 is a 140-character
    line. */
 .jhp-home .jhp-qs{max-width:860px;margin:0 auto}
-.jhp-home .jhp-qs > * + *{margin-top:clamp(26px,2.8vw,34px)}
+/* The rows carry their own hairlines, so they sit flush against each other.
+   Only the photographs inside a part need air. */
+.jhp-home .jhp-qs > figure{margin-block:clamp(34px,4vw,52px)}
 
-.jhp-home .jhp-q{border-top:1px solid var(--line-soft);
-  padding-top:clamp(22px,2.4vw,28px)}
-.jhp-home .jhp-q:first-child{border-top:0;padding-top:0}
-.jhp-home .jhp-q h3{font-family:var(--serif);font-weight:600;
-  font-size:clamp(19px,1.9vw,24px);line-height:1.22;color:var(--ink);
-  margin:0 0 14px;text-wrap:balance}
+/* A subheading is a row on a hairline: the heading left, a chevron right,
+   nothing boxed. Boxed rows inside an already-open part read as cards inside
+   a card, which is one frame too many. */
+.jhp-home .jhp-q{border-top:1px solid var(--line-soft)}
+.jhp-home .jhp-q:first-child{border-top:0}
+.jhp-home .jhp-q > summary{display:flex;align-items:baseline;
+  justify-content:space-between;gap:18px;padding:clamp(17px,1.9vw,22px) 0;
+  cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
+.jhp-home .jhp-q > summary::-webkit-details-marker{display:none}
+.jhp-home .jhp-q > summary:focus-visible{outline:2px solid var(--gold-bright);
+  outline-offset:2px}
+.jhp-home .jhp-q > summary h3{font-family:var(--serif);font-weight:600;
+  font-size:clamp(19px,1.9vw,24px);line-height:1.22;color:var(--ink);margin:0;
+  text-wrap:balance;transition:color .3s}
+.jhp-home .jhp-q:hover > summary h3,
+.jhp-home .jhp-q[open] > summary h3{color:var(--gold-bright)}
+/* The same 6px chevron the Info menu, the phone drawer, the FAQ and the part
+   row above all wear. */
+.jhp-home .jhp-q > summary::after{content:"";flex:0 0 auto;width:6px;height:6px;
+  margin-top:6px;border-right:1px solid var(--gold);
+  border-bottom:1px solid var(--gold);transform:rotate(45deg);
+  transition:transform .3s}
+.jhp-home .jhp-q[open] > summary::after{transform:rotate(-135deg);margin-top:10px}
+.jhp-home .jhp-q .a{padding:0 0 clamp(20px,2.2vw,26px)}
+.jhp-home .jhp-q .a > *:first-child{margin-top:0}
 .jhp-home .jhp-q p{font-family:var(--sans);font-weight:300;font-size:15.5px;
   line-height:1.75;color:var(--muted);margin:0 0 13px}
 .jhp-home .jhp-q p:last-child{margin-bottom:0}
@@ -448,12 +482,13 @@ GUIDE_CSS += """
 .jhp-home .jhp-q .jhp-card{margin-inline:0}
 .jhp-home .jhp-q .jhp-p{font-size:15.5px;line-height:1.75;margin:0 0 13px}
 
-/* ON A PHONE the four rows tighten and the type steps down one notch. There
-   is no box to take off any more -- the questions have been hairlines and
-   prose at every width since the part became the control. */
+/* ON A PHONE both rows tighten and the subheading steps down one notch. There
+   is no box to take off -- the rows are hairlines at every width. 15px of line
+   plus 16px either side clears the 44px a thumb needs. */
 @media (max-width:620px){
   .jhp-home .jhp-qs{max-width:none}
-  .jhp-home .jhp-q h3{font-size:19px}
+  .jhp-home .jhp-q > summary{padding:16px 0;gap:14px}
+  .jhp-home .jhp-q > summary h3{font-size:18.5px}
   .jhp-home .jhp-pt > summary{padding:26px 0 22px}
   .jhp-home .jhp-lift{margin:38px auto}
 }
@@ -466,10 +501,11 @@ GUIDE_CSS += """
 # something print engines handle badly and inconsistently.
 GUIDE_CSS += """
 @media print{
-  /* ALL FOUR PARTS ARE OPEN ON PAPER. A part is a <details> and a closed one
-     prints as its summary alone -- the first render after the questions became
-     disclosures came out nine pages of headings with not a word of copy under
-     any of them, and the file looked fine from the outside. Paper does not tap.
+  /* BOTH LEVELS ARE OPEN ON PAPER -- four parts and nineteen questions. Each
+     is a <details> and a closed one prints as its summary alone; the first
+     render after the questions became disclosures came out nine pages of
+     headings with not a word of copy under any of them, and the file looked
+     fine from the outside. Paper does not tap, twice over now.
 
      Both hiding mechanisms have to be undone, the same pair the phone nav
      spells out: older engines hide a closed <details>'s children with a
@@ -479,12 +515,15 @@ GUIDE_CSS += """
      not depend on any script having run, which is the point -- a stylesheet
      must not wait on an event. */
   .jhp-home .jhp-pt > .jhp-qs,.jhp-home .jhp-pt > figure,
-  .jhp-home .jhp-pt > .jhp-lift{display:block !important}
-  .jhp-home .jhp-pt::details-content{content-visibility:visible !important;
-    display:block !important;block-size:auto !important}
+  .jhp-home .jhp-pt > .jhp-lift,.jhp-home .jhp-q > .a{display:block !important}
+  .jhp-home .jhp-pt::details-content,.jhp-home .jhp-q::details-content{
+    content-visibility:visible !important;display:block !important;
+    block-size:auto !important}
   /* A chevron and a question count are instructions to tap, and there is
      nothing to tap on paper. */
   .jhp-home .jhp-part .ct{display:none}
+  .jhp-home .jhp-q > summary::after{display:none}
+  .jhp-home .jhp-q > summary{padding:0 0 12px}
   /* A part heading starts a page rather than orphaning itself at the foot of
      the last one. Not the first, which would leave a blank sheet in front of
      Part One. */
@@ -831,12 +870,12 @@ COUNTS = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six",
 
 
 def render_parts():
-    """Four disclosures, each holding one whole part.
+    """Four parts, each holding its own run of question disclosures.
 
-    Jessica's ask, 25 September: the part heading is the control, and opening
-    it shows every question underneath at once rather than asking her to click
-    each one. So the <details> is the PART, and the questions inside it are
-    plain articles -- headings and prose, read straight down.
+    Jessica's ask, 25 September: "I want to click the section, and all the
+    subheadings appear at the same time below it." So the part is a <details>
+    and every question inside it is a <details> too. Opening the part shows all
+    of its subheadings at once; opening a subheading shows that answer.
 
     Everything that belongs to a part goes inside it, the closing photograph
     and the lifted line included. Left outside they would sit between the four
@@ -851,9 +890,11 @@ def render_parts():
         items = []
         for it in part["items"]:
             items.append(
-                '  <article class="jhp-q%s" id="%s">\n'
-                '    <h3>%s</h3>%s\n'
-                '  </article>' % (" jhp-wide" if it["wide"] else "",
+                '  <details class="jhp-q%s" id="%s">\n'
+                '    <summary><h3>%s</h3></summary>\n'
+                '    <div class="a">%s\n'
+                '    </div>\n'
+                '  </details>' % (" jhp-wide" if it["wide"] else "",
                                   it["id"], it["q"], it["a"]))
             if it["id"] in INSIDE:
                 items.append("  " + INSIDE[it["id"]].replace("\n", "\n  "))
