@@ -349,6 +349,11 @@ thank-you and the compliance line.*
 > monthly, whichever suits you. Your plan is set up within 7 days of
 > booking, and your first payment is due within 30 days.
 >
+> And you can book your session **up to 15 months in advance**, which matters
+> more than it sounds. The further out your date, the more payments your plan
+> spreads across — and that is what keeps the amount manageable for most
+> women.
+>
 > **[Every figure, written down →]**
 >
 > If a number raises a question, bring it. No pressure and no obligation!
@@ -363,6 +368,9 @@ thank-you and the compliance line.*
 > {{contact.first_name}}! It's been two weeks since you reached out. I just
 > sent over everything about the investment — the session fee, the
 > Collections and the interest-free payment plans, all written down.
+>
+> And you can book up to 15 months out, so your plan spreads across as many
+> payments as you need to keep it manageable.
 >
 > If a number raises a question, bring it. No pressure and no obligation!
 >
@@ -396,7 +404,9 @@ thank-you and the compliance line.*
 >
 > **So let's get your session on the books.** Pick a time that suits you and
 > we will talk the whole thing through — the date, the Collections, the
-> payment plan, all of it.
+> payment plan, all of it. You can book as far out as 15 months, so we can
+> put your date wherever it suits you and spread the plan across the months
+> in between.
 >
 > **[Book my call →]**
 >
@@ -440,7 +450,9 @@ thank-you and the compliance line.*
 >
 > And you never pay for it all at once. Every Collection is bought on an
 > **interest-free prepayment plan** — weekly, biweekly or monthly, set up
-> within 7 days of booking, with your first payment due within 30 days.
+> within 7 days of booking, with your first payment due within 30 days. You
+> can book your session **up to 15 months in advance**, too, so your plan
+> spreads across as many payments as you need to keep the amount manageable.
 >
 > You have been thinking about this for three months, {{contact.first_name}}.
 > Let's do it!
@@ -460,7 +472,8 @@ thank-you and the compliance line.*
 > reveal and ordering appointment.
 >
 > And you never pay for it all at once. Every Collection is on an
-> interest-free prepayment plan — weekly, biweekly or monthly.
+> interest-free prepayment plan — weekly, biweekly or monthly. You can book
+> up to 15 months out, so the amount stays manageable.
 >
 > You have thought about it. Let's do it! Book a no-obligation call:
 > [calendar]
@@ -534,6 +547,17 @@ workflow emails. Create the texts based on what the email says."* So the
 72-hour text makes the nervousness case and asks for the phone call, the
 7-day text walks the day, the 14-day text names the investment, and so on.
 They are shorter than the emails and say the same thing.
+
+**The 15-month booking window is now an affordability argument, not a
+logistics detail.** Her steer: a woman who can book that far out spreads her
+prepayment plan across that many more payments, which is what makes the
+amount manageable for most. So it appears in the three money messages -- 5
+and 7 beside the plan terms, and 6 where the call already promises to cover
+the date and the plan together -- and nowhere else. **Not** in messages 1 to
+4, which quote no figures on purpose, and not in message 8, which is a
+goodbye and would read as a last pitch. The number matches the FAQ and the
+Session Guide; 15 months is the settled figure and her old Dubsado copy's
+18 months is the stale one.
 
 **No emoji in any text.** Her instruction, and it is the right one for SMS:
 a heart renders differently on every handset and some carriers still turn a
