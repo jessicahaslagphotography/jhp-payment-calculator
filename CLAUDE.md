@@ -89,8 +89,8 @@ These are the current numbers and nothing on the site may state another:
     product delivery     within 6 weeks of the Zoom reveal
     the Collection       chosen at booking, prepaid before the session
     booking window       up to 15 months in advance
+    session days         Tue and Thu, 9am-3pm      when she is shooting
     studio hours         Mon-Thu, 10am-3pm, by appointment only
-    shoot days           Tue and Thu, 9am-3pm      <- 25 Sep, SEE BELOW
     consultation calls   Mon-Fri, 8am-5pm  (the GHL calendar's own window)
     location             just outside Jefferson City
 
@@ -100,15 +100,31 @@ are changed, because a collection called one thing on the guide and another on
 the FAQ is the exact drift this file exists to stop. The FAQ's `FAQPage`
 JSON-LD picked the new name up in the same build, as it is meant to.
 
-**THE SHOOT DAYS AND THE STUDIO HOURS DISAGREE BY AN HOUR, AND IT IS HERS TO
-SETTLE.** She gave "I photograph on Tuesday's/Thursday's from 9am-3pm" on
-25 September. Narrower days than the studio hours is not a conflict -- the
-studio can be open Monday to Thursday for consultations and reveals and she
-photographs on two of those days -- but **9am is not 10am**. The guide now says
-9am (her newest word, in `F["shoot_days"]`) and the FAQ and all twenty footers
-still say the studio opens at 10am. One of the two is wrong. Nothing was
-changed on her behalf and no third figure was invented; ask her which, then fix
-the loser. Until then the site contradicts itself by one hour in one place.
+**THERE ARE THREE TIME WINDOWS AND THEY ARE THREE DIFFERENT THINGS.** This was
+raised as a contradiction on 25 September -- she photographs from 9am and the
+studio hours said 10am -- and she settled it the same day: *"Studio sessions are
+photographed on tuesday/thrusday from 9am-3pm, studio is open for consultation
+calls, etc. M-Th 10am-3pm."* So:
+
+    session days    Tue and Thu, 9am-3pm   she is behind the camera
+    studio hours    Mon-Thu, 10am-3pm      the studio is open for everything
+                                           else -- her words, "consultation
+                                           calls, etc."
+    call hours      Mon-Fri, 8am-5pm       what the GHL calendar will book,
+                                           wider than both because a phone
+                                           call needs no studio
+
+**9am is not a typo for 10am.** She shoots from 9; the studio opens to
+everything else at 10. Never average them, never quote one where the copy means
+another, and do not "tidy" the three into one figure. All three are in `F` at
+the top of `build-guide.py` with the same note.
+
+**The guide names all three in one sentence** in the intro, and the day panel
+says the session days on their own. **The footer states only two of the three**
+-- studio hours and call hours -- which is true but incomplete, and a woman
+reading it could reasonably think she can be photographed on a Monday. Adding a
+session-days line there is three master files, nine templates and twenty pages;
+it is worth doing and the wording is Jessica's to choose. ASK.
 
 **"50 to 100 images" is off the site.** It was `F["shown"]`, in the guide twice,
 and she removed it on 25 September because how many a woman is shown depends on
@@ -422,9 +438,9 @@ Still to do, roughly in order of what it is worth:
   for 4 years" (both decay, and the second already disagrees with "since 2021").
   Putting any of them back is a decision. **The fourth, the session start time,
   she answered on 25 September** -- Tuesdays and Thursdays, 9am to 3pm -- and
-  the day panel says so now instead of pointing at the studio hours. Read the
-  hour-long conflict that created in *The figures, settled* above before
-  touching either figure.
+  the day panel says so now instead of pointing at the studio hours. That is one
+  of three separate time windows; read *The figures, settled* above before
+  touching any of them.
 - **It greets her by name, out of the link.** GHL builds the URL with its own
   merge field -- `.../session-guide/?n={{contact.first_name}}` -- and three
   slots change: the eyebrow over the title, the first line, the sign-off. Three

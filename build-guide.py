@@ -71,13 +71,18 @@ F = {
     "reveal_wait":    "7&ndash;14 business days",
     "delivery":       "within 6 weeks",
     "booking_window": "15 months",
-    "studio_hours":   "Monday to Thursday, 10am&ndash;3pm",
-    # The days she is BEHIND THE CAMERA, which is narrower than the studio
-    # hours above: the studio is open Monday to Thursday for consultations and
-    # reveals, and she photographs on two of those days. Her own, 25 September.
-    # ASK: this says 9am and the settled studio hours say 10am. One of the two
-    # is wrong and it is hers to settle -- see CLAUDE.md.
+    # THREE WINDOWS, AND THEY ARE THREE DIFFERENT THINGS. Settled by Jessica
+    # on 25 September, after the 9am/10am gap was put to her:
+    #   shoot_days    when she is behind the camera
+    #   studio_hours  when the studio is open for everything else -- her own
+    #                 words, "consultation calls, etc."
+    #   call_hours    when a call can be booked on the GHL calendar, which is
+    #                 wider than both because a phone call needs no studio
+    # 9am is not a typo for 10am. She shoots from 9; the studio opens to
+    # everything else at 10. Never average them, and never quote one where the
+    # copy means another.
     "shoot_days":     "Tuesdays and Thursdays, 9am&ndash;3pm",
+    "studio_hours":   "Monday to Thursday, 10am&ndash;3pm",
     "call_hours":     "Monday to Friday, 8am&ndash;5pm",
     "consult":        "20 minute",
     "wardrobe":       "160",
@@ -994,8 +999,10 @@ BODY = """
        itself works, and what it costs. Tap a part below to open it and read
        straight through, and take them in whatever order you like.</p>
     <p class="jhp-p">If you have any questions afterwards, please reach out and
-       I will get back to you as soon as I can. My studio hours are
-       {studio_hours}, and consultation calls run {call_hours}.</p>
+       I will get back to you as soon as I can. I photograph sessions on
+       {shoot_days}; the studio is open for consultations and reveals
+       {studio_hours}, and a consultation call can be booked
+       {call_hours}.</p>
   </div>
 
 {parts}
