@@ -275,6 +275,100 @@ def inject_schema(html, site, page_dir, ctx=None):
     return html.replace('</head>', block + '</head>', 1)
 
 
+# RESPONSIVE IMAGES
+# -----------------
+# Every photograph is served from GoHighLevel's CDN, which ignores resize
+# parameters -- ?width=600 and the bare URL return the same 689,704 bytes
+# with the same etag, checked 26 September. So a 1600px frame went to a
+# 390px phone and there was no way to ask for less. That was the page-speed
+# problem on this site and it is the one thing here a visitor can feel.
+#
+# Netlify's image CDN resizes the remote original instead. Measured on one
+# of the portfolio frames:
+#
+#       original                689,704 bytes
+#       /.netlify/images w=400   38,561 bytes    -94%
+#       ... w=1200 as AVIF      103,271 bytes    -85%
+#
+# No `fm` is set on purpose: Netlify negotiates the format from the
+# browser's Accept header, so a modern browser gets AVIF or WebP and an old
+# one still gets the JPEG, without a <picture> element and two code paths.
+#
+# THE HOST MUST BE IN netlify.toml's [images] remote_images OR EVERY
+# PHOTOGRAPH ON THE SITE 404s. It is; do not remove it.
+WIDTHS = [400, 640, 900, 1200, 1600]
+
+# What share of the viewport each kind of frame actually occupies, so the
+# browser asks for the right one. Wrong `sizes` is worse than none: too
+# small and it fetches a blurry frame, too large and the whole exercise was
+# pointless. Keyed on the nearest container class above the <img>.
+SIZES = {
+    'jhp-gal':   '(max-width:620px) 50vw, (max-width:1200px) 33vw, 370px',
+    'jhp-set':   '(max-width:620px) 100vw, (max-width:900px) 50vw, 33vw',
+    'jhp-pair':  '(max-width:700px) 100vw, 33vw',
+    'shot':      '(max-width:820px) 100vw, 45vw',
+    'logo-mark': '176px',
+}
+DEFAULT_SIZES = '100vw'
+
+
+def _resized(src, w):
+    from urllib.parse import quote
+    return '/.netlify/images?url=%s&w=%d&q=72' % (quote(src, safe=''), w)
+
+
+def responsive(html):
+    """Rewrite every CDN <img> into a srcset. Returns (html, count)."""
+    out, n = [], 0
+    # Everything after the last </style> is markup. Class names before that
+    # point are CSS selectors and must not be mistaken for containers.
+    markup_at = html.rfind('</style>')
+    markup_at = 0 if markup_at < 0 else markup_at
+    for m in re.finditer(r'<img\b[^>]*>', html):
+        tag = m.group(0)
+        src = re.search(r'\bsrc="(https://assets\.cdn\.filesafe\.space/[^"]+)"', tag)
+        if not src or 'srcset=' in tag:
+            continue
+        url = src.group(1)
+
+        # Never offer more pixels than the original has, when it says.
+        nat = re.search(r'\bwidth="(\d+)"', tag)
+        nat = int(nat.group(1)) if nat else None
+        widths = [w for w in WIDTHS if not nat or w < nat] + ([nat] if nat and
+                                                              nat <= 1600 else [1600])
+        widths = sorted(set(w for w in widths if w))
+
+        # The nearest container above this <img> decides `sizes`.
+        #
+        # THIS LOOKS AT MARKUP ONLY, and the first version did not. Searching
+        # the raw page for 'jhp-gal' or 'logo-mark' hits the STYLESHEET,
+        # which sits above every <img> on the page -- so the home page's hero
+        # came out at sizes="176px", the footer logo's width, and would have
+        # been fetched at 176px and drawn across 1440. It matches whole class
+        # tokens in a class attribute, in the body, and takes the last one.
+        before = html[markup_at:m.start()]
+        sizes, at_best = DEFAULT_SIZES, -1
+        for attr in re.finditer(r'class="([^"]*)"', before):
+            for cls in attr.group(1).split():
+                if cls in SIZES and attr.start() > at_best:
+                    sizes, at_best = SIZES[cls], attr.start()
+
+        srcset = ', '.join('%s %dw' % (_resized(url, w), w) for w in widths)
+        new_tag = tag[:-1].rstrip()
+        if new_tag.endswith('/'):
+            new_tag = new_tag[:-1].rstrip()
+        new_tag += ' srcset="%s" sizes="%s">' % (srcset, sizes)
+        # and point src at a mid-size render rather than the 1600px original
+        new_tag = new_tag.replace('src="%s"' % url,
+                                  'src="%s"' % _resized(url, min(1200, widths[-1])))
+        out.append((m.start(), m.end(), new_tag))
+        n += 1
+
+    for start, end, tag in reversed(out):
+        html = html[:start] + tag + html[end:]
+    return html, n
+
+
 def write(rel, text):
     p = OUT / rel
     p.parent.mkdir(parents=True, exist_ok=True)
@@ -303,6 +397,7 @@ def build(site, blog_url, launch):
         shutil.rmtree(OUT)
     urls = []
     navs = {}
+    shrunk = {}
 
     for src, d, scalogy_page, prio in PAGES:
         raw = (ROOT / src).read_text(encoding='utf-8')
@@ -319,6 +414,8 @@ def build(site, blog_url, launch):
                  'template syntax outside {%% raw %%}' % src)
         html = transform(rendered, site, d, blog_url, launch)
         html = inject_schema(html, site, d)
+        html, nimg = responsive(html)
+        shrunk[d or '/'] = nimg
         rel = (d + '/index.html') if d else 'index.html'
         write(rel, html)
         urls.append(('/' + (d + '/' if d else ''), prio))
@@ -335,6 +432,8 @@ def build(site, blog_url, launch):
                  'comes off the slug' % (p.name, slug, p.stem))
         html = transform(render_jinja(GALLERY_TPL, ctx), site, slug, blog_url, launch)
         html = inject_schema(html, site, slug, ctx)
+        html, nimg = responsive(html)
+        shrunk[slug] = nimg
         if ctx['name'] not in html:
             fail('%s: rendered without the client name -- an empty gallery '
                  'looks exactly like a full one from the outside' % slug)
@@ -361,6 +460,9 @@ def build(site, blog_url, launch):
                                                          ', '.join(sorted(f)))
                                          for h, f in groups.items())))
 
+    notes.append('%d of the %d photographs now go through Netlify\'s resizer '
+                 'instead of being sent full size.'
+                 % (sum(shrunk.values()), sum(shrunk.values())))
     write('_redirects', redirects(blog_url))
     write('sitemap.xml', sitemap(site, urls))
     write('robots.txt',
@@ -532,6 +634,8 @@ def check(site, blog_url, launch):
                     fail('%s: links to an unexpected host %s (%s)'
                          % (where, host, url))
                 continue
+            if url.startswith('/.netlify/images?'):
+                continue          # served by the host, not a file in the bundle
             if not url.startswith('/'):
                 fail('%s: %s="%s" is neither absolute nor rooted' % (where, attr, url))
                 continue

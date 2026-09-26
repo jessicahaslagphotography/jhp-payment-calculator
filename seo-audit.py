@@ -49,7 +49,13 @@ def audit():
         h3s = re.findall(r'<h3\b', h)
         words = len(text_of(h).split())
 
-        imgs = re.findall(r'<img\b[^>]*>', h)
+        # Strip scripts and styles before counting images: the Session
+        # Guide's name-validation comment contains the literal string
+        # "<img src=x onerror=...>" as an example of what it refuses, and
+        # counting that as a photograph with no alt text is a false alarm
+        # that would send somebody looking for a bug that is not there.
+        markup = re.sub(r'<(script|style)\b.*?</\1>', ' ', h, flags=re.S | re.I)
+        imgs = re.findall(r'<img\b[^>]*>', markup)
         page_alts, no_dim, lazy = [], 0, 0
         for tag in imgs:
             a = re.search(r'\balt="([^"]*)"', tag)
