@@ -4,20 +4,23 @@
 # deploy-site.py assembles those into public/ and applies the launch changes.
 # The host runs that on every push, so a deploy is a commit and nothing else.
 #
-# THE LAUNCH SWITCH IS THE --preview FLAG ON THE LINE BELOW, and it is meant to
-# be the one deliberate step. While it is there every page stays noindex,
-# nofollow and robots.txt disallows everything, so the bundle can be built,
-# opened and clicked through at its netlify.app address without competing with
-# www.jhpboudoir.com in Google -- which is the whole reason the tag exists (see
-# CLAUDE.md, "SEO: the site is switched off, and that is on purpose").
+# LAUNCHED 26 September 2026. The --preview flag came off this line with
+# Jessica's say-so, about an hour after the two DNS records moved and
+# jhpboudoir.com started resolving to this host.
 #
-# AT LAUNCH: delete " --preview", commit, and the same push that points the
-# domain at this host also switches indexing on. Put it back and the site is
-# switched off again in one commit. Do not do it as a side effect of any other
-# change, and not without Jessica's say-so.
+# The flag existed so the bundle could be built, opened and clicked through at
+# its netlify.app address without competing with the Showit site in Google --
+# see CLAUDE.md, "SEO: the site is switched off, and that is on purpose". That
+# reason expired the moment Showit stopped serving the domain: there is only
+# one JHP Boudoir site now, and leaving the tag on made the live one invisible
+# while pointing its canonical at a preview URL, which is worse than either.
+#
+# TO SWITCH THE SITE BACK OFF, put " --preview" back on the line below and
+# push. One commit, reversible in both directions, and never a side effect of
+# some other change.
 
 [build]
-  command = "pip install -r requirements.txt && python3 deploy-site.py --preview"
+  command = "pip install -r requirements.txt && python3 deploy-site.py"
   publish = "public"
 
 [build.environment]
