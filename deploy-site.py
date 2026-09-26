@@ -298,6 +298,21 @@ def inject_schema(html, site, page_dir, ctx=None):
 # PHOTOGRAPH ON THE SITE 404s. It is; do not remove it.
 WIDTHS = [400, 640, 900, 1200, 1600]
 
+# THE REAL PIXEL SIZE OF EVERY FRAME THAT DOES NOT DECLARE ONE.
+# Measured on 26 September by Range-requesting each file's header off the CDN
+# and reading the JPEG SOF marker or the PNG IHDR -- a few hundred KB rather
+# than fifteen megabytes, and exact rather than assumed.
+#
+# It is worth having twice over. An <img> with no width and height gives the
+# browser nothing to reserve, so the page reflows as each photograph lands,
+# which is Cumulative Layout Shift and Google measures it. And the srcset
+# below caps at the declared width, so an undeclared image was being offered
+# every step up to 1600 and Netlify asked to UPSCALE anything smaller.
+#
+# TWO OF THEM ARE STRAIGHT OFF HER CAMERA at 6048x4024 and 4024x6048, which
+# is why this mattered: those were going out whole.
+DIMS = json.loads((ROOT / 'image-dimensions.json').read_text())
+
 # What share of the viewport each kind of frame actually occupies, so the
 # browser asks for the right one. Wrong `sizes` is worse than none: too
 # small and it fetches a blurry frame, too large and the whole exercise was
@@ -331,9 +346,13 @@ def responsive(html):
             continue
         url = src.group(1)
 
-        # Never offer more pixels than the original has, when it says.
+        # Never offer more pixels than the original has. The tag's own
+        # width attribute first; failing that, the measured table above.
         nat = re.search(r'\bwidth="(\d+)"', tag)
         nat = int(nat.group(1)) if nat else None
+        known = DIMS.get(url.rsplit('/', 1)[-1])
+        if nat is None and known:
+            nat = known['w']
         widths = [w for w in WIDTHS if not nat or w < nat] + ([nat] if nat and
                                                               nat <= 1600 else [1600])
         widths = sorted(set(w for w in widths if w))
@@ -355,6 +374,9 @@ def responsive(html):
 
         srcset = ', '.join('%s %dw' % (_resized(url, w), w) for w in widths)
         new_tag = tag[:-1].rstrip()
+        if known and not re.search(r'\bheight="\d+"', new_tag):
+            new_tag = re.sub(r'\s*\bwidth="\d+"', '', new_tag)
+            new_tag += ' width="%d" height="%d"' % (known['w'], known['h'])
         if new_tag.endswith('/'):
             new_tag = new_tag[:-1].rstrip()
         new_tag += ' srcset="%s" sizes="%s">' % (srcset, sizes)
