@@ -315,6 +315,54 @@
     linear-gradient(0deg, rgba(19,16,14,.95) 0%, rgba(19,16,14,.82) 22%,
       rgba(19,16,14,.42) 48%, rgba(19,16,14,.08) 80%),
     linear-gradient(90deg, rgba(19,16,14,.55) 0%, rgba(19,16,14,.12) 45%, rgba(19,16,14,0) 70%)}
+/* PHONE ONLY: a stronger scrim. Jessica's note, 26 September -- the hero type
+   was blending into the photograph on a phone and reading fine on a desktop,
+   which is exactly what you would expect, because the two gradients above were
+   tuned on a wide frame and the phone crops that frame to a portrait.
+
+   WHERE THE TYPE ACTUALLY SITS, measured at a true 390 against the 280px band
+   (percentages are UP from the bottom, which is the direction the gradient
+   runs, so they read straight off the stops):
+
+       button      11% - 28% up
+       title       34% - 77% up    three lines at 390, not two
+       eyebrow     83% - 90% up
+
+   The eyebrow is the thing. At 83-90% up it is in the last sliver of the frame,
+   where the desktop vertical scrim has already fallen to about .13 and the
+   horizontal one has been at zero since 70% across. Gold 13px type over a
+   bright wall and lit skin with almost nothing behind it is what she was
+   looking at. The top of the title, at 77%, had the same problem.
+
+   ONE GRADIENT INSTEAD OF TWO CROSSED ONES. The horizontal is dropped rather
+   than re-tuned: it exists because the desktop text sits in the left third of a
+   wide frame, and at 390px the title spans nearly the full width, so a
+   left-weighted wash no longer backs the thing it was drawn for. One axis is
+   also one number to reason about the next time this moves.
+
+   What the stops give, against what was there before:
+
+       title       34% up    .87    was about .58
+       title top   77% up    .52    was about .11
+       eyebrow     83% up    .53    was about .14
+       eyebrow top 90% up    .41    was about .14
+       top edge   100%       .30    was about .10
+
+   THE TOP EDGE IS DELIBERATELY NOT SOLID. It is .30, not .60: a hero that goes
+   opaque at the top reads as a black box with a photograph trapped in it, and
+   the nav sits ABOVE this band rather than over it, so there is nothing up
+   there that needs backing. Judged at a true 390 and a true 320 against the
+   real frame, not a swatch -- a scrim is a judgement about one photograph.
+
+   DESKTOP IS UNTOUCHED, which was her other half of the ask. This block is
+   inside max-width:620px and is declared after .jhp-over rather than in the
+   phone block further up, which sets the crop: an override of the same
+   specificity has to come later in the sheet or it loses. */
+@media (max-width:620px){
+  .jhp-home .jhp-hero .jhp-over{background:
+    linear-gradient(0deg, rgba(19,16,14,.97) 0%, rgba(19,16,14,.90) 28%,
+      rgba(19,16,14,.80) 52%, rgba(19,16,14,.62) 74%, rgba(19,16,14,.30) 100%)}
+}
 .jhp-home .jhp-hero .jhp-eb{font-family:var(--sans);font-size:13px;letter-spacing:.34em;
   text-transform:uppercase;color:var(--gold)}
 .jhp-home .jhp-hero .jhp-ttl{font-family:var(--serif);font-weight:500;
