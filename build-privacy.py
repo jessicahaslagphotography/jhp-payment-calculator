@@ -28,16 +28,27 @@ would be a false statement in a privacy policy if it drifted:
   * the /contact SMS box is still optional and still carries its disclosure
   * the unsubscribe page still exists
 
-TWO THINGS ARE MARKED ASK and are Jessica's to confirm, not mine to invent:
+ONE THING IS STILL MARKED ASK and is Jessica's to confirm, not mine to invent:
 
   * RETENTION. No period is stated anywhere in this project, so the page says
     what is true -- kept while it is being used for what it was given for, and
     deleted on request -- rather than a number nobody has set.
-  * THE 18+ LINE. Nothing on the site states an age requirement. Boudoir is
-    plainly adults-only and "18 or over" is the safe and ordinary wording, but
-    it is an assertion this file is making on her behalf and she should say so
-    out loud once. The generator's boilerplate ancestor said 13, which is the
-    generator's default and is wrong for this studio.
+
+THE AGE IS SETTLED, AND IT IS A BOOKING RULE. It was an ASK for about an hour;
+Jessica answered on 26 September in her own words -- "You must be 18 years of
+age or older to book with my studio" -- and that sentence is on the page
+verbatim, in bold, as the first thing in its section. The heading states the
+rule outright rather than saying "Under 18", because this is a condition of
+booking and not only a statement about data. The generated document it
+replaces set the age at 13, which is that generator's default and wrong for a
+boudoir studio by a distance. AGE_RULE is a guarded figure now, like every
+other figure on this project: the build fails if her sentence goes missing.
+
+IT IS STATED IN EXACTLY ONE PLACE ON THE SITE, WHICH IS THIS PAGE. Nothing in
+the FAQ, the Session Guide, /contact or /inquire says it. A booking
+requirement a woman only meets if she opens the privacy policy is badly
+placed, and the FAQ is where it belongs -- but the FAQ is Jessica's copy and
+adding a question to it is her call, not a gap to quietly fill.
 
 I am not a lawyer and this is not legal advice. What it is, is accurate --
 which the document it replaces is not.
@@ -49,6 +60,8 @@ ROOT = pathlib.Path(__file__).resolve().parent
 src = (ROOT / "scalogy-portfolio.html").read_text()
 
 UPDATED = "26 September 2026"
+# Jessica's own sentence, 26 September. A booking rule, not just a data one.
+AGE_RULE = "You must be 18 years of age or older to book with my studio."
 STUDIO = "JHP Boudoir"
 ADDRESS = "11811 Main Street, Centertown, MO 65023"
 EMAIL = "jessica@jhpboudoir.com"
@@ -319,11 +332,11 @@ BODY = """
     unsubscribed, so the unsubscribe holds, and anything my accountant needs
     for a session you actually paid for. I will tell you if that applies.</p>
 
-  <h2>Under 18</h2>
-  <p>This studio photographs adults. This website is not for anyone under 18
-    and I do not knowingly collect anything from anyone under 18. If you
-    believe a child has sent me something through this site, email me and I
-    will delete it.</p>
+  <h2>You Must Be 18 or Older</h2>
+  <p><b>You must be 18 years of age or older to book with my studio.</b> This
+    website is not for anyone under 18 and I do not knowingly collect anything
+    from anyone under 18. If you believe a child has sent me something through
+    this site, email me and I will delete it.</p>
 
   <h2>Changes to This Policy</h2>
   <p>If this changes, the new version goes up on this page and the date at the
@@ -390,6 +403,12 @@ def check(out):
         if phrase.lower() not in " ".join(contact.split()).lower():
             fails.append(f'the /contact disclosure no longer says {phrase!r}, '
                          f'which this page states as a promise')
+
+    # Her age rule, verbatim. A booking requirement that exists in exactly one
+    # place on the whole site is one edit away from existing nowhere.
+    if AGE_RULE not in BODY:
+        fails.append('the page no longer states Jessica\'s own wording for '
+                     'the booking age requirement')
 
     # The email section promises an unsubscribe link that works.
     ea = ROOT / "scripts" / "email_actions.py"

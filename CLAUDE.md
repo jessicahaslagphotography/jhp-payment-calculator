@@ -292,15 +292,25 @@ tappable target on a phone without moving anything below it. **The bundle
 build fails if any page loses that link** -- a privacy policy nobody can
 reach is not a privacy policy, and that link is the only route to it.
 
-**TWO THINGS ARE MARKED ASK in the generator and are Jessica's to confirm:**
+**ONE THING IS STILL MARKED ASK: retention.** No period is written down
+anywhere in this project, so the page says what is true -- kept while it is
+doing the job it was given, and deleted on request -- rather than a number
+nobody has set.
 
-- **Retention.** No period is written down anywhere in this project, so the
-  page says what is true -- kept while it is doing the job it was given, and
-  deleted on request -- rather than a number nobody has set.
-- **The 18+ line.** Nothing on the site states an age requirement. Boudoir is
-  plainly adults-only and "18 or over" is the safe and ordinary wording, but
-  it is an assertion the page makes on her behalf. The generated document it
-  replaces said **13**, which is that generator's default and wrong here.
+**THE AGE IS SETTLED AND IT IS A BOOKING RULE, NOT A DATA STATEMENT.** Jessica,
+26 September: *"You must be 18 years of age or older to book with my studio."*
+That sentence is on the page verbatim and in bold as the first thing in its
+section, and the heading is **You Must Be 18 or Older** rather than "Under 18"
+because it states a condition of booking. It is a guarded figure now like
+every other figure here -- `AGE_RULE` in `build-privacy.py`, and the build
+fails if the sentence goes missing. The generated document it replaces set the
+age at **13**, which is that generator's default.
+
+**IT IS STATED IN EXACTLY ONE PLACE ON THE SITE, WHICH IS THE PRIVACY POLICY.**
+Nothing in the FAQ, the Session Guide, `/contact` or `/inquire` says it. A
+booking requirement a woman only meets if she opens the privacy policy is
+badly placed, and the FAQ is where it belongs -- but the FAQ is her copy and
+adding a question to it is her call, not a gap to quietly fill.
 
 The counts moved: **ten templates and twenty-one pages**, from nine and
 twenty. Count them rather than trusting this sentence.
