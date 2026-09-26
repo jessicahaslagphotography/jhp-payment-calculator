@@ -49,3 +49,16 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Cache-Control = "public, max-age=0, must-revalidate"
+
+# RESPONSIVE IMAGES COME FROM NETLIFY, BECAUSE THEY CANNOT COME FROM THE CDN.
+# Every photograph on this site is served from GoHighLevel's media CDN, and
+# that CDN ignores resize parameters -- ?width=600, ?w=600&q=75 and the plain
+# URL all return the same 689,704 bytes with the same etag, checked
+# 26 September. So a 1600px frame was being sent to a 390px phone with no way
+# to ask for anything smaller, which is the page-speed problem on this site.
+#
+# Netlify's image CDN can resize a REMOTE image, but only from hosts named
+# here -- without this allowlist /.netlify/images returns a 400 and every
+# photograph on the site disappears. Add a host here before referencing it.
+[images]
+  remote_images = ["https://assets\\.cdn\\.filesafe\\.space/.*"]
