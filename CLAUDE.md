@@ -750,6 +750,23 @@ Still to do, roughly in order of what it is worth:
   change an email already going out. **The JHP Boudoir logo header was already
   on every email** -- `_wrap_html` puts it there -- and the render probe now
   fails if it goes missing.
+  **Every email ends on the Instagram sign-off, and it is an INLINE LINK ON
+  PURPOSE.** `INSTAGRAM` in the builder is appended by `body_of()`, so no email
+  can be missed and the wording lives in one place. A standalone link on its own
+  line is what `_md_to_html` turns into a centred gold CTA, and a second gold
+  button under Book My Call competes with the only ask these emails have -- so
+  it is a sentence with the handle in it, under an `<hr>`, after the sign-off.
+  The render probe fails if it ever renders with a `background`, if it is not
+  the last thing in the body, or if the rule above it goes missing. The handle
+  is **`@jhpboudoir_`** -- the trailing underscore is part of it, and the same
+  URL is in six of the site's own footers.
+  **Paying in full is an option, and that had to change three emails, not one.**
+  Jessica said so on 26 September about the welcome email. Messages 5 and 7
+  both said a Collection **is bought on** a prepayment plan, which reads as
+  compulsory and contradicts message 1 the moment paying in full is offered, so
+  all three now say a Collection **can go on** one. The plan terms themselves
+  did not move: still interest free, still weekly/biweekly/monthly, still set
+  up within 7 days with the first payment due within 30.
   **The previews are the real render, at `/email-previews-2027`.**
   `build-email-previews` runs the eight through the same two functions a live
   send uses and stores the HTML in `email_previews`; the page drops each one in

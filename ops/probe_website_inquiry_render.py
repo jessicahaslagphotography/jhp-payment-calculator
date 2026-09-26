@@ -19,6 +19,8 @@ database and obvious in somebody's inbox:
     native size and the 600px card comes apart
   * the eight photographs are eight different frames, and every email keeps
     the JHP Boudoir logo header
+  * every email ends on the Instagram sign-off, as an INLINE link under a rule
+    and never as a second gold button competing with "Book my call"
 
 Run it after any edit to the copy, to the runner's merge fields, or to the
 markdown renderer.
@@ -48,6 +50,7 @@ CTX = {
 }
 
 PART_ANCHORS = ('begin', 'worries', 'works', 'investment')
+IG = 'https://www.instagram.com/jhpboudoir_'
 # The card is 600px with 32px of padding either side.
 IMG_WIDTH = '536'
 
@@ -112,6 +115,20 @@ def main():
                 frames[frame] = t
         # A logo header on every email, which is what makes them hers.
         check('alt="JHP Boudoir"' in html, f'{t}: the logo header is missing')
+
+        # The Instagram sign-off: present, last, under a rule, and NOT a button.
+        check(IG in html, f'{t}: the Instagram sign-off is missing')
+        check('<hr' in html, f'{t}: the Instagram sign-off has no rule above it')
+        ig_a = re.findall(r'<a [^>]*' + re.escape(IG) + r'[^>]*>', html)
+        check(len(ig_a) == 1, f'{t}: {len(ig_a)} Instagram link(s), expected 1')
+        if ig_a:
+            check('background' not in ig_a[0],
+                  f'{t}: the Instagram link rendered as a gold button -- it must '
+                  f'stay inline so it does not compete with Book my call')
+        check(html.rstrip().endswith('</table></div>'),
+              f'{t}: the email does not end inside the branded container')
+        check(body.rstrip().endswith(IG + ')'),
+              f'{t}: the Instagram sign-off is not the last thing in the body')
 
         if include_lines:
             check(include_lines == 6,

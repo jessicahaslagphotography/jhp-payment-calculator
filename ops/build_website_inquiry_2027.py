@@ -120,6 +120,24 @@ FRAMES = {
 }
 
 
+# The Instagram sign-off, on all eight. Jessica's ask, 26 September.
+#
+# DELIBERATELY AN INLINE LINK AND NOT A BUTTON. A standalone link on its own
+# line is what _md_to_html turns into a centred gold CTA, and a second gold
+# button under "Book my call" would compete with the only ask that matters in
+# these emails. This is a quiet secondary action, under a rule, after the
+# sign-off -- a footer, not a second request.
+#
+# The handle is @jhpboudoir_ (the trailing underscore is part of it) and the
+# wording matches the home page's own "Follow on Instagram".
+INSTAGRAM = (
+    "---\n\n"
+    "**Come find me on Instagram** — new work, a look behind the scenes, and "
+    "the occasional reveal I am allowed to share: "
+    "[@jhpboudoir_](https://www.instagram.com/jhpboudoir_)"
+)
+
+
 def photo(target):
     """The markdown image line for an email.
 
@@ -174,7 +192,7 @@ Your boudoir experience includes:
 
 """ + INCLUDES + """
 
-**And you never pay for it all at once.** Your images and products are purchased separately from the session fee, and every Collection is bought on an **interest-free prepayment plan** — weekly, biweekly or monthly, whichever suits you. You can also book your session **up to 15 months in advance**, so your plan spreads across as many payments as you need to keep the amount manageable.
+**You do not have to pay for it all at once.** Your images and products are purchased separately from the session fee, and every Collection can go on an **interest-free prepayment plan** — weekly, biweekly or monthly, whichever suits you. Would you rather pay in full? You are very welcome to do that instead. And you can book your session **up to 15 months in advance**, so a plan spreads across as many payments as you need to keep the amount manageable.
 
 **Ready to chat?** Grab a time and bring every question you have — the practical ones and the nervous ones. No pressure and no obligation. \U0001f5a4
 
@@ -306,7 +324,7 @@ And I would much rather you knew what this costs before we talk than after. So, 
 
 **Got a little sticker shock?** Totally get it. Most of my clients feel that way at first. \U0001f64c
 
-Here is the good news: you do not pay for it all at once. Every Collection is bought on an **interest-free prepayment plan** — weekly, biweekly or monthly, whichever suits you. Your plan is set up within 7 days of booking, and your first payment is due within 30 days.
+Here is the good news: you do not have to pay for it all at once. Every Collection can go on an **interest-free prepayment plan** — weekly, biweekly or monthly, whichever suits you — or you can pay in full if you would rather. A plan is set up within 7 days of booking, and your first payment is due within 30 days.
 
 And you can book your session **up to 15 months in advance**, which matters more than it sounds. The further out your date, the more payments your plan spreads across — and that is what keeps the amount manageable for most women.
 
@@ -372,7 +390,7 @@ In case it helps to see it again, here is what your experience includes:
 
 @@PHOTO@@
 
-And you never pay for it all at once. Every Collection is bought on an **interest-free prepayment plan** — weekly, biweekly or monthly, set up within 7 days of booking, with your first payment due within 30 days. You can book your session **up to 15 months in advance**, too, so your plan spreads across as many payments as you need to keep the amount manageable.
+And you do not have to pay for it all at once. Every Collection can go on an **interest-free prepayment plan** — weekly, biweekly or monthly, set up within 7 days of booking, with your first payment due within 30 days — or you can pay in full if you would rather. You can book your session **up to 15 months in advance**, too, so a plan spreads across as many payments as you need to keep the amount manageable.
 
 You have been thinking about this for three months, {{contact.first_name}}. Let's do it!
 
@@ -385,7 +403,7 @@ No obligation, just a conversation.
 
 Your experience includes the studio, hair and makeup at a local salon beforehand, the full wardrobe - 160 pieces, XS to 4X - your session with me posing you head to pointed toe, retouching, and your private image reveal and ordering appointment.
 
-And you never pay for it all at once. Every Collection is on an interest-free prepayment plan - weekly, biweekly or monthly. You can book up to 15 months out, so the amount stays manageable.
+And you do not have to pay for it all at once. Every Collection can go on an interest-free prepayment plan - weekly, biweekly or monthly - or you can pay in full if you would rather. You can book up to 15 months out, so the amount stays manageable.
 
 You have thought about it. Let's do it! Book a no-obligation call: {{calendar_url}}
 
@@ -464,7 +482,8 @@ def body_of(step):
     is named, and so check(), main() and the render probe cannot disagree about
     what was installed.
     """
-    return step['body'].replace('@@PHOTO@@', photo(step['target']))
+    return (step['body'].replace('@@PHOTO@@', photo(step['target']))
+            + '\n\n' + INSTAGRAM)
 
 
 def check():

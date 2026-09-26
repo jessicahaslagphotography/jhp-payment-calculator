@@ -147,11 +147,12 @@ straight answer in the body.
 > - ✨ Expert posing and expression guidance
 > - ✨ Retouching, and your private image reveal and ordering appointment
 >
-> **And you never pay for it all at once.** Your images and products are
-> purchased separately from the session fee, and every Collection is bought
-> on an **interest-free prepayment plan** — weekly, biweekly or monthly,
-> whichever suits you. You can also book your session **up to 15 months in
-> advance**, so your plan spreads across as many payments as you need to keep
+> **You do not have to pay for it all at once.** Your images and products are
+> purchased separately from the session fee, and every Collection can go on
+> an **interest-free prepayment plan** — weekly, biweekly or monthly,
+> whichever suits you. Would you rather pay in full? You are very welcome to
+> do that instead. And you can book your session **up to 15 months in
+> advance**, so a plan spreads across as many payments as you need to keep
 > the amount manageable.
 >
 > **Ready to chat?** Grab a time and bring every question you have — the
@@ -351,10 +352,11 @@ thank-you and the compliance line.*
 > **Got a little sticker shock?** Totally get it. Most of my clients feel
 > that way at first. 🙌
 >
-> Here is the good news: you do not pay for it all at once. Every Collection
-> is bought on an **interest-free prepayment plan** — weekly, biweekly or
-> monthly, whichever suits you. Your plan is set up within 7 days of
-> booking, and your first payment is due within 30 days.
+> Here is the good news: you do not have to pay for it all at once. Every
+> Collection can go on an **interest-free prepayment plan** — weekly,
+> biweekly or monthly, whichever suits you — or you can pay in full if you
+> would rather. A plan is set up within 7 days of booking, and your first
+> payment is due within 30 days.
 >
 > And you can book your session **up to 15 months in advance**, which matters
 > more than it sounds. The further out your date, the more payments your plan
@@ -455,11 +457,12 @@ thank-you and the compliance line.*
 > - ✨ Expert posing and expression guidance
 > - ✨ Retouching, and your private image reveal and ordering appointment
 >
-> And you never pay for it all at once. Every Collection is bought on an
-> **interest-free prepayment plan** — weekly, biweekly or monthly, set up
-> within 7 days of booking, with your first payment due within 30 days. You
-> can book your session **up to 15 months in advance**, too, so your plan
-> spreads across as many payments as you need to keep the amount manageable.
+> And you do not have to pay for it all at once. Every Collection can go on
+> an **interest-free prepayment plan** — weekly, biweekly or monthly, set up
+> within 7 days of booking, with your first payment due within 30 days — or
+> you can pay in full if you would rather. You can book your session **up to
+> 15 months in advance**, too, so a plan spreads across as many payments as
+> you need to keep the amount manageable.
 >
 > You have been thinking about this for three months, {{contact.first_name}}.
 > Let's do it!
@@ -478,9 +481,10 @@ thank-you and the compliance line.*
 > me posing you head to pointed toe, retouching, and your private image
 > reveal and ordering appointment.
 >
-> And you never pay for it all at once. Every Collection is on an
-> interest-free prepayment plan — weekly, biweekly or monthly. You can book
-> up to 15 months out, so the amount stays manageable.
+> And you do not have to pay for it all at once. Every Collection can go on
+> an interest-free prepayment plan — weekly, biweekly or monthly — or you can
+> pay in full if you would rather. You can book up to 15 months out, so the
+> amount stays manageable.
 >
 > You have thought about it. Let's do it! Book a no-obligation call:
 > [calendar]
@@ -523,6 +527,39 @@ thank-you and the compliance line.*
 > captures you.
 >
 > [calendar] — Jess
+
+---
+
+## What every email carries, on top of its own copy
+
+**The JHP Boudoir header.** It was already there — the same branded wrapper
+her other emails use puts the mark at the top of every one, on cream, in a
+600px white card.
+
+**One photograph, and all eight are different.** Every frame was already on
+the site, so every one has been judged at full size on the page it sits on:
+the /contact lead band on the welcome (the photograph she was looking at when
+she filled the form in), five of the Session Guide's own plates matched to
+what each email says, the guide's closing band on the three-month, and the
+guide's cover on the goodbye. **Nothing was newly chosen** — the image CDN is
+unreachable from the build sandbox, so a fresh frame would be a frame picked
+blind, which is exactly what the guide's hero picker exists to avoid.
+
+**The Instagram sign-off**, under a rule, after "— Jess":
+
+> **Come find me on Instagram** — new work, a look behind the scenes, and the
+> occasional reveal I am allowed to share: [@jhpboudoir_]
+
+It is an **inline link and not a button** on purpose. A second gold button
+under Book My Call competes with the one ask that matters, and every email
+here already has one. This is a footer, not a second request. ("The
+occasional reveal I am allowed to share" is also true to the rule that a
+client is never required to share her images.)
+
+**Where to read them:** `pages.scalogy.com/jhpboudoir1/email-previews-2027/`
+— all eight, with the text beside each. Those are the real render, not
+mock-ups: the same code a live send uses, so the page cannot drift from what
+actually arrives.
 
 ---
 
