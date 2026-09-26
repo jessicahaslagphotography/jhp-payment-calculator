@@ -70,6 +70,9 @@ PAGES = [
     ('scalogy-contact.html',    'contact',     'contact',      0.9),
     ('scalogy-inquire.html',    'inquire',     'inquire',      0.6),
     ('scalogy-guide.html',      'session-guide', 'session-guide', 0.7),
+    # Same path the old Showit site serves, deliberately: every existing link
+    # to it keeps working and it needs no redirect.
+    ('scalogy-privacy.html',    'privacy-policy', 'privacy-policy', 0.2),
 ]
 GALLERY_TPL = 'scalogy-gallery.html'
 GALLERY_PRIORITY = 0.5
@@ -255,7 +258,7 @@ def redirects(blog_url):
                                   that page's content became.
         /specialty-sessions   -> treehouse subdomain   the Treehouse page,
                                   which stays on Scalogy under its own domain
-        /privacy-policy       -> NOTHING. See below.
+        /privacy-policy       -> /privacy-policy/   SAME PATH, on purpose
         /blog/, /YYYY/MM/DD/  -> --blog-url, when there is one
 
     The first five need no rule: the bundle has a directory of that name and
@@ -263,13 +266,14 @@ def redirects(blog_url):
     old site's map and a reader should not have to work out which lines are
     missing on purpose.
 
-    **/privacy-policy HAS NO EQUIVALENT AND IS DELIBERATELY NOT REDIRECTED.**
-    The old site has one and the new site does not, which is a regression
-    rather than an omission: /contact and /inquire both collect a name, email
-    and phone, and /contact now also takes an SMS consent that names a
-    disclosure. Pointing it at /contact or the FAQ would be worse than a 404 --
-    it would answer a question about data handling with a booking form. It
-    wants a real page, and that is Jessica's to approve.
+    **/privacy-policy IS NOW A REAL PAGE AND KEEPS ITS OLD PATH.** The old
+    site's version is a stub whose whole content is "Click here to read our
+    privacy policy" over a link to a generated document on privacypolicies.com
+    -- one that describes this studio's parent company, affiliates and joint
+    venture partners, none of which exist, and says nothing about text
+    messages. It is replaced by build-privacy.py, written from what the site
+    actually does. Keeping the path means every existing link to it still
+    resolves and no rule is needed here at all.
     """
     out = ['# The old Showit site, crawled 26 September 2026. See redirects()',
            '# in deploy-site.py for the full map and for what is missing.',
@@ -319,8 +323,8 @@ def check(site, blog_url, launch):
     nobody visits, and on the real domain it 404s in front of a client.
     """
     files = sorted(OUT.rglob('*.html'))
-    if len(files) != 20:
-        fail('the bundle has %d pages, expected 20' % len(files))
+    if len(files) != 21:
+        fail('the bundle has %d pages, expected 21' % len(files))
 
     for f in files:
         rel = f.relative_to(OUT)
@@ -347,6 +351,11 @@ def check(site, blog_url, launch):
             fail('%s: %d h1 elements, expected exactly 1' % (where, len(h1s)))
         if 'class="jhp-navd"' not in html:
             fail('%s: no <details class="jhp-navd"> -- the phone nav is gone' % where)
+        # A privacy policy nobody can reach is not a privacy policy. It is
+        # linked from the copyright line of all twenty-one footers and that
+        # is the only route to it, so losing the link loses the page.
+        if 'href="/privacy-policy/"' not in html and where != '/privacy-policy':
+            fail('%s: the footer has lost its privacy policy link' % where)
 
         canon = re.search(r'<link rel="canonical" href="([^"]+)"', html)
         want = site + '/' + (str(rel.parent) + '/' if str(rel.parent) != '.' else '')
@@ -385,8 +394,8 @@ def check(site, blog_url, launch):
 
     sm = (OUT / 'sitemap.xml').read_text(encoding='utf-8')
     locs = re.findall(r'<loc>([^<]+)</loc>', sm)
-    if len(locs) != 20:
-        fail('the sitemap lists %d URLs, expected 20' % len(locs))
+    if len(locs) != 21:
+        fail('the sitemap lists %d URLs, expected 21' % len(locs))
     for loc in locs:
         p = loc[len(site):].lstrip('/')
         if not (OUT / (p + 'index.html' if p.endswith('/') or not p else p)).exists():
@@ -419,7 +428,7 @@ def main():
     print('%d pages, %s, %.0f KB -> %s'
           % (len(urls), site, total / 1024, OUT.relative_to(ROOT)))
     if not a.blog_url:
-        notes.append('The dead /blog link was dropped from all nine footers. '
+        notes.append('The dead /blog link was dropped from every footer in the bundle. '
                      'Pass --blog-url once the blog has somewhere to live.')
     notes.append('The wordmark now points at / and Specialty Sessions at %s '
                  '(her own live custom domain for that page).' % TREEHOUSE)

@@ -231,6 +231,15 @@
   font-size:11px;letter-spacing:.24em;text-transform:uppercase}
 .jhp-home .jhp-foot .fc{font-family:var(--sans);font-size:12px;color:var(--dim);
   letter-spacing:.04em;margin:0}
+/* The privacy link sits in the copyright line rather than in .ftnav above:
+   the nav's eight items are a reading order and a legal link is not a place
+   to explore. The vertical padding gives a 12px link a tappable target on a
+   phone and the matching negative margin keeps the line box the height it
+   already was, so nothing below it moves. */
+.jhp-home .jhp-foot .fc a{display:inline-block;padding:11px 6px;
+  margin:-11px 0;color:var(--dim);border-bottom:1px solid transparent;
+  transition:color .3s,border-color .3s}
+.jhp-home .jhp-foot .fc a:hover{color:var(--gold);border-color:var(--line)}
 
 .jhp-home .jhp-foot .social{display:flex;gap:12px;flex-wrap:wrap;
   align-items:center;justify-content:center;margin-top:20px}
@@ -564,6 +573,31 @@
    visitor has touched it, which is a telling-off for arriving. */
 .jhp-home .jhp-ask-form input:not(:placeholder-shown):invalid{
   border-color:#B4614B}
+/* The SMS consent row. Same rules as /inquire's acknowledgment, deliberately --
+   the two forms are one system and a checkbox that looks different on the
+   second one reads as a different kind of question. A row rather than a block
+   so the box sits on the first line of its own sentence at any width, and the
+   whole thing is a <label>, so the sentence is the tap target as well: 17px of
+   checkbox is not something to ask a thumb to find.
+   NOT `required`. The guide arrives by email, so declining to be texted must
+   cost her nothing and cost Jessica nothing -- which is also why there is no
+   :user-invalid rule here. Nothing about this box can fail validation. */
+.jhp-home .jhp-ask-form .ack{display:flex;align-items:flex-start;gap:12px;
+  margin:20px 0 0;padding:16px 18px;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line);border-radius:2px;
+  transition:border-color .3s}
+.jhp-home .jhp-ask-form .ack:hover{border-color:var(--gold)}
+.jhp-home .jhp-ask-form .ack input{display:block;flex:0 0 auto;width:17px;
+  height:17px;margin:2px 0 0;padding:0;accent-color:var(--gold);cursor:pointer;
+  background:none;border:0}
+.jhp-home .jhp-ask-form .ack input:hover{border:0}
+.jhp-home .jhp-ask-form .ack span{font-family:var(--sans);font-weight:300;
+  font-size:14px;line-height:1.6;color:var(--muted)}
+.jhp-home .jhp-ask-form .ack input:focus-visible{
+  outline:2px solid var(--gold-bright);outline-offset:3px}
+.jhp-home .jhp-ask-form .ack .opt{display:inline-block;font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+  margin-left:6px;font-weight:400}
 .jhp-home .jhp-ask-form .go{margin-top:24px;text-align:center}
 .jhp-home .jhp-ask-form .go .jhp-btn{width:100%;max-width:340px}
 .jhp-home .jhp-ask-form .note{margin:18px 0 0;font-family:var(--sans);
@@ -1001,7 +1035,7 @@
         <li><a href="../contact/">Book a Call</a></li>
       </ul>
     </nav>
-    <p class="fc">&copy; 2026 JHP Boudoir &nbsp;&middot;&nbsp; Jefferson City, Missouri</p>
+    <p class="fc">&copy; 2026 JHP Boudoir &nbsp;&middot;&nbsp; Jefferson City, Missouri &nbsp;&middot;&nbsp; <a href="../privacy-policy/">Privacy Policy</a></p>
   </div>
 </footer>
 </div>

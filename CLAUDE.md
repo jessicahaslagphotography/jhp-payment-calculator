@@ -241,6 +241,70 @@ Still to do, roughly in order of what it is worth:
    consistency matters, so this needs settling -- and it is Jessica's to
    settle, not a find-and-replace.
 
+## The privacy policy is a real page now, and it replaces a stub
+
+`/privacy-policy`, template `jhp-privacy-2026`, generator `build-privacy.py`.
+
+**THE OLD ONE IS A STUB AND WAS NOT PORTED.** The Showit site has the page,
+and the whole of its content is the sentence *"Click here to read our privacy
+policy"* over a link to a generated document on `privacypolicies.com`. That
+document describes this studio's **parent company**, its **affiliates**, its
+**joint venture partners** and **"signing in to Your Account"** -- none of
+which exist -- and says **nothing at all about text messages**, which is the
+one genuinely new thing this site collects and the one with damages attached.
+Copying it across would have carried all of that over. It is written instead
+from what the site actually does, which is knowable to the byte: the two
+forms are in `build-contact.py` and `build-inquiry.py`, the destinations are
+in `scripts/site_leads_ingest.py` and the Scalogy workflows, the SMS gate is
+`sms_blocked_reason()` and the opt-out is `email_unsubscribe_ingest.py`.
+
+**THE PATH IS UNCHANGED ON PURPOSE.** `/privacy-policy` is what the old site
+serves, so every existing link to it resolves and `_redirects` needs no rule.
+That is also why it is not `/privacy`.
+
+**"No cookies, no analytics, no tracking" is CHECKED, not asserted.** The
+build greps all nine public page files for `gtag(`, `fbq(`, Tag Manager,
+Hotjar, Clarity, `document.cookie`, `localStorage` and `sessionStorage`, and
+refuses to write the page if any of them appears -- because the claim would
+then be a false statement in a privacy policy rather than a stale sentence.
+It also fails if the `/contact` SMS box loses its name, **becomes required**,
+or drops a phrase of its disclosure; if `UNSUB_BASE` disappears from
+`email_actions.py`; if the postal address stops matching the email footer's;
+or if the quiet hours it states stop matching `SMS_QUIET_START`/`_END`.
+**And it checks every CSS token PAGE_CSS uses exists in the sliced system** --
+the first draft reached for `--body` and `--rule`, which are not tokens here,
+and an undefined `var()` would have drawn the text in the browser's default
+colour on a near-black page. The real ones are `--muted` for body copy,
+`--ink` for bold, `--line` for hairlines and `--dim` for the smallest labels.
+
+**It carries no photograph**, which is the one page on the site where that is
+right twice over: a legal page should open on the words, and a frame chosen
+from this sandbox is a frame chosen blind. The prose is the FAQ's answer
+setting to the character -- sans, weight 300, 16.5px on 1.8, `--muted`, gold
+links on a `--line` underline -- because that is the site's long-reading
+style and a second one would be a second thing to keep in step.
+
+**THE LINK IS IN THE COPYRIGHT LINE, NOT THE FOOTER NAV.** `.ftnav`'s eight
+items are a reading order Jessica set and a legal link is not a place to
+explore, so it goes in `.fc` beside the city. `.fc a` takes
+`padding:11px 6px` with a matching negative margin, which gives a 12px link a
+tappable target on a phone without moving anything below it. **The bundle
+build fails if any page loses that link** -- a privacy policy nobody can
+reach is not a privacy policy, and that link is the only route to it.
+
+**TWO THINGS ARE MARKED ASK in the generator and are Jessica's to confirm:**
+
+- **Retention.** No period is written down anywhere in this project, so the
+  page says what is true -- kept while it is doing the job it was given, and
+  deleted on request -- rather than a number nobody has set.
+- **The 18+ line.** Nothing on the site states an age requirement. Boudoir is
+  plainly adults-only and "18 or over" is the safe and ordinary wording, but
+  it is an assertion the page makes on her behalf. The generated document it
+  replaces said **13**, which is that generator's default and wrong here.
+
+The counts moved: **ten templates and twenty-one pages**, from nine and
+twenty. Count them rather than trusting this sentence.
+
 ## Launch: the site goes out as a static bundle, and the switch is one flag
 
 **SCALOGY BINDS A CUSTOM DOMAIN TO ONE PAGE, NOT A TENANT.** Their docs say so
@@ -1050,10 +1114,10 @@ launch does *not* fix are in `launch-plan.md`.
 - **Changing the footer means twenty pages, not nine.** The footer lives
   in `scalogy-home.html` and `scalogy-about.html` by hand and in
   `scalogy-portfolio.html` for everything sliced from it, so a footer edit
-  is three files plus a rebuild -- and then **nine** templates to patch and
-  **twenty** pages to render, because the twelve galleries all share
+  is three files plus a rebuild -- and then **ten** templates to patch and
+  **twenty-one** pages to render, because the twelve galleries all share
   `jhp-gallery-2026`. It was seven and eighteen before `/inquire`, eight and
-  nineteen before `/session-guide`;
+  nineteen before `/session-guide`, nine and twenty before `/privacy-policy`;
   the count moves every time a page is added, so count it rather than
   trusting this sentence. THE GALLERIES RENDER FROM DATA: `pages_render` on one
   of them without its payload from `renders/<slug>.json` would publish an

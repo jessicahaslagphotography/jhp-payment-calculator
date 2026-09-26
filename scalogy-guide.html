@@ -231,6 +231,15 @@
   font-size:11px;letter-spacing:.24em;text-transform:uppercase}
 .jhp-home .jhp-foot .fc{font-family:var(--sans);font-size:12px;color:var(--dim);
   letter-spacing:.04em;margin:0}
+/* The privacy link sits in the copyright line rather than in .ftnav above:
+   the nav's eight items are a reading order and a legal link is not a place
+   to explore. The vertical padding gives a 12px link a tappable target on a
+   phone and the matching negative margin keeps the line box the height it
+   already was, so nothing below it moves. */
+.jhp-home .jhp-foot .fc a{display:inline-block;padding:11px 6px;
+  margin:-11px 0;color:var(--dim);border-bottom:1px solid transparent;
+  transition:color .3s,border-color .3s}
+.jhp-home .jhp-foot .fc a:hover{color:var(--gold);border-color:var(--line)}
 
 .jhp-home .jhp-foot .social{display:flex;gap:12px;flex-wrap:wrap;
   align-items:center;justify-content:center;margin-top:20px}
@@ -1455,7 +1464,7 @@
         <li><a href="../contact/">Book a Call</a></li>
       </ul>
     </nav>
-    <p class="fc">&copy; 2026 JHP Boudoir &nbsp;&middot;&nbsp; Jefferson City, Missouri</p>
+    <p class="fc">&copy; 2026 JHP Boudoir &nbsp;&middot;&nbsp; Jefferson City, Missouri &nbsp;&middot;&nbsp; <a href="../privacy-policy/">Privacy Policy</a></p>
   </div>
 </footer>
 </div>
