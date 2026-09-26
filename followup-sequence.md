@@ -556,6 +556,28 @@ here already has one. This is a footer, not a second request. ("The
 occasional reveal I am allowed to share" is also true to the rule that a
 client is never required to share her images.)
 
+**The legal footer**, under its own rule at the very bottom: why she is
+getting it, the studio name and postal address, and a real unsubscribe link.
+
+> You are getting this because you asked for the Session Guide at
+> jhpboudoir.com.
+>
+> **JHP Boudoir**
+> 11811 Main Street, Centertown, MO 65023
+>
+> [Unsubscribe from these emails]
+
+That link is a working one-click opt-out, not a line of text: it records the
+request, switches the contact's email off in GoHighLevel, and stops any
+sequence they are in. It asks for one tap on the page rather than acting on
+the click itself, because some email apps open links on a reader's behalf and
+would otherwise unsubscribe people who never asked.
+
+**Only these marketing emails carry it.** Session confirmations, contracts
+and image reveals do not, and that is on purpose — GoHighLevel's email
+opt-out is account-wide, so a booked client who used it would stop receiving
+her own session emails too.
+
 **Where to read them:** `pages.scalogy.com/jhpboudoir1/email-previews-2027/`
 — all eight, with the text beside each. Those are the real render, not
 mock-ups: the same code a live send uses, so the page cannot drift from what

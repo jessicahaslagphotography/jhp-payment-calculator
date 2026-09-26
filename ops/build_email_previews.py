@@ -34,6 +34,10 @@ log = logging.getLogger('build_email_previews')
 # client would see them addressed, and deliberately example.com so nothing here
 # could ever be mistaken for a real address.
 CTX = {
+    # Marks this a marketing send, which is what makes email_actions attach the
+    # CAN-SPAM footer. Without it the preview would quietly stop matching what
+    # actually goes out, which is the one thing this page exists to prevent.
+    'workflow': 'website_inquiry_2027',
     'contact': {'id': 'preview', 'name': 'Jessica Haslag',
                 'first_name': 'Jessica', 'email': 'jessica@example.com',
                 'phone': '(573) 555-0100'},
@@ -77,7 +81,7 @@ def main():
                 subject = wr.render_text(s['subject'], CTX, cfg)
                 body = wr.render_text(raw, CTX, cfg)
                 sms = wr.render_text(s['sms'], CTX, cfg)
-                html = ea._md_to_html(body)
+                html = ea._md_to_html(body, ea._legal_footer_html(CTX))
                 frame = b.FRAMES[s['target']][0]
                 if 'alt="JHP Boudoir"' not in html:
                     raise SystemExit(f"{s['target']}: the logo header is missing "
@@ -85,6 +89,10 @@ def main():
                 if f'media/{frame}' not in html:
                     raise SystemExit(f"{s['target']}: frame {frame[:8]} is not in "
                                      f"the render")
+                if ea.STUDIO_ADDRESS not in html or 'unsubscribe/?c=' not in html:
+                    raise SystemExit(f"{s['target']}: the compliance footer is "
+                                     f"missing -- is the workflow name still in "
+                                     f"email_actions.MARKETING_WORKFLOWS?")
                 cur.execute(
                     "INSERT INTO email_previews (workflow_name, step_position, target, "
                     " label, timing, subject, email_html, sms_text, sms_armed, frame) "

@@ -42,6 +42,10 @@ CAL = ('https://api.leadconnectorhq.com/widget/booking/mi2EqYRq4gGEbBJHe82b'
        '?first_name=Jessica&last_name=Haslag&email=j%40example.com&phone=5735550100')
 
 CTX = {
+    # The workflow name is what tells email_actions this is a marketing send and
+    # so must carry the CAN-SPAM footer. Wrong name here and the probe would
+    # pass while the real emails went out without it.
+    'workflow': 'website_inquiry_2027',
     'contact': {'id': 'ghl_fake', 'name': 'Jessica Haslag',
                 'first_name': 'Jessica', 'email': 'j@example.com',
                 'phone': '5735550100'},
@@ -73,7 +77,7 @@ def main():
         subj = wr.render_text(s['subject'], CTX, cfg)
         body = wr.render_text(raw, CTX, cfg)
         sms = wr.render_text(s['sms'], CTX, cfg)
-        html = ea._md_to_html(body)
+        html = ea._md_to_html(body, ea._legal_footer_html(CTX))
         t = s['target']
 
         check('{{' not in subj + body + sms, f'{t}: an unrendered {{{{token}}}} survived')
@@ -127,6 +131,19 @@ def main():
                   f'stay inline so it does not compete with Book my call')
         check(html.rstrip().endswith('</table></div>'),
               f'{t}: the email does not end inside the branded container')
+
+        # The compliance footer: the address, the reason, and a working opt-out.
+        check(ea.STUDIO_ADDRESS in html, f'{t}: the postal address is missing')
+        check(ea.STUDIO_NAME in html, f'{t}: the studio name is missing')
+        check('unsubscribe/?c=' in html,
+              f'{t}: the unsubscribe link is missing or carries no contact id')
+        check('You are getting this because' in html,
+              f'{t}: the footer does not say why she is receiving it')
+        unsub_a = re.findall(r'<a [^>]*unsubscribe/[^>]*>', html)
+        check(len(unsub_a) == 1, f'{t}: {len(unsub_a)} unsubscribe link(s), expected 1')
+        if unsub_a:
+            check('background' not in unsub_a[0],
+                  f'{t}: the unsubscribe link rendered as a button')
         check(body.rstrip().endswith(IG + ')'),
               f'{t}: the Instagram sign-off is not the last thing in the body')
 

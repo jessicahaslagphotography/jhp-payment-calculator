@@ -767,6 +767,60 @@ Still to do, roughly in order of what it is worth:
   all three now say a Collection **can go on** one. The plan terms themselves
   did not move: still interest free, still weekly/biweekly/monthly, still set
   up within 7 days with the first payment due within 30.
+  **THE CAN-SPAM FOOTER, AND WHY IT IS NOT ON EVERY EMAIL.** Commercial email
+  needs an accurate sender, a physical postal address and a working opt-out.
+  Before 26 September **not one of the thirty-seven email steps on this tenant
+  carried either the address or an unsubscribe** -- not this sequence and not
+  the eight that were already live. The footer now sits inside the same branded
+  card, under a rule, in small grey type: why she is receiving it, the studio
+  name and address, and the unsubscribe link.
+
+        JHP Boudoir
+        11811 Main Street, Centertown, MO 65023     her own, given 26 September
+
+  **`MARKETING_WORKFLOWS` in `email_actions.py` is an ALLOWLIST and the default
+  is no footer.** That is a safety decision, not a legal shortcut.
+  Transactional and relationship email -- a session confirmation, a contract, an
+  image reveal -- is exempt from the opt-out requirement anyway, and inviting a
+  booked client to unsubscribe would be actively harmful: **GHL's Email DND is
+  ACCOUNT-WIDE**, so a client who used it would stop receiving her own session
+  emails too. A NEW MARKETING SEQUENCE MUST BE ADDED TO THAT SET or it ships
+  without a footer; the render probe catches it for this one.
+  **The three other prospect-facing sequences are still uncovered** --
+  `promo_inquiry_nurture`, `boudoir_giveaway_lead_capture` and
+  `referral_program` (which carries "a special offer just for you", so it is
+  marketing). Adding their names to the set is the whole change, but each one's
+  copy wants reading first and it edits live sequences, so it is a decision to
+  take rather than a line to add in passing.
+  **The unsubscribe is a real one-click opt-out, not a sentence.**
+  `/unsubscribe` -> webhook `email-unsubscribe` -> workflow
+  `email-unsubscribe-ingest`, which writes an `email_optouts` row **and commits
+  it before GHL is touched**, then sets Email DND (the flag the send path
+  already checks, so it is what actually stops the next email), then cancels
+  that contact's open enrollments so the sequence stops now rather than at the
+  next stopgate pass. `email_optouts` holds PII and must never be attached to an
+  app.
+  **IT IS A CLICK AND NOT AN ON-LOAD POST, deliberately.** Outlook Safe Links
+  and similar scanners prefetch URLs, and a GET-triggered opt-out unsubscribes
+  people who never asked. One page, one button, which is what the law actually
+  requires.
+  **The token is the GHL contact id**, a stated trade written out in the ingest
+  script: anyone holding an id can stop that contact's marketing email, the id
+  is opaque and appears nowhere public, and nothing transactional is affected.
+  An HMAC is the upgrade and needs a tenant secret that does not exist yet.
+  **`probe-unsubscribe` tests the whole chain** with a deliberately fake
+  contact: the webhook fires, the row lands, the GHL failure for a non-existent
+  contact is recorded rather than swallowed, and nobody else's enrollment moves.
+  It cleans up after itself. Run it after touching any part of that path -- a
+  lost opt-out is invisible otherwise, which is exactly the failure that gets a
+  domain blocklisted.
+  **`email_actions.py` and `workflow_runner.py` now carry four changes and are
+  still NOT mirrored in this repo.** The image width, the footer, and the
+  `guide_url`/`calendar_url`/`workflow` merge values all live only on Scalogy.
+  `verify-runner-syntax` byte-compiles them and exercises the merge fields; run
+  it after any edit. **Mirroring both into `scripts/` is worth doing** -- they
+  are the whole send path for nine live sequences and exist in exactly one
+  place.
   **The previews are the real render, at `/email-previews-2027`.**
   `build-email-previews` runs the eight through the same two functions a live
   send uses and stores the HTML in `email_previews`; the page drops each one in
