@@ -241,6 +241,82 @@ Still to do, roughly in order of what it is worth:
    consistency matters, so this needs settling -- and it is Jessica's to
    settle, not a find-and-replace.
 
+## Launch: the site goes out as a static bundle, and the switch is one flag
+
+**SCALOGY BINDS A CUSTOM DOMAIN TO ONE PAGE, NOT A TENANT.** Their docs say so
+and the way round it was tested and is shut: a page is a directory, but
+`/opt/scalogy/data/tenants/jhpboudoir1/web/` is the platform's and a tenant
+workflow gets `PermissionError` writing into it. So `jhpboudoir.com` on Scalogy
+could serve exactly one of the twenty pages, which is why the launch is a
+hosting decision and not a link edit.
+
+**`deploy-site.py` assembles `public/`** -- the eight `scalogy-*.html` pages
+flat at one segment each, plus the twelve galleries rendered from
+`renders/<slug>.json`, plus `sitemap.xml`, `robots.txt` and `_redirects`. It is
+what Netlify builds on each push; `netlify.toml` holds the build command and
+`requirements.txt` is Jinja2 and nothing else. `public/` is gitignored -- it is
+857KB of generated HTML and committing it would put every launch edit in the
+diff twice.
+
+**THE LAUNCH CHANGES ARE A TRANSFORM ON THE WAY OUT, NOT AN EDIT TO THE REPO,
+and that is the point.** Every `scalogy-*.html` stays byte-identical to its live
+template (bar the known gaps above) because patches are cut by diffing against
+`git show HEAD:`. Editing `SITE` and the robots tag into the files would break
+that the day before launch, for a change that has to be reversible in a moment.
+What the transform does, in this order, and the order matters in three places:
+
+    pages.scalogy.com/jhpboudoir1/home-preview/ -> <site>/   BEFORE the generic
+        SITE swap, or home's canonical comes out as <site>/home-preview/ and
+        competes with <site>/ itself
+    pages.scalogy.com/jhpboudoir1 -> <site>
+    ../home-preview/     -> /                   the wordmark
+    ../treehouse-sessions/ -> https://treehouse.jhpboudoir.com/   her own live
+        custom domain for that page; verified 200, served by Caddy. BEFORE the
+        blanket href rewrite below.
+    /blog                -> dropped, <li> and all, or --blog-url
+    href="../            -> href="/             the bundle is flat so ../ would
+        already resolve, but a rooted href cannot be wrong
+    noindex, nofollow    -> index, follow, max-image-preview:large
+
+**`--preview` IS THE LAUNCH SWITCH AND IT LIVES IN `netlify.toml`.** With it the
+bundle builds with the preview URLs and the noindex tag still on, so the whole
+site can be clicked through at its `netlify.app` address without competing with
+`www.jhpboudoir.com` in Google -- which is the entire reason that tag exists.
+Dropping the flag is the launch, it is one commit, and it goes both ways. The
+deploy-preview and branch-deploy contexts also send `X-Robots-Tag: noindex` on
+top, because a branch deploy is never the live site whatever the flag says.
+
+**THE JINJA FENCE COMES OFF THROUGH JINJA, NOT BY HAND.** The eight page files
+wrap their body in `{% raw %}` and the galleries are real Jinja, so both go
+through the same renderer -- a static page cannot then differ from the live one
+by the way it was produced. The build asserts the eight changed by *nothing but*
+the two fence tags, which is where the documented 21 bytes comes from: Jinja
+drops `{% raw %}` and `{% endraw %}` (9 + 12) and keeps both newlines.
+
+**It refuses to write a bundle it cannot vouch for**, and every check is
+something that has gone wrong here or would ship silently: 20 pages; one `h1`
+each; `details.jhp-navd` present; the header nav AND the footer identical across
+all twenty by md5 (named by class -- a gallery has three `<nav>`s); every
+internal link resolving to a file actually in the bundle; every canonical
+matching its own page; no `pages.scalogy.com`, `noindex`, `/blog` or `../` left;
+no link out to a host off the allowlist; no gallery published empty, which looks
+identical to a full one. Eight deliberate mutations of the output were all
+caught. A browser pass at 1440, 390 and 320 came back clean.
+
+**Cloudflare Pages was ruled out**, not overlooked: a custom domain on the apex
+needs the zone on Cloudflare's nameservers, which is the nameserver move the
+whole route exists to avoid. Moving nameservers means recreating every record on
+the domain including MX, and nine subdomains already point at Scalogy pages.
+
+**The old Showit URLs are not in `_redirects` and must not be guessed.** They
+need the list Showit or WP Engine can export; until then any old URL that is not
+also a page in the bundle 404s. `/unsubscribe` stays on Scalogy on purpose --
+it is the target of every marketing footer already sent and is not part of the
+public site, so it is not in the bundle and its URL never changes.
+
+The current state of the decision, the steps only Jessica can take, and what
+launch does *not* fix are in `launch-plan.md`.
+
 ## The rest of the system, in one place
 
 - **The design system is sliced, not copied.** `build-info.py` and

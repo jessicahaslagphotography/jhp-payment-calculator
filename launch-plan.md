@@ -1,208 +1,210 @@
 # Getting the new site onto jhpboudoir.com
 
-**Status: DECISION NEEDED. Nothing has been changed.**
-
-You asked for links that read `www.jhpboudoir.com/about`, `/experience`,
-`/contact`, and for the Squarespace steps to make it live. Before touching DNS
-I checked what is actually running today and what Scalogy can actually serve.
-Four things came back that change the shape of this, so they are first.
+**Status: route decided, the bundle is built and checked, and nothing on the
+live domain has been touched.** Everything below the line marked YOUR PART is
+waiting on you, and none of it is irreversible until the very last step.
 
 ---
 
-## What I found
+## Where this landed
+
+You asked for links that read `www.jhpboudoir.com/about`, `/experience`,
+`/contact`, and for the Squarespace steps to make it live. Four things I found
+before touching anything changed the shape of it, and they are why this is a
+hosting decision rather than a link edit.
 
 ### 1. Scalogy cannot serve `/about` under your domain. I tested it.
 
-Scalogy binds a custom domain to **one page**, not to your whole site — their
-own documentation says so outright: *"A custom domain points at a single page,
-not your whole tenant."*
-
-There was one possible way round it. The same docs say a page is a *directory*
-and that subdirectories keep their paths, so in principle one page could hold
-`about/index.html`, `contact/index.html` and so on, and the whole site would
-sit under one domain with clean URLs.
-
-I tested whether that is reachable from our side. It is not:
+A Scalogy custom domain points at **one page**, not a tenant -- their own docs
+say so outright. There was one way round it on paper: a page is a directory, so
+one page could in principle hold `about/index.html` and the rest. It is not
+reachable from our side:
 
     /opt/scalogy/data/tenants/jhpboudoir1/web/  ->  PermissionError
 
-That directory belongs to the platform, not to the tenant. So **as things
-stand, `jhpboudoir.com` can serve exactly one of your twenty pages.** Your
-request is not a link edit — it needs a hosting decision.
+That directory belongs to the platform. So `jhpboudoir.com` on Scalogy can
+serve exactly one of your twenty pages.
 
 ### 2. Your canonical domain is the BARE domain, not `www`.
 
     www.jhpboudoir.com  ->  301 redirect  ->  jhpboudoir.com
     <link rel="canonical" href="https://jhpboudoir.com">
 
-Google has indexed you as `jhpboudoir.com`. If we publish links as
-`www.jhpboudoir.com/about` we are pointing at a redirect, and flipping which
-one is canonical churns the ranking you already have for no gain.
-
-**Recommendation: links read `jhpboudoir.com/about`** — shorter, already
-canonical, already indexed. `www` keeps redirecting to it exactly as now.
-Say the word if you would rather have `www` and I will flip it instead.
+Google has you indexed as `jhpboudoir.com`. **So the links read
+`jhpboudoir.com/about`** -- shorter, already canonical, already indexed, and
+`www` keeps redirecting to it exactly as it does now. That is what is built. If
+you would rather lead with `www` it is one flag and I will rebuild; it just
+costs you the ranking churn of flipping which one is canonical, for nothing.
 
 ### 3. It is not Squarespace serving the site. It is Showit on WP Engine.
 
-    jhpboudoir.com  ->  Showit design + WordPress, hosted at WP Engine,
-                        behind Cloudflare
+    jhpboudoir.com  ->  Showit design + WordPress at WP Engine, behind Cloudflare
 
-Squarespace is almost certainly where the **domain** lives — Google Domains
-customers were moved to Squarespace, and that is the panel you log into. That
-is where the DNS change happens, so your instinct was right. But the thing the
-domain currently points at is Showit/WP Engine, and **the moment DNS moves, the
-whole of the old site goes dark.** Not page by page. All at once.
+Squarespace is where the **domain** lives -- the Google Domains move put it
+there -- so that is the panel the DNS change happens in and your instinct was
+right. But the thing the domain points at today is Showit, and **the moment DNS
+moves, all of the old site goes dark at once.** Not page by page.
 
-### 4. YOU HAVE A LIVE BLOG, and it is the reason this needs a real decision.
+### 4. You have a live blog, and it is what decided the route.
 
-    jhpboudoir.com/blog/  ->  200, live WordPress
-
-It is a real WordPress install (`/wp-json/`, `/wp-admin/`) behind the Showit
-design. The new site has no blog and `/blog` 404s on it.
-
-Pointing the domain at the new site therefore **takes your blog offline and
-breaks every post URL**, along with whatever search traffic and backlinks they
-carry. `CLAUDE.md` already notes that for a local studio a blog is the single
-biggest organic lever there is. Losing the one you have to launch the new site
-is a bad trade made by accident.
-
-This is the constraint that decides the route, because only one of the options
-below can keep `/blog` where it is.
+`jhpboudoir.com/blog/` is a real WordPress install. The new site has no blog.
+You told me it is fewer than ten posts, not optimised, and not bringing you
+enquiries -- which settles it, because the only route that keeps the blog
+exactly where it is would have meant moving your **nameservers**, and that
+means recreating every DNS record on the domain including your **MX**. Get
+those wrong and your email stops. That was the one genuinely frightening step
+in the whole plan, and a blog worth nothing is not a reason to take it.
 
 ---
 
-## The three routes
+## The route: publish the static pages, leave DNS almost alone
 
-### A. Cloudflare in front of the domain  — *keeps the blog*
+The public site is twenty static HTML files. There is no server behind it: the
+two forms POST across to Scalogy webhooks, the calendar is GoHighLevel's, and
+every photograph comes off the CDN. So it can be published to a host that
+serves directories -- **Netlify**, on the free tier, with SSL included.
 
-Cloudflare sits in front of `jhpboudoir.com` and routes by path:
+What that buys, and what it costs:
 
-    /blog/*     ->  WP Engine   (your blog, untouched)
-    everything  ->  pages.scalogy.com/jhpboudoir1/...
+- `jhpboudoir.com/about`, `/contact`, `/experience` and the twelve galleries,
+  which is what you asked for.
+- **Two DNS records change and nothing else.** Your MX records, your
+  `treehouse.`, `reveal.`, `boudoirgiveaway.` and the other subdomains are
+  never touched. That matters more than it sounds: you have nine subdomains
+  pointed at Scalogy pages already.
+- Scalogy stays where the site is built and edited. Nothing about the way we
+  work on it changes.
+- The blog needs somewhere to live -- `blog.jhpboudoir.com` -- and its post
+  URLs change once. On fewer than ten unoptimised posts that costs close to
+  nothing, and the script redirects `/blog/*` there the moment it exists.
 
-- **Gives you exactly what you asked for**: `jhpboudoir.com/about`.
-- **The only route that keeps the blog at `/blog`.**
-- Free tier is ample. Done with Cloudflare Rules, no code.
-- Relative links on the site (`../about/`) keep working, because the path depth
-  is unchanged — one segment either way.
-- **The cost: your DNS nameservers move from Squarespace to Cloudflare**, which
-  means every existing record has to be recreated there. That includes your
-  **MX records — get those wrong and your email stops** — plus
-  `treehouse.`, `reveal.`, `boudoirgiveaway.` and anything else on the domain.
-  Recoverable, but it is the one step in this whole plan that can break
-  something that has nothing to do with the website.
-
-### B. Ask Scalogy to bind the domain at tenant level  — *cleanest, no ETA*
-
-`jhpboudoir.com/about/` → `jhpboudoir1/about/`, served by them. For Scalogy
-this is a small change to how their edge maps a domain; for you it is zero
-infrastructure and nothing new to maintain.
-
-- Cleanest long-term answer, and keeps everything in one system.
-- **Does not solve the blog** — that still needs route A's path split or a move.
-- **No timeline.** It depends on them saying yes. Worth asking either way; I can
-  draft the request.
-
-### C. Publish the static pages to a host that does paths  — *lowest risk*
-
-The public site is twenty static HTML files. Cloudflare Pages or Netlify serve
-`/about/` natively, free, with SSL, and take **A/CNAME records from Squarespace
-— no nameserver move**, so your email and subdomains are never touched.
-
-- Gives you `jhpboudoir.com/about`.
-- Lowest-risk DNS change of the three.
-- The blog moves to `blog.jhpboudoir.com` with `/blog/*` redirected to it. You
-  keep the posts; the URLs change once, which costs some ranking.
-- Adds a publish step: Scalogy stays where the site is built, and a deploy
-  pushes the rendered pages to the static host. I would build and test that.
-
-### My recommendation
-
-**Route A**, because your blog is worth more than the convenience of the other
-two, and A is the only one that leaves it exactly where Google already has it.
-
-Ask Scalogy for B in parallel — if they do it, A gets simpler (Cloudflare then
-only needs the `/blog` rule).
-
-**What would change my mind:** if the blog has only a handful of posts and
-little traffic, route C is clearly better — no nameserver move means no chance
-of breaking your email, which is the only genuinely scary step here. That is
-your call because you know what the blog is worth. **Tell me roughly how many
-posts there are and whether any of them bring you enquiries**, and I will tell
-you which way I would go.
+I looked at Cloudflare Pages too and ruled it out: a custom domain on the apex
+needs the zone on Cloudflare's own nameservers, which is the exact move we are
+avoiding.
 
 ---
 
-## What you would change in Squarespace
+## What is built and committed
 
-### If route A (Cloudflare)
+    deploy-site.py     assembles public/ from the repo and applies the launch
+                       changes -- SITE, the noindex tag, the wordmark link,
+                       Specialty Sessions, the dead /blog link
+    netlify.toml       how the host builds it. THE LAUNCH SWITCH IS ONE FLAG
+                       ON ONE LINE IN HERE.
+    requirements.txt   Jinja2, which is all the build needs
 
-1. **First, inventory.** In Squarespace → Domains → `jhpboudoir.com` → DNS,
-   screenshot **every** record. Send it to me. This is the safety net for your
-   email and subdomains and I do not want to do the next step without it.
-2. Create a free Cloudflare account and add `jhpboudoir.com`. Cloudflare imports
-   the records it can see — **verify them against your screenshot**, especially
-   MX.
-3. Cloudflare gives you two nameservers. In Squarespace → Domains →
-   `jhpboudoir.com` → **Nameservers**, switch from Squarespace's to those two.
-4. Tell me when it has propagated. I will set the routing rules and bind the
-   pages.
+**The launch changes are made on the way out, not in the repo.** Every
+`scalogy-*.html` stays byte-identical to its live Scalogy template, because
+that is how patches are cut; editing `SITE` and the robots tag into the files
+themselves would break that the day before launch, for a change that has to be
+reversible in a moment. So `deploy-site.py --preview` builds the bundle with
+the preview URLs and the noindex tag still on, and dropping `--preview` is the
+launch. Both states are one commit apart and visible in the diff.
 
-### If route C (static host)
+**It refuses to publish a bundle it cannot vouch for.** Every check in it is
+either something that has already gone wrong on this project or something that
+would ship silently:
 
-Two records, and nothing else on the domain is touched:
+    20 pages, one h1 each, the phone drawer present on every one
+    the header nav AND the footer identical across all twenty, byte for byte
+    every internal link resolves to a file that is actually in the bundle
+    every canonical tag matches the page it is on
+    no pages.scalogy.com, no noindex, no /blog, no ../ left anywhere
+    no link out to a host that is not on a known list
+    no gallery published empty -- which looks identical to a full one
+    the eight page files changed by nothing but their Jinja fence
 
-| Type | Host | Value |
+I ran it, then deliberately broke eight things in the output -- a link to a
+page that does not exist, a lost `h1`, the noindex tag back, a renamed phone
+drawer, a canonical left on the preview domain, a link left relative -- and it
+caught all eight. Then I loaded all twenty pages in a real browser at 1440,
+390 and 320: **no horizontal scroll anywhere, one `h1` and one nav per page, no
+JavaScript errors.**
+
+---
+
+## YOUR PART, in order
+
+Nothing before step 5 changes anything anybody can see.
+
+**1. Send me the DNS screenshot first.** Squarespace -> Domains ->
+`jhpboudoir.com` -> DNS. Every record, including the ones below the fold. This
+is the safety net for your email and your nine subdomains and I do not want to
+do step 5 without it. It costs you two minutes and it is the only thing in here
+that protects you if something goes wrong.
+
+**2. Make a free Netlify account** at netlify.com. Sign in with GitHub, which
+saves a step later.
+
+**3. Connect this repository.** Add new site -> Import an existing project ->
+GitHub -> this repo -> branch `claude/website-revamp-g9od7u`. It will read
+`netlify.toml` and fill the build command and publish directory in by itself --
+you should see `python3 deploy-site.py --preview` and `public`. Deploy.
+
+**4. Send me the address it gives you** (something like
+`fanciful-name-123.netlify.app`) **and click round it yourself.** This is the
+whole site, on a real host, before your domain is involved. Check it on your
+phone. It is still `noindex` at this point, so Google will not touch it.
+
+**5. Then, and only then, the domain.** In Netlify: Domain settings -> Add a
+domain -> `jhpboudoir.com`. It will tell you it is registered elsewhere and
+**print the exact records to create.** Send me that screen. I am not going to
+quote you an IP address from memory for the step that takes your website down
+if it is wrong -- I will read theirs and check it against what you are about to
+save. Then, in Squarespace -> Domains -> `jhpboudoir.com` -> DNS, you change:
+
+| Type | Host | What it becomes |
 | --- | --- | --- |
-| A | `@` | *(the host's IP — I will give you the exact value)* |
-| CNAME | `www` | *(the host's target)* |
+| A | `@` | the IP Netlify shows you |
+| CNAME | `www` | the target Netlify shows you |
 
-### If route B alone (Scalogy, home page only)
+**Leave every other record alone.** Your MX records in particular do not move.
 
-This is what Scalogy supports *today* without a proxy, and it only gets you the
-home page at the domain:
+Propagation takes anywhere from a few minutes to a couple of hours, and SSL is
+automatic once it sees the records.
 
-| Type | Host | Value |
-| --- | --- | --- |
-| A | `@` | `178.105.37.93` |
-| CNAME | `www` | `edge.scalogy.com` |
-
-I would not launch on this — every other page would still read
-`pages.scalogy.com/jhpboudoir1/...`, which is the problem you asked me to fix.
+**6. Tell me when it resolves, and I switch indexing on.** That is one commit
+removing `--preview`. It is deliberately not automatic, because there is no
+undoing a Google index in a hurry.
 
 ---
 
-## What I do on the site, whichever route
+## What I still need from you, separately
 
-None of this is done yet; it all waits on the route, because most of it needs
-the final URL shape.
-
-1. **`SITE` changes from `https://pages.scalogy.com/jhpboudoir1` to
-   `https://jhpboudoir.com`** — three HTML files and four generators. It feeds
-   every canonical tag and `og:url`.
-2. **The `noindex, nofollow` comes off.** Deliberately switched on so the
-   preview could not compete with the live site in Google; it comes off as one
-   step, at launch, with your say-so. Every other SEO signal is already built
-   and waiting, so it all counts from day one.
-3. **The JHP wordmark link** goes from `../home-preview/` to `/`.
-4. **Specialty Sessions in the footer** — currently relative to the Treehouse
-   page. Decide with the wordmark whether it stays a path or becomes
-   `treehouse.jhpboudoir.com`.
-5. **`sitemap.xml` and `robots.txt`** — both need the real domain and cannot be
-   written until it is bound.
-6. **Redirects from the old Showit URLs** to the new equivalents, so existing
-   links and search results do not land on 404s. I need the old URL list for
-   this; Showit or WP Engine can export it.
-7. **Update the links we send** — the Session Guide and the calendar URLs in
-   the follow-up emails currently point at `pages.scalogy.com`. They keep
-   working, but they should read as hers.
+1. **The old Showit URL list.** Showit or WP Engine can export it. Every old URL
+   that is not also a page in the new bundle will 404 the moment DNS moves,
+   which loses whatever links and search results point at it. I can redirect
+   them all, but not to addresses I am guessing at.
+2. **Where the blog goes.** Simplest is to ask WP Engine to serve it at
+   `blog.jhpboudoir.com` -- then it is one CNAME and the script redirects
+   `/blog/*` to it. Or export the posts and let it go, which on fewer than ten
+   is a defensible choice.
+3. **`jhpboudoir.com` or `www.`** -- confirm the first, or say the word.
 
 ---
 
-## What I need from you
+## What launch does NOT fix, so it is not a surprise afterwards
 
-1. **Route A, B or C** — and the blog answer above if you want me to decide.
-2. **`jhpboudoir.com/about` or `www.jhpboudoir.com/about`.** I recommend the
-   first; your site is already canonically non-www.
-3. **The DNS screenshot** from Squarespace, before anything changes.
+These are already in `CLAUDE.md`; this is the short version, worst first.
+
+1. **Your Google Business Profile carries about a third of local ranking on its
+   own**, more than everything on the site put together, and it is not in this
+   repo. The primary category is the single biggest thing in it. Launching
+   changes nothing about that.
+2. **165 gallery photographs share one alt string**, word for word -- useless
+   to Google Images and to a screen reader alike.
+3. **No `srcset`.** Full 1600px frames are sent to 390px phones. That is the
+   page-speed problem on this site and it is worth more after launch than it is
+   now.
+4. **The name is inconsistent.** The About page's `h1` says "Jessica Paul"; its
+   title, its description and all six alt texts say "Jessica Haslag". Search
+   engines treat a person as an entity. That one is yours to settle.
+5. **There is still no 404 page of your own.** An old URL that I have not been
+   given a redirect for lands on Netlify's grey default rather than on your
+   site with your nav on it. Worth building, and it is a new page, so it is a
+   design decision rather than something to slip in.
+6. **The Session Guide PDF is still going out.** The GoHighLevel workflow on
+   the `Session Guide - Requested` tag still attaches the old Canva magazine,
+   which quotes a $500 session fee and Collections from $2,800 -- $197 and
+   $1,550 under what the site says. Nothing in this repo can stop it. That one
+   is costing you money today and has nothing to do with launch.

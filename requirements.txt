@@ -1,0 +1,2 @@
+# Only what deploy-site.py needs. The generators use the standard library.
+Jinja2>=3.1

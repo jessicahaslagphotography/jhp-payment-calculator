@@ -1,0 +1,48 @@
+# How the static host builds the public site.
+#
+# The site is AUTHORED on Scalogy and mirrored here as scalogy-*.html;
+# deploy-site.py assembles those into public/ and applies the launch changes.
+# The host runs that on every push, so a deploy is a commit and nothing else.
+#
+# THE LAUNCH SWITCH IS THE --preview FLAG ON THE LINE BELOW, and it is meant to
+# be the one deliberate step. While it is there every page stays noindex,
+# nofollow and robots.txt disallows everything, so the bundle can be built,
+# opened and clicked through at its netlify.app address without competing with
+# www.jhpboudoir.com in Google -- which is the whole reason the tag exists (see
+# CLAUDE.md, "SEO: the site is switched off, and that is on purpose").
+#
+# AT LAUNCH: delete " --preview", commit, and the same push that points the
+# domain at this host also switches indexing on. Put it back and the site is
+# switched off again in one commit. Do not do it as a side effect of any other
+# change, and not without Jessica's say-so.
+
+[build]
+  command = "pip install -r requirements.txt && python3 deploy-site.py --preview"
+  publish = "public"
+
+[build.environment]
+  PYTHON_VERSION = "3.11"
+
+# Belt and braces on top of the --preview robots.txt: a deploy preview or a
+# branch deploy is never the live site, whatever the flag says.
+[context.deploy-preview]
+  [[context.deploy-preview.headers]]
+    for = "/*"
+    [context.deploy-preview.headers.values]
+      X-Robots-Tag = "noindex, nofollow"
+
+[context.branch-deploy]
+  [[context.branch-deploy.headers]]
+    for = "/*"
+    [context.branch-deploy.headers.values]
+      X-Robots-Tag = "noindex, nofollow"
+
+# The pages are static and the photographs come from the CDN, so nothing here
+# needs to be revalidated on every view; the HTML does, because a copy change
+# has to show up the moment it is pushed.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Cache-Control = "public, max-age=0, must-revalidate"

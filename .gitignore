@@ -5,3 +5,9 @@ photos/
 headings/
 __pycache__/
 *.pyc
+
+# The static bundle deploy-site.py assembles. A build artefact: 857KB of
+# generated HTML that is the eight scalogy-*.html files plus twelve Jinja
+# renders, so committing it would put every launch edit in the diff twice. The
+# host builds it on each push -- see netlify.toml.
+public/
