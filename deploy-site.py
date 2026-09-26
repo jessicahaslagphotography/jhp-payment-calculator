@@ -236,20 +236,67 @@ def build(site, blog_url, launch):
 
 
 def redirects(blog_url):
-    """Netlify/Cloudflare Pages _redirects. Only for URLs that already exist.
+    """Netlify/Cloudflare Pages _redirects, built from the OLD SITE AS CRAWLED.
 
-    The old Showit URLs are NOT in here and cannot be guessed. Getting them
-    right needs the list Showit or WP Engine can export; until then any old URL
-    that is not also a page in this bundle will 404, which is worth fixing
-    before launch rather than after.
+    Not guessed. On 26 September the live Showit/WordPress site was crawled
+    from its own navigation and its WordPress API read; it is eight pages and
+    five posts, and every one of them is accounted for below. An old URL that
+    404s after the cutover loses whatever links and search results point at
+    it, and the only way to know which ones exist is to go and look.
+
+        /                     -> /                     same
+        /about                -> /about/               same
+        /portfolio            -> /portfolio/           same
+        /contact              -> /contact/             same
+        /faq                  -> /faq/                 same (not in the old
+                                  nav, but live -- found by probing)
+        /information          -> /faq/                 RENAMED. Info is a menu
+                                  on the new site, not a page; the FAQ is what
+                                  that page's content became.
+        /specialty-sessions   -> treehouse subdomain   the Treehouse page,
+                                  which stays on Scalogy under its own domain
+        /privacy-policy       -> NOTHING. See below.
+        /blog/, /YYYY/MM/DD/  -> --blog-url, when there is one
+
+    The first five need no rule: the bundle has a directory of that name and
+    the host resolves it. They are written out here because this list is the
+    old site's map and a reader should not have to work out which lines are
+    missing on purpose.
+
+    **/privacy-policy HAS NO EQUIVALENT AND IS DELIBERATELY NOT REDIRECTED.**
+    The old site has one and the new site does not, which is a regression
+    rather than an omission: /contact and /inquire both collect a name, email
+    and phone, and /contact now also takes an SMS consent that names a
+    disclosure. Pointing it at /contact or the FAQ would be worse than a 404 --
+    it would answer a question about data handling with a booking form. It
+    wants a real page, and that is Jessica's to approve.
     """
-    out = ['# Anything bookmarked or texted from the Scalogy preview.',
+    out = ['# The old Showit site, crawled 26 September 2026. See redirects()',
+           '# in deploy-site.py for the full map and for what is missing.',
+           '',
+           '# Renamed: Info is a menu on the new site, not a page.',
+           '/information      /faq/   301',
+           '',
+           '# The Treehouse page stays on Scalogy, under her own subdomain.',
+           '/specialty-sessions   %s   301' % TREEHOUSE,
+           '',
+           '# Anything bookmarked or texted from the Scalogy preview.',
            '/home-preview/*   /   301!',
            '/home-preview     /   301!']
     if blog_url:
-        out += ['', '# The blog, wherever it lives now.',
-                '/blog/*   %s:splat   301' % blog_url.rstrip('/'),
-                '/blog     %s   301' % blog_url]
+        b = blog_url.rstrip('/')
+        out += ['',
+                '# The blog and its five posts. The post URLs are date-based at',
+                '# the ROOT, not under /blog/, so /blog/* alone would miss them.',
+                '/blog/*   %s/blog/:splat   301' % b,
+                '/blog     %s/blog/          301' % b,
+                '/2024/*   %s/2024/:splat    301' % b,
+                '/2025/*   %s/2025/:splat    301' % b]
+    else:
+        out += ['',
+                '# NO --blog-url WAS GIVEN, so the blog and its five posts are',
+                '# not redirected anywhere and will 404:',
+                '#   /blog/  and  /2024/02/01/*  /2025/03/*  /2025/04/*']
     return '\n'.join(out) + '\n'
 
 

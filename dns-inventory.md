@@ -7,11 +7,32 @@ a photograph of the zone on the morning of the cutover.
 
 ## The two records that change at launch, and nothing else
 
-    A      @      141.193.213.10    30 mins    Showit   -> DELETE
-    A      @      141.193.213.11    30 mins    Showit   -> DELETE
-                                               -> one A @ to Netlify's IP
+Netlify's own values, read off its Domain management screen on 26 September,
+not quoted from memory:
 
-    CNAME  www    wp.wpenginepowered.com   30 mins     -> EDIT to Netlify
+    DELETE   A      @      141.193.213.10           30 mins   Showit
+    DELETE   A      @      141.193.213.11           30 mins   Showit
+    ADD      A      @      75.2.60.5                          Netlify
+    EDIT     CNAME  www    wp.wpenginepowered.com   30 mins
+                  ->       silly-crepe-70cda6.netlify.app
+
+**Netlify's "Recommended" ALIAS/ANAME option is not available.** It wants an
+ALIAS to `apex-loadbalancer.netlify.com`; Squarespace DNS does not support
+ALIAS or ANAME, so the A record is the one to use. Netlify calls that the
+"Fallback" and it is the normal arrangement for a domain on external DNS.
+
+**"Set up Netlify DNS" is the nameserver move and must not be clicked.** It
+would take DNS off Squarespace and mean recreating all thirty-four records
+here, MX included. That is the risk this whole route exists to avoid.
+
+**Netlify warns that an apex primary domain misses "the full advantages of a
+CDN" and suggests www. Declined, on a specific ground rather than a general
+one:** Netlify serves only the HTML here, 35-80KB a page. Every photograph
+loads from `assets.cdn.filesafe.space`, which is where all the weight is, so
+the warning applies to a few tens of kilobytes of text. Against that, Google
+has her indexed at the bare domain and the live Showit site's canonical tags
+already say `https://jhpboudoir.com`. Not worth the churn. Revisit only if
+the site ever serves its own images.
 
 **BOTH apex A records must go.** They are a pair, and deleting one and editing
 the other leaves the domain round-robining between Netlify and Showit -- about
@@ -107,3 +128,38 @@ that install so it answers on the new name. **Do this BEFORE the cutover**,
 while the blog is still up, so there is no window where it is unreachable. Then
 `deploy-site.py --blog-url https://blog.jhpboudoir.com/` redirects `/blog/*`
 there and puts the Blog link back in all nine footers.
+
+## The old site, crawled rather than guessed (26 September)
+
+`launch-plan.md` had "get the old Showit URL list from Showit or WP Engine" as
+something only Jessica could supply. It turned out to be readable directly:
+the WordPress API at `/wp-json/wp/v2/` lists the posts, and the Showit pages
+were found by crawling the live site's own navigation. Its 404 is
+distinguishable (a Showit page titled "Page not found"), so a probe can tell a
+real page from a miss.
+
+**The whole live site is eight pages and five posts:**
+
+    /                     200   home
+    /about                200
+    /portfolio            200
+    /contact              200
+    /faq                  200   live, but NOT linked from the nav
+    /information          200   -> becomes /faq/ on the new site
+    /specialty-sessions   200   -> becomes treehouse.jhpboudoir.com
+    /privacy-policy       200   -> NO EQUIVALENT ON THE NEW SITE
+    /blog/                200   the index
+
+    /2025/04/03/brookes-boudoir-session-the-sweetest-wedding-gift/
+    /2025/03/26/client-spotlight-karis-exhilarating-boudoir-experience/
+    /2025/03/20/haleys-session-from-clammy-nervous-to-total-powerhouse/
+    /2024/02/01/3-tips-to-choosing-your-perfect-boudoir-photographer/
+    /2024/02/01/jericas-luxury-experiencewith-jhp-boudoir/
+
+**THE POST URLS ARE DATE-BASED AT THE ROOT, NOT UNDER `/blog/`.** A `/blog/*`
+rule alone would miss all five, which is exactly the kind of thing that is
+invisible until somebody follows an old link. `_redirects` now carries
+`/2024/*` and `/2025/*` as well.
+
+All of this is built into `redirects()` in `deploy-site.py`, so the map is
+code rather than a note somebody has to remember.
