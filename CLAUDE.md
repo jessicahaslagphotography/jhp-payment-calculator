@@ -1198,13 +1198,21 @@ launch does *not* fix are in `launch-plan.md`.
     `.ack:hover{border-color:var(--gold)}`, which `/inquire` never had and
     which would have quietly appeared on its acknowledgment box. A rebuild
     that moves a file by more than the change you made is worth stopping for.
-  - `scalogy-home.html` is **2,253 bytes larger locally**: the repo copy
-    carries the section comments (`/* ---------- 2 · hero ---------- */`,
-    the `<!-- ===== 7 · email opt-in ===== -->` markers, the file header)
-    and three rule-sets that nothing on the page uses -- `.jhp-empower`,
+  - `scalogy-home.html` is **4,087 bytes larger locally** (62,645 against
+    58,558): the repo copy carries the section comments
+    (`/* ---------- 2 · hero ---------- */`, the
+    `<!-- ===== 7 · email opt-in ===== -->` markers, the file header) and
+    three rule-sets that nothing on the page uses -- `.jhp-empower`,
     `.jhp-band` and `.jhp-ba`. Dead CSS; the live page is not missing
     anything it renders. (`.jhp-empower-sub` is the one that *is* used,
     and it is live.)
+    **It was 2,253 and the phone hero scrim widened it on 26 September.**
+    The RULE went live -- `jhp-home-2026` is 57,799 bytes no more, it is
+    58,558 -- but only a seven-line version of the comment went with it,
+    because pushing this file's full commentary live is the one thing the
+    paragraph below says not to do. The gap stays comments-only, which is
+    what keeps `templates_patch` erroring rather than landing in the wrong
+    place.
 
   The failure mode here is loud, not silent: `templates_patch` requires
   each search to match exactly once and applies nothing if one does not,
