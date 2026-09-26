@@ -305,6 +305,23 @@ reach is not a privacy policy, and that link is the only route to it.
 The counts moved: **ten templates and twenty-one pages**, from nine and
 twenty. Count them rather than trusting this sentence.
 
+**SCALOGY IS HALF DONE HERE AND THAT IS A TRAP TO KNOW ABOUT.** The nine
+existing templates are patched and verified byte-in-step with the repo (see
+the gap table below -- every documented gap still holds). What does NOT exist
+yet is **`jhp-privacy-2026` on Scalogy**, because a 46KB template goes up as a
+create plus a run of patches and the whole 44KB body has to be retyped through
+the tool to get there.
+
+So the Scalogy PAGES have deliberately **not** been re-rendered. As they stand
+they still carry the old footer with no privacy link, which is internally
+consistent and not broken. **Run `pages_render` on any of them before that
+template exists and you publish twenty pages whose footer links to a 404.**
+Create `jhp-privacy-2026` from `scalogy-privacy.html` first, add the page at
+slug `privacy-policy`, then render all twenty-one together.
+
+None of this affects the launch: the static bundle is built from the repo, not
+from Scalogy, and it has all twenty-one pages with the link working.
+
 ## Launch: the site goes out as a static bundle, and the switch is one flag
 
 **SCALOGY BINDS A CUSTOM DOMAIN TO ONE PAGE, NOT A TENANT.** Their docs say so
@@ -1152,6 +1169,16 @@ launch does *not* fix are in `launch-plan.md`.
     whitespace), and both were patched rather than left to trip the next
     search string.
   - `scalogy-about.html` is 24 bytes smaller locally.
+  - **`scalogy-inquire.html` was STALE and the rebuild caught it.** It had not
+    been rebuilt since the SMS consent box went into `/contact` on
+    26 September, so it was missing 1,616 bytes that `build-inquiry.py` slices
+    out of `scalogy-contact.html`. That block is now cut back out of the slice
+    on purpose -- `/inquire` has no SMS box, its own `.ack` is the REQUIRED
+    acknowledgment, and contact's rules declare the same selector earlier so
+    every property is overridden anyway. Every property except
+    `.ack:hover{border-color:var(--gold)}`, which `/inquire` never had and
+    which would have quietly appeared on its acknowledgment box. A rebuild
+    that moves a file by more than the change you made is worth stopping for.
   - `scalogy-home.html` is **2,253 bytes larger locally**: the repo copy
     carries the section comments (`/* ---------- 2 · hero ---------- */`,
     the `<!-- ===== 7 · email opt-in ===== -->` markers, the file header)

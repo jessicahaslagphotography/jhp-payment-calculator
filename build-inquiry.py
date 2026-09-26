@@ -107,7 +107,31 @@ print("scaffolding built:", len(shared), "shared,", len(parts), "parts")
 # copies of that is two things to keep in step. build-contact.py owns those
 # rules; this file borrows them, which means /contact must be built first.
 contact = (ROOT / "scalogy-contact.html").read_text()
-FORM_CSS = contact[contact.index("/* THE FORM"):contact.index('/* The band says')]
+_form_all = contact[contact.index("/* THE FORM"):contact.index('/* The band says')]
+
+# THIS PAGE HAS NO SMS CONSENT BOX, so /contact's rules for one are cut back
+# out of the slice. They came in when the consent box was added to /contact on
+# 26 September, and this file had not been rebuilt since, so the drift only
+# surfaced on the next rebuild -- 1,616 bytes of it.
+#
+# It is not merely dead weight. /inquire has its own .ack, the REQUIRED
+# acknowledgment, styled by EXTRA_CSS below; contact's block declares the same
+# selector earlier in the sheet, so every property it sets is overridden --
+# except `.ack:hover{border-color:var(--gold)}`, which /inquire never had and
+# which would have quietly appeared on its acknowledgment. And its comment
+# describes a consent box that does not exist on this page, which is worse
+# than the bytes.
+#
+# Everything else in the slice is still shared on purpose: the inputs, the
+# focus ring, the invalid state and the 16px floor are one set of rules across
+# both forms, which is the whole reason this page slices /contact at all.
+_sms_a = _form_all.index("/* The SMS consent row.")
+_sms_b = _form_all.index(".jhp-home .jhp-ask-form .go{", _sms_a)
+if not 1400 < _sms_b - _sms_a < 2200:
+    raise SystemExit(f"the SMS consent block is {_sms_b - _sms_a} bytes, which is "
+                     f"not the size it has been -- check what moved in "
+                     f"scalogy-contact.html before cutting it out blind")
+FORM_CSS = _form_all[:_sms_a] + _form_all[_sms_b:]
 
 # Only what this page adds: three controls /contact has no use for. They
 # inherit the input styling above rather than restating it.
