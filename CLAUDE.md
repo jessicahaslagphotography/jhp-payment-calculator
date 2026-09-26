@@ -730,6 +730,36 @@ Still to do, roughly in order of what it is worth:
   in `site_leads` are not sent a welcome email months late. Baselined
   25 September 20:18 UTC. Deleting that file would mail every lead in the
   table.
+  **The eight emails carry a photograph each, and all eight were already on the
+  site.** `FRAMES` in the builder maps a step to a frame and its alt text. They
+  are the /contact lead band, five of the Session Guide's own plates, the guide's
+  closing band and the guide's cover -- not one of them newly chosen, because
+  the CDN is unreachable from this sandbox and a frame picked here is a frame
+  picked blind. Each one was judged at full size by Jessica on the page it
+  already sits on. One per email, all eight distinct, and the build fails if two
+  emails share a frame or an email loses its photograph.
+  **The photograph is a markdown image line and must stay one.** Inline HTML in
+  a body is not an option: `_md_to_html` passes the WHOLE body through
+  unprocessed the moment it sees an HTML tag anywhere in it, which would kill
+  every bold run, link and button in that email.
+  **The `width` ATTRIBUTE on those frames is load-bearing.** Outlook renders
+  through Word, which ignores `max-width` and would draw a 1600px frame at its
+  native size and take the 600px card apart. `_md_to_html` now emits
+  `width="536"` (600 less the card's 32px of padding either side); no live
+  sequence used a markdown image before 26 September, so adding it could not
+  change an email already going out. **The JHP Boudoir logo header was already
+  on every email** -- `_wrap_html` puts it there -- and the render probe now
+  fails if it goes missing.
+  **The previews are the real render, at `/email-previews-2027`.**
+  `build-email-previews` runs the eight through the same two functions a live
+  send uses and stores the HTML in `email_previews`; the page drops each one in
+  its own iframe so the email's own CSS cannot mix with the page's, and shows
+  the parked text beside it. A hand-drawn mock-up would be a photograph of the
+  truth on the day somebody drew it, which is the exact mistake the Canva guide
+  made. **After any copy change, run the builder and then this**, or the page
+  shows the previous copy back. `email_previews` holds marketing copy against a
+  fake contact and NO PII, which is the only reason it may be attached to an
+  app at all.
   **The Dubsado `inquiry_website` workflow is retired**, not deleted -- it sent
   the same 700-word email at all six of its steps and nine of its figures
   contradicted the site.

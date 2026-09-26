@@ -14,6 +14,11 @@ database and obvious in somebody's inbox:
   * every standalone CTA link became a real <a> button, not literal markdown
   * the six-line includes list renders as six lines, not one run-on
   * nothing that should be bold or italic leaked its asterisks
+  * each email carries exactly one photograph, with alt text and the width
+    ATTRIBUTE Outlook needs -- without it Word draws the 1600px frame at its
+    native size and the 600px card comes apart
+  * the eight photographs are eight different frames, and every email keeps
+    the JHP Boudoir logo header
 
 Run it after any edit to the copy, to the runner's merge fields, or to the
 markdown renderer.
@@ -43,8 +48,11 @@ CTX = {
 }
 
 PART_ANCHORS = ('begin', 'worries', 'works', 'investment')
+# The card is 600px with 32px of padding either side.
+IMG_WIDTH = '536'
 
 fails = []
+frames = {}
 
 
 def check(cond, msg):
@@ -57,9 +65,10 @@ def main():
     b.check()
     print()
     for i, s in enumerate(b.STEPS, start=1):
-        cfg = {'subject': s['subject'], 'body_md': s['body'], 'sms': s['sms']}
+        raw = b.body_of(s)
+        cfg = {'subject': s['subject'], 'body_md': raw, 'sms': s['sms']}
         subj = wr.render_text(s['subject'], CTX, cfg)
-        body = wr.render_text(s['body'], CTX, cfg)
+        body = wr.render_text(raw, CTX, cfg)
         sms = wr.render_text(s['sms'], CTX, cfg)
         html = ea._md_to_html(body)
         t = s['target']
@@ -79,6 +88,30 @@ def main():
         check('**' not in html, f'{t}: literal ** left in the HTML')
         buttons = len(re.findall(r'background: #9a7b4f', html))
         include_lines = body.count('✨')
+
+        imgs = re.findall(r'<img [^>]*>', html)
+        # The logo header is an <img> too, so the photograph is the other one.
+        photos = [m for m in imgs if 'alt="JHP Boudoir"' not in m]
+        check(len(imgs) == 2, f'{t}: expected a logo and one photograph, '
+                              f'got {len(imgs)} image(s)')
+        check(len(photos) == 1, f'{t}: {len(photos)} photograph(s), expected 1')
+        if photos:
+            pic = photos[0]
+            check(f'width="{IMG_WIDTH}"' in pic,
+                  f'{t}: the photograph has no width="{IMG_WIDTH}" -- Outlook '
+                  f'will draw it at 1600px and break the layout')
+            alt = re.search(r'alt="([^"]*)"', pic)
+            check(alt is not None and len(alt.group(1)) > 10,
+                  f'{t}: the photograph has no useful alt text')
+            src = re.search(r'src="([^"]+)"', pic)
+            if src:
+                frame = src.group(1).rsplit('/', 1)[-1]
+                check(frame not in frames,
+                      f'{t}: frame {frame[:8]} already used in '
+                      f'{frames.get(frame)}')
+                frames[frame] = t
+        # A logo header on every email, which is what makes them hers.
+        check('alt="JHP Boudoir"' in html, f'{t}: the logo header is missing')
 
         if include_lines:
             check(include_lines == 6,
@@ -101,9 +134,13 @@ def main():
         print(f"   body    : {len(body):>5} md -> {len(html):>6} html, "
               f"{buttons} button(s), {include_lines} includes line(s)"
               + (f", deep link #{anchors[0]}" if anchors else ""))
+        print(f"   photo   : {re.search(r'media/([0-9a-f]{8})', html).group(1)}"
+              f"  width={IMG_WIDTH}, logo header present")
         print(f"   sms     : {len(sms)} chars, ~{-(-len(sms) // 153)} segment(s)")
 
     print()
+    check(len(frames) == len(b.STEPS),
+          f'{len(frames)} distinct frame(s) across {len(b.STEPS)} emails')
     if fails:
         for f in fails:
             print('FAIL ', f)

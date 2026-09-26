@@ -69,6 +69,70 @@ STALE = [
     'Klarna', 'Affirm', 'AfterPay', 'PayPal Credit',
 ]
 
+# ---------------------------------------------------------------------------
+# The photographs.
+#
+# EVERY ONE OF THESE IS ALREADY ON THE SITE, which is the whole reason they can
+# be chosen from here. The image CDN is unreachable from this sandbox, so nobody
+# working on this can look at a frame and judge it -- the house rule is that a
+# photograph is judged at real size, and these eight already were, by Jessica,
+# on the page each one sits on. Picking a fresh frame for an email means picking
+# it blind, and that is what the pickers exist to avoid.
+#
+# One frame per email and no repeats. The same face opening and closing a run
+# reads as the only woman who has ever been there.
+CDN = 'https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/'
+
+FRAMES = {
+    # the /contact lead band -- the photograph she was looking at when she
+    # filled the form in, so the email and the page are plainly one thing
+    'website-inquiry-day0': ('80df5d3e-43e6-4eb5-84c2-673a346bbec3.jpg',
+                             'A client photographed at the JHP Boudoir studio '
+                             'near Jefferson City, Missouri'),
+    # the studio in window light -- this email is about the room, not her
+    'website-inquiry-24h': ('f9de4c0c-ba8e-48bb-b559-a9a11beac76c.jpg',
+                            'Window light in the JHP Boudoir studio'),
+    # the guide's own posing plate, under the posing answer
+    'website-inquiry-72h': ('678293dc-8167-4463-a41b-8a20bfaee783.jpg',
+                            'A client posed from head to pointed toe at '
+                            'JHP Boudoir'),
+    # "this is the part I cannot wait for" -- the session day
+    'website-inquiry-7d': ('958c1b0e-53b1-4d18-b5ed-7b4b2ae1ccc5.jpg',
+                           'A black and white portrait from a studio session '
+                           'at JHP Boudoir'),
+    # the reveal plate, under the email that explains what she is buying
+    'website-inquiry-14d': ('538477d1-c964-4c26-babe-89e797786880.jpg',
+                            'Finished images seen together at a JHP Boudoir '
+                            'image reveal'),
+    # "every body, every age, every size" -- the email about finally booking
+    'website-inquiry-1mo': ('1d6d5e7e-7f3d-490b-9883-371ecaa5f1d0.jpg',
+                            'A client photographed at the JHP Boudoir studio '
+                            '-- every body, every age, every size'),
+    # the consultation band frame, under the touch-base ask
+    'website-inquiry-3mo': ('78e3da43-f19a-4c5b-a450-c76cd27ad02f.jpg',
+                            'A black and white portrait from a studio session '
+                            'at JHP Boudoir'),
+    # the Session Guide cover, Jessica's own pick -- the goodbye closes on the
+    # frame she chose for the document herself
+    'website-inquiry-6mo': ('92138463-6253-40ca-a072-7005daa9d96a.jpg',
+                            'A client photographed at the JHP Boudoir studio, '
+                            'from the Session Guide'),
+}
+
+
+def photo(target):
+    """The markdown image line for an email.
+
+    A standalone image line is what email_actions._md_to_html turns into a
+    centred, Outlook-safe frame. Inline HTML must NOT be used instead: the
+    renderer sees an HTML tag anywhere in a body and passes the WHOLE body
+    through unprocessed, which would kill every bold run, link and button in
+    the email.
+    """
+    f, alt = FRAMES[target]
+    return '![%s](%s%s)' % (alt, CDN, f)
+
+
 INCLUDES = (
     "✨ A two to three hour experience in our luxury studio\n"
     "✨ Professional hair and makeup at a local salon before you arrive "
@@ -97,6 +161,8 @@ STEPS = [
 I am **so** excited you reached out about a boudoir session with us at JHP Boudoir.
 
 Whether this is something you have been thinking about for years or you just had a little spark of *"maybe I could do this..."* — you are in the right place.
+
+@@PHOTO@@
 
 There are a lot of photographers you could have asked about this. You asked me. Thank you. That means more than you know. \U0001f495
 
@@ -138,6 +204,8 @@ Just making sure the Session Guide reached you — it sometimes hides in your sp
 
 [Your Session Guide →]({{guide_url}})
 
+@@PHOTO@@
+
 And in case it helps to hear it: the thing women say most on that first call is some version of *"I'm not sure I'm the kind of person who does this."*
 
 Nearly every single one. You do not need to be brave, or in shape, or photogenic. You just need to show up — I will do the rest, and you will love every minute of it. This is a full service boudoir studio, and I will take great care of you throughout your boudoir experience.
@@ -167,6 +235,8 @@ But nervous turns into empowered real quick, and you will leave feeling like a d
 *"But I don't look like the women in your portfolio."*
 
 You do. The women in my galleries are teachers and nurses and mothers and grandmothers, and not one of them walked in feeling ready. What they had was two hours, professional hair and makeup, and someone telling them exactly what to do with their hands.
+
+@@PHOTO@@
 
 > *"Jessica is amazing! Such a lovely day. She is so fun and professional! She really makes the studio a safe and comfortable place!"*
 
@@ -202,6 +272,8 @@ It has been a week since you inquired with the studio, and I would love to get y
 
 That is the part women tell me afterwards was their favourite of the whole experience, and it is easily mine.
 
+@@PHOTO@@
+
 [How it all works →]({{guide_url}}#works)
 
 Questions about any of it? Bring them all. Let's get you booked!
@@ -223,6 +295,8 @@ Any questions I can answer for you? Let's get your call booked: {{calendar_url}}
         body="""Hi {{contact.first_name}},
 
 It has been two weeks since you reached out to the studio, so I wanted to check in with you again!
+
+@@PHOTO@@
 
 And I would much rather you knew what this costs before we talk than after. So, plainly:
 
@@ -268,6 +342,8 @@ Here is the thing about why women finally book. It is rarely a birthday, though 
 
 If you are still thinking about it a month later, {{contact.first_name}}, that is generally your answer.
 
+@@PHOTO@@
+
 **So let's get your session on the books.** Pick a time that suits you and we will talk the whole thing through — the date, the Collections, the payment plan, all of it. You can book as far out as 15 months, so we can put your date wherever it suits you and spread the plan across the months in between.
 
 [Book my call →]({{calendar_url}})
@@ -293,6 +369,8 @@ It has been three months since you reached out about a session with us, and I wa
 In case it helps to see it again, here is what your experience includes:
 
 """ + INCLUDES + """
+
+@@PHOTO@@
 
 And you never pay for it all at once. Every Collection is bought on an **interest-free prepayment plan** — weekly, biweekly or monthly, set up within 7 days of booking, with your first payment due within 30 days. You can book your session **up to 15 months in advance**, too, so your plan spreads across as many payments as you need to keep the amount manageable.
 
@@ -323,6 +401,8 @@ This is the last time I will reach out, so I wanted to make it count.
 Thank you for thinking of my studio in the first place. With everywhere you could have looked, that still means a great deal to me.
 
 **My door is always open to you.** Next month, next year, whenever the time is right — I would love to have you in.
+
+@@PHOTO@@
 
 [Book my call →]({{calendar_url}})
 
@@ -377,12 +457,36 @@ def connect():
         host=os.environ['PGHOST'], cursor_factory=psycopg2.extras.RealDictCursor)
 
 
+def body_of(step):
+    """The step's body with its photograph substituted in.
+
+    The placeholder exists so the frame table stays the one place a photograph
+    is named, and so check(), main() and the render probe cannot disagree about
+    what was installed.
+    """
+    return step['body'].replace('@@PHOTO@@', photo(step['target']))
+
+
 def check():
     """Refuse to install rather than ship a wrong figure or an emoji text."""
     problems = []
+    frames_seen = {}
     for s in STEPS:
         t = s['target']
-        blob = s['subject'] + '\n' + s['body'] + '\n' + s['sms']
+        body = body_of(s)
+        if '@@PHOTO@@' in body:
+            problems.append(f"{t}: photograph placeholder not substituted")
+        if body.count('](' + CDN) != 1:
+            problems.append(f"{t}: expected exactly one photograph, found "
+                            f"{body.count('](' + CDN)}")
+        frame = FRAMES[t][0]
+        if frame in frames_seen:
+            problems.append(f"{t}: reuses the frame already in "
+                            f"{frames_seen[frame]} -- one frame per email")
+        frames_seen[frame] = t
+        if not FRAMES[t][1].strip():
+            problems.append(f"{t}: photograph has no alt text")
+        blob = s['subject'] + '\n' + body + '\n' + s['sms']
         for bad in STALE:
             if bad.lower() in blob.lower():
                 problems.append(f"{t}: superseded figure {bad!r}")
@@ -398,7 +502,7 @@ def check():
             if tok.strip().lower() not in KNOWN_TOKENS:
                 problems.append(f"{t}: unknown merge token {{{{{tok}}}}}")
         # A link the runner would render as a dead button.
-        for url in re.findall(r'\]\(([^)]*)\)', s['body']):
+        for url in re.findall(r'\]\(([^)]*)\)', body):
             if not (url.startswith('{{') or url.startswith('http')):
                 problems.append(f"{t}: link target {url!r} is neither a token nor a URL")
     targets = [s['target'] for s in STEPS]
@@ -444,7 +548,8 @@ def main():
             cur.execute("DELETE FROM jhp_workflow_steps WHERE workflow_id=%s", (wid,))
             for i, s in enumerate(STEPS, start=1):
                 amount, unit = s['delay']
-                cfg = {'subject': s['subject'], 'body_md': s['body'], 'sms': s['sms']}
+                cfg = {'subject': s['subject'], 'body_md': body_of(s),
+                       'sms': s['sms']}
                 cur.execute(
                     "INSERT INTO jhp_workflow_steps (workflow_id, position, label, kind, "
                     "action_kind, action_target, action_config, delay_amount, delay_unit, "
