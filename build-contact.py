@@ -207,6 +207,31 @@ FORM_CSS = """
    visitor has touched it, which is a telling-off for arriving. */
 .jhp-home .jhp-ask-form input:not(:placeholder-shown):invalid{
   border-color:#B4614B}
+/* The SMS consent row. Same rules as /inquire's acknowledgment, deliberately --
+   the two forms are one system and a checkbox that looks different on the
+   second one reads as a different kind of question. A row rather than a block
+   so the box sits on the first line of its own sentence at any width, and the
+   whole thing is a <label>, so the sentence is the tap target as well: 17px of
+   checkbox is not something to ask a thumb to find.
+   NOT `required`. The guide arrives by email, so declining to be texted must
+   cost her nothing and cost Jessica nothing -- which is also why there is no
+   :user-invalid rule here. Nothing about this box can fail validation. */
+.jhp-home .jhp-ask-form .ack{display:flex;align-items:flex-start;gap:12px;
+  margin:20px 0 0;padding:16px 18px;cursor:pointer;
+  background:var(--surface);border:1px solid var(--line);border-radius:2px;
+  transition:border-color .3s}
+.jhp-home .jhp-ask-form .ack:hover{border-color:var(--gold)}
+.jhp-home .jhp-ask-form .ack input{display:block;flex:0 0 auto;width:17px;
+  height:17px;margin:2px 0 0;padding:0;accent-color:var(--gold);cursor:pointer;
+  background:none;border:0}
+.jhp-home .jhp-ask-form .ack input:hover{border:0}
+.jhp-home .jhp-ask-form .ack span{font-family:var(--sans);font-weight:300;
+  font-size:14px;line-height:1.6;color:var(--muted)}
+.jhp-home .jhp-ask-form .ack input:focus-visible{
+  outline:2px solid var(--gold-bright);outline-offset:3px}
+.jhp-home .jhp-ask-form .ack .opt{display:inline-block;font-size:10px;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--dim);
+  margin-left:6px;font-weight:400}
 .jhp-home .jhp-ask-form .go{margin-top:24px;text-align:center}
 .jhp-home .jhp-ask-form .go .jhp-btn{width:100%;max-width:340px}
 .jhp-home .jhp-ask-form .note{margin:18px 0 0;font-family:var(--sans);
@@ -257,6 +282,8 @@ FORM_CSS = """
   .jhp-home .jhp-ask-form .row .f{margin-bottom:16px}
   .jhp-home .jhp-ask-form .row + .f{margin-top:0}
   .jhp-home .jhp-ask-form .go .jhp-btn{max-width:none}
+  .jhp-home .jhp-ask-form .ack{padding:14px 15px}
+  .jhp-home .jhp-ask-form .ack span{font-size:13.5px}
   .jhp-home .jhp-ask-form .note{font-size:13px}
   .jhp-home .jhp-done p{font-size:var(--ph-body)}
 }
@@ -322,6 +349,13 @@ BODY = """
       <span class="lb">Phone</span>
       <input type="tel" name="phone" autocomplete="tel"
              placeholder="(573) 000-0000" required>
+    </label>
+    <label class="ack">
+      <input type="checkbox" name="sms_consent">
+      <span>Text me too. I agree to receive text messages from JHP Boudoir
+        about my session at the number above. Message frequency varies, message
+        and data rates may apply. Reply STOP to opt out or HELP for help.
+        <b class="opt">Optional</b></span>
     </label>
     <div class="hp" aria-hidden="true">
       <label>Website<input type="text" name="website" tabindex="-1"
@@ -496,6 +530,12 @@ BODY = """
         name: (first + " " + last).trim(),
         email: v("email"),
         phone: v("phone"),
+        /* Express written consent to be texted, and the reason it is a real
+           checkbox rather than fine print by the button: the law wants an
+           affirmative act, and a box she chose to tick is one. Unticked sends
+           false, which is what an absent answer has to mean. */
+        sms_consent: !!(form.elements["sms_consent"]
+                        && form.elements["sms_consent"].checked),
         source_page: location.pathname,
         is_test: new URLSearchParams(location.search).has("test"),
         user_agent: navigator.userAgent.slice(0, 400),
@@ -540,5 +580,28 @@ out = out.replace("{{CDN}}", CDN).replace("{{WEBHOOK}}", WEBHOOK)
 
 n_fields = out.count('<input type="text"') + out.count('<input type="email"') \
     + out.count('<input type="tel"')
-print("wrote", len(out.encode()), "bytes,", n_fields, "inputs (4 real + 1 honeypot),",
+n_box = out.count('type="checkbox"')
+
+# The SMS consent chain is only as good as its weakest link, and every one of
+# these is silent when it breaks: a box that is required would cost leads, a box
+# whose value never reaches the webhook would have her texting without consent,
+# and a disclosure missing its STOP wording is not consent at all. So the build
+# refuses rather than shipping any of them.
+assert n_box == 1, f"expected exactly one checkbox (SMS consent), found {n_box}"
+assert 'name="sms_consent"' in out, "the consent box lost its name"
+assert 'sms_consent:' in out, "the form no longer sends sms_consent to the webhook"
+assert '<input type="checkbox" name="sms_consent" required' not in out, \
+    "the consent box must NOT be required -- the guide arrives by email, so " \
+    "declining to be texted cannot be allowed to cost her the guide"
+# Checked against whitespace-collapsed HTML: the disclosure wraps across source
+# lines, and a phrase test that cares about that fails on formatting rather than
+# on substance.
+_flat = " ".join(out.split())
+for phrase in ("Reply STOP to opt out", "message and data rates may apply",
+               "Message frequency varies", "text messages from JHP Boudoir",
+               "HELP for help"):
+    assert phrase in _flat, f"the consent disclosure is missing: {phrase!r}"
+
+print("wrote", len(out.encode()), "bytes,", n_fields, "inputs (4 real + 1 honeypot)",
+      "+ 1 optional SMS consent box,",
       out.count('href="/contact"'), "absolute contact links (want 0)")

@@ -66,15 +66,25 @@ the FAQ note at the foot of this file.
 $500 session fee, Collections from $2,800. Message 1 replaces it. This has to
 change whether or not the rest is approved.
 
-**2. There is no SMS consent on `/contact`.** It takes a phone number for a
-guide and never asks permission to text. In the US that is TCPA exposure,
-priced per message. **The emails can run today; the texts should wait** for
-one line under the phone field:
+**2. SMS consent is now on `/contact`, and the texts are compliant.** Done
+26 September. There is an **optional** box under the phone field:
 
-> By giving your number you agree to receive texts from JHP Boudoir about
-> your session. Message and data rates may apply. Reply STOP to opt out.
+> Text me too. I agree to receive text messages from JHP Boudoir about my
+> session at the number above. Message frequency varies, message and data
+> rates may apply. Reply STOP to opt out or HELP for help.
 
-An hour's work — say the word.
+It is optional on purpose: the guide arrives by email, so declining to be
+texted costs her nothing and costs you nothing. **Nobody who leaves it
+unticked is ever texted** — the flag follows her from the form into her
+enrollment, and the send refuses without it.
+
+Also built: every text carries "Reply STOP to opt out" and the first carries
+the full disclosure; texts only go out **9am–8pm Central**, enforced rather
+than hoped for; and an inbound STOP is handled by GoHighLevel, which also ends
+the whole sequence.
+
+**The texts are still switched off.** Not for any compliance reason any more —
+that is all closed. Turning them on is one line, and it is your call.
 
 **3. Exit conditions, or the sequence embarrasses her.** Remove from the
 sequence the moment any of these happen:
@@ -91,8 +101,10 @@ sequence the moment any of these happen:
 woman opening the month-3 email sees the next four days and nothing else.
 Worth knowing when a six-month sequence keeps saying "book a call".
 
-**5. Quiet hours 9am–8pm, her client's local time.** A 3am text from a
-boudoir studio is a bad look.
+**5. Quiet hours are enforced, not just noted.** 9am–8pm Central. If a step
+comes due outside that window the email still goes and the text is skipped with
+a reason in the log — a 3am text from a boudoir studio is a bad look, and a
+late one is better than a wrong one.
 
 ---
 

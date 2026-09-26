@@ -691,13 +691,51 @@ Still to do, roughly in order of what it is worth:
   text, an empty field, a merge token the runner does not substitute, and a
   link target that is neither a token nor a URL. `raise SystemExit` beats
   finding one of them in a stranger's inbox.
-  **SMS IS WRITTEN AND PARKED, AND THAT IS A LEGAL LINE, NOT A PREFERENCE.**
-  All eight texts are in `action_config.sms`, but every step is
-  `action_kind='send_email'`, which makes the runner ignore them. `/contact`
-  takes a phone number and never asks permission to text, which is TCPA
-  exposure priced per message. Put the consent line under the phone field,
-  flip `SEND_SMS` in the builder, re-run, and all eight arm at once. **Do not
-  arm them first and add the line after.**
+  **SMS IS COMPLIANT NOW AND STILL PARKED.** All eight texts are in
+  `action_config.sms` and every step is still `action_kind='send_email'`, so the
+  runner ignores them. What changed on 26 September is that the reason they were
+  parked is gone: the consent, the wording, the quiet hours and the opt-out are
+  all built and tested. **Arming them is one line** -- `SEND_SMS = True` in the
+  builder, re-run -- and it is Jessica's call, not a tidy-up.
+  **THE CONSENT CHAIN HAS FOUR LINKS AND EVERY ONE OF THEM FAILS SILENTLY:**
+
+        /contact consent box   build-contact.py, an OPTIONAL checkbox
+        site_leads.sms_consent scripts/site_leads_ingest.py stores it
+        enrollment.context     ops/enroll_website_inquiry.py stamps it
+        the send gate          sms_blocked_reason() in email_actions refuses
+                               a marketing text without it
+
+  A form that stops sending the field, an ingest that stops reading it, an
+  enroller that stops stamping it -- none of them raise, and all three look
+  exactly like working, right up until she is texting people who never agreed.
+  `probe-sms-consent` walks the whole chain with two test leads and
+  `probe-unsubscribe` checks the gate's behaviour; `build-contact.py` refuses to
+  build if the box goes missing, loses its name, stops being sent, **becomes
+  `required`**, or drops any phrase of the disclosure.
+  **THE BOX IS DELIBERATELY NOT REQUIRED.** The guide arrives by email, so
+  declining to be texted must cost the woman nothing and cost Jessica nothing.
+  Consent is separable from the lead, which is also why the ingest's upsert only
+  ever ratchets consent UP: a second POST that omits the field must not silently
+  revoke it, and a revocation arrives as a STOP, not as a form.
+  **ONLY A REAL BOOLEAN `True` IS CONSENT.** `'true'`, `1` and `'yes'` are what a
+  mis-wired form sends, and the probe asserts each of them is refused. An absent
+  flag is a no.
+  **QUIET HOURS ARE ENFORCED, NOT DOCUMENTED.** 9am-8pm `America/Chicago`,
+  tightened from the legal 8am-9pm because a text from a boudoir studio at five
+  past eight in the morning is legal and still wrong. If the local hour cannot
+  be established the text does not go: the only thing worse than a late text is
+  a 3am one. A blocked text is logged with its reason and the email still sends.
+  **The compliance wording is in the copy and guarded.** Every text carries
+  "Reply STOP to opt out"; the first also carries the sender, message frequency,
+  "Msg & data rates may apply" and "HELP for help". The builder fails without
+  them. **Segment count is not a reason to trim any of it** -- these are the
+  texts a carrier audit reads.
+  **STOP itself is GHL's job and it already does it**: an inbound STOP sets SMS
+  DND, which GHL enforces on every send. The website-inquiry stopgate also
+  cancels the whole sequence on any inbound message, so a STOP ends the emails
+  too.
+  **`boudoir_giveaway_lead_capture` LOOKS like marketing and is not** -- see the
+  footer note above. The same list decides both the footer and the SMS gate.
   **The clock starts at enrollment, not at the step.** Every step is
   `delay_relative_to='enrollment'`, so the whole six months is anchored to the
   moment she pressed the button and a slow runner pass cannot drift the
@@ -832,6 +870,9 @@ Still to do, roughly in order of what it is worth:
   It cleans up after itself. Run it after touching any part of that path -- a
   lost opt-out is invisible otherwise, which is exactly the failure that gets a
   domain blocklisted.
+  **`scripts/site_leads_ingest.py` is NOT mirrored and now holds a link of the
+  consent chain**, so it is the next one worth copying down. The other three
+  links are all in the repo.
   **`email_actions.py` and `workflow_runner.py` ARE NOW MIRRORED** in `scripts/`,
   on Jessica's say-so, 26 September. They are the whole send path for nine live
   sequences and until then existed in exactly one place, on Scalogy, with no
@@ -861,6 +902,25 @@ Still to do, roughly in order of what it is worth:
   link, and her superseded attachment quoting $500 and $2,800. Nothing in this
   repo can stop the second one.
 
+- **TWO WEBHOOK DELIVERIES 37ms APART RAN THE WORKFLOW ONCE, AND THE FIRST ONE
+  WAS LOST.** Found on 26 September while testing the SMS consent chain: two
+  POSTs to `site-lead-submit` a fraction of a second apart both returned 200,
+  both were logged `accepted` with `action_status: succeeded` and
+  `run_workflow dispatched` -- and `runs_list` shows **one** execution, which
+  processed the SECOND body. The first lead was never written and nothing
+  anywhere says so.
+  **This is not specific to that hook.** Every browser-originated ingest on this
+  tenant dispatches the same way, which includes `site-inquiry-submit` and the
+  payment hooks -- `promo-reserve-pay`, `treehouse-reserve-pay`,
+  `emc-reserve-pay`, `pspp-checkout-trigger`. Two women submitting within the
+  same second is not exotic after an Instagram post or an email send, and for a
+  payment hook the lost one is a charge.
+  **What it means in practice:** the webhook event log is NOT proof a submission
+  was processed -- only a row in the destination table is. When a lead is
+  reported missing, check the table against `webhook_events_list` rather than
+  trusting the log's "succeeded". Spacing submissions fixes it, which a probe can
+  do and a real visitor cannot, so the durable fix belongs on Scalogy's side:
+  raise it with them. Nothing in this repo can serialise their dispatcher.
 - **The hero picker is temporary and must be retired.** `/guide-hero-picker`,
   template `jhp-guide-hero-picker`, generator `build-hero-picker.py`, 13,952
   bytes. It exists because **the image CDN is unreachable from this sandbox**

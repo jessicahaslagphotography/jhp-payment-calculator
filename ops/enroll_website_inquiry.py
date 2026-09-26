@@ -13,6 +13,12 @@ Stamped into enrollment.context, which the runner exposes as merge fields:
   calendar_url  -> the Boudoir Consultation Call calendar, prefilled with the
                    four fields she already typed
   site_lead_id  -> the dedupe key, so one lead is never enrolled twice
+  sms_consent   -> whether she ticked the consent box on /contact. NOT a merge
+                   field: email_actions.action_send_sms reads it and refuses to
+                   send a marketing text without it. Carried on the enrollment
+                   rather than re-read at send time so the answer is frozen as
+                   she gave it, and so a text is never sent on a consent that
+                   cannot be pointed at.
 
 WHY ?n= IS VALIDATED HERE TOO. The guide validates the parameter itself against
 ^\\p{L}[\\p{L}'-]{1,23}$ and falls back to its default copy if it fails, so a
@@ -145,7 +151,7 @@ def main():
         with conn.cursor() as cur:
             cur.execute(
                 "SELECT l.id, l.contact_name, l.contact_email, l.contact_phone, "
-                "       l.ghl_contact_id, l.created_at "
+                "       l.ghl_contact_id, l.created_at, l.sms_consent "
                 "FROM site_leads l "
                 "WHERE l.is_test IS NOT TRUE AND COALESCE(l.contact_email,'') <> '' "
                 "  AND l.ghl_contact_id IS NOT NULL AND l.created_at > %s "
@@ -180,12 +186,14 @@ def main():
                 ctx = {
                     'site_lead_id': lid,
                     'source': 'website-contact-form',
+                    'sms_consent': bool(r.get('sms_consent')),
                     'guide_url': guide_url_for(first),
                     'calendar_url': calendar_url_for(first, last, email,
                                                      r.get('contact_phone')),
                 }
                 if DRY:
                     log.info(f"[dry-run] would enrol {email} at step {start_pos} "
+                             f"sms_consent={ctx['sms_consent']} "
                              f"guide={ctx['guide_url']}")
                     _sp(conn, "RELEASE SAVEPOINT sp")
                     enrolled += 1
@@ -201,7 +209,8 @@ def main():
                     new = cur.fetchone()
                 _sp(conn, "RELEASE SAVEPOINT sp")
                 enrolled += 1
-                log.info(f"enrolled {email} -> #{new['id']} (site_lead {lid})")
+                log.info(f"enrolled {email} -> #{new['id']} (site_lead {lid}, "
+                         f"sms_consent={ctx['sms_consent']})")
             except psycopg2.Error as e:
                 _sp(conn, "ROLLBACK TO SAVEPOINT sp")
                 log.warning(f"lead {lid} ({email}) failed, skipped: {e}")

@@ -91,6 +91,61 @@ WHY = {
 }
 WHY_DEFAULT = 'You are getting this because you contacted JHP Boudoir.'
 
+# ---------------------------------------------------------------------------
+# SMS compliance (added 2026-09-26)
+#
+# A marketing text needs three things an email does not, and all three are
+# enforced in action_send_sms rather than trusted to the copy:
+#
+#   1. PRIOR EXPRESS WRITTEN CONSENT. The /contact consent box writes
+#      site_leads.sms_consent, enroll_website_inquiry stamps it onto the
+#      enrollment, and a marketing text without it is refused here. TCPA damages
+#      are per message, so this is the expensive one to get wrong -- which is why
+#      the default is NO and an absent flag is not consent.
+#   2. QUIET HOURS. A marketing text outside 8am-9pm in the recipient's local
+#      time is a violation on its own. Her clients are Missouri, so the window is
+#      America/Chicago and tightened to 9am-8pm: a text from a boudoir studio at
+#      five past eight in the morning is legal and still wrong.
+#   3. AN OPT-OUT THAT WORKS. GHL processes an inbound STOP itself and sets SMS
+#      DND, which it then enforces on every send; the website-inquiry stopgate
+#      also cancels the whole sequence on any inbound message, so a STOP ends the
+#      emails too. The copy carries the STOP wording; see the builder.
+#
+# Transactional texts -- your session is tomorrow, your images are ready -- are
+# not gated by any of this, exactly as they are not gated by the email footer.
+SMS_QUIET_START = 9    # inclusive, America/Chicago
+SMS_QUIET_END = 20     # exclusive, so the last text can go at 19:59
+SMS_TZ = 'America/Chicago'
+
+
+def sms_blocked_reason(ctx):
+    """Why a MARKETING text must not be sent right now, or None if it may be.
+
+    Returns a short string so the caller can log the actual reason: 'no consent'
+    and 'quiet hours' are the same non-event in the log otherwise, and they want
+    very different fixes.
+    """
+    wf = (ctx or {}).get('workflow')
+    if wf not in MARKETING_WORKFLOWS:
+        return None
+    enr_ctx = ((ctx or {}).get('enrollment') or {}).get('context') or {}
+    if not isinstance(enr_ctx, dict):
+        enr_ctx = {}
+    if enr_ctx.get('sms_consent') is not True:
+        return 'no SMS consent on this enrollment'
+    try:
+        from zoneinfo import ZoneInfo
+        from datetime import datetime
+        hour = datetime.now(ZoneInfo(SMS_TZ)).hour
+    except Exception as e:
+        # Cannot establish the local hour -> do not send. The one thing worse
+        # than a delayed text is a 3am one.
+        return f'local time unavailable ({e})'
+    if hour < SMS_QUIET_START or hour >= SMS_QUIET_END:
+        return (f'quiet hours ({hour:02d}:00 {SMS_TZ}, window '
+                f'{SMS_QUIET_START:02d}-{SMS_QUIET_END:02d})')
+    return None
+
 
 def is_suppressed(conn, ctx):
     """True if this contact has unsubscribed from marketing email.
@@ -405,9 +460,20 @@ def action_send_email(conn, enr, step, ctx, rendered_subject, rendered_body):
 
 def action_send_sms(conn, enr, step, ctx, message):
     """Send an SMS to the contact via GHL Conversations. Respects the contact's
-    SMS DND in GHL."""
+    SMS DND in GHL, and for MARKETING sequences also requires express consent,
+    an opt-out that has not been used, and the quiet-hours window."""
     contact_id = ctx['contact'].get('id') or enr.get('ghl_contact_id')
     target_slug = step.get('action_target') or 'unknown'
+    wf = (ctx or {}).get('workflow')
+    if wf in MARKETING_WORKFLOWS:
+        reason = sms_blocked_reason(ctx)
+        if reason is None and is_suppressed(conn, ctx):
+            reason = 'unsubscribed'
+        if reason:
+            log.info(f"  send_sms({target_slug}) NOT SENT - {reason}")
+            return {'external_ref': f"sms_blocked:{target_slug}",
+                    'payload': {'kind': 'sms_blocked', 'reason': reason,
+                                'target': target_slug, 'workflow': wf}}
     if not contact_id:
         raise ValueError("send_sms: no GHL contact id on enrollment")
     if not message:

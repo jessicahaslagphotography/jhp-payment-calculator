@@ -211,7 +211,7 @@ There are plenty of photographers you could've asked - thank you for inquiring w
 
 Questions or Ready to Book? Let's Chat: {{calendar_url}}
 
-Reply STOP to opt out.""",
+Msg frequency varies. Msg & data rates may apply. Reply STOP to opt out, HELP for help.""",
     ),
     dict(
         target='website-inquiry-24h', delay=(24, 'hours'),
@@ -239,7 +239,9 @@ You do not need to be brave, or in shape, or photogenic - you just need to show 
 
 Any questions at all, reply right here or book a call! Talk soon!
 
-{{calendar_url}} - Jess""",
+{{calendar_url}} - Jess
+
+Reply STOP to opt out.""",
     ),
     dict(
         target='website-inquiry-72h', delay=(72, 'hours'),
@@ -273,7 +275,9 @@ Being nervous is the best reason there is to book the call. Bring every worry yo
 
 Let's get you on the phone: {{calendar_url}}
 
-- Jess""",
+- Jess
+
+Reply STOP to opt out.""",
     ),
     dict(
         target='website-inquiry-7d', delay=(7, 'days'),
@@ -305,7 +309,9 @@ Hair and makeup first at a local salon, then two to three hours in the studio, t
 
 Any questions I can answer for you? Let's get your call booked: {{calendar_url}}
 
-- Jess""",
+- Jess
+
+Reply STOP to opt out.""",
     ),
     dict(
         target='website-inquiry-14d', delay=(14, 'days'),
@@ -343,7 +349,9 @@ If a number raises a question, bring it. No pressure and no obligation!
 
 I would absolutely love to get your session on the books. Let's find a time to chat: {{calendar_url}}
 
-- Jess""",
+- Jess
+
+Reply STOP to opt out.""",
     ),
     dict(
         target='website-inquiry-1mo', delay=(30, 'days'),
@@ -375,7 +383,9 @@ Women rarely book because of a birthday. They book because they got tired of wai
 
 I would love to welcome you into the studio. Let's get your call booked and your session on the calendar: {{calendar_url}}
 
-- Jess""",
+- Jess
+
+Reply STOP to opt out.""",
     ),
     dict(
         target='website-inquiry-3mo', delay=(90, 'days'),
@@ -407,7 +417,9 @@ And you do not have to pay for it all at once. Every Collection can go on an int
 
 You have thought about it. Let's do it! Book a no-obligation call: {{calendar_url}}
 
-- Jess""",
+- Jess
+
+Reply STOP to opt out.""",
     ),
     dict(
         target='website-inquiry-6mo', delay=(180, 'days'),
@@ -433,7 +445,9 @@ Thank you for thinking of my studio in the first place. With everywhere you coul
 
 Next month, next year, whenever the time is right - I would love to have you in. You are worth it, and I would be honored to be the one who captures you.
 
-{{calendar_url}} - Jess""",
+{{calendar_url}} - Jess
+
+Reply STOP to opt out.""",
     ),
 ]
 
@@ -490,7 +504,7 @@ def check():
     """Refuse to install rather than ship a wrong figure or an emoji text."""
     problems = []
     frames_seen = {}
-    for s in STEPS:
+    for i, s in enumerate(STEPS, start=1):
         t = s['target']
         body = body_of(s)
         if '@@PHOTO@@' in body:
@@ -512,6 +526,19 @@ def check():
         for field in ('subject', 'body', 'sms'):
             if not (s.get(field) or '').strip():
                 problems.append(f"{t}: empty {field}")
+        # SMS COMPLIANCE IS NOT COPY AND MAY NOT BE TRIMMED FOR LENGTH.
+        # Every marketing text needs a visible opt-out; the first one, which is
+        # the one that opens the relationship, needs the full disclosure. These
+        # are the texts a carrier audit looks at, and the segment count is not a
+        # reason to drop any of it.
+        if 'Reply STOP to opt out' not in s['sms']:
+            problems.append(f"{t}: the text has no 'Reply STOP to opt out'")
+        if i == 1:
+            for phrase in ('Msg & data rates may apply', 'Msg frequency varies',
+                           'HELP for help', 'JHP Boudoir'):
+                if phrase not in s['sms']:
+                    problems.append(f"{t}: the first text is missing the "
+                                    f"disclosure phrase {phrase!r}")
         # Her rule: no emoji in any text. Also protects against an SMS being
         # upgraded to MMS by the carrier.
         for ch in s['sms']:
