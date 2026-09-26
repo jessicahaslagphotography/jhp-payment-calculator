@@ -260,6 +260,8 @@ def redirects(blog_url):
                                   which stays on Scalogy under its own domain
         /privacy-policy       -> /privacy-policy/   SAME PATH, on purpose
         /blog/, /YYYY/MM/DD/  -> --blog-url, when there is one
+        /category/*           -> two of them, found by reading the blog index
+        /feed/*, /wp-json/*   -> so a feed reader and the API follow too
 
     The first five need no rule: the bundle has a directory of that name and
     the host resolves it. They are written out here because this list is the
@@ -291,16 +293,22 @@ def redirects(blog_url):
         b = blog_url.rstrip('/')
         out += ['',
                 '# The blog and its five posts. The post URLs are date-based at',
-                '# the ROOT, not under /blog/, so /blog/* alone would miss them.',
-                '/blog/*   %s/blog/:splat   301' % b,
-                '/blog     %s/blog/          301' % b,
-                '/2024/*   %s/2024/:splat    301' % b,
-                '/2025/*   %s/2025/:splat    301' % b]
+                '# the ROOT, not under /blog/, so /blog/* alone would miss',
+                '# them -- and there are two category pages besides.',
+                '/blog/*      %s/blog/:splat      301' % b,
+                '/blog        %s/blog/             301' % b,
+                '/2024/*      %s/2024/:splat       301' % b,
+                '/2025/*      %s/2025/:splat       301' % b,
+                '/category/*  %s/category/:splat   301' % b,
+                '/feed/*      %s/feed/:splat       301' % b,
+                '/wp-json/*   %s/wp-json/:splat    301' % b]
     else:
         out += ['',
                 '# NO --blog-url WAS GIVEN, so the blog and its five posts are',
                 '# not redirected anywhere and will 404:',
-                '#   /blog/  and  /2024/02/01/*  /2025/03/*  /2025/04/*']
+                '#   /blog/  /2024/02/01/*  /2025/03/*  /2025/04/*',
+                '#   /category/empowerment-stories-client-testimonials/',
+                '#   /category/tips-tricks/']
     return '\n'.join(out) + '\n'
 
 
