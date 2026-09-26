@@ -144,6 +144,137 @@ def transform(html, site, page_dir, blog_url, launch):
     return html
 
 
+# What each page IS, in schema.org's vocabulary, and what a visitor would
+# call it in a breadcrumb. Anything not listed is a plain WebPage.
+SCHEMA = {
+    '':               ('WebSite',      'Home'),
+    'about':          ('AboutPage',    'About'),
+    'portfolio':      ('CollectionPage', 'Portfolio'),
+    'experience':     ('WebPage',      'The Experience'),
+    'faq':            (None,           'FAQ'),   # already has FAQPage, derived
+    'contact':        ('ContactPage',  'Book a Call'),
+    'inquire':        ('ContactPage',  'Inquire'),
+    'session-guide':  ('Article',      'The Session Guide'),
+    'privacy-policy': ('WebPage',      'Privacy Policy'),
+}
+
+
+def _meta(html, name=None, prop=None):
+    pat = (r'<meta name="%s" content="([^"]*)"' % name if name
+           else r'<meta property="%s" content="([^"]*)"' % prop)
+    m = re.search(pat, html)
+    return html_unescape(m.group(1)) if m else None
+
+
+def html_unescape(s):
+    import html as _h
+    return _h.unescape(s)
+
+
+def structured_data(html, site, page_dir, ctx=None):
+    """Build the JSON-LD for one page FROM THAT PAGE.
+
+    Derived, never written twice -- the same rule the FAQ's FAQPage already
+    follows. Title, description, canonical and share image are read back out
+    of the head that was just built, so a copy change moves the markup Google
+    reads in the same pass and the two cannot disagree.
+
+    Nineteen of the twenty-one pages carried nothing at all before this. The
+    two that did are left alone: the home page's ProfessionalService block is
+    hand-written in scalogy-home.html and holds her NAP, and the FAQ's
+    FAQPage is parsed out of its own accordion by build-info.py. Adding a
+    second description of the same business on the same page would be two
+    things to keep true, which is the failure this whole project is arranged
+    against.
+
+    Everything here points at that one business node by @id, so the graph has
+    a single publisher rather than twenty-one copies of her details.
+    """
+    kind, label = SCHEMA.get(page_dir, ('WebPage', page_dir))
+    if ctx:                       # a client gallery
+        kind, label = 'ImageGallery', ctx['name']
+    if kind is None and not ctx:
+        kind = None
+
+    url = site + '/' + (page_dir + '/' if page_dir else '')
+    biz = site + '/#business'
+    title = _meta(html, prop='og:title') or ''
+    desc = _meta(html, name='description') or ''
+    img = _meta(html, prop='og:image')
+
+    graph = []
+
+    # The trail. Home is not a breadcrumb of itself.
+    if page_dir:
+        trail = [('Home', site + '/')]
+        if ctx:
+            trail.append(('Portfolio', site + '/portfolio/'))
+        trail.append((label, url))
+        graph.append({
+            '@type': 'BreadcrumbList',
+            '@id': url + '#breadcrumb',
+            'itemListElement': [
+                {'@type': 'ListItem', 'position': i, 'name': n, 'item': u}
+                for i, (n, u) in enumerate(trail, 1)],
+        })
+
+    if kind:
+        node = {
+            '@type': kind,
+            '@id': url + '#page',
+            'url': url,
+            'name': title,
+            'isPartOf': {'@id': site + '/#website'},
+            'publisher': {'@id': biz},
+        }
+        if desc:
+            node['description'] = desc
+        if img:
+            node['primaryImageOfPage'] = {'@type': 'ImageObject', 'url': img}
+        if page_dir:
+            node['breadcrumb'] = {'@id': url + '#breadcrumb'}
+        if kind == 'WebSite':
+            node['@id'] = site + '/#website'
+            node['name'] = 'JHP Boudoir'
+            node.pop('isPartOf', None)
+            node.pop('breadcrumb', None)
+        if kind == 'Article':
+            node['headline'] = title[:110]
+            node['author'] = {'@id': biz}
+            node['image'] = img
+
+        # A gallery lists what is in it. This is the one place the 165
+        # photographs get described to Google individually, and it is only
+        # worth anything once they have alt text worth reading -- see the
+        # note in CLAUDE.md. The structure goes in now so that the day the
+        # alt text improves, the markup improves with it.
+        if ctx:
+            photos = [p for row in ctx['rows'] for p in row]
+            node['numberOfItems'] = len(photos)
+            node['associatedMedia'] = [{
+                '@type': 'ImageObject',
+                'contentUrl': ctx['cdn'] + p['file'],
+                'width': p.get('w'),
+                'height': p.get('h'),
+                'caption': p.get('alt'),
+            } for p in photos]
+        graph.append(node)
+
+    if not graph:
+        return ''
+    blob = json.dumps({'@context': 'https://schema.org', '@graph': graph},
+                      indent=1, ensure_ascii=False)
+    return '<script type="application/ld+json">\n%s\n</script>\n' % blob
+
+
+def inject_schema(html, site, page_dir, ctx=None):
+    block = structured_data(html, site, page_dir, ctx)
+    if not block:
+        return html
+    assert '</head>' in html, 'no </head> to put the structured data before'
+    return html.replace('</head>', block + '</head>', 1)
+
+
 def write(rel, text):
     p = OUT / rel
     p.parent.mkdir(parents=True, exist_ok=True)
@@ -187,6 +318,7 @@ def build(site, blog_url, launch):
             fail('%s: Jinja changed more than the raw fence -- there is live '
                  'template syntax outside {%% raw %%}' % src)
         html = transform(rendered, site, d, blog_url, launch)
+        html = inject_schema(html, site, d)
         rel = (d + '/index.html') if d else 'index.html'
         write(rel, html)
         urls.append(('/' + (d + '/' if d else ''), prio))
@@ -202,6 +334,7 @@ def build(site, blog_url, launch):
             fail('%s: slug is %r but the file is named %r -- the canonical URL '
                  'comes off the slug' % (p.name, slug, p.stem))
         html = transform(render_jinja(GALLERY_TPL, ctx), site, slug, blog_url, launch)
+        html = inject_schema(html, site, slug, ctx)
         if ctx['name'] not in html:
             fail('%s: rendered without the client name -- an empty gallery '
                  'looks exactly like a full one from the outside' % slug)
@@ -364,6 +497,18 @@ def check(site, blog_url, launch):
         # is the only route to it, so losing the link loses the page.
         if 'href="/privacy-policy/"' not in html and where != '/privacy-policy':
             fail('%s: the footer has lost its privacy policy link' % where)
+
+        # Nineteen of twenty-one pages had no structured data before
+        # 26 September. Having added it, the build refuses to lose it again.
+        blobs = re.findall(r'<script type="application/ld\+json">(.*?)</script>',
+                           html, re.S)
+        if not blobs:
+            fail('%s: no structured data' % where)
+        for b in blobs:
+            try:
+                json.loads(b)
+            except Exception as e:
+                fail('%s: a JSON-LD block does not parse (%s)' % (where, e))
 
         canon = re.search(r'<link rel="canonical" href="([^"]+)"', html)
         want = site + '/' + (str(rel.parent) + '/' if str(rel.parent) != '.' else '')
