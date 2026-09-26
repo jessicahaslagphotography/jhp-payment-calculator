@@ -228,13 +228,22 @@ Still to do, roughly in order of what it is worth:
 2. **Nothing is written for anyone to find.** There is no blog and
    `/blog` 404s. For a local studio that is the main organic lever there
    is, and the FAQ answers are already the raw material.
-3. **165 gallery photographs share one alt string**, word for word:
-   "Boudoir portrait from a session at JHP Boudoir". It is honest and it
-   is useless -- to Google Images and to a screen reader alike.
-4. **No `srcset` anywhere.** Full 1600px frames are served to 390px
-   phones, which is the page-speed problem on this site.
-5. **`sitemap.xml` and `robots.txt`** both want the real domain and
-   cannot be written until it is bound.
+3. ~~165 gallery photographs share one alt string~~ **DONE, 26 September.**
+   All 165 now carry their own description, written by putting every frame
+   through Claude's vision API from a Scalogy workflow -- the build sandbox
+   cannot reach the CDN, so this was the one SEO item nobody here could do.
+   Jessica cleared it: her clients sign a full model release covering
+   marketing use, and these are her own published photographs and her own
+   key. $2.43 for all 165, none failed, all distinct, none over 125
+   characters. The text lives in `gallery-alt-text.json` keyed by filename
+   and `plan-all.py` reads it, so re-planning the galleries keeps it.
+   **The generic line is still in `plan-all.py` as a FALLBACK and that is
+   deliberate** -- a frame added tomorrow has no entry yet and must not stop
+   the build; it gets the old line and is counted in what the script prints.
+   Across the site: 33 distinct alt strings before, 197 after.
+4. ~~No `srcset` anywhere~~ **DONE, 26 September.** See the responsive
+   images note under *Launch* below. 690KB to 25KB on a phone.
+5. ~~`sitemap.xml` and `robots.txt`~~ **DONE at launch.**
 6. **The name is inconsistent.** The About h1 says "Jessica Paul"; its
    own meta description, its title and all six alt texts say "Jessica
    Haslag". Search engines treat a person as an entity and entity

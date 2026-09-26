@@ -9,7 +9,29 @@ LENGTH instead: a lone banner against a run of three.
 import json, pathlib, re
 
 CDN = "https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/"
+
+# REAL ALT TEXT, ONE STRING PER PHOTOGRAPH.
+# All 165 frames used to share this line, word for word:
+#
+#     "Boudoir portrait from a session at JHP Boudoir"
+#
+# Honest, and useless -- to Google Images and to a screen reader alike. It was
+# the third item on CLAUDE.md's SEO list and the only one nobody could do from
+# the build sandbox, because the image CDN is unreachable from here and a
+# photograph cannot be described unseen.
+#
+# gallery-alt-text.json is that description, keyed by filename: written on
+# 26 September by putting every frame through Claude's vision API from a
+# Scalogy workflow, which CAN reach the CDN. Jessica cleared it -- her clients
+# sign a full model release covering marketing use, and these are her own
+# published photographs and her own API key. $2.43 for all 165.
+#
+# THE FALLBACK IS STILL HERE AND IS DELIBERATE. A frame added to
+# galleries.json tomorrow has no entry yet, and a missing description must not
+# stop the site building -- it gets the old generic line and shows up in the
+# count this script prints, which is how anybody notices.
 ALT = "Boudoir portrait from a session at JHP Boudoir"
+ALT_TEXT = json.loads(pathlib.Path("gallery-alt-text.json").read_text())
 WIDTH, GAP = 1240, 14
 SHAPES = [(0, 1), (0, 2), (0, 3), (1, 1), (1, 2), (2, 1), (2, 0), (3, 0)]
 MIN_H, MAX_H = 240, 960
@@ -75,11 +97,15 @@ def main():
     out_dir.mkdir(exist_ok=True)
     galleries = json.loads(pathlib.Path("galleries.json").read_text())
     summary = []
+    described = generic = 0
 
     for g in galleries:
         photos = [{"file": f, "label": lb, "w": w, "h": h,
-                   "ar": round(w / h, 4), "alt": ALT}
+                   "ar": round(w / h, 4),
+                   "alt": ALT_TEXT.get(f, ALT)}
                   for f, lb, w, h in g["photos"]]
+        described += sum(1 for p in photos if p["alt"] != ALT)
+        generic += sum(1 for p in photos if p["alt"] == ALT)
         tall = [p for p in photos if p["ar"] < 1]
         wide = [p for p in photos if p["ar"] >= 1]
         ar_t = sum(p["ar"] for p in tall) / len(tall) if tall else 0.67
@@ -101,7 +127,13 @@ def main():
         i = galleries.index(g)
         prev = galleries[i - 1]
         nxt = galleries[(i + 1) % len(galleries)]
-        payload = {"name": g["name"], "cdn": CDN, "rows": rows,
+        # `slug` is what the gallery template builds its canonical and og:url
+        # from, and what deploy-site.py checks the filename against. It was in
+        # the payloads on disk but NOT written here, so re-running this script
+        # would have silently dropped it and broken every gallery's canonical
+        # tag. Caught on 26 September when this file was next touched.
+        payload = {"name": g["name"], "slug": g["slug"], "cdn": CDN,
+                   "rows": rows,
                    "prev": {"name": prev["name"], "slug": prev["slug"]},
                    "nxt": {"name": nxt["name"], "slug": nxt["slug"]}}
         (out_dir / (g["slug"] + ".json")).write_text(
@@ -109,6 +141,12 @@ def main():
         summary.append((g["slug"], g["name"], len(photos), len(wide), len(tall),
                         len(rows), len(set(map(tuple, shapes))), hs))
 
+    print("\nalt text: %d described, %d still on the generic line"
+          % (described, generic))
+    if generic:
+        print("         (a frame with no entry in gallery-alt-text.json "
+              "falls back; add one)")
+    print()
     print("%-20s %-7s %4s %4s %4s %5s %6s  row heights"
           % ("slug", "name", "n", "wide", "tall", "rows", "shapes"))
     for s in summary:
