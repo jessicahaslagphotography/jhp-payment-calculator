@@ -779,19 +779,37 @@ Still to do, roughly in order of what it is worth:
         11811 Main Street, Centertown, MO 65023     her own, given 26 September
 
   **`MARKETING_WORKFLOWS` in `email_actions.py` is an ALLOWLIST and the default
-  is no footer.** That is a safety decision, not a legal shortcut.
-  Transactional and relationship email -- a session confirmation, a contract, an
-  image reveal -- is exempt from the opt-out requirement anyway, and inviting a
-  booked client to unsubscribe would be actively harmful: **GHL's Email DND is
-  ACCOUNT-WIDE**, so a client who used it would stop receiving her own session
-  emails too. A NEW MARKETING SEQUENCE MUST BE ADDED TO THAT SET or it ships
-  without a footer; the render probe catches it for this one.
-  **The three other prospect-facing sequences are still uncovered** --
-  `promo_inquiry_nurture`, `boudoir_giveaway_lead_capture` and
-  `referral_program` (which carries "a special offer just for you", so it is
-  marketing). Adding their names to the set is the whole change, but each one's
-  copy wants reading first and it edits live sequences, so it is a decision to
-  take rather than a line to add in passing.
+  is no footer.** Jessica's rule, 26 September: **booking emails do not carry an
+  unsubscribe.** Transactional and relationship email -- a session confirmation,
+  a contract, an image reveal -- is exempt from the opt-out requirement anyway,
+  and a booking email is the last place to invite somebody to switch your emails
+  off. A NEW MARKETING SEQUENCE MUST BE ADDED TO THAT SET or it ships without a
+  footer; the render probe catches it for this one, and `probe-unsubscribe`
+  fails if a sequence in the set has no `WHY` line.
+
+        with a footer   website_inquiry_2027, promo_inquiry_nurture,
+                        referral_program
+        without         boudoir_giveaway_lead_capture, emc_prepay_reminders,
+                        promo_booking_reminders, image_reveal, reschedule_session
+
+  **`boudoir_giveaway_lead_capture` LOOKS like marketing and is not.** Its name
+  says lead capture and its enroller reads `giveaway_leads`, but those are
+  winners who have already paid the $197 retainer, and every step says *"your
+  giveaway session is officially reserved -- pick your date, sign your contract,
+  set up your plan"*. That is a booking email. Read the copy before deciding
+  which list a sequence belongs on; the name will mislead you.
+  **AN OPT-OUT MUST NOT BE ABLE TO BREAK A BOOKING, and the first version of
+  this could.** It set GHL's Email DND, which is **ACCOUNT-WIDE** -- it blocks
+  every email to that contact, transactional included. A woman who unsubscribed
+  from the nurture emails and later booked would have silently stopped receiving
+  her own confirmation, contract and reveal notice, with the automation looking
+  perfectly healthy. So the ingest now **tags** the contact `Email Unsubscribed`
+  in GHL, for Jessica's eyes and her manual sends, and the suppression itself
+  lives in `email_optouts` and is enforced by `is_suppressed()` in
+  `email_actions`, **on marketing sends only**. `is_suppressed` fails OPEN on a
+  database error, deliberately: the alternative is one transient fault silently
+  stopping every marketing email on the tenant, and the ingest cancels the
+  contact's enrollments anyway, so a send would have to survive that too.
   **The unsubscribe is a real one-click opt-out, not a sentence.**
   `/unsubscribe` -> webhook `email-unsubscribe` -> workflow
   `email-unsubscribe-ingest`, which writes an `email_optouts` row **and commits
@@ -814,13 +832,15 @@ Still to do, roughly in order of what it is worth:
   It cleans up after itself. Run it after touching any part of that path -- a
   lost opt-out is invisible otherwise, which is exactly the failure that gets a
   domain blocklisted.
-  **`email_actions.py` and `workflow_runner.py` now carry four changes and are
-  still NOT mirrored in this repo.** The image width, the footer, and the
-  `guide_url`/`calendar_url`/`workflow` merge values all live only on Scalogy.
-  `verify-runner-syntax` byte-compiles them and exercises the merge fields; run
-  it after any edit. **Mirroring both into `scripts/` is worth doing** -- they
-  are the whole send path for nine live sequences and exist in exactly one
-  place.
+  **`email_actions.py` and `workflow_runner.py` ARE NOW MIRRORED** in `scripts/`,
+  on Jessica's say-so, 26 September. They are the whole send path for nine live
+  sequences and until then existed in exactly one place, on Scalogy, with no
+  copy anywhere. **Scalogy remains authoritative and the repo copy is kept in
+  step BY HAND**, exactly like `scripts/ghl_calendar_*.py` -- the runner imports
+  `email_actions` from its own directory, so the repo copy is a backup and a
+  diff target, never what executes. Both were byte-identical when mirrored
+  (34,204 and 19,662). After editing either on Scalogy, run
+  `verify-runner-syntax`, then copy it down and check the byte count.
   **The previews are the real render, at `/email-previews-2027`.**
   `build-email-previews` runs the eight through the same two functions a live
   send uses and stores the HTML in `email_previews`; the page drops each one in

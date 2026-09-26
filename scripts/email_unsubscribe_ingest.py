@@ -9,13 +9,26 @@ survives a GHL outage and can be replayed by hand. CAN-SPAM allows ten business
 days to honour a request; this aims at ten seconds, but the durable record is
 what makes the promise keepable either way.
 
-  1. email_optouts row        the durable record
-  2. GHL Email DND            the flag the send path already checks, so this is
-                              what actually stops the next email going out
+  1. email_optouts row        the durable record, and the list every marketing
+                              send checks before it goes out
+  2. GHL tag                  'Email Unsubscribed', so the opt-out is visible to
+                              Jessica in GHL and she can exclude them from
+                              anything she sends by hand
   3. cancel open enrollments  so the sequence stops now rather than at the next
                               stopgate pass
 
-ONLY THE EMAIL CHANNEL IS TOUCHED. Her SMS and call consent are separate
+IT DELIBERATELY DOES **NOT** SET GHL'S EMAIL DND, and that was a correction
+made on 26 September rather than the original design. GHL's DND is ACCOUNT-WIDE:
+it blocks every email to that contact, transactional included. So a woman who
+unsubscribed from the nurture emails and later booked a session would silently
+stop receiving her own confirmation, her contract and her image-reveal notice --
+the automation would look healthy and she would simply never hear from the
+studio again. Suppression therefore lives in email_optouts, which only marketing
+sends consult, and the GHL tag carries the same information for Jessica's eyes
+without the blast radius. If a hard account-wide block is ever wanted for one
+person, set DND on that contact by hand in GHL.
+
+ONLY MARKETING EMAIL IS AFFECTED. Her SMS and call consent are separate
 permissions and an email unsubscribe is not a request about either.
 
 THE TOKEN IS THE GHL CONTACT ID, and that is a deliberate, stated trade.
@@ -49,6 +62,7 @@ log = logging.getLogger('email_unsubscribe_ingest')
 MAX_BODY_BYTES = 20_000
 GHL_BASE = 'https://services.leadconnectorhq.com'
 GHL_VERSION = '2021-07-28'
+UNSUB_TAG = 'Email Unsubscribed'
 UA = ('JHPBoudoir-Scalogy/1.0 (email unsubscribe; '
       '+https://pages.scalogy.com/jhpboudoir1/)')
 
@@ -82,11 +96,13 @@ def connect():
         host=os.environ['PGHOST'], cursor_factory=psycopg2.extras.RealDictCursor)
 
 
-def set_email_dnd(contact_id):
-    """Set Email DND on the contact. Returns (ok, error_text).
+def tag_unsubscribed(contact_id):
+    """Tag the contact in GHL so the opt-out is visible there. (ok, error_text).
 
-    A contacts PUT carries only what it is changing: the upsert's locationId is
-    rejected on an update, the same shape trap the calendar scripts hit.
+    A tag and not DND -- see the module docstring. This is for Jessica's eyes
+    and for anything she sends by hand; what actually stops the automated
+    marketing email is the email_optouts row, which email_actions checks on
+    every marketing send.
     """
     token = os.environ.get('GHL_API_KEY')
     if not token:
@@ -95,16 +111,13 @@ def set_email_dnd(contact_id):
         import httpx
     except Exception as e:
         return False, f'httpx import failed: {e}'
-    body = {'dndSettings': {'Email': {
-        'status': 'active',
-        'message': 'Unsubscribed from the website email footer'}}}
     try:
-        r = httpx.put(
-            f'{GHL_BASE}/contacts/{contact_id}',
+        r = httpx.post(
+            f'{GHL_BASE}/contacts/{contact_id}/tags',
             headers={'Authorization': f'Bearer {token}', 'Version': GHL_VERSION,
                      'Content-Type': 'application/json', 'Accept': 'application/json',
                      'User-Agent': UA},
-            json=body, timeout=20)
+            json={'tags': [UNSUB_TAG]}, timeout=20)
         if r.status_code >= 400:
             return False, f'GHL HTTP {r.status_code}: {r.text[:300]}'
         return True, None
@@ -146,10 +159,11 @@ def main():
         log.info(f'opt-out #{row_id} recorded '
                  f'(contact={cid or "-"} email={email or "-"} src={source})')
 
-        dnd_ok, dnd_err = False, 'no contact id supplied'
+        tag_ok, tag_err = False, 'no contact id supplied'
         if cid:
-            dnd_ok, dnd_err = set_email_dnd(cid)
-            log.info('GHL email DND set' if dnd_ok else f'GHL DND failed: {dnd_err}')
+            tag_ok, tag_err = tag_unsubscribed(cid)
+            log.info(f'GHL tagged {UNSUB_TAG!r}' if tag_ok
+                     else f'GHL tag failed: {tag_err}')
 
         cancelled = 0
         with conn.cursor() as cur:
@@ -168,12 +182,13 @@ def main():
                     "AND status IN ('active','paused')", (email,))
                 cancelled += cur.rowcount
             cur.execute(
-                'UPDATE email_optouts SET ghl_dnd_set=%s, ghl_error=%s, '
+                'UPDATE email_optouts SET ghl_tag_set=%s, ghl_error=%s, '
                 'enrollments_cancelled=%s WHERE id=%s',
-                (dnd_ok, None if dnd_ok else (dnd_err or '')[:500], cancelled, row_id))
+                (tag_ok, None if tag_ok else (tag_err or '')[:500], cancelled, row_id))
         conn.commit()
         log.info(f'done - {cancelled} enrollment(s) cancelled, '
-                 f'DND {"set" if dnd_ok else "NOT set"}')
+                 f'GHL tag {"set" if tag_ok else "NOT set"}. The opt-out itself '
+                 f'is in email_optouts and is what stops the email.')
     except Exception:
         conn.rollback()
         raise
