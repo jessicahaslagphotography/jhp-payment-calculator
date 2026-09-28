@@ -54,7 +54,7 @@ READ FIRST, ALWAYS. No argument reports; `apply` writes the WHOLE object back
 with only the wanted values changed, then re-reads and proves it.
 
 The calendar is mi2EqYRq4gGEbBJHe82b -- the one /contact forwards to and
-every Book a Call button on the site opens.
+every Book button on the site opens.
 """
 import json
 import os

@@ -286,6 +286,39 @@ and an undefined `var()` would have drawn the text in the browser's default
 colour on a near-black page. The real ones are `--muted` for body copy,
 `--ink` for bold, `--line` for hairlines and `--dim` for the smallest labels.
 
+**NETLIFY INJECTS A SCRIPT THE GREP CANNOT SEE, AND IT TOUCHES THIS CLAIM.**
+Found on 28 September by diffing a live page against its own bundle file:
+`/portfolio/` served 64,954 bytes against 64,770 on disk, and the whole 184
+was one line Netlify adds at SERVE time, present in no repo file:
+
+    <script async src="/.netlify/scripts/hud?variant=public"
+            data-nf-variant="public" data-netlify-site-id="...">
+
+It is Netlify's badge and owner toolbar. **The grep above runs over the nine
+page FILES, so it can never see this** -- the build can only vouch for what
+the repo produces, and the served page is the repo's output plus whatever the
+host adds to it. That is a gap in the guarantee, not a bug in the guard.
+
+What is established, from reading the first 4KB of the 34KB script: it stores
+a dismissal flag in **`localStorage`** under `nl-hud:<variant>:v1`, and it
+builds links to `app.netlify.com` carrying `utm_source=netlify_badge` and
+`utm_campaign=loops`, which is Netlify's own acquisition tracking. **The rest
+of the file has NOT been read**, so whether it also beacons anything about a
+visitor is UNKNOWN and must not be asserted either way.
+
+So the page says no cookies, no analytics, no tracking, and a script that
+writes to localStorage runs on every view of it. `localStorage` is not a
+cookie and this is not analytics ON HER VISITORS, but the sentence is
+absolute and the honest options are two: **turn the badge off in Netlify if
+that setting exists**, which is the right answer and keeps the claim clean,
+or qualify the sentence. **It is Jessica's to decide and it is not fixed.**
+Do not soften the wording to make the guard pass -- that is the exact
+failure this whole paragraph exists to prevent.
+
+**THE GENERAL LESSON: the bundle is not the served page.** Diff a live URL
+against its own file in `public/` after any host change, because a build that
+verifies its own output verifies only its own output.
+
 **It carries no photograph**, which is the one page on the site where that is
 right twice over: a legal page should open on the words, and a frame chosen
 from this sandbox is a frame chosen blind. The prose is the FAQ's answer
@@ -434,7 +467,11 @@ launch does *not* fix are in `launch-plan.md`.
   panel's `margin-top:21px` (padding-bottom plus the 1px border) is
   measured from, and without it the panel floats off the rule under the
   header. Reading order is About, Portfolio, Info, Specialty Sessions,
-  Book a Call.
+  **Book** -- which was "Book a Call" until 28 September, when Jessica
+  shortened it. Worth keeping short for a reason beyond taste: walking the
+  viewport down from 1440 to 621 (where the drawer takes over), "Book a Call"
+  wrapped the bar to two rows at and below 635px and "Book Your Session"
+  would have done it at and below 691px. "Book" never wraps.
 - **Info is a menu, not a page.** Under Info sit FAQ and The Experience.
   Info itself is a `<span>` and goes nowhere -- there is no Info page. On a
   desktop the menu uses no JavaScript: both links are always in the markup
@@ -759,7 +796,7 @@ launch does *not* fix are in `launch-plan.md`.
 - **The consultation calendar is configured from here, not by hand.**
   `mi2EqYRq4gGEbBJHe82b`, the GHL calendar named **Boudoir Consultation Call**
   -- it was called `Info`, which is what `/contact` forwards to and what every
-  Book a Call button opens. Two scripts drive it, both mirrored in `scripts/`
+  Book button opens. Two scripts drive it, both mirrored in `scripts/`
   and both fired as manual Scalogy workflows:
   `ghl_calendar_leadtime.py` (`ghl-calendar-settings`) and
   `ghl_calendar_copy.py` (`ghl-calendar-copy`).
