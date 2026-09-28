@@ -204,7 +204,7 @@ BODY = """
   <p>Only what you choose to type and send. There is no account to make and
     nothing is gathered in the background.</p>
 
-  <h3>The Session Guide form, on the Contact page</h3>
+  <h3>The Session Guide Form, on the Contact Page</h3>
   <ul>
     <li>your first and last name</li>
     <li>your email address</li>
@@ -213,7 +213,7 @@ BODY = """
       leaving it unticked costs you nothing</li>
   </ul>
 
-  <h3>The inquiry form</h3>
+  <h3>The Inquiry Form</h3>
   <ul>
     <li>your first and last name, email address and phone number</li>
     <li>which kind of session you are thinking about, and roughly when</li>
@@ -222,8 +222,8 @@ BODY = """
       put in it only what you want me to have</li>
   </ul>
 
-  <h3>Booking a call</h3>
-  <p>The Book a Call button opens my scheduling calendar, which is run for me
+  <h3>Booking a Call</h3>
+  <p>The booking buttons open my scheduling calendar, which is run for me
     by GoHighLevel. Booking a slot gives them your name, email and phone
     number so the appointment can exist. Their privacy policy governs what
     happens on that page.</p>
