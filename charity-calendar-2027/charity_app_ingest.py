@@ -19,6 +19,7 @@ import os
 import sys
 import json
 import re
+import datetime
 import psycopg2
 import psycopg2.extras
 
@@ -29,6 +30,13 @@ GHL_VERSION = "2021-07-28"
 GHL_SOURCE = "jhpboudoir.com - 2027 Charity Calendar Model Call"
 APPLY_TAG = "Charity Calendar 2027 - Applied"
 LEAD_TAGS = [APPLY_TAG, "Model Call Lead"]
+
+# Application window: Oct 22 - Oct 28, 2026, Central time (CDT, UTC-5). The page
+# enforces the same window; this is the server-side backstop. Live applications
+# outside it are dropped. is_test rows are always accepted so the form can be
+# checked outside the window.
+WINDOW_OPEN = datetime.datetime(2026, 10, 22, 5, 0, tzinfo=datetime.timezone.utc)
+WINDOW_CLOSE = datetime.datetime(2026, 10, 29, 5, 0, tzinfo=datetime.timezone.utc)
 
 # Whitelists: the only values allowed to reach the database or GHL.
 BOUDOIR_BEFORE = {"no", "yes-jhp", "yes-other"}
@@ -155,6 +163,10 @@ def main():
             return
 
     is_test = bool(body.get("is_test"))
+    now = datetime.datetime.now(datetime.timezone.utc)
+    if not is_test and not (WINDOW_OPEN <= now < WINDOW_CLOSE):
+        print("outside the Oct 22-28 application window -- rejected, nothing stored")
+        return
 
     conn = psycopg2.connect(dbname=os.environ["PGDATABASE"], user=os.environ["PGUSER"],
                             host=os.environ["PGHOST"],

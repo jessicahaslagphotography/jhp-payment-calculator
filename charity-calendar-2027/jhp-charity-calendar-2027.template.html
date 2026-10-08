@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-cc-closed="{{ '1' if closed is defined and closed else '0' }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -463,20 +463,23 @@
   <div class="jhp-over">
     <p class="jhp-kicker">Model Call &middot; By Application</p>
     <h1 class="jhp-h jhp-h-lg">2027 Charity Calendar Model Call</h1>
-    <p class="cc-status">Applications open October 23</p>
+    <p class="cc-status" id="cc-status">Now accepting applications &middot; For a limited time</p>
   </div>
 </section>
 <section class="jhp-sec">
   <div class="jhp-center">
     <p class="jhp-kicker">Twelve months. Real women. One good cause.</p>
     <h2 class="jhp-h">Be Part of Something Bigger Than a Photo Shoot</h2>
-    <p class="jhp-p">I&rsquo;m creating a 2027 calendar full of real, gorgeous,
-       every-kind-of-body women &mdash; and the proceeds go to charity. I want
-       YOU in it!!</p>
+    <p class="jhp-p">This is a model call to be part of my 2027 Charity Calendar
+       &mdash; a calendar full of real, gorgeous, every-kind-of-body women, raising
+       money for charity. I want YOU in it!!</p>
+    <p class="jhp-p">Selected models book their session anytime between
+       <strong style="color:var(--ink);font-weight:400">November 2026 and October 2027</strong>
+       to be part of the calendar.</p>
     <p class="jhp-p">This is an application-based model call, so it&rsquo;s not
-       first come, first served. Tell me a little about yourself and why you want
-       to be part of it, and I&rsquo;ll personally review every single
-       application.</p>
+       first come, first served. Applications are open for a limited time only, so
+       don&rsquo;t wait! Tell me a little about yourself and why you want to be
+       part of it, and I&rsquo;ll personally review every single application.</p>
     <p class="jhp-p">Do you have a body? Yes? Perfect. That&rsquo;s the only
        requirement. &hearts;&#xFE0F;</p>
   </div>
@@ -534,7 +537,8 @@
     <li><div><b>I review every application</b><span>I read each one personally and
         reach out to the women selected for the calendar.</span></div></li>
     <li><div><b>Book your session</b><span>Selected models secure their date with
-        the $99 session fee.</span></div></li>
+        the $99 session fee &mdash; choose any date from November 2026 through
+        October 2027.</span></div></li>
     <li><div><b>Your session</b><span>Just 2 gals hanging out and one of them has a
         camera. I coach you through every pose &mdash; no experience needed.</span></div></li>
     <li><div><b>Your image reveal</b><span>See your images for the first time and
@@ -545,24 +549,31 @@
 </section>
 <section class="jhp-sec">
   <div class="jhp-center">
-    <p class="jhp-kicker">Key dates</p>
-    <h2 class="jhp-h">Mark Your Calendar</h2>
+    <p class="jhp-kicker">The details</p>
+    <h2 class="jhp-h">At a Glance</h2>
   </div>
-  <!-- PLACEHOLDER DATES: replace the .tba rows once confirmed. -->
   <dl class="cc-dates">
-    <div><dt>Applications open</dt><dd>October 23, 2026</dd></div>
-    <div><dt>Application deadline</dt><dd class="tba">To be announced</dd></div>
-    <div><dt>Models notified</dt><dd class="tba">To be announced</dd></div>
-    <div><dt>Session dates</dt><dd class="tba">To be announced</dd></div>
-    <div><dt>Calendar release</dt><dd class="tba">To be announced</dd></div>
+    <div><dt>Applications</dt><dd>For a limited time</dd></div>
+    <div><dt>Session dates</dt><dd>November 2026 &ndash; October 2027</dd></div>
+    <div><dt>Session fee</dt><dd>$99</dd></div>
+    <div><dt>Your package</dt><dd>$500 off</dd></div>
+    <div><dt>Where</dt><dd>Studio near Jefferson City</dd></div>
   </dl>
 </section>
 <section class="jhp-sec" id="apply" style="border-bottom:none">
   <div class="jhp-center">
     <p class="jhp-kicker">The application</p>
     <h2 class="jhp-h">Apply to Be a 2027 Calendar Model</h2>
-    <p class="jhp-p">Applying is free and doesn&rsquo;t commit you to anything.
-       Everything you share here comes straight to me and stays private.</p>
+    <p class="jhp-p">Applications are open for a limited time. Applying is free
+       and doesn&rsquo;t commit you to anything. Everything you share here comes
+       straight to me and stays private.</p>
+  </div>
+  <div class="jhp-done" id="cc-closed" hidden>
+    <h2 class="jhp-h" id="cc-closed-h">Applications Are Closed</h2>
+    <p id="cc-closed-p">Thank you to every woman who applied for the 2027 Charity
+       Calendar &mdash; I am so grateful for you!! &hearts;&#xFE0F;</p>
+    <p>Still dreaming of your own session? <a href="../inquire/">Tell me about it
+       here</a> and I&rsquo;ll come back to you personally.</p>
   </div>
   <form class="jhp-ask-form" id="cc-apply" novalidate>
     <div class="row">
@@ -651,8 +662,9 @@
     <label class="ack">
       <input type="checkbox" name="acknowledged" required>
       <span>I understand this is an application and not everyone will be selected.
-        If I&rsquo;m selected, my session fee is $99 and I&rsquo;ll receive $500
-        off the package I purchase. Images are purchased separately from the
+        If I&rsquo;m selected, my session fee is $99, my session will be booked
+        between November 2026 and October 2027, and I&rsquo;ll receive $500 off
+        the package I purchase. Images are purchased separately from the
         session fee.</span>
     </label>
     <div class="hp" aria-hidden="true">
@@ -690,6 +702,17 @@
       <p>Nope! Not ever. You choose exactly how you&rsquo;re included &mdash; face
          shown, faceless and anonymous, or completely private. Nothing is posted
          or printed without your written permission. These are YOUR images.</p>
+    </details>
+    <details>
+      <summary>When would my session be?</summary>
+      <p>Anytime between November 2026 and October 2027 &mdash; you pick the date
+         that works for you, and your images become part of the 2027 Charity
+         Calendar.</p>
+    </details>
+    <details>
+      <summary>How long are applications open?</summary>
+      <p>For a limited time only. Once I have the applications I need, the
+         application closes &mdash; so if you&rsquo;re feeling it, apply now!</p>
     </details>
     <details>
       <summary>Does it cost anything to apply?</summary>
@@ -743,6 +766,30 @@
     const err = document.getElementById("cc-err");
     if (!form || !done) return;
     const ENDPOINT = "https://app.scalogy.com/webhooks/in/jhpboudoir1/charity-app-submit";
+    /* Application window: Oct 22 - Oct 28, 2026, Central time. The same
+       window is enforced server-side in charity-app-ingest. ?test=1 bypasses
+       it so the form can be checked outside the window. Jessica's manual
+       close is data-cc-closed, set by pages_render(data={"closed": true}). */
+    const OPEN_AT = Date.parse("2026-10-22T05:00:00Z");
+    const CLOSE_AT = Date.parse("2026-10-29T05:00:00Z");
+    const isTest = new URLSearchParams(location.search).has("test");
+    const now = Date.now();
+    const manual = document.documentElement.getAttribute("data-cc-closed") === "1";
+    const status = document.getElementById("cc-status");
+    const closedBox = document.getElementById("cc-closed");
+    if (!isTest && (manual || now >= CLOSE_AT || now < OPEN_AT)) {
+      form.hidden = true;
+      closedBox.hidden = false;
+      if (now < OPEN_AT && !manual) {
+        status.textContent = "Applications open October 22";
+        document.getElementById("cc-closed-h").textContent = "Applications Open October 22";
+        document.getElementById("cc-closed-p").textContent =
+          "Check back on October 22 to apply — it’s only open for a limited time!";
+      } else {
+        status.textContent = "Applications are closed";
+      }
+      return;
+    }
     const token = () => {
       try { if (crypto && crypto.randomUUID) return crypto.randomUUID(); } catch (e) {}
       return "t-" + Date.now() + "-" + Math.random().toString(36).slice(2, 11);
@@ -784,7 +831,7 @@
         notes: v("notes").slice(0, 2000),
         acknowledged: !!form.elements["acknowledged"].checked,
         source_page: location.pathname,
-        is_test: new URLSearchParams(location.search).has("test"),
+        is_test: isTest,
         user_agent: navigator.userAgent.slice(0, 400),
       };
       sent = true;
@@ -856,3 +903,4 @@
 {% endraw %}
 </body>
 </html>
+
