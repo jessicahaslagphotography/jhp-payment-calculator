@@ -414,7 +414,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
         chips.appendChild(btn);
       });
       card.appendChild(chips);
-      if (Date.parse(day + "T12:00:00") < soonCut) card.appendChild(el("div", "soon", "Package paid in full at booking"));
+      card.appendChild(el("div", "soon", Date.parse(day + "T12:00:00") < soonCut ? "Package paid in full at booking" : "Prepayment plan eligible"));
       datesBox.appendChild(card);
     });
     const n = byDay.size;
