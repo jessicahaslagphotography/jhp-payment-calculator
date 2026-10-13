@@ -91,6 +91,11 @@ s.was{color:var(--dim);text-decoration-thickness:1px}
 .side .promise li{font-size:15px}
 #claim,#dates{scroll-margin-top:64px}
 
+/* PHOTO STRIP */
+.strip .wrap{padding:0 32px 72px}
+.stripg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.stripg .ph{aspect-ratio:4/5}
+
 .promise{display:flex;flex-direction:column;gap:14px;margin-top:6px;padding:0;list-style:none}
 .promise li{position:relative;padding-left:26px;font:300 16px/1.65 var(--sans);color:var(--muted)}
 .promise li::before{content:"";position:absolute;left:4px;top:.62em;width:7px;height:7px;transform:rotate(45deg);border:1px solid var(--blush)}
@@ -153,6 +158,8 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
   .hero p{font-size:17px}
   .band .wrap{padding:30px 16px;grid-template-columns:1fr;gap:20px}
   .quote .wrap{padding:52px 16px}
+  .strip .wrap{padding:0 16px 52px}
+  .stripg{gap:8px}
   .split .ph{min-height:320px}
   .row{grid-template-columns:1fr;gap:0}
   .fine .wrap{padding:48px 16px}
@@ -227,6 +234,10 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
   <div class="stars">★★★★★</div>
   <p>&ldquo;I walked in nervous and left feeling like I could do anything. By the end of the session I felt completely at home.&rdquo;</p>
   <div class="who">Skylar · Verified Google Review</div>
+</div></section>
+
+<section class="sec strip" id="lm-strip" hidden><div class="wrap">
+  <div class="stripg" id="lm-stripg"></div>
 </div></section>
 
 <section class="sec" id="claim"><div class="wrap apply">
@@ -419,6 +430,27 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     card.appendChild(el("div", "tm", "Remaining dates through December 2026. Tell me what works for you below and I'll match you to an opening."));
     datesBox.appendChild(card);
   });
+
+  /* PHOTO STRIP
+     Three photos between the review and the form, from the public
+     'Scalogy - Images' Drive folder. Paste each file's Drive id into id; the
+     strip stays hidden until at least one is set. */
+  const STRIP = [
+    { id: "", alt: "A JHP Boudoir client" },
+    { id: "", alt: "A JHP Boudoir client" },
+    { id: "", alt: "A JHP Boudoir client" },
+  ];
+  const stripItems = STRIP.filter((p) => p.id);
+  if (stripItems.length) {
+    const g = document.getElementById("lm-stripg");
+    stripItems.forEach((p) => {
+      const box = el("div", "ph");
+      const img = el("img"); img.src = "https://drive.google.com/thumbnail?id=" + encodeURIComponent(p.id) + "&sz=w1000";
+      img.alt = p.alt; img.loading = "lazy";
+      box.appendChild(img); g.appendChild(box);
+    });
+    document.getElementById("lm-strip").hidden = false;
+  }
 
   /* THE SUBMIT
      Same fire-and-forget no-cors POST as /inquire, into the same webhook, so
