@@ -122,6 +122,7 @@ select option{background:var(--panel);color:var(--ink)}
 textarea{min-height:104px;resize:vertical;line-height:1.6}
 .ack{display:flex;align-items:flex-start;gap:12px;margin:22px 0 0;padding:16px 18px;cursor:pointer;background:var(--panel);border:1px solid var(--line2)}
 .ack:hover{border-color:var(--rose)}
+.ack+.ack{margin-top:10px}
 .ack input{flex:0 0 auto;width:18px;height:18px;margin:2px 0 0;accent-color:var(--blush);cursor:pointer}
 .ack span{font:300 14.5px/1.65 var(--sans);color:var(--muted)}
 .ack:has(input:user-invalid){border-color:#B4614B}
@@ -287,7 +288,11 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
       <label class="f"><span class="lb">Anything you&rsquo;d like me to know?<span class="opt">OPTIONAL</span></span>
         <textarea name="notes" rows="3" maxlength="1500" placeholder="A backup date, an occasion, nerves, questions &mdash; anything at all."></textarea></label>
       <label class="ack"><input type="checkbox" name="acknowledged" required>
-        <span>I understand my date is reserved once my $99 session fee retainer is paid, and the retainer is non-refundable. My images are purchased separately, with 40% off a Full Collection or the Digital Gallery, or $500 off a Petite Collection, and my package must be paid in full 30 days before my session date (or when I book, if my date is less than 30 days away).</span></label>
+        <span>I understand my date is reserved once my $99 session fee retainer is paid, and the retainer is non-refundable.</span></label>
+      <label class="ack"><input type="checkbox" name="ack_images" required>
+        <span>I understand my images are purchased separately, with 40% off a Full Collection or the Digital Gallery, or $500 off a Petite Collection.</span></label>
+      <label class="ack"><input type="checkbox" name="ack_payment" required>
+        <span>I understand my package must be paid in full 30 days before my session date (or when I book, if my date is less than 30 days away).</span></label>
       <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
       <div class="go"><button class="btn" type="submit">Claim My Date</button></div>
       <p class="err" id="lm-err" role="alert">Please fill in the highlighted fields above.</p>
@@ -510,7 +515,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
       email: v("email"), phone: v("phone"),
       session_type: "studio", timeframe: "next-3-months",
       notes: notes,
-      acknowledged: !!form.elements["acknowledged"].checked,
+      acknowledged: ["acknowledged", "ack_images", "ack_payment"].every((n) => form.elements[n].checked),
       source_page: location.pathname, is_test: isTest,
       user_agent: navigator.userAgent.slice(0, 400),
     };
