@@ -285,8 +285,6 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
           <option value="digital">The Digital Gallery (40% off)</option>
           <option value="petite">A Petite Collection ($500 off)</option>
         </select></label>
-      <label class="f"><span class="lb">Anything you&rsquo;d like me to know?<span class="opt">OPTIONAL</span></span>
-        <textarea name="notes" rows="3" maxlength="1500" placeholder="A backup date, an occasion, nerves, questions &mdash; anything at all."></textarea></label>
       <label class="ack"><input type="checkbox" name="acknowledged" required>
         <span>I understand my date is reserved once my $99 session fee retainer is paid, and the retainer is non-refundable.</span></label>
       <label class="ack"><input type="checkbox" name="ack_images" required>
@@ -506,8 +504,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     const notes = [
       "[LAST-MINUTE OPENINGS 2026] $99 retainer / 40% off Full / $500 off Petite",
       "Preferred date: " + preferred,
-      "Leaning toward: " + leaning,
-      v("notes") ? "Her note: " + v("notes") : ""
+      "Leaning toward: " + leaning
     ].filter(Boolean).join(String.fromCharCode(10)).slice(0, 2000);
     const body = {
       client_token: token(),
