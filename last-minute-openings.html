@@ -659,14 +659,14 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
      file's Drive id into id; the section stays hidden until at least one is
      set. alt carries the prices so they are readable without the image. */
   const SHEET = [
-    { id: "", alt: "Artist Collection: 100 image digital collection, 10x14 album with 60 images, diamond cover upgrade, couture album box, two gold-framed artist prints, private mobile gallery, 4 outfit changes, 4 bonus sets. $9,900, 40% off: $5,940." },
+    { id: "1N-p-6bIG-k3ey3QN6rFosoMigSRItZq9", alt: "Artist Collection: 100 image digital collection, 10x14 album with 60 images, diamond cover upgrade, couture album box, two gold-framed artist prints, private mobile gallery, 4 outfit changes, 4 bonus sets. $9,900, 40% off: $5,940." },
     { id: "", alt: "Diamond Collection: 60 image digital collection, 10x14 album with 60 images, one artist print, private mobile gallery, 4 outfit changes, 2 bonus sets. $7,400, 40% off: $4,440." },
-    { id: "", alt: "Gold Collection: 50 image digital collection, 8x12 album with 50 images, 12x16 metal wall art, private mobile gallery, 3 outfit changes, 2 bonus sets. $5,600, 40% off: $3,360." },
-    { id: "", alt: "Digital Gallery: 50 image digital collection, private mobile gallery, 3 outfit changes, no bonus sets. $5,000, 40% off: $3,000." },
-    { id: "", alt: "Silver Collection: 15 image digital collection, 6x8 album with 15 images, private mobile gallery, 2 outfit changes, no bonus sets. $3,400, 40% off: $2,040." },
-    { id: "", alt: "Petite 15: 15 image digital collection, digital only, 1 outfit session. Was $2,700, now $2,200." },
-    { id: "", alt: "Petite 8: 8 image digital collection, digital only, 1 outfit session. Was $2,000, now $1,500." },
-    { id: "", alt: "Petite 3: 3 image digital collection, digital only, 1 outfit session. Was $1,250, now $750." },
+    { id: "1WdrnLKRQV5mV6BTljvLvwN8VKw_L0pns", alt: "Gold Collection: 50 image digital collection, 8x12 album with 50 images, 12x16 metal wall art, private mobile gallery, 3 outfit changes, 2 bonus sets. $5,600, 40% off: $3,360." },
+    { id: "13IgNN7u2_QXWYyDRw9m8HT-85qyxS4tF", alt: "Digital Gallery: 50 image digital collection, private mobile gallery, 3 outfit changes, no bonus sets. $5,000, 40% off: $3,000." },
+    { id: "1tga6rCj37p3Thq_Q93CqAD76F7luwRXs", alt: "Silver Collection: 15 image digital collection, 6x8 album with 15 images, private mobile gallery, 2 outfit changes, no bonus sets. $3,400, 40% off: $2,040." },
+    { id: "1ZPBcX5osRNLXsyZxYBO5U51HlJGuC_pP", alt: "Petite 15: 15 image digital collection, digital only, 1 outfit session. Was $2,700, now $2,200." },
+    { id: "1kzsgAw0xkIbrLlsumEn0QNkh7QxWNH_z", alt: "Petite 8: 8 image digital collection, digital only, 1 outfit session. Was $2,000, now $1,500." },
+    { id: "1XrEt-J_ELiKoBeoZpTUe7JdFMcA7MGc-", alt: "Petite 3: 3 image digital collection, digital only, 1 outfit session. Was $1,250, now $750." },
   ];
   const drive = (id, w) => "https://drive.google.com/thumbnail?id=" + encodeURIComponent(id) + "&sz=w" + w;
   const sheetItems = SHEET.filter((c) => c.id);
