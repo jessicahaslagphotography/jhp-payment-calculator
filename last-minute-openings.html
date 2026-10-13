@@ -74,81 +74,31 @@ s.was{color:var(--dim);text-decoration-thickness:1px}
 .split{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:48px;align-items:center}
 .split .ph{min-height:460px}
 .split .stack{gap:18px}
-.split .body{font:300 17px/1.75 var(--sans);color:var(--muted);text-wrap:pretty}
-.split .body strong{color:var(--ink);font-weight:400}
 .sig{font:400 13px/1 var(--sans);letter-spacing:.2em;color:var(--rose)}
 
 /* OPEN DATES */
 .dates{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:1px;background:var(--line);margin-top:32px;border:1px solid var(--line)}
-.dates>div{background:var(--bg);padding:22px 22px;display:flex;flex-direction:column;gap:8px}
+.dates>div{background:var(--bg);padding:22px 22px;display:flex;flex-direction:column;gap:10px}
 .dates .d{font:400 22px/1.2 var(--serif)}
 .dates .tm{font:300 14px/1.5 var(--sans);color:var(--muted)}
 .dates .soon{font:400 10px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--gold-bright)}
 .dates-note{margin-top:18px;font:300 14px/1.6 var(--sans);color:var(--dim);font-style:italic}
 .soldout{margin-top:32px;padding:32px;border:1px solid var(--line2);background:var(--panel);display:flex;flex-direction:column;gap:12px}
 .soldout p{font:300 16px/1.7 var(--sans);color:var(--muted)}
-
-/* PRICING CARDS */
-.offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:24px;margin-top:34px}
-.offer{border:1px solid var(--line2);background:var(--bg);padding:34px 30px;display:flex;flex-direction:column;gap:14px}
-.offer.hot{border-color:var(--blush)}
-.offer .tag{align-self:flex-start;padding:7px 12px;border:1px solid var(--line2);font:400 10px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-bright)}
-.offer h3{font:400 30px/1.15 var(--serif)}
-.offer .big{font:300 54px/1 var(--serif);color:var(--blush)}
-.offer .from{font:300 16px/1.5 var(--sans);color:var(--muted)}
-.offer .from strong{color:var(--ink);font-weight:400;font-size:20px}
-.offer p{font:300 15px/1.7 var(--sans);color:var(--muted);text-wrap:pretty}
+.dates .slots{display:flex;flex-wrap:wrap;gap:8px}
+.dates .slot{font:400 13px/1 var(--sans);letter-spacing:.06em;padding:11px 14px;border:1px solid var(--line2);background:transparent;color:var(--ink);cursor:pointer;transition:background .2s,border-color .2s}
+.dates .slot:hover,.dates .slot:focus-visible{border-color:var(--blush);background:var(--raised);outline:none}
+.side .promise li{font-size:15px}
+#claim,#dates{scroll-margin-top:64px}
 
 .promise{display:flex;flex-direction:column;gap:14px;margin-top:6px;padding:0;list-style:none}
 .promise li{position:relative;padding-left:26px;font:300 16px/1.65 var(--sans);color:var(--muted)}
 .promise li::before{content:"";position:absolute;left:4px;top:.62em;width:7px;height:7px;transform:rotate(45deg);border:1px solid var(--blush)}
 .promise b{color:var(--ink);font-weight:400}
 
-.gal-h{padding-bottom:28px}
-.gal{max-width:1120px;margin:0 auto;padding:0 32px 72px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px}
-.gal .ph{aspect-ratio:3/2}
-
-.steps{display:flex;flex-direction:column;margin-top:32px}
-.steps .s{display:grid;grid-template-columns:40px minmax(200px,300px) 1fr;gap:24px;padding:22px 0;border-top:1px solid var(--line);align-items:baseline}
-.steps .s:last-child{border-bottom:1px solid var(--line)}
-.steps .no{font:300 22px/1 var(--serif);color:var(--rose)}
-.steps .t{font:400 20px/1.3 var(--serif)}
-.steps p{font:300 15px/1.7 var(--sans);color:var(--muted)}
-
-.grid6{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1px;background:var(--line);margin-top:34px}
-.grid6>div{background:var(--bg);padding:30px 28px}
-.sec.alt .grid6>div{background:var(--panel)}
-.grid6 h3{margin:0 0 10px;font:italic 400 23px/1.3 var(--serif)}
-.grid6 p{font:300 15px/1.7 var(--sans);color:var(--muted);text-wrap:pretty}
-
-/* 30-DAY RULE */
-.rule{margin-top:34px;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:0;border:1px solid var(--blush)}
-.rule .big{padding:40px 32px;background:var(--raised);display:flex;flex-direction:column;justify-content:center;gap:10px;border-right:1px solid var(--line2)}
-.rule .big .n{font:300 72px/1 var(--serif);color:var(--blush)}
-.rule .big .l{font:400 12px/1.5 var(--sans);letter-spacing:.16em;text-transform:uppercase}
-.rule .txt{padding:34px 32px;display:flex;flex-direction:column;gap:14px}
-.rule .txt p{font:300 16px/1.7 var(--sans);color:var(--muted);text-wrap:pretty}
-.rule .txt strong{color:var(--ink);font-weight:400}
-
-.revs{max-width:1120px;margin:0 auto;padding:0 32px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));gap:28px}
-.revs>div{display:flex;flex-direction:column;gap:14px}
-.revs .ph{aspect-ratio:4/5}
-.revs .st{font:400 11px/1 var(--sans);letter-spacing:.4em;color:var(--rose)}
-.revs p{font:italic 300 18px/1.6 var(--serif);color:var(--soft)}
-.revs .who{font-size:11px}
-.more{max-width:1120px;margin:0 auto;padding:0 32px 72px}
-.more a{font:400 13px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--line2);padding-bottom:6px}
-
-.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:24px;margin-top:32px}
-.glance>div{padding-top:18px;border-top:1px solid var(--blush);display:flex;flex-direction:column;gap:8px}
-.glance>div:nth-child(even){border-top-color:var(--line2)}
-.glance .k{font:400 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--blush)}
-.glance .v{font:400 22px/1.3 var(--serif)}
-
 /* THE FORM */
 .apply{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:56px;align-items:start}
 .apply .side{position:sticky;top:96px;display:flex;flex-direction:column;gap:18px}
-.apply .side .ph{aspect-ratio:4/5}
 form{display:block}
 .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .f{display:block;margin:0 0 16px}
@@ -161,6 +111,7 @@ input:hover,select:hover,textarea:hover{border-color:var(--rose)}
 input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold-bright);background:var(--raised)}
 input:not(:placeholder-shown):invalid{border-color:#B4614B}
 select{padding-right:40px;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--dim) 50%),linear-gradient(135deg,var(--dim) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%;background-size:5px 5px;background-repeat:no-repeat}
+select.flash{border-color:var(--gold-bright);background-color:var(--raised)}
 select option{background:var(--panel);color:var(--ink)}
 textarea{min-height:104px;resize:vertical;line-height:1.6}
 .ack{display:flex;align-items:flex-start;gap:12px;margin:22px 0 0;padding:16px 18px;cursor:pointer;background:var(--panel);border:1px solid var(--line2)}
@@ -181,13 +132,6 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
 .faq .q{font:400 18px/1.35 var(--serif)}
 .faq p{font:300 14px/1.7 var(--sans);color:var(--muted)}
 
-.close{background:var(--panel);color:var(--ink);border-top:1px solid var(--blush)}
-.close .wrap{padding:96px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:48px;align-items:center}
-.close .kick{color:var(--blush)}
-.close h2{font:300 clamp(38px,5vw,60px)/1.02 var(--serif);max-width:14ch}
-.close p{max-width:46ch;font:300 17px/1.7 var(--sans);color:var(--muted)}
-.close .btn{padding:24px 44px;font-size:15px}
-
 .fine .wrap{padding:56px 32px;display:flex;flex-direction:column;gap:20px}
 .fine .kick{color:var(--dim)}
 .fine ul{margin:0;padding:0 0 0 18px;display:flex;flex-direction:column;gap:8px}
@@ -198,11 +142,6 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
 @media (max-width:860px){
   .apply{grid-template-columns:1fr;gap:32px}
   .apply .side{position:static}
-  .apply .side .ph{aspect-ratio:3/2}
-  .steps .s{grid-template-columns:32px 1fr;gap:6px 16px}
-  .steps .s p{grid-column:2}
-  .rule{grid-template-columns:1fr}
-  .rule .big{border-right:0;border-bottom:1px solid var(--line2)}
 }
 @media (max-width:620px){
   .wrap{padding:56px 16px}
@@ -215,15 +154,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
   .band .wrap{padding:30px 16px;grid-template-columns:1fr;gap:20px}
   .quote .wrap{padding:52px 16px}
   .split .ph{min-height:320px}
-  .gal{padding:0 16px 56px}
-  .revs{padding:0 16px 32px}
-  .more{padding:0 16px 56px}
   .row{grid-template-columns:1fr;gap:0}
-  .grid6>div{padding:24px 20px}
-  .offer{padding:28px 22px}
-  .rule .big,.rule .txt{padding:28px 22px}
-  .close .wrap{padding:64px 16px}
-  .close .btn{padding:20px 28px;font-size:13px}
   .fine .wrap{padding:48px 16px}
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
@@ -247,7 +178,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     <h1>A few 2026 dates just opened up.</h1>
     <p>Every remaining session date on my calendar this year comes with a <strong style="color:var(--ink);font-weight:400">$99 session fee retainer</strong>, <strong style="color:var(--ink);font-weight:400">40% off Full Collections and the Digital Gallery</strong>, and <strong style="color:var(--ink);font-weight:400">$500 off Petite Collections</strong>. When these dates are gone, they&rsquo;re gone.</p>
     <div class="cta">
-      <a href="#claim" class="btn" style="padding:20px 36px;font-size:14px">Claim Your Date</a>
+      <a href="#dates" class="btn" style="padding:20px 36px;font-size:14px">See the Open Dates</a>
       <span class="pill" id="lm-status">Open until every date is booked</span>
     </div>
   </div></div>
@@ -260,29 +191,11 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
   <div class="tx">Full Collections start at <strong>$2,040</strong> <s class="was">$3,400</s>, the Digital Gallery is <strong>$3,000</strong> <s class="was">$5,000</s>, and Petite Collections start at <strong>$750</strong> <s class="was">$1,250</s> with your discount applied, plus sales tax at checkout on collections that include printed products. On any remaining date through December 31, 2026. <strong>Your package must be paid in full 30 days before your session date.</strong></div>
 </div></section>
 
-<section class="sec quote"><div class="wrap">
-  <div class="stars">★★★★★</div>
-  <p>&ldquo;I walked in nervous and left feeling like I could do anything. By the end of the session I felt completely at home.&rdquo;</p>
-  <div class="who">Skylar · Verified Google Review</div>
-</div></section>
-
-<section class="sec"><div class="wrap split">
-  <div class="stack">
-    <div class="kick">Why the special?</div>
-    <h2 class="h2">I have openings, and I&rsquo;d love to fill them with you.</h2>
-    <p class="body">My calendar books out months ahead, so when a few dates open up this close to the end of the year, I&rsquo;d rather hand them to a woman who&rsquo;s been waiting for her moment than leave the studio dark.</p>
-    <p class="body">So for this first round, <strong>every remaining 2026 session date</strong> gets my best last-minute pricing. Same studio, same full experience, same luxury products. Just a much better price to say yes right now.</p>
-    <p class="body"><strong>Do you have a body? Yes? Perfect. That&rsquo;s the only requirement.</strong> &hearts;&#xFE0F;</p>
-    <div class="sig">&mdash; XO, JESS</div>
-  </div>
-  <div class="ph"><img src="https://drive.google.com/thumbnail?id=1JWNC5apxINn9ZdinwqtuQd0wWiHYr2sL&amp;sz=w1600" alt="The JHP Boudoir studio" loading="lazy"></div>
-</div></section>
-
 <section class="sec alt" id="dates"><div class="wrap">
   <div class="stack">
     <div class="kick" style="color:var(--blush)">The openings</div>
     <h2 class="h2">Remaining 2026 dates</h2>
-    <p class="lede">I photograph on Tuesdays and Thursdays. These are the dates still open right now. When one is booked, it disappears from this list.</p>
+    <p class="lede">I photograph on Tuesdays and Thursdays. Tap a time to claim it. When a date is booked, it disappears from this list.</p>
   </div>
   <div class="dates" id="lm-dates">
     <div><div class="d">Tuesdays &amp; Thursdays</div><div class="tm">Through December 2026 &middot; loading the open dates&hellip;</div></div>
@@ -292,45 +205,6 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     <p>Thank you so much, ladies! &hearts;&#xFE0F; This round of last-minute openings is full. Still dreaming of your own session? <a href="https://pages.scalogy.com/jhpboudoir1/inquire/">Tell me about it here</a> and I&rsquo;ll come back to you personally.</p>
   </div>
   <p class="dates-note" id="lm-dates-note">A date isn&rsquo;t held until your $99 retainer is paid. Dates less than 30 days away need your package paid in full when you book.</p>
-</div></section>
-
-<section class="sec"><div class="wrap">
-  <div class="stack">
-    <div class="kick">The offer</div>
-    <h2 class="h2">Two ways to save on your images</h2>
-    <p class="lede">Your $99 retainer reserves your date. Your images are purchased separately: you choose your collection when you book, your last-minute discount comes off it, and you can always move up at your reveal.</p>
-  </div>
-  <div class="offers">
-    <div class="offer hot">
-      <span class="tag">Biggest savings</span>
-      <h3>Full Collections</h3>
-      <div class="big">40% off</div>
-      <div class="from">From <strong>$2,040</strong> &nbsp;<s class="was">$3,400</s></div>
-      <p>Artist, Diamond, Gold and Silver: a printed album, your digital images and the private mobile gallery app, with artist prints, wall art and bonus sets in the larger collections. 40% comes off every one, all the way up &mdash; and off the <strong style="color:var(--ink);font-weight:400">Digital Gallery</strong> too: 50 digital images for $3,000 <s class="was">$5,000</s>. Sales tax is added at checkout on Full Collections, since they include printed products; the Digital Gallery is tax-free.</p>
-    </div>
-    <div class="offer">
-      <span class="tag">Smaller sets</span>
-      <h3>Petite Collections</h3>
-      <div class="big">$500 off</div>
-      <div class="from">From <strong>$750</strong> &nbsp;<s class="was">$1,250</s></div>
-      <p>Petite 15, 8 or 3: your favorite digital images from a one-outfit session. A beautiful way in if you want the full experience and a smaller set of images. $500 comes off every Petite Collection, and because they&rsquo;re digital only, there&rsquo;s no sales tax.</p>
-    </div>
-  </div>
-</div></section>
-
-<section class="sec alt"><div class="wrap">
-  <div class="stack">
-    <div class="kick" style="color:var(--blush)">Paying for your package</div>
-    <h2 class="h2">Paid in full 30 days before your session</h2>
-  </div>
-  <div class="rule">
-    <div class="big"><div class="n">30</div><div class="l">Days before your session &mdash; your package is paid in full</div></div>
-    <div class="txt">
-      <p><strong>Your package must be paid in full 30 days prior to your session date.</strong> It&rsquo;s chosen when you book, and paid on my interest-free in-house payment plan: weekly, biweekly or monthly, set up on auto-pay so you never have to think about it.</p>
-      <p><strong>Booking a date that&rsquo;s less than 30 days away?</strong> Then your package is simply paid in full when you book.</p>
-      <p>And if you can&rsquo;t narrow your images down at your reveal (most women can&rsquo;t!), you can move up to a larger collection right there. Nobody is ever held to the one they chose at booking.</p>
-    </div>
-  </div>
 </div></section>
 
 <section class="sec"><div class="wrap split">
@@ -349,97 +223,10 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
   </div>
 </div></section>
 
-<section class="sec"><div class="wrap">
-  <div class="stack">
-    <div class="kick">How the day works</div>
-    <h2 class="h2">From &ldquo;I booked it!&rdquo; to your images in hand</h2>
-  </div>
-  <div class="steps">
-    <div class="s"><div class="no">01</div><div class="t">Claim your date</div><p>Tell me which opening you want below. I&rsquo;ll reach out personally to confirm it and take your $99 retainer, and your date is yours.</p></div>
-    <div class="s"><div class="no">02</div><div class="t">Your consultation call <span style="font-size:15px;color:var(--dim)">(optional)</span></div><p>A 20-minute call where I walk you through the session-day experience and answer any questions you have.</p></div>
-    <div class="s"><div class="no">03</div><div class="t">Hair &amp; makeup</div><p>Professional hair and makeup first, at a local salon. You drive over to the studio once it&rsquo;s finished.</p></div>
-    <div class="s"><div class="no">04</div><div class="t">Wardrobe</div><p>We go through what you brought and what you want to borrow, and pick the order we&rsquo;ll shoot it in.</p></div>
-    <div class="s"><div class="no">05</div><div class="t">Your session</div><p>Just the two of us in a private studio. I direct everything &mdash; you&rsquo;ll never be left wondering what to do with your hands. The whole day runs two to three hours. (Fair warning: you&rsquo;ll be sore. It&rsquo;s quite the workout!)</p></div>
-    <div class="s"><div class="no">06</div><div class="t">Your image reveal</div><p>7&ndash;14 business days later, over Zoom. We go through your images together, you choose your favorites and order right there, with your last-minute discount applied.</p></div>
-    <div class="s"><div class="no">07</div><div class="t">Your images arrive</div><p>Your digital images are yours the moment the reveal ends. Albums and wall art are made to order and drop-shipped to your door within 6 weeks.</p></div>
-  </div>
-</div></section>
-
-<section class="sec">
-  <div class="wrap stack gal-h">
-    <div class="kick">From the studio</div>
-    <h2 class="h2">Every age, every size, every kind of nervous</h2>
-    <p class="lede">Real women who walked in unsure. Not models &mdash; teachers, nurses, mothers, brides, grandmothers.</p>
-  </div>
-  <div class="gal">
-    <div class="ph"><img src="https://drive.google.com/thumbnail?id=1N8jEKdXCLnVvw5Kt3PfiFJRUCdPbDwiz&amp;sz=w1600" alt="A JHP Boudoir client" loading="lazy"></div>
-    <div class="ph"><img src="https://drive.google.com/thumbnail?id=1eBo4nvhBHFmkd1446q6eCtNaGNvMNwTM&amp;sz=w1600" alt="A JHP Boudoir client" loading="lazy"></div>
-    <div class="ph"><img src="https://drive.google.com/thumbnail?id=17kwL2X7KKG4ki7b1U1gDkKQBxZxivehg&amp;sz=w1600" alt="A JHP Boudoir client" loading="lazy"></div>
-    <div class="ph"><img src="https://drive.google.com/thumbnail?id=1ajMRwLjGI-FvWLtgjOCQmRsmHakEqDRS&amp;sz=w1600" alt="A JHP Boudoir client" loading="lazy"></div>
-    <div class="ph"><img src="https://drive.google.com/thumbnail?id=1HgbEHDEkT7x3ad1cR3Kad5qf8Xq04z9O&amp;sz=w1600" alt="A JHP Boudoir client" loading="lazy"></div>
-    <div class="ph"><img src="https://drive.google.com/thumbnail?id=1YyoSexLDAoz1FJ7M1IUsuQVikvSUx4xD&amp;sz=w1600" alt="A JHP Boudoir client" loading="lazy"></div>
-  </div>
-</section>
-
-<section class="sec alt"><div class="wrap">
-  <div class="stack">
-    <div class="kick" style="color:var(--blush)">Feeling unsure? Read this first</div>
-    <h2 class="h2">Nervous? Good. You&rsquo;re exactly who this is for.</h2>
-  </div>
-  <div class="grid6">
-    <div><h3>&ldquo;I won&rsquo;t know how to pose.&rdquo;</h3><p>You won&rsquo;t need to. I direct every pose, every hand, every chin tilt, out loud, the entire time.</p></div>
-    <div><h3>&ldquo;I&rsquo;m not photogenic.&rdquo;</h3><p>Being photogenic is a skill I have, not one you need. Flattering light, posing chosen for your body, and an eye for your best angles &mdash; that&rsquo;s my job.</p></div>
-    <div><h3>&ldquo;I don&rsquo;t have the &lsquo;right&rsquo; body.&rdquo;</h3><p>There is no such thing as the perfect body. You&rsquo;re never too big, too small, too old or too young. Any body is a boudoir body.</p></div>
-    <div><h3>&ldquo;I&rsquo;ll wait until I lose weight.&rdquo;</h3><p>I&rsquo;ve watched women wait for a body that keeps moving. The ones who came anyway all say the same thing: I wish I&rsquo;d stopped waiting sooner.</p></div>
-    <div><h3>&ldquo;Who else will be there?&rdquo;</h3><p>Just you and me. Hair and makeup happens at the salon beforehand, and the studio has private rooms for every part of your day.</p></div>
-    <div><h3>&ldquo;What if someone sees my photos?&rdquo;</h3><p>Your images are yours. Nothing is ever posted to my website or social media without your written permission. Wardrobe malfunctions? Totally normal &mdash; we fix it, laugh and move on.</p></div>
-  </div>
-</div></section>
-
-<section class="sec">
-  <div class="wrap stack" style="padding-bottom:32px">
-    <div class="kick">In their words</div>
-    <h2 class="h2">Loved by women who were also unsure</h2>
-    <p class="lede">Real women. Real Google reviews.</p>
-  </div>
-  <div class="revs">
-    <div>
-      <div class="ph"><img src="https://drive.google.com/thumbnail?id=1tEHN0SiB_CqiEsBkis-E-bg7LlUoQsQC&amp;sz=w1000" alt="Client portrait" loading="lazy"></div>
-      <div class="st">★★★★★</div>
-      <p>&ldquo;Jess makes you feel comfortable and helps you embrace your body as is. I went from &lsquo;I could never do something like this&rsquo; to excited about booking my next shoot.&rdquo;</p>
-      <div class="who">Priscilla · Google Review</div>
-    </div>
-    <div>
-      <div class="ph"><img src="https://drive.google.com/thumbnail?id=1ZUd195kp3NnGp_c08y3TLHe_ucmcB2LC&amp;sz=w1000" alt="Client portrait" loading="lazy"></div>
-      <div class="st">★★★★★</div>
-      <p>&ldquo;I was feeling nervous and insecure, but she immediately made me feel at home while hyping me up the entire time. By the end I felt like I could do anything!&rdquo;</p>
-      <div class="who">Skylar · Google Review</div>
-    </div>
-    <div>
-      <div class="ph"><img src="https://drive.google.com/thumbnail?id=15cErko0DCp2GI-8_-GAoHXUoTgH3f18d&amp;sz=w1000" alt="Client portrait" loading="lazy"></div>
-      <div class="st">★★★★★</div>
-      <p>&ldquo;Jess is the absolute best! She made me feel unstoppable and the images were 100% perfect. I loved them so much I had to upgrade to buy more.&rdquo;</p>
-      <div class="who">Ciera · Google Review</div>
-    </div>
-  </div>
-  <div class="more"><a href="https://share.google/atA84RqUNxxX3qZ4r">★★★★★ Read all of our Google reviews →</a></div>
-</section>
-
-<section class="sec alt"><div class="wrap">
-  <div class="stack">
-    <div class="kick" style="color:var(--blush)">The details</div>
-    <h2 class="h2">At a glance</h2>
-  </div>
-  <div class="glance">
-    <div><div class="k">Session dates</div><div class="v">Any remaining date through December 31, 2026</div></div>
-    <div><div class="k">Session fee retainer</div><div class="v">$99 &middot; normally $697</div></div>
-    <div><div class="k">Full Collections</div><div class="v">40% off &middot; from $2,040</div></div>
-    <div><div class="k">Petite Collections</div><div class="v">$500 off &middot; from $750</div></div>
-    <div><div class="k">Package payment</div><div class="v">Paid in full 30 days before your session</div></div>
-    <div><div class="k">Payment plans</div><div class="v">Interest-free, weekly, biweekly or monthly</div></div>
-    <div><div class="k">Session days</div><div class="v">Tuesdays &amp; Thursdays, 9am&ndash;3pm</div></div>
-    <div><div class="k">The studio</div><div class="v">Just outside Jefferson City, Missouri</div></div>
-  </div>
+<section class="sec quote"><div class="wrap">
+  <div class="stars">★★★★★</div>
+  <p>&ldquo;I walked in nervous and left feeling like I could do anything. By the end of the session I felt completely at home.&rdquo;</p>
+  <div class="who">Skylar · Verified Google Review</div>
 </div></section>
 
 <section class="sec" id="claim"><div class="wrap apply">
@@ -447,7 +234,15 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     <div class="kick">Claim your opening</div>
     <h2 class="h2">Which date is calling your name?</h2>
     <p class="lede">Pick your date and I&rsquo;ll reach out personally to confirm it and take your $99 retainer. Everything you share here comes straight to me and stays private.</p>
-    <div class="ph"><img src="https://drive.google.com/thumbnail?id=1RRM-T82fdj68TXiKIxjSn4_hVHyISJkp&amp;sz=w1000" alt="A JHP Boudoir client" loading="lazy"></div>
+    <ul class="promise">
+      <li><b>$99 session fee retainer</b> &mdash; normally $697</li>
+      <li><b>40% off Full Collections</b> and the Digital Gallery</li>
+      <li><b>$500 off Petite Collections</b></li>
+      <li><b>Package paid in full</b> 30 days before your session</li>
+      <li><b>Any remaining date</b> through December 31, 2026</li>
+    </ul>
+    <p class="lede"><strong style="color:var(--ink);font-weight:400">Do you have a body? Yes? Perfect. That&rsquo;s the only requirement.</strong> &hearts;&#xFE0F;</p>
+    <div class="sig">&mdash; XO, JESS</div>
   </div>
   <div>
     <div class="done" id="lm-closed" hidden>
@@ -475,16 +270,6 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
           <option value="full">A Full Collection (40% off)</option>
           <option value="digital">The Digital Gallery (40% off)</option>
           <option value="petite">A Petite Collection ($500 off)</option>
-        </select></label>
-      <label class="f"><span class="lb">How did you hear about this?<span class="opt">OPTIONAL</span></span>
-        <select name="heard_via">
-          <option value="" selected>Prefer not to say</option>
-          <option value="facebook">Facebook</option>
-          <option value="instagram">Instagram</option>
-          <option value="tiktok">TikTok</option>
-          <option value="google">Google</option>
-          <option value="friend">A friend</option>
-          <option value="other">Somewhere else</option>
         </select></label>
       <label class="f"><span class="lb">Anything you&rsquo;d like me to know?<span class="opt">OPTIONAL</span></span>
         <textarea name="notes" rows="3" maxlength="1500" placeholder="A backup date, an occasion, nerves, questions &mdash; anything at all."></textarea></label>
@@ -517,22 +302,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     <div><div class="q">When does my package need to be paid?</div><p>In full, 30 days before your session date, on an interest-free payment plan (weekly, biweekly or monthly). If your date is less than 30 days away, your package is paid in full when you book.</p></div>
     <div><div class="q">Can I upgrade at my reveal?</div><p>Absolutely. If you can&rsquo;t narrow it down (most women can&rsquo;t!), you can move up to a larger collection right there at your reveal.</p></div>
     <div><div class="q">I&rsquo;ve never done anything like this. Is that okay?</div><p>YES. Most of my clients have never been in front of a camera like this. I coach you through every single pose and expression.</p></div>
-    <div><div class="q">Can I bring a friend?</div><p>I don&rsquo;t allow guests for any part of your session or your ordering appointment. What I do is best delivered one to one, with your complete attention.</p></div>
-    <div><div class="q">Anything I should skip before my session?</div><p>Please skip the spray tan &mdash; I don&rsquo;t correct tan lines or spray-tan skin tone. No props, and clients must be 18 or older.</p></div>
     <div><div class="q">Where is the studio?</div><p>Just outside Jefferson City, Missouri: over 2,000 square feet built for boudoir, with a hair and makeup room, a wardrobe room and multiple sets.</p></div>
-  </div>
-</div></section>
-
-<section class="close"><div class="wrap">
-  <div class="stack" style="gap:18px">
-    <div class="kick">Your moment</div>
-    <h2>This is your sign.</h2>
-    <p>You&rsquo;ve been thinking about it. A few 2026 dates just opened, the pricing is the best I offer, and when these dates are gone, they&rsquo;re gone.</p>
-  </div>
-  <div class="stack" style="gap:16px;align-items:flex-start">
-    <a href="#claim" class="btn">Claim Your Date →</a>
-    <div class="stars">★★★★★</div>
-    <div style="font:300 14px/1.6 var(--sans)">$99 retainer, 40% off Full Collections, $500 off Petite Collections</div>
   </div>
 </div></section>
 
@@ -597,6 +367,16 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
   };
   const timeLabel = (s) => (s.display || "").split("·").pop().trim() || s.slot_local.slice(11);
 
+  /* Tapping a time on a date card picks that opening in the form below and
+     takes her there, so claiming a date is one tap plus her details. */
+  const claimSlot = (value) => {
+    pick.value = value;
+    document.getElementById("claim").scrollIntoView({ behavior: "smooth", block: "start" });
+    pick.classList.add("flash");
+    setTimeout(() => pick.classList.remove("flash"), 1800);
+    setTimeout(() => { try { form.elements["first"].focus({ preventScroll: true }); } catch (e) {} }, 600);
+  };
+
   const showSoldOut = () => {
     datesBox.hidden = true; datesNote.hidden = true; soldout.hidden = false;
     status.textContent = "Every 2026 opening is booked";
@@ -612,7 +392,15 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     byDay.forEach((list, day) => {
       const card = el("div");
       card.appendChild(el("div", "d", dayLabel(day)));
-      card.appendChild(el("div", "tm", list.map(timeLabel).join(" · ")));
+      const chips = el("div", "slots");
+      list.forEach((s) => {
+        const btn = el("button", "slot", timeLabel(s));
+        btn.type = "button";
+        btn.setAttribute("aria-label", "Claim " + dayLabel(day) + " at " + timeLabel(s));
+        btn.addEventListener("click", () => claimSlot(s.display || s.slot_local));
+        chips.appendChild(btn);
+      });
+      card.appendChild(chips);
       if (Date.parse(day + "T12:00:00") < soonCut) card.appendChild(el("div", "soon", "Package paid in full at booking"));
       datesBox.appendChild(card);
     });
@@ -665,13 +453,13 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
       "Preferred date: " + preferred,
       "Leaning toward: " + leaning,
       v("notes") ? "Her note: " + v("notes") : ""
-    ].filter(Boolean).join("\n").slice(0, 2000);
+    ].filter(Boolean).join(String.fromCharCode(10)).slice(0, 2000);
     const body = {
       client_token: token(),
       name: (v("first") + " " + v("last")).trim(),
       email: v("email"), phone: v("phone"),
       session_type: "studio", timeframe: "next-3-months",
-      heard_via: v("heard_via"), notes: notes,
+      notes: notes,
       acknowledged: !!form.elements["acknowledged"].checked,
       source_page: location.pathname, is_test: isTest,
       user_agent: navigator.userAgent.slice(0, 400),
