@@ -99,6 +99,15 @@ s.was{color:var(--dim);text-decoration-thickness:1px}
 .offer .from strong{color:var(--ink);font-weight:400;font-size:20px}
 .offer p{font:300 15px/1.7 var(--sans);color:var(--muted);text-wrap:pretty}
 
+/* PRICING SHEET */
+.sheet{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,240px),1fr));gap:16px;margin-top:34px}
+.sheet button{display:block;padding:0;border:1px solid var(--line2);background:#FAF8F5;cursor:zoom-in;aspect-ratio:1427/2000;overflow:hidden;transition:border-color .25s}
+.sheet button:hover{border-color:var(--blush)}
+.sheet img{width:100%;height:100%;object-fit:cover}
+.zoom{padding:0;border:0;background:transparent;max-width:min(94vw,720px);max-height:94vh;overflow:visible}
+.zoom::backdrop{background:rgba(10,8,7,.88)}
+.zoom img{display:block;width:100%;height:auto;max-height:94vh;object-fit:contain}
+.zoom .zx{position:absolute;top:-14px;right:-6px;width:44px;height:44px;border:0;border-radius:50%;background:var(--blush);color:var(--bg);font:400 26px/1 var(--sans);cursor:pointer}
 .promise{display:flex;flex-direction:column;gap:14px;margin-top:6px;padding:0;list-style:none}
 .promise li{position:relative;padding-left:26px;font:300 16px/1.65 var(--sans);color:var(--muted)}
 .promise li::before{content:"";position:absolute;left:4px;top:.62em;width:7px;height:7px;transform:rotate(45deg);border:1px solid var(--blush)}
@@ -245,7 +254,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
   <div class="c"><div class="wrap">
     <div class="kick">Last-Minute Openings · Through December 2026</div>
     <h1>A few 2026 dates just opened up.</h1>
-    <p>Every remaining session date on my calendar this year comes with a <strong style="color:var(--ink);font-weight:400">$99 session fee retainer</strong>, <strong style="color:var(--ink);font-weight:400">40% off Full Collections</strong> and <strong style="color:var(--ink);font-weight:400">$500 off Petite Collections</strong>. When these dates are gone, they&rsquo;re gone.</p>
+    <p>Every remaining session date on my calendar this year comes with a <strong style="color:var(--ink);font-weight:400">$99 session fee retainer</strong>, <strong style="color:var(--ink);font-weight:400">40% off Full Collections and the Digital Gallery</strong>, and <strong style="color:var(--ink);font-weight:400">$500 off Petite Collections</strong>. When these dates are gone, they&rsquo;re gone.</p>
     <div class="cta">
       <a href="#claim" class="btn" style="padding:20px 36px;font-size:14px">Claim Your Date</a>
       <span class="pill" id="lm-status">Open until every date is booked</span>
@@ -255,9 +264,9 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
 
 <section class="band"><div class="wrap">
   <div><div class="n">$99</div><div class="l">Session fee retainer</div><div class="w">Normally <s class="was">$697</s></div></div>
-  <div><div class="n">40% off</div><div class="l">Full Collections</div><div class="w">Album, digitals &amp; mobile app</div></div>
-  <div><div class="n">$500 off</div><div class="l">Petite Collections</div><div class="w">Digital-only collections</div></div>
-  <div class="tx">Full Collections start at <strong>$2,040</strong> <s class="was">$3,400</s> and Petite Collections start at <strong>$750</strong> <s class="was">$1,250</s> with your discount applied. On any remaining date through December 31, 2026. <strong>Your package must be paid in full 30 days before your session date.</strong></div>
+  <div><div class="n">40% off</div><div class="l">Full Collections</div><div class="w">Plus the Digital Gallery</div></div>
+  <div><div class="n">$500 off</div><div class="l">Petite Collections</div><div class="w">Petite 15, 8 &amp; 3</div></div>
+  <div class="tx">Full Collections start at <strong>$2,040</strong> <s class="was">$3,400</s>, the Digital Gallery is <strong>$3,000</strong> <s class="was">$5,000</s>, and Petite Collections start at <strong>$750</strong> <s class="was">$1,250</s> with your discount applied. On any remaining date through December 31, 2026. <strong>Your package must be paid in full 30 days before your session date.</strong></div>
 </div></section>
 
 <section class="sec quote"><div class="wrap">
@@ -306,17 +315,30 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
       <h3>Full Collections</h3>
       <div class="big">40% off</div>
       <div class="from">From <strong>$2,040</strong> &nbsp;<s class="was">$3,400</s></div>
-      <p>The whole experience in your hands: a printed album, your digital images and the private mobile gallery app, with wall art and bonus sets in the larger collections. 40% comes off every Full Collection, all the way up.</p>
+      <p>Artist, Diamond, Gold and Silver: a printed album, your digital images and the private mobile gallery app, with artist prints, wall art and bonus sets in the larger collections. 40% comes off every one, all the way up &mdash; and off the <strong style="color:var(--ink);font-weight:400">Digital Gallery</strong> too: 50 digital images for $3,000 <s class="was">$5,000</s>.</p>
     </div>
     <div class="offer">
-      <span class="tag">Digital-only</span>
+      <span class="tag">Smaller sets</span>
       <h3>Petite Collections</h3>
       <div class="big">$500 off</div>
       <div class="from">From <strong>$750</strong> &nbsp;<s class="was">$1,250</s></div>
-      <p>Your favorite digital images with your online gallery. A beautiful way in if you want the experience and a smaller set of images. $500 comes off every Petite Collection.</p>
+      <p>Petite 15, 8 or 3: your favorite digital images from a one-outfit session. A beautiful way in if you want the full experience and a smaller set of images. $500 comes off every Petite Collection.</p>
     </div>
   </div>
 </div></section>
+
+<section class="sec" id="collections" hidden><div class="wrap">
+  <div class="stack">
+    <div class="kick">The collections</div>
+    <h2 class="h2">Every collection, with your discount</h2>
+    <p class="lede">Tap any collection to see it full size.</p>
+  </div>
+  <div class="sheet" id="lm-sheet"></div>
+</div></section>
+<dialog class="zoom" id="lm-zoom" aria-label="Collection details">
+  <button type="button" class="zx" id="lm-zoom-x" aria-label="Close">&times;</button>
+  <img id="lm-zoom-img" alt="">
+</dialog>
 
 <section class="sec alt"><div class="wrap">
   <div class="stack">
@@ -473,6 +495,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
         <select name="leaning">
           <option value="" selected>Not sure yet</option>
           <option value="full">A Full Collection (40% off)</option>
+          <option value="digital">The Digital Gallery (40% off)</option>
           <option value="petite">A Petite Collection ($500 off)</option>
         </select></label>
       <label class="f"><span class="lb">How did you hear about this?<span class="opt">OPTIONAL</span></span>
@@ -488,7 +511,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
       <label class="f"><span class="lb">Anything you&rsquo;d like me to know?<span class="opt">OPTIONAL</span></span>
         <textarea name="notes" rows="3" maxlength="1500" placeholder="A backup date, an occasion, nerves, questions &mdash; anything at all."></textarea></label>
       <label class="ack"><input type="checkbox" name="acknowledged" required>
-        <span>I understand my date is reserved once my $99 session fee retainer is paid, and the retainer is non-refundable. My images are purchased separately, with 40% off a Full Collection or $500 off a Petite Collection, and my package must be paid in full 30 days before my session date (or when I book, if my date is less than 30 days away).</span></label>
+        <span>I understand my date is reserved once my $99 session fee retainer is paid, and the retainer is non-refundable. My images are purchased separately, with 40% off a Full Collection or the Digital Gallery, or $500 off a Petite Collection, and my package must be paid in full 30 days before my session date (or when I book, if my date is less than 30 days away).</span></label>
       <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
       <div class="go"><button class="btn" type="submit">Claim My Date</button></div>
       <p class="err" id="lm-err" role="alert">Please fill in the highlighted fields above.</p>
@@ -512,7 +535,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     <div><div class="q">Which dates are included?</div><p>Every remaining session date on my calendar through December 31, 2026. I photograph on Tuesdays and Thursdays, and the list above shows what&rsquo;s still open right now.</p></div>
     <div><div class="q">How long is this special running?</div><p>Until the dates are gone. Once every 2026 opening is booked, this round is over.</p></div>
     <div><div class="q">What does the $99 retainer cover?</div><p>It reserves your date and covers your consultation call, professional hair and makeup, private use of the studio, the client wardrobe, 60 minutes of photography with full posing coaching, and your private reveal appointment. It&rsquo;s normally $697.</p></div>
-    <div><div class="q">How does the discount work?</div><p>You choose your collection when you book. Full Collections (an album, your digitals and the mobile gallery app) are 40% off and start at $2,040. Petite Collections (digital images with your online gallery) are $500 off and start at $750.</p></div>
+    <div><div class="q">How does the discount work?</div><p>You choose your collection when you book. Full Collections (Artist, Diamond, Gold and Silver) are 40% off and start at $2,040. The Digital Gallery is 40% off too, at $3,000. Petite Collections (Petite 15, 8 and 3) are $500 off and start at $750.</p></div>
     <div><div class="q">When does my package need to be paid?</div><p>In full, 30 days before your session date, on an interest-free payment plan (weekly, biweekly or monthly). If your date is less than 30 days away, your package is paid in full when you book.</p></div>
     <div><div class="q">Can I upgrade at my reveal?</div><p>Absolutely. If you can&rsquo;t narrow it down (most women can&rsquo;t!), you can move up to a larger collection right there at your reveal.</p></div>
     <div><div class="q">I&rsquo;ve never done anything like this. Is that okay?</div><p>YES. Most of my clients have never been in front of a camera like this. I coach you through every single pose and expression.</p></div>
@@ -540,7 +563,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
   <ul>
     <li>Last-minute opening pricing applies to sessions booked on remaining open dates through December 31, 2026, and is available until those dates are booked. Dates are first come, first served and are not held until the session fee retainer is paid.</li>
     <li>The $99 session fee retainer is non-refundable and non-transferable. It reserves your date and covers your consultation call, professional hair and makeup, private studio time, client wardrobe access, 60 minutes of photography and your private reveal and ordering appointment.</li>
-    <li>Images and products are purchased separately from the session fee retainer. Full Collections are 40% off (from $2,040, regularly $3,400). Petite Collections are $500 off (from $750, regularly $1,250). Discounts cannot be combined with any other offer or studio credit.</li>
+    <li>Images and products are purchased separately from the session fee retainer. Full Collections are 40% off (from $2,040, regularly $3,400). The Digital Gallery is 40% off ($3,000, regularly $5,000). Petite Collections are $500 off (from $750, regularly $1,250). Discounts cannot be combined with any other offer or studio credit.</li>
     <li>Your package must be paid in full no less than 30 days prior to your session date. Sessions booked less than 30 days out are paid in full at booking. Failure to complete payment results in session cancellation and forfeiture of the session fee retainer.</li>
     <li>Clients must be 18 or older. No images are shared publicly without the client&rsquo;s written permission. Standard studio booking, rescheduling and cancellation policies apply.</li>
   </ul>
@@ -631,6 +654,43 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     datesBox.appendChild(card);
   });
 
+  /* PRICING SHEET
+     Graphics live in the public 'Scalogy - Images' Drive folder. Paste each
+     file's Drive id into id; the section stays hidden until at least one is
+     set. alt carries the prices so they are readable without the image. */
+  const SHEET = [
+    { id: "", alt: "Artist Collection: 100 image digital collection, 10x14 album with 60 images, diamond cover upgrade, couture album box, two gold-framed artist prints, private mobile gallery, 4 outfit changes, 4 bonus sets. $9,900, 40% off: $5,940." },
+    { id: "", alt: "Diamond Collection: 60 image digital collection, 10x14 album with 60 images, one artist print, private mobile gallery, 4 outfit changes, 2 bonus sets. $7,400, 40% off: $4,440." },
+    { id: "", alt: "Gold Collection: 50 image digital collection, 8x12 album with 50 images, 12x16 metal wall art, private mobile gallery, 3 outfit changes, 2 bonus sets. $5,600, 40% off: $3,360." },
+    { id: "", alt: "Digital Gallery: 50 image digital collection, private mobile gallery, 3 outfit changes, no bonus sets. $5,000, 40% off: $3,000." },
+    { id: "", alt: "Silver Collection: 15 image digital collection, 6x8 album with 15 images, private mobile gallery, 2 outfit changes, no bonus sets. $3,400, 40% off: $2,040." },
+    { id: "", alt: "Petite 15: 15 image digital collection, digital only, 1 outfit session. Was $2,700, now $2,200." },
+    { id: "", alt: "Petite 8: 8 image digital collection, digital only, 1 outfit session. Was $2,000, now $1,500." },
+    { id: "", alt: "Petite 3: 3 image digital collection, digital only, 1 outfit session. Was $1,250, now $750." },
+  ];
+  const drive = (id, w) => "https://drive.google.com/thumbnail?id=" + encodeURIComponent(id) + "&sz=w" + w;
+  const sheetItems = SHEET.filter((c) => c.id);
+  if (sheetItems.length) {
+    const sheet = document.getElementById("lm-sheet");
+    const zoom = document.getElementById("lm-zoom");
+    const zoomImg = document.getElementById("lm-zoom-img");
+    sheetItems.forEach((c) => {
+      const b = el("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "View full size: " + c.alt.split(":")[0]);
+      const img = el("img"); img.src = drive(c.id, 800); img.alt = c.alt; img.loading = "lazy";
+      b.appendChild(img);
+      b.addEventListener("click", () => {
+        zoomImg.src = drive(c.id, 1600); zoomImg.alt = c.alt;
+        if (zoom.showModal) zoom.showModal(); else window.open(drive(c.id, 1600), "_blank");
+      });
+      sheet.appendChild(b);
+    });
+    document.getElementById("lm-zoom-x").addEventListener("click", () => zoom.close());
+    zoom.addEventListener("click", (e) => { if (e.target === zoom) zoom.close(); });
+    document.getElementById("collections").hidden = false;
+  }
+
   /* THE SUBMIT
      Same fire-and-forget no-cors POST as /inquire, into the same webhook, so
      every request lands in site_inquiries and GHL tagged 'Session Inquiry'.
@@ -658,7 +718,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     };
     if (v("website")) { show(); return; }
     const preferred = v("preferred") === "flexible" ? "Flexible - any open date" : v("preferred");
-    const leaning = { full: "Full Collection (40% off)", petite: "Petite Collection ($500 off)" }[v("leaning")] || "Not sure yet";
+    const leaning = { full: "Full Collection (40% off)", digital: "Digital Gallery (40% off)", petite: "Petite Collection ($500 off)" }[v("leaning")] || "Not sure yet";
     const notes = [
       "[LAST-MINUTE OPENINGS 2026] $99 retainer / 40% off Full / $500 off Petite",
       "Preferred date: " + preferred,
