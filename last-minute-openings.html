@@ -105,6 +105,8 @@ s.was{color:var(--dim);text-decoration-thickness:1px}
 /* THE FORM */
 .apply{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:56px;align-items:start}
 .apply .side{position:sticky;top:96px;display:flex;flex-direction:column;gap:18px}
+.reserve{max-width:760px;display:flex;flex-direction:column;gap:18px}
+.reserve .go{margin-top:6px}
 form{display:block}
 .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .f{display:block;margin:0 0 16px}
@@ -175,7 +177,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
   <div class="brand">JHP BOUDOIR</div>
   <div class="r">
     <div class="t">Last-Minute Openings · 2026 dates</div>
-    <a href="#claim" class="btn">Claim a Date</a>
+    <a href="#claim" class="btn">Reserve Now</a>
   </div>
 </div></div>
 
@@ -205,7 +207,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
   <div class="stack">
     <div class="kick" style="color:var(--blush)">The openings</div>
     <h2 class="h2">Remaining 2026 dates</h2>
-    <p class="lede">I photograph on Tuesdays and Thursdays. Tap a time to claim it. When a date is booked, it disappears from this list.</p>
+    <p class="lede">I photograph on Tuesdays and Thursdays. Tap a time to reserve it. When a date is booked, it disappears from this list.</p>
   </div>
   <div class="dates" id="lm-dates">
     <div><div class="d">Tuesdays &amp; Thursdays</div><div class="tm">Through December 2026 &middot; loading the open dates&hellip;</div></div>
@@ -214,7 +216,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     <h3 class="h2" style="font-size:32px">Every 2026 opening is booked</h3>
     <p>Thank you so much, ladies! &hearts;&#xFE0F; This round of last-minute openings is full. Still dreaming of your own session? <a href="https://pages.scalogy.com/jhpboudoir1/inquire/">Tell me about it here</a> and I&rsquo;ll come back to you personally.</p>
   </div>
-  <p class="dates-note" id="lm-dates-note">A date isn&rsquo;t held until your $99 retainer is paid. Dates less than 30 days away need your package paid in full when you book.</p>
+  <p class="dates-note" id="lm-dates-note">Openings are first come, first served, and your date is locked in when you book it. Last-minute openings can&rsquo;t be rescheduled. Dates less than 30 days away need your package paid in full when you book.</p>
 </div></section>
 
 <section class="sec"><div class="wrap split">
@@ -243,64 +245,23 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
   <div class="stripg" id="lm-stripg"></div>
 </div></section>
 
-<section class="sec" id="claim"><div class="wrap apply">
-  <div class="side">
-    <div class="kick">Reserve your opening</div>
-    <h2 class="h2">Reserve your last-minute opening</h2>
-    <p class="lede">These openings are first come, first served. Here&rsquo;s how to make one yours:</p>
-    <ul class="promise">
-      <li><b>1. Request your date.</b> Choose your opening and send this form. It takes about a minute.</li>
-      <li><b>2. I&rsquo;ll reach out personally</b> to confirm your date and take your $99 session fee retainer.</li>
-      <li><b>3. Your date is reserved.</b> Once your retainer is paid, that opening is yours and comes off the calendar.</li>
-    </ul>
-    <p class="lede">Until your retainer is paid, your date is still open to others, so keep an eye on your phone and email.</p>
-    <div class="sig">&mdash; XO, JESS</div>
+<section class="sec" id="claim"><div class="wrap reserve">
+  <div class="kick">Reserve your opening</div>
+  <h2 class="h2">Reserve your last-minute opening</h2>
+  <p class="lede">These openings are first come, first served. Here&rsquo;s how to make one yours:</p>
+  <ul class="promise">
+    <li><b>1. Pay your $99 session fee retainer.</b> That reserves your last-minute opening.</li>
+    <li><b>2. Choose your collection and pick your session date.</b> Your last-minute pricing is already applied.</li>
+    <li><b>3. Sign your contract</b> and set up your payment plan. Your package is paid in full 30 days before your session.</li>
+  </ul>
+  <div class="go" id="lm-go"><a class="btn" id="lm-reserve" href="https://pages.scalogy.com/jhpboudoir1/lm-reserve/">Reserve My Opening &middot; $99</a></div>
+  <p class="lede" id="lm-go-note">After paying, you&rsquo;ll go straight to booking, where you choose your collection and lock in your date.</p>
+  <div class="done" id="lm-closed" hidden>
+    <h2 class="h2">Every 2026 opening is booked</h2>
+    <p>This round of last-minute openings is full &mdash; thank you, ladies! &hearts;&#xFE0F;</p>
+    <p>Still dreaming of your own session? <a href="https://pages.scalogy.com/jhpboudoir1/inquire/">Tell me about it here</a> and I&rsquo;ll come back to you personally.</p>
   </div>
-  <div>
-    <div class="done" id="lm-closed" hidden>
-      <h2 class="h2">Every 2026 opening is booked</h2>
-      <p>This round of last-minute openings is full &mdash; thank you, ladies! &hearts;&#xFE0F;</p>
-      <p>Still dreaming of your own session? <a href="https://pages.scalogy.com/jhpboudoir1/inquire/">Tell me about it here</a> and I&rsquo;ll come back to you personally.</p>
-    </div>
-    <form id="lm-form" novalidate>
-      <div class="row">
-        <label class="f"><span class="lb">First Name</span><input type="text" name="first" autocomplete="given-name" maxlength="80" placeholder="Jane" required></label>
-        <label class="f"><span class="lb">Last Name</span><input type="text" name="last" autocomplete="family-name" maxlength="80" placeholder="Smith" required></label>
-      </div>
-      <div class="row">
-        <label class="f"><span class="lb">Email</span><input type="email" name="email" autocomplete="email" maxlength="254" placeholder="jane@example.com" required></label>
-        <label class="f"><span class="lb">Phone</span><input type="tel" name="phone" autocomplete="tel" maxlength="40" placeholder="(573) 000-0000" required></label>
-      </div>
-      <label class="f"><span class="lb">Your Preferred Date</span>
-        <select name="preferred" id="lm-pick" required>
-          <option value="" selected disabled>Choose an opening</option>
-          <option value="flexible">I&rsquo;m flexible &mdash; any open date works</option>
-        </select></label>
-      <label class="f"><span class="lb">Which collection are you leaning toward?<span class="opt">OPTIONAL</span></span>
-        <select name="leaning">
-          <option value="" selected>Not sure yet</option>
-          <option value="full">A Full Collection (40% off)</option>
-          <option value="digital">The Digital Gallery (40% off)</option>
-          <option value="petite">A Petite Collection ($500 off)</option>
-        </select></label>
-      <label class="ack"><input type="checkbox" name="acknowledged" required>
-        <span>I understand my date is reserved once my $99 session fee retainer is paid, and the retainer is non-refundable.</span></label>
-      <label class="ack"><input type="checkbox" name="ack_images" required>
-        <span>I understand my images are purchased separately, with 40% off a Full Collection or the Digital Gallery, or $500 off a Petite Collection.</span></label>
-      <label class="ack"><input type="checkbox" name="ack_payment" required>
-        <span>I understand my package must be paid in full 30 days before my session date (or when I book, if my date is less than 30 days away).</span></label>
-      <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-      <div class="go"><button class="btn" type="submit">Reserve My Opening</button></div>
-      <p class="err" id="lm-err" role="alert">Please fill in the highlighted fields above.</p>
-      <noscript><p class="lede" style="margin-top:16px">This form needs JavaScript. Email me at <a href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a> with the date you&rsquo;d like and I&rsquo;ll take it from there.</p></noscript>
-    </form>
-    <div class="done" id="lm-done" hidden tabindex="-1">
-      <h2 class="h2">Eek!! Your request is in.</h2>
-      <p>I am SO excited for you. &hearts;&#xFE0F; I&rsquo;ll reach out personally to confirm your date and get your $99 retainer taken care of.</p>
-      <p>Openings aren&rsquo;t held until the retainer is paid, so keep an eye on your phone and email &mdash; I don&rsquo;t want you to miss your spot!</p>
-      <p>Questions in the meantime? Write to me at <a href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a>.</p>
-    </div>
-  </div>
+  <div class="sig">&mdash; XO, JESS</div>
 </div></section>
 
 <section class="sec"><div class="wrap">
@@ -327,7 +288,7 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     <li>The $99 session fee retainer is non-refundable and non-transferable. It reserves your date and covers your optional consultation call, professional hair and makeup, private studio time, client wardrobe access, 60 minutes of photography and your private reveal and ordering appointment.</li>
     <li>Images and products are purchased separately from the session fee retainer. Full Collections are 40% off (from $2,040, regularly $3,400). The Digital Gallery is 40% off ($3,000, regularly $5,000). Petite Collections are $500 off (from $750, regularly $1,250). Prices shown do not include sales tax, which is applied at checkout to collections that include physical products; digital-only collections are not taxed. Discounts cannot be combined with any other offer or studio credit.</li>
     <li>Your package must be paid in full no less than 30 days prior to your session date. Sessions booked less than 30 days out are paid in full at booking. Failure to complete payment results in session cancellation and forfeiture of the session fee retainer.</li>
-    <li>Clients must be 18 or older. No images are shared publicly without the client&rsquo;s written permission. Standard studio booking, rescheduling and cancellation policies apply.</li>
+    <li>Clients must be 18 or older. No images are shared publicly without the client&rsquo;s written permission. Last-minute openings cannot be rescheduled. Standard studio booking and cancellation policies apply.</li>
   </ul>
   <div class="foot"><span>JHP BOUDOIR</span><a href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a></div>
 </div></section>
@@ -349,9 +310,23 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
   const soldout = document.getElementById("lm-soldout");
   const datesNote = document.getElementById("lm-dates-note");
   const status = document.getElementById("lm-status");
-  const pick = document.getElementById("lm-pick");
-  const form = document.getElementById("lm-form");
   const closedBox = document.getElementById("lm-closed");
+  const RESERVE_URL = "https://pages.scalogy.com/jhpboudoir1/lm-reserve/";
+  /* The $99 pay page forwards sd/st on to the booking checkout, which
+     pre-selects that date and time (and still checks it is open). */
+  const reserveUrl = (s) => {
+    const q = new URLSearchParams();
+    if (s) {
+      q.set("sd", s.slot_date);
+      const t = (s.slot_local || "").slice(11, 16);
+      if (/^[0-9]{2}:[0-9]{2}$/.test(t)) q.set("st", t);
+      if (s.display) q.set("pref", s.display);
+    }
+    if (isTest) q.set("test", "1");
+    const qs = q.toString();
+    return RESERVE_URL + (qs ? "?" + qs : "");
+  };
+  document.getElementById("lm-reserve").href = reserveUrl(null);
 
   const get = (path, auth) => fetch("_api/" + path, {
     headers: Object.assign({ Accept: "application/json" }, auth && PT ? { Authorization: "Bearer " + PT } : {})
@@ -381,20 +356,15 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
   };
   const timeLabel = (s) => (s.display || "").split("·").pop().trim() || s.slot_local.slice(11);
 
-  /* Tapping a time on a date card picks that opening in the form below and
-     takes her there, so claiming a date is one tap plus her details. */
-  const claimSlot = (value) => {
-    pick.value = value;
-    document.getElementById("claim").scrollIntoView({ behavior: "smooth", block: "start" });
-    pick.classList.add("flash");
-    setTimeout(() => pick.classList.remove("flash"), 1800);
-    setTimeout(() => { try { form.elements["first"].focus({ preventScroll: true }); } catch (e) {} }, 600);
-  };
+  /* Tapping a time on a date card goes straight to the $99 pay page with
+     that opening pre-selected for the booking step. */
+  const claimSlot = (s) => { location.href = reserveUrl(s); };
 
   const showSoldOut = () => {
     datesBox.hidden = true; datesNote.hidden = true; soldout.hidden = false;
     status.textContent = "Every 2026 opening is booked";
-    form.hidden = true; closedBox.hidden = false;
+    ["lm-go", "lm-go-note"].forEach((id) => { document.getElementById(id).hidden = true; });
+    closedBox.hidden = false;
   };
 
   loadSlots().then((slots) => {
@@ -410,8 +380,8 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
       list.forEach((s) => {
         const btn = el("button", "slot", timeLabel(s));
         btn.type = "button";
-        btn.setAttribute("aria-label", "Claim " + dayLabel(day) + " at " + timeLabel(s));
-        btn.addEventListener("click", () => claimSlot(s.display || s.slot_local));
+        btn.setAttribute("aria-label", "Reserve " + dayLabel(day) + " at " + timeLabel(s));
+        btn.addEventListener("click", () => claimSlot(s));
         chips.appendChild(btn);
       });
       card.appendChild(chips);
@@ -420,17 +390,11 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     });
     const n = byDay.size;
     status.textContent = (n === 1 ? "Only 1 date" : n + " dates") + " left in 2026";
-    const flex = pick.querySelector('option[value="flexible"]');
-    slots.forEach((s) => {
-      const o = el("option", null, s.display || (dayLabel(s.slot_date) + " · " + timeLabel(s)));
-      o.value = s.display || s.slot_local;
-      pick.insertBefore(o, flex);
-    });
   }).catch(() => {
     datesBox.textContent = "";
     const card = el("div");
     card.appendChild(el("div", "d", "Tuesdays & Thursdays"));
-    card.appendChild(el("div", "tm", "Remaining dates through December 2026. Tell me what works for you below and I'll match you to an opening."));
+    card.appendChild(el("div", "tm", "Remaining dates through December 2026. Tap Reserve below, then pick your date on the booking page."));
     datesBox.appendChild(card);
   });
 
@@ -471,56 +435,6 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
     })
     .catch(() => setHero(null));
 
-  /* THE SUBMIT
-     Same fire-and-forget no-cors POST as /inquire, into the same webhook, so
-     every request lands in site_inquiries and GHL tagged 'Session Inquiry'.
-     The [LAST-MINUTE OPENINGS 2026] note prefix and source_page are what mark
-     it as coming from this page. ?test=1 is stored but skips GHL. */
-  const ENDPOINT = "https://app.scalogy.com/webhooks/in/jhpboudoir1/site-inquiry-submit";
-  const err = document.getElementById("lm-err");
-  const done = document.getElementById("lm-done");
-  const token = () => {
-    try { if (crypto && crypto.randomUUID) return crypto.randomUUID(); } catch (e) {}
-    return "t-" + Date.now() + "-" + Math.random().toString(36).slice(2, 11);
-  };
-  form.addEventListener("input", () => { if (form.checkValidity()) err.style.display = "none"; });
-  let sent = false;
-  form.addEventListener("submit", (ev) => {
-    ev.preventDefault();
-    if (sent) return;
-    if (!form.checkValidity()) { err.style.display = "block"; form.reportValidity(); return; }
-    err.style.display = "none";
-    const v = (n) => { const f = form.elements[n]; return f && typeof f.value === "string" ? f.value.trim() : ""; };
-    const show = () => {
-      form.hidden = true; done.hidden = false;
-      done.scrollIntoView({ block: "center", behavior: "smooth" });
-      try { done.focus({ preventScroll: true }); } catch (e) {}
-    };
-    if (v("website")) { show(); return; }
-    const preferred = v("preferred") === "flexible" ? "Flexible - any open date" : v("preferred");
-    const leaning = { full: "Full Collection (40% off)", digital: "Digital Gallery (40% off)", petite: "Petite Collection ($500 off)" }[v("leaning")] || "Not sure yet";
-    const notes = [
-      "[LAST-MINUTE OPENINGS 2026] $99 retainer / 40% off Full / $500 off Petite",
-      "Preferred date: " + preferred,
-      "Leaning toward: " + leaning
-    ].filter(Boolean).join(String.fromCharCode(10)).slice(0, 2000);
-    const body = {
-      client_token: token(),
-      name: (v("first") + " " + v("last")).trim(),
-      email: v("email"), phone: v("phone"),
-      session_type: "studio", timeframe: "next-3-months",
-      notes: notes,
-      acknowledged: ["acknowledged", "ack_images", "ack_payment"].every((n) => form.elements[n].checked),
-      source_page: location.pathname, is_test: isTest,
-      user_agent: navigator.userAgent.slice(0, 400),
-    };
-    sent = true;
-    try {
-      fetch(ENDPOINT, { method: "POST", mode: "no-cors", keepalive: true,
-        headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }).catch(() => {});
-    } catch (e) {}
-    show();
-  });
 })();
 </script>
 </body>
