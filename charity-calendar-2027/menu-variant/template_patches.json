@@ -1,0 +1,50 @@
+[
+  {
+    "search": "  var FORM_VERSION=IS_2027?'2027-lpl-giveaway':'2026';\n  var SINGLE_CARD=PATHNAME.indexOf('forms-pspp-setup-1cc')>=0||PATHNAME.indexOf('forms-pspp-2027-lpl-giveaway-1cc')>=0;\n",
+    "replace": "  // 2027 Charity Calendar Model Call (2026-10-24, Jessica): pages\n  // forms-pspp-2027-ccmc (two-card) and forms-pspp-2027-ccmc-1cc (single-card)\n  // show EXACTLY the LPL Giveaway 2027 menu and pricing (the $500 credit is\n  // already in the prices; the $99 Session Fee is paid on the claim page), with\n  // their own title, form_name, form_version '2027-ccmc', cross links and\n  // Charity Calendar Model Call contract + acknowledgements. Kept SEPARATE from\n  // IS_2027 so the giveaway labels/links never leak onto these pages. Same\n  // webhooks + form_slugs as every other non-specialty page, so bookings flow\n  // through promote-psppv2-inbox(-1cc) and enroll-booked-on-pspp unchanged.\n  // Never last-minute, never flash-sale, never specialty.\n  var IS_CCMC=PATHNAME.indexOf('forms-pspp-2027-ccmc')>=0;\n  var FORM_VERSION=IS_CCMC?'2027-ccmc':IS_2027?'2027-lpl-giveaway':'2026';\n  var SINGLE_CARD=PATHNAME.indexOf('forms-pspp-setup-1cc')>=0||PATHNAME.indexOf('forms-pspp-2027-lpl-giveaway-1cc')>=0||PATHNAME.indexOf('forms-pspp-2027-ccmc-1cc')>=0;\n"
+  },
+  {
+    "search": "  var LINEUP_2027=IS_2027||!IS_SPECIALTY;\n",
+    "replace": "  var LINEUP_2027=IS_2027||IS_CCMC||!IS_SPECIALTY;\n"
+  },
+  {
+    "search": "qp('campaign')==='last-minute'&&!IS_SPECIALTY&&!IS_2027;",
+    "replace": "qp('campaign')==='last-minute'&&!IS_SPECIALTY&&!IS_2027&&!IS_CCMC;"
+  },
+  {
+    "search": "  var BOOK_START=(qp('campaign')==='flash-sale')?new Date(2026,9,1):new Date(2026,7,1);\n",
+    "replace": "  var BOOK_START=(qp('campaign')==='flash-sale'&&!IS_CCMC)?new Date(2026,9,1):new Date(2026,7,1);\n"
+  },
+  {
+    "search": "  var IS_FLASH=(P.campaign||'')==='flash-sale';\n",
+    "replace": "  var IS_FLASH=(P.campaign||'')==='flash-sale'&&!IS_CCMC;\n"
+  },
+  {
+    "search": "CONTRACT_TITLE='Boudoir Session Contract - Last-Minute Openings';}\n",
+    "replace": "CONTRACT_TITLE='Boudoir Session Contract - Last-Minute Openings';}\n  // Charity Calendar Model Call contract (asset row contract-ccmc-2027). Until that\n  // row exists contractSrc() is null and step 3 cannot be completed - fails closed.\n  if(IS_CCMC){CONTRACT_KEY='contract-ccmc-2027';CONTRACT_SLUG='boudoir-session-contract-charity-calendar-model-call';CONTRACT_TITLE='Boudoir Session Contract - Charity Calendar Model Call';}\n"
+  },
+  {
+    "search": "  if(IS_2027){try{document.title='2027 Pricing - LPL Giveaway — JHP Boudoir';}catch(_e){}}\n",
+    "replace": "  if(IS_2027){try{document.title='2027 Pricing - LPL Giveaway — JHP Boudoir';}catch(_e){}}\n  if(IS_CCMC){try{document.title='2027 Charity Calendar Model Call — JHP Boudoir';}catch(_e){}}\n"
+  },
+  {
+    "search": ":IS_FLASH?'I understand the Flash Sale only includes",
+    "replace": ":IS_CCMC?'I understand the Charity Calendar Model Call only includes the $99 Session Fee I paid to reserve my date and $500 off my collection, already taken off every collection price. No products or services are included with the model call, and all other products must be purchased separately.':IS_FLASH?'I understand the Flash Sale only includes"
+  },
+  {
+    "search": "  function allInitialed(){",
+    "replace": "  if(IS_CCMC){KEY_ACKS.splice(KEY_ACKS.indexOf('I understand the Charity Calendar Model Call only includes the $99 Session Fee I paid to reserve my date and $500 off my collection, already taken off every collection price. No products or services are included with the model call, and all other products must be purchased separately.')+1,0,'I understand that entering my images in the 2027 Charity Calendar is optional and is decided at my Image Reveal & Ordering Appointment, that it requires a separate signed release, and that my $500 discount applies whether or not my images are entered. Sessions held after October 2027 are not eligible for the calendar, and my images will never be shared publicly without my written permission.');}\n  function allInitialed(){"
+  },
+  {
+    "search": "(IS_2027?'../forms-pspp-2027-lpl-giveaway/':'../forms-pspp-setup-pspp-checkout-v2/')",
+    "replace": "(IS_CCMC?'../forms-pspp-2027-ccmc/':IS_2027?'../forms-pspp-2027-lpl-giveaway/':'../forms-pspp-setup-pspp-checkout-v2/')"
+  },
+  {
+    "search": "(IS_2027?'../forms-pspp-2027-lpl-giveaway-1cc/':'../forms-pspp-setup-1cc/')",
+    "replace": "(IS_CCMC?'../forms-pspp-2027-ccmc-1cc/':IS_2027?'../forms-pspp-2027-lpl-giveaway-1cc/':'../forms-pspp-setup-1cc/')"
+  },
+  {
+    "search": "(IS_2027?(SINGLE_CARD?'2027 Pricing - LPL Giveaway (Single Card)':'2027 Pricing - LPL Giveaway'):",
+    "replace": "(IS_CCMC?(SINGLE_CARD?'2027 Charity Calendar Model Call (Single Card)':'2027 Charity Calendar Model Call'):IS_2027?(SINGLE_CARD?'2027 Pricing - LPL Giveaway (Single Card)':'2027 Pricing - LPL Giveaway'):"
+  }
+]

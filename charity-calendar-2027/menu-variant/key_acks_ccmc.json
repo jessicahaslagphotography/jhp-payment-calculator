@@ -1,0 +1,38 @@
+{
+  "_note": "KEY_ACKS shown on forms-pspp-2027-ccmc(-1cc) after template_patches.json is applied (captured by running the patched template JS under node). Identical to the LPL Giveaway list except index 4 (giveaway ack replaced) and index 5 (new). Card-count wording at index 6 follows SINGLE_CARD exactly as today. These strings are embedded in template patches 8 and 9 - edit there too if Jessica changes them.",
+  "changed": {
+    "4": {
+      "was": "I understand the Boudoir Session Giveaway only includes a $500 discounted Session Fee and $500 Collection Credit. No products or services are included with the giveaway and all other products must be purchased separately.",
+      "now": "I understand the Charity Calendar Model Call only includes the $99 Session Fee I paid to reserve my date and $500 off my collection, already taken off every collection price. No products or services are included with the model call, and all other products must be purchased separately."
+    },
+    "5": {
+      "was": null,
+      "now": "I understand that entering my images in the 2027 Charity Calendar is optional and is decided at my Image Reveal & Ordering Appointment, that it requires a separate signed release, and that my $500 discount applies whether or not my images are entered. Sessions held after October 2027 are not eligible for the calendar, and my images will never be shared publicly without my written permission.",
+      "new": true
+    }
+  },
+  "two_card": [
+    "I agree to the terms and conditions of this contract.",
+    "The above session date/time is correct.",
+    "I understand that a last-minute cancellation or reschedule will incur a fee automatically charged to my card on file: $250 if requested within 30 days of my session, $500 if within 14 days, and $750 for a no-call/no-show or any cancellation within 24 hours of my start time.",
+    "I understand that refunds are not available for the Session Fee, Pre-Session Payment Plans, or Image Orders.",
+    "I understand the Charity Calendar Model Call only includes the $99 Session Fee I paid to reserve my date and $500 off my collection, already taken off every collection price. No products or services are included with the model call, and all other products must be purchased separately.",
+    "I understand that entering my images in the 2027 Charity Calendar is optional and is decided at my Image Reveal & Ordering Appointment, that it requires a separate signed release, and that my $500 discount applies whether or not my images are entered. Sessions held after October 2027 are not eligible for the calendar, and my images will never be shared publicly without my written permission.",
+    "By signing this contract and submitting my card information, I consent to and authorize automatic payment for my session via the provided payment method(s). I will keep a minimum of 2 credit cards on file at all times.",
+    "My Pre-Session Payment Plan must be set up within 7 days of paying the Session Fee, and my first payment must begin within 30 days. The plan must be paid in full no less than 30 days prior to my session (minimum investment $750 with 3 digital images). Failure to complete payment will result in session cancellation and forfeiture of the Session Fee.",
+    "I understand that any missed or declined payment will incur a $150 NSF/late fee, and that three (3) missed payments will result in cancellation of my session without refund.",
+    "I certify that the credit cards I place on file belong to me, and I am authorized to use them for all payments under this agreement."
+  ],
+  "single_card": [
+    "I agree to the terms and conditions of this contract.",
+    "The above session date/time is correct.",
+    "I understand that a last-minute cancellation or reschedule will incur a fee automatically charged to my card on file: $250 if requested within 30 days of my session, $500 if within 14 days, and $750 for a no-call/no-show or any cancellation within 24 hours of my start time.",
+    "I understand that refunds are not available for the Session Fee, Pre-Session Payment Plans, or Image Orders.",
+    "I understand the Charity Calendar Model Call only includes the $99 Session Fee I paid to reserve my date and $500 off my collection, already taken off every collection price. No products or services are included with the model call, and all other products must be purchased separately.",
+    "I understand that entering my images in the 2027 Charity Calendar is optional and is decided at my Image Reveal & Ordering Appointment, that it requires a separate signed release, and that my $500 discount applies whether or not my images are entered. Sessions held after October 2027 are not eligible for the calendar, and my images will never be shared publicly without my written permission.",
+    "By signing this contract and submitting my card information, I consent to and authorize automatic payment for my session via my card on file.",
+    "My Pre-Session Payment Plan must be set up within 7 days of paying the Session Fee, and my first payment must begin within 30 days. The plan must be paid in full no less than 30 days prior to my session (minimum investment $750 with 3 digital images). Failure to complete payment will result in session cancellation and forfeiture of the Session Fee.",
+    "I understand that any missed or declined payment will incur a $150 NSF/late fee, and that three (3) missed payments will result in cancellation of my session without refund.",
+    "I certify that the credit cards I place on file belong to me, and I am authorized to use them for all payments under this agreement."
+  ]
+}

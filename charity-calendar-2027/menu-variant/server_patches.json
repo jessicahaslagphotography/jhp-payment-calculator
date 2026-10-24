@@ -1,0 +1,10 @@
+[
+  {
+    "search": "                   and answers.get(\"form_version\") != \"2027-lpl-giveaway\"\n",
+    "replace": "                   and answers.get(\"form_version\") not in (\"2027-lpl-giveaway\", \"2027-ccmc\")\n"
+  },
+  {
+    "search": "        if answers.get(\"form_version\") == \"2027-lpl-giveaway\" and not SPECIALTY:\n            retry_base = (\"https://pages.scalogy.com/jhpboudoir1/forms-pspp-2027-lpl-giveaway-1cc/\"\n                          if SINGLE_CARD else\n                          \"https://pages.scalogy.com/jhpboudoir1/forms-pspp-2027-lpl-giveaway/\")\n",
+    "replace": "        if answers.get(\"form_version\") == \"2027-lpl-giveaway\" and not SPECIALTY:\n            retry_base = (\"https://pages.scalogy.com/jhpboudoir1/forms-pspp-2027-lpl-giveaway-1cc/\"\n                          if SINGLE_CARD else\n                          \"https://pages.scalogy.com/jhpboudoir1/forms-pspp-2027-lpl-giveaway/\")\n        # 2027 Charity Calendar Model Call: same 2027 menu, its own pages.\n        elif answers.get(\"form_version\") == \"2027-ccmc\" and not SPECIALTY:\n            retry_base = (\"https://pages.scalogy.com/jhpboudoir1/forms-pspp-2027-ccmc-1cc/\"\n                          if SINGLE_CARD else\n                          \"https://pages.scalogy.com/jhpboudoir1/forms-pspp-2027-ccmc/\")\n"
+  }
+]

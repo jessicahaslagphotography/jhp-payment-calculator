@@ -1,0 +1,6 @@
+[
+  {
+    "search": "  if(IS_LASTMIN)BOOK_END=new Date(2026,11,31);\n",
+    "replace": "  if(IS_LASTMIN)BOOK_END=new Date(2026,11,31);\n  // CCMC (pending Jessica): bookable through March 2028 at the discounted rate. Also\n  // needs ops/ghl_slots_sync.py BOOK_END >= 2028-03-31 and GHL openings, or nothing shows.\n  if(IS_CCMC)BOOK_END=new Date(2028,2,31);\n"
+  }
+]

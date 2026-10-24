@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Claim Your Spot &middot; 2027 Charity Calendar &middot; JHP Boudoir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://web.squarecdn.com/v1/square.js"></script>
+<style>
+  :root{
+    --bg:#13100E; --panel:#1C1714; --raised:#241D18;
+    --ink:#F2ECE2; --muted:#A99A86; --dim:#7D7161;
+    --gold:#C9A24B; --gold-bright:#E6C576; --line:rgba(201,162,75,.30); --line-soft:rgba(242,236,226,.09);
+    --danger:#f0c9c0; --danger-bg:#3a2420; --danger-bd:#6e3a30;
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg)}
+  body{font-family:var(--sans);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;font-weight:400}
+  ::selection{background:var(--gold);color:#13100E}
+  @keyframes ccFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @keyframes sp{to{transform:rotate(360deg)}}
+  .page{width:100%;max-width:580px;margin:0 auto;min-height:100vh}
+  .topbar{height:4px;background:linear-gradient(90deg,var(--gold),var(--gold-bright),var(--gold))}
+  .brand{display:flex;align-items:baseline;justify-content:center;gap:10px;padding:22px 20px 0}
+  .brand .m{font-family:var(--serif);font-style:italic;font-size:24px;color:var(--ink);line-height:1}
+  .brand .t{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+  .head{padding:26px 26px 6px;text-align:center}
+  .eyebrow{font-size:12px;font-weight:500;letter-spacing:4px;text-transform:uppercase;color:var(--gold)}
+  .title{font-family:var(--serif);font-weight:600;font-size:40px;line-height:1.05;margin:14px 0 8px;color:#fff;letter-spacing:-.3px}
+  .title em{display:block;font-style:italic;font-weight:500;font-size:26px;color:var(--gold-bright);margin-top:8px;letter-spacing:0}
+  .rule{width:56px;height:1px;background:var(--gold);margin:16px auto 0}
+  .sub{font-size:15px;font-weight:300;color:var(--muted);max-width:440px;margin:14px auto 0}
+  .wrap{padding:22px 20px 40px}
+  .card{background:var(--panel);border:1px solid #2E2620;border-radius:16px;padding:22px 20px;margin-bottom:16px;animation:ccFade .4s ease}
+  .label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:0 0 12px;font-weight:600}
+  .facts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+  .facts li{display:flex;gap:12px;font-size:14px;line-height:1.55;color:#D8CDBE;font-weight:300}
+  .facts li .dot{flex:none;width:7px;height:7px;border-radius:50%;background:var(--gold);margin-top:8px}
+  .facts li strong{color:var(--ink);font-weight:500}
+  .clock{display:flex;gap:14px;align-items:flex-start;background:#1a1206;border:1px solid #6e4a2e;border-left:3px solid var(--gold);border-radius:12px;padding:16px}
+  .clock .ic{flex:none;width:38px;height:38px;border-radius:50%;background:var(--gold);color:#13100E;display:flex;align-items:center;justify-content:center}
+  .clock p{margin:0;font-size:14px;line-height:1.55;color:var(--ink)}
+  .clock p+p{margin-top:6px;color:var(--muted);font-weight:300;font-size:13px}
+  .plans{display:flex;gap:10px;margin:0}
+  .plan{flex:1;text-align:left;background:var(--raised);border:1px solid var(--line);border-radius:12px;
+      padding:14px;cursor:pointer;color:var(--ink);font-family:var(--sans);display:flex;flex-direction:column;gap:5px;
+      transition:border-color .15s,background .15s}
+  .plan .pt{font-family:var(--serif);font-size:21px;font-weight:600;line-height:1.05;color:var(--ink)}
+  .plan .pd{font-size:12px;color:var(--muted);line-height:1.4}
+  .plan.sel{border-color:var(--gold);background:linear-gradient(180deg,rgba(201,162,75,.16),rgba(201,162,75,.03))}
+  .plan.sel .pd{color:var(--gold-bright)}
+  .plan:focus-visible,.btn:focus-visible,.linkbtn:focus-visible{outline:2px solid var(--gold-bright);outline-offset:2px}
+  form{display:flex;flex-direction:column;gap:15px}
+  label.f{display:flex;flex-direction:column;gap:7px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  input[type=text],input[type=date]{
+      font-family:var(--sans);font-size:16px;color:var(--ink);background:var(--raised);
+      border:1px solid var(--line);border-radius:10px;padding:13px 14px;width:100%}
+  input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,162,75,.18)}
+  input[type=date]{color-scheme:dark}
+  .hint{font-size:12px;color:var(--gold-bright);text-transform:none;letter-spacing:0;margin-top:2px}
+  .pay-label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:block;margin:0 0 8px}
+  #sq-card{background:var(--raised);border:1px solid var(--line);border-radius:10px;padding:4px 6px;min-height:52px}
+  .ack{display:flex;gap:12px;align-items:flex-start;font-size:13px;color:#E7D9C8;text-transform:none;letter-spacing:0;line-height:1.5;cursor:pointer;background:#13100E;border:1px solid #6E4A2E;border-radius:12px;padding:15px}
+  .ack input{margin-top:1px;width:22px;height:22px;accent-color:var(--gold);flex:none}
+  .ack strong{color:#fff;font-weight:600}
+  .btn,.linkbtn{margin-top:2px;font-family:var(--sans);font-weight:600;font-size:15px;letter-spacing:.12em;text-transform:uppercase;
+      color:#13100E;background:linear-gradient(90deg,var(--gold),var(--gold-bright));border:none;border-radius:12px;
+      height:56px;cursor:pointer;transition:filter .15s,opacity .15s}
+  .linkbtn{display:inline-flex;align-items:center;justify-content:center;padding:0 28px;text-decoration:none;margin-top:22px}
+  .btn:hover,.linkbtn:hover{filter:brightness(1.05)} .btn:disabled{opacity:.5;cursor:not-allowed}
+  .err{background:var(--danger-bg);border:1px solid var(--danger-bd);color:var(--danger);border-radius:10px;padding:12px 14px;font-size:13px}
+  .err:empty{display:none;padding:0;border:none}
+  .spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(19,16,14,.35);border-top-color:#13100E;border-radius:50%;vertical-align:-2px;margin-right:8px;animation:sp .7s linear infinite}
+  .spin.gold{border-color:rgba(201,162,75,.25);border-top-color:var(--gold);width:28px;height:28px;margin:0 auto 14px;display:block}
+  .secure{display:flex;align-items:center;justify-content:center;gap:7px;font-size:11.5px;color:var(--dim);margin-top:6px}
+  .legal{color:var(--dim);font-size:11.5px;margin-top:12px;line-height:1.55;text-align:center}
+  .hide{display:none!important}
+  .msg{text-align:center;padding:30px 10px 10px;animation:ccFade .5s ease}
+  .msg .mk{width:66px;height:66px;border-radius:50%;background:var(--gold);color:#13100E;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:32px}
+  .msg .mk.soft{background:var(--raised);color:var(--gold);border:1px solid var(--line)}
+  .msg h2{font-family:var(--serif);font-weight:600;font-size:32px;color:#fff;line-height:1.08;margin:0}
+  .msg p{font-size:15px;font-weight:300;color:var(--muted);max-width:420px;margin:12px auto 0}
+  .footer{text-align:center;font-size:11px;color:var(--dim);padding:0 26px 30px;line-height:1.6}
+  @media (max-width:460px){.plans{flex-direction:column}.title{font-size:34px}.title em{font-size:23px}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="topbar"></div>
+  <div class="brand"><span class="m">JHP</span><span class="t">Boudoir</span></div>
+
+  <div class="head">
+    <div class="eyebrow">You&rsquo;re invited</div>
+    <h1 class="title">Claim your spot <em>2027 Charity Calendar Model Call</em></h1>
+    <div class="rule"></div>
+  </div>
+
+  <!-- checking the invitation -->
+  <main id="st-checking">
+    <div class="wrap"><div class="msg"><span class="spin gold"></span><p>Checking your invitation&hellip;</p></div></div>
+  </main>
+
+  <!-- no / malformed ?t= -->
+  <main class="hide" id="st-nolink">
+    <div class="wrap"><div class="card"><div class="msg">
+      <div class="mk soft">&#9993;</div>
+      <h2>This link is personal</h2>
+      <p>Claiming a spot in the 2027 Charity Calendar Model Call is by invitation. Please open the personal link from your invitation email or text &mdash; it&rsquo;s made just for you.</p>
+      <p>Can&rsquo;t find it? Just reply to your invitation and we&rsquo;ll help.</p>
+    </div></div></div>
+  </main>
+
+  <!-- server said: invalid / expired / claimed -->
+  <main class="hide" id="st-closed">
+    <div class="wrap"><div class="card"><div class="msg">
+      <div class="mk soft" id="closed-mk">&#8987;</div>
+      <h2 id="closed-title">This invitation has expired</h2>
+      <p id="closed-text"></p>
+      <a class="linkbtn hide" id="closed-go" href="#">Continue to booking &rarr;</a>
+    </div></div></div>
+  </main>
+
+  <!-- the claim form -->
+  <main class="hide" id="panel">
+    <div class="head" style="padding-top:0">
+      <p class="sub">You&rsquo;ve been selected for the 2027 Charity Calendar Model Call. Pay your $99 session fee in full, or hold your spot for $1 today. Either way, your session fee is non-refundable.</p>
+    </div>
+    <div class="wrap">
+      <div class="card">
+        <div class="clock">
+          <div class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+          <div>
+            <p>You have <strong style="color:var(--gold-bright)">72 hours</strong> from your invitation to claim your spot.</p>
+            <p id="claim-by"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="label">What you&rsquo;re claiming</div>
+        <ul class="facts">
+          <li><span class="dot"></span><span>A <strong>$99 session fee</strong> and <strong>$500 off your package</strong>.</span></li>
+          <li><span class="dot"></span><span>After claiming, you have <strong>1 week to complete your booking</strong> &mdash; choose your package and your session date.</span></li>
+          <li><span class="dot"></span><span>Sessions held <strong>October 2026 &ndash; October 2027</strong> are eligible for the 2027 calendar.</span></li>
+          <li><span class="dot"></span><span>You can also book a session <strong>through March 2028</strong> at the same discounted rate &mdash; it just won&rsquo;t be in the calendar.</span></li>
+          <li><span class="dot"></span><span>Being in the calendar is <strong>completely optional</strong>. Your images are always yours.</span></li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <div class="label">Choose how to pay</div>
+        <div class="plans">
+          <button type="button" class="plan" id="plan-full" data-plan="full">
+            <span class="pt">Pay $99 in full</span>
+            <span class="pd">$99 today &middot; nothing later</span>
+          </button>
+          <button type="button" class="plan sel" id="plan-deposit" data-plan="deposit">
+            <span class="pt">Hold for $1 today</span>
+            <span class="pd">$1 now &middot; $98 on a date you choose (within 14 days)</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <form id="form" novalidate>
+          <label class="f">Name on card<input type="text" id="cardname" autocomplete="cc-name"></label>
+          <label class="f" id="balrow">Charge my $98 balance on
+            <input type="date" id="baldate">
+            <span class="hint" id="datehint"></span>
+          </label>
+          <div>
+            <span class="pay-label">Card details</span>
+            <div id="sq-card"></div>
+            <div class="err" id="card-err" style="margin-top:10px;"></div>
+          </div>
+          <label class="ack"><input type="checkbox" id="ack">
+            <span><span id="acktext"></span></span></label>
+          <button type="submit" class="btn" id="submit">Claim my spot &mdash; $1 today</button>
+          <div class="err" id="form-err"></div>
+          <div class="secure">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Secure payment &middot; processed by Square
+          </div>
+          <p class="legal">Your card is stored only to charge your scheduled balance.</p>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="label">A little reassurance</div>
+        <div style="font-size:14px;font-weight:300;color:#D8CDBE;line-height:1.6;margin:0 0 14px;"><strong style="color:var(--ink);font-weight:500;">Your images are always yours.</strong> Calendar participation is your choice, and there&rsquo;s never any requirement to share your images anywhere else.</div>
+        <div style="font-size:14px;font-weight:300;color:#D8CDBE;line-height:1.6;margin:0;"><strong style="color:var(--ink);font-weight:500;">Interest-free prepayment plans are available</strong> for your package &mdash; you&rsquo;ll set it up when you book.</div>
+      </div>
+    </div>
+    <div class="footer">JHP Boudoir &middot; Jessica Haslag Paul<br>The $99 session fee is non-refundable and reserves your studio time. You have 7 days after claiming to choose your package and session date, or your spot is forfeited without refund.</div>
+  </main>
+
+  <!-- success -->
+  <main class="hide" id="done">
+    <div class="wrap"><div class="card"><div class="msg">
+      <div class="mk">&#10003;</div>
+      <h2 id="done-title">Your spot is claimed!</h2>
+      <p id="done-lead">Taking you to your booking page&hellip;</p>
+      <a class="linkbtn hide" id="done-go" href="#">Book my session &rarr;</a>
+    </div></div></div>
+  </main>
+</div>
+
+<script>{% raw %}
+(function(){
+  var APP_ID='sq0idp-GTU2E7U0Tm7SIicRiQdXUA';
+  var LOCATION_ID='LPEFSHS0X4QPD';
+  var WEBHOOK='https://app.scalogy.com/webhooks/in/jhpboudoir1/ccmc-reserve-pay';
+  var NEXT_PREFIX='https://pages.scalogy.com/jhpboudoir1/';
+  var LS_KEY='ccmcResvToken';
+
+  var PT=(document.querySelector('meta[name="scalogy-page-token"]')||{}).content||'';
+  function api(path){var h={'Accept':'application/json'};if(PT)h['Authorization']='Bearer '+PT;return fetch('_api/'+path,{headers:h});}
+  var $=function(id){return document.getElementById(id);};
+  function qp(n){try{return new URLSearchParams(location.search).get(n)||'';}catch(e){return '';}}
+  var IS_TEST=qp('test')==='1';
+  var INVITE=(qp('t')||'').trim();
+  var SUBTLE=(window.crypto&&window.crypto.subtle)||null;
+
+  // Persist the claim token across reloads: if the client refreshes mid-'Processing',
+  // re-using the SAME token lets the server dedupe + Square idempotency keys prevent a
+  // second charge. Replaced after an error (so a retry gets fresh idempotency keys) and
+  // cleared on any terminal outcome.
+  function mkToken(){return (self.crypto&&crypto.randomUUID)?crypto.randomUUID():('r'+Date.now()+Math.random().toString(16).slice(2)+Math.random().toString(16).slice(2));}
+  function saveToken(t){try{localStorage.setItem(LS_KEY,t);}catch(e){}}
+  function clearToken(){try{localStorage.removeItem(LS_KEY);}catch(e){}}
+  var TOKEN,TOKEN_HASH='';
+  try{TOKEN=localStorage.getItem(LS_KEY)||'';}catch(e){TOKEN='';}
+  if(!TOKEN){TOKEN=mkToken();saveToken(TOKEN);}
+
+  function utf8(s){return new TextEncoder().encode(s);}
+  function hex(buf){var b=new Uint8Array(buf),s='';for(var i=0;i<b.length;i++)s+=('0'+b[i].toString(16)).slice(-2);return s;}
+  function hashToken(){
+    if(!SUBTLE)return Promise.resolve('');
+    return SUBTLE.digest('SHA-256',utf8(TOKEN)).then(function(h){TOKEN_HASH=hex(h);return TOKEN_HASH;});
+  }
+  function newToken(){TOKEN=mkToken();saveToken(TOKEN);TOKEN_HASH='';return hashToken();}
+
+  // next_url is stored encrypted (see ccmc_reserve_charge._enc_next_url):
+  // base64(nonce16 || ct), keystream block i = HMAC-SHA256(sha256('ccmc-next-url|'+TOKEN), nonce||uint32be(i))
+  function decNext(enc){
+    if(!enc||!SUBTLE)return Promise.resolve('');
+    var raw;
+    try{var bin=atob(enc);raw=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)raw[i]=bin.charCodeAt(i);}catch(e){return Promise.resolve('');}
+    if(raw.length<17)return Promise.resolve('');
+    var nonce=raw.slice(0,16),ct=raw.slice(16),out=new Uint8Array(ct.length);
+    return SUBTLE.digest('SHA-256',utf8('ccmc-next-url|'+TOKEN)).then(function(kb){
+      return SUBTLE.importKey('raw',kb,{name:'HMAC',hash:'SHA-256'},false,['sign']);
+    }).then(function(key){
+      var jobs=[];
+      for(var off=0;off<ct.length;off+=32){(function(off){
+        var n=off/32,msg=new Uint8Array(20);
+        msg.set(nonce,0);msg[16]=(n>>>24)&255;msg[17]=(n>>>16)&255;msg[18]=(n>>>8)&255;msg[19]=n&255;
+        jobs.push(SUBTLE.sign('HMAC',key,msg).then(function(ks){
+          ks=new Uint8Array(ks);
+          for(var j=0;j<32&&off+j<ct.length;j++)out[off+j]=ct[off+j]^ks[j];
+        }));
+      })(off);}
+      return Promise.all(jobs);
+    }).then(function(){return new TextDecoder().decode(out);}).catch(function(){return '';});
+  }
+  function safeNext(u){
+    if(typeof u!=='string'||u.indexOf(NEXT_PREFIX)!==0)return '';
+    if(/[\s<>"'`\\]/.test(u))return '';
+    return u;
+  }
+
+  var VIEWS=['st-checking','st-nolink','st-closed','panel','done'];
+  function show(id){VIEWS.forEach(function(v){$(v).classList.toggle('hide',v!==id);});window.scrollTo(0,0);}
+
+  // ---------- no / malformed invite: friendly message, no card form ----------
+  if(!/^[A-Za-z0-9_-]{16,128}$/.test(INVITE)){show('st-nolink');return;}
+
+  function post(payload){
+    try{return fetch(WEBHOOK,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}).catch(function(){});}
+    catch(e){return Promise.resolve();}
+  }
+
+  function fetchRow(){
+    if(!TOKEN_HASH)return Promise.resolve(null);
+    return api('ccmc_reservation_status?limit=500&_cb='+Date.now()).then(function(r){
+      // The page token can lapse on a long visit: reload. The claim token is persisted, so the
+      // on-load check resumes an in-flight or finished charge instead of starting over.
+      if(r.status===401){location.reload();return null;}
+      return r.ok?r.json():null;
+    }).then(function(d){
+      if(!d)return null;
+      var rows=d.rows||d.data||(Array.isArray(d)?d:[]);
+      for(var i=0;i<rows.length;i++){if(rows[i]&&rows[i].token_hash===TOKEN_HASH)return rows[i];}
+      return null;
+    }).catch(function(){return null;});
+  }
+
+  // ---------- terminal "closed" screens ----------
+  function showClosed(row){
+    clearToken();
+    var st=row.status, msg=row.card_error||'';
+    var title='This invitation has expired', mk='⌛';
+    if(st==='invalid'){title='We couldn’t find this invitation';mk='?';}
+    else if(st==='claimed'){title='You’ve already claimed your spot';mk='✓';}
+    else if(st==='released'||st==='forfeited'){title='This invitation is no longer active';}
+    $('closed-title').textContent=title;
+    $('closed-mk').textContent=mk;
+    $('closed-text').textContent=msg||'If you think this is a mistake, reach out and we’ll help.';
+    $('closed-go').classList.add('hide');
+    show('st-closed');
+    if(st==='claimed'&&row.next_url_enc){
+      decNext(row.next_url_enc).then(function(u){
+        u=safeNext(u);
+        if(u){$('closed-go').href=u;$('closed-go').classList.remove('hide');}
+      });
+    }
+  }
+  var CLOSED={invalid:1,expired:1,claimed:1,released:1,forfeited:1};
+
+  // ---------- form ----------
+  var selectedPlan='deposit', formReady=false;
+  function iso(d){return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+  function pretty(s){try{return new Date(s+'T00:00:00').toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});}catch(e){return s;}}
+  function prettyTs(s){try{return new Date(s).toLocaleString('en-US',{timeZone:'America/Chicago',weekday:'long',month:'long',day:'numeric',hour:'numeric',minute:'2-digit'})+' (Central)';}catch(e){return '';}}
+
+  (function(){
+    var now=new Date(), day=86400000, el=$('baldate');
+    el.min=iso(new Date(now.getTime()+day));
+    el.max=iso(new Date(now.getTime()+14*day));
+    el.value=iso(new Date(now.getTime()+7*day));
+    function hint(){$('datehint').textContent=el.value?('That’s '+pretty(el.value)):'';}
+    hint(); el.addEventListener('change',hint);
+  })();
+
+  function setAck(p){
+    var box=$('acktext'); box.textContent='';
+    box.appendChild(document.createTextNode('I understand my '));
+    var s=document.createElement('strong'); s.textContent='$99 session fee is non-refundable'; box.appendChild(s);
+    box.appendChild(document.createTextNode(p==='full'
+      ? ', and I authorize JHP Boudoir to charge $99 to my card today.'
+      : ', and I authorize JHP Boudoir to charge $1 today and my $98 balance on the date I selected.'));
+  }
+  function planLabel(){return selectedPlan==='full'?'Pay $99 & claim my spot':'Claim my spot — $1 today';}
+  function selectPlan(p){
+    selectedPlan=p;
+    $('plan-deposit').classList.toggle('sel',p==='deposit');
+    $('plan-full').classList.toggle('sel',p==='full');
+    $('plan-deposit').setAttribute('aria-pressed',p==='deposit'?'true':'false');
+    $('plan-full').setAttribute('aria-pressed',p==='full'?'true':'false');
+    $('balrow').style.display=(p==='deposit')?'':'none';
+    setAck(p);
+    if(!$('submit').disabled)$('submit').textContent=planLabel();
+  }
+  $('plan-deposit').addEventListener('click',function(){selectPlan('deposit');});
+  $('plan-full').addEventListener('click',function(){selectPlan('full');});
+  selectPlan('deposit');
+
+  // Square Web Payments (LIVE production)
+  var sqPayments,sqCard;
+  function initSquare(){
+    (async function(){
+      try{
+        if(!window.Square){$('card-err').textContent='Card form failed to load. Please refresh.';return;}
+        sqPayments=window.Square.payments(APP_ID,LOCATION_ID);
+        sqCard=await sqPayments.card();
+        await sqCard.attach('#sq-card');
+      }catch(e){$('card-err').textContent='Could not load the card form: '+(e&&e.message||e);}
+    })();
+  }
+  function showForm(row){
+    if(formReady)return;
+    formReady=true;
+    $('claim-by').textContent=(row&&row.claim_deadline)?('Please claim by '+prettyTs(row.claim_deadline)+'.'):'';
+    show('panel');
+    initSquare();
+  }
+
+  function busy(on){
+    var b=$('submit');b.disabled=on;b.textContent='';
+    if(on){var sp=document.createElement('span');sp.className='spin';b.appendChild(sp);b.appendChild(document.createTextNode('Processing…'));}
+    else b.textContent=planLabel();
+  }
+  function formErr(m){$('form-err').textContent=m||'';}
+  function cardErr(m){$('card-err').textContent=m||'';}
+  function clearErr(){formErr('');cardErr('');}
+
+  $('form').addEventListener('submit',async function(ev){
+    ev.preventDefault(); clearErr();
+    var cname=$('cardname').value.trim(),bd=$('baldate').value;
+    if(!sqCard){cardErr('The card form is still loading — please wait a moment.');return;}
+    if(!cname){formErr('Please enter the name on your card.');return;}
+    if(selectedPlan==='deposit'&&!bd){formErr('Please choose a date for your $98 balance.');return;}
+    if(!$('ack').checked){formErr('Please agree to the reservation terms to continue.');return;}
+    busy(true);
+    if(!TOKEN_HASH){try{await hashToken();}catch(e){}}
+    var res;
+    try{res=await sqCard.tokenize();}catch(e){cardErr('Card error: '+(e&&e.message||e));busy(false);return;}
+    if(!res||res.status!=='OK'){
+      var em=(res&&res.errors&&res.errors[0]&&(res.errors[0].message||res.errors[0].detail))||'Please double-check your card details.';
+      cardErr(em);busy(false);return;
+    }
+    // SCA / buyer verification (required to store a card on file; may prompt 3DS in production)
+    var vtoken='';
+    try{
+      var amt=(selectedPlan==='full')?'99.00':'1.00';
+      var vres=await sqPayments.verifyBuyer(res.token,{
+        amount:amt, currencyCode:'USD', intent:'CHARGE_AND_STORE', customerInitiated:true,
+        billingContact:{ givenName:(cname.split(' ')[0]||''), familyName:(cname.split(' ').slice(1).join(' ')||'') }
+      });
+      vtoken=(vres&&vres.token)||'';
+    }catch(e){ vtoken=''; }
+    if(!vtoken){ cardErr('We couldn’t verify your card. Please re-enter your card details and try again.'); busy(false); return; }
+    var payload={client_token:TOKEN,invite_token:INVITE,sourceId:res.token,verification_token:vtoken,
+                 plan:selectedPlan,balance_date:(selectedPlan==='deposit'?bd:''),
+                 acknowledged:true,is_test:IS_TEST,user_agent:(navigator.userAgent||'').slice(0,400)};
+    await post(payload);
+    watch('pay',payload);
+  });
+
+  // ---------- one poller for both phases ----------
+  // phase 'check': waiting for the invite check (ready / closed / an in-flight or finished claim)
+  // phase 'pay'  : waiting for the charge outcome ('ready' and 'new' mean keep waiting)
+  // retryPayload: a webhook POST that lands while the workflow is already running (any
+  // visitor's run) is dropped by the runner, so re-POST while the row hasn't moved. Safe:
+  // the server dedupes on client_token and reuses the same Square idempotency keys.
+  var iv=null, gen=0;
+  function watch(phase,retryPayload){
+    if(iv)clearInterval(iv);
+    var my=++gen, tries=0, retries=0, max=(phase==='check')?20:45;
+    iv=setInterval(function(){
+      tries++;
+      fetchRow().then(function(row){
+        if(my!==gen||!iv)return;
+        var moved=row&&(phase==='check'?true:(row.status!=='ready'));
+        if(retryPayload&&!moved&&retries<3&&tries%5===0){retries++;post(retryPayload);}
+        if(row){
+          var st=row.status;
+          if(st==='reserved'||st==='paid'||st==='booked'){stop();showDone(row);return;}
+          if(CLOSED[st]){stop();showClosed(row);return;}
+          if(st==='error'){
+            if(phase==='pay'){stop();busy(false);cardErr(row.card_error||'Something went wrong. Please try again.');newToken();return;}
+            stop();newToken().then(startCheck);return;   // stale error from an earlier visit: re-check with a fresh token
+          }
+          if(phase==='check'&&st==='ready'){stop();showForm(row);return;}
+          if(phase==='check'&&st==='new'){stop();showForm(null);busy(true);watch('pay');return;}  // reload mid-charge (no re-POST: no card token)
+        }
+        if(tries>=max){
+          stop();
+          if(phase==='check'){showForm(null);}   // server slow: show the form; the charge re-validates the invite
+          else{busy(false);formErr('Still processing — please check your email and texts, or try again in a moment.');}
+        }
+      });
+    },phase==='check'?1500:2000);
+    function stop(){if(my===gen){clearInterval(iv);iv=null;}}
+  }
+
+  function showDone(row){
+    clearToken();
+    var full=(row.status==='paid'||selectedPlan==='full');
+    $('done-title').textContent=full?'You’re all set!':'Your spot is claimed!';
+    $('done-lead').textContent='Taking you to your booking page…';
+    show('done');
+    decNext(row.next_url_enc).then(function(u){
+      u=safeNext(u);
+      if(!u){$('done-lead').textContent='Check your email and texts — your personal booking link is on its way. You have 7 days to choose your package and session date.';return;}
+      $('done-go').href=u; $('done-go').classList.remove('hide');
+      setTimeout(function(){window.location.href=u;},1100);
+    });
+  }
+
+  // ---------- start: ask the server about this invitation ----------
+  function startCheck(){
+    if(!TOKEN_HASH){showForm(null);return;}   // no WebCrypto: skip the pre-check; the charge still validates
+    var chk={mode:'check',client_token:TOKEN,invite_token:INVITE,is_test:IS_TEST,user_agent:(navigator.userAgent||'').slice(0,400)};
+    post(chk);
+    watch('check',chk);
+  }
+  hashToken().then(startCheck).catch(function(){showForm(null);});
+})();
+{% endraw %}</script>
+</body>
+</html>

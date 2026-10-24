@@ -1,0 +1,28 @@
+SAME /jhpboudoir1/forms-pspp-setup-pspp-checkout-v2/   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-setup-pspp-checkout-v2/?campaign=last-minute   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-setup-pspp-checkout-v2/?campaign=flash-sale   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-setup-1cc/   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-setup-1cc/?campaign=last-minute   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-setup-1cc/?campaign=flash-sale   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-2027-lpl-giveaway/   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-2027-lpl-giveaway/?campaign=last-minute   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-2027-lpl-giveaway/?campaign=flash-sale   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-2027-lpl-giveaway-1cc/   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-2027-lpl-giveaway-1cc/?campaign=last-minute   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-2027-lpl-giveaway-1cc/?campaign=flash-sale   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-setup-specialty/   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-setup-specialty/?campaign=last-minute   IS_CCMC=False
+SAME /jhpboudoir1/forms-pspp-setup-specialty/?campaign=flash-sale   IS_CCMC=False
+SAME /jhpboudoir1/treehouse-pc-investment/   IS_CCMC=False
+SAME /jhpboudoir1/treehouse-pc-investment/?campaign=last-minute   IS_CCMC=False
+SAME /jhpboudoir1/treehouse-pc-investment/?campaign=flash-sale   IS_CCMC=False
+CCMC vs giveaway (no query) differs in: ['CONTRACT_KEY', 'CONTRACT_SLUG', 'CONTRACT_TITLE', 'FORM_VERSION', 'IS_2027', 'IS_CCMC', 'KEY_ACKS', 'form_name', 'link_one_card', 'link_two_card', 'title']
+CCMC?campaign=last-minute vs giveaway (no query) differs in: ['CONTRACT_KEY', 'CONTRACT_SLUG', 'CONTRACT_TITLE', 'FORM_VERSION', 'IS_2027', 'IS_CCMC', 'KEY_ACKS', 'form_name', 'link_one_card', 'link_two_card', 'title']
+CCMC?campaign=flash-sale vs giveaway (no query) differs in: ['CONTRACT_KEY', 'CONTRACT_SLUG', 'CONTRACT_TITLE', 'FORM_VERSION', 'IS_2027', 'IS_CCMC', 'KEY_ACKS', 'form_name', 'link_one_card', 'link_two_card', 'title']
+CCMC-1cc vs giveaway-1cc (no query) differs in: ['CONTRACT_KEY', 'CONTRACT_SLUG', 'CONTRACT_TITLE', 'FORM_VERSION', 'IS_2027', 'IS_CCMC', 'KEY_ACKS', 'form_name', 'link_one_card', 'link_two_card', 'title']
+CCMC-1cc?campaign=last-minute vs giveaway-1cc (no query) differs in: ['CONTRACT_KEY', 'CONTRACT_SLUG', 'CONTRACT_TITLE', 'FORM_VERSION', 'IS_2027', 'IS_CCMC', 'KEY_ACKS', 'form_name', 'link_one_card', 'link_two_card', 'title']
+CCMC-1cc?campaign=flash-sale vs giveaway-1cc (no query) differs in: ['CONTRACT_KEY', 'CONTRACT_SLUG', 'CONTRACT_TITLE', 'FORM_VERSION', 'IS_2027', 'IS_CCMC', 'KEY_ACKS', 'form_name', 'link_one_card', 'link_two_card', 'title']
+ccmc two-card: {"FORM_VERSION": "2027-ccmc", "SINGLE_CARD": false, "CONTRACT_KEY": "contract-ccmc-2027", "CONTRACT_SLUG": "boudoir-session-contract-charity-calendar-model-call", "CONTRACT_TITLE": "Boudoir Session Contract - Charity Calendar Model Call", "title": "2027 Charity Calendar Model Call — JHP Boudoir", "form_name": "2027 Charity Calendar Model Call", "link_one_card": "../forms-pspp-2027-ccmc-1cc/", "link_two_card": "../forms-pspp-2027-ccmc/", "WEBHOOK_URL": "https://app.scalogy.com/webhooks/in/jhpboudoir1/pspp-checkout-trigger", "BOOK_START": "2026-08-01", "BOOK_END": "2027-12-16"}
+ccmc single-card: {"FORM_VERSION": "2027-ccmc", "SINGLE_CARD": true, "title": "2027 Charity Calendar Model Call — JHP Boudoir (Single Card)", "form_name": "2027 Charity Calendar Model Call (Single Card)", "link_two_card": "../forms-pspp-2027-ccmc/", "WEBHOOK_URL": "https://app.scalogy.com/webhooks/in/jhpboudoir1/pspp-checkout-trigger-1cc"}
+menu ids/prices (ccmc): [["artist", "Artist Collection", 9400], ["diamond", "Diamond Collection", 6900], ["gold", "Gold Collection", 5100], ["fulldigital", "Full Digital Gallery", 4500], ["silver", "Silver Collection", 2900], ["petite1", "Petite 15", 2200], ["petite2", "Petite 8", 1500], ["petite3", "Petite 3", 750]]
+ALL EXISTING PATHS UNCHANGED: True
