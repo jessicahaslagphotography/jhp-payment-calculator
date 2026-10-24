@@ -6,5 +6,9 @@
   {
     "search": "        if answers.get(\"form_version\") == \"2027-lpl-giveaway\" and not SPECIALTY:\n            retry_base = (\"https://pages.scalogy.com/jhpboudoir1/forms-pspp-2027-lpl-giveaway-1cc/\"\n                          if SINGLE_CARD else\n                          \"https://pages.scalogy.com/jhpboudoir1/forms-pspp-2027-lpl-giveaway/\")\n",
     "replace": "        if answers.get(\"form_version\") == \"2027-lpl-giveaway\" and not SPECIALTY:\n            retry_base = (\"https://pages.scalogy.com/jhpboudoir1/forms-pspp-2027-lpl-giveaway-1cc/\"\n                          if SINGLE_CARD else\n                          \"https://pages.scalogy.com/jhpboudoir1/forms-pspp-2027-lpl-giveaway/\")\n        # 2027 Charity Calendar Model Call: same 2027 menu, its own pages.\n        elif answers.get(\"form_version\") == \"2027-ccmc\" and not SPECIALTY:\n            retry_base = (\"https://pages.scalogy.com/jhpboudoir1/forms-pspp-2027-ccmc-1cc/\"\n                          if SINGLE_CARD else\n                          \"https://pages.scalogy.com/jhpboudoir1/forms-pspp-2027-ccmc/\")\n"
+  },
+  {
+    "search": "    if last_minute:\n        promo_code = \"\"  # last-minute pricing never stacks with a promo code\n",
+    "replace": "    if last_minute:\n        promo_code = \"\"  # last-minute pricing never stacks with a promo code\n    if answers.get(\"form_version\") == \"2027-ccmc\":\n        promo_code = \"\"  # Charity Calendar prices already carry the $500 off; no code stacks (Jessica 2026-10-24)\n"
   }
 ]

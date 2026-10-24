@@ -49,11 +49,11 @@ h1{font:600 clamp(26px,4vw,34px)/1.1 var(--serif);text-align:center;margin:10px 
 <div class="col">
   <div class="wm">JHP BOUDOIR</div>
   <h1>2027 Charity Calendar — Applications</h1>
-  <p class="sub">Read each application, then choose. <b>Invite</b> sends her claim link (72 hours, with a reminder email + text each day). <b>Save-ahead offer</b> sends the backup offer. <b>Not selected</b> sends nothing. Sends go out within about 5 minutes, and you can undo until then.</p>
+  <p class="sub">Read each application, then choose. <b>Invite</b> sends her claim link (72 hours, with a reminder email + text each day). <b>Not selected</b> sends a kind "not selected this time" email + text with your exclusive Save-Ahead offer (book 12+ months out with an interest-free prepayment plan). <b>Close, no email</b> sends nothing (for spam or duplicates). Sends go out within about 5 minutes, and you can undo until then.</p>
   <div class="tabs" id="tabs"></div>
   <div class="tools"><label><input type="checkbox" id="showTest"> Show test applications</label><button class="btn" id="refresh" type="button">Refresh</button></div>
   <div id="list"><div class="loading">Loading applications…</div></div>
-  <div class="legend">Qualified = interested in a digital or combo collection and able to pay in full or on a prepayment plan.<br>Statuses: New · Invite queued · Invited (claim clock running) · Claimed · Booked · Released (didn't claim) · Forfeited · Save-ahead sent · Not selected</div>
+  <div class="legend">Qualified = interested in a digital or combo collection and able to pay in full or on a prepayment plan.<br>Statuses: New · Invite queued · Invited (claim clock running) · Claimed · Booked · Released (didn't claim) · Forfeited · Not selected (offer sent) · Closed (no email)</div>
 </div>
 <script>
 {% raw %}
@@ -66,7 +66,7 @@ h1{font:600 clamp(26px,4vw,34px)/1.1 var(--serif);text-align:center;margin:10px 
   }
   var PKG={'combo':'Combo collection','digital':'Digital collection','experience-only':'Experience only'};
   var PAY={'pay-in-full':'Pay in full','prepayment-plan':'Prepayment plan','cannot-afford':"Can't afford a package"};
-  var STATUS={'new':'New','approved':'Invite queued','invited':'Invited','claimed':'Claimed','paid':'Paid','booked':'Booked','released':"Released — didn't claim",'forfeited':'Forfeited','backup':'Save-ahead queued','backup_sent':'Save-ahead sent','declined':'Not selected'};
+  var STATUS={'new':'New','approved':'Invite queued','invited':'Invited','claimed':'Claimed','paid':'Paid','booked':'Booked','released':"Released — didn't claim",'forfeited':'Forfeited','backup':'Not selected — offer queued','backup_sent':'Not selected — offer sent','declined':'Closed (no email)'};
   var TABS=[['todo','To review'],['qualified','Qualified'],['experience','Experience only'],['invited','Invited'],['claimed','Claimed / booked'],['closed','Closed'],['all','All']];
   var rows=[], tab='todo';
   var listEl=document.getElementById('list'), tabsEl=document.getElementById('tabs'), testEl=document.getElementById('showTest');
@@ -115,11 +115,11 @@ h1{font:600 clamp(26px,4vw,34px)/1.1 var(--serif);text-align:center;margin:10px 
       x.addEventListener('click',function(){if(confirmMsg&&!window.confirm(confirmMsg))return;setStatus(r,status,stEl,btns);});acts.appendChild(x);}
     if(s==='new'){
       b('Invite to claim spot','go','approved','Invite '+(r.contact_name||'her')+'? She will get her claim link by email and text within about 5 minutes, and has 72 hours to claim.');
-      b('Send save-ahead offer','alt','backup','Send '+(r.contact_name||'her')+' the Save-Ahead offer?');
-      b('Not selected','', 'declined');
+      b('Not selected + Save-Ahead offer','alt','backup','Send '+(r.contact_name||'her')+' the "not selected" email and text with your Save-Ahead offer?');
+      b('Close, no email','', 'declined');
     } else if(s==='approved'||s==='backup'||s==='declined'){
       b('Undo','', 'new');
-      stEl.textContent=s==='declined'?'Nothing is sent for "Not selected".':'Queued — sends within about 5 minutes.';
+      stEl.textContent=s==='declined'?'Closed. No email is sent.':'Queued — sends within about 5 minutes.';
     } else if(s==='released'){
       stEl.textContent='Her 72 hours ended without a claim.';
     }
