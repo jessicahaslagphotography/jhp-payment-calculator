@@ -42,6 +42,9 @@ WINDOW_CLOSE = datetime.datetime(2026, 10, 29, 5, 0, tzinfo=datetime.timezone.ut
 BOUDOIR_BEFORE = {"no", "yes-jhp", "yes-other"}
 SHARING = {"calendar-only", "faceless", "private", "open"}
 HEARD_VIA = {"instagram", "facebook", "vip-group", "friend", "past-client", "other"}
+# Package qualifier + payment preference (short application, Oct 24 2026).
+PACKAGE_INTEREST = {"combo", "digital", "experience-only"}
+PAYMENT_PREF = {"pay-in-full", "prepayment-plan", "cannot-afford"}
 
 _ghl_token = os.environ.get("GHL_API_KEY")
 _ghl_location = os.environ.get("GHL_LOCATION_ID") or "Pcnm8GVNMmWTY65qVOAp"
@@ -179,8 +182,9 @@ def main():
             INSERT INTO charity_calendar_applications
               (client_token, contact_name, contact_email, contact_phone, city, instagram,
                why_apply, cause, boudoir_before, sharing_pref, heard_via, notes,
-               acknowledged, source_page, is_test, user_agent)
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
+               acknowledged, source_page, is_test, user_agent,
+               package_interest, payment_pref)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)
             ON CONFLICT (client_token) DO NOTHING
             RETURNING id
             """,
@@ -189,7 +193,8 @@ def main():
              pick("boudoir_before", BOUDOIR_BEFORE), pick("sharing_pref", SHARING),
              pick("heard_via", HEARD_VIA), s("notes", 2000),
              bool(body.get("acknowledged")),
-             s("source_page", 200), is_test, s("user_agent", 400)),
+             s("source_page", 200), is_test, s("user_agent", 400),
+             pick("package_interest", PACKAGE_INTEREST), pick("payment_pref", PAYMENT_PREF)),
         )
         row = cur.fetchone()
         if not row:

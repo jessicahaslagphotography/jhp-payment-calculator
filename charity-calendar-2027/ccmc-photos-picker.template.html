@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Charity Calendar Model Call — Landing Photos</title>
+<style>
+  :root{--bg:#13100E;--surface:#1C1714;--surface-2:#241D18;--ink:#F2ECE2;--ink-soft:#A99A86;--ink-mute:#7D7161;
+    --accent:#C9A24B;--accent-deep:#E6C576;--line:rgba(201,162,75,.22);--line-soft:rgba(242,236,226,.09);--good:#8fbf90;--bad:#e8a58f;
+    --display:'Cormorant Garamond',Georgia,serif;--body:system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+  *{box-sizing:border-box} html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .col{max-width:1040px;margin:0 auto;padding:30px 16px 80px}
+  .wm{font-family:var(--mono);font-size:11px;letter-spacing:.3em;color:var(--accent);text-align:center}
+  h1{font-family:var(--display);font-weight:600;font-size:clamp(24px,4vw,32px);text-align:center;margin:12px 0 6px}
+  .sub{text-align:center;color:var(--ink-soft);font-size:14px;max-width:62ch;margin:0 auto}
+  .bar{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);margin:20px -16px 0;padding:12px 16px}
+  .slots{display:flex;gap:10px;flex-wrap:wrap}
+  .slotcard{display:flex;flex-direction:column;gap:6px;align-items:center;width:86px;padding:6px;border:1px solid var(--line);border-radius:8px;background:var(--surface);cursor:pointer;color:var(--ink)}
+  .slotcard.active{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+  .slotcard .thumb{width:100%;aspect-ratio:3/4;border-radius:5px;overflow:hidden;background:var(--surface-2);display:flex;align-items:center;justify-content:center}
+  .slotcard .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .slotcard .thumb .ph{color:var(--ink-mute);font-family:var(--mono);font-size:16px}
+  .slotcard .lb{font-family:var(--mono);font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);text-align:center;line-height:1.25}
+  .slotcard.active .lb{color:var(--accent-deep)}
+  .actions{display:flex;gap:12px;align-items:center;margin-top:12px;flex-wrap:wrap}
+  .btn{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:4px;padding:9px 14px;cursor:pointer;text-decoration:none;display:inline-block}
+  .btn.gold{background:var(--accent);color:#13100E;border-color:var(--accent)}
+  .status{font-size:13px;color:var(--ink-soft);min-height:18px}
+  .status.ok{color:var(--good)} .status.err{color:var(--bad)}
+  .hint{font-family:var(--mono);font-size:11px;color:var(--ink-mute);letter-spacing:.03em;margin:16px 0 10px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:10px}
+  .card{position:relative;aspect-ratio:2/3;border-radius:7px;overflow:hidden;border:1px solid var(--line-soft);background:var(--surface-2);cursor:pointer}
+  .card:hover{border-color:var(--accent)}
+  .card img{width:100%;height:100%;object-fit:cover;display:block}
+  .card.sel{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+  .card .badge{position:absolute;top:6px;left:6px;width:24px;height:24px;border-radius:50%;background:var(--accent);color:#13100E;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+  .card .tag{position:absolute;top:6px;right:6px;background:rgba(0,0,0,.62);color:#fff;font-family:var(--mono);font-size:9px;text-transform:uppercase;padding:2px 5px;border-radius:3px}
+  .card .lbl{position:absolute;bottom:6px;right:6px;background:rgba(0,0,0,.5);color:#fff;font-family:var(--mono);font-size:9px;padding:2px 4px;border-radius:3px}
+  .card.broken img{display:none}
+  .card.broken::after{content:attr(data-lbl);position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--ink-mute);font-family:var(--mono);font-size:10px;padding:6px;text-align:center}
+  .foot{font-family:var(--mono);font-size:11px;color:var(--ink-mute);text-align:center;margin-top:34px;line-height:1.7}
+  .loading{text-align:center;color:var(--ink-mute);padding:40px 0}
+</style>
+</head>
+<body>
+<div class="col">
+  <div class="wm">JHP BOUDOIR</div>
+  <h1>Charity Calendar Model Call — Landing Photos</h1>
+  <p class="sub">Tap a spot below, then tap a photo from your folder to fill it. Before/after pairs only show on the page once both photos in the pair are set. Tap <b>Clear</b> to empty a spot.</p>
+  <div class="bar">
+    <div class="slots" id="slots"><span class="loading">Loading…</span></div>
+    <div class="actions">
+      <button type="button" class="btn" id="clear">Clear this spot</button>
+      <a class="btn gold" target="_blank" rel="noopener" href="https://pages.scalogy.com/jhpboudoir1/charity-calendar-2027/">View landing page ↗</a>
+      <span class="status" id="status"></span>
+    </div>
+  </div>
+  <div class="hint" id="hint">Your whole folder — tap a photo to drop it into the selected spot.</div>
+  <div class="grid" id="grid"><div class="loading">Loading your photos…</div></div>
+  <div class="foot">Changes save instantly and show on the landing page the next time it loads.<br>Private page · JHP Boudoir</div>
+</div>
+<script>
+{% raw %}
+(function(){
+  var meta=document.querySelector('meta[name="scalogy-page-token"]');
+  var TOKEN=meta?meta.content:'';
+  function api(method,path,body){
+    return fetch('_api/'+path,{method:method,
+      headers:Object.assign({'Authorization':'Bearer '+TOKEN},body?{'Content-Type':'application/json'}:{}),
+      body:body?JSON.stringify(body):undefined})
+      .then(function(r){ if(r.status===204) return null;
+        return r.json().then(function(d){ if(!r.ok) throw new Error((d&&d.error)||('HTTP '+r.status)); return d; }); });
+  }
+  function thumb(id,w){return 'https://lh3.googleusercontent.com/d/'+encodeURIComponent(id)+'=w'+(w||240);}
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+  var lib=[], slots=[], activeId=null, stTimer;
+  var slotsEl=document.getElementById('slots'), gridEl=document.getElementById('grid');
+  var statusEl=document.getElementById('status'), hintEl=document.getElementById('hint');
+  function setStatus(msg,cls){statusEl.textContent=msg||'';statusEl.className='status'+(cls?(' '+cls):'');
+    if(msg&&cls==='ok'){clearTimeout(stTimer);stTimer=setTimeout(function(){setStatus('');},5000);}}
+  function active(){return slots.filter(function(s){return s.id===activeId;})[0];}
+  function load(){
+    Promise.all([api('GET','ccmc_slots?limit=50'),api('GET','treehouse_library?limit=200')])
+      .then(function(res){
+        slots=((res[0]&&res[0].rows)||[]).sort(function(a,b){return (a.sort_ord||0)-(b.sort_ord||0);});
+        lib=((res[1]&&res[1].rows)||[]).sort(function(a,b){return (a.sort_ord||0)-(b.sort_ord||0);});
+        if(slots.length) activeId=slots[0].id;
+        renderSlots(); renderGrid();
+      })
+      .catch(function(e){gridEl.innerHTML='<div class="loading">Could not load ('+esc(e.message)+'). Refresh to try again.</div>';slotsEl.innerHTML='';});
+  }
+  function renderSlots(){
+    slotsEl.innerHTML=slots.map(function(s){
+      var cls='slotcard'+(s.id===activeId?' active':'');
+      var img=s.drive_id?'<img src="'+thumb(s.drive_id,240)+'" alt="">':'<span class="ph">+</span>';
+      return '<button type="button" class="'+cls+'" data-slotid="'+s.id+'"><span class="thumb">'+img+'</span><span class="lb">'+esc(s.label)+'</span></button>';
+    }).join('');
+  }
+  function renderGrid(){
+    var a=active();
+    gridEl.innerHTML=lib.map(function(r){
+      var cur=a&&a.drive_id===r.drive_id;
+      return '<div class="card'+(cur?' sel':'')+'" data-id="'+esc(r.drive_id)+'" data-lbl="'+esc(r.label)+'">'
+        +'<img loading="lazy" src="'+thumb(r.drive_id,240)+'" alt="'+esc(r.label)+'" onerror="this.closest(\'.card\').classList.add(\'broken\')">'
+        +(cur?'<div class="badge">✓</div>':'')+(r.is_color?'<span class="tag">Color</span>':'')
+        +'<span class="lbl">'+esc(r.label)+'</span></div>';
+    }).join('');
+  }
+  function save(s,did,prev){
+    setStatus('Saving …','');
+    api('PATCH','ccmc_slots/'+s.id,{drive_id:did})
+      .then(function(){setStatus('Saved ✓  '+s.label+(did?' updated.':' cleared.')+' Refresh the landing page to see it.','ok');})
+      .catch(function(err){s.drive_id=prev;renderSlots();renderGrid();setStatus('Could not save ('+esc(err.message)+').','err');});
+  }
+  slotsEl.addEventListener('click',function(e){
+    var b=e.target.closest('.slotcard'); if(!b) return;
+    activeId=parseInt(b.getAttribute('data-slotid'),10);
+    var s=active(); hintEl.textContent=s?('Filling: '+s.label+' — tap a photo below.'):'';
+    renderSlots(); renderGrid();
+  });
+  gridEl.addEventListener('click',function(e){
+    var c=e.target.closest('.card'); if(!c) return;
+    var did=c.getAttribute('data-id'); var s=active();
+    if(!s){setStatus('Tap a spot up top first.','err');return;}
+    if(s.drive_id===did) return;
+    var prev=s.drive_id; s.drive_id=did; renderSlots(); renderGrid(); save(s,did,prev);
+  });
+  document.getElementById('clear').addEventListener('click',function(){
+    var s=active(); if(!s||!s.drive_id) return;
+    var prev=s.drive_id; s.drive_id=null; renderSlots(); renderGrid(); save(s,null,prev);
+  });
+  load();
+})();
+{% endraw %}
+</script>
+</body>
+</html>

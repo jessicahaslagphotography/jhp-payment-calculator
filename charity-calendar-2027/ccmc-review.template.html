@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Charity Calendar Applications · JHP Boudoir</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&amp;family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet">
+<style>
+:root{--bg:#13100E;--panel:#1C1714;--raised:#241D18;--ink:#F2ECE2;--soft:#E9E1D5;--muted:#A99A86;--dim:#7D7161;--gold:#C9A24B;--gold2:#E6C576;--line:rgba(242,236,226,.09);--line2:rgba(201,162,75,.22);--good:#8fbf90;--bad:#e8a58f;--serif:'Cormorant Garamond',Georgia,serif;--sans:'Jost',system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+.col{max-width:980px;margin:0 auto;padding:28px 16px 80px}
+.wm{font-size:11px;letter-spacing:.3em;color:var(--gold);text-align:center}
+h1{font:600 clamp(26px,4vw,34px)/1.1 var(--serif);text-align:center;margin:10px 0 4px}
+.sub{text-align:center;color:var(--muted);font-size:14px;max-width:64ch;margin:0 auto}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:22px 0 10px}
+.tab{font:400 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:9px 12px;border:1px solid var(--line2);background:var(--panel);color:var(--muted);cursor:pointer}
+.tab.on{background:var(--gold);color:#13100E;border-color:var(--gold)}
+.tab b{font-weight:500;margin-left:4px}
+.tools{display:flex;justify-content:center;gap:14px;align-items:center;font-size:13px;color:var(--dim);margin-bottom:14px}
+.tools label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.card{background:var(--panel);border:1px solid var(--line2);padding:18px 18px 16px;margin:0 0 14px}
+.top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-start}
+.nm{font:600 24px/1.15 var(--serif)}
+.meta{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.6}
+.meta a{color:var(--gold2);text-decoration:none}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.bd{font:500 10px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;padding:6px 8px;border:1px solid var(--line2);color:var(--soft)}
+.bd.q{border-color:var(--good);color:var(--good)}
+.bd.x{border-color:var(--bad);color:var(--bad)}
+.bd.s{background:var(--gold);color:#13100E;border-color:var(--gold)}
+.bd.t{border-style:dashed;color:var(--dim)}
+.why{margin-top:12px;padding:12px 14px;background:var(--raised);font-size:15px;line-height:1.65;color:var(--soft);white-space:pre-wrap}
+.acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.btn{font:500 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;padding:11px 14px;border:1px solid var(--line2);background:var(--bg);color:var(--ink);cursor:pointer}
+.btn.go{background:var(--gold);color:#13100E;border-color:var(--gold)}
+.btn.alt{border-color:var(--gold2);color:var(--gold2)}
+.btn[disabled]{opacity:.45;cursor:default}
+.note{display:flex;gap:8px;margin-top:12px}
+.note textarea{flex:1;min-height:40px;resize:vertical;padding:9px 10px;font:300 14px/1.5 var(--sans);color:var(--ink);background:var(--bg);border:1px solid var(--line2)}
+.st{font-size:13px;color:var(--muted)}
+.st.ok{color:var(--good)}.st.err{color:var(--bad)}
+.empty,.loading{text-align:center;color:var(--dim);padding:40px 0}
+.legend{font-size:12px;color:var(--dim);text-align:center;line-height:1.7;margin-top:30px}
+</style>
+</head>
+<body>
+<div class="col">
+  <div class="wm">JHP BOUDOIR</div>
+  <h1>2027 Charity Calendar — Applications</h1>
+  <p class="sub">Read each application, then choose. <b>Invite</b> sends her claim link (72 hours, with a reminder email + text each day). <b>Save-ahead offer</b> sends the backup offer. <b>Not selected</b> sends nothing. Sends go out within about 5 minutes, and you can undo until then.</p>
+  <div class="tabs" id="tabs"></div>
+  <div class="tools"><label><input type="checkbox" id="showTest"> Show test applications</label><button class="btn" id="refresh" type="button">Refresh</button></div>
+  <div id="list"><div class="loading">Loading applications…</div></div>
+  <div class="legend">Qualified = interested in a digital or combo collection and able to pay in full or on a prepayment plan.<br>Statuses: New · Invite queued · Invited (claim clock running) · Claimed · Booked · Released (didn't claim) · Forfeited · Save-ahead sent · Not selected</div>
+</div>
+<script>
+{% raw %}
+(function(){
+  var meta=document.querySelector('meta[name="scalogy-page-token"]');
+  var TOKEN=meta?meta.content:'';
+  function api(method,path,body){
+    return fetch('_api/'+path,{method:method,headers:Object.assign({'Authorization':'Bearer '+TOKEN},body?{'Content-Type':'application/json'}:{}),body:body?JSON.stringify(body):undefined})
+      .then(function(r){if(r.status===204)return null;return r.json().then(function(d){if(!r.ok)throw new Error((d&&d.error)||('HTTP '+r.status));return d;});});
+  }
+  var PKG={'combo':'Combo collection','digital':'Digital collection','experience-only':'Experience only'};
+  var PAY={'pay-in-full':'Pay in full','prepayment-plan':'Prepayment plan','cannot-afford':"Can't afford a package"};
+  var STATUS={'new':'New','approved':'Invite queued','invited':'Invited','claimed':'Claimed','paid':'Paid','booked':'Booked','released':"Released — didn't claim",'forfeited':'Forfeited','backup':'Save-ahead queued','backup_sent':'Save-ahead sent','declined':'Not selected'};
+  var TABS=[['todo','To review'],['qualified','Qualified'],['experience','Experience only'],['invited','Invited'],['claimed','Claimed / booked'],['closed','Closed'],['all','All']];
+  var rows=[], tab='todo';
+  var listEl=document.getElementById('list'), tabsEl=document.getElementById('tabs'), testEl=document.getElementById('showTest');
+  function qualified(r){return (r.package_interest==='combo'||r.package_interest==='digital')&&r.payment_pref&&r.payment_pref!=='cannot-afford';}
+  function inTab(r,t){var s=r.status||'new';
+    if(t==='todo')return s==='new';
+    if(t==='qualified')return s==='new'&&qualified(r);
+    if(t==='experience')return s==='new'&&!qualified(r);
+    if(t==='invited')return s==='approved'||s==='invited';
+    if(t==='claimed')return s==='claimed'||s==='paid'||s==='booked';
+    if(t==='closed')return ['released','forfeited','backup','backup_sent','declined'].indexOf(s)>=0;
+    return true;}
+  function visible(){return rows.filter(function(r){return testEl.checked||!r.is_test;});}
+  function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
+  function fmt(ts){if(!ts)return '';try{return new Date(ts).toLocaleString([], {month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});}catch(e){return ts;}}
+  function renderTabs(){tabsEl.textContent='';var v=visible();
+    TABS.forEach(function(t){var n=v.filter(function(r){return inTab(r,t[0]);}).length;
+      var b=el('button','tab'+(tab===t[0]?' on':''),t[1]);var c=el('b',null,String(n));b.appendChild(c);
+      b.type='button';b.addEventListener('click',function(){tab=t[0];render();});tabsEl.appendChild(b);});}
+  function setStatus(r,status,stEl,btns){
+    btns.forEach(function(b){b.disabled=true;});stEl.className='st';stEl.textContent='Saving…';
+    var body={status:status};
+    if(status==='new'){body.decided_at=null;body.decided_by=null;}else{body.decided_at=new Date().toISOString();body.decided_by='jessica';}
+    api('PATCH','charity_calendar_applications/'+r.id,body).then(function(){r.status=status;r.decided_at=body.decided_at;render();})
+      .catch(function(e){stEl.className='st err';stEl.textContent='Could not save ('+e.message+')';btns.forEach(function(b){b.disabled=false;});});
+  }
+  function card(r){
+    var c=el('div','card'),top=el('div','top'),left=el('div');
+    left.appendChild(el('div','nm',r.contact_name||'(no name)'));
+    var m=el('div','meta');
+    if(r.contact_email){var a=el('a',null,r.contact_email);a.href='mailto:'+r.contact_email;m.appendChild(a);m.appendChild(document.createTextNode('  ·  '));}
+    m.appendChild(document.createTextNode((r.contact_phone||'')+'  ·  applied '+fmt(r.created_at)));
+    left.appendChild(m);
+    var bds=el('div','badges');
+    var s=r.status||'new';
+    bds.appendChild(el('span','bd s',STATUS[s]||s));
+    bds.appendChild(el('span','bd '+(qualified(r)?'q':'x'),qualified(r)?'Qualified':'Experience only'));
+    if(r.package_interest)bds.appendChild(el('span','bd',PKG[r.package_interest]||r.package_interest));
+    if(r.payment_pref)bds.appendChild(el('span','bd',PAY[r.payment_pref]||r.payment_pref));
+    if(r.is_test)bds.appendChild(el('span','bd t','Test'));
+    if(s==='invited'&&r.claim_deadline)bds.appendChild(el('span','bd','Claim by '+fmt(r.claim_deadline)));
+    left.appendChild(bds);top.appendChild(left);c.appendChild(top);
+    if(r.why_apply)c.appendChild(el('div','why',r.why_apply));
+    var acts=el('div','acts'),stEl=el('span','st'),btns=[];
+    function b(label,cls,status,confirmMsg){var x=el('button','btn'+(cls?' '+cls:''),label);x.type='button';btns.push(x);
+      x.addEventListener('click',function(){if(confirmMsg&&!window.confirm(confirmMsg))return;setStatus(r,status,stEl,btns);});acts.appendChild(x);}
+    if(s==='new'){
+      b('Invite to claim spot','go','approved','Invite '+(r.contact_name||'her')+'? She will get her claim link by email and text within about 5 minutes, and has 72 hours to claim.');
+      b('Send save-ahead offer','alt','backup','Send '+(r.contact_name||'her')+' the Save-Ahead offer?');
+      b('Not selected','', 'declined');
+    } else if(s==='approved'||s==='backup'||s==='declined'){
+      b('Undo','', 'new');
+      stEl.textContent=s==='declined'?'Nothing is sent for "Not selected".':'Queued — sends within about 5 minutes.';
+    } else if(s==='released'){
+      stEl.textContent='Her 72 hours ended without a claim.';
+    }
+    acts.appendChild(stEl);c.appendChild(acts);
+    var nt=el('div','note'),ta=el('textarea');ta.placeholder='Private notes (only you see these)';ta.value=r.owner_notes||'';
+    var sv=el('button','btn','Save note');sv.type='button';var ns=el('span','st');
+    sv.addEventListener('click',function(){ns.className='st';ns.textContent='Saving…';
+      api('PATCH','charity_calendar_applications/'+r.id,{owner_notes:ta.value.slice(0,4000)}).then(function(){r.owner_notes=ta.value;ns.className='st ok';ns.textContent='Saved';})
+        .catch(function(e){ns.className='st err';ns.textContent='Could not save ('+e.message+')';});});
+    nt.appendChild(ta);nt.appendChild(sv);c.appendChild(nt);c.appendChild(ns);
+    return c;
+  }
+  function render(){renderTabs();listEl.textContent='';
+    var v=visible().filter(function(r){return inTab(r,tab);});
+    if(!v.length){listEl.appendChild(el('div','empty','Nothing here right now.'));return;}
+    v.forEach(function(r){listEl.appendChild(card(r));});}
+  function load(){listEl.textContent='';listEl.appendChild(el('div','loading','Loading applications…'));
+    api('GET','charity_calendar_applications?limit=200').then(function(d){
+      rows=((d&&d.rows)||[]).sort(function(a,b){return String(b.created_at).localeCompare(String(a.created_at));});render();})
+      .catch(function(e){listEl.textContent='';listEl.appendChild(el('div','empty','Could not load ('+e.message+'). Refresh to try again.'));});}
+  testEl.addEventListener('change',render);
+  document.getElementById('refresh').addEventListener('click',load);
+  load();
+})();
+{% endraw %}
+</script>
+</body>
+</html>
