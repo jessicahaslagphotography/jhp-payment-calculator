@@ -38,15 +38,12 @@ h1,h2,h3,p{margin:0}
 .btn{display:inline-block;font:400 13px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;padding:18px 32px;background:var(--blush);color:var(--bg);border:0;cursor:pointer;transition:background .25s}
 .btn:hover{background:var(--gold-bright);color:var(--bg)}
 .btn:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--blush);outline-offset:3px}
-.note{font:300 14px/1.5 var(--sans);color:var(--dim);font-style:italic}
-
 .bar{position:sticky;top:0;z-index:20;background:rgba(19,16,14,.93);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 .bar .in{max-width:1120px;margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .brand{font:400 15px/1 var(--sans);letter-spacing:.34em;color:var(--blush)}
 .bar .r{display:flex;align-items:center;gap:22px}
 .bar .t{font:300 13px/1 var(--sans);color:var(--dim)}
 .bar .btn{padding:13px 22px;font-size:12px}
-
 .hero{position:relative;min-height:680px;background:var(--stripe);display:grid}
 .hero>img{width:100%;height:100%;object-fit:cover;grid-area:1/1}
 .hero .sh{grid-area:1/1;background:linear-gradient(to top,rgba(19,16,14,.97) 8%,rgba(19,16,14,.35) 62%,rgba(19,16,14,.5) 100%)}
@@ -57,46 +54,20 @@ h1,h2,h3,p{margin:0}
 .hero p{max-width:54ch;font:300 19px/1.65 var(--sans);color:#D9D0C3;text-wrap:pretty}
 .hero .cta{display:flex;flex-wrap:wrap;align-items:center;gap:18px;padding-top:6px}
 .pill{display:inline-block;padding:9px 16px;border:1px solid var(--line2);border-radius:999px;background:rgba(19,16,14,.6);font:400 11px/1 var(--sans);letter-spacing:.2em;text-transform:uppercase;color:var(--gold-bright)}
-
 .band{background:var(--panel);color:var(--ink);border-top:1px solid var(--blush);border-bottom:1px solid var(--blush)}
 .band .wrap{padding:34px 32px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;align-items:center}
 .band .n{font:300 40px/1 var(--serif);color:var(--blush)}
 .band .l{font:400 12px/1.4 var(--sans);letter-spacing:.14em;text-transform:uppercase;margin-top:4px}
 .band .tx{grid-column:1/-1;padding-top:20px;border-top:1px solid var(--line2);font:300 16px/1.65 var(--sans);color:var(--muted);text-wrap:pretty}
-
-.quote .wrap{max-width:900px;padding:72px 32px;display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center}
 .stars{font:400 13px/1 var(--sans);letter-spacing:.5em;color:var(--rose)}
-.quote p{max-width:40ch;font:italic 300 clamp(24px,3vw,32px)/1.4 var(--serif)}
 .who{font:400 12px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--dim)}
-
 .split{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:48px;align-items:center}
 .split .ph{min-height:460px}
 .split .stack{gap:18px}
-.split .body{font:300 17px/1.75 var(--sans);color:var(--muted);text-wrap:pretty}
-.split .body strong{color:var(--ink);font-weight:400}
-.sig{font:400 13px/1 var(--sans);letter-spacing:.2em;color:var(--rose)}
-
 .promise{display:flex;flex-direction:column;gap:14px;margin-top:6px;padding:0;list-style:none}
 .promise li{position:relative;padding-left:26px;font:300 16px/1.65 var(--sans);color:var(--muted)}
 .promise li::before{content:"";position:absolute;left:4px;top:.62em;width:7px;height:7px;transform:rotate(45deg);border:1px solid var(--blush)}
 .promise b{color:var(--ink);font-weight:400}
-
-.gal-h{padding-bottom:28px}
-.gal{max-width:1120px;margin:0 auto;padding:0 32px 72px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:16px}
-.gal .ph{aspect-ratio:3/2}
-
-.steps{display:flex;flex-direction:column;margin-top:32px}
-.steps .s{display:grid;grid-template-columns:40px minmax(200px,300px) 1fr;gap:24px;padding:22px 0;border-top:1px solid var(--line);align-items:baseline}
-.steps .s:last-child{border-bottom:1px solid var(--line)}
-.steps .no{font:300 22px/1 var(--serif);color:var(--rose)}
-.steps .t{font:400 20px/1.3 var(--serif)}
-.steps p{font:300 15px/1.7 var(--sans);color:var(--muted)}
-
-.grid6{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1px;background:var(--line);margin-top:34px}
-.grid6>div{background:var(--bg);padding:30px 28px}
-.grid6 h3{margin:0 0 10px;font:italic 400 23px/1.3 var(--serif)}
-.grid6 p{font:300 15px/1.7 var(--sans);color:var(--muted);text-wrap:pretty}
-
 .revs{max-width:1120px;margin:0 auto;padding:0 32px 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px}
 .revs>div{display:flex;flex-direction:column;gap:14px}
 .revs .ph{aspect-ratio:4/5}
@@ -105,14 +76,6 @@ h1,h2,h3,p{margin:0}
 .revs .who{font-size:11px}
 .more{max-width:1120px;margin:0 auto;padding:0 32px 72px}
 .more a{font:400 13px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;border-bottom:1px solid var(--line2);padding-bottom:6px}
-
-.glance{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:32px}
-.glance>div{padding-top:18px;border-top:1px solid var(--blush);display:flex;flex-direction:column;gap:8px}
-.glance>div:nth-child(even){border-top-color:var(--line2)}
-.glance .k{font:400 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--blush)}
-.glance .v{font:400 22px/1.3 var(--serif)}
-
-/* THE FORM */
 .apply{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:56px;align-items:start}
 .apply .side{position:sticky;top:96px;display:flex;flex-direction:column;gap:18px}
 .apply .side .ph{aspect-ratio:4/5}
@@ -121,20 +84,12 @@ form{display:block}
 .f{display:block;margin:0 0 16px}
 .row .f{margin-bottom:16px}
 .lb{display:block;margin:0 0 7px;font:400 11px/1.4 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--blush)}
-.opt{font-size:10px;letter-spacing:.14em;color:var(--dim);margin-left:8px}
-input[type=text],input[type=email],input[type=tel],select,textarea{display:block;width:100%;padding:14px 15px;font:300 16px/1.4 var(--sans);color:var(--ink);background:var(--panel);border:1px solid var(--line2);border-radius:0;appearance:none;transition:border-color .25s}
+input[type=text],input[type=email],input[type=tel],textarea{display:block;width:100%;padding:14px 15px;font:300 16px/1.4 var(--sans);color:var(--ink);background:var(--panel);border:1px solid var(--line2);border-radius:0;appearance:none;transition:border-color .25s}
 input::placeholder,textarea::placeholder{color:var(--dim);opacity:1}
-input:hover,select:hover,textarea:hover{border-color:var(--rose)}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold-bright);background:var(--raised)}
+input:hover,textarea:hover{border-color:var(--rose)}
+input:focus,textarea:focus{outline:none;border-color:var(--gold-bright);background:var(--raised)}
 input:not(:placeholder-shown):invalid{border-color:#B4614B}
-select{padding-right:40px;cursor:pointer;background-image:linear-gradient(45deg,transparent 50%,var(--dim) 50%),linear-gradient(135deg,var(--dim) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%;background-size:5px 5px;background-repeat:no-repeat}
-select option{background:var(--panel);color:var(--ink)}
 textarea{min-height:104px;resize:vertical;line-height:1.6}
-.ack{display:flex;align-items:flex-start;gap:12px;margin:22px 0 0;padding:16px 18px;cursor:pointer;background:var(--panel);border:1px solid var(--line2)}
-.ack:hover{border-color:var(--rose)}
-.ack input{flex:0 0 auto;width:18px;height:18px;margin:2px 0 0;accent-color:var(--blush);cursor:pointer}
-.ack span{font:300 14.5px/1.65 var(--sans);color:var(--muted)}
-.ack:has(input:user-invalid){border-color:#B4614B}
 .go{margin-top:24px}
 .go .btn{width:100%;padding:20px 32px;font-size:14px}
 .err{display:none;margin:14px 0 0;font-size:14px;color:#D98C76}
@@ -142,63 +97,28 @@ textarea{min-height:104px;resize:vertical;line-height:1.6}
 .done{display:flex;flex-direction:column;gap:14px;padding:36px 32px;border:1px solid var(--line2);background:var(--panel)}
 .done p{font:300 16.5px/1.75 var(--sans);color:var(--muted)}
 [hidden]{display:none!important}
-
 .faq{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0 48px;margin-top:26px}
 .faq>div{display:flex;flex-direction:column;gap:6px;padding:20px 0;border-top:1px solid var(--line)}
 .faq .q{font:400 18px/1.35 var(--serif)}
 .faq p{font:300 14px/1.7 var(--sans);color:var(--muted)}
-
 .close{background:var(--panel);color:var(--ink);border-top:1px solid var(--blush)}
 .close .wrap{padding:96px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:center}
 .close .kick{color:var(--blush)}
 .close h2{font:300 clamp(38px,5vw,60px)/1.02 var(--serif);max-width:14ch}
 .close p{max-width:46ch;font:300 17px/1.7 var(--sans);color:var(--muted)}
 .close .btn{padding:24px 44px;font-size:15px}
-
 .fine .wrap{padding:56px 32px;display:flex;flex-direction:column;gap:20px}
 .fine .kick{color:var(--dim)}
 .fine ul{margin:0;padding:0 0 0 18px;display:flex;flex-direction:column;gap:8px}
 .fine li{font:300 13px/1.7 var(--sans);color:#8F8272}
 .fine .foot{padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font:400 13px/1 var(--sans);letter-spacing:.3em;color:var(--dim)}
 .fine .foot a{letter-spacing:.1em;font-size:12px;color:var(--dim)}
-
-@media (max-width:860px){
-  .apply{grid-template-columns:1fr;gap:32px}
-  .apply .side{position:static}
-  .apply .side .ph{aspect-ratio:3/2}
-  .steps .s{grid-template-columns:32px 1fr;gap:6px 16px}
-  .steps .s p{grid-column:2}
-}
-@media (max-width:620px){
-  .wrap{padding:56px 20px}
-  .bar .in{padding:12px 20px}
-  .bar .t{display:none}
-  .brand{font-size:13px;letter-spacing:.28em}
-  .hero{min-height:600px}
-  .hero .c .wrap{padding:80px 20px 44px}
-  .hero p{font-size:17px}
-  .band .wrap{padding:30px 20px;grid-template-columns:1fr 1fr;align-items:start}
-  .band .tx{grid-column:1/-1}
-  .quote .wrap{padding:52px 20px}
-  .split .ph{min-height:320px}
-  .gal{padding:0 20px 56px}
-  .revs{padding:0 20px 32px}
-  .more{padding:0 20px 56px}
-  .row{grid-template-columns:1fr;gap:0}
-  .grid6>div{padding:24px 20px}
-  .faq{grid-template-columns:1fr}
-  .close .wrap{padding:64px 20px}
-  .close .btn{padding:20px 28px;font-size:13px}
-}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
-
-/* SHORT PAGE ADDITIONS */
 img[data-slot]:not([src]){visibility:hidden}
 .ba{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,460px),1fr));gap:28px;margin-top:32px}
-.ba .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .ba figure{margin:0;position:relative}
-.ba .ph{aspect-ratio:4/5}
-.ba figcaption{position:absolute;left:10px;bottom:10px;padding:5px 10px;background:rgba(19,16,14,.78);border:1px solid var(--line2);font:400 10px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-bright)}
+.ba .ph{aspect-ratio:1/1}
+.ba figcaption.l{left:10px}.ba figcaption.r{left:calc(50% + 10px)}
+.ba figcaption{position:absolute;bottom:10px;padding:5px 10px;background:rgba(19,16,14,.78);border:1px solid var(--line2);font:400 10px/1 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-bright)}
 .ba-note{margin-top:18px;font:italic 300 20px/1.5 var(--serif);color:var(--soft);text-align:center}
 .choices{display:flex;flex-direction:column;gap:10px}
 .choice{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;background:var(--panel);border:1px solid var(--line2);transition:border-color .25s}
@@ -216,7 +136,32 @@ legend{padding:0;margin:0 0 9px;font:400 11px/1.4 var(--sans);letter-spacing:.18
 .steps4 .t{font:400 20px/1.3 var(--serif)}
 .steps4 p{font:300 14.5px/1.65 var(--sans);color:var(--muted)}
 .urg{font:400 12px/1.5 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-bright);margin-top:22px}
-@media (max-width:620px){.ba .pair{gap:6px}.ba-note{font-size:18px}}
+@media (max-width:860px){
+  .apply{grid-template-columns:1fr;gap:32px}
+  .apply .side{position:static}
+  .apply .side .ph{aspect-ratio:3/2}
+}
+@media (max-width:620px){
+  .wrap{padding:56px 20px}
+  .bar .in{padding:12px 20px}
+  .bar .t{display:none}
+  .brand{font-size:13px;letter-spacing:.28em}
+  .hero{min-height:600px}
+  .hero .c .wrap{padding:80px 20px 44px}
+  .hero p{font-size:17px}
+  .band .wrap{padding:30px 20px;grid-template-columns:1fr 1fr;align-items:start}
+  .band .tx{grid-column:1/-1}
+  .split .ph{min-height:320px}
+  .revs{padding:0 20px 32px}
+  .more{padding:0 20px 56px}
+  .row{grid-template-columns:1fr;gap:0}
+  .faq{grid-template-columns:1fr}
+  .close .wrap{padding:64px 20px}
+  .close .btn{padding:20px 28px;font-size:13px}
+  .ba figcaption{font-size:9px;padding:4px 7px}
+  .ba-note{font-size:18px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
 </style>
 </head>
 <body>
@@ -257,14 +202,10 @@ legend{padding:0;margin:0 0 9px;font:400 11px/1.4 var(--sans);letter-spacing:.18
     <p class="lede">Same woman. Same body. Just finally seen the way she deserves to be.</p>
   </div>
   <div class="ba">
-    <div class="pair" data-pair="1">
-      <figure><div class="ph"><img data-slot="before-1" alt="Client before her session" loading="lazy"></div><figcaption>Before</figcaption></figure>
-      <figure><div class="ph"><img data-slot="after-1" alt="The same client after her JHP Boudoir session" loading="lazy"></div><figcaption>After</figcaption></figure>
-    </div>
-    <div class="pair" data-pair="2">
-      <figure><div class="ph"><img data-slot="before-2" alt="Client before her session" loading="lazy"></div><figcaption>Before</figcaption></figure>
-      <figure><div class="ph"><img data-slot="after-2" alt="The same client after her JHP Boudoir session" loading="lazy"></div><figcaption>After</figcaption></figure>
-    </div>
+    <figure data-ba="ba-1"><div class="ph"><img data-slot="ba-1" alt="A client before her session and after her JHP Boudoir session" loading="lazy"></div><figcaption class="l">Before</figcaption><figcaption class="r">After</figcaption></figure>
+    <figure data-ba="ba-2"><div class="ph"><img data-slot="ba-2" alt="A client before her session and after her JHP Boudoir session" loading="lazy"></div><figcaption class="l">Before</figcaption><figcaption class="r">After</figcaption></figure>
+    <figure data-ba="ba-3"><div class="ph"><img data-slot="ba-3" alt="A client before her session and after her JHP Boudoir session" loading="lazy"></div><figcaption class="l">Before</figcaption><figcaption class="r">After</figcaption></figure>
+    <figure data-ba="ba-4"><div class="ph"><img data-slot="ba-4" alt="A client before her session and after her JHP Boudoir session" loading="lazy"></div><figcaption class="l">Before</figcaption><figcaption class="r">After</figcaption></figure>
   </div>
   <p class="ba-note">Do you have a body? Yes? Perfect. That&rsquo;s the only requirement. &hearts;&#xFE0F;</p>
 </div></section>
@@ -417,15 +358,15 @@ legend{padding:0;margin:0 0 9px;font:400 11px/1.4 var(--sans);letter-spacing:.18
 <script>
 (() => {
   /* PHOTOS: every <img data-slot> is filled from ccmc_slots, which Jessica
-     edits in the private picker. Empty slots fall back to the stripe; a
-     before/after pair is hidden until both of its photos are set. */
+     edits in the private picker. Each before & after spot (ba-1..ba-4) is ONE
+     combined side-by-side image and stays hidden until set; the whole section
+     hides if none are set. */
   const IMG = (id, w) => "https://lh3.googleusercontent.com/d/" + encodeURIComponent(id) + "=w" + (w || 1600);
   const meta = document.querySelector('meta[name="scalogy-page-token"]');
   const hidePairs = (map) => {
     let shown = 0;
-    document.querySelectorAll("[data-pair]").forEach((p) => {
-      const n = p.getAttribute("data-pair");
-      const ok = map["before-" + n] && map["after-" + n];
+    document.querySelectorAll("[data-ba]").forEach((p) => {
+      const ok = !!map[p.getAttribute("data-ba")];
       p.hidden = !ok; if (ok) shown++;
     });
     const sec = document.getElementById("ba-sec");
@@ -467,7 +408,7 @@ legend{padding:0;margin:0 0 9px;font:400 11px/1.4 var(--sans);letter-spacing:.18
       status.textContent = "Applications open October 22";
       document.getElementById("cc-closed-h").textContent = "Applications open October 22";
       document.getElementById("cc-closed-p").textContent =
-        "Check back on October 22 to apply \u2014 it\u2019s only open for a limited time!";
+        "Check back on October 22 to apply — it’s only open for a limited time!";
     } else {
       status.textContent = "Applications are closed";
     }
