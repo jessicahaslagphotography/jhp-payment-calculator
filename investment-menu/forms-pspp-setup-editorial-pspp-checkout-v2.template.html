@@ -915,7 +915,8 @@
   };
   function m27Rows(rows){return '<ul>'+rows.map(function(r){return '<li><svg viewBox="0 0 24 24" aria-hidden="true">'+(M27_ICONS[r[0]]||'')+'</svg><span>'+esc(r[1])+'</span></li>';}).join('')+'</ul>';}
   // "As low as $X/mo": the monthly plan if she picks the latest bookable date (tax included).
-  function asLow(c){try{if(IS_PASTCLIENT||IS_SPECIALTY||!c||!c.price)return null;var t=Math.round(c.price*(1+taxRateFor(c.id))*100)/100;var s=buildSchedule({total:t,firstDate:new Date(TODAY),sessionDate:new Date(BOOK_END),frequency:'monthly'});return s.count>=2?Math.ceil(s.perPayment):null;}catch(e){return null;}}
+  function asLow(c,f){try{if(IS_PASTCLIENT||IS_SPECIALTY||!c||!c.price)return null;var t=Math.round(c.price*(1+taxRateFor(c.id))*100)/100;var s=buildSchedule({total:t,firstDate:new Date(TODAY),sessionDate:new Date(BOOK_END),frequency:f||'monthly'});return s.count>=2?Math.ceil(s.perPayment):null;}catch(e){return null;}}
+  function asLowHtml(c,sep){var m=asLow(c,'monthly'),b=asLow(c,'biweekly');if(!m)return '';return 'As low as '+moneyTight(m)+'/mo'+(b?sep+'or '+moneyTight(b)+' every 2 weeks':'');}
   function card27Html(c){
     var active=state.chosen===c.id;
     var b64=IMG_MAP['m27-'+c.id]||IMG_MAP[c.id];
@@ -925,7 +926,7 @@
       '<div class="mtxt"><div class="mname">'+esc(shortName(c.name))+'</div><div class="mrule"></div>'+
       '<div class="mh">The Collection</div>'+m27Rows(c.m27.coll)+
       '<div class="mh s2">The Session</div>'+m27Rows(c.m27.sess)+
-      '<div class="mprice">'+(c.strike?'<div class="mstrike">'+moneyTight(c.strike)+'</div>':'')+'<div class="mnow">'+moneyTight(c.price)+'</div><div class="mfin">'+(NEWLOOK&&asLow(c)?'<b>As low as '+moneyTight(asLow(c))+'/mo</b>':'')+'0% interest financing available'+(IS_PASTCLIENT?'<br>or up to 12 months with Klarna/Affirm':'')+'</div></div>'+
+      '<div class="mprice">'+(c.strike?'<div class="mstrike">'+moneyTight(c.strike)+'</div>':'')+'<div class="mnow">'+moneyTight(c.price)+'</div><div class="mfin">'+(NEWLOOK&&asLow(c)?'<b>'+asLowHtml(c,'<br>')+'</b>':'')+'0% interest financing available'+(IS_PASTCLIENT?'<br>or up to 12 months with Klarna/Affirm':'')+'</div></div>'+
       '</div>'+badge+'</div>';
   }
   function cardHtml(c){
@@ -940,7 +941,7 @@
     var etag=IS_SPECIALTY?(c.id==='rose'?'Most popular':(c.id==='gold'?null:c.tag)):c.tag;
     var badge=etag?('<div class="cbadge">'+esc(etag)+'</div>'):'';
     var img=IMG_MAP[c.id]?'<div class="cimg"><img src="data:image/jpeg;base64,'+IMG_MAP[c.id]+'" alt=""></div>':'';
-    var price='<div class="cprice">'+(c.strike?'<span class="cstrike">'+moneyTight(c.strike)+'</span>':'')+moneyTight(c.price)+(NEWLOOK&&asLow(c)?'<span class="cmo">As low as '+moneyTight(asLow(c))+'/mo · 0% interest</span>':'')+'</div>';
+    var price='<div class="cprice">'+(c.strike?'<span class="cstrike">'+moneyTight(c.strike)+'</span>':'')+moneyTight(c.price)+(NEWLOOK&&asLow(c)?'<span class="cmo">'+asLowHtml(c,' ')+' · 0% interest</span>':'')+'</div>';
     return '<div class="ccard'+(active?' active':'')+(etag?' feat':'')+'" data-id="'+c.id+'">'+
       '<div class="ctop"><div class="cname">'+esc(shortName(c.name))+'</div>'+
       price+
