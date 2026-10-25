@@ -27,6 +27,11 @@ Copy source: Claude Doc "Charity Calendar Model Call — Launch Week Campaign (O
 Edit `ops/ccmc_launch_emails.py`, then run workflow `ccmc-launch-emails` (rewrites the runner step and the
 GHL templates). The runner reads the step at send time.
 
-## Mon–Fri
-Scheduled by Jessica in GHL as campaigns from templates 2–6, 9:00 AM CT, excluding tag
-"Charity Calendar 2027 - Applied".
+## Mon–Fri (sent by Scalogy, Jessica's choice 2026-10-24)
+- `ops/ccmc_campaign_tag.py` (workflow `ccmc-campaign-tag`) tags ~4,498 contacts `ccmc-campaign-oct26`
+  and records each in table `ccmc_campaign_tagged` (resumable).
+- `ops/ccmc_launch_daily_send.py` (workflow `ccmc-launch-daily-send`, cron `*-10-26..30 14,15:00:00 UTC`)
+  sends that day's email (Mon=2 ... Fri=6) through GHL Conversations to the tagged list, skipping
+  applicants and email_optouts; `ccmc_launch_sends` (unique email+day) makes reruns safe. Each email
+  becomes a 1:1 thread in GHL Conversations (accepted tradeoff). Delete the workflow after Oct 30.
+- `--test N` sends email N to Jessica only; `--dry` prints today's count.
