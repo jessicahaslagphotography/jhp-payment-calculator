@@ -1,0 +1,1571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pre-Session Payment Plan — JHP Boudoir</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Albert+Sans:wght@300;400;500;600;700&family=Jost:wght@300;400;500&display=swap">
+<script src="https://web.squarecdn.com/v1/square.js"></script>
+<style>
+  :root{
+    --bg:#13100E;--surface:#1C1714;--surface2:#241D19;--line:#2E2620;--lineSoft:#221C18;
+    --ink:#F6EFE5;--inkSoft:#A89A89;--inkMute:#6E6359;--accent:#C9A87C;--accentInk:#13100E;
+    --display:"Cormorant Garamond",Georgia,serif;--body:"Albert Sans",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg)}
+  body{font-family:var(--body);color:var(--ink);-webkit-font-smoothing:antialiased}
+  .app{max-width:440px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative}
+  .hide{display:none!important}
+
+  .header{padding:20px 24px 12px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--lineSoft)}
+  .wm{font-family:var(--display);font-style:italic;font-size:18px;letter-spacing:.02em;line-height:1}
+  .wmsub{font-size:9px;letter-spacing:.35em;text-transform:uppercase;color:var(--inkMute);margin-top:3px}
+  /* 2027 LPL Giveaway (2026-09-25, Jessica): bigger JHP Boudoir wordmark + bolder section headings. */
+  .y27 .header{padding:26px 24px 18px}
+  .y27 .wm{font-size:40px;letter-spacing:.03em;color:var(--ink)}
+  .y27 .wmsub{font-family:"Jost",system-ui,sans-serif;font-size:13px;letter-spacing:.5em;color:var(--inkSoft);margin-top:7px}
+  .y27 .section{margin-top:38px;margin-bottom:6px;gap:14px}
+  .y27 .section .nm{font-style:normal;font-weight:500;text-transform:uppercase;font-size:27px;letter-spacing:.07em;color:var(--accent);white-space:nowrap}
+  .y27 .section .ln{height:1px;background:var(--accent);opacity:.55}
+  @media (max-width:400px){.y27 .section .nm{font-size:23px}}
+  .dots{display:flex;gap:6px;align-items:center}
+  .dot{width:6px;height:6px;border-radius:3px;background:var(--line);transition:all .4s cubic-bezier(.2,.7,.2,1)}
+  .dot.active{width:22px;background:var(--ink)}
+  .dot.done{background:var(--accent)}
+
+  .pad{padding:24px 24px 140px}
+  .eyebrow{font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--inkMute)}
+  .lbl{font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--inkSoft)}
+  .h1{font-family:var(--display);font-weight:400;font-style:italic;font-size:36px;line-height:1.05;margin:8px 0 6px;letter-spacing:-.01em}
+  .sub{font-size:13px;color:var(--inkSoft);line-height:1.5;max-width:320px}
+  .guidelink{display:inline-flex;align-items:center;gap:7px;margin-top:16px;padding:11px 16px;background:var(--accent);border:1px solid var(--accent);border-radius:6px;color:var(--accentInk);text-decoration:none;font-size:12.5px;line-height:1.3;transition:filter .15s}
+  .guidelink:hover{filter:brightness(.93)}
+  .guidelink .gi{color:var(--accentInk);font-style:italic;font-family:var(--display);font-size:15px}
+
+  .section{display:flex;align-items:center;gap:12px;margin-top:24px}
+  .section .nm{font-family:var(--display);font-style:italic;font-size:16px;color:var(--inkSoft)}
+  .section .ln{flex:1;height:1px;background:var(--lineSoft)}
+  .cards{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+
+  .ccard{text-align:left;cursor:pointer;display:block;background:var(--surface);border:1px solid var(--line);border-radius:2px;position:relative;transition:all .3s cubic-bezier(.2,.7,.2,1);color:var(--ink);overflow:hidden;width:100%}
+  .ccard.active{background:var(--surface2);border-color:var(--accent)}
+  .ctop{padding:14px 14px 11px}
+  .cbody{display:flex;align-items:stretch;border-top:1px solid var(--lineSoft)}
+  .cimg{width:134px;flex-shrink:0;overflow:hidden;background:var(--surface2);align-self:stretch;min-height:158px}
+  .cimg .placeholder{font-family:var(--display);font-style:italic;color:var(--inkMute);font-size:24px;line-height:1}
+  .cimg img{width:100%;height:100%;object-fit:cover;object-position:50% 28%;display:block}
+  .ccard.active .cimg img{filter:none;transform:scale(1.03)}
+  .cmeta{flex:1;padding:13px 14px 12px;min-width:0;display:flex;flex-direction:column}
+  .cname{font-family:var(--display);font-size:24px;letter-spacing:-.005em;font-weight:600;line-height:1.05;padding-right:74px}
+  .cprice{font-family:var(--display);font-size:17px;font-weight:500;margin-top:4px;color:var(--inkSoft)}
+  .ccard.active .cprice{color:var(--accent)}
+  .cstrike{text-decoration:line-through;color:var(--inkMute);font-size:13px;margin-right:6px}
+  .caccent{font-size:11.5px;color:var(--inkSoft);margin-top:7px;line-height:1.4}
+  .cincl{opacity:1;flex:1;min-width:0}
+  .ccard.active .cincl{max-height:420px;opacity:1}
+  .cinclbody{padding:12px 14px 14px}
+  .cincl .lbl{display:block;margin-bottom:10px}
+  .cincl ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px}
+  .cincl li{font-size:12px;color:var(--ink);padding-left:16px;position:relative;line-height:1.45}
+  .cincl li .d{position:absolute;left:0;top:0;color:var(--accent);font-family:var(--display);font-style:italic}
+  .cstrip{position:absolute;left:-1px;top:0;bottom:0;width:2px;background:transparent;transition:background .3s}
+  /* 2027 LPL Giveaway menu cards (2026-09-25): ivory card modelled on Jessica's Canva menu graphics. Brand type: Cormorant Garamond + Jost. */
+  .ccard.m27{background:#FBF9F6;color:#2B2724;border:1px solid #E4DDD2;border-radius:3px;display:flex;align-items:stretch;min-height:300px}
+  .ccard.m27.active{background:#FBF9F6;border-color:var(--accent);box-shadow:0 0 0 2px var(--accent)}
+  .m27 .mimg{width:40%;flex-shrink:0;background:#E9E3DA;position:relative;overflow:hidden}
+  .m27 .mimg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block}
+  .m27 .mtxt{flex:1;min-width:0;display:flex;flex-direction:column;padding:18px 14px 0 16px}
+  .m27 .mname{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;text-transform:uppercase;font-size:29px;line-height:.95;letter-spacing:.01em;color:#2B2724;padding-right:6px;word-break:break-word}
+  .m27 .mrule{height:1px;background:#DCD5CA;margin:12px 0 10px}
+  .m27 .mh{font-family:"Jost",system-ui,sans-serif;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#3A3430;margin:4px 0 3px}
+  .m27 .mh.s2{margin-top:12px}
+  .m27 ul{list-style:none;margin:0;padding:0}
+  .m27 li{display:flex;align-items:center;gap:9px;font-family:"Jost",system-ui,sans-serif;font-weight:400;font-size:12px;line-height:1.3;color:#3A3430;padding:6px 0;border-bottom:1px solid #EAE4DB}
+  .m27 li:last-child{border-bottom:none}
+  .m27 li svg{width:17px;height:17px;flex-shrink:0;stroke:#B3A796;fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+  .m27 .mprice{margin:12px -14px 0 -16px;padding:12px 10px 13px;background:#F3F0EB;text-align:center;margin-top:auto}
+  .m27 .mstrike{font-family:"Cormorant Garamond",Georgia,serif;font-size:21px;color:#8A817A;text-decoration:line-through;text-decoration-thickness:1.5px;line-height:1}
+  .m27 .mnow{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500;font-size:34px;color:#2B2724;line-height:1.05;margin-top:2px}
+  .m27 .mfin{font-family:"Jost",system-ui,sans-serif;font-size:9.5px;letter-spacing:.04em;color:#6F6760;border-top:1px solid #DCD5CA;margin:7px auto 0;padding-top:6px;max-width:190px}
+  .m27 .mspace{height:12px}
+  .ccard.m27 .cbadge{top:10px;right:0}
+  .m27 .msel{position:absolute;left:8px;top:8px;background:var(--accent);color:var(--accentInk);font-family:"Jost",system-ui,sans-serif;font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;padding:4px 8px;font-weight:500;display:none;z-index:2}
+  .m27.active .msel{display:block}
+  @media (max-width:360px){.m27 .mname{font-size:24px}.m27 li{font-size:11.5px}}
+  /* Treehouse past-client menu on desktop (step 1 only): 3 cards per row, photo on top */
+  @media (min-width:960px){
+    body.pcwide .app{max-width:1120px}
+    body.pcwide .pad{padding:32px 40px 150px}
+    body.pcwide .sub{max-width:640px}
+    body.pcwide .cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+    body.pcwide .ccard.m27{flex-direction:column;min-height:0}
+    body.pcwide .m27 .mimg{width:100%;height:300px}
+    body.pcwide .m27 .mtxt{padding:18px 18px 0}
+    body.pcwide .m27 .mprice{margin:auto -18px 0}
+  }
+  .ccard.active .cstrip{background:var(--accent)}
+  .cbadge{position:absolute;top:10px;right:0;background:var(--accent);color:var(--accentInk);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;padding:4px 9px 4px 10px;font-weight:600;font-family:var(--body);pointer-events:none}
+
+  .fields{margin-top:22px;display:flex;flex-direction:column;gap:18px}
+  .flabel{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+  .flabel .hint{font-size:10px;color:var(--inkMute);font-style:italic}
+  .flabel-lg{margin-bottom:12px}
+  .flabel-lg .lbl{font-family:var(--display);font-size:18px;font-weight:600;letter-spacing:-.005em;text-transform:none;color:var(--ink)}
+  .flabel-lg .hint{font-size:11px}
+  .dfield{width:100%;background:transparent;border:none;border-bottom:1px solid var(--line);color:var(--ink);font-family:var(--display);font-size:22px;padding:6px 0 10px;outline:none;color-scheme:dark}
+  .dfield:focus{border-color:var(--accent)}
+  .freqgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .freqbtn{padding:13px 10px;font-family:var(--body);font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px solid var(--line);cursor:pointer;font-weight:500}
+  .freqbtn.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .pmgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .pmbtn{text-align:left;padding:14px 12px;background:transparent;color:var(--ink);border:1px solid var(--line);cursor:pointer;display:flex;flex-direction:column;gap:5px;font-family:var(--body)}
+  .pmbtn.active{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+  .pmt{font-size:12px;letter-spacing:.15em;text-transform:uppercase;font-weight:600}
+  .pms{font-size:12px;color:var(--inkSoft);line-height:1.4}
+  .tcgo{display:inline-block;margin-top:6px;color:var(--accent);text-decoration:underline}
+  .promorow{display:flex;gap:8px;align-items:stretch}
+  .promoin{flex:1}
+  .promobtn{padding:0 18px;font-family:var(--body);font-size:11px;letter-spacing:.18em;text-transform:uppercase;background:var(--ink);color:var(--bg);border:none;cursor:pointer;font-weight:500;white-space:nowrap}
+  .promobtn:disabled{opacity:.5;cursor:not-allowed}
+  .promomsg{margin-top:8px;font-size:12px;line-height:1.4}
+  .promomsg.ok{color:var(--accent)}
+  .promomsg.err{color:#f3c9c0}
+
+  .sched{margin-top:10px;padding:16px 0 4px;border-top:1px solid var(--lineSoft)}
+  .schedhead{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px}
+  .schedhead .cnt{font-family:var(--display);font-style:italic;font-size:13px;color:var(--inkSoft)}
+  .srow{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--lineSoft)}
+  .srow .left{display:flex;align-items:baseline;gap:10px}
+  .srow .num{font-family:var(--display);font-style:italic;color:var(--inkMute);font-size:13px;width:22px}
+  .srow .dt{font-size:13px}
+  .srow .amt{font-family:var(--display);font-size:17px;font-weight:500}
+  .smore{padding:10px 0;font-size:11px;color:var(--inkMute);font-style:italic;text-align:center}
+  .staxrow{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;font-size:12px;color:var(--inkSoft)}
+  .planwarn{margin-top:14px;padding:12px 14px;background:#3a201c;border:1px solid #5a2e27;color:#f3c9c0;font-size:12.5px;line-height:1.45}
+  .stotal{display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+  .stotal .amt{font-family:var(--display);font-size:28px;font-weight:500}
+
+  .summary{margin-top:22px;background:var(--surface);border:1px solid var(--line);padding:18px}
+  .qrow{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--lineSoft);gap:12px}
+  .qrow.last{border-bottom:none}
+  .qrow .k{font-size:11px;color:var(--inkMute);letter-spacing:.05em}
+  .qrow .v{font-size:13px;color:var(--ink);text-align:right}
+  .qtotal{display:flex;justify-content:space-between;align-items:baseline;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+  .qtotal .lab{font-family:var(--display);font-style:italic;font-size:14px}
+  .qtotal .amt{font-family:var(--display);font-size:30px;font-weight:500;color:var(--accent)}
+
+  .agree{display:flex;gap:12px;margin-top:18px;cursor:pointer;align-items:flex-start}
+  .agree .box{width:20px;height:20px;border:2px solid var(--inkMute);background:transparent;flex-shrink:0;display:flex;align-items:center;justify-content:center;margin-top:2px;color:var(--accentInk);font-size:12px;line-height:1}
+  .agree.on .box{border-color:var(--accent);background:var(--accent)}
+  .agree .box .ck{display:none}
+  .agree.on .box .ck{display:inline}
+  .agree .txt{font-size:12px;color:var(--inkSoft);line-height:1.5}
+
+  .inisec{margin-top:18px}
+  .inisec .lbl{display:block;margin-bottom:8px}
+  .chint{margin-top:14px;font-size:12px;color:#f3c9c0;line-height:1.4;min-height:16px}
+  .chint.done{color:var(--accent)}
+  .iniinput{background:transparent;border:none;border-bottom:1px solid var(--line);font-family:var(--display);font-style:italic;font-size:32px;color:var(--ink);letter-spacing:.2em;padding:4px 0 8px;width:140px;outline:none}
+  .iniinput:focus{border-color:var(--accent)}
+  .iniinput::placeholder{color:var(--inkMute);opacity:.6}
+
+  .errbar{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;width:100%;max-width:440px;padding:0 22px;z-index:6;display:none}
+  .errbar.show{display:block}
+  .errbar .inner{background:#3a201c;color:#f3c9c0;border:1px solid #5a2e27;padding:11px 14px;font-size:12.5px;line-height:1.45}
+  .finalbar{position:fixed;left:50%;transform:translateX(-50%);bottom:88px;width:100%;max-width:440px;padding:0 22px;z-index:6;display:none}
+  .finalbar.show{display:block}
+  .finalbar .inner{background:var(--surface2);color:var(--inkSoft);border:1px solid var(--line);padding:11px 14px;font-size:12.5px;line-height:1.45;display:flex;align-items:center;gap:10px}
+  .finalbar .spin{width:13px;height:13px;border-radius:50%;border:2px solid var(--accent);border-top-color:transparent;animation:fspin .8s linear infinite;flex-shrink:0}
+  @keyframes fspin{to{transform:rotate(360deg)}}
+
+  .cta{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:100%;max-width:440px;padding:14px 22px 22px;background:linear-gradient(180deg,rgba(19,16,14,0),var(--bg) 35%);display:flex;gap:10px;align-items:center;z-index:5}
+  .primary{flex:1;background:var(--ink);color:var(--bg);border:none;padding:16px 18px;font-family:var(--body);font-size:13px;letter-spacing:.22em;text-transform:uppercase;font-weight:500;cursor:pointer}
+  .primary:disabled{opacity:.35;cursor:not-allowed}
+  /* 2026-10 refresh (Jessica): black & gold, landing-page fonts, warmer intro. Scoped to body.nl (?look=new) until approved. */
+  body.nl{--accent:#C9A24B;--gold2:#E6C576;--body:"Jost",system-ui,sans-serif;--line:#3A2F22;--lineSoft:#2A221B;--surface:#1A1512;--surface2:#221B16}
+  body.nl .primary{background:linear-gradient(90deg,#C9A24B,#E6C576);color:#13100E;font-weight:600}
+  body.nl .ghost{border-color:rgba(201,162,75,.45);color:var(--gold2)}
+  body.nl .dot.active{background:var(--accent)}
+  body.nl .eyebrow{color:var(--accent);letter-spacing:.3em}
+  body.nl .h1{font-style:normal;font-weight:300;font-size:40px}
+  body.nl .guidelink{background:transparent;color:var(--gold2);border:1px solid rgba(201,162,75,.45);border-radius:999px;padding:9px 14px;font-size:12.5px;margin-top:10px;margin-right:6px}
+  body.nl .guidelink .gi{color:var(--gold2)}
+  body.nl .ccard.m27{background:#1A1512;color:var(--ink);border:1px solid rgba(201,162,75,.28);border-radius:4px}
+  body.nl .ccard.m27.active{background:#211A14;border-color:#E6C576;box-shadow:0 0 0 2px #C9A24B,0 10px 30px rgba(201,162,75,.18)}
+  body.nl .ccard.feat{border:1.5px solid #C9A24B;box-shadow:0 8px 28px rgba(201,162,75,.14)}
+  body.nl .m27 .mimg{background:#241D18}
+  body.nl .m27 .mname{color:#F6EFE5}
+  body.nl .m27 .mrule{background:linear-gradient(90deg,#C9A24B,rgba(201,162,75,0))}
+  body.nl .m27 .mh{color:#C9A24B}
+  body.nl .m27 li{color:#E2D8CA;border-bottom-color:rgba(242,236,226,.07)}
+  body.nl .m27 li svg{stroke:#C9A24B}
+  body.nl .m27 .mprice{background:#221B16;border-top:1px solid rgba(201,162,75,.2)}
+  body.nl .m27 .mstrike{color:#8F8272}
+  body.nl .m27 .mnow{color:#E6C576}
+  body.nl .m27 .mfin{color:#A99A86;border-top-color:rgba(201,162,75,.2)}
+  body.nl .mfin b{display:block;font-weight:500;font-size:12.5px;letter-spacing:.02em;color:#F6EFE5;margin-bottom:3px}
+  body.nl .cbadge{background:linear-gradient(90deg,#C9A24B,#E6C576);color:#13100E}
+  body.nl .ccard.feat .cbadge{font-size:9.5px;padding:6px 12px}
+  body.nl .cmo{display:block;font-family:var(--body);font-size:12px;color:var(--gold2);margin-top:4px;font-weight:400}
+  body.nl .ihero{position:relative;margin:-24px -24px 0;height:300px;overflow:hidden;background:#1A1512}
+  body.nl .ihero img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;display:block}
+  body.nl .ihero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(19,16,14,.1) 30%,rgba(19,16,14,.96))}
+  body.nl .ihx{position:absolute;left:24px;right:24px;bottom:18px;z-index:1}
+  body.nl .ihx .ik{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold2)}
+  body.nl .ihx .ih{font-family:var(--display);font-weight:300;font-size:36px;line-height:1.05;margin-top:8px;color:#fff}
+  body.nl .ilede{font-size:14.5px;line-height:1.65;color:#CFC4B5;font-weight:300;margin:18px 0 14px}
+  body.nl .ichips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+  body.nl .ichips span{font-size:11.5px;letter-spacing:.04em;padding:7px 11px;border:1px solid rgba(201,162,75,.35);border-radius:999px;color:#E9E1D5;background:rgba(201,162,75,.06)}
+  body.nl .iquote{margin:0 0 26px;padding:16px 18px;border-left:2px solid #C9A24B;background:#1A1512;font-family:var(--display);font-style:italic;font-size:18px;line-height:1.5;color:#E9E1D5}
+  body.nl .iquote cite{display:block;margin-top:8px;font-family:var(--body);font-style:normal;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+  .ghost{background:transparent;border:1px solid var(--line);color:var(--ink);padding:16px 18px;font-family:var(--body);font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
+
+  .thanks{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:80px 32px;text-align:center;min-height:70vh}
+  .thanks .body{font-size:13px;color:var(--inkSoft);line-height:1.6;max-width:280px}
+  .thanks .div{width:40px;height:1px;background:var(--accent);margin:22px auto}
+  .startover{background:transparent;border:none;color:var(--accent);font-size:11px;letter-spacing:.3em;text-transform:uppercase;cursor:pointer}
+
+  .cardblock{margin-top:18px;background:var(--surface);border:1px solid var(--line);padding:16px}
+  .cardblock.ok{border-color:var(--accent)}
+  .cardblock .lbl{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+  .cardblock .lbl .stat{font-size:9px;letter-spacing:.22em;color:var(--inkMute);font-style:normal;text-transform:uppercase}
+  .cardblock.ok .lbl .stat{color:var(--accent)}
+  .cardblock .sqholder{min-height:90px;background:var(--bg);padding:4px 6px;border:1px solid var(--lineSoft)}
+  .cardblock .cardname{font-family:var(--body);font-size:15px;margin-bottom:12px;padding:4px 0 9px}
+  .cardblock .errline{font-size:11px;color:#f3c9c0;margin-top:8px;display:none}
+  .cardblock.err .errline{display:block}
+
+  .pickrow{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+  .pickcol{flex:1;min-width:132px}
+  .dsel{width:100%;background:var(--surface2);border:1px solid var(--line);border-radius:2px;color:var(--ink);font-family:var(--body);font-size:14px;padding:12px 10px;outline:none;color-scheme:dark;cursor:pointer}
+  .dsel:focus{border-color:var(--accent)}
+  .dsel:disabled{opacity:.4;cursor:not-allowed}
+  .slotwrap{margin-top:16px}
+  .slotlbl{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--inkSoft);margin-bottom:8px}
+  .slotgrid{display:flex;gap:8px;flex-wrap:wrap}
+  .slotbtn{flex:1;min-width:96px;padding:12px 6px;font-family:var(--body);font-size:12px;letter-spacing:.05em;background:transparent;color:var(--ink);border:1px solid var(--line);cursor:pointer;border-radius:2px}
+  .slotbtn.active{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+  .slotbtn:not(.active):hover{border-color:var(--accent)}
+  .slot-note{margin-top:14px;font-size:12px;color:var(--inkMute);font-style:italic}
+  .calwrap{background:var(--surface2);border:1px solid var(--line);border-radius:6px;padding:12px;margin-top:4px}
+  .calhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+  .calmon{font-family:var(--display);font-size:18px;color:var(--ink)}
+  .calnav{width:34px;height:34px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--ink);font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+  .calnav:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
+  .calnav:disabled{opacity:.3;cursor:not-allowed}
+  .calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+  .caldow{text-align:center;font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--inkMute);padding:2px 0 6px}
+  .calcell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-family:var(--body);font-size:13px;border-radius:5px;border:1px solid transparent;padding:0}
+  .calcell.empty{border:none}
+  .calcell.off{color:var(--inkMute);opacity:.35}
+  .calcell.avail{background:var(--surface);border-color:var(--line);color:var(--ink);cursor:pointer;font-weight:500}
+  .calcell.avail:hover{border-color:var(--accent);color:var(--accent)}
+  .calcell.avail.sel{background:var(--accent);border-color:var(--accent);color:var(--accentInk)}
+  .dppick{display:flex;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:13px 14px;cursor:pointer;transition:border-color .2s}
+  .dppick:hover,.dppick:focus-within{border-color:var(--accent)}
+  .dppick .dpico{flex:0 0 auto;color:var(--accent);display:flex}
+  .dppick .dpinput{flex:1;min-width:0;border-bottom:none!important;padding:2px 0!important;font-size:20px}
+  .dppick .dpcta{flex:0 0 auto;font-family:var(--body);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);white-space:nowrap}
+  .dpnote{margin-top:8px;font-size:11.5px;color:var(--inkMute);font-style:italic;line-height:1.45}
+  .contractbox{margin-top:12px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:18px;max-height:46vh;overflow-y:auto;font-size:12.5px;line-height:1.65;color:var(--inkSoft);font-family:var(--body)}
+  .contractbox h4{font-family:var(--display);font-weight:600;font-size:15px;color:var(--ink);margin:18px 0 6px;letter-spacing:.01em}
+  .contractbox h4:first-child{margin-top:0}
+  .contractbox p{margin:0 0 11px}
+  .contractbox p:last-child{margin-bottom:0}
+  .contractbox strong{color:var(--ink);font-weight:600}
+  .contractbox.loading{color:var(--inkMute);font-style:italic}
+  .acks{margin-top:4px}
+  .ackitem{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--lineSoft)}
+  .ackitem:first-child{border-top:none}
+  .acktext{flex:1;font-size:12.5px;color:var(--ink);line-height:1.5}
+  .inibox{flex:0 0 72px;width:72px;text-align:center;text-transform:uppercase;font-family:var(--display);font-style:italic;font-size:20px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:8px 4px;letter-spacing:.12em;outline:none}
+  .inibox:focus{border-color:var(--accent)}
+  .ackitem.filled .inibox{border-color:var(--accent);color:var(--accent)}
+  .agbox{margin-top:12px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:16px}
+  .agrow{display:flex;justify-content:space-between;gap:12px;padding:7px 0;font-size:13px;border-bottom:1px solid var(--lineSoft)}
+  .agrow span:first-child{color:var(--inkMute)}
+  .agrow span:last-child{color:var(--ink);text-align:right}
+  .agterms{margin:12px 0 0;padding:0 0 0 18px;display:flex;flex-direction:column;gap:9px}
+  .agterms li{font-size:12px;color:var(--inkSoft);line-height:1.5}
+  .agterms strong{color:var(--ink)}
+  .sigsec{margin-top:20px}
+  .sigfield{width:100%;background:transparent;border:none;border-bottom:1px solid var(--line);color:var(--ink);font-family:var(--display);font-style:italic;font-size:26px;padding:6px 0 10px;outline:none;letter-spacing:.02em}
+  .sigfield:focus{border-color:var(--accent)}
+  .sigfield::placeholder{color:var(--inkMute);opacity:.55}
+</style>
+</head>
+<body>
+<div class="app">
+  <div id="wizard">
+    <div class="header">
+      <div>
+        <div class="wm">JHP</div>
+        <div class="wmsub">Boudoir</div>
+      </div>
+      <div class="dots"><div class="dot" id="d0"></div><div class="dot" id="d1"></div><div class="dot" id="d2"></div><div class="dot" id="d3"></div></div>
+    </div>
+    <div class="pad" id="step"></div>
+    <div class="errbar" id="err"><div class="inner" id="errmsg"></div></div>
+    <div class="finalbar" id="finalbar"><div class="inner"><span class="spin"></span><span id="finalmsg">Securely setting up your plan…</span></div></div>
+    <div class="cta">
+      <button class="ghost hide" id="backBtn">Back</button>
+      <button class="primary" id="nextBtn">Continue</button>
+    </div>
+  </div>
+
+  <div id="thanks" class="thanks hide">
+    <div class="eyebrow">Booking Confirmed</div>
+    <h1 class="h1" style="font-size:44px;margin:14px 0 10px">Thank you.</h1>
+    <div class="body" style="font-size:16px;line-height:1.7;max-width:400px">Your booking is complete — welcome to JHP Boudoir! A confirmation email with your Pre-Session Payment Plan details, along with a welcome email and everything you need for your session, are on their way to your inbox. Please allow up to 10 minutes for your confirmation email to arrive. No further action is needed from you — just keep an eye out for those emails. I can't wait to create something beautiful with you.<br><br>Xx, Jessica</div>
+    <div class="body" id="confirmedTotal" style="margin-top:10px;font-weight:600;font-size:16px"></div>
+    <div class="div"></div>
+    <button class="startover" id="startOver">Start another</button>
+  </div>
+</div>
+<script>
+{% raw %}
+(function(){
+  var PT=(document.querySelector('meta[name="scalogy-page-token"]')||{}).content||'';
+  function rawFetch(path,opts,useToken){opts=opts||{};var src=opts.headers||{};var h={};for(var k in src)h[k]=src[k];h['Accept']='application/json';if(useToken&&PT)h['Authorization']='Bearer '+PT;var o={};for(var k2 in opts)o[k2]=opts[k2];o.headers=h;return fetch('_api/'+path,o);}
+  function api(path,opts){return rawFetch(path,opts,false).then(function(r){if((r.status===401||r.status===403)&&PT){return rawFetch(path,opts,true);}return r;});}
+  function qp(n){try{return new URLSearchParams(window.location.search).get(n)||'';}catch(e){return '';}}
+  function isUuid(s){return /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(s||'');}
+  function genToken(){try{if(window.crypto&&crypto.randomUUID)return crypto.randomUUID();}catch(e){}return 'tk-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,10);}
+  // Page-variant flags MUST be defined before WEBHOOK_URL. They previously lived
+  // ~200 lines below this point, so `var` hoisting left SINGLE_CARD undefined here
+  // and the ternary always picked the TWO-CARD webhook. Every single-card
+  // submission was therefore POSTed to pspp-checkout-trigger while carrying
+  // form_slug 'pspp-setup-2026-1cc' - which the two-card workflow does not claim,
+  // so the row was silently discarded and the client saw "We could not confirm
+  // your submission was received". Fixed 2026-08-14 (Megan Hurley).
+  var PATHNAME=((window.location&&window.location.pathname)||'');
+  // 2027 Pricing - LPL Giveaway (2026-09-25, Jessica): pages
+  // forms-pspp-2027-lpl-giveaway (two-card) and forms-pspp-2027-lpl-giveaway-1cc
+  // (single-card) render THIS template with the 2027 giveaway menu: no Platinum
+  // or Rose, new Gold + Diamond contents, and a Full Digital Gallery. Same
+  // webhooks + form_slugs as the 2026 pages; the server prices every id in
+  // promote_psppv2_inbox.py CANON_PRICES.
+  var IS_2027=PATHNAME.indexOf('forms-pspp-2027-lpl-giveaway')>=0;
+  // 2027 Charity Calendar Model Call (2026-10-24, Jessica): pages
+  // forms-pspp-2027-ccmc (two-card) and forms-pspp-2027-ccmc-1cc (single-card)
+  // show EXACTLY the LPL Giveaway 2027 menu and pricing (the $500 credit is
+  // already in the prices; the $99 Session Fee is paid on the claim page), with
+  // their own title, form_name, form_version '2027-ccmc', cross links and
+  // Charity Calendar Model Call contract + acknowledgements. Kept SEPARATE from
+  // IS_2027 so the giveaway labels/links never leak onto these pages. Same
+  // webhooks + form_slugs as every other non-specialty page, so bookings flow
+  // through promote-psppv2-inbox(-1cc) and enroll-booked-on-pspp unchanged.
+  // Never last-minute, never flash-sale, never specialty.
+  var IS_CCMC=PATHNAME.indexOf('forms-pspp-2027-ccmc')>=0;
+  // Save-Ahead offer (not selected for the calendar, same $99 / $500-off deal, Jessica
+  // 2026-10-25): the claim charger adds ?offer=saveahead to her booking link. Same menu,
+  // contract without the calendar section (asset contract-ccmc-saveahead-2027).
+  var IS_CCMC_SA=IS_CCMC&&qp('offer')==='saveahead';
+  // 2026-10 visual refresh preview (?look=new). Flip to true once Jessica approves it.
+  var NEWLOOK=qp('look')==='new';
+  if(NEWLOOK){try{document.body.classList.add('nl');}catch(_e){}}
+  var FORM_VERSION=IS_CCMC?'2027-ccmc':IS_2027?'2027-lpl-giveaway':'2026';
+  var SINGLE_CARD=PATHNAME.indexOf('forms-pspp-setup-1cc')>=0||PATHNAME.indexOf('forms-pspp-2027-lpl-giveaway-1cc')>=0||PATHNAME.indexOf('forms-pspp-2027-ccmc-1cc')>=0;
+  // Treehouse PAST-CLIENT investment menu (2026-10-19, Jessica): page
+  // treehouse-pc-investment. Reuses the specialty lineup + fixed session date, but:
+  // no hair & makeup (already paid on treehouse-past-clients), its own contract,
+  // plans of up to 5 monthly payments (not tied to the session date), an
+  // 'I'll decide after I see my images' option (contract only, no cards), and its
+  // own webhook treehouse-pc-plan -> treehouse-pc-plan workflow.
+  var IS_PASTCLIENT=PATHNAME.indexOf('treehouse-pc-investment')>=0;
+  var PC_PLAN_DAYS=120; // first payment + 4 more monthly = 5 monthly payments
+  var IS_SPECIALTY=PATHNAME.indexOf('forms-pspp-setup-specialty')>=0||IS_PASTCLIENT;
+  // 2026-10-13 (Jessica): every booking checkout except the Treehouse specialty
+  // form shows the 2027 lineup - no Platinum or Rose, the 2027 Gold + Diamond
+  // contents, the Full Digital Gallery and the menu-card layout. IS_2027 still
+  // marks the LPL Giveaway pages for their own title, form_version and links.
+  var LINEUP_2027=IS_2027||IS_CCMC||!IS_SPECIALTY;
+  // Last-minute openings (2026-10-13): ?campaign=last-minute swaps in the
+  // last-minute prices (LM_PRICES below) and contract, hides the promo field and
+  // caps session dates at Dec 31, 2026. The server re-prices from its own
+  // LM_PRICES only for 2026 session dates, so the flag cannot buy more than the
+  // public offer. LM_LIVE holds it off until Jessica approves the contract.
+  var LM_LIVE=true; // contract approved by Jessica 2026-10-13
+  var IS_LASTMIN=LM_LIVE&&qp('campaign')==='last-minute'&&!IS_SPECIALTY&&!IS_2027&&!IS_CCMC;
+  var WEBHOOK_URL=IS_PASTCLIENT?'https://app.scalogy.com/webhooks/in/jhpboudoir1/treehouse-pc-plan':SINGLE_CARD?'https://app.scalogy.com/webhooks/in/jhpboudoir1/pspp-checkout-trigger-1cc':'https://app.scalogy.com/webhooks/in/jhpboudoir1/pspp-checkout-trigger';
+  function esc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+
+  function money2(n){return '$'+Number(n).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function moneyTight(n){return '$'+Math.round(n).toLocaleString('en-US');}
+  function addDays(d,n){var x=new Date(d);x.setDate(x.getDate()+n);return x;}
+  function fmtDate(d){if(!d)return '—';return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+  function fmtDateShort(d){if(!d)return '—';return d.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+  function toISO(d){var x=new Date(d);var y=x.getFullYear();var m=String(x.getMonth()+1).padStart(2,'0');var day=String(x.getDate()).padStart(2,'0');return y+'-'+m+'-'+day;}
+  function parseDate(str){if(!str)return null;var p=str.split('-').map(function(x){return parseInt(x,10);});if(!p[0]||!p[1]||!p[2])return null;return new Date(p[0],p[1]-1,p[2]);}
+  function buildSchedule(o){
+    var total=o.total,firstDate=o.firstDate,sessionDate=o.sessionDate,frequency=o.frequency;
+    if(!total||!firstDate||!frequency)return {payments:[],perPayment:0,count:0};
+    if(frequency==='full')return {payments:[{date:firstDate,amount:total}],perPayment:total,count:1};
+    var intervalDays=frequency==='monthly'?30:frequency==='biweekly'?14:7;
+    var horizonEnd=IS_PASTCLIENT?addDays(firstDate,PC_PLAN_DAYS):(sessionDate?addDays(sessionDate,-payoffLeadFor(sessionDate)):addDays(firstDate,180));
+    var daysAvailable=Math.max(0,Math.floor((horizonEnd-firstDate)/86400000));
+    var count=Math.max(1,Math.floor(daysAvailable/intervalDays)+1);
+    var perPayment=Math.ceil((total/count)*100)/100;
+    var payments=[],running=0;
+    for(var i=0;i<count;i++){var amount=(i===count-1)?Math.round((total-running)*100)/100:perPayment;running+=amount;payments.push({date:addDays(firstDate,intervalDays*i),amount:amount});}
+    return {payments:payments,perPayment:perPayment,count:count};
+  }
+
+  // --- Session availability: Tue/Thu only, seasonal time slots, holiday + holiday-week closures, Aug 2026-Oct 2027 window ---
+  function nthWeekdayOfMonth(y,m,wd,n){var f=new Date(y,m,1).getDay();var off=(wd-f+7)%7;return new Date(y,m,1+off+(n-1)*7);}
+  function lastWeekdayOfMonth(y,m,wd){var l=new Date(y,m+1,0);var off=(l.getDay()-wd+7)%7;return new Date(y,m,l.getDate()-off);}
+  function sameDay(a,b){return !!a&&!!b&&a.getFullYear()===b.getFullYear()&&a.getMonth()===b.getMonth()&&a.getDate()===b.getDate();}
+  // The FIRST date that may be booked. Aug 1, 2026 for every promotion, except
+  // the flash sale: the 72-hour sale launched 2026-09-15 is sold as "October
+  // 2026 - November 2027", and its whole pitch is an interest-free prepayment
+  // plan paid off BEFORE the session. A late-September date leaves days, not
+  // weeks, to pay a collection off - so ?campaign=flash-sale opens at Oct 1.
+  var BOOK_START=(qp('campaign')==='flash-sale'&&!IS_CCMC)?new Date(2026,9,1):new Date(2026,7,1);
+  // The last date that may be booked. Nov 30, 2027 normally - the full
+  // calendar, extended from Oct 31 on 2026-08-19 so the giveaway (sold as
+  // "August 2026 - November 2027") can book through November.
+  // 2026-09-15: the flash-sale horizon USED TO BE Jun 30, 2027, left over from
+  // the Sept 2026 - June 2027 sale. The new 72-hour sale is sold as "October
+  // 2026 - November 2027", and because sale-reserved ALWAYS sends
+  // ?campaign=flash-sale (it selects the flash-sale contract), that stale date
+  // silently hid every opening after June from paying clients. Both branches
+  // now end Nov 30, 2027. A future sale needing a shorter horizon should read
+  // promo_campaigns.window_end rather than reintroducing a hardcoded date.
+  // ops/ghl_slots_sync.py generates the grid to its own BOOK_END and must be
+  // kept at or beyond this date, or later months simply never appear.
+  // GHL publishes openings to Oct 2027 either way, so this is the horizon that
+  // actually decides, and it is enforced in two places: loadGhlSlots drops
+  // later slots as they arrive (which also stops the month navigation, since
+  // that is built from what survives), and isAvailableDate refuses anything
+  // past it. To move either window, change the matching date on this line.
+  // qp() is a hoisted function declaration, so reading the param here - well
+  // before P and IS_FLASH are built - is safe.
+  // 2026-10-05 (Jessica): extended to Thu Dec 16, 2027 - Tue/Thu sessions
+  // through Dec 16, nothing after that in December 2027.
+  var BOOK_END=new Date(2027,11,16);
+  if(IS_LASTMIN)BOOK_END=new Date(2026,11,31);
+  // 2026-10-24 (Jessica): the LPL Giveaway and the 2027 Charity Calendar Model Call book
+  // through March 2028 (Tue/Thu 8, 10, noon in Jan-Mar 2028; nothing Dec 17-31, 2027).
+  // ops/ghl_slots_sync.py carries the matching grid. Every other page stays at Dec 16, 2027.
+  if(IS_2027||IS_CCMC)BOOK_END=new Date(2028,2,31);
+  function minSessionDate(){return TODAY>BOOK_START?new Date(TODAY):new Date(BOOK_START);}
+  function slotsForMonth(m){return (m>=3&&m<=9)?['09:00','11:00','13:00']:['09:00','11:00'];} // Apr-Oct: 9/11/1 (April=3 slots); Nov-Mar: 9/11
+  var AVAIL_MAP={},AVAIL_LOADED=false;
+  function GHLon(){return qp('avail')!=='legacy';}
+  function ghlIso(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
+  // The page _api caps `limit` at 200 rows per request no matter what is asked
+  // for, and returns them UNORDERED - so one request silently drops whatever
+  // does not fit and real openings simply vanish from the calendar. Found
+  // 2026-08-19: 245 slots in the table, 200 came back, and Tue/Thu dates
+  // including Dec 10 and Dec 17 2026 were among the ones that disappeared even
+  // though they were open for booking. This gets worse as availability grows.
+  // So: page through until a short page comes back, and de-dupe, since
+  // LIMIT/OFFSET without an ORDER BY can repeat a row across pages.
+  // If a page fails we keep whatever we already collected rather than blanking
+  // the calendar - partial is no worse than the single request this replaces,
+  // and an empty calendar costs a booking outright.
+  function loadGhlSlots(){
+    if(!GHLon())return Promise.resolve();
+    var PAGE=200,CB=Date.now(),map={},got=0,HORIZON=ghlIso(BOOK_END);
+    function ingest(rows){
+      for(var i=0;i<rows.length;i++){
+        var sl=(rows[i].slot_local||rows[i].slot_iso||'');
+        var t=String(sl).split('T');
+        if(t.length<2)continue;
+        var dt=t[0],tm=t[1].slice(0,5);
+        if(dt>HORIZON)continue;   // past the booking horizon - never offer it
+        (map[dt]=map[dt]||[]).push(tm);
+      }
+      got+=rows.length;
+    }
+    function page(offset,guard){
+      if(guard>30)return Promise.resolve();
+      return api('ghl_session_slots?limit='+PAGE+'&offset='+offset+'&_cb='+CB)
+        .then(function(r){return r.ok?r.json():null;})
+        .then(function(d){
+          var rows=(d&&d.rows)||[];
+          ingest(rows);
+          if(rows.length>=PAGE)return page(offset+rows.length,guard+1);
+        });
+    }
+    return page(0,0).then(function(){
+      if(!got)return;
+      for(var k in map){map[k]=map[k].filter(function(v,i,a){return a.indexOf(v)===i;}).sort();}
+      AVAIL_MAP=map;AVAIL_LOADED=true;
+    }).catch(function(){});
+  }
+  function fmtTime(s){var p=s.split(':');var h=parseInt(p[0],10);var ap=h>=12?'PM':'AM';var hh=h%12;if(hh===0)hh=12;return hh+':'+(p[1]||'00')+' '+ap;}
+  function inThanksgivingWeek(d){var t=nthWeekdayOfMonth(d.getFullYear(),10,4,4);var mon=addDays(t,-3);var sun=addDays(mon,6);return d>=mon&&d<=sun;} // full week of the 4th Thu of Nov
+  function inXmasNewYear(d){var m=d.getMonth(),day=d.getDate();return (m===11&&day>=25)||(m===0&&day===1);} // Dec 25 - Jan 1
+  function isHoliday(d){
+    var y=d.getFullYear(),m=d.getMonth(),day=d.getDate();
+    if(m===0&&day===1)return true;   // New Year's Day
+    if(m===4&&sameDay(d,lastWeekdayOfMonth(y,4,1)))return true; // Memorial Day (last Mon May)
+    if(m===5&&day===19)return true;  // Juneteenth
+    if(m===6&&day===4)return true;   // Independence Day
+    if(m===8&&sameDay(d,nthWeekdayOfMonth(y,8,1,1)))return true; // Labor Day (1st Mon Sep)
+    if(m===10&&day===11)return true; // Veterans Day
+    return false;
+  }
+  var JHP_BLOCKED_DATES=['2026-12-22','2026-12-24','2027-04-13','2027-04-15'];function isManuallyBlocked(d){var iso=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);return JHP_BLOCKED_DATES.indexOf(iso)>-1;}function isBlockedDate(d){return inThanksgivingWeek(d)||inXmasNewYear(d)||isHoliday(d)||isManuallyBlocked(d);}
+  // The BOOK_START floor is enforced HERE, not just in minSessionDate(). The GHL
+  // branch below answers purely from AVAIL_MAP, so before 2026-09-15 a floor set
+  // on BOOK_START only moved the calendar's DEFAULT date - every earlier month
+  // GHL still published stayed reachable by paging back, and monthsWithAvailability()
+  // takes its start month from ghlMonthBounds() rather than minSessionDate(), so
+  // those months were listed too. Checking it up front covers both branches and
+  // also stops a stale past slot from ever being offered.
+  function isAvailableDate(d){if(!d)return false;if(d>BOOK_END)return false;if(d<minSessionDate())return false;if(GHLon()){if(!AVAIL_LOADED)return false;return !!(AVAIL_MAP[ghlIso(d)]&&AVAIL_MAP[ghlIso(d)].length);}var wd=d.getDay();if(wd!==2&&wd!==4)return false;if(d<minSessionDate()||d>BOOK_END)return false;if(isBlockedDate(d))return false;return true;} // Tue=2, Thu=4
+  function firstAvailableFrom(start){var d=new Date(start);d.setHours(0,0,0,0);for(var g=0;g<800;g++){if(isAvailableDate(d))return d;d=addDays(d,1);}return null;}
+  function monthName(m){return ['January','February','March','April','May','June','July','August','September','October','November','December'][m];}
+
+  var COLLECTIONS=[
+    {id:'artist',name:'Artist Collection',price:9400,strike:9900,tier:'signature',tag:'Flagship',accent:'Entire image collection, 9×12 album with 60 images, gold-framed artist prints.',includes:['Entire Image Digital Collection','9×12 Album with 60 Images','Diamond Cover Upgrade','Couture Album Box','2-Piece Gold Framed Artist Prints','Mobile Gallery Phone App','4 Outfit Changes','4 Bonuses (Elite, Premium and/or Standard)']},
+    {id:'platinum',name:'Platinum Collection',price:8400,strike:8900,tier:'signature',tag:null,accent:'80 digital images, layflat album & 4-piece metal gallery.',includes:['80 Image Digital Collection','9×12 Album with 50 Images','Couture Album Box','4-Piece Metal Gallery','Mobile Gallery Phone App','4 Outfit Changes','4 Bonuses (Elite, Premium and/or Standard)']},
+    {id:'diamond',name:'Diamond Collection',price:6900,strike:7400,tier:'signature',tag:null,accent:'60 digital images, album & 2-piece metal gallery.',includes:['60 Image Digital Collection','9×12 Album with 40 Images','2-Piece Metal Gallery','Mobile Gallery Phone App','4 Outfit Changes','3 Bonuses (Elite, Premium and/or Standard)']},
+    {id:'gold',name:'Gold Collection',price:5100,strike:5600,tier:'signature',tag:'Most popular',accent:'40 digital images, album & 12×18 metal wall art.',includes:['40 Image Digital Collection','8×10 Album with 30 Images','12×18 Metal Wall Art','Mobile Gallery Phone App','3 Outfit Changes','2 Bonuses (Premium and/or Standard)']},
+    {id:'rose',name:'Rose Collection',price:3900,strike:4400,tier:'signature',tag:null,accent:'25 digital images & a printed album to match.',includes:['8×10 Album with 25 Images','25 Image Digital Collection (matches album)','Mobile Gallery Phone App','2 Outfit Changes','1 Standard Bonus Set']},
+    {id:'silver',name:'Silver Collection',price:2900,strike:3400,tier:'signature',tag:null,accent:'15 digital images & a printed album to match.',includes:['6×8 Album with 15 Images','15 Image Digital Collection (matches album)','Mobile Gallery Phone App','2 Outfit Changes','No Bonus Sets']},
+    {id:'petite1',name:'Petite Collection — One',price:2200,strike:2700,tier:'petite',tag:null,accent:'15 digital images with your online gallery.',includes:['15 Digital Images','Online Gallery','1 Outfit','No Bonus Sets']},
+    {id:'petite2',name:'Petite Collection — Two',price:1500,strike:2000,tier:'petite',tag:'Entry',accent:'8 digital images with your online gallery.',includes:['8 Digital Images','Online Gallery','1 Outfit','No Bonus Sets']},
+    {id:'petite3',name:'Petite Collection — Three',price:750,strike:1250,tier:'petite',tag:null,accent:'3 digital images with your online gallery.',includes:['3 Digital Images','Online Gallery','1 Outfit','1 Set']}
+  ];
+  if(LINEUP_2027){
+    COLLECTIONS=COLLECTIONS.filter(function(c){return c.id!=='platinum'&&c.id!=='rose';}).map(function(c){
+      if(c.id==='diamond')return {id:'diamond',name:'Diamond Collection',price:6900,strike:7400,tier:'signature',tag:null,accent:'60 digital images, 10×14 album & an artist print.',includes:['60 Image Digital Collection','10×14 Album with 60 Images','1 Artist Print','Private Mobile Gallery Phone App','4 Outfit Changes','2 Bonuses (Elite, Premium and/or Standard)']};
+      if(c.id==='gold')return {id:'gold',name:'Gold Collection',price:5100,strike:5600,tier:'signature',tag:'Most popular',accent:'50 digital images, album & 12×16 metal wall art.',includes:['50 Image Digital Collection','8×12 Album with 50 Images','12×16 Metal Wall Art','Mobile Gallery Phone App','3 Outfit Changes','2 Bonuses (Premium and/or Standard)']};
+      return c;
+    });
+    // Menu-card contents (2026-09-25): mirror Jessica's Canva menu graphics.
+    // [icon, text]. includes[] is kept in step for anything else that reads it.
+    var M27={
+      artist:{coll:[['img','100 Image Digital Collection'],['book','10 × 14 Album · 60 Images'],['gem','Diamond Cover Upgrade'],['box','Couture Album Box'],['frame','Two Gold-Framed Artist Prints'],['phone','Private Mobile Gallery App']],sess:[['hanger','4 Outfit Changes'],['star','4 Bonus Sets']]},
+      diamond:{coll:[['img','60 Image Digital Collection'],['book','10 × 14 Album · 60 Images'],['frame','1 Artist Print'],['phone','Private Mobile Gallery App']],sess:[['hanger','4 Outfit Changes'],['star','2 Bonus Sets']]},
+      gold:{coll:[['img','50 Image Digital Collection'],['book','8 × 12 Album · 50 Images'],['frame','12 × 16 Metal Wall Art'],['phone','Private Mobile Gallery App']],sess:[['hanger','3 Outfit Changes'],['star','2 Bonus Sets']]},
+      fulldigital:{coll:[['img','50 Image Digital Collection'],['phone','Private Mobile Gallery App']],sess:[['hanger','3 Outfit Changes'],['star','No Bonus Sets']]},
+      silver:{coll:[['img','15 Image Digital Collection'],['book','6 × 8 Album · 15 Images'],['phone','Private Mobile Gallery App']],sess:[['hanger','2 Outfit Changes'],['star','No Bonus Sets']]},
+      petite1:{name:'Petite 15',coll:[['img','15 Image Digital Collection'],['img','Digital Only']],sess:[['hanger','1 Outfit Session']]},
+      petite2:{name:'Petite 8',coll:[['img','8 Image Digital Collection'],['img','Digital Only']],sess:[['hanger','1 Outfit Session']]},
+      petite3:{name:'Petite 3',coll:[['img','3 Image Digital Collection'],['img','Digital Only']],sess:[['hanger','1 Outfit Session']]}
+    };
+    COLLECTIONS.forEach(function(c){var m=M27[c.id];if(!m)return;c.m27=m;if(m.name)c.name=m.name;c.includes=m.coll.concat(m.sess).map(function(r){return r[1];});});
+    // 2026-09-25 (Jessica): no Flagship badge; Petite 3 is now the Entry collection.
+    COLLECTIONS.forEach(function(c){if(c.id==='artist'||c.id==='petite2')c.tag=null;if(c.id==='petite3')c.tag='Entry';});
+    var _gi=0;for(var _k=0;_k<COLLECTIONS.length;_k++){if(COLLECTIONS[_k].id==='gold')_gi=_k;}
+    COLLECTIONS.splice(_gi+1,0,{id:'fulldigital',name:'Full Digital Gallery',price:4500,strike:5000,tier:'petite',tag:null,accent:'50 digital images with your mobile gallery app.',includes:['50 Image Digital Collection','Private Mobile Gallery App','3 Outfit Changes','No Bonus Sets'],m27:M27.fulldigital});
+  }
+  // Treehouse past-client menu (2026-10-19, Jessica): same menu-card look as the
+  // Boudoir Giveaway, with the specialty packages' contents unchanged (rows are
+  // the existing includes[] text, regrouped under The Collection / The Session).
+  if(IS_PASTCLIENT){
+    var PCM={
+      gold:{coll:[['img','40 Image Digital Collection'],['book','8×10 Album with 30 Images'],['frame','12×18 Metal Wall Art'],['phone','Mobile Gallery Phone App']],sess:[['hanger','3 Outfit Changes']]},
+      rose:{coll:[['img','25 Image Digital Collection'],['book','8×10 Album with 25 Images'],['phone','Mobile Gallery Phone App']],sess:[['hanger','2 Outfit Changes']]},
+      silver:{coll:[['img','15 Image Digital Collection'],['book','6×8 Album with 15 Images'],['phone','Mobile Gallery Phone App']],sess:[['hanger','2 Outfit Changes']]},
+      petite1:{coll:[['img','15 Image Digital Collection'],['phone','Online Gallery']],sess:[['hanger','1 Outfit Change']]},
+      petite2:{coll:[['img','8 Image Digital Collection'],['phone','Online Gallery']],sess:[['hanger','1 Outfit Change']]},
+      petite3:{coll:[['img','3 Image Digital Collection'],['phone','Online Gallery']],sess:[['hanger','1 Outfit Change']]}
+    };
+    // 2026-10-19 (Jessica): no bonus sets on any collection for this offer; same row format on every card.
+    COLLECTIONS.forEach(function(c){if(PCM[c.id]){c.m27=PCM[c.id];c.includes=PCM[c.id].coll.concat(PCM[c.id].sess).map(function(r){return r[1];});}c.tag=(c.id==='rose'?'Most popular':(c.id==='petite3'?'Entry':((c.id==='gold'||c.id==='petite2')?null:c.tag)));});
+  }
+  // Last-minute prices: 40% off the regular (strike) price for the Full
+  // Collections and the Digital Gallery, $500 off for Petite. Mirrors LM_PRICES
+  // in promote_psppv2_inbox.py, which is what is actually charged.
+  var LM_PRICES={artist:5940,diamond:4440,gold:3360,fulldigital:3000,silver:2040,petite1:2200,petite2:1500,petite3:750};
+  if(IS_LASTMIN)COLLECTIONS.forEach(function(c){if(LM_PRICES[c.id]!=null)c.price=LM_PRICES[c.id];});
+  var FREQS=[{id:'full',label:'In full'},{id:'monthly',label:'Monthly'},{id:'biweekly',label:'Bi-weekly'},{id:'weekly',label:'Weekly'}];
+  var FREQ_STORE={full:'In Full',monthly:'Monthly',biweekly:'Bi-Weekly',weekly:'Weekly'};
+  var IMG_MAP={};
+  var SQUARE_APP_ID='sq0idp-GTU2E7U0Tm7SIicRiQdXUA';
+  var SQUARE_LOCATION_ID='LPEFSHS0X4QPD';
+
+  var P={
+    intel_id:qp('intel_id')||qp('id'),ghl_id:qp('ghl_id')||qp('cid'),
+    name:qp('name'),first:qp('first')||qp('first_name'),last:qp('last')||qp('last_name'),
+    email:qp('email'),phone:qp('phone'),collection:qp('collection'),test:qp('test')==='1',
+    sd:qp('sd'),st:qp('st'),hmu:(qp('hmu')==='1'||qp('hmu')==='true'),
+    b:IS_PASTCLIENT?String(qp('b')||'').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,12):'',
+    campaign:qp('campaign')
+  };
+  if(!P.name&&(P.first||P.last))P.name=((P.first||'')+' '+(P.last||'')).trim();
+  if(P.name&&(!P.first&&!P.last)){var sp=P.name.split(' ');P.first=sp.shift()||'';P.last=sp.join(' ');}
+
+  var TODAY=new Date();TODAY.setHours(0,0,0,0);
+  // Treehouse past-client short link (?b=CODE&s=12-0830): the slot gives the session
+  // date/time; the server fills her name/email from the private booking code.
+  if(IS_PASTCLIENT&&!P.sd){var _sm=/^(\d{2})-(\d{2})(\d{2})$/.exec(qp('s')||'');if(_sm){P.sd='2026-11-'+_sm[1];P.st=_sm[2]+':'+_sm[3];}}
+  var contactCaptureNeeded = !P.ghl_id && !P.email && !P.b;
+  var INIT_SESSION=firstAvailableFrom(addDays(TODAY,60))||firstAvailableFrom(minSessionDate())||minSessionDate();
+  var state={payMethod:'plan',
+    step:0,
+    chosen:'gold',
+    firstDate:toISO(TODAY),
+    sessionDate:toISO(INIT_SESSION),
+    sessionTime:null,
+    calY:INIT_SESSION.getFullYear(),
+    calM:INIT_SESSION.getMonth(),
+    frequency:'monthly',
+    promoCode:'',
+    promo:null,
+    promoAck:false,
+    pendingToken:null,
+    promoMsg:'',
+    promoChecking:false,
+    initials:'',
+    agree:false,
+    captureName: P.name || '',
+    captureEmail: P.email || '',
+    capturePhone: P.phone || '',
+    cardDefaultToken:null,
+    cardDefaultBrand:null,
+    cardDefaultLast4:null,
+    cardDefaultName:'',
+    cardBackupToken:null,
+    cardBackupBrand:null,
+    cardBackupLast4:null,
+    cardBackupName:'',
+    cardErrorPending:null,
+    signature:'',
+    ini0:'',ini1:'',ini2:'',ini3:'',ini4:'',ini5:'',ini6:'',
+    planAgree:false,
+    sigEdited:false,
+    cardAttest:false,
+    hmu:false
+  };
+  var sqPayments=null, sqCardDefault=null, sqCardBackup=null;
+  if(P.collection){for(var i=0;i<COLLECTIONS.length;i++){var c=COLLECTIONS[i];if(c.id===P.collection.toLowerCase()||c.name.toLowerCase()===P.collection.toLowerCase()){state.chosen=c.id;break;}}}
+  state.signature=effName();
+
+  function coll(){for(var i=0;i<COLLECTIONS.length;i++){if(COLLECTIONS[i].id===state.chosen)return COLLECTIONS[i];}return null;}
+  function shortName(n){return n.replace(' Collection','').replace(' Selection','').replace('The ','');}
+  var TAX_RATE=0.0785;
+  // Digital-only collections are not taxed (Jessica, 2026-08-06). Mirrors
+  // NONTAXABLE_COLLECTIONS in promote_psppv2_inbox.py + pspp_promo_preview.py.
+  var NONTAXABLE={petite1:1,petite2:1,petite3:1,fulldigital:1};
+  function taxRateFor(id){return NONTAXABLE[id]?0:TAX_RATE;}
+  function discountInfo(){var c=coll();if(!c)return {base:0,discount:0,subtotal:0,tax:0,total:0,taxRate:0};var base=c.price,d=0;if(state.promo&&!IS_LASTMIN){var dt=state.promo.discount_type;if(dt==='percent')d=base*(Number(state.promo.discount_value)/100);else if(dt==='amount')d=Number(state.promo.discount_value);else d=0;}d=Math.round(d*100)/100;if(isNaN(d)||d<0)d=0;if(d>base)d=base;var sub=Math.round((base-d)*100)/100;var rate=taxRateFor(c.id);var tax=Math.round(sub*rate*100)/100;var hmu=(IS_SPECIALTY&&!IS_PASTCLIENT&&state.hmu)?155:0;return {base:base,discount:d,subtotal:sub,tax:tax,taxRate:rate,hmu:hmu,total:Math.round((sub+tax+hmu)*100)/100};}
+  function effTotal(){return discountInfo().total;}
+  function schedule(){return buildSchedule({total:effTotal(),firstDate:parseDate(state.firstDate),sessionDate:parseDate(state.sessionDate),frequency:state.frequency});}
+  var NL=String.fromCharCode(10);
+  var CONTRACT_KEY='contract-giveaway-2026';
+  var CONTRACT_SLUG='boudoir-session-contract-giveaway-winner';
+  var CONTRACT_TITLE='Boudoir Session Contract - Giveaway Winner';
+  // SINGLE_CARD / IS_SPECIALTY are now declared at the top of this IIFE, above
+  // WEBHOOK_URL - do not re-declare them here (see the 2026-08-14 note).
+  if(IS_SPECIALTY){CONTRACT_KEY='contract-treehouse-2026';CONTRACT_SLUG='specialty-session-boudoir-session-contract-thss';CONTRACT_TITLE='Specialty Session Boudoir Photography Contract';}
+  if(IS_PASTCLIENT){CONTRACT_KEY='contract-treehouse-pc-2026';CONTRACT_SLUG='treehouse-past-client-contract-2026';CONTRACT_TITLE='Treehouse Specialty Session Contract';}
+  // Flash-sale clients book through THIS page (the shared booking point reading
+  // the GHL Boudoir Sessions calendar), so the campaign cannot be told from the
+  // path the way SINGLE_CARD / IS_SPECIALTY are. The last-minute-sale funnel
+  // carries ?campaign=flash-sale from /sale-reserved/, which swaps in the flash
+  // sale contract: same terms, but a $19 non-refundable session fee and no
+  // "Boudoir Giveaway" wording. Everything else on this page is unchanged.
+  var IS_FLASH=(P.campaign||'')==='flash-sale'&&!IS_CCMC;
+  if(IS_FLASH&&!IS_SPECIALTY){CONTRACT_KEY='contract-flash-2026';CONTRACT_SLUG='boudoir-session-contract-flash-sale';CONTRACT_TITLE='Boudoir Session Contract - Flash Sale';}
+  if(IS_LASTMIN){CONTRACT_KEY='contract-lastminute-2026';CONTRACT_SLUG='boudoir-session-contract-last-minute';CONTRACT_TITLE='Boudoir Session Contract - Last-Minute Openings';}
+  // Charity Calendar Model Call contract (asset row contract-ccmc-2027). Until that
+  // row exists contractSrc() is null and step 3 cannot be completed - fails closed.
+  if(IS_CCMC){CONTRACT_KEY='contract-ccmc-2027';CONTRACT_SLUG='boudoir-session-contract-charity-calendar-model-call';CONTRACT_TITLE='Boudoir Session Contract - Charity Calendar Model Call';}
+  if(IS_CCMC_SA){CONTRACT_KEY='contract-ccmc-saveahead-2027';CONTRACT_SLUG='boudoir-session-contract-save-ahead-offer';CONTRACT_TITLE='Boudoir Session Contract - Save-Ahead Offer';}
+  var PAYOFF_LEAD=IS_SPECIALTY?14:30;
+  // Per-session-date payoff overrides for PAYMENT PLANS. Must match
+  // PAYOFF_DAYS_OVERRIDES in scripts/promote_psppv2_inbox.py, which recounts the
+  // plan server-side - if they differ the server charges a different schedule.
+  // 2026-10-13 (Jessica): the Nov 10 2026 14-day exception was REMOVED the same
+  // day. Everyone pays in full 30 days before the session; closer dates book In Full.
+  var PAYOFF_LEAD_OVERRIDES={};
+  function payoffLeadFor(sd){var k=sd?toISO(sd):'';return Object.prototype.hasOwnProperty.call(PAYOFF_LEAD_OVERRIDES,k)?PAYOFF_LEAD_OVERRIDES[k]:PAYOFF_LEAD;}
+  // 2026-10-13 (Jessica): PAY-IN-FULL bookings skip the payoff-lead rule on every
+  // date (replaces the Aug 25 one-off list). Paying in full settles the balance
+  // up front, so there is no plan to finish before the session; the payment just
+  // has to be dated on or before the session (checked in planError). Still gated
+  // to frequency==='full' on purpose: exempting any cadence would let
+  // buildSchedule collapse a plan to one payment still labelled "Monthly - 1
+  // payment" and hand a malformed plan to Square. promote_psppv2_inbox.py already
+  // treats "In Full" as one payment with no payoff check, so nothing server-side.
+  function payoffExempt(){return state.frequency==='full';}
+  // A date closer than its payoff lead (30 days, 14 for Treehouse) is allowed on
+  // every variant (giveaway, Treehouse, last-minute), but the package is paid in
+  // full at booking, so switch the cadence to In full for her instead of leaving
+  // her on Monthly with a "too soon" error. Jessica 2026-10-13.
+  function lmForceFull(){if(IS_PASTCLIENT)return;var d=parseDate(state.sessionDate);if(d&&addDays(d,-payoffLeadFor(d))<TODAY&&state.frequency!=='full'){state.frequency='full';Array.prototype.forEach.call(document.querySelectorAll('.freqbtn'),function(x){x.classList.toggle('active',x.getAttribute('data-freq')==='full');});}}
+  var FIXED_SESSION=IS_SPECIALTY&&/^\d{4}-\d{2}-\d{2}$/.test(P.sd||'');
+  if(FIXED_SESSION){setTimeout(lmForceFull,0);state.sessionDate=P.sd;if(P.st)state.sessionTime=P.st;var _fp=parseDate(P.sd);if(_fp){state.calY=_fp.getFullYear();state.calM=_fp.getMonth();}}
+  // PRESET (2026-08-17, Jessica): let the giveaway booking links land pre-set on a
+  // date / time / cadence so the client does not have to navigate the calendar back
+  // from the default (~60 days out) or remember to switch off Monthly. This ONLY
+  // seeds initial state - unlike FIXED_SESSION it does NOT set FIXED_SESSION, so the
+  // calendar still renders, isAvailableDate() still gates the date, and planError()
+  // still runs. A crafted URL therefore cannot book an unavailable date.
+  if(!IS_SPECIALTY){
+    if(/^\d{4}-\d{2}-\d{2}$/.test(P.sd||'')){
+      state.sessionDate=P.sd;
+      var _ps=parseDate(P.sd);
+      if(_ps){state.calY=_ps.getFullYear();state.calM=_ps.getMonth();}
+    }
+    if(/^\d{2}:\d{2}$/.test(P.st||''))state.sessionTime=P.st;
+    if(qp('freq')==='full')state.frequency='full';
+    lmForceFull();
+  }
+  if(IS_SPECIALTY&&!IS_PASTCLIENT&&P.hmu)state.hmu=true;
+  if(IS_PASTCLIENT){COLLECTIONS.push({id:'decide',name:'I\'ll decide after I see my images',price:0,tier:'decide',tag:null,accent:'No purchase today. Choose at your image reveal.',includes:[]});try{document.title='Your Investment Menu — JHP Boudoir';}catch(_e){}}
+  function isDecide(){return IS_PASTCLIENT&&state.chosen==='decide';}
+  // 2026-10-20 (Jessica): Klarna / Affirm through ThriveCart. She signs her contract here (booked),
+  // then pays on that collection's ThriveCart checkout. No cards on file, no Square.
+  function isBnpl(){return IS_PASTCLIENT&&state.payMethod==='bnpl'&&!isDecide();}
+  function noSquare(){return isDecide()||isBnpl();}
+  var TC_URLS={gold:'https://jessicahaslagphotography.thrivecart.com/gold-collection---500-off/',rose:'https://jessicahaslagphotography.thrivecart.com/rose-collection---500-off/',silver:'https://jessicahaslagphotography.thrivecart.com/silver-collection---500-off/',petite1:'https://jessicahaslagphotography.thrivecart.com/petite15---500-off/',petite2:'https://jessicahaslagphotography.thrivecart.com/petite8---500-off/',petite3:'https://jessicahaslagphotography.thrivecart.com/petite3---500-off/'};
+  function tcUrl(){var c=coll();var u=c&&TC_URLS[c.id];if(!u)return '';var nm=String(state.signature||'').trim().split(/\s+/);var q=[];if(nm[0])q.push('passthrough[customer_firstname]='+encodeURIComponent(nm[0]));if(nm.length>1)q.push('passthrough[customer_lastname]='+encodeURIComponent(nm.slice(1).join(' ')));var em=effEmail();if(em&&em.indexOf('@')>0)q.push('passthrough[customer_email]='+encodeURIComponent(em));return u+(q.length?'?'+q.join('&'):'');}
+  function pcPayMethodHtml(){var b=function(id,l,s){return '<button type="button" class="pmbtn'+(state.payMethod===id?' active':'')+'" data-pm="'+id+'"><span class="pmt">'+l+'</span><span class="pms">'+s+'</span></button>';};return '<div><div class="flabel flabel-lg"><div class="lbl">How you&rsquo;ll pay</div></div><div class="pmgrid">'+b('plan','Interest-free plan','In full or up to 5 monthly payments with JHP')+b('bnpl','Klarna or Affirm','Up to 12 months, credit approval required')+'</div></div>';}
+  function bnplInfoHtml(){var c=coll();var di=discountInfo();return '<div class="agbox"><div class="agrow"><span>Collection</span><span>'+esc(c?c.name:'')+'</span></div>'+(di.tax>0?'<div class="agrow"><span>Sales tax</span><span>'+money2(di.tax)+'</span></div>':'')+'<div class="agrow"><span>Total</span><span>'+money2(di.total)+'</span></div><div class="dpnote" style="margin-top:12px">Next you&rsquo;ll sign your session contract, which makes you fully booked. Then we&rsquo;ll take you to a secure checkout where you choose Klarna or Affirm and pay over up to 12 months (credit approval required). Klarna and Affirm make the approval decision, not JHP Boudoir. Your products are delivered once your order is paid in full.</div></div>';}
+  if(IS_2027){try{document.title='2027 Pricing - LPL Giveaway — JHP Boudoir';}catch(_e){}}
+  if(IS_CCMC){try{document.title=(IS_CCMC_SA?'Save-Ahead Offer':'2027 Charity Calendar Model Call')+' — JHP Boudoir';}catch(_e){}}
+  if(LINEUP_2027||IS_PASTCLIENT){try{document.body.classList.add('y27');}catch(_e){}}
+  if(SINGLE_CARD){try{document.title=document.title+' (Single Card)';}catch(_e){}}
+  var PSPP_VERSION=(SINGLE_CARD?'pspp-2026-jhp-1cc@786e9f0031aa':'pspp-2026-jhp@905d9ccb99af')+(IS_LASTMIN?'+lm-noresched-20261013':'');
+  var PSPP_INTRO='This agreement covers the non-refundable Pre-Session Payment Plan terms. It applies in addition to the terms of the Session Contract signed at booking, and covers all monies paid to Jessica Haslag Photography (JHP Boudoir).';
+  var PSPP_TERMS=[
+    'All sales are final. All payments made are non-refundable.',
+    'If the Client cancels their session, all monies paid toward the Session Fee and the Pre-Session Payment Plan are forfeited and are not transferable.',
+    (IS_LASTMIN?'Last-Minute Openings sessions cannot be rescheduled. If the Client reschedules under the Last-Minute Openings Reschedule Policy in the Session Contract, the Session Fee and all pre-session payments transfer to the new date and apply toward the Client\'s collection at the price that applies under that policy.':'If the Client reschedules their session, the Session Fee and all pre-session payments transfer to the new date as long as it falls within the same calendar year.'),
+    (SINGLE_CARD?'Payments are processed weekly, bi-weekly, or monthly per the schedule selected in this form, and are drafted automatically from the card on file.':'Payments are processed weekly, bi-weekly, or monthly per the schedule selected in this form, and are drafted automatically from the default card on file. The backup card on file is charged only if the default card declines.'),
+    (SINGLE_CARD?'One active credit or debit card must remain on file at all times. The studio may request a backup card if a payment declines. The Client must notify the studio at least 7 days in advance to update or remove a card.':'Two active credit or debit cards must remain on file at all times. The Client must notify the studio at least 7 days in advance to update or remove a card.'),
+    (IS_PASTCLIENT?'The plan must begin within 30 days of setup and may run up to five (5) monthly payments (or the bi-weekly or weekly equivalent). Products and images are delivered once the plan is paid in full.':IS_SPECIALTY?'The plan must begin within 30 days of setup and be paid in full no less than 14 days before the session date (minimum product investment $750). Failure to complete payment results in session cancellation and forfeiture of the Session Fee.':'The plan must begin within 30 days of setup and be paid in full no less than 30 days before the session date (minimum investment '+(IS_FLASH?'$1,500':'$750')+'). Failure to complete payment results in session cancellation and forfeiture of the Session Fee.'),
+    'Any missed or declined payment incurs a $150 NSF/late fee. Three (3) missed payments result in cancellation of the session without refund.',
+    'Ceasing payments and cancelling the session forfeits all monies paid. Payments may not be used as studio credit or transferred to another session or another client.',
+    'The Pre-Session Payment Plan applies toward the specific collection selected in this form. Collections cannot be downgraded once the plan has begun. If part of a collection is not redeemed, no refunds, credits, or substitutions are provided.',
+    'If the Client upgrades their collection at the Image Reveal & Ordering appointment, the full pre-paid amount applies as a credit toward the upgraded collection, and any remaining balance is due in full at the time of ordering.',
+    'If a chargeback or payment dispute is initiated, all access to galleries, images, and any included or purchased products is immediately revoked and no refunds are issued. Payment disputes are treated as a breach of this agreement, and the studio may pursue recovery of the full contracted amount plus fees.'
+  ];
+  function psppAgreeText(){if(IS_PASTCLIENT)return 'I have read and agree to the terms of the Pre-Session Payment Plan Agreement, I understand my plan may run up to five monthly payments and my products are delivered once it is paid in full, and I authorize Jessica Haslag Photography to charge my cards per the payment schedule I selected.';return 'I have read and agree to the terms of the 2026 Pre-Session Payment Plan Agreement, I understand my plan must be paid in full at least '+payoffLeadFor(parseDate(state.sessionDate))+' days before my session, and I authorize Jessica Haslag Photography to charge my cards per the payment schedule I selected.';}
+  function psppPlanSummary(){var c=coll();var di=discountInfo();var sch=schedule();return {collection:c?c.name:null,total:di.total,total_formatted:money2(di.total),frequency:FREQ_STORE[state.frequency],payment_count:sch.count,first_payment_date:state.firstDate,session_date:state.sessionDate,session_time:state.sessionTime};}
+  var CLIENT_FORM_WEBHOOK='https://app.scalogy.com/webhooks/in/jhpboudoir1/client-form-submit';
+  var KEY_ACKS=IS_PASTCLIENT?[
+    'I agree to the terms and conditions of this contract.',
+    'I understand my session date and time are the slot I booked, and that my $155 hair & makeup fee (if booked) is non-refundable.',
+    'I understand that a cancellation or reschedule incurs a fee charged to my card on file: $250 within 30 days of my session, $500 within 14 days, and a $750 no-call/no-show fee for a no-show or any cancellation within 24 hours. The Treehouse date cannot be rebooked, and all fees are non-refundable.',
+    'I understand that refunds are not available for hair & makeup, Pre-Session Payment Plans, or Image Orders.',
+    'I understand no product purchase is required before my session. If I pre-purchase, my plan may run up to five monthly payments, and my products are delivered once it is paid in full.',
+    'I understand no products are included with my session. Orders placed at my image reveal may be paid in full, on a post-payment plan of up to 4 months, or with Klarna or Affirm for up to 12 months, and no products are delivered until my order is paid in full.',
+    'I understand Klarna and Affirm financing is subject to their own credit approval. JHP Boudoir has no part in approval decisions and cannot guarantee that financing will be offered to me.',
+    'I understand my Image Reveal & Ordering Appointment is held within 14 business days of my session, there is no second reveal, and any images I don’t purchase are permanently deleted at the end of it.',
+    'I will arrive with clean, 100% dry hair, no spray tan, and no tanning bed within 4 weeks of my session. Arriving with wet hair may result in a $200 fee, and arriving more than 10 minutes late cancels my session without a refund (or requires a $500 fee to reschedule in the studio).',
+    'I understand bad weather moves my session indoors to the cabin with no refund or reschedule, that other clients will be on-site throughout the day, and that I will not photograph, record, or identify any other client.',
+    'If I set up a payment plan, I authorize automatic payment via the card(s) I place on file, which belong to me, and I will keep a minimum of two cards on file.'
+  ]:IS_SPECIALTY?[
+    'I agree to the terms and conditions of this contract.',
+    'I confirm I am available on both November 12 and 13, 2026, and understand my exact session date and time are assigned by booking order and confirmed approximately two weeks prior.',
+    'I understand that a cancellation or reschedule incurs a fee charged to my card on file: $250 within 30 days of my session, $500 within 14 days, and a $750 no-call/no-show fee for a no-show or any cancellation within 24 hours. The Treehouse date cannot be rebooked, and all fees are non-refundable.',
+    'I understand that refunds are not available for the Session Fee, Pre-Session Payment Plans, or Image Orders.',
+    'I understand that if I am not paying in full at booking, I must use a prepayment plan set up before my session and paid in full no less than 14 days before my session date (minimum product investment $750), or my session is cancelled and my Session Fee forfeited.',
+    'I authorize automatic payment for my session via the card(s) I place on file, which belong to me, and I will keep a minimum of two cards on file at all times.'
+  ]:[
+    'I agree to the terms and conditions of this contract.',
+    'The above session date/time is correct.',
+    (IS_LASTMIN?'I understand that Last-Minute Openings sessions cannot be rescheduled. If I need to reschedule for a reason other than a documented medical or weather exception, I will pay $598 (the difference between the full $697 Session Fee retainer and my $99 Session Fee), my last-minute collection pricing will no longer apply, my minimum purchase becomes 3 digital images at $1,250, and only one reschedule is permitted. For a documented medical or weather exception, no fee is charged and my session is moved to a later open date offered by the Photographer. A last-minute cancellation will incur a fee automatically charged to my card on file: $250 if requested within 30 days of my session, $500 if within 14 days, and $750 for a no-call/no-show or any cancellation within 24 hours of my start time.':'I understand that a last-minute cancellation or reschedule will incur a fee automatically charged to my card on file: $250 if requested within 30 days of my session, $500 if within 14 days, and $750 for a no-call/no-show or any cancellation within 24 hours of my start time.'),
+    'I understand that refunds are not available for the Session Fee, Pre-Session Payment Plans, or Image Orders.',
+    // Same ?campaign=flash-sale flag that already picks the flash-sale contract
+    // and the June 2027 booking horizon - so a flash-sale client initials the
+    // offer she was actually sold, and a giveaway winner still initials hers.
+    // No dollar figure here ON PURPOSE. The session fee changes daily during the
+    // Aug 2026 day-of-the-month promo, and a client pays it up to 7 days before
+    // she reaches this page - so a number printed here would be the price on the
+    // day she BOOKS, not the one she actually PAID. This wording is true whichever
+    // day she reserved, and matches the contract, which is amount-neutral for the
+    // same reason.
+    (IS_LASTMIN?'I understand the Last-Minute Openings special only includes the $99 Session Fee I paid to reserve my date and last-minute collection pricing (40% off a Full Collection or the Digital Gallery, or $500 off a Petite Collection), already taken off every collection price. No products or services are included with the special, and all products must be purchased separately.':IS_CCMC_SA?'I understand the Save-Ahead Offer only includes the $99 Session Fee I paid to reserve my date and $500 off my collection, already taken off every collection price. No products or services are included with the offer, and all other products must be purchased separately.':IS_CCMC?'I understand the Charity Calendar Model Call only includes the $99 Session Fee I paid to reserve my date and $500 off my collection, already taken off every collection price. No products or services are included with the model call, and all other products must be purchased separately.':IS_FLASH?'I understand the Flash Sale only includes the discounted Session Fee I paid to reserve my date and $500 off my collection, already taken off every collection price. No products or services are included with the flash sale, and all products must be purchased separately.':'I understand the Boudoir Session Giveaway only includes a $500 discounted Session Fee and $500 Collection Credit. No products or services are included with the giveaway and all other products must be purchased separately.'),
+    (SINGLE_CARD?'By signing this contract and submitting my card information, I consent to and authorize automatic payment for my session via my card on file.':'By signing this contract and submitting my card information, I consent to and authorize automatic payment for my session via the provided payment method(s). I will keep a minimum of 2 credit cards on file at all times.'),
+    'My Pre-Session Payment Plan must be set up within 7 days of paying the Session Fee, and my first payment must begin within 30 days. The plan must be paid in full no less than 30 days prior to my session (minimum investment '+(IS_FLASH?'$1,500':'$750 with 3 digital images')+'). Failure to complete payment will result in session cancellation and forfeiture of the Session Fee.',
+    'I understand that any missed or declined payment will incur a $150 NSF/late fee, and that three (3) missed payments will result in cancellation of my session without refund.',
+    'I certify that the credit cards I place on file belong to me, and I am authorized to use them for all payments under this agreement.'
+  ];
+  if(IS_CCMC&&!IS_CCMC_SA){KEY_ACKS.splice(KEY_ACKS.indexOf('I understand the Charity Calendar Model Call only includes the $99 Session Fee I paid to reserve my date and $500 off my collection, already taken off every collection price. No products or services are included with the model call, and all other products must be purchased separately.')+1,0,'I understand that entering my images in the 2027 Charity Calendar is optional and is decided at my Image Reveal & Ordering Appointment, that it requires me to sign the standard Model Release, and that my $500 discount applies whether or not my images are entered. Sessions held after October 2027 are not eligible for the calendar, and my images will never be shared publicly without my written permission.');}
+  function allInitialed(){for(var _i=0;_i<KEY_ACKS.length;_i++){if(!state['ini'+_i])return false;}return true;}
+  function initialsMissing(){var _n=0;for(var _i=0;_i<KEY_ACKS.length;_i++){if(!state['ini'+_i])_n++;}return _n;}
+  function initialsArr(){return KEY_ACKS.map(function(t,i){return {statement:t,initials:state['ini'+i]||''};});}
+  function effName(){return ((contactCaptureNeeded?state.captureName:P.name)||P.name||'').trim();}
+  function effEmail(){return ((contactCaptureNeeded?state.captureEmail:P.email)||P.email||'').trim();}
+  function effFirst(){var n=effName();return n?n.split(' ')[0]:'';}
+  function effLast(){var n=effName();var p=n.split(' ');return p.length>1?p.slice(1).join(' '):'';}
+  function initialHint(){var s=((effFirst().charAt(0)||'')+(effLast().charAt(0)||'')).toUpperCase();return s||'AB';}
+  function b64utf8(b){try{return decodeURIComponent(escape(window.atob(b)));}catch(e){try{return window.atob(b);}catch(e2){return '';}}}
+  function contractSrc(){return IMG_MAP[CONTRACT_KEY]?b64utf8(IMG_MAP[CONTRACT_KEY]):null;}
+  function endTime(s){if(!s)return '';var p=s.split(':');var h=(parseInt(p[0],10)+4)%24;return fmtTime((h<10?'0':'')+h+':'+(p[1]||'00'));}
+  function mergeContract(text){
+    var sd=parseDate(state.sessionDate);
+    var vals={'client.firstname':effFirst(),'client.first_name':effFirst(),'contact.first_name':effFirst(),'first_name':effFirst(),'client.name':(effName()||(P.b?'(as signed below)':'')),'client.fullname':(effName()||(P.b?'(as signed below)':'')),'contact.name':effName(),'name':effName(),'client.email':effEmail(),'contact.email':effEmail(),'brand.emailtemplate.signature':'JHP Boudoir'};
+    var s=String(text),out='',i=0;
+    while(i<s.length){
+      var a=s.indexOf('{{',i);
+      if(a<0){out+=s.slice(i);break;}
+      out+=s.slice(i,a);
+      var b=s.indexOf('}}',a+2);
+      if(b<0){out+=s.slice(a);break;}
+      var tok=s.slice(a+2,b),parts=tok.split('|'),key=(parts[0]||'').trim().toLowerCase(),filt=(parts[1]||'').trim().toLowerCase();
+      var rep='';
+      if(key==='job.start'||key==='job.date'||key==='session.date'){rep=(filt.indexOf('time')>=0)?(state.sessionTime?fmtTime(state.sessionTime):''):(sd?fmtDate(sd):'');}
+      else if(key==='job.end'){rep=state.sessionTime?endTime(state.sessionTime):'';}
+      else if(vals.hasOwnProperty(key)){rep=vals[key];}
+      out+=rep;i=b+2;
+    }
+    return out;
+  }
+  function isCHeader(t){
+    if(t.length>80)return false;
+    if(t.charAt(t.length-1)===':')return true;
+    var letters=0,uppers=0,i,ch;
+    for(i=0;i<t.length;i++){ch=t.charAt(i);if(ch>='A'&&ch<='Z'){uppers++;letters++;}else if(ch>='a'&&ch<='z'){letters++;}}
+    if(letters>=2&&uppers/letters>=0.72)return true;
+    var last=t.charAt(t.length-1);
+    if(t.length<=46&&t.charAt(0)>='A'&&t.charAt(0)<='Z'&&last!=='.'&&last!==','&&last!==';'){
+      var w=t.split(' '),c=0,f;for(i=0;i<w.length;i++){f=w[i].charAt(0);if((f>='A'&&f<='Z')||(f>='0'&&f<='9'))c++;}
+      if(w.length>=2&&c/w.length>=0.75)return true;
+    }
+    return false;
+  }
+  function cPara(t){
+    var ci=t.indexOf(':');
+    if(ci>2&&ci<=60){
+      var label=t.slice(0,ci),rest=t.slice(ci+1).trim(),up=0,le=0,i,ch;
+      for(i=0;i<label.length;i++){ch=label.charAt(i);if(ch>='A'&&ch<='Z'){up++;le++;}else if(ch>='a'&&ch<='z'){le++;}}
+      if(rest&&le>=2&&up/le>=0.72)return '<p><strong>'+esc(label)+':</strong> '+esc(rest)+'</p>';
+    }
+    return '<p>'+esc(t)+'</p>';
+  }
+  function contractDisplay(){
+    var t=contractSrc();if(t==null)return null;
+    var full=mergeContract(t),idx=full.indexOf('CONTRACT DOCUMENT');
+    if(idx>=0){var nl=full.indexOf(NL,idx);full=(nl>=0)?full.slice(nl+1):full.slice(idx);}
+    var lines=full.split(NL),out='',i,ln,e,tl,low;
+    for(i=0;i<lines.length;i++){
+      ln=lines[i];e=ln.length;
+      while(e>0&&(ln.charAt(e-1)==='*'||ln.charAt(e-1)===' '||ln.charAt(e-1)==='\t'))e--;
+      tl=ln.slice(0,e).trim();
+      if(!tl)continue;
+      low=tl.toLowerCase();
+      if(low==='signature')continue;
+      if(low.indexOf('the date will be recorded')===0)continue;
+      out+=isCHeader(tl)?('<h4>'+esc(tl)+'</h4>'):cPara(tl);
+    }
+    return out||null;
+  }
+  function refreshSignName(){
+    var cb=document.querySelector('#step .contractbox');
+    if(cb){var d=contractDisplay();if(d!=null)cb.innerHTML=d;}
+    var hint=initialHint();
+    Array.prototype.forEach.call(document.querySelectorAll('.inibox'),function(b){b.placeholder=hint;});
+    var si=document.getElementById('sigInput');
+    if(si&&!state.sigEdited){si.value=effName();state.signature=effName();}
+  }
+  function bindSign(){
+    Array.prototype.forEach.call(document.querySelectorAll('.inibox'),function(b){
+      b.oninput=function(){var i=b.getAttribute('data-i');b.value=b.value.toUpperCase().slice(0,4);state['ini'+i]=b.value;var it=b.parentNode;if(it)it.className=b.value.trim()?'ackitem filled':'ackitem';updateCTA();};
+    });
+    var pa=document.getElementById('planAgree');
+    if(pa)pa.onclick=function(){state.planAgree=!state.planAgree;if(state.planAgree){state.planAgreedAt=new Date().toISOString();state.planAtAgree=psppPlanSummary();}else{state.planAgreedAt=null;state.planAtAgree=null;}pa.classList.toggle('on',state.planAgree);updateCTA();};
+    var si=document.getElementById('sigInput');
+    if(si)si.oninput=function(){state.signature=si.value;state.sigEdited=true;updateCTA();};
+  }
+  function contractRecord(token){
+    var nm=effName(),p=nm.split(' '),first=p.shift()||'',last=p.join(' ');
+    return {
+      form_slug:'contract:'+CONTRACT_SLUG,
+      form_name:CONTRACT_TITLE,
+      ghl_contact_id:P.ghl_id||null,
+      contact_name:nm||null,contact_email:effEmail()||null,contact_phone:((contactCaptureNeeded?state.capturePhone:P.phone)||P.phone||null),
+      agree_first_name:first||null,agree_last_name:last||null,
+      signature:state.signature,
+      is_test:!!P.test,
+      user_agent:(navigator.userAgent||'').slice(0,400),
+      answers:{client_token:token+'-contract',booking_code:(P.b||null),contract_slug:CONTRACT_SLUG,contract_title:CONTRACT_TITLE,agreed:true,signed_name:nm,signature:state.signature,signed_client_time:new Date().toISOString(),initials:initialsArr(),initials_count:KEY_ACKS.length,session_date:state.sessionDate,session_time:state.sessionTime,source:'pspp-checkout-v2',prefill:{name:P.name,email:P.email,ghl_id:P.ghl_id}}
+    };
+  }
+  function canNext(){
+    if(state.step===0)return !!state.chosen;
+    if(state.step===1&&isBnpl())return !!state.sessionDate&&!!state.sessionTime;
+    if(state.step===1)return !!state.firstDate&&!!state.sessionDate&&!!state.sessionTime&&(FIXED_SESSION||isAvailableDate(parseDate(state.sessionDate)))&&!!state.frequency&&!planError();
+    if(state.step===2){
+      if(contactCaptureNeeded){ if(!state.captureName||effEmail().indexOf('@')<1)return false; }
+      if(!contractSrc())return false;
+      if(!allInitialed())return false;
+      if(!state.planAgree&&!noSquare())return false;
+      if(!state.signature||state.signature.trim().length<2)return false;
+      return true;
+    }
+    return !!state.cardAttest && state.cardDefaultName.trim().length>0 && (SINGLE_CARD||state.cardBackupName.trim().length>0);
+  }
+
+  var stepEl=document.getElementById('step');
+  var backBtn=document.getElementById('backBtn');
+  var nextBtn=document.getElementById('nextBtn');
+
+  var M27_ICONS={
+    img:'<rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 17l5-5 4 4 3-3 6 6"/><circle cx="15.5" cy="8.5" r="1.6"/>',
+    book:'<path d="M12 6.5C10 5 7 4.5 3.5 4.8v13.4C7 18 10 18.6 12 20c2-1.4 5-2 8.5-1.8V4.8C17 4.5 14 5 12 6.5z"/><path d="M12 6.5V20"/>',
+    gem:'<path d="M6.5 4h11L21 9l-9 11L3 9z"/><path d="M3 9h18M9.5 4L8 9l4 11 4-11-1.5-5"/>',
+    box:'<path d="M3 8l9-4 9 4-9 4z"/><path d="M3 8v8l9 4 9-4V8"/><path d="M12 12v8"/>',
+    frame:'<rect x="3" y="5" width="18" height="14" rx="1"/><rect x="6.5" y="8.5" width="11" height="7"/>',
+    phone:'<rect x="7" y="2.5" width="10" height="19" rx="2"/><path d="M10.5 18.5h3"/>',
+    hanger:'<path d="M12 7.5a1.8 1.8 0 1 1 1.8-1.8c0 1-1.8 1.4-1.8 2.6v1L3.5 15.5a1 1 0 0 0 .6 1.8h15.8a1 1 0 0 0 .6-1.8L12 9.3"/>',
+    star:'<path d="M12 3.5l2.6 5.4 5.9.8-4.3 4.1 1 5.9L12 16.9l-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z"/>'
+  };
+  function m27Rows(rows){return '<ul>'+rows.map(function(r){return '<li><svg viewBox="0 0 24 24" aria-hidden="true">'+(M27_ICONS[r[0]]||'')+'</svg><span>'+esc(r[1])+'</span></li>';}).join('')+'</ul>';}
+  // "As low as $X/mo": the monthly plan if she picks the latest bookable date (tax included).
+  function asLow(c){try{if(IS_PASTCLIENT||IS_SPECIALTY||!c||!c.price)return null;var t=Math.round(c.price*(1+taxRateFor(c.id))*100)/100;var s=buildSchedule({total:t,firstDate:new Date(TODAY),sessionDate:new Date(BOOK_END),frequency:'monthly'});return s.count>=2?Math.ceil(s.perPayment):null;}catch(e){return null;}}
+  function card27Html(c){
+    var active=state.chosen===c.id;
+    var b64=IMG_MAP['m27-'+c.id]||IMG_MAP[c.id];
+    var img='<div class="mimg">'+(b64?'<img src="data:image/jpeg;base64,'+b64+'" alt="">':'')+'<div class="msel">Selected</div></div>';
+    var badge=c.tag?('<div class="cbadge">'+esc(c.tag)+'</div>'):'';
+    return '<div class="ccard m27'+(active?' active':'')+(c.tag?' feat':'')+'" data-id="'+c.id+'">'+img+
+      '<div class="mtxt"><div class="mname">'+esc(shortName(c.name))+'</div><div class="mrule"></div>'+
+      '<div class="mh">The Collection</div>'+m27Rows(c.m27.coll)+
+      '<div class="mh s2">The Session</div>'+m27Rows(c.m27.sess)+
+      '<div class="mprice">'+(c.strike?'<div class="mstrike">'+moneyTight(c.strike)+'</div>':'')+'<div class="mnow">'+moneyTight(c.price)+'</div><div class="mfin">'+(NEWLOOK&&asLow(c)?'<b>As low as '+moneyTight(asLow(c))+'/mo</b>':'')+'0% interest financing available'+(IS_PASTCLIENT?'<br>or up to 12 months with Klarna/Affirm':'')+'</div></div>'+
+      '</div>'+badge+'</div>';
+  }
+  function cardHtml(c){
+    if((LINEUP_2027||IS_PASTCLIENT)&&c.m27)return card27Html(c);
+    var active=state.chosen===c.id;
+    var incl='';
+    if(c.includes&&c.includes.length){
+      incl='<div class="cincl"><div class="cinclbody"><span class="lbl">You will receive</span><ul>'+
+        c.includes.map(function(t){return '<li><span class="d">—</span>'+esc(t)+'</li>';}).join('')+
+        '</ul></div></div>';
+    }
+    var etag=IS_SPECIALTY?(c.id==='rose'?'Most popular':(c.id==='gold'?null:c.tag)):c.tag;
+    var badge=etag?('<div class="cbadge">'+esc(etag)+'</div>'):'';
+    var img=IMG_MAP[c.id]?'<div class="cimg"><img src="data:image/jpeg;base64,'+IMG_MAP[c.id]+'" alt=""></div>':'';
+    var price='<div class="cprice">'+(c.strike?'<span class="cstrike">'+moneyTight(c.strike)+'</span>':'')+moneyTight(c.price)+(NEWLOOK&&asLow(c)?'<span class="cmo">As low as '+moneyTight(asLow(c))+'/mo · 0% interest</span>':'')+'</div>';
+    return '<div class="ccard'+(active?' active':'')+(etag?' feat':'')+'" data-id="'+c.id+'">'+
+      '<div class="ctop"><div class="cname">'+esc(shortName(c.name))+'</div>'+
+      price+
+      '<div class="caccent">'+esc(c.accent)+'</div></div>'+
+      '<div class="cbody">'+img+incl+'</div>'+
+      '<div class="cstrip"></div>'+badge+'</div>';
+  }
+  function introHtml(){
+    var ik=IS_CCMC_SA?'Save-Ahead Offer':IS_CCMC?'2027 Charity Calendar Model Call':IS_2027?'2027 LPL Giveaway':'JHP Boudoir';
+    return '<div class="ihero"><img src="https://lh3.googleusercontent.com/d/1S-Cp7Jf9f9_vlBV0rDxJLuIUf8ByGfpI=w1200" alt=""><div class="ihx"><div class="ik">'+esc(ik)+'</div><div class="ih">Your investment menu</div></div></div>'+
+      '<p class="ilede">This is where it gets real, in the best way. Choose the collection you\'ll treasure, then pick your session date. Your interest-free plan is built for you automatically.</p>'+
+      '<div class="ichips"><span>0% interest prepayment plans</span><span>Pay monthly or in full</span><span>Your images stay private</span></div>'+
+      '<blockquote class="iquote">“Jess is the absolute best! She made me feel unstoppable and the images were 100% perfect. I loved them so much I had to upgrade to buy more.”<cite>Ciera · ★★★★★ Google Review</cite></blockquote>';
+  }
+  function step1Html(){
+    var SPEC={gold:1,rose:1,silver:1,petite1:1,petite2:1,petite3:1};
+    // 2026-09-25 (Jessica): Petite Collection Three ($750, 3 digital images) is
+    // offered on the Boudoir Giveaway menu too. The flash sale still starts at
+    // Petite Two, so it stays hidden there.
+    if(IS_PASTCLIENT)return pcMenuHtml(SPEC);
+    var vis=IS_SPECIALTY?COLLECTIONS.filter(function(c){return SPEC[c.id];}):COLLECTIONS.filter(function(c){return c.id!=='petite3'||!IS_FLASH;});
+    var sig=vis.filter(function(c){return c.tier==='signature';});
+    var pet=vis.filter(function(c){return c.tier==='petite';});
+    return (NEWLOOK?introHtml():'')+'<div class="eyebrow">Step one</div>'+
+      '<h1 class="h1">Choose your collection</h1>'+
+      '<div class="sub">Everything included is shown below — tap your collection to choose it.</div>'+
+      '<div style="background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:15px 16px;margin:4px 0 18px;font-family:var(--body)">'+
+        '<div style="font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">How this works</div>'+
+        '<div style="font-size:13.5px;line-height:1.6;color:var(--inkSoft)">First, pick your collection below. Next, you\'ll choose your session date — and your prepayment plan is <strong style="color:var(--ink)">calculated automatically for you on the next screen</strong>. Pick a session date based on the budget that works for you, or <strong style="color:var(--ink)">pay in full</strong> if you wish.</div>'+
+      '</div>'+
+      '<a class="guidelink" href="https://canva.link/0t9409gtdpn3xky" target="_blank" rel="noopener"><span class="gi">i</span>Need a refresher? View the full guide here.</a>'+
+      '<a class="guidelink" href="https://pages.scalogy.com/jhpboudoir1/view-form/?f=pre-session-payment-plan-faq" target="_blank" rel="noopener"><span class="gi">?</span>Read the Payment Plan FAQ.</a>'+
+      '<div class="section"><div class="nm">'+(LINEUP_2027?'Full Collections':'Signature')+'</div><div class="ln"></div></div>'+
+      '<div class="cards">'+sig.map(cardHtml).join('')+'</div>'+
+      '<div class="section"><div class="nm">'+(LINEUP_2027?'Digital Collections':'Petite')+'</div><div class="ln"></div></div>'+
+      '<div class="cards">'+pet.map(cardHtml).join('')+'</div>';
+  }
+  function pcMenuHtml(SPEC){
+    var vis=COLLECTIONS.filter(function(c){return SPEC[c.id];});
+    var sig=vis.filter(function(c){return c.tier==='signature';});
+    var pet=vis.filter(function(c){return c.tier==='petite';});
+    var dOn=state.chosen==='decide';
+    return '<div class="eyebrow">Tentatively reserved for 24 hours &middot; Not booked yet</div>'+
+      '<h1 class="h1">Your investment menu</h1>'+
+      '<div class="sub"><strong style="color:var(--ink)">You are not fully booked until you finish both steps.</strong> <strong style="color:var(--ink)">Step 1:</strong> review the collections below. Purchasing is completely optional: choose a collection, or “I\'ll decide after I see my images” at the bottom. <strong style="color:var(--ink)">Step 2:</strong> sign your session contract. Please finish both within 24 hours of booking.</div>'+
+      '<div style="background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:12px;padding:15px 16px;margin:4px 0 18px;font-family:var(--body)">'+
+        '<div style="font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);margin-bottom:8px">Why pre-purchase?</div>'+
+        '<ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.65;color:var(--inkSoft)">'+
+          '<li><strong style="color:var(--ink)">An extra month to pay.</strong> Pre-purchase today and spread it over up to <strong style="color:var(--ink)">5 monthly payments</strong>, instead of 4 after your reveal.</li>'+
+          '<li><strong style="color:var(--ink)">You already know you\'ll love them.</strong> Remember how much you loved your images the first time? It will be the same with these, too.</li>'+
+          '<li><strong style="color:var(--ink)">Upgrade anytime.</strong> At your reveal, everything you\'ve paid goes toward a bigger collection if you fall in love with more.</li>'+
+          '<li><strong style="color:var(--ink)">Interest-free payment plans.</strong> Your products are delivered once your collection is paid in full.</li>'+
+        '</ul></div>'+
+      '<div class="section"><div class="nm">Full Collections</div><div class="ln"></div></div>'+
+      '<div class="cards">'+sig.map(cardHtml).join('')+'</div>'+
+      '<div class="section"><div class="nm">Digital Collections</div><div class="ln"></div></div>'+
+      '<div class="cards">'+pet.map(cardHtml).join('')+'</div>'+
+      '<div class="ccard m27'+(dOn?' active':'')+'" data-id="decide" style="margin-top:22px;min-height:0"><div class="mtxt" style="padding:18px 16px 16px"><div class="mname" style="font-size:24px">I\'ll decide after I see my images</div><div class="mrule"></div>'+
+        '<div style="font-family:Jost,system-ui,sans-serif;font-size:13px;line-height:1.55;color:#3A3430">No purchase today. You\'ll still sign your session contract. At your reveal you can pay in full, use a 4-month post-payment plan, or Klarna or Affirm for up to 12 months (subject to approval).</div></div></div>';
+  }
+  function planError(){
+    var fd=parseDate(state.firstDate),sd=parseDate(state.sessionDate);
+    if(!fd||!sd)return null;
+    if(IS_PASTCLIENT){if(noSquare())return null;if(fd<TODAY)return 'Your first payment date can’t be in the past.';if(fd>addDays(TODAY,30))return 'Your first payment must be within 30 days of today — on or before '+fmtDate(addDays(TODAY,30))+'.';return null;}
+    var lead=payoffLeadFor(sd);
+    var payoff=addDays(sd,-lead);
+    var exempt=payoffExempt();
+    if(sd<=TODAY)return 'Your session date must be in the future.';
+    if(exempt&&fd>sd)return 'Your payment must be dated on or before your session date.';
+    if(!exempt&&payoff<TODAY)return 'This date is less than '+lead+' days away, so your package must be paid in full at booking. Choose “In full” to continue.';
+    if(!exempt&&payoff<TODAY)return 'Your session is too soon to set up a plan — it needs to be at least '+lead+' days away so the payments can finish in time.';
+    if(fd<TODAY)return 'Your first payment date can’t be in the past.';
+    if(fd>addDays(TODAY,30))return 'Your first payment must be within 30 days of today — on or before '+fmtDate(addDays(TODAY,30))+'.';
+    if(!exempt&&fd>payoff)return 'Your first payment must be on or before '+fmtDate(payoff)+' — that’s '+lead+' days before your session, when the plan has to be paid off.';
+    var sch=buildSchedule({total:effTotal(),firstDate:fd,sessionDate:sd,frequency:state.frequency});
+    if(sch.payments.length&&!exempt){var last=sch.payments[sch.payments.length-1].date;if(last>payoff)return 'This cadence can’t finish in time — the last payment ('+fmtDate(last)+') falls after your payoff date ('+fmtDate(payoff)+'). Choose a more frequent cadence, an earlier first payment, or a later session.';}
+    return null;
+  }
+  function ghlMonthBounds(){var ks=Object.keys(AVAIL_MAP).sort();if(!ks.length)return null;var a=ks[0].split('-'),b=ks[ks.length-1].split('-');return {sy:parseInt(a[0],10),sm:parseInt(a[1],10)-1,ey:parseInt(b[0],10),em:parseInt(b[1],10)-1};}
+  function monthsWithAvailability(){
+    var out=[];var minD=minSessionDate();
+    var gb=(GHLon()&&AVAIL_LOADED)?ghlMonthBounds():null;
+    var y=gb?gb.sy:minD.getFullYear(),m=gb?gb.sm:minD.getMonth();
+    var endY=gb?gb.ey:BOOK_END.getFullYear(),endM=gb?gb.em:BOOK_END.getMonth();
+    while(y<endY||(y===endY&&m<=endM)){
+      var dim=new Date(y,m+1,0).getDate(),has=false;
+      for(var i=1;i<=dim;i++){if(isAvailableDate(new Date(y,m,i))){has=true;break;}}
+      if(has)out.push({y:y,m:m});
+      m++;if(m>11){m=0;y++;}
+    }
+    return out;
+  }
+  function availableDatesIn(y,m){
+    var out=[],dim=new Date(y,m+1,0).getDate();
+    for(var i=1;i<=dim;i++){var d=new Date(y,m,i);if(isAvailableDate(d))out.push(d);}
+    return out;
+  }
+  function sessionPickerHtml(){
+    var months=monthsWithAvailability(),i,curIdx=-1;
+    for(i=0;i<months.length;i++){if(months[i].y===state.calY&&months[i].m===state.calM){curIdx=i;break;}}
+    if(curIdx<0&&months.length){state.calY=months[0].y;state.calM=months[0].m;curIdx=0;}
+    var canPrev=curIdx>0,canNext=curIdx>=0&&curIdx<months.length-1;
+    var dow=['Su','Mo','Tu','We','Th','Fr','Sa'],head='';
+    for(i=0;i<7;i++){head+='<div class="caldow">'+dow[i]+'</div>';}
+    var startDow=new Date(state.calY,state.calM,1).getDay();
+    var dim=new Date(state.calY,state.calM+1,0).getDate(),cells='';
+    for(i=0;i<startDow;i++){cells+='<div class="calcell empty"></div>';}
+    for(var day=1;day<=dim;day++){
+      var dd=new Date(state.calY,state.calM,day),iso=toISO(dd);
+      if(isAvailableDate(dd)){cells+='<button type="button" class="calcell avail'+(iso===state.sessionDate?' sel':'')+'" data-date="'+iso+'">'+day+'</button>';}
+      else{cells+='<div class="calcell off">'+day+'</div>';}
+    }
+    var d=parseDate(state.sessionDate),haveDate=!!(d&&isAvailableDate(d));
+    var slots=(GHLon()?(AVAIL_MAP[state.sessionDate]||[]):slotsForMonth(state.calM)),ts='<option value=""'+(state.sessionTime?'':' selected')+'>Choose a time…</option>';
+    for(i=0;i<slots.length;i++){ts+='<option value="'+slots[i]+'"'+(state.sessionTime===slots[i]?' selected':'')+'>'+fmtTime(slots[i])+'</option>';}
+    return '<div class="calwrap">'+
+        '<div class="calhead">'+
+          '<button type="button" class="calnav" id="calPrev"'+(canPrev?'':' disabled')+' aria-label="Previous month">‹</button>'+
+          '<div class="calmon">'+monthName(state.calM)+' '+state.calY+'</div>'+
+          '<button type="button" class="calnav" id="calNext"'+(canNext?'':' disabled')+' aria-label="Next month">›</button>'+
+        '</div>'+
+        '<div class="calgrid">'+head+cells+'</div>'+
+      '</div>'+
+      '<div class="pickcol" style="margin-top:14px"><div class="slotlbl">Time</div><select class="dsel" id="slotSel"'+(haveDate?'':' disabled')+'>'+ts+'</select></div>'+
+      '<div class="slot-note">'+(haveDate&&state.sessionTime?('Your session: '+esc(fmtDate(d))+' · '+esc(fmtTime(state.sessionTime))):'Sessions run on Tuesdays &amp; Thursdays; holidays and holiday weeks are unavailable.')+'</div>'+
+      (IS_LASTMIN?'<div class="slot-note" style="font-style:normal;font-weight:600">Last-minute openings can&rsquo;t be rescheduled, so please choose a date you&rsquo;re sure you can make.</div>':'');
+  }
+  function refreshPicker(){var el=document.getElementById('sessionPicker');if(el){el.innerHTML=sessionPickerHtml();bindSessionPicker();}}
+  function scheduleHtml(){
+    var perr=planError();
+    if(perr)return '<div class="planwarn">'+esc(perr)+'</div>';
+    var sch=schedule();var c=coll();var di=discountInfo();
+    if(!sch.payments.length)return '';
+    var taxRows='<div class="staxrow" style="margin-top:12px"><div>Collection</div><div>'+money2(di.base)+'</div></div>'+
+      (di.discount>0?'<div class="staxrow"><div>Promo discount</div><div>−'+money2(di.discount)+'</div></div>':'')+
+      '<div class="staxrow"><div>Subtotal</div><div>'+money2(di.subtotal)+'</div></div>'+
+      (di.tax>0?'<div class="staxrow"><div>Sales tax (7.85%)</div><div>'+money2(di.tax)+'</div></div>':'')+
+      '<div class="stotal"><div class="lbl">Total</div><div class="amt">'+money2(di.total)+'</div></div>';
+    if(state.frequency==='full'){
+      return '<div class="schedhead"><div class="lbl">Your payment</div><div class="cnt">Paid in full — one payment</div></div>'+
+        '<div class="srow"><div class="left"><div class="num">01</div><div class="dt">'+fmtDate(sch.payments[0].date)+'</div></div><div class="amt">'+money2(sch.payments[0].amount)+'</div></div>'+
+        '<div class="smore">No payment plan — your collection is paid in one charge on the date above.</div>'+
+        taxRows;
+    }
+    var lastD=sch.payments[sch.payments.length-1].date;
+    var rows=sch.payments.slice(0,6).map(function(p,i){
+      return '<div class="srow"><div class="left"><div class="num">'+String(i+1).padStart(2,'0')+'</div>'+
+        '<div class="dt">'+fmtDate(p.date)+'</div></div>'+
+        '<div class="amt">'+money2(p.amount)+'</div></div>';
+    }).join('');
+    var more=sch.payments.length>6?('<div class="smore">+'+(sch.payments.length-6)+' more · final '+fmtDateShort(sch.payments[sch.payments.length-1].date)+'</div>'):'';
+    return '<div class="schedhead"><div class="lbl">Your schedule</div>'+
+      '<div class="cnt">'+sch.count+' payment'+(sch.count===1?'':'s')+'</div></div>'+
+      rows+more+
+      (IS_PASTCLIENT?'<div class="smore">Final payment '+fmtDate(lastD)+'. Your products are delivered once your collection is paid in full.</div>':'<div class="smore">Final payment '+fmtDate(lastD)+' — always at least '+payoffLeadFor(parseDate(state.sessionDate))+' days before your session.</div>')+
+      taxRows;
+  }
+  function step2SubInner(){var c=coll();var di=discountInfo();var price=di.discount>0?('<span class="cstrike">'+moneyTight(di.base)+'</span> '+moneyTight(di.subtotal)):moneyTight(di.base);return esc(c?c.name:'')+' · '+price+(IS_PASTCLIENT?(isBnpl()?'. Pay over up to 12 months with Klarna or Affirm (credit approval required).':'. Choose a rhythm, up to 5 monthly payments, interest free.'):'. Choose a rhythm — your plan must be paid in full at least 30 days before your session.');}
+  function promoHtml(){var applied=!!state.promoAck;var checking=!!state.promoChecking;var row='<div class="promorow"><input type="text" class="dfield promoin" id="promoIn" value="'+esc(state.promoCode)+'" placeholder="Enter code" autocomplete="off"'+((applied||checking)?' disabled':'')+'><button type="button" class="promobtn" id="promoBtn"'+(checking?' disabled':'')+'>'+(checking?'Checking…':(applied?'Remove':'Apply'))+'</button></div>';var msg=state.promoMsg?('<div class="promomsg '+((applied||checking)?'ok':'err')+'">'+esc(state.promoMsg)+'</div>'):'';return row+msg;}
+  function bindPromo(){var pin=document.getElementById('promoIn');if(pin)pin.oninput=function(){state.promoCode=pin.value;};var pb=document.getElementById('promoBtn');if(pb)pb.onclick=applyPromo;}
+  function hmuHtml(){if(!IS_SPECIALTY)return '';var on=!!state.hmu;var bd=on?'var(--accent)':'var(--line)';var bg=on?'rgba(201,168,124,.10)':'var(--surface)';return '<div id="hmuToggle" tabindex="0" role="checkbox" aria-checked="'+(on?'true':'false')+'" style="display:flex;align-items:center;gap:12px;cursor:pointer;border:1px solid '+bd+';background:'+bg+';border-radius:12px;padding:14px 15px">'+'<span style="flex:none;width:22px;height:22px;border-radius:6px;border:2px solid '+(on?'var(--accent)':'var(--inkMute)')+';background:'+(on?'var(--accent)':'transparent')+';color:#13100E;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">'+(on?'✓':'')+'</span>'+'<span style="flex:1"><span style="display:block;font-size:15px;color:var(--ink);font-weight:600">Add professional Hair &amp; Makeup</span><span style="display:block;font-size:12.5px;color:var(--inkSoft);margin-top:2px">On-site the day of your session — added to your plan.</span></span>'+'<span style="font-size:18px;color:var(--accent);font-weight:700">+'+moneyTight(155)+'</span></div>';}
+  function bindHmu(){var h=document.getElementById('hmuToggle');if(!h)return;function t(){state.hmu=!state.hmu;refreshStep2();}h.onclick=t;h.onkeydown=function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();t();}};}
+  function refreshStep2(){var sub=document.getElementById('step2sub');if(sub)sub.innerHTML=step2SubInner();var pw=document.getElementById('promoWrap');if(pw)pw.innerHTML=promoHtml();var sc=document.getElementById('sched');if(sc)sc.innerHTML=scheduleHtml();var hw=document.getElementById('hmuWrap');if(hw)hw.innerHTML=hmuHtml();bindPromo();bindHmu();updateCTA();}
+  var PROMO_WEBHOOK='https://app.scalogy.com/webhooks/in/jhpboudoir1/pspp-promo-preview';
+  function fetchPromoPreview(token){return api('psppv2_promo_preview?limit=500&_cb='+Date.now()).then(function(r){return r.ok?r.json():null;}).then(function(d){if(!d)return null;var arr=Array.isArray(d)?d:(d.rows||[]);for(var i=0;i<arr.length;i++){if(String(arr[i].token)===String(token))return arr[i];}return null;}).catch(function(){return null;});}
+  function applyPromo(){
+    var raw=(state.promoCode||'').trim();
+    if(state.promoChecking)return;
+    if(state.promoAck){state.promoAck=false;state.promo=null;state.promoMsg='';state.promoCode='';refreshStep2();return;}
+    if(!raw){state.promoMsg='Enter a code first.';refreshStep2();return;}
+    state.promoChecking=true;state.promoMsg='Checking your code…';refreshStep2();
+    var pvToken='pv-'+genToken();
+    var c=coll();
+    try{fetch(PROMO_WEBHOOK,{method:'POST',mode:'no-cors',body:JSON.stringify({preview_token:pvToken,code:raw,collection_id:c?c.id:null,is_test:!!P.test})});}catch(_e){}
+    var tries=0,max=16;
+    (function tick(){
+      tries++;
+      fetchPromoPreview(pvToken).then(function(row){
+        if(row){
+          state.promoChecking=false;
+          if(row.status==='valid'){
+            state.promo={discount_type:row.discount_type,discount_value:row.discount_value};
+            state.promoAck=true;
+            var d=discountInfo();
+            state.promoMsg=d.discount>0?('Code applied — you save '+money2(d.discount)+'. New total '+money2(d.total)+' (tax included).'):'Code applied.';
+          }else{
+            state.promo=null;state.promoAck=false;
+            state.promoMsg='That code is not valid or has expired.';
+          }
+          refreshStep2();return;
+        }
+        if(tries>=max){
+          state.promoChecking=false;state.promoAck=true;state.promo=null;
+          state.promoMsg='Code saved — it will be verified and applied at checkout.';
+          refreshStep2();return;
+        }
+        setTimeout(tick,1250);
+      });
+    })();
+  }
+  function step2Html(){
+    var c=coll();
+    var pmHtml=IS_PASTCLIENT?pcPayMethodHtml():'';
+    var freqBtns=FREQS.map(function(f){return '<button class="freqbtn'+(state.frequency===f.id?' active':'')+'" data-freq="'+f.id+'">'+f.label+'</button>';}).join('');
+    return '<div class="eyebrow">Step two</div>'+
+      '<h1 class="h1">'+(isBnpl()?'Klarna or Affirm':'Set the cadence')+'</h1>'+
+      '<div class="sub" id="step2sub">'+step2SubInner()+'</div>'+
+      '<div class="fields">'+
+        (IS_SPECIALTY&&!IS_PASTCLIENT?'<div><div class="flabel flabel-lg"><div class="lbl">Hair &amp; makeup</div><div class="hint">Optional add-on</div></div><div id="hmuWrap">'+hmuHtml()+'</div></div>':'')+
+        (IS_LASTMIN||IS_CCMC||isBnpl()?'':'<div><div class="flabel flabel-lg"><div class="lbl">Promo code</div><div class="hint">Optional</div></div><div id="promoWrap">'+promoHtml()+'</div></div>')+
+        (FIXED_SESSION?'<div><div class="flabel flabel-lg"><div class="lbl">Session date</div><div class="hint">Selected on the previous step</div></div><div class="dppick" style="cursor:default"><span class="dpico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg></span><span style="flex:1">'+esc(fmtDate(parseDate(state.sessionDate)))+(state.sessionTime?(' · '+esc(fmtTime(state.sessionTime))):'')+'</span></div></div>':'<div><div class="flabel flabel-lg"><div class="lbl">Session date</div><div class="hint">Tue &amp; Thu · by appointment</div></div><div id="sessionPicker">'+sessionPickerHtml()+'</div></div>')+
+        pmHtml+(isBnpl()?bnplInfoHtml():'<div><div class="flabel flabel-lg"><div class="lbl">First payment date</div><div class="hint">Within 30 days of today</div></div><label class="dppick" for="firstDate"><span class="dpico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg></span><input type="date" class="dfield dpinput" id="firstDate" min="'+esc(toISO(TODAY))+'" max="'+esc(toISO(addDays(TODAY,30)))+'" value="'+esc(state.firstDate)+'"><span class="dpcta">Tap to change</span></label><div class="dpnote">Your first payment drafts today by default — tap the date above to pick a different day.</div></div>'+
+        '<div><div class="flabel flabel-lg"><div class="lbl">Frequency</div></div><div class="freqgrid">'+freqBtns+'</div></div>'+
+        '<div class="sched" id="sched">'+scheduleHtml()+'</div>')+
+      '</div>';
+  }
+  function step3Html(){
+    if(state.planAgree&&state.planAtAgree&&JSON.stringify(psppPlanSummary())!==JSON.stringify(state.planAtAgree)){state.planAgree=false;state.planAgreedAt=null;state.planAtAgree=null;}
+    var c=coll();
+    var contactBlock='';
+    if(contactCaptureNeeded){
+      contactBlock='<div class="fields" style="margin-bottom:8px">'+
+        '<div><div class="flabel"><div class="lbl">Your name</div></div><input type="text" class="dfield" id="capName" value="'+esc(state.captureName)+'" placeholder="First Last"></div>'+
+        '<div><div class="flabel"><div class="lbl">Email</div></div><input type="email" class="dfield" id="capEmail" value="'+esc(state.captureEmail)+'" placeholder="you@example.com"></div>'+
+        '<div><div class="flabel"><div class="lbl">Phone</div><div class="hint">Optional</div></div><input type="tel" class="dfield" id="capPhone" value="'+esc(state.capturePhone)+'" placeholder="(555) 012-3456"></div>'+
+      '</div>';
+    }
+    var disp=contractDisplay();
+    var contractHtml=(disp==null)?'<div class="contractbox loading">Loading your contract…</div>':'<div class="contractbox">'+disp+'</div>';
+    var hint=initialHint(),iniItems='';
+    for(var k=0;k<KEY_ACKS.length;k++){var v=state['ini'+k]||'';iniItems+='<div class="ackitem'+(v?' filled':'')+'"><div class="acktext">'+esc(KEY_ACKS[k])+'</div><input class="inibox" data-i="'+k+'" maxlength="4" placeholder="'+esc(hint)+'" value="'+esc(v)+'" autocomplete="off"></div>';}
+    var sch=schedule(),di=discountInfo();
+    var firstP=fmtDate(parseDate(state.firstDate));
+    var finalP=sch.payments.length?fmtDate(sch.payments[sch.payments.length-1].date):'—';
+    var planRecap='<div class="agbox">'+
+      '<div class="agrow"><span>Collection</span><span>'+esc(c?c.name:'')+'</span></div>'+
+      '<div class="agrow"><span>Plan total</span><span>'+money2(di.total)+'</span></div>'+
+      '<div class="agrow"><span>Payments</span><span>'+FREQ_STORE[state.frequency]+' · '+sch.count+'</span></div>'+
+      '<div class="agrow"><span>First draft</span><span>'+firstP+'</span></div>'+
+      '<div class="agrow"><span>Paid in full by</span><span>'+finalP+'</span></div>'+
+      '<div class="agterms" style="max-height:280px;overflow-y:auto;padding-right:6px;margin-top:10px">'+
+        '<div style="font-size:12px;color:var(--inkSoft);line-height:1.55;margin-bottom:10px">'+esc(PSPP_INTRO)+'</div>'+
+        '<ol style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:8px">'+PSPP_TERMS.map(function(t){return '<li style="font-size:12px;color:var(--inkSoft);line-height:1.5">'+esc(t)+'</li>';}).join('')+'</ol>'+
+        '<div style="font-size:10.5px;color:var(--inkMute);margin-top:12px">Jessica Haslag Photography (JHP Boudoir) · This is a legally binding agreement. · '+esc(PSPP_VERSION)+'</div>'+
+      '</div></div>';
+    if(noSquare())return '<div class="eyebrow">Last step</div>'+
+      '<h1 class="h1">Sign your session contract</h1>'+
+      '<div class="sub">'+(isBnpl()?'Sign below and you\'re fully booked. Then we\'ll take you to a secure Klarna or Affirm checkout for your '+esc(c?c.name:'')+' ('+money2(discountInfo().total)+').':'No purchase today. You\'ll choose your images at your reveal. Sign below and you\'re fully booked.')+'</div>'+
+      contactBlock+
+      '<div class="section"><div class="nm">Session Contract</div><div class="ln"></div></div>'+
+      contractHtml+
+      '<div class="acks"><span class="lbl" style="display:block;margin:16px 0 10px">Initial to acknowledge</span>'+iniItems+'</div>'+
+      '<div class="sigsec"><span class="lbl" style="display:block;margin-bottom:8px">Sign — type your full name</span><input type="text" class="sigfield" id="sigInput" placeholder="Your full name" value="'+esc(state.signature)+'"></div>'+
+      '<div class="chint" id="chint"></div>';
+    return '<div class="eyebrow">Step three</div>'+
+      '<h1 class="h1">Review &amp; sign</h1>'+
+      '<div class="sub">Two quick agreements — your Session Contract and your Payment Plan. Everything is already filled in from your choices.</div>'+
+      contactBlock+
+      '<div class="section"><div class="nm">Session Contract</div><div class="ln"></div></div>'+
+      contractHtml+
+      '<div class="acks"><span class="lbl" style="display:block;margin:16px 0 10px">Initial to acknowledge</span>'+iniItems+'</div>'+
+      '<div class="section"><div class="nm">Payment Plan Agreement</div><div class="ln"></div></div>'+
+      planRecap+
+      '<div class="agree'+(state.planAgree?' on':'')+'" id="planAgree"><span class="box"><span class="ck">v</span></span><span class="txt">'+esc(psppAgreeText())+' I have also read and agree to the Session Contract above.</span></div>'+
+      '<div class="sigsec"><span class="lbl" style="display:block;margin-bottom:8px">Sign — type your full name</span><input type="text" class="sigfield" id="sigInput" placeholder="Your full name" value="'+esc(state.signature)+'"></div>'+
+      '<div class="chint" id="chint"></div>';
+  }
+  function step4Html(){
+    var c=coll();var sch=schedule();var di=discountInfo();
+    var def=state.cardDefaultToken?('Saved · '+esc(state.cardDefaultBrand||'')+' ····'+esc(state.cardDefaultLast4||'')):'';
+    var bak=state.cardBackupToken?('Saved · '+esc(state.cardBackupBrand||'')+' ····'+esc(state.cardBackupLast4||'')):'';
+    return '<div class="eyebrow">Step four</div>'+
+      '<h1 class="h1">'+(SINGLE_CARD?'Payment card':'Payment cards')+'</h1>'+
+      '<div class="sub">'+(SINGLE_CARD?'One card on file for autopay. Card details never touch our servers.':'Two cards on file: a default for autopay and a backup we use only if the default declines. Card details never touch our servers.')+'</div>'+
+      '<div class="summary" style="margin-top:16px">'+
+        '<div class="qrow"><div class="k">Collection</div><div class="v">'+esc(c?c.name:'')+'</div></div>'+
+        '<div class="qrow"><div class="k">Session</div><div class="v">'+fmtDate(parseDate(state.sessionDate))+(state.sessionTime?(' · '+fmtTime(state.sessionTime)):'')+'</div></div>'+
+        '<div class="qrow"><div class="k">Plan</div><div class="v">'+FREQ_STORE[state.frequency]+' · '+sch.count+' payment'+(sch.count===1?'':'s')+'</div></div>'+
+        '<div class="qrow last"><div class="k">Signed</div><div class="v">'+esc(state.signature||'—')+'</div></div>'+
+        '<div class="qtotal"><div class="lab">Total due</div><div class="amt">'+money2(di.total)+'</div></div>'+
+      '</div>'+
+      '<div class="cardblock'+(state.cardDefaultToken?' ok':'')+'" id="cb-default">'+
+        '<div class="lbl"><span>Default card</span><span class="stat" id="stat-default">'+(def||'Enter below')+'</span></div>'+
+        '<input type="text" class="dfield cardname" id="name-default" placeholder="Name on card" autocomplete="cc-name" autocapitalize="words" value="'+esc(state.cardDefaultName)+'">'+
+        '<div class="sqholder" id="sq-card-default"></div>'+
+        '<div class="errline" id="err-default"></div>'+
+      '</div>'+
+      (SINGLE_CARD?'':'<div class="cardblock'+(state.cardBackupToken?' ok':'')+'" id="cb-backup">'+
+        '<div class="lbl"><span>Backup card</span><span class="stat" id="stat-backup">'+(bak||'Enter below')+'</span></div>'+
+        '<input type="text" class="dfield cardname" id="name-backup" placeholder="Name on card" autocomplete="cc-name" autocapitalize="words" value="'+esc(state.cardBackupName)+'">'+
+        '<div class="sqholder" id="sq-card-backup"></div>'+
+        '<div class="errline" id="err-backup"></div>'+
+      '</div>')+
+      (SINGLE_CARD?'<div class="dpnote" style="margin-top:14px">Prefer the standard setup with a backup card on file? <a href="'+(IS_CCMC?'../forms-pspp-2027-ccmc/':IS_2027?'../forms-pspp-2027-lpl-giveaway/':'../forms-pspp-setup-pspp-checkout-v2/')+esc(window.location.search)+'" style="color:var(--accent);text-decoration:underline">Use the two-card form</a>.</div>':'<div class="dpnote" style="margin-top:14px">Only able to keep one card on file? <a href="'+(IS_CCMC?'../forms-pspp-2027-ccmc-1cc/':IS_2027?'../forms-pspp-2027-lpl-giveaway-1cc/':'../forms-pspp-setup-1cc/')+esc(window.location.search)+'" style="color:var(--accent);text-decoration:underline">Use the single-card setup form</a>.</div>')+
+      '<div class="agree'+(state.cardAttest?' on':'')+'" id="cardAttest" style="margin-top:20px"><span class="box"><span class="ck">v</span></span><span class="txt">'+(SINGLE_CARD?'I certify that the card on file belongs to me, and I authorize the scheduled payments above.':'I certify that both cards on file belong to me, and I authorize the scheduled payments above.')+'</span></div>'+
+      '<div class="chint" id="chint"></div>';
+  }
+
+  function updateDots(){
+    [0,1,2,3].forEach(function(i){var d=document.getElementById('d'+i);d.className='dot'+(i<state.step?' done':'')+(i===state.step?' active':'');});
+  }
+  function updateCTA(){nextBtn.disabled=!canNext();updateConfirmHint();}
+  function updateConfirmHint(){
+    var h=document.getElementById('chint');if(!h)return;
+    if(state.step===2){
+      var miss=[];
+      if(contactCaptureNeeded&&(!state.captureName||effEmail().indexOf('@')<1))miss.push('add your name & email');
+      var need=initialsMissing();
+      if(need)miss.push('initial '+need+' more');
+      if(!state.planAgree&&!noSquare())miss.push('check the agreement box');
+      if(!state.signature||state.signature.trim().length<2)miss.push('type your signature');
+      if(miss.length){h.className='chint';h.textContent='To continue: '+miss.join(', ')+'.';}
+      else{h.className='chint done';h.textContent=isBnpl()?'All set — tap Sign & go to checkout.':'All set — tap Continue.';}
+    }else if(state.step===3){
+      if(!state.cardDefaultName.trim()||(!SINGLE_CARD&&!state.cardBackupName.trim())){h.className='chint';h.textContent=SINGLE_CARD?'Enter the name on your card, add the card, and confirm it belongs to you.':'Enter the name on each card, add both cards, and confirm they belong to you.';}
+      else if(!state.cardAttest){h.className='chint';h.textContent=SINGLE_CARD?'Confirm the card belongs to you, enter your card, then tap Confirm & Submit.':'Confirm the cards belong to you, enter both cards, then tap Confirm & Submit.';}
+      else{h.className='chint';h.textContent=SINGLE_CARD?'Enter your card above, then tap Confirm & Submit.':'Enter both cards above, then tap Confirm & Submit.';}
+    }else{h.textContent='';}
+  }
+  function clearErr(){document.getElementById('err').classList.remove('show');}
+  function showErr(m){var e=document.getElementById('err');document.getElementById('errmsg').textContent=m;e.classList.add('show');}
+  function showFinal(m){var f=document.getElementById('finalbar');if(m)document.getElementById('finalmsg').textContent=m;f.classList.add('show');}
+  function hideFinal(){document.getElementById('finalbar').classList.remove('show');}
+  function extractId(d){
+    if(!d)return null;
+    if(d.id)return d.id;
+    if(d.record&&d.record.id)return d.record.id;
+    if(Array.isArray(d)&&d[0]&&d[0].id)return d[0].id;
+    if(d.rows&&d.rows[0]&&d.rows[0].id)return d.rows[0].id;
+    return null;
+  }
+  function sigOf(a){var an=a&&a.answers;if(typeof an==='string'){try{an=JSON.parse(an);}catch(e){return null;}}return an&&an.signed_client_time;}
+  function findRow(arr,id,sig){
+    var i;
+    for(i=0;i<arr.length;i++){if(id&&String(arr[i].id)===String(id))return arr[i];}
+    if(sig){for(i=0;i<arr.length;i++){if(sigOf(arr[i])===sig)return arr[i];}}
+    return null;
+  }
+  function fetchStatus(token){
+    return api('psppv2_checkout_status?limit=500&_cb='+Date.now()).then(function(r){return r.ok?r.json():null;}).then(function(d){
+      if(!d)return null;
+      var arr=Array.isArray(d)?d:(d.rows||[]);
+      for(var i=0;i<arr.length;i++){if(String(arr[i].token)===String(token))return arr[i];}
+      return null;
+    }).catch(function(){return null;});
+  }
+  function pollOutcome(token){
+    return new Promise(function(resolve){
+      var tries=0,max=40,seen=false;
+      (function tick(){
+        tries++;
+        if(tries===5)showFinal('Almost there — confirming your cards…');
+        if(tries===14)showFinal('Still working — hang tight, please don’t close this page…');
+        fetchStatus(token).then(function(row){
+          if(row)seen=true;
+          var st=row&&row.status;
+          if(st==='processed'){resolve({status:'processed',final_total:row.final_total});return;}
+          if(st==='error'){var ce=row&&row.card_error;if(typeof ce==='string'){try{ce=JSON.parse(ce);}catch(e){ce=null;}}resolve({status:'error',card:ce});return;}
+          if(tries>=12&&!seen){resolve({status:'lost'});return;}
+          if(tries>=max){resolve({status:seen?'timeout':'lost'});return;}
+          setTimeout(tick,1500);
+        });
+      })();
+    });
+  }
+  function handleCardError(card){
+    var which=(card&&card.which)==='backup'?'backup':'default';
+    state.cardDefaultToken=null;state.cardDefaultBrand=null;state.cardDefaultLast4=null;
+    state.cardBackupToken=null;state.cardBackupBrand=null;state.cardBackupLast4=null;
+    state.cardErrorPending={which:which,message:(card&&card.message)||'Please re-enter your card details.'};
+    state.step=2;
+    render();
+    nextBtn.disabled=false;
+  }
+  function showCardError(which,msg){
+    var blockEl=document.getElementById(which==='backup'?'cb-backup':'cb-default');
+    var errEl=document.getElementById(which==='backup'?'err-backup':'err-default');
+    var statEl=document.getElementById(which==='backup'?'stat-backup':'stat-default');
+    if(errEl)errEl.textContent=msg;
+    if(blockEl)blockEl.classList.add('err');
+    if(statEl)statEl.textContent='Enter below';
+    showErr(msg);
+  }
+
+  async function attachSquareCards(){
+    if(!window.Square){showErr('Payment SDK failed to load. Refresh the page and try again.');return;}
+    if(!sqPayments){
+      try{sqPayments=window.Square.payments(SQUARE_APP_ID,SQUARE_LOCATION_ID);}
+      catch(e){showErr('Card setup error: '+e.message);return;}
+    }
+    try{if(sqCardDefault){await sqCardDefault.destroy();sqCardDefault=null;}}catch(e){}
+    if(!SINGLE_CARD){try{if(sqCardBackup){await sqCardBackup.destroy();sqCardBackup=null;}}catch(e){}}
+    try{
+      sqCardDefault=await sqPayments.card();
+      await sqCardDefault.attach('#sq-card-default');
+    }catch(e){document.getElementById('err-default').textContent='Could not load card form: '+e.message;document.getElementById('cb-default').classList.add('err');}
+    if(!SINGLE_CARD){try{
+      sqCardBackup=await sqPayments.card();
+      await sqCardBackup.attach('#sq-card-backup');
+    }catch(e){document.getElementById('err-backup').textContent='Could not load card form: '+e.message;document.getElementById('cb-backup').classList.add('err');}}
+  }
+  // 2026-10-02: default + backup must be two DIFFERENT cards (Alycia Ruffin / Theresa Decker entered one card twice).
+  function sameCard(){return !SINGLE_CARD&&!!(state.cardDefaultLast4&&state.cardBackupLast4&&String(state.cardDefaultLast4)===String(state.cardBackupLast4)&&String(state.cardDefaultBrand||'').toUpperCase()===String(state.cardBackupBrand||'').toUpperCase());}
+  var SAME_CARD_MSG='Your backup card needs to be a different card from your default card. Please enter another card.';
+  async function tokenize(which){
+    var card=which==='default'?sqCardDefault:sqCardBackup;
+    var blockId=which==='default'?'cb-default':'cb-backup';
+    var statId=which==='default'?'stat-default':'stat-backup';
+    var errId=which==='default'?'err-default':'err-backup';
+    var blockEl=document.getElementById(blockId);
+    var statEl=document.getElementById(statId);
+    var errEl=document.getElementById(errId);
+    blockEl.classList.remove('err','ok');
+    try{
+      var result=await card.tokenize();
+      if(result.status==='OK'){
+        var det=result.details||{};var cd=det.card||{};
+        if(which==='default'){state.cardDefaultToken=result.token;state.cardDefaultBrand=cd.brand||'';state.cardDefaultLast4=cd.last4||'';}
+        else{state.cardBackupToken=result.token;state.cardBackupBrand=cd.brand||'';state.cardBackupLast4=cd.last4||'';}
+        statEl.textContent='Saved · '+(cd.brand||'')+' ····'+(cd.last4||'');
+        blockEl.classList.add('ok');
+        updateCTA();
+      } else {
+        var msg=(result.errors||[]).map(function(x){return x.message;}).join(', ')||'Validation failed';
+        errEl.textContent=msg;blockEl.classList.add('err');
+        if(which==='default'){state.cardDefaultToken=null;}else{state.cardBackupToken=null;}
+        updateCTA();
+      }
+    }catch(e){
+      errEl.textContent='Card validation error: '+(e&&e.message||e);
+      blockEl.classList.add('err');
+      if(which==='default'){state.cardDefaultToken=null;}else{state.cardBackupToken=null;}
+      updateCTA();
+    }
+  }
+
+  function bindSessionPicker(){
+    var months=monthsWithAvailability();
+    function curIdx(){for(var i=0;i<months.length;i++){if(months[i].y===state.calY&&months[i].m===state.calM)return i;}return -1;}
+    var prev=document.getElementById('calPrev');
+    if(prev)prev.onclick=function(){var i=curIdx();if(i>0){state.calY=months[i-1].y;state.calM=months[i-1].m;refreshPicker();}};
+    var next=document.getElementById('calNext');
+    if(next)next.onclick=function(){var i=curIdx();if(i>=0&&i<months.length-1){state.calY=months[i+1].y;state.calM=months[i+1].m;refreshPicker();}};
+    Array.prototype.forEach.call(document.querySelectorAll('#sessionPicker .calcell.avail'),function(btn){
+      btn.onclick=function(){
+        state.sessionDate=btn.getAttribute('data-date')||null;
+        lmForceFull();
+        var d=parseDate(state.sessionDate);
+        if(d){var slots=(GHLon()?(AVAIL_MAP[state.sessionDate]||[]):slotsForMonth(d.getMonth()));if(state.sessionTime&&slots.indexOf(state.sessionTime)===-1)state.sessionTime=null;}
+        refreshPicker();var sc=document.getElementById('sched');if(sc)sc.innerHTML=scheduleHtml();updateCTA();
+      };
+    });
+    var ts=document.getElementById('slotSel');
+    if(ts)ts.onchange=function(){state.sessionTime=ts.value||null;refreshPicker();updateCTA();};
+  }
+  function attachStep(){
+    if(state.step===0){
+      Array.prototype.forEach.call(stepEl.querySelectorAll('.ccard'),function(el){
+        el.onclick=function(){
+          state.chosen=el.getAttribute('data-id');
+          Array.prototype.forEach.call(stepEl.querySelectorAll('.ccard'),function(x){x.classList.toggle('active',x===el);});
+          updateCTA();
+        };
+      });
+    } else if(state.step===1){
+      bindSessionPicker();
+      var fd=document.getElementById('firstDate');
+      if(fd)fd.onchange=function(){state.firstDate=fd.value;document.getElementById('sched').innerHTML=scheduleHtml();updateCTA();};
+      var _dpk=(fd&&fd.closest)?fd.closest('.dppick'):null;
+      if(_dpk)_dpk.addEventListener('click',function(){try{if(fd.showPicker)fd.showPicker();}catch(_e){}});
+      Array.prototype.forEach.call(stepEl.querySelectorAll('.freqbtn'),function(b){
+        b.onclick=function(){state.frequency=b.getAttribute('data-freq');
+          Array.prototype.forEach.call(stepEl.querySelectorAll('.freqbtn'),function(x){x.classList.toggle('active',x===b);});
+          document.getElementById('sched').innerHTML=scheduleHtml();updateCTA();};
+      });
+      bindPromo();
+      Array.prototype.forEach.call(stepEl.querySelectorAll('.pmbtn'),function(b){b.onclick=function(){state.payMethod=b.getAttribute('data-pm');if(state.payMethod==='bnpl'){state.promo=null;state.promoAck=false;state.promoCode='';state.promoMsg='';}state.planAgree=false;state.planAgreedAt=null;state.planAtAgree=null;render();};});
+    } else if(state.step===2){
+      if(contactCaptureNeeded){
+        var cn=document.getElementById('capName'),ce=document.getElementById('capEmail'),cp=document.getElementById('capPhone');
+        if(cn)cn.oninput=function(){state.captureName=cn.value;refreshSignName();updateCTA();};
+        if(ce)ce.oninput=function(){state.captureEmail=ce.value.trim();updateCTA();};
+        if(cp)cp.oninput=function(){state.capturePhone=cp.value;updateCTA();};
+      }
+      bindSign();
+    } else if(state.step===3){
+      var nd=document.getElementById('name-default');
+      if(nd)nd.oninput=function(){state.cardDefaultName=nd.value;updateCTA();};
+      var nb=document.getElementById('name-backup');
+      if(nb)nb.oninput=function(){state.cardBackupName=nb.value;updateCTA();};
+      var ca=document.getElementById('cardAttest');
+      if(ca)ca.onclick=function(){state.cardAttest=!state.cardAttest;ca.classList.toggle('on',state.cardAttest);updateCTA();};
+      attachSquareCards();
+      if(state.cardErrorPending){var _cep=state.cardErrorPending;state.cardErrorPending=null;showCardError(_cep.which,_cep.message);}
+    }
+  }
+
+  function render(){
+    clearErr();
+    var fn=state.step===0?step1Html:state.step===1?step2Html:state.step===2?step3Html:step4Html;
+    try{document.body.classList.toggle('pcwide',IS_PASTCLIENT&&state.step===0);}catch(_e){}
+    stepEl.innerHTML=fn();
+    backBtn.classList.toggle('hide',state.step===0);
+    nextBtn.textContent=(isBnpl()&&state.step===2)?'Sign & go to checkout':(state.step<3&&!(isDecide()&&state.step===2))?'Continue':'Confirm & Submit';
+    updateDots();updateCTA();attachStep();
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+
+  backBtn.onclick=function(){if(isDecide()&&state.step===2){state.step=0;render();return;}if(state.step>0){state.step--;render();}};
+  nextBtn.onclick=async function(){
+    if(!canNext())return;
+    if(isDecide()){if(state.step===0){state.step=2;render();return;}if(state.step===2){submit();return;}}
+    if(isBnpl()&&state.step===2){submit();return;}
+    if(state.step<3){state.step++;render();return;}
+    if(!state.cardDefaultToken){await tokenize('default');}
+    if(!SINGLE_CARD&&!state.cardBackupToken){await tokenize('backup');}
+    if(!state.cardDefaultToken||(!SINGLE_CARD&&!state.cardBackupToken)){return;}
+    if(sameCard()){state.cardBackupToken=null;state.cardBackupBrand=null;state.cardBackupLast4=null;showCardError('backup',SAME_CARD_MSG);updateCTA();return;}
+    submit();
+  };
+  document.getElementById('startOver').onclick=function(){
+    state.step=0;state.initials='';state.agree=false;
+    state.signature='';state.sigEdited=false;state.planAgree=false;state.planAgreedAt=null;state.planAtAgree=null;state.cardAttest=false;for(var _si=0;_si<KEY_ACKS.length;_si++)state['ini'+_si]='';
+    state.promo=null;state.promoAck=false;state.pendingToken=null;state.promoCode='';state.promoMsg='';state.promoChecking=false;
+    state.cardDefaultToken=null;state.cardDefaultBrand=null;state.cardDefaultLast4=null;
+    state.cardBackupToken=null;state.cardBackupBrand=null;state.cardBackupLast4=null;
+    state.cardDefaultName='';state.cardBackupName='';
+    document.getElementById('thanks').classList.add('hide');
+    document.getElementById('wizard').classList.remove('hide');
+    render();
+  };
+
+  function submit(){
+    clearErr();
+    if(!state.signature||state.signature.trim().length<2){showErr('Please add your signature on the previous step.');return;}
+    if(!state.planAgree&&!noSquare()){showErr('Please agree to the contracts on the previous step.');return;}
+    if(!allInitialed()){showErr('Please initial every statement on the previous step.');return;}
+    if(!noSquare()){
+    if(!state.cardAttest){showErr('Please confirm the cards on file belong to you.');return;}
+    if(!state.cardDefaultName.trim()||(!SINGLE_CARD&&!state.cardBackupName.trim())){showErr(SINGLE_CARD?'Please enter the name on your card.':'Please enter the name on each card.');return;}
+    if(!state.cardDefaultToken||(!SINGLE_CARD&&!state.cardBackupToken)){showErr(SINGLE_CARD?'Your card is required. Please go back and add it.':'Both cards are required. Please go back and add them.');return;}
+    if(sameCard()){showErr(SAME_CARD_MSG);return;}
+    }
+    var perr=planError();if(perr){showErr(perr);return;}
+    var c=coll();var sch=schedule();var di=discountInfo();var total=di.total;
+    var freqStore=FREQ_STORE[state.frequency];
+    if(noSquare()){sch={payments:[],perPayment:0,count:0};freqStore=isBnpl()?'Klarna or Affirm':null;}
+    var scheduleArr=sch.payments.map(function(p,i){return {n:i+1,date:toISO(p.date),amount:Math.round(p.amount*100)/100,amount_formatted:money2(p.amount)};});
+    var body={
+      form_slug:(IS_PASTCLIENT?'pspp-setup-2026-treehouse-pc':IS_SPECIALTY?'pspp-setup-2026-specialty':(SINGLE_CARD?'pspp-setup-2026-1cc':'pspp-setup-2026')),
+      form_name:(IS_PASTCLIENT?'Treehouse Past Client — Investment Menu':IS_SPECIALTY?'Treehouse Specialty — Pre-Session Payment Plan':(IS_CCMC_SA?(SINGLE_CARD?'Save-Ahead Offer - 2027 Charity Calendar (Single Card)':'Save-Ahead Offer - 2027 Charity Calendar'):IS_CCMC?(SINGLE_CARD?'2027 Charity Calendar Model Call (Single Card)':'2027 Charity Calendar Model Call'):IS_2027?(SINGLE_CARD?'2027 Pricing - LPL Giveaway (Single Card)':'2027 Pricing - LPL Giveaway'):(SINGLE_CARD?'2026 Pre-Session Payment Plan Setup (Single Card)':'2026 Pre-Session Payment Plan Setup'))),
+      ghl_contact_id:P.ghl_id||null,
+      contact_name:effName()||null,
+      contact_email:effEmail()||null,
+      contact_phone:((contactCaptureNeeded?state.capturePhone:P.phone)||P.phone||null),
+      session_datetime:(state.sessionDate&&state.sessionTime)?(state.sessionDate+'T'+state.sessionTime):(state.sessionDate||null),
+      collection:c?c.name:null,
+      other_amount:money2(total),
+      initials:{signature:state.signature},
+      is_test:!!P.test,
+      user_agent:(navigator.userAgent||'').slice(0,400),
+      answers:{
+        square_env:'production', single_card:SINGLE_CARD, form_version:FORM_VERSION, campaign:(IS_LASTMIN?'last-minute':null),
+        collection:c?c.name:null, collection_id:c?c.id:null, collection_price:di.base,
+        discount:di.discount, promo_code:(state.promoAck?(state.promoCode||'').trim():null),
+        subtotal:di.subtotal, tax_rate:di.taxRate, tax:di.tax,
+        total:total, total_formatted:money2(total), hair_makeup:(IS_SPECIALTY&&!IS_PASTCLIENT&&!!state.hmu), hmu:(di.hmu||0), decide_later:isDecide(), booking_code:(P.b||null),
+        session_date:state.sessionDate,
+        session_time:state.sessionTime,
+        first_payment_date:state.firstDate,
+        payment_frequency:freqStore,
+        payment_count:sch.count,
+        schedule:scheduleArr,
+        signature:state.signature,
+        agreement:true,
+        acknowledgement:'I authorize autopay per the schedule (backup card on decline); plan paid in full at least 30 days before the session; retainer and pre-session payments are non-refundable.',
+        contract:{slug:CONTRACT_SLUG,title:CONTRACT_TITLE,signed:true,initials:initialsArr()},
+        payment_plan_agreement:{agreed:true,authorize_autopay:true,paid_off_30_days_before:true,non_refundable:true,cards_belong_to_client:true,signature:state.signature},
+        pspp_agreement:{version:PSPP_VERSION,agreement_label:psppAgreeText(),signed_name:state.signature,agree_checkbox:state.planAgree===true,agreed_at_client:state.planAgreedAt,charge_authorization:true,plan_at_signing:state.planAtAgree},
+        prefill:{name:P.name,email:P.email,phone:P.phone,collection:P.collection,intel_id:P.intel_id,ghl_id:P.ghl_id},
+        signed_client_time:new Date().toISOString(),
+        payment_method:(isBnpl()?'thrivecart':(isDecide()?null:'square')),
+        square:noSquare()?null:{
+          app_id:SQUARE_APP_ID,
+          location_id:SQUARE_LOCATION_ID,
+          default_card:{token:state.cardDefaultToken,brand:state.cardDefaultBrand,last4:state.cardDefaultLast4,name:state.cardDefaultName.trim()},
+          backup_card:(SINGLE_CARD?undefined:{token:state.cardBackupToken,brand:state.cardBackupBrand,last4:state.cardBackupLast4,name:state.cardBackupName.trim()})
+        }
+      }
+    };
+    if(isUuid(P.intel_id))body.intel_id=P.intel_id;
+
+    if(!state.pendingToken)state.pendingToken=genToken();
+    var subToken=state.pendingToken;
+    body.answers.client_token=subToken;
+    try{ fetch(CLIENT_FORM_WEBHOOK,{method:'POST',mode:'no-cors',body:JSON.stringify(contractRecord(subToken))}); }catch(_e){}
+    nextBtn.disabled=true;nextBtn.textContent='Finalizing…';clearErr();showFinal(noSquare()?'Saving your signed contract…':'Securely setting up your plan…');
+    fetch(WEBHOOK_URL,{method:'POST',mode:'no-cors',body:JSON.stringify(body)})
+      .then(function(){return pollOutcome(subToken);})
+      .then(function(res){
+        hideFinal();
+        if(res&&res.status==='lost'){nextBtn.disabled=false;nextBtn.textContent='Confirm & Submit';showErr('We could not confirm your submission was received. Please check your connection and tap Confirm & Submit again.');return;}
+        state.pendingToken=null;
+        if(res&&res.status==='error'&&res.card&&res.card.which==='promo'){state.promoAck=false;state.promo=null;state.promoMsg='';state.promoCode='';state.step=1;render();nextBtn.disabled=false;showErr(res.card.message||'Your promo code is no longer valid. Please re-apply or remove it, then submit again.');return;}
+        if(res&&res.status==='error'&&res.card){handleCardError(res.card);return;}
+        var _tcGo=isBnpl()?tcUrl():'';
+        if(IS_PASTCLIENT&&_tcGo){var tb2=document.querySelector('#thanks .body');if(tb2)tb2.textContent='You\'re fully booked! Your signed contract is saved. Now let\'s finish your '+(c?c.name:'collection')+' with Klarna or Affirm. Taking you to the secure checkout…';var so2=document.getElementById('startOver');if(so2)so2.style.display='none';var ct2=document.getElementById('confirmedTotal');if(ct2){ct2.textContent='';var a2=document.createElement('a');a2.href=_tcGo;a2.className='tcgo';a2.textContent='Continue to Klarna / Affirm checkout →';ct2.appendChild(a2);}setTimeout(function(){window.location.href=_tcGo;},2500);}
+        else if(IS_PASTCLIENT){var tb=document.querySelector('#thanks .body');if(tb)tb.textContent=isDecide()?'You\'re fully booked! Your signed contract is saved. Watch your inbox for your welcome email and prep guides. At your reveal you\'ll choose the images you love.':'You\'re fully booked! Your collection is reserved and your interest-free plan is set up. Watch your inbox for your plan confirmation, welcome email and prep guides.';var so=document.getElementById('startOver');if(so)so.style.display='none';}
+        if(res&&res.status==='processed'&&res.final_total!=null&&!noSquare()){var ct=document.getElementById('confirmedTotal');if(ct)ct.textContent='Confirmed plan total: '+money2(res.final_total)+'.';}
+        document.getElementById('wizard').classList.add('hide');
+        document.getElementById('thanks').classList.remove('hide');
+        window.scrollTo({top:0,behavior:'smooth'});
+      })
+      .catch(function(e){hideFinal();nextBtn.disabled=false;nextBtn.textContent='Confirm & Submit';showErr('Sorry — your plan could not be sent. Please try again. ('+e.message+')');});
+  }
+
+  function loadAssets(){
+    return api('psppv2_form_assets').then(function(r){return r.ok?r.json():{rows:[]};}).then(function(d){
+      var rows=(d&&d.rows)||[];
+      for(var i=0;i<rows.length;i++){if(rows[i].key&&rows[i].data_b64)IMG_MAP[rows[i].key]=rows[i].data_b64;}
+    }).catch(function(){});
+  }
+  loadAssets().then(loadGhlSlots).then(render);
+})();
+{% endraw %}
+</script>
+</body>
+</html>
