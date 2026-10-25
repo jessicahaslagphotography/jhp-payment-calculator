@@ -96,7 +96,7 @@
 
   <div class="head">
     <div class="eyebrow">You&rsquo;re invited</div>
-    <h1 class="title">Claim your spot <em>2027 Charity Calendar Model Call</em></h1>
+    <h1 class="title">Claim your spot <em id="title-em">2027 Charity Calendar Model Call</em></h1>
     <div class="rule"></div>
   </div>
 
@@ -128,7 +128,7 @@
   <!-- the claim form -->
   <main class="hide" id="panel">
     <div class="head" style="padding-top:0">
-      <p class="sub">You&rsquo;ve been selected for the 2027 Charity Calendar Model Call. Pay your $99 session fee in full, or hold your spot for $1 today. Either way, your session fee is non-refundable.</p>
+      <p class="sub" id="lead">You&rsquo;ve been selected for the 2027 Charity Calendar Model Call. Pay your $99 session fee in full, or hold your spot for $1 today. Either way, your session fee is non-refundable.</p>
     </div>
     <div class="wrap">
       <div class="card">
@@ -143,7 +143,7 @@
 
       <div class="card">
         <div class="label">What you&rsquo;re claiming</div>
-        <ul class="facts">
+        <ul class="facts" id="facts">
           <li><span class="dot"></span><span>A <strong>$99 session fee</strong> and <strong>$500 off your package</strong>.</span></li>
           <li><span class="dot"></span><span>After claiming, you have <strong>1 week to complete your booking</strong> &mdash; choose your package and your session date.</span></li>
           <li><span class="dot"></span><span>Sessions held <strong>October 2026 &ndash; October 2027</strong> are eligible for the 2027 calendar.</span></li>
@@ -372,9 +372,27 @@
       }catch(e){$('card-err').textContent='Could not load the card form: '+(e&&e.message||e);}
     })();
   }
+  // Not-selected applicants get the SAME $99 / $500-off deal as a Save-Ahead offer
+  // (ccmc_reservation_status.offer='saveahead', set by the invite check).
+  function applyOffer(row){
+    if(!row||row.offer!=='saveahead')return;
+    $('title-em').textContent='Your Save-Ahead Offer';
+    $('lead').textContent='Thank you for applying for the 2027 Charity Calendar Model Call. You weren’t selected for the calendar this time, but you still get the same offer: pay your $99 session fee in full, or hold your spot for $1 today. Either way, your session fee is non-refundable.';
+    var ul=$('facts');ul.textContent='';
+    [['A ','$99 session fee',' and ','$500 off your package','.'],
+     ['After claiming, you have ','1 week to complete your booking',' — choose your package and your session date.','',''],
+     ['Choose ','any session date through March 2028','.','',''],
+     ['','Interest-free prepayment plans',' make it easy to spread out your collection before your session.','','']
+    ].forEach(function(p){
+      var li=document.createElement('li'),d=document.createElement('span'),t=document.createElement('span');d.className='dot';
+      for(var i=0;i<p.length;i++){if(!p[i])continue;if(i%2===1){var s=document.createElement('strong');s.textContent=p[i];t.appendChild(s);}else t.appendChild(document.createTextNode(p[i]));}
+      li.appendChild(d);li.appendChild(t);ul.appendChild(li);
+    });
+  }
   function showForm(row){
     if(formReady)return;
     formReady=true;
+    applyOffer(row);
     $('claim-by').textContent=(row&&row.claim_deadline)?('Please claim by '+prettyTs(row.claim_deadline)+'.'):'';
     show('panel');
     initSquare();

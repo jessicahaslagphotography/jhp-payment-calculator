@@ -9,7 +9,10 @@ happens here, so nothing a visitor can reach can send anything:
   approved  -> mint invite_token + 72h claim_deadline, status 'invited',
                enroll the contact in jhp_workflows 'ccmc_invite' (day 0 / 1 / 2
                email + text, sent by jhp-workflow-runner)
-  backup    -> enroll in 'ccmc_saveahead', status 'backup_sent'
+  backup    -> (not selected) mint invite_token + 72h claim_deadline, status
+               'backup_sent', enroll in 'ccmc_saveahead' (not-selected email + text
+               with the SAME $99 / $500-off offer and her personal claim link,
+               day 0 / 1 / 2). Unclaimed after 72h -> 'released' quietly.
   invited, deadline passed, not claimed
             -> status 'released', cancel the invite enrollment, alert Jessica
                so she can personally approve the next woman in line
@@ -121,28 +124,35 @@ def main():
             "WHERE id=%s AND status='approved'", (token, deadline, enr_id, app["id"]))
         print(f"app {app['id']}: invited, deadline {deadline.isoformat()}, enrollment {enr_id}")
 
-    # 2. Backup -> save-ahead offer.
+    # 2. Backup (not selected) -> Save-Ahead offer with her own 72h claim link.
+    #    Same $99 (or $1 hold) / $500-off offer as an invite (Jessica 2026-10-25).
     cur.execute("SELECT * FROM charity_calendar_applications WHERE status='backup' ORDER BY id")
     for app in cur.fetchall():
         if not app["contact_email"]:
             print(f"app {app['id']}: no email, cannot send the save-ahead offer")
             continue
-        enr_id = enroll(cur, save_wid, app, {"book_url": CONSULT_URL, "ccmc_application_id": app["id"]})
+        token = app["invite_token"] or secrets.token_hex(16)
+        deadline = now() + datetime.timedelta(hours=CLAIM_HOURS)
+        ctx = {"book_url": CLAIM_BASE + token, "booking_deadline": fmt_deadline(deadline),
+               "ccmc_application_id": app["id"]}
+        enr_id = enroll(cur, save_wid, app, ctx)
         cur.execute(
-            "UPDATE charity_calendar_applications SET status='backup_sent', enrollment_id=%s, "
-            "processed_status='backup_sent' WHERE id=%s AND status='backup'", (enr_id, app["id"]))
-        print(f"app {app['id']}: save-ahead offer enrolled {enr_id}")
+            "UPDATE charity_calendar_applications SET status='backup_sent', invite_token=%s, "
+            "invited_at=NOW(), claim_deadline=%s, enrollment_id=%s, processed_status='backup_sent' "
+            "WHERE id=%s AND status='backup'", (token, deadline, enr_id, app["id"]))
+        print(f"app {app['id']}: save-ahead offer enrolled {enr_id}, deadline {deadline.isoformat()}")
 
     # 3. Expired invitations -> release + alert.
     cur.execute(
-        "SELECT * FROM charity_calendar_applications WHERE status='invited' "
+        "SELECT * FROM charity_calendar_applications WHERE status IN ('invited','backup_sent') "
         "AND claim_deadline IS NOT NULL AND claim_deadline < NOW()")
     for app in cur.fetchall():
         cancel_enrollment(cur, app["enrollment_id"], "ccmc: 72h claim window ended")
         cur.execute(
             "UPDATE charity_calendar_applications SET status='released', released_at=NOW() "
-            "WHERE id=%s AND status='invited'", (app["id"],))
-        if not app["is_test"]:
+            "WHERE id=%s AND status=%s", (app["id"], app["status"]))
+        # A Save-Ahead offer that lapses is released quietly: no spot to hand on.
+        if not app["is_test"] and app["status"] == "invited":
             owner_alert(cur, f"Charity Calendar: {app['contact_name']} did not claim her spot",
                         f"{app['contact_name']} ({app['contact_email']}) did not claim her 2027 Charity "
                         f"Calendar spot within 72 hours, so it has been released. Open your review page to "
@@ -153,8 +163,8 @@ def main():
     cur.execute(
         "SELECT a.id, a.enrollment_id, a.status FROM charity_calendar_applications a "
         "JOIN jhp_workflow_enrollments e ON e.id=a.enrollment_id "
-        "WHERE e.workflow_id=%s AND e.status IN ('active','paused') AND a.status = ANY(%s)",
-        (invite_wid, list(TERMINAL)))
+        "WHERE e.workflow_id IN (%s,%s) AND e.status IN ('active','paused') AND a.status = ANY(%s)",
+        (invite_wid, save_wid, list(TERMINAL)))
     for r in cur.fetchall():
         n = cancel_enrollment(cur, r["enrollment_id"], f"ccmc: application {r['status']}")
         print(f"app {r['id']}: invite reminders cancelled ({r['status']}, {n} row)")

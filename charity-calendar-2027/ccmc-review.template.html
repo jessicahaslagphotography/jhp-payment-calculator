@@ -49,7 +49,7 @@ h1{font:600 clamp(26px,4vw,34px)/1.1 var(--serif);text-align:center;margin:10px 
 <div class="col">
   <div class="wm">JHP BOUDOIR</div>
   <h1>2027 Charity Calendar — Applications</h1>
-  <p class="sub">Read each application, then choose. <b>Invite</b> sends her claim link (72 hours, with a reminder email + text each day). <b>Not selected</b> sends a kind "not selected this time" email + text with your exclusive Save-Ahead offer (book 12+ months out with an interest-free prepayment plan). <b>Close, no email</b> sends nothing (for spam or duplicates). Sends go out within about 5 minutes, and you can undo until then.</p>
+  <p class="sub">Read each application, then choose. <b>Invite</b> sends her claim link (72 hours, with a reminder email + text each day). <b>Not selected</b> sends a kind "not selected this time" email + text with the same offer as a Save-Ahead spot ($99 or $1 to hold, $500 off, any date through March 2028) and her own 72-hour claim link. <b>Close, no email</b> sends nothing (for spam or duplicates). Sends go out within about 5 minutes, and you can undo until then.</p>
   <div class="tabs" id="tabs"></div>
   <div class="tools"><label><input type="checkbox" id="showTest"> Show test applications</label><button class="btn" id="refresh" type="button">Refresh</button></div>
   <div id="list"><div class="loading">Loading applications…</div></div>
@@ -67,7 +67,7 @@ h1{font:600 clamp(26px,4vw,34px)/1.1 var(--serif);text-align:center;margin:10px 
   var PKG={'combo':'Combo collection','digital':'Digital collection','experience-only':'Experience only'};
   var PAY={'pay-in-full':'Pay in full','prepayment-plan':'Prepayment plan','cannot-afford':"Can't afford a package"};
   var STATUS={'new':'New','approved':'Invite queued','invited':'Invited','claimed':'Claimed','paid':'Paid','booked':'Booked','released':"Released — didn't claim",'forfeited':'Forfeited','backup':'Not selected — offer queued','backup_sent':'Not selected — offer sent','declined':'Closed (no email)'};
-  var TABS=[['todo','To review'],['qualified','Qualified'],['experience','Experience only'],['invited','Invited'],['claimed','Claimed / booked'],['closed','Closed'],['all','All']];
+  var TABS=[['todo','To review'],['qualified','Qualified'],['experience','Experience only'],['invited','Invited / offers out'],['claimed','Claimed / booked'],['closed','Closed'],['all','All']];
   var rows=[], tab='todo';
   var listEl=document.getElementById('list'), tabsEl=document.getElementById('tabs'), testEl=document.getElementById('showTest');
   function qualified(r){return (r.package_interest==='combo'||r.package_interest==='digital')&&r.payment_pref&&r.payment_pref!=='cannot-afford';}
@@ -75,9 +75,9 @@ h1{font:600 clamp(26px,4vw,34px)/1.1 var(--serif);text-align:center;margin:10px 
     if(t==='todo')return s==='new';
     if(t==='qualified')return s==='new'&&qualified(r);
     if(t==='experience')return s==='new'&&!qualified(r);
-    if(t==='invited')return s==='approved'||s==='invited';
+    if(t==='invited')return ['approved','invited','backup','backup_sent'].indexOf(s)>=0;
     if(t==='claimed')return s==='claimed'||s==='paid'||s==='booked';
-    if(t==='closed')return ['released','forfeited','backup','backup_sent','declined'].indexOf(s)>=0;
+    if(t==='closed')return ['released','forfeited','declined'].indexOf(s)>=0;
     return true;}
   function visible(){return rows.filter(function(r){return testEl.checked||!r.is_test;});}
   function el(tag,cls,text){var e=document.createElement(tag);if(cls)e.className=cls;if(text!=null)e.textContent=text;return e;}
@@ -107,7 +107,7 @@ h1{font:600 clamp(26px,4vw,34px)/1.1 var(--serif);text-align:center;margin:10px 
     if(r.package_interest)bds.appendChild(el('span','bd',PKG[r.package_interest]||r.package_interest));
     if(r.payment_pref)bds.appendChild(el('span','bd',PAY[r.payment_pref]||r.payment_pref));
     if(r.is_test)bds.appendChild(el('span','bd t','Test'));
-    if(s==='invited'&&r.claim_deadline)bds.appendChild(el('span','bd','Claim by '+fmt(r.claim_deadline)));
+    if((s==='invited'||s==='backup_sent')&&r.claim_deadline)bds.appendChild(el('span','bd','Claim by '+fmt(r.claim_deadline)));
     left.appendChild(bds);top.appendChild(left);c.appendChild(top);
     if(r.why_apply)c.appendChild(el('div','why',r.why_apply));
     var acts=el('div','acts'),stEl=el('span','st'),btns=[];
@@ -115,7 +115,7 @@ h1{font:600 clamp(26px,4vw,34px)/1.1 var(--serif);text-align:center;margin:10px 
       x.addEventListener('click',function(){if(confirmMsg&&!window.confirm(confirmMsg))return;setStatus(r,status,stEl,btns);});acts.appendChild(x);}
     if(s==='new'){
       b('Invite to claim spot','go','approved','Invite '+(r.contact_name||'her')+'? She will get her claim link by email and text within about 5 minutes, and has 72 hours to claim.');
-      b('Not selected + Save-Ahead offer','alt','backup','Send '+(r.contact_name||'her')+' the "not selected" email and text with your Save-Ahead offer?');
+      b('Not selected + Save-Ahead offer','alt','backup','Send '+(r.contact_name||'her')+' the "not selected" email and text with her Save-Ahead claim link ($99 / $500 off, 72 hours to claim)?');
       b('Close, no email','', 'declined');
     } else if(s==='approved'||s==='backup'||s==='declined'){
       b('Undo','', 'new');

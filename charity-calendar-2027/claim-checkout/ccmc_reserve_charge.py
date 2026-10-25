@@ -231,7 +231,7 @@ def _invite_state(app, now):
     if not app:
         return "invalid", MSG_INVALID
     st = (app.get("status") or "").strip().lower()
-    if st == "invited":
+    if st in ("invited", "backup_sent"):
         dl = app.get("claim_deadline")
         if dl is None:
             return "invalid", MSG_INVALID
@@ -243,6 +243,12 @@ def _invite_state(app, now):
     if st == "booked":
         return "claimed", MSG_BOOKED
     return "expired", MSG_CLOSED
+
+
+def _offer(app):
+    """'saveahead' when a not-selected applicant claims her Save-Ahead offer (same $99 /
+    $500-off deal, Jessica 2026-10-25), else 'invite'. Read before the claim flips status."""
+    return "saveahead" if (app.get("status") or "").strip().lower() == "backup_sent" else "invite"
 
 
 def _live_next_url(cur, app_id):
@@ -423,41 +429,58 @@ def _fmt_day(d):
     return (d.strftime("%B ") + str(d.day)) if d else "your selected date"
 
 
-def _claimed_email_html(first, plan, bal, deadline, book):
+def _claimed_email_html(first, plan, bal, deadline, book, offer="invite"):
     e = lambda s: html.escape(s or "", quote=True)
+    sa = (offer == "saveahead")
+    prog = "Save-Ahead offer" if sa else "2027 Charity Calendar Model Call"
+    pre = "Your Save-Ahead spot is claimed" if sa else "Your Charity Calendar spot is claimed"
+    eyebrow = "JHP Boudoir &middot; Save-Ahead Offer" if sa else "JHP Boudoir &middot; 2027 Charity Calendar"
+    if sa:
+        reward = ('<p style="font-size:14.5px;line-height:1.65;color:#a89e8d;margin:0;">Choose <strong style="color:#cfc6b6;">'
+                  'any session date through March 2028</strong>, and spread your collection over an interest-free prepayment plan.</p>')
+        foot_cal = "Sessions may be booked through March 2028."
+    else:
+        reward = ('<p style="font-size:14.5px;line-height:1.65;color:#a89e8d;margin:0 0 8px;">Sessions held <strong style="color:#cfc6b6;">'
+                  'October 2026 &ndash; October 2027</strong> are eligible for the 2027 calendar. You can also book a session through '
+                  '<strong style="color:#cfc6b6;">March 2028</strong> at the same discounted rate &mdash; it just won&rsquo;t be in the calendar.</p>'
+                  '<p style="font-size:14.5px;line-height:1.65;color:#a89e8d;margin:0;">Being in the calendar is completely optional &mdash; '
+                  'your images are always yours.</p>')
+        foot_cal = ("Sessions held October 2026 &ndash; October 2027 are eligible for the 2027 Charity Calendar; sessions "
+                    "through March 2028 receive the same discounted rate but are not included in the calendar. Calendar participation is optional.")
     greet = f"You&rsquo;re in, {e(first)}!" if (first and first != "there") else "You&rsquo;re in!"
     if plan == "full":
         pay_line = ("Your <strong style=\"color:#f4eee2;\">$99 session fee is paid in full</strong> and your spot in the "
-                    "2027 Charity Calendar Model Call is officially claimed.")
+                    f"{prog} is officially claimed.")
         bal_box = ""
     else:
         pay_line = ("Your <strong style=\"color:#f4eee2;\">$1 today is in</strong> and your spot in the "
-                    "2027 Charity Calendar Model Call is officially claimed.")
+                    f"{prog} is officially claimed.")
         bal_box = f"""<tr><td style="padding:8px 40px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#16110d;border:1px solid #2a2018;border-radius:10px;"><tr><td style="padding:16px 18px;font-family:Arial,Helvetica,sans-serif;"><div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#8a8072;margin-bottom:5px;">Your $98 balance</div><div style="font-size:17px;color:#ece4d6;">Charges automatically on <strong style="color:#c8a35a;">{e(bal)}</strong></div><div style="font-size:13px;color:#a89e8d;margin-top:5px;">Nothing for you to do &mdash; it&rsquo;s on your card on file. You don&rsquo;t need to wait for it: book your session now.</div></td></tr></table></td></tr>"""
     return f"""<!doctype html><html><body style="margin:0;padding:0;background:#0c0a09;">
-<div style="display:none;max-height:0;overflow:hidden;opacity:0;">Your Charity Calendar spot is claimed — book your session within 7 days.</div>
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">{pre} — book your session within 7 days.</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0c0a09;"><tr><td align="center" style="padding:26px 14px;">
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#12100c;border:1px solid #241c12;border-radius:14px;overflow:hidden;">
-<tr><td align="center" style="padding:34px 40px 6px;"><img src="{LOGO_URL}" width="120" alt="JHP Boudoir" style="display:block;border:0;margin:0 auto 10px;width:120px;max-width:50%;height:auto;"><div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:3px;color:#c8a35a;text-transform:uppercase;">JHP Boudoir &middot; 2027 Charity Calendar</div></td></tr>
+<tr><td align="center" style="padding:34px 40px 6px;"><img src="{LOGO_URL}" width="120" alt="JHP Boudoir" style="display:block;border:0;margin:0 auto 10px;width:120px;max-width:50%;height:auto;"><div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:3px;color:#c8a35a;text-transform:uppercase;">{eyebrow}</div></td></tr>
 <tr><td align="center" style="padding:14px 40px 0;"><div style="font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:4px;color:#c8a35a;text-transform:uppercase;">Your spot is claimed</div><h1 style="font-family:Georgia,'Cormorant Garamond',serif;font-weight:normal;font-size:40px;line-height:1.1;color:#f4eee2;margin:12px 0 6px;">You&rsquo;re In</h1></td></tr>
 <tr><td style="padding:14px 40px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7;color:#cfc6b6;"><p style="margin:0 0 14px;">{greet}</p><p style="margin:0 0 14px;">{pay_line} There&rsquo;s one step left &mdash; book your session.</p></td></tr>
 {bal_box}
 <tr><td style="padding:14px 40px 0;"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#1a1206;border:1px solid #6e4a2e;border-left:4px solid #c8a35a;border-radius:8px;"><tr><td style="padding:16px 18px;font-family:Arial,Helvetica,sans-serif;"><div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#c8a35a;margin-bottom:5px;">Important &middot; 7 days to book</div><div style="font-size:15px;line-height:1.6;color:#f4eee2;">Please choose your package and session date by <strong style="color:#c8a35a;">{e(deadline)}</strong> (Central). If you haven&rsquo;t booked by then, your spot is forfeited without refund.</div></td></tr></table></td></tr>
 <tr><td align="center" style="padding:24px 40px 6px;"><a href="{e(book)}" style="display:inline-block;background:#c8a35a;color:#0c0a09;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;text-decoration:none;padding:15px 30px;border-radius:6px;">Book your session</a></td></tr>
-<tr><td style="padding:26px 40px 0;font-family:Arial,Helvetica,sans-serif;"><div style="border-top:1px solid #241c12;padding-top:22px;"><div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#c8a35a;text-align:center;">Your model-call reward</div><div style="font-family:Georgia,serif;font-size:26px;color:#f4eee2;text-align:center;margin:8px 0 14px;">A $99 session fee + $500 off your package</div><p style="font-size:14.5px;line-height:1.65;color:#a89e8d;margin:0 0 8px;">Sessions held <strong style="color:#cfc6b6;">October 2026 &ndash; October 2027</strong> are eligible for the 2027 calendar. You can also book a session through <strong style="color:#cfc6b6;">March 2028</strong> at the same discounted rate &mdash; it just won&rsquo;t be in the calendar.</p><p style="font-size:14.5px;line-height:1.65;color:#a89e8d;margin:0;">Being in the calendar is completely optional &mdash; your images are always yours.</p></div></td></tr>
+<tr><td style="padding:26px 40px 0;font-family:Arial,Helvetica,sans-serif;"><div style="border-top:1px solid #241c12;padding-top:22px;"><div style="font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#c8a35a;text-align:center;">Your model-call reward</div><div style="font-family:Georgia,serif;font-size:26px;color:#f4eee2;text-align:center;margin:8px 0 14px;">A $99 session fee + $500 off your package</div>{reward}</div></td></tr>
 <tr><td style="padding:24px 40px 0;font-family:Arial,Helvetica,sans-serif;"><div style="border-top:1px solid #241c12;padding-top:22px;"><p style="font-size:14.5px;line-height:1.7;color:#cfc6b6;margin:0;"><em style="color:#e6ddcd;">A little note from me:</em> almost every woman who walks into my studio feels nervous &mdash; and leaves beaming. You&rsquo;re in the best of hands. Every pose is guided and the whole day is designed to help you relax and feel beautiful. All you have to do is show up.</p></div></td></tr>
 <tr><td style="padding:20px 40px 32px;font-family:Georgia,serif;font-size:16px;color:#c8a35a;">Xo, Jess</td></tr>
-<tr><td style="padding:20px 40px 30px;background:#0a0807;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;line-height:1.6;color:#7d7466;">Your $99 session fee is non-refundable. You have 7 days from claiming your spot to choose your package and session date, or your spot is forfeited without refund. Sessions held October 2026 &ndash; October 2027 are eligible for the 2027 Charity Calendar; sessions through March 2028 receive the same discounted rate but are not included in the calendar. Calendar participation is optional.<br><br>JHP Boudoir &middot; Jefferson City, MO</td></tr>
+<tr><td style="padding:20px 40px 30px;background:#0a0807;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;line-height:1.6;color:#7d7466;">Your $99 session fee is non-refundable. You have 7 days from claiming your spot to choose your package and session date, or your spot is forfeited without refund. {foot_cal}<br><br>JHP Boudoir &middot; Jefferson City, MO</td></tr>
 </table></td></tr></table></body></html>"""
 
 
-def _confirm_sms(plan, name, balance_date, deadline, book_url):
+def _confirm_sms(plan, name, balance_date, deadline, book_url, offer="invite"):
     first = (name or "").split(" ")[0] or "there"
+    spot = "Save-Ahead spot" if offer == "saveahead" else "Charity Calendar spot"
     if plan == "full":
         return (f"Hi {first}! It's Jessica w/ JHP Boudoir. Your $99 session fee is paid in full — your "
-                f"Charity Calendar spot is claimed! You have 7 days (until {deadline}) to choose your "
+                f"{spot} is claimed! You have 7 days (until {deadline}) to choose your "
                 f"package & session date here: {book_url} (It's in your email too.) Xo, Jess")
-    return (f"Hi {first}! It's Jessica w/ JHP Boudoir. Your $1 is in & your Charity Calendar spot is claimed! "
+    return (f"Hi {first}! It's Jessica w/ JHP Boudoir. Your $1 is in & your {spot} is claimed! "
             f"Your $98 balance charges on {_fmt_day(balance_date)}. You have 7 days (until {deadline}) to choose "
             f"your package & session date here: {book_url} Xo, Jess")
 
@@ -470,6 +493,9 @@ def _run_check(cur, token, app, now):
     _check_status(cur, token, state, card_error=msg,
                   claim_deadline=(app or {}).get("claim_deadline") if state == "ready" else None,
                   next_url=nxt)
+    if app:
+        cur.execute("UPDATE ccmc_reservation_status SET offer=%s WHERE token_hash=%s",
+                    (_offer(app), _token_hash(token)))
     print(f"check: invite -> {state}" + (f" (application {app['id']})" if app else ""))
 
 
@@ -573,6 +599,7 @@ def main():
 
         app_id = app["id"]
         is_test = bool(app.get("is_test"))
+        offer = _offer(app)
         if body_is_test and not is_test:
             _status(cur, token, "error", card_error="Test mode isn't available for this invitation.")
             conn.commit()
@@ -628,8 +655,8 @@ def main():
             """
             INSERT INTO ccmc_reservations
                 (application_id, invite_token, client_token, contact_name, contact_email, contact_phone,
-                 plan, balance_due_date, deposit_cents, balance_cents, status, is_test, user_agent, expires_at)
-            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'new',%s,%s,%s)
+                 plan, balance_due_date, deposit_cents, balance_cents, status, is_test, user_agent, expires_at, offer)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,'new',%s,%s,%s,%s)
             ON CONFLICT (client_token) DO UPDATE SET
                 plan=EXCLUDED.plan, balance_due_date=EXCLUDED.balance_due_date,
                 deposit_cents=EXCLUDED.deposit_cents, balance_cents=EXCLUDED.balance_cents,
@@ -637,7 +664,7 @@ def main():
             RETURNING id
             """,
             (app_id, invite, token, name, email, phone, plan, balance_date, deposit_amt, balance_amt,
-             is_test, user_agent, expires_at),
+             is_test, user_agent, expires_at, offer),
         )
         rid = cur.fetchone()["id"]
         _status(cur, token, "new", balance_date=balance_date)
@@ -819,12 +846,13 @@ def main():
 
         deadline_str = _fmt_deadline(booking_deadline)
         first_nm = (name or "").split(" ")[0] or "there"
-        sid, serr = _ghl_sms(gid, _confirm_sms(plan, name, balance_date, deadline_str, next_url))
+        sid, serr = _ghl_sms(gid, _confirm_sms(plan, name, balance_date, deadline_str, next_url, offer))
         print(f"  confirm sms: {sid or serr}")
-        subj = ("You're in! Your Charity Calendar spot is claimed ✦" if plan == "deposit"
-                else "You're in! Your Charity Calendar session fee is paid ✦")
+        _what = "Save-Ahead" if offer == "saveahead" else "Charity Calendar"
+        subj = (f"You're in! Your {_what} spot is claimed ✦" if plan == "deposit"
+                else f"You're in! Your {_what} session fee is paid ✦")
         eid, eerr = _ghl_email(gid, subj, _claimed_email_html(first_nm, plan, _fmt_day(balance_date),
-                                                              deadline_str, next_url))
+                                                              deadline_str, next_url, offer))
         print(f"  confirm email: {eid or eerr}")
 
         if plan == "full":
@@ -832,7 +860,7 @@ def main():
         else:
             pay_desc = f"paid $1 today; the $98 balance auto-charges on {_fmt_day(balance_date)}"
         queue_note(cur, "Charity Calendar spot claimed",
-                   f"{name or email} claimed their 2027 Charity Calendar Model Call spot and {pay_desc}. "
+                   f"{name or email} claimed their {'Save-Ahead offer (not selected for the calendar)' if offer == 'saveahead' else '2027 Charity Calendar Model Call'} spot and {pay_desc}. "
                    f"They have until {deadline_str} (Central) to book their package and session date. "
                    f"Reservation {rid}, application {app_id}. Confirmation SMS: {'sent' if sid else 'NOT sent'}; "
                    f"email: {'sent' if eid else 'NOT sent'}.")

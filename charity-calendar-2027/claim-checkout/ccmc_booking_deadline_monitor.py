@@ -110,21 +110,21 @@ def reminder_email_html(first, deadline, book):
     e = lambda s: html.escape(s or "", quote=True)
     greet = f"Hi {e(first)}," if (first and first != "there") else "Hi there,"
     return f"""<!doctype html><html><body style="margin:0;padding:0;background:#0c0a09;">
-<div style="display:none;max-height:0;overflow:hidden;opacity:0;">2 days left to book your Charity Calendar session.</div>
+<div style="display:none;max-height:0;overflow:hidden;opacity:0;">2 days left to book your session.</div>
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#0c0a09;"><tr><td align="center" style="padding:26px 14px;">
 <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#12100c;border:1px solid #241c12;border-radius:14px;overflow:hidden;">
 <tr><td align="center" style="padding:34px 40px 6px;"><img src="{LOGO_URL}" width="120" alt="JHP Boudoir" style="display:block;border:0;margin:0 auto 10px;width:120px;max-width:50%;height:auto;"><div style="font-family:Arial,Helvetica,sans-serif;font-size:11px;letter-spacing:3px;color:#c8a35a;text-transform:uppercase;">JHP Boudoir &middot; 2027 Charity Calendar</div></td></tr>
 <tr><td align="center" style="padding:14px 40px 0;"><div style="font-family:Arial,Helvetica,sans-serif;font-size:12px;letter-spacing:4px;color:#c8a35a;text-transform:uppercase;">2 days left to book</div><h1 style="font-family:Georgia,'Cormorant Garamond',serif;font-weight:normal;font-size:40px;line-height:1.1;color:#f4eee2;margin:12px 0 6px;">Don&rsquo;t Lose Your Spot</h1></td></tr>
-<tr><td style="padding:14px 40px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7;color:#cfc6b6;"><p style="margin:0 0 14px;">{greet}</p><p style="margin:0 0 14px;">Your Charity Calendar spot is claimed &mdash; the last step is choosing your package and session date. Please book by <strong style="color:#c8a35a;">{e(deadline)}</strong> (Central), or your spot is forfeited without refund.</p><p style="margin:0 0 14px;">It only takes a few minutes.</p></td></tr>
+<tr><td style="padding:14px 40px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7;color:#cfc6b6;"><p style="margin:0 0 14px;">{greet}</p><p style="margin:0 0 14px;">Your spot is claimed &mdash; the last step is choosing your package and session date. Please book by <strong style="color:#c8a35a;">{e(deadline)}</strong> (Central), or your spot is forfeited without refund.</p><p style="margin:0 0 14px;">It only takes a few minutes.</p></td></tr>
 <tr><td align="center" style="padding:16px 40px 6px;"><a href="{e(book)}" style="display:inline-block;background:#c8a35a;color:#0c0a09;font-family:Arial,Helvetica,sans-serif;font-size:14px;font-weight:bold;letter-spacing:1px;text-decoration:none;padding:15px 30px;border-radius:6px;">Book your session</a></td></tr>
 <tr><td style="padding:22px 40px 32px;font-family:Georgia,serif;font-size:16px;color:#c8a35a;">Xo, Jess</td></tr>
-<tr><td style="padding:20px 40px 30px;background:#0a0807;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;line-height:1.6;color:#7d7466;">Your $99 session fee is non-refundable. Sessions held October 2026 &ndash; October 2027 are eligible for the 2027 Charity Calendar; sessions through March 2028 receive the same discounted rate but are not included in the calendar. Calendar participation is optional.<br><br>JHP Boudoir &middot; Jefferson City, MO</td></tr>
+<tr><td style="padding:20px 40px 30px;background:#0a0807;font-family:Arial,Helvetica,sans-serif;font-size:11.5px;line-height:1.6;color:#7d7466;">Your $99 session fee is non-refundable. You can choose any session date through March 2028.<br><br>JHP Boudoir &middot; Jefferson City, MO</td></tr>
 </table></td></tr></table></body></html>"""
 
 
 def reminder_sms(first, deadline, book):
     first = first or "there"
-    return (f"Hi {first}! It's Jessica w/ JHP Boudoir. Just 2 days left to book your Charity Calendar "
+    return (f"Hi {first}! It's Jessica w/ JHP Boudoir. Just 2 days left to book your "
             f"session — please choose your package & date by {deadline} or your spot is forfeited: {book} Xo, Jess")
 
 
@@ -248,7 +248,7 @@ def main():
                         print(f"  REMIND {rid} ({who}) -> NOT sent (ghl_contact_id={bool(cid)} next_url={bool(book)})")
                     else:
                         sid, serr = ghl_sms(cid, reminder_sms(first, dl, book))
-                        eid, eerr = ghl_email(cid, "2 days left to book your Charity Calendar session ✦",
+                        eid, eerr = ghl_email(cid, "2 days left to book your session ✦",
                                               reminder_email_html(first, dl, book))
                         print(f"  REMIND {rid} ({who}): sms={sid or serr} email={eid or eerr}")
                     cur.execute("UPDATE ccmc_reservations SET reminder_sent_at=NOW() WHERE id=%s", (rid,))
