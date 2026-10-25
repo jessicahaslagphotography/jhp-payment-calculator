@@ -19,3 +19,11 @@ Per Jess: the $99 session / $500 off offer is revealed only in the invitation to
 women. The landing page no longer shows the offer anywhere (meta tags, hero, offer band →
 "By invitation / 2 minutes / Oct 2026 – Oct 2027", privacy bullet, step 03, FAQs, fine
 print). The package qualifier on the form keeps its three choices but drops the prices.
+
+## Past-client early access (2026-10-25)
+
+`?access=vip` opens the form 24 hours early: Sun Oct 25 9:00 AM CT (`EARLY_AT`), counting
+down "Opens to everyone in" until Monday 9 AM, then behaving like the public page. Before
+Sunday 9 AM the VIP link shows "Your early access opens in". The link is only in the
+past-client email. `test_vip_early_access.js` checks Sat night, Sun, plain link on Sun,
+Tue, and the 9 AM Sunday flip.
