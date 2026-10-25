@@ -375,8 +375,9 @@
   // 2026-10-25): the claim charger adds ?offer=saveahead to her booking link. Same menu,
   // contract without the calendar section (asset contract-ccmc-saveahead-2027).
   var IS_CCMC_SA=IS_CCMC&&qp('offer')==='saveahead';
-  // 2026-10 visual refresh preview (?look=new). Flip to true once Jessica approves it.
-  var NEWLOOK=qp('look')==='new';
+  // 2026-10 visual refresh: approved by Jessica 2026-10-25 for every page on this template.
+  // ?look=old shows the previous design (for comparison only).
+  var NEWLOOK=qp('look')!=='old';
   if(NEWLOOK){try{document.body.classList.add('nl');}catch(_e){}}
   var FORM_VERSION=IS_CCMC?'2027-ccmc':IS_2027?'2027-lpl-giveaway':'2026';
   var SINGLE_CARD=PATHNAME.indexOf('forms-pspp-setup-1cc')>=0||PATHNAME.indexOf('forms-pspp-2027-lpl-giveaway-1cc')>=0||PATHNAME.indexOf('forms-pspp-2027-ccmc-1cc')>=0;
@@ -961,7 +962,7 @@
       '<div class="cstrip"></div>'+badge+'</div>';
   }
   function introHtml(){
-    var ik=IS_CCMC_SA?'Save-Ahead Offer':IS_CCMC?'2027 Charity Calendar Model Call':IS_2027?'2027 LPL Giveaway':'JHP Boudoir';
+    var ik=IS_CCMC_SA?'Save-Ahead Offer':IS_CCMC?'2027 Charity Calendar Model Call':IS_2027?'2027 LPL Giveaway':IS_SPECIALTY?'Treehouse Specialty Session':IS_LASTMIN?'Last-Minute Openings':IS_FLASH?'The Sale':'JHP Boudoir';
     return '<div class="ihero"><img src="https://lh3.googleusercontent.com/d/1S-Cp7Jf9f9_vlBV0rDxJLuIUf8ByGfpI=w1200" alt=""><div class="ihx"><div class="ik">'+esc(ik)+'</div><div class="ih">Your investment menu</div></div></div>'+
       '<p class="ilede">This is where it gets real, in the best way. Choose the collection you\'ll treasure, then pick your session date. Your interest-free plan is built for you automatically.</p>'+
       '<div class="ichips"><span>0% interest prepayment plans</span><span>Pay monthly or in full</span><span>Your images stay private</span></div>'+
