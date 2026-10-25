@@ -19,3 +19,9 @@ Graphics > "Story Frames - Sun & Mon".
 | Mon-4 "Apply in 2 minutes" | Link -> landing page, "Apply here" |
 
 Local preview: `python3 ccmc_stories.py out FONTS_DIR --placeholders`.
+
+## Tuesday–Friday (ccmc_stories_tf.py, workflow `ccmc-story-frames-tf`)
+Uploaded to "Story Frames - Tue to Fri". Stickers: Tue-3 emoji slider, Tue-4/Wed-4/Thu-4/Fri-4
+link, Thu-1 question box, Fri-3 countdown (Fri 11:59 PM). Thu-2/Thu-3 are pre-made answers to
+the two most common questions; real questions from the box can be answered with Instagram's
+own reply-to-question card.
