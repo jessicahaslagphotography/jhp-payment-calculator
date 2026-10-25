@@ -220,6 +220,17 @@
   body.nl .ichips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
   body.nl .ichips span{font-size:11.5px;letter-spacing:.04em;padding:7px 11px;border:1px solid rgba(201,162,75,.35);border-radius:999px;color:#E9E1D5;background:rgba(201,162,75,.06)}
   body.nl .iquote{margin:0 0 26px;padding:16px 18px;border-left:2px solid #C9A24B;background:#1A1512;font-family:var(--display);font-style:italic;font-size:18px;line-height:1.5;color:#E9E1D5}
+  @media (min-width:960px){
+    body.nl.pcwide .app{max-width:1240px}
+    body.nl.pcwide .cards{grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+    body.nl.pcwide .ihero{margin:-32px -40px 0;height:420px}
+    body.nl.pcwide .ihx{left:40px;right:40px;bottom:30px}
+    body.nl.pcwide .ihx .ih{font-size:54px}
+    body.nl.pcwide .ilede{max-width:680px;font-size:16px}
+    body.nl.pcwide .iquote{max-width:760px}
+    body.nl.pcwide .m27 .mimg{height:320px}
+    body.nl.pcwide .m27 .mname{font-size:26px}
+  }
   body.nl .iquote cite{display:block;margin-top:8px;font-family:var(--body);font-style:normal;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
   .ghost{background:transparent;border:1px solid var(--line);color:var(--ink);padding:16px 18px;font-family:var(--body);font-size:11px;letter-spacing:.2em;text-transform:uppercase;cursor:pointer}
 
@@ -922,7 +933,7 @@
     var b64=IMG_MAP['m27-'+c.id]||IMG_MAP[c.id];
     var img='<div class="mimg">'+(b64?'<img src="data:image/jpeg;base64,'+b64+'" alt="">':'')+'<div class="msel">Selected</div></div>';
     var badge=c.tag?('<div class="cbadge">'+esc(c.tag)+'</div>'):'';
-    return '<div class="ccard m27'+(active?' active':'')+(c.tag?' feat':'')+'" data-id="'+c.id+'">'+img+
+    return '<div class="ccard m27'+(active?' active':'')+(c.tag==='Most popular'?' feat':'')+'" data-id="'+c.id+'">'+img+
       '<div class="mtxt"><div class="mname">'+esc(shortName(c.name))+'</div><div class="mrule"></div>'+
       '<div class="mh">The Collection</div>'+m27Rows(c.m27.coll)+
       '<div class="mh s2">The Session</div>'+m27Rows(c.m27.sess)+
@@ -942,7 +953,7 @@
     var badge=etag?('<div class="cbadge">'+esc(etag)+'</div>'):'';
     var img=IMG_MAP[c.id]?'<div class="cimg"><img src="data:image/jpeg;base64,'+IMG_MAP[c.id]+'" alt=""></div>':'';
     var price='<div class="cprice">'+(c.strike?'<span class="cstrike">'+moneyTight(c.strike)+'</span>':'')+moneyTight(c.price)+(NEWLOOK&&asLow(c)?'<span class="cmo">'+asLowHtml(c,' ')+' · 0% interest</span>':'')+'</div>';
-    return '<div class="ccard'+(active?' active':'')+(etag?' feat':'')+'" data-id="'+c.id+'">'+
+    return '<div class="ccard'+(active?' active':'')+(etag==='Most popular'?' feat':'')+'" data-id="'+c.id+'">'+
       '<div class="ctop"><div class="cname">'+esc(shortName(c.name))+'</div>'+
       price+
       '<div class="caccent">'+esc(c.accent)+'</div></div>'+
@@ -1442,7 +1453,7 @@
   function render(){
     clearErr();
     var fn=state.step===0?step1Html:state.step===1?step2Html:state.step===2?step3Html:step4Html;
-    try{document.body.classList.toggle('pcwide',IS_PASTCLIENT&&state.step===0);}catch(_e){}
+    try{document.body.classList.toggle('pcwide',(IS_PASTCLIENT||NEWLOOK)&&state.step===0);}catch(_e){}
     stepEl.innerHTML=fn();
     backBtn.classList.toggle('hide',state.step===0);
     nextBtn.textContent=(isBnpl()&&state.step===2)?'Sign & go to checkout':(state.step<3&&!(isDecide()&&state.step===2))?'Continue':'Confirm & Submit';
