@@ -1,0 +1,42 @@
+[
+ {
+  "search": ".urg{font:400 12px/1.5 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-bright);margin-top:22px}\n",
+  "replace": ".urg{font:400 12px/1.5 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-bright);margin-top:22px}\n.cd{display:flex;flex-direction:column;gap:10px}\n.cd-l{font:400 11px/1.4 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--gold-bright)}\n.cd-t{display:flex;gap:10px}\n.cd-t span{min-width:70px;padding:12px 10px 10px;border:1px solid var(--line2);background:rgba(19,16,14,.6);text-align:center}\n.cd-t b{display:block;font:300 36px/1 var(--serif);color:var(--ink);font-variant-numeric:tabular-nums}\n.cd-t i{display:block;margin-top:6px;font:normal 400 10px/1 var(--sans);letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}\n.apply .cd{margin-bottom:24px}\n.close .cd{margin-top:8px}\n"
+ },
+ {
+  "search": "  .ba-note{font-size:18px}\n}",
+  "replace": "  .ba-note{font-size:18px}\n  .cd-t{gap:8px}\n  .cd-t span{min-width:0;flex:1;padding:10px 4px 8px}\n  .cd-t b{font-size:28px}\n}"
+ },
+ {
+  "search": "<div class=\"t\">2027 Charity Calendar \u00b7 limited spots</div>",
+  "replace": "<div class=\"t\" id=\"cc-bar-t\">2027 Charity Calendar \u00b7 closes Fri Oct 30</div>"
+ },
+ {
+  "search": "      <span class=\"pill\" id=\"cc-status\">Now accepting applications &middot; For a limited time</span>\n    </div>",
+  "replace": "      <span class=\"pill\" id=\"cc-status\">Now accepting applications &middot; Closes Fri Oct 30 at midnight</span>\n    </div>\n    <div class=\"cd\" data-cd hidden><div class=\"cd-l\" data-cd-l>Applications close in</div><div class=\"cd-t\"><span><b data-u=\"d\">0</b><i>days</i></span><span><b data-u=\"h\">00</b><i>hours</i></span><span><b data-u=\"m\">00</b><i>min</i></span><span><b data-u=\"s\">00</b><i>sec</i></span></div></div>"
+ },
+ {
+  "search": "<div class=\"urg\">Limited spots &middot; applications close without notice</div>",
+  "replace": "<div class=\"urg\" id=\"cc-urg\">Limited spots &middot; applications close Friday, Oct 30 at midnight</div>"
+ },
+ {
+  "search": "  <div>\n    <div class=\"done\" id=\"cc-closed\" hidden>",
+  "replace": "  <div>\n    <div class=\"cd\" data-cd hidden><div class=\"cd-l\" data-cd-l>Applications close in</div><div class=\"cd-t\"><span><b data-u=\"d\">0</b><i>days</i></span><span><b data-u=\"h\">00</b><i>hours</i></span><span><b data-u=\"m\">00</b><i>min</i></span><span><b data-u=\"s\">00</b><i>sec</i></span></div></div>\n    <div class=\"done\" id=\"cc-closed\" hidden>"
+ },
+ {
+  "search": "<p>Spots are limited and applications close without notice. Two minutes could put you in the 2027 Charity Calendar.</p>",
+  "replace": "<p>Spots are limited and applications close Friday, October 30 at midnight (Central). Two minutes could put you in the 2027 Charity Calendar.</p>\n    <div class=\"cd\" data-cd hidden><div class=\"cd-l\" data-cd-l>Applications close in</div><div class=\"cd-t\"><span><b data-u=\"d\">0</b><i>days</i></span><span><b data-u=\"h\">00</b><i>hours</i></span><span><b data-u=\"m\">00</b><i>min</i></span><span><b data-u=\"s\">00</b><i>sec</i></span></div></div>"
+ },
+ {
+  "search": "Application-based; applying does not guarantee selection. Applications are accepted for a limited time and may close at any point.",
+  "replace": "Application-based; applying does not guarantee selection. Applications are accepted Monday, October 26, 2026 at 9:00 AM through Friday, October 30, 2026 at 11:59 PM Central."
+ },
+ {
+  "search": "  /* Application window: Oct 22 - Oct 30, 2026, Central time (extended Oct 25). Also enforced\n     server-side in charity-app-ingest. ?test=1 bypasses it. Manual close is\n     data-cc-closed, set by pages_render(data={\"closed\": true}). */\n  const OPEN_AT = Date.parse(\"2026-10-22T05:00:00Z\");",
+  "replace": "  /* Application window: Mon Oct 26 9:00 AM - Fri Oct 30 11:59 PM, 2026, Central\n     time (launch week, set Oct 25). Server-side charity-app-ingest still accepts\n     from Oct 22 through the close. ?test=1 bypasses it. Manual close is\n     data-cc-closed, set by pages_render(data={\"closed\": true}).\n     Countdown: [data-cd] blocks count to OPEN_AT before launch, then to\n     CLOSE_AT; the page reloads itself when a countdown reaches zero. */\n  const OPEN_AT = Date.parse(\"2026-10-26T14:00:00Z\");"
+ },
+ {
+  "search": "  const closedBox = document.getElementById(\"cc-closed\");\n  if (!isTest && (manual || now >= CLOSE_AT || now < OPEN_AT)) {\n    form.hidden = true;\n    closedBox.hidden = false;\n    if (now < OPEN_AT && !manual) {\n      status.textContent = \"Applications open October 22\";\n      document.getElementById(\"cc-closed-h\").textContent = \"Applications open October 22\";\n      document.getElementById(\"cc-closed-p\").textContent =\n        \"Check back on October 22 to apply \u2014 it\u2019s only open for a limited time!\";\n    } else {\n      status.textContent = \"Applications are closed\";\n    }\n    return;\n  }",
+  "replace": "  const closedBox = document.getElementById(\"cc-closed\");\n  const countdown = (target, label) => {\n    const boxes = document.querySelectorAll(\"[data-cd]\");\n    boxes.forEach((b) => { b.hidden = false; b.querySelector(\"[data-cd-l]\").textContent = label; });\n    const pad = (n) => String(n).padStart(2, \"0\");\n    let reloaded = false;\n    const tick = () => {\n      const left = target - Date.now();\n      if (left <= 0) {\n        if (!reloaded) { reloaded = true; setTimeout(() => location.reload(), 1500); }\n        return;\n      }\n      const s = Math.floor(left / 1000);\n      const u = { d: String(Math.floor(s / 86400)), h: pad(Math.floor(s / 3600) % 24), m: pad(Math.floor(s / 60) % 60), s: pad(s % 60) };\n      boxes.forEach((b) => b.querySelectorAll(\"[data-u]\").forEach((el) => {\n        const t = u[el.getAttribute(\"data-u\")];\n        if (el.textContent !== t) el.textContent = t;\n      }));\n    };\n    tick();\n    setInterval(tick, 1000);\n  };\n  if (!isTest && (manual || now >= CLOSE_AT || now < OPEN_AT)) {\n    form.hidden = true;\n    closedBox.hidden = false;\n    if (now < OPEN_AT && !manual) {\n      status.textContent = \"Applications open Monday, Oct 26 \u00b7 9 AM CT\";\n      document.getElementById(\"cc-bar-t\").textContent = \"2027 Charity Calendar \u00b7 opens Mon Oct 26\";\n      document.getElementById(\"cc-urg\").textContent = \"Limited spots \u00b7 applications open Monday, Oct 26 at 9 AM\";\n      document.getElementById(\"cc-closed-h\").textContent = \"Applications open Monday at 9 AM\";\n      document.getElementById(\"cc-closed-p\").textContent =\n        \"Applications open Monday, October 26 at 9 AM Central and close Friday, October 30 at midnight. Set a reminder \u2014 spots are limited!\";\n      countdown(OPEN_AT, \"Applications open in\");\n    } else {\n      status.textContent = \"Applications are closed\";\n      document.getElementById(\"cc-bar-t\").textContent = \"2027 Charity Calendar \u00b7 applications closed\";\n      document.getElementById(\"cc-urg\").textContent = \"Applications are closed\";\n    }\n    return;\n  }\n  countdown(CLOSE_AT, \"Applications close in\");"
+ }
+]
