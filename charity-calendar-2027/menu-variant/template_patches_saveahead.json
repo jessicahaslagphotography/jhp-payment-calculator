@@ -1,0 +1,26 @@
+[
+ {
+  "search": "  var IS_CCMC=PATHNAME.indexOf('forms-pspp-2027-ccmc')>=0;\n",
+  "replace": "  var IS_CCMC=PATHNAME.indexOf('forms-pspp-2027-ccmc')>=0;\n  // Save-Ahead offer (not selected for the calendar, same $99 / $500-off deal, Jessica\n  // 2026-10-25): the claim charger adds ?offer=saveahead to her booking link. Same menu,\n  // contract without the calendar section (asset contract-ccmc-saveahead-2027).\n  var IS_CCMC_SA=IS_CCMC&&qp('offer')==='saveahead';\n"
+ },
+ {
+  "search": "  if(IS_CCMC){CONTRACT_KEY='contract-ccmc-2027';CONTRACT_SLUG='boudoir-session-contract-charity-calendar-model-call';CONTRACT_TITLE='Boudoir Session Contract - Charity Calendar Model Call';}\n",
+  "replace": "  if(IS_CCMC){CONTRACT_KEY='contract-ccmc-2027';CONTRACT_SLUG='boudoir-session-contract-charity-calendar-model-call';CONTRACT_TITLE='Boudoir Session Contract - Charity Calendar Model Call';}\n  if(IS_CCMC_SA){CONTRACT_KEY='contract-ccmc-saveahead-2027';CONTRACT_SLUG='boudoir-session-contract-save-ahead-offer';CONTRACT_TITLE='Boudoir Session Contract - Save-Ahead Offer';}\n"
+ },
+ {
+  "search": ":IS_CCMC?'I understand the Charity Calendar Model Call only includes the $99 Session Fee I paid to reserve my date and $500 off my collection, already taken off every collection price. No products or services are included with the model call, and all other products must be purchased separately.':",
+  "replace": ":IS_CCMC_SA?'I understand the Save-Ahead Offer only includes the $99 Session Fee I paid to reserve my date and $500 off my collection, already taken off every collection price. No products or services are included with the offer, and all other products must be purchased separately.':IS_CCMC?'I understand the Charity Calendar Model Call only includes the $99 Session Fee I paid to reserve my date and $500 off my collection, already taken off every collection price. No products or services are included with the model call, and all other products must be purchased separately.':"
+ },
+ {
+  "search": "  if(IS_CCMC){KEY_ACKS.splice(",
+  "replace": "  if(IS_CCMC&&!IS_CCMC_SA){KEY_ACKS.splice("
+ },
+ {
+  "search": "  if(IS_CCMC){try{document.title='2027 Charity Calendar Model Call \u2014 JHP Boudoir';}catch(_e){}}\n",
+  "replace": "  if(IS_CCMC){try{document.title=(IS_CCMC_SA?'Save-Ahead Offer':'2027 Charity Calendar Model Call')+' \u2014 JHP Boudoir';}catch(_e){}}\n"
+ },
+ {
+  "search": "(IS_CCMC?(SINGLE_CARD?'2027 Charity Calendar Model Call (Single Card)':'2027 Charity Calendar Model Call'):",
+  "replace": "(IS_CCMC_SA?(SINGLE_CARD?'Save-Ahead Offer - 2027 Charity Calendar (Single Card)':'Save-Ahead Offer - 2027 Charity Calendar'):IS_CCMC?(SINGLE_CARD?'2027 Charity Calendar Model Call (Single Card)':'2027 Charity Calendar Model Call'):"
+ }
+]

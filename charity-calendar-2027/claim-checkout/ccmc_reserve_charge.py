@@ -391,8 +391,9 @@ def queue_note(cur, subject, message):
         print(f"  queue_note warning: {type(e).__name__}: {e}")
 
 
-def _booking_url(name, email, phone, is_test):
-    """CCMC PSPP booking link with contact prefill (redirect target + SMS/email link)."""
+def _booking_url(name, email, phone, is_test, offer="invite"):
+    """CCMC PSPP booking link with contact prefill (redirect target + SMS/email link).
+    offer=saveahead adds ?offer=saveahead: the page then uses the Save-Ahead contract."""
     from urllib.parse import urlencode
     q = {}
     if name:
@@ -401,6 +402,8 @@ def _booking_url(name, email, phone, is_test):
         q["email"] = email
     if phone:
         q["phone"] = phone
+    if offer == "saveahead":
+        q["offer"] = "saveahead"
     if is_test:
         q["test"] = "1"
     u = BOOKING_PAGE_URL
@@ -671,7 +674,7 @@ def main():
         conn.commit()   # also releases the application row lock
 
         done_status = "paid" if plan == "full" else "reserved"
-        next_url = _booking_url(name, email, phone, is_test)
+        next_url = _booking_url(name, email, phone, is_test, offer)
 
         if is_test:
             cur.execute(
