@@ -927,7 +927,7 @@
   };
   function m27Rows(rows){return '<ul>'+rows.map(function(r){return '<li><svg viewBox="0 0 24 24" aria-hidden="true">'+(M27_ICONS[r[0]]||'')+'</svg><span>'+esc(r[1])+'</span></li>';}).join('')+'</ul>';}
   // "As low as $X/mo": the monthly plan if she picks the latest bookable date (tax included).
-  function asLow(c,f){try{if(IS_PASTCLIENT||IS_SPECIALTY||!c||!c.price)return null;var t=Math.round(c.price*(1+taxRateFor(c.id))*100)/100;var s=buildSchedule({total:t,firstDate:new Date(TODAY),sessionDate:new Date(BOOK_END),frequency:f||'monthly'});return s.count>=2?Math.ceil(s.perPayment):null;}catch(e){return null;}}
+  function asLow(c,f){try{if((IS_SPECIALTY&&!IS_PASTCLIENT)||!c||!c.price)return null;var t=Math.round(c.price*(1+taxRateFor(c.id))*100)/100;var s=buildSchedule({total:t,firstDate:new Date(TODAY),sessionDate:new Date(BOOK_END),frequency:f||'monthly'});return s.count>=2?Math.ceil(s.perPayment):null;}catch(e){return null;}}
   function asLowHtml(c,sep){var m=asLow(c,'monthly'),b=asLow(c,'biweekly');if(!m)return '';return 'As low as '+moneyTight(m)+'/mo'+(b?sep+'or '+moneyTight(b)+' every 2 weeks':'');}
   function card27Html(c){
     var active=state.chosen===c.id;
