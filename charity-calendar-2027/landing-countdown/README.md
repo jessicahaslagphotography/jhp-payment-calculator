@@ -12,3 +12,10 @@ Template `jhp-charity-calendar-2027-v3`, page `charity-calendar-2027`.
 
 `countdown.patches.json` is the exact `templates_patch` call that was applied.
 `test_countdown.js` is the Playwright check (pre-launch, open, closed, auto-flip at 9 AM).
+
+## Offer removed from landing page (2026-10-25)
+
+Per Jess: the $99 session / $500 off offer is revealed only in the invitation to selected
+women. The landing page no longer shows the offer anywhere (meta tags, hero, offer band →
+"By invitation / 2 minutes / Oct 2026 – Oct 2027", privacy bullet, step 03, FAQs, fine
+print). The package qualifier on the form keeps its three choices but drops the prices.
