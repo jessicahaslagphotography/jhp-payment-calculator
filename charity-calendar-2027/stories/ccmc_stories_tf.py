@@ -169,8 +169,8 @@ FRAMES = [
         body=["Nervous? Curious? Not sure if it’s for you?", "Send me your question below."])),
     ("Thu-2-answer-calendar", lambda F, ph: qa_card(
         F, 1, ["Do I have to be", "in the calendar?"],
-        ["Nope! You decide at your", "image reveal, after you’ve", "seen your images. They stay",
-         "private unless you say yes."])),
+        ["Nope! It’s optional. Enter", "any eligible photo, and my", "VIP group votes on the",
+         "2027 calendar next year."])),
     ("Thu-3-answer-pose", lambda F, ph: qa_card(
         F, 2, ["I don’t know", "how to pose."],
         ["You don’t need to.", "I coach you through every", "single pose, out loud,", "the whole time."])),
