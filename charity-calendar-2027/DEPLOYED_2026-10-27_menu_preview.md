@@ -15,3 +15,15 @@ IS_MENU_ONLY (path contains forms-pspp-2027-ccmc-menu), so no other page changes
 
 Verified locally: no JS errors; button text/behaviour with and without ?t=; the
 real forms-pspp-2027-ccmc page unchanged (Continue, dots visible).
+
+## Security fix (same day, Jessica approved "that needs locked down")
+
+security_check flagged psppv2_form_assets (all contracts + collection photos) as
+publicly WRITABLE through app pspp-checkout-v2 (allow_write=true on that attachment).
+The checkout template only GETs it (all writes go through webhooks), so the
+attachment was re-made with allow_write=false. The other five apps sharing the
+table were already read-only. Audit: all 22 rows present, updated_at values match
+known edits, no script/iframe content in any contract. contract-lastminute-2026's
+`bytes` column was stale from its documented 2026-10-13 edit and was corrected.
+Still open (reported, not changed): the table is publicly readable (by design, the
+pages need it), and several webhooks are unsigned.
