@@ -27,3 +27,14 @@ known edits, no script/iframe content in any contract. contract-lastminute-2026'
 `bytes` column was stale from its documented 2026-10-13 edit and was corrected.
 Still open (reported, not changed): the table is publicly readable (by design, the
 pages need it), and several webhooks are unsigned.
+
+## Daily booking reminders (Jessica: "Every day")
+
+ops/ccmc_booking_deadline_monitor.py (workflow ccmc-booking-deadline-monitor, hourly
+at :41): the single 48-hour reminder is replaced by one email + SMS per Central
+calendar day while a claim is unbooked, starting the day after she claims, only
+9 AM-8 PM Central, with a countdown ("6 days left" ... "Today is your last day").
+New columns ccmc_reservations.last_reminder_at, reminder_count. Stops when she
+books (booking check runs before the reminder). First live run 2026-10-27 3:04 PM
+CT reminded Mia Malcolm and Kelsie Depew (6 days left); the four who claimed today
+start tomorrow.
