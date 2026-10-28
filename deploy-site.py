@@ -58,6 +58,14 @@ ROOT = Path(__file__).resolve().parent
 OUT = ROOT / 'public'
 SRC_SITE = 'https://pages.scalogy.com/jhpboudoir1'
 TREEHOUSE = 'https://treehouse.jhpboudoir.com/'
+# Scalogy pages the public site links to ON PURPOSE and that stay on Scalogy:
+# the online-booking checkout takes a live card payment and polls its own
+# _api, so it cannot be a static file here (added 2026-10-28 with the "Book
+# Online or by Phone" option on /contact). These URLs are left untouched by
+# the SITE swap below and are the only pages.scalogy.com links allowed out.
+SCALOGY_LIVE = (
+    SRC_SITE + '/studio-reserve/',
+)
 
 # source file -> path in the bundle. ONE SEGMENT EACH, which is what keeps every
 # ../x/ link in the markup resolving to the right place.
@@ -119,9 +127,14 @@ def transform(html, site, page_dir, blog_url, launch):
     """Apply the launch changes. Order matters in three places, marked."""
     # home-preview BEFORE the generic SITE swap, or the home page's canonical
     # comes out as <site>/home-preview/ and competes with <site>/ itself.
+    # Fence the Scalogy-hosted pages off first, so the swap cannot touch them.
+    for i, u in enumerate(SCALOGY_LIVE):
+        html = html.replace(u, '\x00LIVE%d\x00' % i)
     html = html.replace(SRC_SITE + '/home-preview/', site + '/')
     html = html.replace(SRC_SITE + '/', site + '/')
     html = html.replace(SRC_SITE, site)
+    for i, u in enumerate(SCALOGY_LIVE):
+        html = html.replace('\x00LIVE%d\x00' % i, u)
 
     # ..and the relative wordmark before the blanket href="../" rewrite below.
     html = html.replace('href="../home-preview/"', 'href="/"')
@@ -598,6 +611,8 @@ def check(site, blog_url, launch):
 
         if 'pages.scalogy.com/jhpboudoir1' in html and launch:
             for m in re.finditer(r'[^\s"\'<>]*pages\.scalogy\.com/jhpboudoir1[^\s"\'<>]*', html):
+                if m.group(0).startswith(SCALOGY_LIVE):
+                    continue
                 fail('%s: still points at the preview: %s' % (where, m.group(0)))
         if launch and 'noindex' in html:
             fail('%s: still carries noindex' % where)
@@ -651,7 +666,7 @@ def check(site, blog_url, launch):
                 url = url[len(site):] or '/'
             if url.startswith('http'):
                 host = re.sub(r'^https?://([^/]+).*$', r'\1', url)
-                if host not in EXTERNAL_OK and not (
+                if host not in EXTERNAL_OK and not url.startswith(SCALOGY_LIVE) and not (
                         blog_url and url.startswith(blog_url)):
                     fail('%s: links to an unexpected host %s (%s)'
                          % (where, host, url))

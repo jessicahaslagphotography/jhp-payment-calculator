@@ -1277,3 +1277,21 @@ launch does *not* fix are in `launch-plan.md`.
   heading on a contact sheet is often sitting on the subject at 1440. And
   one page, one client per frame -- the same face opening and closing a
   page reads as the only woman who has ever been there.
+
+## Two ways to book (28 October 2026)
+
+Jessica's ask: every call-only button and line on the site now offers both
+options, and the buttons read **Book Online or by Phone**. They all lead to
+`/contact/`, which is now two equal cards side by side: **Book a Consultation
+Call** (the Session Guide form, unchanged in what it does, button "Choose My
+Call Time") and **Book Online Directly** (the four steps, the 1-week booking
+deadline, and a button to the Session Fee checkout).
+
+The checkout is `https://pages.scalogy.com/jhpboudoir1/studio-reserve/`. It
+takes a live Square payment and polls its own `_api`, so it stays on Scalogy
+and is never part of this bundle. `deploy-site.py` lists it in `SCALOGY_LIVE`:
+the SITE swap leaves it alone and the checks allow it. Add any other
+Scalogy-hosted page the site must link to there, never to `EXTERNAL_OK`.
+
+The same pass fixed the /contact SMS checkbox, which inherited
+`appearance:none` from the input rule and drew no box at all.

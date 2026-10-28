@@ -265,8 +265,8 @@ BODY = """
         <p>Your prints &amp; products are bought separately, as a collection.
            Every client chooses a package when she books, and pays for it on an
            interest-free pre-payment plan or may pay in full.</p>
-        <p>We go through all of it on your consultation call, before you commit
-           to anything. No surprises and no pressure &mdash; if it is not right
+        <p>You see all of it before you commit to anything &mdash; on a
+           consultation call, or on the investment menu when you book online. No surprises and no pressure &mdash; if it is not right
            for you, it is not right for you.</p>
       </div>
     </details>

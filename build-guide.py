@@ -591,7 +591,7 @@ FEE = """
     </div>
     <p class="jhp-p" style="margin-top:26px">What the session fee includes:</p>
     <ul class="jhp-inc">
-      <li>Your {consult} pre-session consultation</li>
+      <li>An optional {consult} pre-session consultation</li>
       <li>Private use of the boudoir studio</li>
       <li>Professional hair and makeup application</li>
       <li>Access to the {wardrobe}-piece client wardrobe</li>
@@ -736,9 +736,9 @@ PARTS = [
 
  {"no": "Part Three", "id": "works", "title": "How It All Works", "items": [
    q("talk", "Do I Get to Talk to You First?", """
-    <p>Most of my clients book their session over the phone, which is kind of
-       like our first date. We will have one {consult} phone consultation, so
-       we can make sure you are ready and answer any questions you have.</p>
+    <p>You can book online at your own pace, or over the phone. A phone
+       consultation is kind of like our first date: one {consult} call, so we
+       can make sure you are ready and answer any questions you have.</p>
     <p>I am here for you every step of the way. Email is how I communicate most
        effectively with clients, so write to me any time at
        <a href="mailto:jessica@jhpboudoir.com">jessica@jhpboudoir.com</a>.
@@ -1012,7 +1012,7 @@ BODY = """
   <div class="jhp-gd jhp-end">
     <h2 class="jhp-h" id="ready">Ready to Book?</h2>
     <p class="jhp-p">If you have made it this far and you are ready to take the
-       next step, book your consultation call below. If you would rather ask
+       next step, book online or schedule a consultation call below. If you would rather ask
        something first, reply to the email this guide came with and tell me you
        would like to chat before taking the leap.</p>
     <p class="jhp-p">I truly hope you have enjoyed reading this, and that it
@@ -1029,15 +1029,16 @@ BODY = """
 
 <div class="jhp-div" aria-hidden="true"></div>
 
-<a class="jhp-band" href="{calendar}" target="_blank" rel="noopener">
+<a class="jhp-band" href="../contact/">
   <img src="{cdn}78e3da43-f19a-4c5b-a450-c76cd27ad02f.jpg"
        width="1600" height="1064" loading="lazy"
        alt="A black and white portrait from a studio session at JHP Boudoir">
   <span class="over">
     <span class="jhp-kicker">The next step</span>
-    <h2 class="jhp-h jhp-h-lg">Book Your Consultation Call</h2>
-    <span class="sub">Twenty minutes. Bring your questions &mdash; no obligation.</span>
-    <span class="jhp-btn">Schedule My Call</span>
+    <h2 class="jhp-h jhp-h-lg">Book Your Session</h2>
+    <span class="sub">Book online at your own pace, or start with a twenty-minute
+      call &mdash; no obligation.</span>
+    <span class="jhp-btn">Book Online or by Phone</span>
   </span>
 </a>
 """
