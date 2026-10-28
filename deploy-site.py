@@ -65,7 +65,20 @@ TREEHOUSE = 'https://treehouse.jhpboudoir.com/'
 # the SITE swap below and are the only pages.scalogy.com links allowed out.
 SCALOGY_LIVE = (
     SRC_SITE + '/studio-reserve/',
+    SRC_SITE + '/chat-widget/',
 )
+
+# THE CHAT ASSISTANT (added 2026-10-28, Jessica's go-ahead). Every page in the
+# bundle gets the gold bubble from chat-bubble.html, injected here on the way
+# out like the other launch changes, so the scalogy-*.html mirrors stay
+# byte-identical to their templates. The bubble opens the assistant in an
+# iframe of the Scalogy page chat-widget (template jhp-chat-widget), which is
+# where every answer and price lives -- change those THERE, not here. It is on
+# the regular-pricing pages only: Jessica asked for it to stay OFF the
+# promotion landing pages, whose prices differ from the bot's.
+# The bubble sets no cookies and uses no browser storage; build-privacy.py
+# checks that, because the privacy policy says so.
+CHAT_BUBBLE = (ROOT / 'chat-bubble.html').read_text(encoding='utf-8')
 
 # source file -> path in the bundle. ONE SEGMENT EACH, which is what keeps every
 # ../x/ link in the markup resolving to the right place.
@@ -404,6 +417,13 @@ def responsive(html):
     return html, n
 
 
+def add_chat(html):
+    """Put the chat bubble in just before </body>, once."""
+    at = html.rfind('</body>')
+    assert at >= 0, 'no </body> to put the chat bubble before'
+    return html[:at] + CHAT_BUBBLE + html[at:]
+
+
 def write(rel, text):
     p = OUT / rel
     p.parent.mkdir(parents=True, exist_ok=True)
@@ -450,6 +470,7 @@ def build(site, blog_url, launch):
         html = transform(rendered, site, d, blog_url, launch)
         html = inject_schema(html, site, d)
         html, nimg = responsive(html)
+        html = add_chat(html)
         shrunk[d or '/'] = nimg
         rel = (d + '/index.html') if d else 'index.html'
         write(rel, html)
@@ -468,6 +489,7 @@ def build(site, blog_url, launch):
         html = transform(render_jinja(GALLERY_TPL, ctx), site, slug, blog_url, launch)
         html = inject_schema(html, site, slug, ctx)
         html, nimg = responsive(html)
+        html = add_chat(html)
         shrunk[slug] = nimg
         if ctx['name'] not in html:
             fail('%s: rendered without the client name -- an empty gallery '
@@ -626,6 +648,10 @@ def check(site, blog_url, launch):
         # Structure, checked without a browser. A page that loses its h1 or its
         # phone drawer still renders, still looks finished in a screenshot, and
         # is broken -- and these are the two that a slicing generator can drop.
+        # The chat bubble is on every page, exactly once.
+        if html.count('window.__jhpChat = 1') != 1:
+            fail('%s: the chat bubble is missing or doubled' % where)
+
         h1s = re.findall(r'<h1\b', html)
         if len(h1s) != 1:
             fail('%s: %d h1 elements, expected exactly 1' % (where, len(h1s)))

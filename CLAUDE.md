@@ -1295,3 +1295,35 @@ Scalogy-hosted page the site must link to there, never to `EXTERNAL_OK`.
 
 The same pass fixed the /contact SMS checkbox, which inherited
 `appearance:none` from the input rule and drew no box at all.
+
+## The chat assistant is added on the way out, from one file
+
+Added 28 October 2026 with Jessica's go-ahead. Every page in the bundle gets
+the gold chat bubble from **`chat-bubble.html`**, which `deploy-site.py`
+injects just before `</body>` after the launch transform -- the same
+"transform on the way out" rule as the rest of the launch changes, so the
+`scalogy-*.html` mirrors stay byte-identical to their templates and the
+Scalogy previews simply do not carry it.
+
+The bubble only opens an iframe. **The assistant itself, every answer and
+every price, is the Scalogy page `chat-widget` (template `jhp-chat-widget`)**,
+so a change to what it says is a Scalogy template edit and needs no push here.
+Its "Send It to Jess" box posts to the `chatbot-lead-submit` webhook, which
+stores the lead, tags it in GoHighLevel and emails Jessica.
+
+Three things the build now holds it to:
+
+- `deploy-site.py` fails if any page carries the bubble zero or two times.
+- The chat-widget URL is in `SCALOGY_LIVE`, the short list of pages.scalogy.com
+  links allowed out of the bundle.
+- `build-privacy.py` scans `chat-bubble.html` for cookies and browser storage
+  like every other page, because the privacy policy says there are none. The
+  first draft remembered its "Questions? Ask me!" tip in sessionStorage; that
+  was taken out for exactly this reason. The policy's "The Chat Assistant"
+  section says what the "Send It to Jess" box sends, and must change if the
+  webhook body does.
+
+**It is deliberately NOT on the promotion landing pages** (last-minute
+openings, the sale, the charity calendar, the giveaway, Treehouse). The bot
+quotes regular studio pricing and those pages advertise different prices;
+Jessica asked for it to stay off them.
