@@ -27,7 +27,7 @@
   btn.className = "jhpc-btn"; btn.type = "button"; btn.setAttribute("aria-label", "Open chat: Ask JHP Boudoir");
   btn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3C6.5 3 2 6.8 2 11.5c0 2.3 1.1 4.4 2.9 6L4 21l4.1-1.9c1.2.4 2.5.6 3.9.6 5.5 0 10-3.8 10-8.5S17.5 3 12 3zm-4 9.7a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4zm4 0a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4zm4 0a1.2 1.2 0 1 1 0-2.4 1.2 1.2 0 0 1 0 2.4z"/></svg>';
   var tip = document.createElement("div");
-  tip.className = "jhpc-tip"; tip.textContent = "Questions? Ask me!";
+  tip.className = "jhpc-tip"; tip.textContent = "Ask me anything!";
   var panel = document.createElement("div");
   panel.className = "jhpc-panel"; panel.setAttribute("role", "dialog"); panel.setAttribute("aria-label", "Ask JHP Boudoir");
   root.appendChild(panel); root.appendChild(tip); root.appendChild(btn);
@@ -45,7 +45,7 @@
     }
     panel.classList.toggle("on", open);
     root.classList.toggle("jhpc-open", open);
-    tip.classList.remove("on");
+    tip.classList.toggle("on", !open);
     btn.setAttribute("aria-expanded", open ? "true" : "false");
   }
   btn.addEventListener("click", function () { toggle(); });
@@ -54,8 +54,9 @@
     if (e.origin === "https://pages.scalogy.com" && e.data === "jhp-chat-close") toggle(false);
   });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape" && open) toggle(false); });
-  // No cookies or browser storage: the site's privacy policy promises none.
-  setTimeout(function () { if (!open) { tip.classList.add("on");
-    setTimeout(function () { tip.classList.remove("on"); }, 7000); } }, 5000);
+  // The label stays up until the chat is opened (and comes back when it is
+  // closed), so people know what the bubble is. No cookies or browser
+  // storage: the site's privacy policy promises none.
+  setTimeout(function () { if (!open) tip.classList.add("on"); }, 1500);
 })();
 </script>
