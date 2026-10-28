@@ -1327,3 +1327,23 @@ Three things the build now holds it to:
 openings, the sale, the charity calendar, the giveaway, Treehouse). The bot
 quotes regular studio pricing and those pages advertise different prices;
 Jessica asked for it to stay off them.
+
+## The privacy policy now describes the visit statistics (28 October 2026)
+
+The live site carries a page-view and click tracker that is **not in this
+repo**: Netlify injects it at serve time (a snippet in the Netlify site
+settings, not a file here). It posts to the Scalogy `site-click` webhook,
+workflow `site-click-ingest`, table `site_events`, and keeps a random per-tab
+id in sessionStorage. The policy used to say "no analytics and no tracking of
+any kind", which that made untrue. Jessica chose on 28 October to **disclose
+it rather than remove it**, so the policy now says: no cookies and no
+advertising tracking, plus a "Visit statistics" paragraph listing exactly what
+the script records, and a line on Netlify's own badge script (localStorage).
+Netlify is now listed as the host and Scalogy as running the forms, chat and
+statistics.
+
+**The build cannot see either script**, so it cannot check these paragraphs.
+If the Netlify snippet changes what it sends, or is removed, the
+"Visit statistics" paragraph in `build-privacy.py` must change with it. The
+repo-page check in `build-privacy.py` still holds the site's OWN pages to no
+cookies and no browser storage.

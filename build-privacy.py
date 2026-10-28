@@ -24,7 +24,9 @@ is needed. That is also why the page is not called /privacy.
 THREE CLAIMS ARE CHECKED BY THE BUILD rather than trusted, because each one
 would be a false statement in a privacy policy if it drifted:
 
-  * no cookies, no analytics, no tracking pixel on any public page
+  * no cookies and no third-party tracker in the site's own pages (the
+    visit-statistics script is added by Netlify, outside this repo, and is
+    described on the page instead -- see CLAUDE.md)
   * the /contact SMS box is still optional and still carries its disclosure
   * the unsubscribe page still exists
 
@@ -87,20 +89,20 @@ HEAD = """<!DOCTYPE html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Privacy Policy | JHP Boudoir, Jefferson City MO</title>
-<meta name="description" content="What JHP Boudoir collects when you use this website, why, who else handles it, and how to ask for it back or have it deleted. No cookies and no tracking.">
+<meta name="description" content="What JHP Boudoir collects when you use this website, why, who else handles it, and how to ask for it back or have it deleted. No cookies and no advertising tracking.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="canonical" href="https://pages.scalogy.com/jhpboudoir1/privacy-policy/">
 <meta name="theme-color" content="#13100E">
 <meta property="og:site_name" content="JHP Boudoir">
 <meta property="og:locale" content="en_US">
 <meta property="og:title" content="Privacy Policy | JHP Boudoir">
-<meta property="og:description" content="What this website collects, why, and how to have it deleted. No cookies and no tracking.">
+<meta property="og:description" content="What this website collects, why, and how to have it deleted. No cookies and no advertising tracking.">
 <meta property="og:url" content="https://pages.scalogy.com/jhpboudoir1/privacy-policy/">
 <meta property="og:image" content="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f198fc609c5dbd2205.jpg">
 <meta property="og:image:alt" content="A boudoir portrait photographed at the JHP Boudoir studio in Jefferson City, Missouri">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Privacy Policy | JHP Boudoir">
-<meta name="twitter:description" content="What this website collects, why, and how to have it deleted. No cookies and no tracking.">
+<meta name="twitter:description" content="What this website collects, why, and how to have it deleted. No cookies and no advertising tracking.">
 <meta name="twitter:image" content="https://assets.cdn.filesafe.space/Pcnm8GVNMmWTY65qVOAp/media/6ab1b5f198fc609c5dbd2205.jpg">
 <meta property="og:type" content="website">
 <style>html,body{margin:0;padding:0;background:#13100E}body{overflow-x:hidden}</style>
@@ -181,8 +183,10 @@ BODY = """
   <p class="when">Last updated %(updated)s</p>
 
   <div class="lead">
-    <p><b>The short version.</b> This website has no cookies, no analytics and
-      no tracking of any kind. The only personal information it holds is what
+    <p><b>The short version.</b> This website sets no cookies and has no
+      advertising tracking. It keeps simple visit statistics, which pages are
+      viewed and which links are clicked, without your name or contact
+      details. The only personal information it holds is what
       you type into one of the two forms, or into the chat assistant when you
       choose to send your question to me, and press send on &mdash; your name,
       your email address, your phone number, and on the inquiry form a few
@@ -202,8 +206,9 @@ BODY = """
     <a href="mailto:%(email)s">%(email)s</a></p>
 
   <h2>What This Website Collects</h2>
-  <p>Only what you choose to type and send. There is no account to make and
-    nothing is gathered in the background.</p>
+  <p>Mostly what you choose to type and send. There is no account to make.
+    The one thing gathered in the background is simple visit statistics,
+    described under Cookies and Tracking below.</p>
 
   <h3>The Session Guide Form, on the Contact Page</h3>
   <ul>
@@ -266,8 +271,9 @@ BODY = """
     your information it needs to do its job. They work for me and are not
     allowed to use it for anything else.</p>
   <ul>
-    <li><b>Scalogy</b> &mdash; hosts this website and the chat assistant, and
-      stores what the forms and the chat collect.</li>
+    <li><b>Netlify</b> &mdash; hosts this website.</li>
+    <li><b>Scalogy</b> &mdash; runs the forms and the chat assistant, and
+      stores what they collect and the visit statistics.</li>
     <li><b>GoHighLevel</b> &mdash; my client records, my booking calendar and
       my text messages.</li>
     <li><b>Mailgun</b> &mdash; delivers the emails I send you.</li>
@@ -315,9 +321,21 @@ BODY = """
     not quietly cancel your own paperwork.</p>
 
   <h2>Cookies and Tracking</h2>
-  <p><b>There are none.</b> This website sets no cookies, runs no analytics,
-    carries no advertising pixel and does not follow you anywhere. There is
-    no banner to dismiss because there is nothing to consent to.</p>
+  <p><b>No cookies, and no advertising tracking.</b> This website sets no
+    cookies, carries no advertising pixel and does not follow you to other
+    websites.</p>
+  <p><b>Visit statistics.</b> So I can see which pages are useful, the site
+    keeps simple statistics. When a page opens, it records the page, the page
+    you came from, any campaign tag in the link, your screen width and which
+    browser you are using. When you click a link or button, it records the
+    words on it, where it goes and which part of the page it was in. A random
+    ID ties one visit's clicks together; it is kept in your browser's session
+    storage, not a cookie, and it is gone when you close the tab. None of this
+    includes your name, email or phone number. It is stored by Scalogy for me,
+    and it is never sold or used for advertising.</p>
+  <p><b>My web host's script.</b> Netlify, which hosts this website, adds a
+    small script of its own to every page. It stores a setting in your
+    browser to remember whether its badge has been closed.</p>
   <p>Two things on the page do come from elsewhere: the photographs are served
     from a content delivery network, and the fonts come from Google Fonts.
     Both see your browser's request for a file, as any website's images and
@@ -391,7 +409,10 @@ def check(out):
     """
     fails = []
 
-    # "There are none." -- checked across every public page, not asserted.
+    # "No cookies, no advertising tracking" -- checked across every page the
+    # repo builds, not asserted. The visit-statistics script is NOT in these
+    # files: Netlify injects it at serve time, so the page describes it in
+    # words and CLAUDE.md says where it is configured.
     pages = ["scalogy-home.html", "scalogy-about.html", "scalogy-portfolio.html",
              "scalogy-faq.html", "scalogy-experience.html", "scalogy-contact.html",
              "scalogy-inquire.html", "scalogy-guide.html", "scalogy-gallery.html",
@@ -408,7 +429,8 @@ def check(out):
         hit = tracker.search(f.read_text())
         if hit:
             fails.append(f'{p} contains {hit.group(0)!r} -- this page says the '
-                         f'site has no cookies and no tracking, and that would '
+                         f'site has no cookies and no advertising tracking, '
+                         f'and that would '
                          f'make it a false statement')
 
     # The SMS section describes an OPTIONAL box carrying a disclosure.
