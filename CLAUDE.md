@@ -1323,6 +1323,16 @@ Three things the build now holds it to:
   section says what the "Send It to Jess" box sends, and must change if the
   webhook body does.
 
+**Every question is logged (since 28 October 2026, Jessica's request).** The
+widget posts each typed question and each tapped answer button to the
+`chatbot-question-log` webhook (workflow `chatbot-question-ingest`, table
+`chatbot_questions`): the question, the answer it got, matched or not, the
+page, and a random per-chat id kept only in the iframe's memory -- no name,
+contact details or user agent. Workflow `chatbot-weekly-summary` emails
+Jessica every Monday 9:07am Central (via `action_queue` and `notify-via-ghl`).
+The policy's "The Chat Assistant" section describes exactly this and must
+change if the log body does.
+
 **It is deliberately NOT on the promotion landing pages** (last-minute
 openings, the sale, the charity calendar, the giveaway, Treehouse). The bot
 quotes regular studio pricing and those pages advertise different prices;

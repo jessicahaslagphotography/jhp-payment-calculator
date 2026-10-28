@@ -185,8 +185,8 @@ BODY = """
   <div class="lead">
     <p><b>The short version.</b> This website sets no cookies and has no
       advertising tracking. It keeps simple visit statistics, which pages are
-      viewed and which links are clicked, without your name or contact
-      details. The only personal information it holds is what
+      viewed and which links are clicked, and the questions asked of the chat
+      assistant, all without your name or contact details. The only personal information it holds is what
       you type into one of the two forms, or into the chat assistant when you
       choose to send your question to me, and press send on &mdash; your name,
       your email address, your phone number, and on the inquiry form a few
@@ -230,8 +230,16 @@ BODY = """
 
   <h3>The Chat Assistant</h3>
   <p>The gold chat bubble opens an automated assistant that answers common
-    questions. What you type into it is matched to an answer inside your own
-    browser and is not sent anywhere or kept.</p>
+    questions. It is not a person and it is not artificial intelligence: it
+    matches your question to one of my written answers.</p>
+  <p>So I can see what people want to know and keep the answers useful, each
+    question you type or answer button you tap is saved, along with which
+    answer it got and the page you were on. Your name, contact details and
+    browser are not saved with it. The questions from one chat are grouped
+    by a random number that exists only while the chat window is open and is
+    not stored in your browser. Once a week I get a summary of them. Please
+    do not type personal details into the chat itself; if you want me to
+    answer you personally, use <b>Send It to Jess</b>.</p>
   <p>If it cannot answer and you choose <b>Send It to Jess</b>, it sends
     me:</p>
   <ul>
@@ -273,7 +281,8 @@ BODY = """
   <ul>
     <li><b>Netlify</b> &mdash; hosts this website.</li>
     <li><b>Scalogy</b> &mdash; runs the forms and the chat assistant, and
-      stores what they collect and the visit statistics.</li>
+      stores what they collect, the questions asked of the chat assistant and
+      the visit statistics.</li>
     <li><b>GoHighLevel</b> &mdash; my client records, my booking calendar and
       my text messages.</li>
     <li><b>Mailgun</b> &mdash; delivers the emails I send you.</li>
